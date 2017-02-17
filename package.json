@@ -1,0 +1,22 @@
+{
+  "name": "@spearwolf/x",
+  "description": "foo bar",
+  "version": "0.0.1",
+  "scripts": {
+    "test": "mocha --compilers js:babel-core/register test/test_*.js"
+  },
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "babel-cli": "^6.22.2",
+    "babel-core": "^6.22.1",
+    "babel-preset-env": "^1.1.8",
+    "mocha": "^3.2.0",
+    "systemjs": "^0.20.5",
+    "systemjs-plugin-babel": "0.0.20"
+  },
+  "dependencies": {
+    "@spearwolf/eventize": "github:spearwolf/eventize",
+    "@spearwolf/jab": "github:spearwolf/jab",
+    "immutable": "^3.8.1"
+  }
+}
