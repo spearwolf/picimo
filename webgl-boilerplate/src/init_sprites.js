@@ -25,6 +25,7 @@ export default function ({ gl }) {
     buffer.bufferData(voPool);
 
     return {
+        glx,
         voPool,
         buffer
     };
