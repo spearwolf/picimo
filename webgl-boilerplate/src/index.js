@@ -17,9 +17,9 @@ const spriteState = initSprites(state);
 const program = initProgram(spriteState.glx);
 
 state.currentProgram = program.glProgram;
-state.timeLocation = program.uniforms.get('time').location;
-state.resolutionLocation = program.uniforms.get('resolution').location;
-state.positionLocation = program.attributes.get('position').location;
+state.timeLocation = program.uniforms.time.location;
+state.resolutionLocation = program.uniforms.resolution.location;
+state.positionLocation = program.attributes.position.location;
 state.buffer = spriteState.buffer;
 
 animate( parameters, state );

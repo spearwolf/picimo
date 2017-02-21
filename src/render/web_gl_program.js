@@ -33,14 +33,16 @@ function createAttributes (program) {
     const { gl } = program.glx;
     const len = gl.getProgramParameter( program.glProgram, gl.ACTIVE_ATTRIBUTES );
 
-    program.attributes = new Map;
+    program.attributes = {};
     program.attributeNames = [];
 
     for (let i = 0; i < len; ++i) {
         const attrib = new WebGlAttribute(program, i);
-        program.attributes.set(attrib.name, attrib);
+        program.attributes[attrib.name] = attrib;
         program.attributeNames.push(attrib.name);
     }
+
+    Object.freeze(program.attributes);
 
 }
 
@@ -49,14 +51,16 @@ function createUniforms (program) {
     const { gl } = program.glx;
     const len = gl.getProgramParameter( program.glProgram, gl.ACTIVE_UNIFORMS );
 
-    program.uniforms = new Map;
+    program.uniforms = {};
     program.uniformNames = [];
 
     for (let i = 0; i < len; ++i) {
         const uniform = new WebGlUniform(program, i);
-        program.uniforms.set(uniform.name, uniform);
+        program.uniforms[uniform.name] = uniform;
         program.uniformNames.push(uniform.name);
     }
+
+    Object.freeze(program.uniforms);
 
 }
 
