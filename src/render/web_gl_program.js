@@ -26,6 +26,10 @@ export default class WebGlProgram {
 
     }
 
+    use () {
+        this.glx.useProgram(this.glProgram);
+    }
+
 }
 
 function createAttributes (program) {

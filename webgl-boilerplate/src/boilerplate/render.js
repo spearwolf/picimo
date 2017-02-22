@@ -9,16 +9,17 @@ export default function render({ currentProgram, gl, timeLocation, resolutionLoc
 
     // Load program into GPU
 
-    gl.useProgram( currentProgram );
+    currentProgram.use();
 
     // Set values to program variables
 
-    gl.uniform1f( timeLocation, parameters.time / 1000 );
-    gl.uniform2f( resolutionLocation, parameters.screenWidth, parameters.screenHeight );
+    currentProgram.uniforms.time.setValue( parameters.time / 1000 );
+    currentProgram.uniforms.resolution.setValue( [ parameters.screenWidth, parameters.screenHeight ] );
 
     // Render geometry
 
     buffer.bindBuffer();
+
     gl.vertexAttribPointer( positionLocation, 2, gl.FLOAT, false, 0, 0 );
     gl.enableVertexAttribArray( positionLocation );
     gl.drawArrays( gl.TRIANGLES, 0, 12 );
