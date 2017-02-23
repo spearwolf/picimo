@@ -1,4 +1,9 @@
 
+import { GL_ITEM_TYPES } from '../utils/typed_array_helpers';
+
+const glType = (gl, type) => gl[GL_ITEM_TYPES[type]];
+
+
 export default class WebGlAttribute {
 
     constructor (program, index) {
@@ -18,6 +23,16 @@ export default class WebGlAttribute {
 
         Object.freeze(this);
 
+    }
+
+    /**
+     * @param {VODescriptor} descriptor
+     */
+    vertexAttribPointer (descriptor) {
+        const { gl } = this.glx;
+        const attr = descriptor.attr[this.name];
+        const type = glType(gl, attr.type);
+        gl.vertexAttribPointer(this.location, attr.size, type, false, descriptor.bytesPerVertex, attr.byteOffset);
     }
 
 }

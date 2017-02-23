@@ -1,5 +1,5 @@
 
-export default function render({ currentProgram, gl, timeLocation, resolutionLocation, positionLocation, buffer }, parameters) {
+export default function render({ currentProgram, gl, buffer }, parameters) {
 
     if ( !currentProgram ) return;
 
@@ -20,10 +20,10 @@ export default function render({ currentProgram, gl, timeLocation, resolutionLoc
 
     buffer.bindBuffer();
 
-    gl.vertexAttribPointer( positionLocation, 2, gl.FLOAT, false, 0, 0 );
-    gl.enableVertexAttribArray( positionLocation );
+    currentProgram.attributes.position.vertexAttribPointer( buffer.voPool.descriptor );
+    gl.enableVertexAttribArray( currentProgram.attributes.position.location);
     gl.drawArrays( gl.TRIANGLES, 0, 12 );
-    gl.disableVertexAttribArray( positionLocation );
+    gl.disableVertexAttribArray( currentProgram.attributes.position.location );
 
 }
 

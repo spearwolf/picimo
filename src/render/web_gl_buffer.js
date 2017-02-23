@@ -11,8 +11,8 @@ export default class WebGlBuffer {
 
         this.glBuffer = gl.createBuffer();
 
-        this.srcData = null;
-        this.srcSerial = 0;
+        this.voPool = null;
+        //this.srcSerial = 0;
 
     }
 
@@ -21,15 +21,15 @@ export default class WebGlBuffer {
     }
 
     /**
-     * @param {VOPool} srcData
+     * @param {VOPool} voPool
      */
-    bufferData (srcData) {
-        // TODO srcData dirty/type check
+    bufferData (voPool) {
+        // TODO voPool dirty/type check
 
         this.bindBuffer();
-        this.glx.gl.bufferData( this.target, srcData.voArray.float32Array, this.usage );
+        this.glx.gl.bufferData( this.target, voPool.voArray.float32Array, this.usage );
 
-        this.srcData = srcData;
+        this.voPool = voPool;
         // update srcSerial
     }
 

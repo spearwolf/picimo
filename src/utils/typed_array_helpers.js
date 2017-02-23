@@ -29,9 +29,20 @@ const TYPED_ARRAY_GETTER = Object.freeze({
     uint8   : (obj) => obj.uint8Array,
 });
 
+const GL_ITEM_TYPES = Object.freeze({
+    float32 : 'FLOAT',
+    int16   : 'SHORT',
+    int32   : 'INT',
+    int8    : 'BYTE',
+    uint16  : 'UNSIGNED_SHORT',
+    uint32  : 'UNSIGNED_INT',
+    uint8   : 'UNSIGNED_BYTE'
+});
+
 export {
     BYTES_PER_ELEMENT,
     TYPED_ARRAY_CONSTRUCTOR,
-    TYPED_ARRAY_GETTER
+    TYPED_ARRAY_GETTER,
+    GL_ITEM_TYPES
 };
 
