@@ -7,6 +7,7 @@ Best Practices: WebGL Vertex Data
 - https://developer.mozilla.org/de/docs/Web/API/WebGL_API/WebGL_best_practices
 - https://www.khronos.org/opengl/wiki/Vertex_Specification_Best_Practices
 - https://developer.apple.com/library/content/documentation/3DDrawing/Conceptual/OpenGLES_ProgrammingGuide/TechniquesforWorkingwithVertexData/TechniquesforWorkingwithVertexData.html
+- https://www.khronos.org/registry/webgl/specs/latest/
 - https://webglfundamentals.org/webgl/lessons/webgl-shaders-and-glsl.html
 - enableVertexAttribArray
   - http://stackoverflow.com/questions/12427880/is-it-important-to-call-gldisablevertexattribarray
