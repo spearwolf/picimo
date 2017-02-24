@@ -1,9 +1,11 @@
+import WebGlResourceLibrary from './web_gl_resource_library';
 
 export default class WebGlContext {
 
     constructor (gl) {
         Object.defineProperty(this, 'gl', { value: gl });
 
+        this.resourceLibrary = new WebGlResourceLibrary(this);
         this.boundBuffers = new Map;
         this.currentProgram = 0;
     }

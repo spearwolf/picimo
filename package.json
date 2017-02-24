@@ -6,7 +6,7 @@
     "test": "mocha --compilers js:babel-core/register test/test_*.js",
     "webgl-boilerplate:build": "webpack --watch --config config/webpack.webgl-boilerplate.config.js",
     "webgl-boilerplate:watch": "npm run webgl-boilerplate:build -- --watch",
-    "webgl-boilerplate:serve": "serve webgl-boilerplate",
+    "webgl-boilerplate:serve": "serve -p 8080 webgl-boilerplate",
     "start": "run-p webgl-boilerplate:serve webgl-boilerplate:watch"
   },
   "license": "Apache-2.0",

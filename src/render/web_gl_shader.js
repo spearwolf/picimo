@@ -1,14 +1,18 @@
+import ShaderSource from '../core/shader_source';
 
 export default class WebGlShader {
 
-    constructor (glx, type, source) {
+    constructor (glx, source) {
 
         this.glx = glx;
 
-        this.source = source instanceof HTMLElement ? source.textContent : source.toString();
+        if (! source instanceof ShaderSource) {
+            throw new Error('WebGlShader panic! source must be an instance of ShaderSource!');
+        }
+        this.source = source;
 
         const { gl } = glx;
-        this.shaderType = gl[type];
+        this.shaderType = gl[source.type];
 
         this.glShader = gl.createShader(this.shaderType);
         compileShader(this);
@@ -24,7 +28,7 @@ function compileShader (shader) {
     const { gl } = shader.glx;
     const { glShader, source } = shader;
 
-    gl.shaderSource( glShader, source );
+    gl.shaderSource( glShader, source.source );
     gl.compileShader( glShader );
 
     if ( ! gl.getShaderParameter( glShader, gl.COMPILE_STATUS ) ) {
@@ -45,7 +49,4 @@ function compileShader (shader) {
     }
 
 }
-
-WebGlShader.VERTEX_SHADER = 'VERTEX_SHADER';
-WebGlShader.FRAGMENT_SHADER = 'FRAGMENT_SHADER';
 

@@ -4,14 +4,12 @@ import WebGlShader from './web_gl_shader';
 
 export default class WebGlProgram {
 
-    constructor (glx, vertexShader, fragmentShader) {
+    constructor (glx, shaderProgram) {
 
         this.glx = glx;
 
-        this.vertexShader = vertexShader instanceof WebGlShader ? vertexShader
-            : new WebGlShader(glx, WebGlShader.VERTEX_SHADER, vertexShader);
-        this.fragmentShader = fragmentShader instanceof WebGlShader ? fragmentShader
-            : new WebGlShader(glx, WebGlShader.FRAGMENT_SHADER, fragmentShader);
+        this.vertexShader = glx.resourceLibrary.loadVertexShader(shaderProgram.vertexShader);
+        this.fragmentShader = glx.resourceLibrary.loadFragementShader(shaderProgram.fragmentShader);
 
         const { gl } = glx;
         this.glProgram = gl.createProgram();

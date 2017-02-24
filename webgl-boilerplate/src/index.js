@@ -1,9 +1,11 @@
 // original webgl-boilerplate code based on https://github.com/paulirish/webgl-boilerplate
 
-import init from './boilerplate/init';
+import initGl from './boilerplate/init_gl';
 import initSprites from './init_sprites';
-import initProgram from './init_program';
 import animate from './boilerplate/animate';
+
+import ShaderSource from '../../src/core/shader_source';
+import ShaderProgram from '../../src/core/shader_program';
 
 const parameters = {
     start_time  : new Date().getTime(),
@@ -12,14 +14,15 @@ const parameters = {
     screenHeight: 0
 };
 
-const state = init();
-window.gl = state.gl;
+const state = initGl();
 
-const spriteState = initSprites(state);
-const program = initProgram(spriteState.glx);
+const { voPool, buffer } = initSprites(state.glx);
 
-state.currentProgram = program;
-state.buffer = spriteState.buffer;
+const program = new ShaderProgram(
+    new ShaderSource(ShaderSource.VERTEX_SHADER, document.getElementById('vs')),
+    new ShaderSource(ShaderSource.FRAGMENT_SHADER, document.getElementById('fs')) );
 
+state.program = program;
+state.buffer = buffer;
 animate( parameters, state );
 

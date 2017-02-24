@@ -1,7 +1,5 @@
 
-export default function render({ currentProgram, gl, buffer }, parameters) {
-
-    if ( !currentProgram ) return;
+export default function render({ program, glx, gl, buffer }, parameters) {
 
     parameters.time = new Date().getTime() - parameters.start_time;
 
@@ -9,6 +7,7 @@ export default function render({ currentProgram, gl, buffer }, parameters) {
 
     // Load program into GPU
 
+    const currentProgram = glx.resourceLibrary.loadProgram(program);
     currentProgram.use();
 
     // Set values to program variables
