@@ -1,8 +1,10 @@
 import ShaderVariable from './shader_variable';
 
 /**
- * A ShaderContext holds all references to the current shader variables
- * which will be used by the next draw command ..
+ * A ShaderContext keeps named references to all shader _variables_
+ * to make them available for shader _programs_.
+ * Each named reference is organized as a _stack_ where you can push
+ * or pop shader variable _values_.
  */
 export default class ShaderContext {
 
@@ -15,16 +17,16 @@ export default class ShaderContext {
     /**
      * @param {ShaderVariable} shaderVariable
      */
-    pushVar(shaderVariable) {
+    pushVar (shaderVariable) {
         const lane = shaderVarLane(this, shaderVariable.type, shaderVariable.name);
         lane.push(shaderVariable);
     }
 
     /**
-     * Remove shaderVariable and all later set variables from named shader lane.
+     * Remove current shader variable plus all later set variables from named shader variable stack.
      * @param {ShaderVariable} shaderVariable
      */
-    popVar(shaderVariable) {
+    popVar (shaderVariable) {
         const lane = shaderVarLane(this, shaderVariable.type, shaderVariable.name);
         const len = lane.length;
         for (let i = 0; i < len; ++i) {
@@ -36,28 +38,43 @@ export default class ShaderContext {
     }
 
     /**
-     * Get current shader variable by name and type.
+     * Return current shader variable by name and type.
      * @param {ShaderVariable} shaderVariable
      * @return {ShaderVariable} or `null`
      */
-    curVar(shaderVariable) {
+    curVar (shaderVariable) {
         const lane = shaderVarMap(this, shaderVariable.type).get(shaderVariable.name);
         return lane && lane.length ? lane[lane.length - 1] : null;
     }
 
+    /**
+     * Return current _uniform_ shader variable by name.
+     * @param {string} name
+     * @return {ShaderUniformVariable} or `null`
+     */
     curUniform (name) {
         const lane = this.uniform.get(name);
-        return lane && lane.length ? lane[lane.length - 1].value : null;
+        return lane && lane.length ? lane[lane.length - 1] : null;
     }
 
+    /**
+     * Return current _attribute_ shader variable by name.
+     * @param {string} name
+     * @return {ShaderAttribVariable} or `null`
+     */
     curAttrib (name) {
         const lane = this.attrib.get(name);
-        return lane && lane.length ? lane[lane.length - 1].value : null;
+        return lane && lane.length ? lane[lane.length - 1] : null;
     }
 
+    /**
+     * Return current _texture2d_ shader variable by name.
+     * @param {string} name
+     * @return {ShaderTexture2dVariable} or `null`
+     */
     curTex2d (name) {
         const lane = this.tex2d.get(name);
-        return lane && lane.length ? lane[lane.length - 1].value : null;
+        return lane && lane.length ? lane[lane.length - 1] : null;
     }
 
 }

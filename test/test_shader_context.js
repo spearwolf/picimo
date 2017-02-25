@@ -10,26 +10,32 @@ import ShaderTexture2dVariable from '../src/core/shader_texture_2d_variable';
 describe('ShaderContext', () => {
 
     describe('new ShaderContext', () => {
+
         const ctx = new ShaderContext();
+
         it('creates a SGNode instance', () => assert(ctx));
+
         it('add a shader *uniform* variable', () => {
             const sVar = new ShaderUniformVariable('foo', 23);
             ctx.pushVar(sVar);
             assert.equal(ctx.curVar(sVar).value, 23);
-            assert.equal(ctx.curUniform(sVar.name), 23);
+            assert.equal(ctx.curUniform(sVar.name).value, 23);
         });
+
         it('add a shader *attrib* variable', () => {
             const sVar = new ShaderAttribVariable('bar', 66);
             ctx.pushVar(sVar);
             assert.equal(ctx.curVar(sVar).value, 66);
-            assert.equal(ctx.curAttrib(sVar.name), 66);
+            assert.equal(ctx.curAttrib(sVar.name).value, 66);
         });
+
         it('add a shader *tex2d* variable', () => {
             const sVar = new ShaderTexture2dVariable('plah', 2008);
             ctx.pushVar(sVar);
             assert.equal(ctx.curVar(sVar).value, 2008);
-            assert.equal(ctx.curTex2d(sVar.name), 2008);
+            assert.equal(ctx.curTex2d(sVar.name).value, 2008);
         });
+
         it('push and pop variables', () => {
             const sVar1 = new ShaderVariable('p', ShaderVariable.UNIFORM, 16);
             const sVar2 = new ShaderVariable('p', ShaderVariable.UNIFORM, 32);
