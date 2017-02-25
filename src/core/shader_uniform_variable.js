@@ -1,5 +1,8 @@
 import ShaderVariable from './shader_variable';
 
+/**
+ * Shader uniform variable.
+ */
 export default class ShaderUniformVariable extends ShaderVariable {
 
     /**
