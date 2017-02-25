@@ -6,6 +6,8 @@ import animate from './boilerplate/animate';
 
 import ShaderSource from '../../src/core/shader_source';
 import ShaderProgram from '../../src/core/shader_program';
+import ShaderContext from '../../src/core/shader_context';
+import ShaderUniformVariable from '../../src/core/shader_uniform_variable';
 
 const parameters = {
     start_time  : new Date().getTime(),
@@ -13,6 +15,10 @@ const parameters = {
     screenWidth : 0,
     screenHeight: 0
 };
+
+const sCtx = new ShaderContext();
+sCtx.pushVar(new ShaderUniformVariable('time'));
+sCtx.pushVar(new ShaderUniformVariable('resolution'));
 
 const state = initGl();
 
@@ -22,7 +28,10 @@ const program = new ShaderProgram(
     new ShaderSource(ShaderSource.VERTEX_SHADER, document.getElementById('vs')),
     new ShaderSource(ShaderSource.FRAGMENT_SHADER, document.getElementById('fs')) );
 
+
 state.program = program;
 state.buffer = buffer;
+state.sCtx = sCtx;
+
 animate( parameters, state );
 

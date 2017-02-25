@@ -1,7 +1,12 @@
 
-export default function render({ program, glx, gl, buffer }, parameters) {
+export default function render({ program, glx, gl, buffer, sCtx }, parameters) {
 
     parameters.time = new Date().getTime() - parameters.start_time;
+
+    // Update shader context
+
+    sCtx.curUniform('time').value = parameters.time / 1000;
+    sCtx.curUniform('resolution').value = [ parameters.screenWidth, parameters.screenHeight ];
 
     gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT );
 
@@ -12,8 +17,8 @@ export default function render({ program, glx, gl, buffer }, parameters) {
 
     // Set values to program variables
 
-    currentProgram.uniforms.time.setValue( parameters.time / 1000 );
-    currentProgram.uniforms.resolution.setValue( [ parameters.screenWidth, parameters.screenHeight ] );
+    currentProgram.uniforms.time.setValue( sCtx.curUniform('time').value );
+    currentProgram.uniforms.resolution.setValue( sCtx.curUniform('resolution').value );
 
     // Render geometry
 
