@@ -1,4 +1,5 @@
 import createVertexObjects from './create_vertex_objects';
+import generateUUID from '../../utils/generate_uuid';
 
 export default class VOPool {
 
@@ -10,15 +11,29 @@ export default class VOPool {
      * @param {VertexObject} [options.voZero] - *vertex object* **prototype**
      * @param {VertexObject} [options.voNew] - *vertex object* **prototype**
      * @param {VertexObject} [options.maxAllocVOSize] - never allocate more than *maxAllocVOSize* vertex objects at once
+     * @param {string} [options.usage=VOPool.DYNAMIC_VERTICES] - vertex data usage hint
      */
 
     constructor ( descriptor, options ) {
+
+        this.id = generateUUID();
 
         this.descriptor = descriptor;
         this.capacity = options && options.capacity || this.descriptor.maxIndexedVOPoolSize;
         this.maxAllocVOSize = options && options.maxAllocVOSize || 0;
 
-        this.voArray = options && options.voArray || descriptor.createVOArray( this.capacity );
+        this.usage = options && options.usage || VOPool.DYNAMIC_VERTICES;
+
+        let voArray = options && options.voArray;
+        if (voArray) {
+            if (voArray.usage !== this.usage) {
+                throw new Error(`VOPool usage(=${this.usage}) mismatch with given voArray(usage=${voArray.usage})`);
+            }
+        } else {
+            voArray = descriptor.createVOArray( this.capacity, this.usage );
+        }
+        this.voArray = voArray;
+
         this.voZero = options && options.voZero || descriptor.createVO();
         this.voNew = options && options.voNew || descriptor.createVO();
 
@@ -150,4 +165,7 @@ export default class VOPool {
     }
 
 }
+
+VOPool.STATIC_VERTICES = 'static';
+VOPool.DYNAMIC_VERTICES = 'dynamic';
 

@@ -28,6 +28,12 @@ export default class WebGlProgram {
         this.glx.useProgram(this.glProgram);
     }
 
+    loadUniforms (shaderContext) {
+        this.uniformNames.forEach(name => {
+            this.uniforms[name].setValue( shaderContext.curUniform(name).value );
+        });
+    }
+
 }
 
 function createAttributes (program) {

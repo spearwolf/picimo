@@ -1,5 +1,5 @@
 
-export default function render({ program, glx, gl, buffer, sCtx }, parameters) {
+export default function render({ program, glx, gl, voPool, sCtx }, parameters) {
 
     parameters.time = new Date().getTime() - parameters.start_time;
 
@@ -12,21 +12,22 @@ export default function render({ program, glx, gl, buffer, sCtx }, parameters) {
 
     // Load program into GPU
 
-    const currentProgram = glx.resourceLibrary.loadProgram(program);
+    const currentProgram = glx.resourceLibrary.loadProgram( program );
+
     currentProgram.use();
-
-    // Set values to program variables
-
-    currentProgram.uniforms.time.setValue( sCtx.curUniform('time').value );
-    currentProgram.uniforms.resolution.setValue( sCtx.curUniform('resolution').value );
+    currentProgram.loadUniforms( sCtx );
 
     // Render geometry
 
-    buffer.bindBuffer();
+    const buffer = glx.resourceLibrary.getBuffer(voPool);
 
-    currentProgram.attributes.position.vertexAttribPointer( buffer.voPool.descriptor );
+    buffer.bindBuffer();
+    currentProgram.attributes.position.vertexAttribPointer( voPool.descriptor );
+
     gl.enableVertexAttribArray( currentProgram.attributes.position.location);
+
     gl.drawArrays( gl.TRIANGLES, 0, 12 );
+
     gl.disableVertexAttribArray( currentProgram.attributes.position.location );
 
 }

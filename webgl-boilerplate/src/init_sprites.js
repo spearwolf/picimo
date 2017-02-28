@@ -1,6 +1,5 @@
 import VODescriptor from '../../src/core/v_o_descriptor';
 import VOPool from '../../src/core/v_o_pool';
-import WebGlBuffer from '../../src/render/web_gl_buffer';
 
 export default function (glx) {
 
@@ -19,12 +18,10 @@ export default function (glx) {
     voPool.alloc().setPosition( 0.5, -1.0, 1.0, -1.0, 0.5,  1.0 );
     voPool.alloc().setPosition( 1.0, -1.0, 1.0,  1.0, 0.5,  1.0 );
 
-    const buffer = new WebGlBuffer(glx, WebGlBuffer.ARRAY_BUFFER, WebGlBuffer.STATIC_DRAW);
+    const buffer = glx.resourceLibrary.loadBuffer(voPool);
     buffer.bufferData(voPool);
 
-    return {
-        voPool,
-        buffer
-    };
+    return voPool;
+
 }
 

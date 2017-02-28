@@ -1,4 +1,4 @@
-/* jshint esversion:6 */
+import generateUUID from '../utils/generate_uuid';
 
 import { BYTES_PER_ELEMENT, TYPED_ARRAY_CONSTRUCTOR } from '../utils/typed_array_helpers';
 
@@ -10,6 +10,7 @@ import { BYTES_PER_ELEMENT, TYPED_ARRAY_CONSTRUCTOR } from '../utils/typed_array
  * @param {VODescriptor} descriptor - *Vertex object* descriptor
  * @param {number} capacity - Maximum number of *vertex objects*
  * @param {?ArrayBuffer|DataView|Float32Array} data
+ * @param {string} [usage=VOArray.DYNAMIC_DATA] usage hint
  *
  * @desc
  * An array of *vertex objects*.
@@ -19,10 +20,13 @@ import { BYTES_PER_ELEMENT, TYPED_ARRAY_CONSTRUCTOR } from '../utils/typed_array
 
 export default class VOArray {
 
-    constructor (descriptor, capacity, data) {
+    constructor (descriptor, capacity, data, usage = VOArray.DYNAMIC_DATA) {
+
+        this.id = generateUUID();
 
         this.descriptor = descriptor;
         this.capacity = capacity;
+        this.usage = usage;
 
         if (data instanceof ArrayBuffer) {
             this.float32Array = new Float32Array( data );
@@ -98,3 +102,7 @@ export default class VOArray {
     }
 
 }
+
+VOArray.STATIC_DATA = 'static';
+VOArray.DYNAMIC_DATA = 'dynamic';
+

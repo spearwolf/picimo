@@ -21,8 +21,7 @@ sCtx.pushVar(new ShaderUniformVariable('time'));
 sCtx.pushVar(new ShaderUniformVariable('resolution'));
 
 const state = initGl();
-
-const { voPool, buffer } = initSprites(state.glx);
+const voPool = initSprites(state.glx);
 
 const program = new ShaderProgram(
     new ShaderSource(ShaderSource.VERTEX_SHADER, document.getElementById('vs')),
@@ -30,7 +29,7 @@ const program = new ShaderProgram(
 
 
 state.program = program;
-state.buffer = buffer;
+state.voPool = voPool;
 state.sCtx = sCtx;
 
 animate( parameters, state );

@@ -1,5 +1,13 @@
 import WebGlShader from './web_gl_shader';
 import WebGlProgram from './web_gl_program';
+import WebGlBuffer from './web_gl_buffer';
+import VOPool from '../core/v_o_pool';
+import VOArray from '../core/v_o_array';
+
+const WEB_GL_BUFFER_USAGE = Object.freeze({
+    'static': WebGlBuffer.STATIC_DRAW,
+    'dynamic': WebGlBuffer.DYNAMIC_DRAW,
+});
 
 export default class WebGlResourceLibrary {
 
@@ -9,6 +17,7 @@ export default class WebGlResourceLibrary {
         this.vertexShader = new Map;
         this.fragmentShader = new Map;
         this.shaderProgram = new Map;
+        this.buffer = new Map;
     }
 
     loadVertexShader (shaderSource) {
@@ -36,6 +45,26 @@ export default class WebGlResourceLibrary {
             this.shaderProgram.set(shaderProgram.id, program);
         }
         return program;
+    }
+
+    loadBuffer (voPool) {
+        let buffer = this.buffer.get(voPool.voArray.id);
+        if (!buffer) {
+            buffer = new WebGlBuffer(this.glx, WebGlBuffer.ARRAY_BUFFER, WEB_GL_BUFFER_USAGE[voPool.usage]);
+            this.buffer.set(voPool.voArray.id, buffer);
+        }
+        return buffer;
+    }
+
+    /**
+     * @param {VOPool|VOArray} resource
+     */
+    getBuffer (resource) {
+        if (resource instanceof VOPool) {
+            return this.buffer.get(resource.voArray.id);
+        } else if (resource instanceof VOArray) {
+            return this.buffer.get(resource.id);
+        }
     }
 
 }
