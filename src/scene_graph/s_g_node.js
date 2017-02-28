@@ -20,7 +20,12 @@ export default class SGNode {
         /**
          * @type {string}
          */
-        this.name = name || generateUUID();
+        this.id = generateUUID();
+
+        /**
+         * @type {string}
+         */
+        this.name = name || this.id;
 
         /**
          * @type {SGNode}

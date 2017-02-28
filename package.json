@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@spearwolf/eventize": "github:spearwolf/eventize",
-    "@spearwolf/jab": "github:spearwolf/jab"
+    "@spearwolf/jab": "github:spearwolf/jab",
+    "uuid": "^3.0.1"
   }
 }
