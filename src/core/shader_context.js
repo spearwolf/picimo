@@ -81,12 +81,9 @@ export default class ShaderContext {
 
 function shaderVarMap (shaderContext, type) {
   switch (type) {
-    case ShaderVariable.UNIFORM:
-      return shaderContext.uniform
-    case ShaderVariable.ATTRIB:
-      return shaderContext.attrib
-    case ShaderVariable.TEXTURE_2D:
-      return shaderContext.tex2d
+    case ShaderVariable.TYPE.UNIFORM: return shaderContext.uniform
+    case ShaderVariable.TYPE.ATTRIB: return shaderContext.attrib
+    case ShaderVariable.TYPE.TEXTURE_2D: return shaderContext.tex2d
   }
 }
 

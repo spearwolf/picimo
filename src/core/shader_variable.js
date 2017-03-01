@@ -43,7 +43,9 @@ export default class ShaderVariable {
 
 }
 
-ShaderVariable.UNIFORM = 'uniform'
-ShaderVariable.ATTRIB = 'attrib'
-ShaderVariable.TEXTURE_2D = 'tex2d'
+ShaderVariable.TYPE = Object.freeze({
+  UNIFORM: 'uniform',
+  ATTRIB: 'attrib',
+  TEXTURE_2D: 'tex2d'
+})
 

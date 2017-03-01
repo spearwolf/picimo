@@ -131,11 +131,11 @@ describe('SGNode', () => {
         `${rootNode.name}:after`
       ])
     })
-    it('getRootNodeByType()', () => {
-      assert.equal(nodeA.getRootNodeByType(1), nodeA, 'nodeA:1')
-      assert.equal(nodeE.getRootNodeByType(2), nodeB, 'nodeB:2')
-      assert.equal(nodeB.getRootNodeByType(0), rootNode, 'rootNode:0')
-      assert.equal(nodeE.getRootNodeByType(23), undefined, 'undef')
+    it('getParentNodeByType()', () => {
+      assert.equal(nodeA.getParentNodeByType(1), nodeA, 'nodeA:1')
+      assert.equal(nodeE.getParentNodeByType(2), nodeB, 'nodeB:2')
+      assert.equal(nodeB.getParentNodeByType(0), rootNode, 'rootNode:0')
+      assert.equal(nodeE.getParentNodeByType(23), undefined, 'undef')
     })
     it('findByName()', () => {
       assert.equal(rootNode.findByName('nodeA'), nodeA, 'nodeA')

@@ -7,7 +7,7 @@ import ShaderTexture2dVariable from '../src/core/shader_texture_2d_variable'
 
 describe('ShaderVariable', () => {
   it('new ShaderVariable() without value', () => {
-    const val = new ShaderVariable('foo', ShaderVariable.UNIFORM)
+    const val = new ShaderVariable('foo', ShaderVariable.TYPE.UNIFORM)
     assert.equal(val.value, undefined)
     assert.equal(val.serial, 0)
 
@@ -25,7 +25,7 @@ describe('ShaderVariable', () => {
   })
 
   it('serial increase on value change', () => {
-    const val = new ShaderVariable('bar', ShaderVariable.ATTRIB)
+    const val = new ShaderVariable('bar', ShaderVariable.TYPE.ATTRIB)
     val.value = 16
     assert.equal(val.serial, 1)
     val.value = 32
@@ -35,7 +35,7 @@ describe('ShaderVariable', () => {
   })
 
   it('touch()', () => {
-    const val = new ShaderVariable('plah', ShaderVariable.TEXTURE_2D)
+    const val = new ShaderVariable('plah', ShaderVariable.TYPE.TEXTURE_2D)
     assert.equal(val.serial, 0)
     val.touch()
     assert.equal(val.serial, 1)

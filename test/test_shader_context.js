@@ -34,9 +34,9 @@ describe('ShaderContext', () => {
     })
 
     it('push and pop variables', () => {
-      const sVar1 = new ShaderVariable('p', ShaderVariable.UNIFORM, 16)
-      const sVar2 = new ShaderVariable('p', ShaderVariable.UNIFORM, 32)
-      const sVar3 = new ShaderVariable('p', ShaderVariable.UNIFORM, 64)
+      const sVar1 = new ShaderVariable('p', ShaderVariable.TYPE.UNIFORM, 16)
+      const sVar2 = new ShaderVariable('p', ShaderVariable.TYPE.UNIFORM, 32)
+      const sVar3 = new ShaderVariable('p', ShaderVariable.TYPE.UNIFORM, 64)
 
       assert.equal(ctx.curVar(sVar1), null)
 
@@ -49,9 +49,9 @@ describe('ShaderContext', () => {
       ctx.pushVar(sVar3)
       assert.equal(ctx.curVar(sVar1).value, 64)
 
-      ctx.pushVar(new ShaderVariable('p', ShaderVariable.UNIFORM, 100))
-      ctx.pushVar(new ShaderVariable('p', ShaderVariable.UNIFORM, 101))
-      ctx.pushVar(new ShaderVariable('p', ShaderVariable.UNIFORM, 102))
+      ctx.pushVar(new ShaderVariable('p', ShaderVariable.TYPE.UNIFORM, 100))
+      ctx.pushVar(new ShaderVariable('p', ShaderVariable.TYPE.UNIFORM, 101))
+      ctx.pushVar(new ShaderVariable('p', ShaderVariable.TYPE.UNIFORM, 102))
       assert.equal(ctx.curVar(sVar1).value, 102)
 
       ctx.popVar(sVar3)

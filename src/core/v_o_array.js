@@ -10,7 +10,7 @@ import { BYTES_PER_ELEMENT, TYPED_ARRAY_CONSTRUCTOR } from '../utils/typed_array
  * @param {VODescriptor} descriptor - *Vertex object* descriptor
  * @param {number} capacity - Maximum number of *vertex objects*
  * @param {?ArrayBuffer|DataView|Float32Array} data
- * @param {string} [usage=VOArray.DYNAMIC_DATA] usage hint
+ * @param {string} [usage=VOArray.USAGE.DYNAMIC] usage hint
  *
  * @desc
  * An array of *vertex objects*.
@@ -20,7 +20,7 @@ import { BYTES_PER_ELEMENT, TYPED_ARRAY_CONSTRUCTOR } from '../utils/typed_array
 
 export default class VOArray {
 
-  constructor (descriptor, capacity, data, usage = VOArray.DYNAMIC_DATA) {
+  constructor (descriptor, capacity, data, usage = VOArray.USAGE.DYNAMIC) {
     this.id = generateUUID()
 
     this.descriptor = descriptor
@@ -95,6 +95,8 @@ export default class VOArray {
 
 }
 
-VOArray.STATIC_DATA = 'static'
-VOArray.DYNAMIC_DATA = 'dynamic'
+VOArray.USAGE = Object.freeze({
+  STATIC: 'static',
+  DYNAMIC: 'dynamic'
+})
 

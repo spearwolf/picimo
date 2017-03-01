@@ -89,11 +89,11 @@ export default class SGNode {
    * @param {number} nodeType
    * @return {SGNode}
    */
-  getRootNodeByType (nodeType) {
+  getParentNodeByType (nodeType) {
     if (nodeType === this.nodeType) {
       return this
     } else {
-      return this.parentNode && this.parentNode.getRootNodeByType(nodeType)
+      return this.parentNode && this.parentNode.getParentNodeByType(nodeType)
     }
   }
 
