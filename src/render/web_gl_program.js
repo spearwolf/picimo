@@ -1,94 +1,83 @@
-import WebGlUniform from './web_gl_uniform';
-import WebGlAttribute from './web_gl_attribute';
-import WebGlShader from './web_gl_shader';
+import WebGlUniform from './web_gl_uniform'
+import WebGlAttribute from './web_gl_attribute'
 
 export default class WebGlProgram {
 
-    constructor (glx, shaderProgram) {
+  constructor (glx, shaderProgram) {
+    this.glx = glx
 
-        this.glx = glx;
+    this.vertexShader = glx.resourceLibrary.loadVertexShader(shaderProgram.vertexShader)
+    this.fragmentShader = glx.resourceLibrary.loadFragementShader(shaderProgram.fragmentShader)
 
-        this.vertexShader = glx.resourceLibrary.loadVertexShader(shaderProgram.vertexShader);
-        this.fragmentShader = glx.resourceLibrary.loadFragementShader(shaderProgram.fragmentShader);
+    const { gl } = glx
+    this.glProgram = gl.createProgram()
 
-        const { gl } = glx;
-        this.glProgram = gl.createProgram();
+    linkProgram(this, this.vertexShader.glShader, this.fragmentShader.glShader)
+    // TODO gl.deleteShader?
 
-        linkProgram(this, this.vertexShader.glShader, this.fragmentShader.glShader);
-        // TODO gl.deleteShader?
+    createUniforms(this)
+    createAttributes(this)
 
-        createUniforms(this);
-        createAttributes(this);
+    Object.freeze(this)
+  }
 
-        Object.freeze(this);
+  use () {
+    this.glx.useProgram(this.glProgram)
+  }
 
-    }
-
-    use () {
-        this.glx.useProgram(this.glProgram);
-    }
-
-    loadUniforms (shaderContext) {
-        this.uniformNames.forEach(name => {
-            this.uniforms[name].setValue( shaderContext.curUniform(name).value );
-        });
-    }
+  loadUniforms (shaderContext) {
+    this.uniformNames.forEach(name => {
+      this.uniforms[name].setValue(shaderContext.curUniform(name).value)
+    })
+  }
 
 }
 
 function createAttributes (program) {
+  const { gl } = program.glx
+  const len = gl.getProgramParameter(program.glProgram, gl.ACTIVE_ATTRIBUTES)
 
-    const { gl } = program.glx;
-    const len = gl.getProgramParameter( program.glProgram, gl.ACTIVE_ATTRIBUTES );
+  program.attributes = {}
+  program.attributeNames = []
 
-    program.attributes = {};
-    program.attributeNames = [];
+  for (let i = 0; i < len; ++i) {
+    const attrib = new WebGlAttribute(program, i)
+    program.attributes[attrib.name] = attrib
+    program.attributeNames.push(attrib.name)
+  }
 
-    for (let i = 0; i < len; ++i) {
-        const attrib = new WebGlAttribute(program, i);
-        program.attributes[attrib.name] = attrib;
-        program.attributeNames.push(attrib.name);
-    }
-
-    Object.freeze(program.attributes);
-
+  Object.freeze(program.attributes)
 }
 
 function createUniforms (program) {
+  const { gl } = program.glx
+  const len = gl.getProgramParameter(program.glProgram, gl.ACTIVE_UNIFORMS)
 
-    const { gl } = program.glx;
-    const len = gl.getProgramParameter( program.glProgram, gl.ACTIVE_UNIFORMS );
+  program.uniforms = {}
+  program.uniformNames = []
 
-    program.uniforms = {};
-    program.uniformNames = [];
+  for (let i = 0; i < len; ++i) {
+    const uniform = new WebGlUniform(program, i)
+    program.uniforms[uniform.name] = uniform
+    program.uniformNames.push(uniform.name)
+  }
 
-    for (let i = 0; i < len; ++i) {
-        const uniform = new WebGlUniform(program, i);
-        program.uniforms[uniform.name] = uniform;
-        program.uniformNames.push(uniform.name);
-    }
-
-    Object.freeze(program.uniforms);
-
+  Object.freeze(program.uniforms)
 }
 
 function linkProgram (program, vertexShader, fragmentShader) {
+  const { gl } = program.glx
+  const { glProgram } = program
 
-    const { gl } = program.glx;
-    const { glProgram } = program;
+  gl.attachShader(glProgram, vertexShader)
+  gl.attachShader(glProgram, fragmentShader)
 
-    gl.attachShader( glProgram, vertexShader );
-    gl.attachShader( glProgram, fragmentShader );
+  gl.linkProgram(glProgram)
 
-    gl.linkProgram( glProgram );
-
-    if ( ! gl.getProgramParameter( glProgram, gl.LINK_STATUS ) ) {
-
-        const err = new Error( 'WebGlProgram link panic!' );
-        err.webGlProgram = program;
-        throw err;
-
-    }
-
+  if (!gl.getProgramParameter(glProgram, gl.LINK_STATUS)) {
+    const err = new Error('WebGlProgram link panic!')
+    err.webGlProgram = program
+    throw err
+  }
 }
 

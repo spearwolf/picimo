@@ -1,4 +1,3 @@
-/* jshint esversion:6 */
-import App from './app';
+import App from './app'
 
-export { App };
+export { App }

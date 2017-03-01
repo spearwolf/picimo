@@ -1,12 +1,9 @@
-/* jshint esversion:6 */
-import { BYTES_PER_ELEMENT } from '../../utils/typed_array_helpers';
-import { createVO } from '../v_o_helper';
-import VOArray from '../v_o_array';
-import VOAttrDescriptor from '../v_o_attr_descriptor';
-import createVOPrototype from './create_v_o_prototype';
-import createTypedArrays from './create_typed_arrays';
-import createAttributes from './create_attributes';
-import createAliases from './create_aliases';
+import { createVO } from '../v_o_helper'
+import VOArray from '../v_o_array'
+import createVOPrototype from './create_v_o_prototype'
+import createTypedArrays from './create_typed_arrays'
+import createAttributes from './create_attributes'
+import createAliases from './create_aliases'
 
 /**
  * Vertex object descriptor.
@@ -64,70 +61,60 @@ import createAliases from './create_aliases';
 
 export default class VODescriptor {
 
-    constructor ({ vertexCount, attributes, aliases, proto }) {
+  constructor ({ vertexCount, attributes, aliases, proto }) {
+    this.vertexCount = parseInt(vertexCount, 10)
 
-        this.vertexCount = parseInt( vertexCount, 10 );
+    createAttributes(this, attributes)
+    createAliases(this, aliases)
+    createVOPrototype(this, proto)
+    createTypedArrays(this)
 
-        createAttributes(this, attributes);
-        createAliases(this, aliases);
-        createVOPrototype(this, proto);
-        createTypedArrays(this);
+    // === winterkälte jetzt
 
-        // === winterkälte jetzt
+    Object.keys(this.attr).forEach(name => Object.freeze(this.attr[name]))
+    Object.freeze(this.attr)
+    Object.freeze(this)
+  }
 
-        Object.keys( this.attr ).forEach( name => Object.freeze( this.attr[name] ) );
-        Object.freeze( this.attr );
-        Object.freeze( this );
+  /**
+   * @param {number} [size=1]
+   * @returns {VOArray}
+   */
+  createVOArray (size = 1) {
+    return new VOArray(this, size)
+  }
 
-    }
+  /**
+   * Create a new *vertex object*
+   *
+   * @param {VOArray} [voArray]
+   * @returns {Object} the *vertex object*
+   */
+  createVO (voArray) {
+    return createVO(Object.create(this.voPrototype), this, voArray)
+  }
 
-    /**
-     * @param {number} [size=1]
-     * @returns {VOArray}
-     */
-    createVOArray ( size = 1 ) {
+  /**
+   * @param {string} name
+   * @param {number} size - attribute item count
+   * @returns {boolean}
+   */
+  hasAttribute (name, size) {
+    const attr = this.attr[ name ]
+    return attr && attr.size === size
+  }
 
-        return new VOArray( this, size );
+  /**
+   * Max number of vertex objects when a vertex buffer is used together
+   * with a indexed element array to draw primitives. the reason for
+   * such a limit is that webgl restricts element array indices
+   * to an uin16 data type.
+   * @type {number}
+   */
 
-    }
-
-    /**
-     * Create a new *vertex object*
-     *
-     * @param {VOArray} [voArray]
-     * @returns {Object} the *vertex object*
-     */
-    createVO ( voArray ) {
-
-        return createVO(Object.create( this.voPrototype ), this, voArray);
-
-    }
-
-    /**
-     * @param {string} name
-     * @param {number} size - attribute item count
-     * @returns {boolean}
-     */
-    hasAttribute ( name, size ) {
-
-        const attr = this.attr[ name ];
-        return attr && attr.size === size;
-
-    }
-
-    /**
-     * Max number of vertex objects when a vertex buffer is used together
-     * with a indexed element array to draw primitives. the reason for
-     * such a limit is that webgl restricts element array indices
-     * to an uin16 data type.
-     * @type {number}
-     */
-
-    get maxIndexedVOPoolSize () {
-
-        return Math.floor( 65536 / this.vertexCount );
-
-    }
+  get maxIndexedVOPoolSize () {
+    return Math.floor(65536 / this.vertexCount)
+  }
 
 }
 

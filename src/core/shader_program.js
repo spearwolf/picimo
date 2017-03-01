@@ -1,29 +1,27 @@
-import generateUUID from '../utils/generate_uuid';
+import generateUUID from '../utils/generate_uuid'
 
 export default class GpuProgram {
 
+  /**
+   * @param {ShaderSource} vertexShader
+   * @param {ShaderSource} fragmentShader
+   */
+  constructor (vertexShader, fragmentShader) {
     /**
-     * @param {ShaderSource} vertexShader
-     * @param {ShaderSource} fragmentShader
+     * @type {string}
      */
-    constructor (vertexShader, fragmentShader) {
+    this.id = generateUUID()
 
-        /**
-         * @type {string}
-         */
-        this.id = generateUUID();
+    /**
+     * @type {ShaderSource}
+     */
+    this.vertexShader = vertexShader
 
-        /**
-         * @type {ShaderSource}
-         */
-        this.vertexShader = vertexShader;
-
-        /**
-         * @type {ShaderSource}
-         */
-        this.fragmentShader = fragmentShader;
-
-    }
+    /**
+     * @type {ShaderSource}
+     */
+    this.fragmentShader = fragmentShader
+  }
 
 }
 

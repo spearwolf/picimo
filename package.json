@@ -1,9 +1,11 @@
 {
-  "name": "@spearwolf/x",
-  "description": "foo bar",
-  "version": "0.0.1",
+  "name": "@spearwolf/blitpunk",
+  "description": "todo",
+  "version": "0.0.2",
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register test/test_*.js",
+    "test": "npm run standard:src && mocha --compilers js:babel-core/register test/test_*.js",
+    "standard": "standard",
+    "standard:src": "standard src/**/*.js test/**/*.js",
     "webgl-boilerplate:build": "webpack --watch --config config/webpack.webgl-boilerplate.config.js",
     "webgl-boilerplate:watch": "npm run webgl-boilerplate:build -- --watch",
     "webgl-boilerplate:serve": "serve -p 8080 webgl-boilerplate",
@@ -13,16 +15,21 @@
   "devDependencies": {
     "babel-cli": "^6.22.2",
     "babel-core": "^6.22.1",
+    "babel-eslint": "^7.1.1",
     "babel-loader": "^6.3.2",
     "babel-preset-env": "^1.1.8",
     "mocha": "^3.2.0",
     "npm-run-all": "^4.0.1",
     "serve": "^3.3.1",
+    "standard": "^8.6.0",
     "webpack": "^2.2.1"
   },
   "dependencies": {
     "@spearwolf/eventize": "github:spearwolf/eventize",
     "@spearwolf/jab": "github:spearwolf/jab",
     "uuid": "^3.0.1"
+  },
+  "standard": {
+    "parser": "babel-eslint"
   }
 }
