@@ -1,5 +1,5 @@
 
-export default function render({ program, glx, gl, voPool, sCtx }, parameters) {
+export default function render ({ program, glx, gl, voPool, sCtx }, parameters) {
 
     parameters.time = new Date().getTime() - parameters.start_time;
 
@@ -19,7 +19,7 @@ export default function render({ program, glx, gl, voPool, sCtx }, parameters) {
 
     // Render geometry
 
-    const buffer = glx.resourceLibrary.getBuffer(voPool);
+    const buffer = glx.resourceLibrary.findBuffer(voPool);
 
     buffer.bindBuffer();
     currentProgram.attributes.position.vertexAttribPointer( voPool.descriptor );

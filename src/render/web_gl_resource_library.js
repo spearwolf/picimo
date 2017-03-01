@@ -59,7 +59,7 @@ export default class WebGlResourceLibrary {
   /**
    * @param {VOPool|VOArray} resource
    */
-  getBuffer (resource) {
+  findBuffer (resource) {
     if (resource instanceof VOPool) {
       return this.buffer.get(resource.voArray.id)
     } else if (resource instanceof VOArray) {
