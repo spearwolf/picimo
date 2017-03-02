@@ -1,6 +1,7 @@
 import { BYTES_PER_ELEMENT } from '../../utils/typed_array_helpers'
 import VOAttrDescriptor from '../v_o_attr_descriptor'
 
+/** @private */
 export default function (descriptor, attributes) {
   descriptor.attr = {}
   descriptor.attrNames = []

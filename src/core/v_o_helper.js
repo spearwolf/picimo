@@ -1,4 +1,5 @@
 
+/** @private */
 export function createVO (obj, descriptor, voArray) {
   // set VODescriptor
   //

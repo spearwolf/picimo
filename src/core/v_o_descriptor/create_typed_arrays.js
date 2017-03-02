@@ -1,4 +1,5 @@
 
+/** @private */
 export default function (descriptor) {
   descriptor.typedArrays = {
     float32: false,

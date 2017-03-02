@@ -1,4 +1,5 @@
 
+/** @private */
 const BYTES_PER_ELEMENT = Object.freeze({
   float32: 4,
   int16: 2,
@@ -9,6 +10,7 @@ const BYTES_PER_ELEMENT = Object.freeze({
   uint8: 1
 })
 
+/** @private */
 const TYPED_ARRAY_CONSTRUCTOR = Object.freeze({
   float32: Float32Array,
   int16: Int16Array,
@@ -19,6 +21,7 @@ const TYPED_ARRAY_CONSTRUCTOR = Object.freeze({
   uint8: Uint8Array
 })
 
+/** @private */
 const TYPED_ARRAY_GETTER = Object.freeze({
   float32: (obj) => obj.float32Array,
   int32: (obj) => obj.int32Array,
@@ -29,6 +32,7 @@ const TYPED_ARRAY_GETTER = Object.freeze({
   uint8: (obj) => obj.uint8Array
 })
 
+/** @private */
 const GL_ITEM_TYPES = Object.freeze({
   float32: 'FLOAT',
   int16: 'SHORT',

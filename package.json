@@ -5,6 +5,7 @@
   "scripts": {
     "standard": "standard",
     "mocha": "mocha --compilers js:babel-core/register",
+    "esdoc": "esdoc",
     "lint:js": "npm run standard -- \"src/**/*.js\" \"test/**/*.js\" \"webgl-boilerplate/src/**/*.js\"",
     "test": "npm run lint:js && npm run mocha -- test/test_*.js",
     "boilerplate:build": "webpack --watch --config config/webpack.webgl-boilerplate.config.js",
@@ -19,6 +20,7 @@
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.3.2",
     "babel-preset-env": "^1.1.8",
+    "esdoc": "^0.5.2",
     "mocha": "^3.2.0",
     "npm-run-all": "^4.0.1",
     "serve": "^4.0.1",

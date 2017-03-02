@@ -1,5 +1,6 @@
 import VOAttrDescriptor from '../v_o_attr_descriptor'
 
+/** @private */
 export default function (descriptor, aliases) {
   if (typeof aliases !== 'object') return
 

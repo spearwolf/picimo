@@ -13,9 +13,13 @@ export default class WebGlResourceLibrary {
   constructor (glx) {
     Object.defineProperty(this, 'glx', { value: glx })
 
+    /** @private */
     this.vertexShader = new Map()
+    /** @private */
     this.fragmentShader = new Map()
+    /** @private */
     this.shaderProgram = new Map()
+    /** @private */
     this.buffer = new Map()
   }
 
