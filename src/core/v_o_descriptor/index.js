@@ -60,7 +60,6 @@ import createAliases from './create_aliases'
  */
 
 export default class VODescriptor {
-
   constructor ({ vertexCount, attributes, aliases, proto }) {
     this.vertexCount = parseInt(vertexCount, 10)
 
@@ -115,6 +114,4 @@ export default class VODescriptor {
   get maxIndexedVOPoolSize () {
     return Math.floor(65536 / this.vertexCount)
   }
-
 }
-

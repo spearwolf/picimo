@@ -34,4 +34,3 @@ export default function (descriptor, attributes) {
 
   descriptor.attrList = descriptor.attrNames.map(name => descriptor.attr[name])
 }
-

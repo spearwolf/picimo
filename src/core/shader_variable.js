@@ -5,7 +5,6 @@
  * Use `.touch()` if you want to increase the serial number without changing the value.
  */
 export default class ShaderVariable {
-
   /**
    * @param {string} name
    * @param {string} type
@@ -40,7 +39,6 @@ export default class ShaderVariable {
   touch () {
     ++this.serial
   }
-
 }
 
 ShaderVariable.TYPE = Object.freeze({
@@ -48,4 +46,3 @@ ShaderVariable.TYPE = Object.freeze({
   ATTRIB: 'attrib',
   TEXTURE_2D: 'tex2d'
 })
-

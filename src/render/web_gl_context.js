@@ -1,7 +1,6 @@
 import WebGlResourceLibrary from './web_gl_resource_library'
 
 export default class WebGlContext {
-
   constructor (gl) {
     Object.defineProperty(this, 'gl', { value: gl })
 
@@ -38,6 +37,4 @@ export default class WebGlContext {
       this.currentProgram = glProgram
     }
   }
-
 }
-

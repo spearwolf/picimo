@@ -350,4 +350,3 @@ describe('VODescriptor', () => {
     })
   })
 })
-

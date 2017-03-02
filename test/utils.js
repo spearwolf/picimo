@@ -24,4 +24,3 @@ export function assertVOAttrDescriptor (descriptor, names, size, offset, uniform
     assert(attr.attrNames === undefined, '.attrNames')
   }
 }
-

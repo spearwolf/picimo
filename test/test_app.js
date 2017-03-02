@@ -23,4 +23,3 @@ describe('App', () => {
     assert.equal(typeof App.Service, 'function')
   })
 })
-

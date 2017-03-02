@@ -7,7 +7,6 @@ import ShaderVariable from './shader_variable'
  * or pop shader variable _values_.
  */
 export default class ShaderContext {
-
   constructor () {
     this.uniform = new Map()
     this.attrib = new Map()
@@ -76,7 +75,6 @@ export default class ShaderContext {
     const lane = this.tex2d.get(name)
     return lane && lane.length ? lane[lane.length - 1] : null
   }
-
 }
 
 function shaderVarMap (shaderContext, type) {
@@ -98,4 +96,3 @@ function shaderVarLane (shaderContext, type, name) {
 
   return lane
 }
-

@@ -20,4 +20,3 @@ export function createVO (obj, descriptor, voArray) {
 
   return obj
 }
-

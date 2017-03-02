@@ -1,15 +1,16 @@
 {
   "name": "@spearwolf/blitpunk",
   "description": "todo",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "scripts": {
-    "test": "npm run standard:src && mocha --compilers js:babel-core/register test/test_*.js",
     "standard": "standard",
-    "standard:src": "standard src/**/*.js test/**/*.js",
-    "webgl-boilerplate:build": "webpack --watch --config config/webpack.webgl-boilerplate.config.js",
-    "webgl-boilerplate:watch": "npm run webgl-boilerplate:build -- --watch",
-    "webgl-boilerplate:serve": "serve -p 8080 webgl-boilerplate",
-    "start": "run-p webgl-boilerplate:serve webgl-boilerplate:watch"
+    "mocha": "mocha --compilers js:babel-core/register",
+    "lint:js": "npm run standard -- \"src/**/*.js\" \"test/**/*.js\" \"webgl-boilerplate/src/**/*.js\"",
+    "test": "npm run lint:js && npm run mocha -- test/test_*.js",
+    "boilerplate:build": "webpack --watch --config config/webpack.webgl-boilerplate.config.js",
+    "boilerplate:watch": "npm run boilerplate:build -- --watch",
+    "boilerplate:serve": "serve -p 8080 webgl-boilerplate",
+    "start": "run-p boilerplate:serve boilerplate:watch"
   },
   "license": "Apache-2.0",
   "devDependencies": {
@@ -20,8 +21,8 @@
     "babel-preset-env": "^1.1.8",
     "mocha": "^3.2.0",
     "npm-run-all": "^4.0.1",
-    "serve": "^3.3.1",
-    "standard": "^8.6.0",
+    "serve": "^4.0.1",
+    "standard": "^9.0.0",
     "webpack": "^2.2.1"
   },
   "dependencies": {
@@ -30,6 +31,10 @@
     "uuid": "^3.0.1"
   },
   "standard": {
-    "parser": "babel-eslint"
+    "parser": "babel-eslint",
+    "ignore": [
+      "config/*.js",
+      "webgl-boilerplate/bundle.js"
+    ]
   }
 }

@@ -34,4 +34,3 @@ export default function (descriptor, proto) {
 
   descriptor.voPrototype = Object.create((typeof proto === 'object' ? proto : {}), propertiesObject)
 }
-

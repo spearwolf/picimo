@@ -19,7 +19,6 @@ import { BYTES_PER_ELEMENT, TYPED_ARRAY_CONSTRUCTOR } from '../utils/typed_array
  */
 
 export default class VOArray {
-
   constructor (descriptor, capacity, data, usage = VOArray.USAGE.DYNAMIC) {
     this.id = generateUUID()
 
@@ -92,11 +91,9 @@ export default class VOArray {
         (this.bufferByteOffset + (begin * this.descriptor.bytesPerVO)),
         size * this.descriptor.bytesPerVO))
   }
-
 }
 
 VOArray.USAGE = Object.freeze({
   STATIC: 'static',
   DYNAMIC: 'dynamic'
 })
-

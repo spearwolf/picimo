@@ -4,7 +4,6 @@ import { BYTES_PER_ELEMENT, TYPED_ARRAY_GETTER } from '../utils/typed_array_help
  * Vertex object *attribute* descriptor.
  */
 export default class VOAttrDescriptor {
-
   /**
    * @param {string} name
    * @param {string} type
@@ -170,7 +169,6 @@ export default class VOAttrDescriptor {
       }
     }
   }
-
 }
 
 /** @private */
@@ -245,4 +243,3 @@ function setV1u (getArray, vertexCount, vertexAttrCount, offset) {
 function camelize (name) {
   return name[ 0 ].toUpperCase() + name.substr(1)
 }
-

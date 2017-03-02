@@ -16,4 +16,3 @@ export default function (voPool, maxAllocSize = 0) {
     voPool.availableVOs.push(vertexObject)
   }
 }
-

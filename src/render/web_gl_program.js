@@ -2,7 +2,6 @@ import WebGlUniform from './web_gl_uniform'
 import WebGlAttribute from './web_gl_attribute'
 
 export default class WebGlProgram {
-
   constructor (glx, shaderProgram) {
     this.glx = glx
 
@@ -30,7 +29,6 @@ export default class WebGlProgram {
       this.uniforms[name].setValue(shaderContext.curUniform(name).value)
     })
   }
-
 }
 
 function createAttributes (program) {
@@ -80,4 +78,3 @@ function linkProgram (program, vertexShader, fragmentShader) {
     throw err
   }
 }
-

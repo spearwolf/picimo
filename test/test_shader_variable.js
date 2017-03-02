@@ -41,4 +41,3 @@ describe('ShaderVariable', () => {
     assert.equal(val.serial, 1)
   })
 })
-

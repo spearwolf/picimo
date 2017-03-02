@@ -7,4 +7,3 @@ export {
   SG_NODE_TYPE,
   DEFAULT_PRIORITY
 }
-

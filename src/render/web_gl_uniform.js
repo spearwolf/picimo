@@ -1,6 +1,5 @@
 
 export default class WebGlUniform {
-
   constructor (program, index) {
     this.program = program
     this.glx = program.glx
@@ -19,7 +18,6 @@ export default class WebGlUniform {
 
     Object.freeze(this)
   }
-
 }
 
 function uniformSetter (uniform) {
@@ -27,7 +25,6 @@ function uniformSetter (uniform) {
   const { gl } = uniform.glx
 
   switch (type) {
-
     case gl.FLOAT:
       return (value) => gl.uniform1f(location, value)
 
@@ -45,11 +42,9 @@ function uniformSetter (uniform) {
 
     case gl.SAMPLER_2D:
       return (value) => gl.uniform1i(location, value)
-
   }
 
   const err = new Error(`WebGlUniform unknown uniform type:${type}`)
   err.webGlUniform = uniform
   throw err
 }
-

@@ -4,7 +4,6 @@ import ShaderVariable from './shader_variable'
  * Shader attribute variable.
  */
 export default class ShaderAttribVariable extends ShaderVariable {
-
   /**
    * @param {string} name
    * @param {number|Object} value
@@ -12,6 +11,4 @@ export default class ShaderAttribVariable extends ShaderVariable {
   constructor (name, value) {
     super(name, ShaderVariable.TYPE.ATTRIB, value)
   }
-
 }
-

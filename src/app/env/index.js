@@ -5,7 +5,6 @@ const hasDocument = typeof document !== 'undefined'
 const hasConsole = typeof console !== 'undefined'
 
 export default class Env {
-
   constructor () {
     this.hasWindow = hasWindow
     this.hasDocument = hasDocument
@@ -32,7 +31,6 @@ export default class Env {
 
     Object.freeze(this)
   }
-
 }
 
 function detectWebGl () {
@@ -58,4 +56,3 @@ function getContext (canvas, ctx, options) {
     }
   }
 }
-

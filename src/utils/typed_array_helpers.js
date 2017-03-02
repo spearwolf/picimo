@@ -45,4 +45,3 @@ export {
   TYPED_ARRAY_GETTER,
   GL_ITEM_TYPES
 }
-

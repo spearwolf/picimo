@@ -3,7 +3,6 @@ import { GL_ITEM_TYPES } from '../utils/typed_array_helpers'
 const glType = (gl, type) => gl[GL_ITEM_TYPES[type]]
 
 export default class WebGlAttribute {
-
   constructor (program, index) {
     this.program = program
     this.glx = program.glx
@@ -30,6 +29,4 @@ export default class WebGlAttribute {
     const type = glType(gl, attr.type)
     gl.vertexAttribPointer(this.location, attr.size, type, false, descriptor.bytesPerVertex, attr.byteOffset)
   }
-
 }
-

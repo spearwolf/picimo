@@ -1,7 +1,6 @@
 import ShaderSource from '../core/shader_source'
 
 export default class WebGlShader {
-
   constructor (glx, source) {
     this.glx = glx
 
@@ -18,7 +17,6 @@ export default class WebGlShader {
 
     Object.freeze(this)
   }
-
 }
 
 function compileShader (shader) {
@@ -43,4 +41,3 @@ function compileShader (shader) {
     throw err
   }
 }
-

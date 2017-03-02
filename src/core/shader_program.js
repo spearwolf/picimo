@@ -1,7 +1,6 @@
 import generateUUID from '../utils/generate_uuid'
 
 export default class GpuProgram {
-
   /**
    * @param {ShaderSource} vertexShader
    * @param {ShaderSource} fragmentShader
@@ -22,6 +21,4 @@ export default class GpuProgram {
      */
     this.fragmentShader = fragmentShader
   }
-
 }
-

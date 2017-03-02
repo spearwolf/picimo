@@ -55,4 +55,3 @@ describe('VODescriptor with mixed element types', () => {
     assert.equal(descriptor.attr.translate.byteOffset, 16, 'translate.byteOffset')
   })
 })
-

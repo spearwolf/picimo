@@ -10,7 +10,6 @@ const WEB_GL_BUFFER_USAGE = Object.freeze({
 })
 
 export default class WebGlResourceLibrary {
-
   constructor (glx) {
     Object.defineProperty(this, 'glx', { value: glx })
 
@@ -66,6 +65,4 @@ export default class WebGlResourceLibrary {
       return this.buffer.get(resource.id)
     }
   }
-
 }
-

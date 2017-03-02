@@ -18,4 +18,3 @@ export default function (descriptor) {
 
   descriptor.typeList = Object.keys(descriptor.typedArrays).filter(type => descriptor.typedArrays[type]).sort()
 }
-

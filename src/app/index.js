@@ -2,7 +2,6 @@ import * as jab from '@spearwolf/jab'
 import Env from './env'
 
 class App extends jab.App {
-
   constructor ({ provider } = {}) {
     super({
       provider: Object.assign({
@@ -10,7 +9,6 @@ class App extends jab.App {
       }, provider)
     })
   }
-
 }
 
 App.Component = jab.App.Component

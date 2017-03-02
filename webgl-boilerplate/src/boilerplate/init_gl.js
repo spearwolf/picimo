@@ -1,25 +1,23 @@
-import WebGlContext from '../../../src/render/web_gl_context';
+import WebGlContext from '../../../src/render/web_gl_context'
 
-export default function initGl() {
+export default function initGl () {
+  const canvas = document.querySelector('canvas')
 
-    const canvas = document.querySelector( 'canvas' );
+  let gl
+  try {
+    gl = canvas.getContext('experimental-webgl')
+  } catch (error) {
+  }
 
-    let gl;
-    try {
-        gl = canvas.getContext( 'experimental-webgl' );
-    } catch( error ) {
-    }
+  if (!gl) {
+    throw new Error('cannot create webgl context')
+  }
 
-    if ( !gl ) {
-        throw "cannot create webgl context";
-    }
+  const glx = new WebGlContext(gl)
 
-    const glx = new WebGlContext(gl);
-
-    return {
-        canvas,
-        gl,
-        glx
-    };
+  return {
+    canvas,
+    gl,
+    glx
+  }
 }
-

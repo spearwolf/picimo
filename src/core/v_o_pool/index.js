@@ -3,7 +3,6 @@ import generateUUID from '../../utils/generate_uuid'
 import VOArray from '../v_o_array'
 
 export default class VOPool {
-
   /**
    * @param {VODescriptor} descriptor - vertex object descriptor
    * @param {Object} [options] - Advanced options
@@ -19,10 +18,10 @@ export default class VOPool {
     this.id = generateUUID()
 
     this.descriptor = descriptor
-    this.capacity = options && options.capacity || this.descriptor.maxIndexedVOPoolSize
-    this.maxAllocVOSize = options && options.maxAllocVOSize || 0
+    this.capacity = (options && options.capacity) || this.descriptor.maxIndexedVOPoolSize
+    this.maxAllocVOSize = (options && options.maxAllocVOSize) || 0
 
-    this.usage = options && options.usage || VOPool.USAGE.DYNAMIC
+    this.usage = (options && options.usage) || VOPool.USAGE.DYNAMIC
 
     let voArray = options && options.voArray
     if (voArray) {
@@ -34,8 +33,8 @@ export default class VOPool {
     }
     this.voArray = voArray
 
-    this.voZero = options && options.voZero || descriptor.createVO()
-    this.voNew = options && options.voNew || descriptor.createVO()
+    this.voZero = (options && options.voZero) || descriptor.createVO()
+    this.voNew = (options && options.voNew) || descriptor.createVO()
 
     this.availableVOs = []
     this.usedVOs = []
@@ -139,8 +138,6 @@ export default class VOPool {
 
     vo.voArray.copy(this.voZero.voArray)
   }
-
 }
 
-VOPool.USAGE = VOArray.USAGE;
-
+VOPool.USAGE = VOArray.USAGE

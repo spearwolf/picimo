@@ -23,4 +23,3 @@ function shouldHaveProperty (getEnv, propName, propType = 'boolean') {
     assert.equal(typeof getEnv()[propName], propType)
   })
 }
-

@@ -143,4 +143,3 @@ describe('VOPool', () => {
     it('usedCount:after', () => assert.equal(pool.usedCount, 15))
   })
 })
-

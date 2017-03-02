@@ -7,7 +7,6 @@ import { SG_NODE_TYPE, DEFAULT_PRIORITY } from './constants'
  * Common interface used by all scene graph nodes.
  */
 export default class SGNode {
-
   constructor ({ nodeType, name, parentNode, priority } = {}) {
     eventize(this)
 
@@ -82,7 +81,7 @@ export default class SGNode {
    * @type {SGNode}
    */
   get rootNode () {
-    return this.parentNode && this.parentNode.rootNode || this
+    return (this.parentNode && this.parentNode.rootNode) || this
   }
 
   /**
@@ -183,6 +182,4 @@ export default class SGNode {
       }
     }
   }
-
 }
-
