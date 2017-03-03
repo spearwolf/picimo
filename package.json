@@ -1,7 +1,7 @@
 {
   "name": "@spearwolf/blitpunk",
   "description": "todo",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "scripts": {
     "standard": "standard",
     "mocha": "mocha --compilers js:babel-core/register",
@@ -30,6 +30,7 @@
   "dependencies": {
     "@spearwolf/eventize": "github:spearwolf/eventize",
     "@spearwolf/jab": "github:spearwolf/jab",
+    "document-register-element": "^1.4.1",
     "uuid": "^3.0.1"
   },
   "standard": {

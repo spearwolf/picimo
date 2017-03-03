@@ -5,12 +5,13 @@ import SGNode from '../src/scene_graph/s_g_node'
 
 describe('SGNode', () => {
   describe('new SGNode', () => {
-    const node = new SGNode()
+    const node = new SGNode({ name: 'foo' })
     it('creates a SGNode instance', () => assert(node))
     it('.parentNode is null', () => assert.equal(node.parentNode, null))
     it('is a rootNode', () => assert.equal(node.isRootNode, true))
     it('is the .rootNode instance', () => assert.equal(node.rootNode, node))
-    it('has a .name', () => assert(typeof node.name === 'string' && node.name.length > 0))
+    it('has a .uuid', () => assert(typeof node.uuid === 'string' && node.uuid.length > 0))
+    it('has a .name', () => assert.equal(node.name, 'foo'))
     it('default .priority is 0', () => assert.equal(node.priority, 0))
     it('has no children', () => assert.equal(node.hasChildNodes, false))
     it('is eventized', () => assert(eventize.is(node)))
@@ -24,8 +25,8 @@ describe('SGNode', () => {
     it('node.parentNode is rootNode', () => assert.equal(node.parentNode, rootNode))
     it('node is NOT a rootNode', () => assert.equal(node.isRootNode, false))
     it('rootNode is the .rootNode instance of node', () => assert.equal(node.rootNode, rootNode))
-    it('has a .name', () => assert(typeof node.name === 'string' && node.name.length > 0))
-    it('.name is different than rootNode.name', () => assert(node.name !== rootNode.name))
+    it('has a .uuid', () => assert(typeof node.uuid === 'string' && node.uuid.length > 0))
+    it('.uuid is different than rootNode.uuid', () => assert(node.uuid !== rootNode.uuid))
     it('rootNode has a child', () => assert.equal(rootNode.hasChildNodes, true))
     it('rootNode contains child: node ', () => assert(rootNode.containsChild(node), true))
     it('node can not be append twice to rootNode', () => {
@@ -47,14 +48,14 @@ describe('SGNode', () => {
     it('rootNode has 3 children', () => assert.equal(rootNode.childNodes.length, 3))
     it('check forEachChild sequence', () => {
       let sequence = []
-      rootNode.forEachChild(node => sequence.push(node.name))
-      assert.deepEqual(sequence, [nodeA.name, nodeB.name, nodeC.name])
+      rootNode.forEachChild(node => sequence.push(node.uuid))
+      assert.deepEqual(sequence, [nodeA.uuid, nodeB.uuid, nodeC.uuid])
     })
     it('check forEachChild sequence after priority from a node changed', () => {
       let sequence = []
       nodeB.priority = 1024
-      rootNode.forEachChild(node => sequence.push(node.name))
-      assert.deepEqual(sequence, [nodeB.name, nodeA.name, nodeC.name])
+      rootNode.forEachChild(node => sequence.push(node.uuid))
+      assert.deepEqual(sequence, [nodeB.uuid, nodeA.uuid, nodeC.uuid])
     })
   })
 
