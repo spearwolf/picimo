@@ -152,7 +152,7 @@ export default class BlitpCanvas extends BlitpElement {
        */
       this.height = h
 
-      this.glx.gl.viewport(0, 0, w, h)
+      this.glx.gl.viewport(0, 0, w, h)  // TODO move this into WebGlRenderer
     }
   }
 }
