@@ -13,6 +13,12 @@ export default class ShaderContext {
     this.tex2d = new Map()
   }
 
+  clear () {
+    this.uniform.clear()
+    this.attrib.clear()
+    this.tex2d.clear()
+  }
+
   /**
    * @param {ShaderVariable} shaderVariable
    */

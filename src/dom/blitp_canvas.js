@@ -1,5 +1,3 @@
-import eventize from '@spearwolf/eventize'
-
 import BlitpElement from './blitp_element'
 import WebGlContext from '../render/web_gl_context'
 
@@ -47,8 +45,6 @@ const now = () => window.performance.now() / 1000
 export default class BlitpCanvas extends BlitpElement {
   /** @private */
   initialize () {
-    eventize(this)
-
     /**
      * @type {CanvasHTMLElement}
      */
