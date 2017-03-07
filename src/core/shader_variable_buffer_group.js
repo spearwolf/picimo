@@ -1,13 +1,14 @@
 import ShaderVariableGroup from './shader_variable_group'
 import ShaderAttribVariable from './shader_attrib_variable'
+import ShaderAttribValue from './shader_attrib_value'
 import ShaderVariableAlias from './shader_variable_alias'
 
 /**
- * Group of shader variables from a buffer.
+ * Group of shader variables which are referencing one single buffer.
  */
 export default class ShaderVariableBufferGroup extends ShaderVariableGroup {
   /**
-  * @param {VOPool} bufferSource
+   * @param {VOPool} bufferSource
    */
   constructor (bufferSource) {
     super([])
@@ -15,11 +16,13 @@ export default class ShaderVariableBufferGroup extends ShaderVariableGroup {
     let firstVar
     Object.keys(descriptor.attr).forEach(attrName => {
       if (!firstVar) {
-        firstVar = new ShaderAttribVariable(attrName, {
-          // attrDescriptor: descriptor.attr[attrName],
-          descriptor,
-          bufferSource
-        })
+        firstVar = new ShaderAttribVariable(
+          attrName,
+          new ShaderAttribValue(
+            attrName,
+            descriptor,
+            bufferSource
+          ))
         this.shaderVars.push(firstVar)
       } else {
         this.shaderVars.push(new ShaderVariableAlias(attrName, firstVar))

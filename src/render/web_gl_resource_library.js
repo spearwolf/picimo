@@ -1,8 +1,6 @@
 import WebGlShader from './web_gl_shader'
 import WebGlProgram from './web_gl_program'
 import WebGlBuffer from './web_gl_buffer'
-import VOPool from '../core/v_o_pool'
-import VOArray from '../core/v_o_array'
 
 const WEB_GL_BUFFER_USAGE = Object.freeze({
   static: WebGlBuffer.STATIC_DRAW,
@@ -64,13 +62,9 @@ export default class WebGlResourceLibrary {
   }
 
   /**
-    * @param {VOPool|VOArray} resource
+    * @param {string} id
     */
-  findBuffer (resource) {
-    if (resource instanceof VOPool) {
-      return this.buffer.get(resource.voArray.id)
-    } else if (resource instanceof VOArray) {
-      return this.buffer.get(resource.id)
-    }
+  findBuffer (id) {
+    return this.buffer.get(id)
   }
 }
