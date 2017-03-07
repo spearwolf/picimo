@@ -1,7 +1,7 @@
 import VODescriptor from '../../src/core/v_o_descriptor'
 import VOPool from '../../src/core/v_o_pool'
 
-export default function (glx) {
+export default function () {
   const voDescriptor = new VODescriptor({
     vertexCount: 3, // => triangle
     attributes: [
@@ -16,9 +16,6 @@ export default function (glx) {
 
   voPool.alloc().setPosition(0.5, -1.0, 1.0, -1.0, 0.5, 1.0)
   voPool.alloc().setPosition(1.0, -1.0, 1.0, 1.0, 0.5, 1.0)
-
-  const buffer = glx.resourceLibrary.loadBuffer(voPool)
-  buffer.bufferData(voPool)
 
   return voPool
 }

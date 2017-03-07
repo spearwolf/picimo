@@ -50,18 +50,22 @@ export default class WebGlResourceLibrary {
     return program
   }
 
-  loadBuffer (voPool) {
-    let buffer = this.buffer.get(voPool.voArray.id)
+  /**
+    * @param {VOArray} voArray
+    */
+  loadBuffer (voArray) {
+    let buffer = this.buffer.get(voArray.id)
     if (!buffer) {
-      buffer = new WebGlBuffer(this.glx, WebGlBuffer.ARRAY_BUFFER, WEB_GL_BUFFER_USAGE[voPool.usage])
-      this.buffer.set(voPool.voArray.id, buffer)
+      buffer = new WebGlBuffer(this.glx, WebGlBuffer.ARRAY_BUFFER, WEB_GL_BUFFER_USAGE[voArray.usage])
+      buffer.voArray = voArray
+      this.buffer.set(voArray.id, buffer)
     }
     return buffer
   }
 
   /**
-   * @param {VOPool|VOArray} resource
-   */
+    * @param {VOPool|VOArray} resource
+    */
   findBuffer (resource) {
     if (resource instanceof VOPool) {
       return this.buffer.get(resource.voArray.id)

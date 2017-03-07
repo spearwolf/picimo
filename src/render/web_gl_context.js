@@ -4,6 +4,8 @@ export default class WebGlContext {
   constructor (gl) {
     Object.defineProperty(this, 'gl', { value: gl })
 
+    initialize(this)
+
     this.resourceLibrary = new WebGlResourceLibrary(this)
     this.boundBuffers = new Map()
     this.currentProgram = 0
@@ -37,4 +39,11 @@ export default class WebGlContext {
       this.currentProgram = glProgram
     }
   }
+}
+
+/** @private */
+function initialize (glx) {
+  const { gl } = glx
+
+  glx.DEPTH_BITS = gl.getParameter(gl.DEPTH_BITS)
 }

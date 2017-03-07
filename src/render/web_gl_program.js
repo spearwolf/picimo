@@ -29,8 +29,19 @@ export default class WebGlProgram {
       this.uniforms[name].setValue(shaderContext.curUniform(name).value)
     })
   }
+
+  loadAttributes (shaderContext) {
+    const { resourceLibrary } = this.glx
+    this.attributeNames.forEach(name => {
+      const attrib = shaderContext.curAttrib(name).value
+      const buffer = resourceLibrary.findBuffer(attrib.bufferSource)
+      buffer.bindBuffer()
+      this.attributes[name].vertexAttribPointer(attrib.descriptor)
+    })
+  }
 }
 
+/** @private */
 function createAttributes (program) {
   const { gl } = program.glx
   const len = gl.getProgramParameter(program.glProgram, gl.ACTIVE_ATTRIBUTES)
@@ -47,6 +58,7 @@ function createAttributes (program) {
   Object.freeze(program.attributes)
 }
 
+/** @private */
 function createUniforms (program) {
   const { gl } = program.glx
   const len = gl.getProgramParameter(program.glProgram, gl.ACTIVE_UNIFORMS)
@@ -63,6 +75,7 @@ function createUniforms (program) {
   Object.freeze(program.uniforms)
 }
 
+/** @private */
 function linkProgram (program, vertexShader, fragmentShader) {
   const { gl } = program.glx
   const { glProgram } = program

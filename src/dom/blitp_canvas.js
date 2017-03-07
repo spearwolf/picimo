@@ -1,5 +1,6 @@
 import BlitpElement from './blitp_element'
 import WebGlContext from '../render/web_gl_context'
+import WebGlRenderer from '../render/web_gl_renderer'
 
 const now = () => window.performance.now() / 1000
 
@@ -70,6 +71,11 @@ export default class BlitpCanvas extends BlitpElement {
      */
     this.glx = new WebGlContext(createGlContext(this.canvas, this.contextAttributes))
 
+    /**
+     * @type {WebGlRenderer}
+     */
+    this.renderer = new WebGlRenderer(this.glx)
+
     setCanvasStyles(this.canvas)
     this.appendChild(this.canvas)
 
@@ -109,7 +115,7 @@ export default class BlitpCanvas extends BlitpElement {
     ++this.frameNo
     this.time = now() - this.startTime
     this.resize()
-    this.emit('renderFrame')
+    this.renderer.renderFrame(this)
   }
 
   /**
@@ -180,12 +186,14 @@ function createGlContext (canvas, ctxAttrs) {
   try {
     gl = canvas.getContext('webgl', ctxAttrs)
   } catch (err0) {
+    console.error(err0)
   }
 
   if (!gl) {
     try {
       gl = canvas.getContext('experimental-webgl', ctxAttrs)
     } catch (err1) {
+      console.error(err1)
     }
   }
 
