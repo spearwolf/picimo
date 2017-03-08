@@ -93,7 +93,8 @@ describe('ShaderContext', () => {
     it('push to context', () => {
       assert.equal(ctx.curUniform('poiu'), null, ':poiu should be null')
       assert.equal(ctx.curUniform('ghjk'), null, ':ghjk should be null')
-      group.pushVar(ctx)
+      // group.pushVar(ctx)
+      ctx.pushVar(group)
       assert.equal(ctx.curUniform('poiu').value, 666)
       assert.equal(ctx.curUniform('ghjk').value, 666)
     })
@@ -101,7 +102,8 @@ describe('ShaderContext', () => {
     it('pop from context', () => {
       assert.equal(ctx.curUniform('poiu').value, 666)
       assert.equal(ctx.curUniform('ghjk').value, 666)
-      group.popVar(ctx)
+      // group.popVar(ctx)
+      ctx.popVar(group)
       assert.equal(ctx.curUniform('poiu'), null, ':poiu should be null')
       assert.equal(ctx.curUniform('ghjk'), null, ':ghjk should be null')
     })

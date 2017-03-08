@@ -1,4 +1,5 @@
 import ShaderVariable from './shader_variable'
+import ShaderVariableGroup from './shader_variable_group'
 
 /**
  * A ShaderContext keeps named references to all shader _variables_
@@ -20,24 +21,32 @@ export default class ShaderContext {
   }
 
   /**
-   * @param {ShaderVariable} shaderVariable
+   * @param {ShaderVariable|ShaderVariableGroup} shaderVariable
    */
   pushVar (shaderVariable) {
-    const lane = shaderVarLane(this, shaderVariable.type, shaderVariable.name)
-    lane.push(shaderVariable)
+    if (shaderVariable instanceof ShaderVariableGroup) {
+      shaderVariable.pushVar(this)
+    } else {
+      const lane = shaderVarLane(this, shaderVariable.type, shaderVariable.name)
+      lane.push(shaderVariable)
+    }
   }
 
   /**
    * Remove current shader variable plus all later set variables from named shader variable stack.
-   * @param {ShaderVariable} shaderVariable
+   * @param {ShaderVariable|ShaderVariableGroup} shaderVariable
    */
   popVar (shaderVariable) {
-    const lane = shaderVarLane(this, shaderVariable.type, shaderVariable.name)
-    const len = lane.length
-    for (let i = 0; i < len; ++i) {
-      if (lane[i] === shaderVariable) {
-        lane.length = i
-        return
+    if (shaderVariable instanceof ShaderVariableGroup) {
+      shaderVariable.popVar(this)
+    } else {
+      const lane = shaderVarLane(this, shaderVariable.type, shaderVariable.name)
+      const len = lane.length
+      for (let i = 0; i < len; ++i) {
+        if (lane[i] === shaderVariable) {
+          lane.length = i
+          return
+        }
       }
     }
   }

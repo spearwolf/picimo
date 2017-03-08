@@ -16,7 +16,7 @@ const resolutionUniform = new ShaderUniformVariable('resolution')
 
 const el = document.getElementById('blitpunkCanvas')
 const voPool = initSprites()
-const bufferAttribs = new ShaderVariableBufferGroup(voPool)
+const voPoolAttribs = new ShaderVariableBufferGroup(voPool)
 
 const program = new ShaderProgram(
     new ShaderSource(ShaderSource.VERTEX_SHADER, document.getElementById('vs')),
@@ -32,39 +32,30 @@ el.on('animateFrame', function () {
 // ------- sync buffers ----------------------------- /// // ----
 
 el.on('syncBuffers', function (renderer) {
-  renderer.glx.resourceLibrary.loadBuffer(voPool.voArray).bufferData()
+  renderer.syncBuffer(voPool)
 })
 
 // ------- render frame ----------------------------- /// // ----
 
 el.on('renderFrame', function (renderer) {
+  const { shaderContext } = renderer
+
   //
   // Shader variables
   //
-  const { shaderContext } = renderer
-
   shaderContext.pushVar(timeUniform)
   shaderContext.pushVar(resolutionUniform)
-  bufferAttribs.pushVar(shaderContext)
+  shaderContext.pushVar(voPoolAttribs)
 
   //
   // Load gpu program
   //
-  const { glx } = renderer
-  const currentProgram = glx.resourceLibrary.loadProgram(program)
-  currentProgram.use()
-  currentProgram.loadUniforms(shaderContext)
-  currentProgram.loadAttributes(shaderContext)
+  renderer.useShaderProgram(program)
 
   //
   // Render geometry
   //
-  const { gl } = glx
-  gl.enableVertexAttribArray(currentProgram.attributes.position.location)
-
-  gl.drawArrays(gl.TRIANGLES, 0, 12)
-
-  gl.disableVertexAttribArray(currentProgram.attributes.position.location)
+  renderer.drawArrays('TRIANGLES', 12)
 })
 
 // ----- animation startup -----

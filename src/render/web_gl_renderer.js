@@ -36,4 +36,32 @@ export default class WebGlRenderer {
 
     gl.clear(clear)
   }
+
+  /**
+   * @param {ShaderProgram} shaderProgram
+   */
+  useShaderProgram (shaderProgram) {
+    const program = this.glx.resourceLibrary.loadProgram(shaderProgram)
+    const { shaderContext } = this
+    program.use(shaderContext)
+    program.loadUniforms(shaderContext)
+    program.loadAttributes(shaderContext)
+  }
+
+  /**
+   * @param {string} primitive
+   * @param {number} count
+   * @param {number} [startIndex=0]
+   */
+  drawArrays (primitive, count, startIndex = 0) {
+    const { gl } = this.glx
+    gl.drawArrays(gl[primitive], startIndex, count)
+  }
+
+  /**
+   * @param {VOPool} voPool
+   */
+  syncBuffer (voPool) {
+    this.glx.resourceLibrary.loadBuffer(voPool.voArray).bufferData()
+  }
 }

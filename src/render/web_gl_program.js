@@ -20,16 +20,30 @@ export default class WebGlProgram {
     Object.freeze(this)
   }
 
+  /**
+   * @return {boolean}
+   */
   use () {
-    this.glx.useProgram(this.glProgram)
+    const { glx } = this
+    if (glx.useProgram(this.glProgram)) {
+      glx.enableVertexAttribArrays(this.attributeLocations)
+      return true
+    }
+    return false
   }
 
+  /**
+   * @param {ShaderContext}
+   */
   loadUniforms (shaderContext) {
     this.uniformNames.forEach(name => {
       this.uniforms[name].setValue(shaderContext.curUniform(name).value)
     })
   }
 
+  /**
+   * @param {ShaderContext}
+   */
   loadAttributes (shaderContext) {
     const { resourceLibrary } = this.glx
     this.attributeNames.forEach(name => {
@@ -48,11 +62,13 @@ function createAttributes (program) {
 
   program.attributes = {}
   program.attributeNames = []
+  program.attributeLocations = []
 
   for (let i = 0; i < len; ++i) {
     const attrib = new WebGlAttribute(program, i)
     program.attributes[attrib.name] = attrib
     program.attributeNames.push(attrib.name)
+    program.attributeLocations.push(attrib.location)
   }
 
   Object.freeze(program.attributes)
