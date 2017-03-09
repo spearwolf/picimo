@@ -6,13 +6,13 @@ import { isPowerOf2, findNextPowerOf2 } from '../utils/math_helpers'
  */
 export default class PowerOf2Image {
   /**
-   * If image `imgEl` dimension is NOT power of 2 then create a new `<canvas>`
+   * If image dimension is NOT power of 2 then create a new `<canvas>`
    * (with power of 2 dimension) and copy the original image content onto it.
    * Since fetching imge data from server is a *async* operation the `imgEl` property
    * can be `null` right after object construction and will be set later after
    * image is loaded (and possible converted).
    *
-   * @param {string|HTMLImageElement|HTMLCanvasElement} image
+   * @param {string|HTMLImageElement|HTMLCanvasElement} image - url or html *image* element
    */
   constructor (image) {
     let imgEl
@@ -61,10 +61,18 @@ export default class PowerOf2Image {
     return this.imgEl != null
   }
 
+  /**
+   * Returns image width or `0` if image loading is not finished.
+   * @type {number}
+   */
   get width () {
     return (this.imgEl && this.imgEl.width) || 0
   }
 
+  /**
+   * Returns image height or `0` if image loading is not finished.
+   * @type {number}
+   */
   get height () {
     return (this.imgEl && this.imgEl.height) || 0
   }
