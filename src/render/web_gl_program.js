@@ -33,7 +33,7 @@ export default class WebGlProgram {
   }
 
   /**
-   * @param {ShaderContext}
+   * @param {ShaderContext} shaderContext
    */
   loadUniforms (shaderContext) {
     this.uniformNames.forEach(name => {
@@ -42,7 +42,7 @@ export default class WebGlProgram {
   }
 
   /**
-   * @param {ShaderContext}
+   * @param {ShaderContext} shaderContext
    */
   loadAttributes (shaderContext) {
     const { resourceLibrary } = this.glx
