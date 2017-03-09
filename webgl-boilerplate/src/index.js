@@ -7,7 +7,11 @@ import ShaderVariableBufferGroup from '../../src/core/shader_variable_buffer_gro
 
 import defineBlitpElements from '../../src/dom/define_blitp_elements'
 
+import PowerOf2Image from '../../src/core/power_of_2_image'
+
 // ----- init ---------
+
+window.PowerOf2Image = PowerOf2Image
 
 defineBlitpElements()
 

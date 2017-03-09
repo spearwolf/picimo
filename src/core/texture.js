@@ -1,4 +1,22 @@
 
+/**
+ * Represents texture coordinates and holds a reference to a `<img>` or `<canvas>` element.
+ * Textures can form hierachical structures.
+ * The *root* texture contains always the image reference, all other *sub* textures contain
+ * references to their parent (and the root).
+ *
+ * @class Texture
+ *
+ * @example
+ * const cnavas = document.createElement("canvas")
+ * const texture = new Texture(canvas)
+ * texture.width    // => 300 <- default size of <canvas> element
+ * texture.height   // => 150
+ *
+ * let subTex = new Texture(texture, 30, 15, 100, 100)
+ * subTex.width    // => 100
+ */
+
 export default class Texture {
   /**
    * @param {Texture|HTMLImageElement|HTMLCanvasElement} source
