@@ -9,8 +9,8 @@ import BlitpCanvas from './blitp_canvas'
  */
 export default function defineBlitpElements () {
   // install custom elements polyfill
-  installCE(global)
+  installCE(window)
 
   // define element in the CustomElementRegistry
-  global.customElements.define('blitp-canvas', BlitpCanvas)
+  window.customElements.define('blitp-canvas', BlitpCanvas)
 }
