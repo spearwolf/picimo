@@ -1,3 +1,4 @@
+import PowerOf2Image from './power_of_2_image'
 
 /**
  * Represents texture coordinates and holds a reference to a `<img>` or `<canvas>` element.
@@ -8,18 +9,23 @@
  * @class Texture
  *
  * @example
- * const cnavas = document.createElement("canvas")
+ * const canvas = document.createElement("canvas")
  * const texture = new Texture(canvas)
  * texture.width    // => 300 <- default size of <canvas> element
  * texture.height   // => 150
  *
  * let subTex = new Texture(texture, 30, 15, 100, 100)
  * subTex.width    // => 100
+ *
+ * Texture.load('test/assets/bird-chicken-penguin.png').then(tex => {
+ *   tex.width    // => 640
+ *   tex.height   // => 480
+ * })
  */
 
 export default class Texture {
   /**
-   * @param {Texture|HTMLImageElement|HTMLCanvasElement} source
+   * @param {Texture|PowerOf2Image|HTMLImageElement|HTMLCanvasElement} source - image elements must be *completed* (loaded)
    * @param {number} [width]
    * @param {number} [height]
    * @param {number} [x=0]
@@ -32,20 +38,19 @@ export default class Texture {
        */
       this.parent = source
       /**
-       * @type {HTMLImageElement|HTMLCanvasElement}
+       * @type {PowerOf2Image|HTMLImageElement|HTMLCanvasElement}
        */
       this.image = null
     } else if (typeof source === 'object' && 'width' in source && 'height' in source) {
-      /**
-       * @type {HTMLImageElement|HTMLCanvasElement}
-       */
       this.image = source
-      /**
-       * @type {Texture}
-       */
       this.parent = null
+
+      if ('origWidth' in source && 'origHeight' in source) {
+        width = source.origWidth
+        height = source.origHeight
+      }
     } else {
-      throw new Error('new Texture() panic: blank source argument!')
+      throw new Error('new Texture() panic: unexpected source argument!')
     }
 
     this._width = width
@@ -66,6 +71,14 @@ export default class Texture {
    */
   get root () {
     return (this.parent && this.parent.root) || this
+  }
+
+  /**
+   * @type {HTMLImageElement|HTMLCanvasElement}
+   */
+  get imgEl () {
+    const { root } = this
+    return root.image.imgEl || root.image
   }
 
   /**
@@ -162,5 +175,14 @@ export default class Texture {
     }
 
     return y / this.root.image.height
+  }
+
+  /**
+    * Loads an image from url and returns a texture.
+    * @param {string} url
+    * @returns {Promise<Texture>}
+    */
+  static load (url) {
+    return new PowerOf2Image(url).complete.then(p2img => new Texture(p2img))
   }
 }

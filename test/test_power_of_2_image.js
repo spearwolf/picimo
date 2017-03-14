@@ -7,7 +7,7 @@ describe('PowerOf2Image', () => {
   describe('should load image from given url', () => {
     const p2img = new PowerOf2Image(assetUrl('nobinger.png'))
     let promiseResult
-    beforeEach(() => p2img.complete.then(img => {
+    before(() => p2img.complete.then(img => {
       promiseResult = img
       return img
     }))
@@ -29,10 +29,9 @@ describe('PowerOf2Image', () => {
     img.onload = () => {
       origWidth = img.width
       origHeight = img.height
-      console.log('original image size is', origWidth, 'x', origHeight)
     }
     const p2img = new PowerOf2Image(img)
-    beforeEach(() => p2img.complete)
+    before(() => p2img.complete)
     describe('after complete', () => {
       it('should have been called previous onload image handler', () => assert.equal(typeof origWidth, 'number'))
       it('original width', () => assert.equal(origWidth, 128))
@@ -45,7 +44,7 @@ describe('PowerOf2Image', () => {
   })
   describe('should convert non-power-of-2 image', () => {
     const p2img = new PowerOf2Image(assetUrl('bird-chicken-penguin.png'))
-    beforeEach(() => p2img.complete)
+    before(() => p2img.complete)
     describe('after complete', () => {
       it('width', () => assert.equal(p2img.width, 1024))
       it('height', () => assert.equal(p2img.height, 512))

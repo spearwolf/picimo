@@ -1,6 +1,8 @@
 /* eslint-env mocha */
 import assert from 'assert'
+import { assetUrl } from './utils'
 import Texture from '../src/core/texture'
+import PowerOf2Image from '../src/core/power_of_2_image'
 
 describe('Texture', () => {
   describe('new Texture(<img>)', () => {
@@ -52,6 +54,40 @@ describe('Texture', () => {
     it('minT', () => assert.equal(tex.minT, 11 / 160))
     it('maxS', () => assert.equal(tex.maxS, (300 + 9) / 320))
     it('maxT', () => assert.equal(tex.maxT, (140 + 11) / 160))
+  })
+
+  describe('new Texture(PowerOf2Image)', () => {
+    const p2img = new PowerOf2Image(assetUrl('bird-chicken-penguin.png'))
+    let tex
+    before(() => p2img.complete.then(function () {
+      tex = new Texture(p2img)
+    }))
+
+    it('image', () => assert.equal(tex.image, p2img))
+    it('imgEl', () => assert.equal(tex.imgEl, p2img.imgEl))
+    it('parent', () => assert.equal(tex.parent, null))
+    it('root', () => assert.equal(tex.root, tex))
+    it('width', () => assert.equal(tex.width, 640))
+    it('height', () => assert.equal(tex.height, 480))
+    it('x', () => assert.equal(tex.x, 0))
+    it('y', () => assert.equal(tex.y, 0))
+    it('minS', () => assert.equal(tex.minS, 0))
+    it('minT', () => assert.equal(tex.minT, 0))
+    it('maxS', () => assert.equal(tex.maxS, 640 / 1024))
+    it('maxT', () => assert.equal(tex.maxT, 480 / 512))
+  })
+
+  describe('Texture.load(url)', () => {
+    let tex = null
+    const promise = Texture.load(assetUrl('nobinger.png')).then(t => {
+      tex = t
+    })
+    before(() => promise)
+    it('image', () => assert.ok(tex.image instanceof PowerOf2Image))
+    it('image.isComplete', () => assert.ok(tex.image.isComplete))
+    it('image.imgEl', () => assert.ok(tex.image.imgEl instanceof window.HTMLImageElement))
+    it('width', () => assert.equal(tex.width, 128))
+    it('height', () => assert.equal(tex.height, 256))
   })
 
   describe('new Texture(Texture)', () => {
