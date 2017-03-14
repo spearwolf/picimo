@@ -1,5 +1,7 @@
 import assert from 'assert'
 
+export const assetUrl = path => `/base/test/assets/${path}`
+
 export function assertProperties (vo, props) {
   Object.keys(props).forEach(type => {
     props[type].forEach(name => {

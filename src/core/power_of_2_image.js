@@ -33,8 +33,10 @@ export default class PowerOf2Image {
       this.complete = new Promise(resolve => {
         const origOnLoad = imgEl.onload
         imgEl.onload = () => {
-          this.imgEl = convertToPowerOf2(imgEl)
           if (origOnLoad) origOnLoad.call(imgEl)
+          this.imgEl = isPowerOf2(imgEl.width) && isPowerOf2(imgEl.height) ? imgEl : convertToPowerOf2(imgEl)
+          this.origWidth = imgEl.width
+          this.origHeight = imgEl.height
           resolve(this)
         }
       })
@@ -45,6 +47,15 @@ export default class PowerOf2Image {
       this.imgEl = isPowerOf2(image.width) && isPowerOf2(image.height)
         ? image
         : convertToPowerOf2(image)
+
+      /**
+       * @type {number}
+       */
+      this.origWidth = image.width
+      /**
+       * @type {number}
+       */
+      this.origHeight = image.height
 
       /**
        * @type {Promise<PowerOf2Image>}
