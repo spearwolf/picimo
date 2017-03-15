@@ -12,17 +12,17 @@ export default class PowerOf2Image {
    * can be `null` right after object construction and will be set later after
    * image is loaded (and possible converted).
    *
-   * @param {string|HTMLImageElement|HTMLCanvasElement} image - url or html *image* element
+   * @param {string|HTMLImageElement|HTMLCanvasElement} from - url or html *image* element
    */
-  constructor (image) {
+  constructor (from) {
     let imgEl
-    if (typeof image === 'string') {
+    if (typeof from === 'string') {
       imgEl = new window.Image()
-      imgEl.src = image
+      imgEl.src = from
     } else {
-      imgEl = image
+      imgEl = from
     }
-    if (imgEl.width === 0 && imgEl.height === 0) {
+    if (imgEl.complete === false || (imgEl.width === 0 && imgEl.height === 0)) {
       /**
        * @type {HTMLImageElement|HTMLCanvasElement}
        */
@@ -34,29 +34,12 @@ export default class PowerOf2Image {
         const origOnLoad = imgEl.onload
         imgEl.onload = () => {
           if (origOnLoad) origOnLoad.call(imgEl)
-          this.imgEl = isPowerOf2(imgEl.width) && isPowerOf2(imgEl.height) ? imgEl : convertToPowerOf2(imgEl)
-          this.origWidth = imgEl.width
-          this.origHeight = imgEl.height
+          setPowerOf2ImgEl(this, imgEl)
           resolve(this)
         }
       })
     } else {
-      /**
-       * @type {HTMLImageElement|HTMLCanvasElement}
-       */
-      this.imgEl = isPowerOf2(image.width) && isPowerOf2(image.height)
-        ? image
-        : convertToPowerOf2(image)
-
-      /**
-       * @type {number}
-       */
-      this.origWidth = image.width
-      /**
-       * @type {number}
-       */
-      this.origHeight = image.height
-
+      setPowerOf2ImgEl(this, imgEl)
       /**
        * @type {Promise<PowerOf2Image>}
        */
@@ -87,6 +70,12 @@ export default class PowerOf2Image {
   get height () {
     return (this.imgEl && this.imgEl.height) || 0
   }
+}
+
+function setPowerOf2ImgEl (p2img, imgEl) {
+  p2img.imgEl = isPowerOf2(imgEl.width) && isPowerOf2(imgEl.height) ? imgEl : convertToPowerOf2(imgEl)
+  p2img.origWidth = imgEl.width
+  p2img.origHeight = imgEl.height
 }
 
 function convertToPowerOf2 (image) {
