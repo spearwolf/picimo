@@ -1,51 +1,68 @@
 import Texture from './texture'
-import PowerOf2Image from './power_of_2_image'
+import TextureAtlasSpec from './texture_atlas_spec.js'
 
+/**
+  * @example
+  * TextureAtlas.load('nobinger.json').then(atlas => {
+  *   const blau = atlas.getFrame('nobinger-blau.png')
+  *   blau.width   # => 55
+  *   blau.height  # => 61
+  * })
+  */
 export default class TextureAtlas {
-  constructor (jsonDef) {
-    this.jsonDef = jsonDef
-    this.frameNames = Object.keys(jsonDef.frames)
+  /**
+   * @param {Texture} rootTexture
+   * @param {TextureAtlasSpec} [spec=null]
+   */
+  constructor (rootTexture, spec = null) {
+    /**
+     * @type {Texture}
+     */
+    this.rootTexture = rootTexture
+    /**
+     * @type {TextureAtlasSpec}
+     */
+    this.spec = spec
+    /**
+     * @type {Map<string,Texture>}
+     */
+    this.frames = new Map()
   }
 
-  get frames () {
-    return this.jsonDef.frames
+  /**
+   * @param {string} name
+   * @param {number} width
+   * @param {number} height
+   * @param {number} x
+   * @param {number} y
+   */
+  addFrame (name, width, height, x, y) {
+    this.frames.set(name, new Texture(this.rootTexture, width, height, x, y))
   }
 
-  get meta () {
-    return this.jsonDef.meta
+  /**
+   * @param {string} name
+   * @returns {Texture}
+   */
+  getFrame (name) {
+    return this.frames.get(name)
   }
 
-  get imageUrl () {
-    return this.meta.image
+  /**
+   * @returns {Array<string>}
+   */
+  frameNames () {
+    return this.frames.keys()
   }
 
-  createTextures (image = null) {
-    return (
-      Promise.resolve(image)
-      .then(img => {
-        if (typeof image === 'function') {
-          return Promise.resolve(image(this))
-        } else if (typeof image === 'string') {
-          return (new PowerOf2Image(image)).complete
-        } else if (image) {
-          return image
-        } else {
-          throw new Error('TextureAtlas.createTextures(): no image found!')
-        }
-      })
-      .then(img => {
-        const rootTexture = new Texture(img)
-        const frames = new Map()
-        for (let name of Object.keys(this.frames)) {
-          const { frame } = this.frames[name]
-          frames.set(name, new Texture(rootTexture, frame.w, frame.h, frame.x, frame.y))
-        }
-        return frames
-      })
-    )
-  }
-
-  static load (url, options) {
-    return window.fetch(url, options).then(response => response.json()).then(json => new TextureAtlas(json))
+  /**
+   * Loads a TextureAtlas.
+   * @param {string} url - should point to the *texture atlas json spec*
+   * @param {Object} [fetchOptions=undefined] - options for the `fetch()` call
+   * @param {string|function|PowerOf2Image|HTMLImageElement|HTMLCanvasElement} [image=null] - per default the image will be loaded from `meta.image` url from the *texture atlas spec*
+   * @returns {Promise<TextureAtlas>}
+   */
+  static load (url, fetchOptions = null, image = null) {
+    return TextureAtlasSpec.load(url, fetchOptions).then(atlasSpec => atlasSpec.createTextureAtlas(image))
   }
 }
