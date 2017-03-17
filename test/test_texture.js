@@ -2,6 +2,7 @@
 import assert from 'assert'
 import { assetUrl } from './utils'
 import Texture from '../src/core/texture'
+import Serial from '../src/utils/serial'
 import PowerOf2Image from '../src/core/power_of_2_image'
 
 describe('Texture', function () {
@@ -20,6 +21,7 @@ describe('Texture', function () {
     it('minT', () => assert.equal(tex.minT, 0))
     it('maxS', () => assert.equal(tex.maxS, 1))
     it('maxT', () => assert.equal(tex.maxT, 1))
+    it('serial', () => assert.ok(tex.serial instanceof Serial))
   })
 
   describe('new Texture(<img>, w, h)', function () {
@@ -116,6 +118,7 @@ describe('Texture', function () {
     it('minT', () => assert.equal(tex.minT, 0))
     it('maxS', () => assert.equal(tex.maxS, 1))
     it('maxT', () => assert.equal(tex.maxT, 1))
+    it('serial', () => assert.equal(tex.serial, parent.serial))
   })
 
   describe('new Texture(Texture(<img>, w, h, x, y), w, h, x, y)', function () {

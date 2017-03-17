@@ -1,4 +1,5 @@
 import PowerOf2Image from './power_of_2_image'
+import Serial from '../utils/serial'
 
 /**
  * Represents texture coordinates and holds a reference to a `<img>` or `<canvas>` element.
@@ -44,6 +45,7 @@ export default class Texture {
     } else if (typeof source === 'object' && 'width' in source && 'height' in source) {
       this.image = source
       this.parent = null
+      this._serial = new Serial()
 
       if ('origWidth' in source && 'origHeight' in source) {
         width = source.origWidth
@@ -79,6 +81,13 @@ export default class Texture {
   get imgEl () {
     const { root } = this
     return root.image.imgEl || root.image
+  }
+
+  /**
+   * @type {Serial}
+   */
+  get serial () {
+    return this._serial || this.root.serial
   }
 
   /**
