@@ -20,11 +20,13 @@ import { BYTES_PER_ELEMENT, TYPED_ARRAY_CONSTRUCTOR } from '../utils/typed_array
 
 export default class VOArray {
   constructor (descriptor, capacity, data, usage = VOArray.USAGE.DYNAMIC) {
+    /** @type {ResourceRef} */
     this.resourceRef = new ResourceRef(this, { usage })
 
+    /** @type {VODescriptor} */
     this.descriptor = descriptor
+    /** @type {number} */
     this.capacity = capacity
-    // this.usage = usage
 
     if (data instanceof ArrayBuffer) {
       this.float32Array = new Float32Array(data)

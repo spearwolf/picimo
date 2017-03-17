@@ -1,5 +1,5 @@
-import generateUuid from '../utils/generate_uuid'
-import Serial from '../utils/serial'
+import generateUuid from './generate_uuid'
+import Serial from './serial'
 
 /**
  * Represents a resource reference which points to a *renderable resource*.

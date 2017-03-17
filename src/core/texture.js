@@ -1,5 +1,5 @@
 import PowerOf2Image from './power_of_2_image'
-import Serial from '../utils/serial'
+import ResourceRef from '../utils/resource_ref'
 
 /**
  * Represents texture coordinates and holds a reference to a `<img>` or `<canvas>` element.
@@ -45,7 +45,7 @@ export default class Texture {
     } else if (typeof source === 'object' && 'width' in source && 'height' in source) {
       this.image = source
       this.parent = null
-      this._serial = new Serial()
+      this._resourceRef = new ResourceRef(this /* TODO hints */)
 
       if ('origWidth' in source && 'origHeight' in source) {
         width = source.origWidth
@@ -84,10 +84,10 @@ export default class Texture {
   }
 
   /**
-   * @type {Serial}
+   * @type {ResourceRef}
    */
-  get serial () {
-    return this._serial || this.root.serial
+  get resourceRef () {
+    return this._resourceRef || this.root.resourceRef
   }
 
   /**
