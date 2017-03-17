@@ -1,3 +1,4 @@
+import ResourceRef from '../utils/resource_ref'
 import WebGlShader from './web_gl_shader'
 import WebGlProgram from './web_gl_program'
 import WebGlBuffer from './web_gl_buffer'
@@ -49,22 +50,27 @@ export default class WebGlResourceLibrary {
   }
 
   /**
-    * @param {VOArray} voArray
-    */
-  loadBuffer (voArray) {
-    let buffer = this.buffer.get(voArray.id)
-    if (!buffer) {
-      buffer = new WebGlBuffer(this.glx, WebGlBuffer.ARRAY_BUFFER, WEB_GL_BUFFER_USAGE[voArray.usage])
-      buffer.voArray = voArray
-      this.buffer.set(voArray.id, buffer)
+   * @param {ResourceRef} voArrayRef - resource reference to VOArray
+   * @returns {ResourceRef} resource reference to WebGlBuffer
+   */
+  loadBuffer (voArrayRef) {
+    let bufferRef = this.buffer.get(voArrayRef.id)
+    if (!bufferRef) {
+      // create WebGlBuffer
+      const glBuffer = new WebGlBuffer(this.glx, WebGlBuffer.ARRAY_BUFFER, WEB_GL_BUFFER_USAGE[voArrayRef.hints.usage])
+      glBuffer.voArray = voArrayRef.resource
+      // create ResourceRef
+      bufferRef = new ResourceRef(glBuffer, { id: voArrayRef.id, serial: 0 })
+      this.buffer.set(voArrayRef.id, bufferRef)
     }
-    return buffer
+    return bufferRef
   }
 
   /**
-    * @param {string} id
-    */
-  findBuffer (id) {
-    return this.buffer.get(id)
+   * @param {ResourceRef} resourceRef
+   * @returns {ResourceRef} resource reference to WebGlBuffer
+   */
+  findBuffer (resourceRef) {
+    return this.buffer.get(resourceRef.id)
   }
 }

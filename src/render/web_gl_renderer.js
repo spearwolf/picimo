@@ -62,6 +62,8 @@ export default class WebGlRenderer {
    * @param {VOPool} voPool
    */
   syncBuffer (voPool) {
-    this.glx.resourceLibrary.loadBuffer(voPool.voArray).bufferData()
+    const voArrayRef = voPool.voArray.resourceRef
+    const bufferRef = this.glx.resourceLibrary.loadBuffer(voArrayRef)
+    bufferRef.sync(voArrayRef, buffer => buffer.bufferData())
   }
 }

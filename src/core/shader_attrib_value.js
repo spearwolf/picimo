@@ -11,10 +11,10 @@ export default class ShaderAttribValue {
     return this.descriptor.attr[this.name]
   }
 
-  get bufferId () {
+  get resourceRef () {
     const { bufferSource } = this
     return (bufferSource instanceof VOArray
-      ? bufferSource.id
-      : bufferSource.voArray.id)
+      ? bufferSource.resourceRef
+      : bufferSource.voArray.resourceRef)
   }
 }

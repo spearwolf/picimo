@@ -48,7 +48,7 @@ export default class WebGlProgram {
     const { resourceLibrary } = this.glx
     this.attributeNames.forEach(name => {
       const attribValue = shaderContext.curAttrib(name).value
-      const buffer = resourceLibrary.findBuffer(attribValue.bufferId)
+      const buffer = resourceLibrary.findBuffer(attribValue.resourceRef).resource
       buffer.bindBuffer()
       this.attributes[name].vertexAttribPointer(attribValue.descriptor)
     })

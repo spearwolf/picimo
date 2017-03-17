@@ -10,7 +10,6 @@ export default class WebGlBuffer {
     this.glBuffer = gl.createBuffer()
 
     this.voArray = null
-    this.srcSerial = 0
   }
 
   bindBuffer () {
@@ -19,16 +18,10 @@ export default class WebGlBuffer {
 
   /**
    * Upload array buffer content to gpu via `g.bufferData(..)`.
-   * Only sync buffer if `srcSerial` is *zero* or not equal than the *serial value* from the internal `voArray`.
    */
   bufferData () {
-    const { srcSerial, voArray } = this
-    if (srcSerial > 0 && srcSerial === voArray.serial.value) return
-
     this.bindBuffer()
-    this.glx.gl.bufferData(this.target, voArray.float32Array, this.usage)
-
-    this.srcSerial = voArray.serial.value
+    this.glx.gl.bufferData(this.target, this.voArray.float32Array, this.usage)
   }
 }
 
