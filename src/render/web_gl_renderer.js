@@ -62,8 +62,19 @@ export default class WebGlRenderer {
    * @param {VOPool} voPool
    */
   syncBuffer (voPool) {
+    // TODO delay sync until buffer is really used by draw commands aka drawArrays()
     const voArrayRef = voPool.voArray.resourceRef
     const bufferRef = this.glx.resourceLibrary.loadBuffer(voArrayRef)
     bufferRef.sync(voArrayRef, buffer => buffer.bufferData())
+  }
+
+  /**
+   * @param {Texture} texture
+   */
+  syncTexture (texture) {
+    // TODO delay sync until texture is really used by draw commands aka drawArrays()
+    const texRef = texture.resourceRef
+    const glTexRef = this.glx.resourceLibrary.loadTexture(texRef)
+    glTexRef.sync(texRef, tex => tex.uploadImageData())
   }
 }

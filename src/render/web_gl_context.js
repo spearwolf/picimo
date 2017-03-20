@@ -1,4 +1,5 @@
 import WebGlResourceLibrary from './web_gl_resource_library'
+import WebGlTextureManager from './web_gl_texture_manager'
 
 export default class WebGlContext {
   constructor (gl) {
@@ -10,6 +11,41 @@ export default class WebGlContext {
     this.boundBuffers = new Map()
     this.currentProgram = 0
     this.enabledVertexAttribLocations = []
+
+    this.textureManager = new WebGlTextureManager(this)
+
+    this.boundTextures = new Array(this.MAX_TEXTURE_IMAGE_UNITS)
+    for (let i = 0; i < this.boundTextures.length; i++) {
+      this.boundTextures[i] = { TEXTURE_2D: null }
+    }
+
+    this.activeTexture(0) // enable first texture unit by default
+  }
+
+  /**
+   * @param {number} texUnit
+   */
+  activeTexture (texUnit) {
+    const { gl } = this
+    const tex = gl.TEXTURE0 + texUnit
+
+    if (this.activeTexUnit !== tex) {
+      this.activeTexUnit = tex
+      gl.activeTexture(this.activeTexUnit)
+    }
+  }
+
+  /**
+   * @param {number} glTextureId
+   */
+  bindTexture2d (glTextureId) {
+    const { gl } = this
+    const bound = this.boundTextures[this.activeTexUnit - gl.TEXTURE0]
+
+    if (bound.TEXTURE_2D !== glTextureId) {
+      bound.TEXTURE_2D = glTextureId
+      gl.bindTexture(gl.TEXTURE_2D, glTextureId)
+    }
   }
 
   readCurrentState () {
@@ -71,4 +107,5 @@ function initialize (glx) {
   const { gl } = glx
 
   glx.DEPTH_BITS = gl.getParameter(gl.DEPTH_BITS)
+  glx.MAX_TEXTURE_IMAGE_UNITS = gl.getParameter(gl.MAX_TEXTURE_IMAGE_UNITS)
 }

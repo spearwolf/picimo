@@ -8,6 +8,7 @@ import ShaderVariableBufferGroup from '../../src/core/shader_variable_buffer_gro
 import defineBlitpElements from '../../src/dom/define_blitp_elements'
 
 import PowerOf2Image from '../../src/core/power_of_2_image'
+import Texture from '../../src/core/texture'
 
 // ----- init ---------
 
@@ -37,6 +38,14 @@ el.on('animateFrame', function () {
 
 el.on('syncBuffers', function (renderer) {
   renderer.syncBuffer(voPool)
+})
+
+// ------- sync textures ---------------------------- /// // ----
+
+Texture.load('nobinger.png').then(texture => {
+  el.on('syncTextures', function (renderer) {
+    renderer.syncTexture(texture)
+  })
 })
 
 // ------- render frame ----------------------------- /// // ----

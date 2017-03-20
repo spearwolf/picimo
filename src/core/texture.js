@@ -31,8 +31,12 @@ export default class Texture {
    * @param {number} [height]
    * @param {number} [x=0]
    * @param {number} [y=0]
+   * @param {Object} [hints] texture hints
+   * @param {boolean} [hints.flipY=false]
+   * @param {boolean} [hints.repeatable=false]
+   * @param {boolean} [hints.premultiplyAlpha=false]
    */
-  constructor (source, width, height, x = 0, y = 0) {
+  constructor (source, width, height, x = 0, y = 0, hints = null) {
     if (source instanceof Texture) {
       /**
        * @type {Texture}
@@ -45,7 +49,12 @@ export default class Texture {
     } else if (typeof source === 'object' && 'width' in source && 'height' in source) {
       this.image = source
       this.parent = null
-      this._resourceRef = new ResourceRef(this /* TODO hints */)
+
+      this._resourceRef = new ResourceRef(this, {
+        flipY: !!hints && hints.flipY === true,
+        repeatable: !!hints && hints.repeatable === true,
+        premultiplyAlpha: !!hints && hints.premultiplyAlpha === true
+      })
 
       if ('origWidth' in source && 'origHeight' in source) {
         width = source.origWidth

@@ -2,6 +2,7 @@ import ResourceRef from '../utils/resource_ref'
 import WebGlShader from './web_gl_shader'
 import WebGlProgram from './web_gl_program'
 import WebGlBuffer from './web_gl_buffer'
+import WebGlTexture from './web_gl_texture'
 
 const WEB_GL_BUFFER_USAGE = Object.freeze({
   static: WebGlBuffer.STATIC_DRAW,
@@ -20,6 +21,8 @@ export default class WebGlResourceLibrary {
     this.shaderProgram = new Map()
     /** @private */
     this.buffer = new Map()
+    /** @private */
+    this.texture = new Map()
   }
 
   loadVertexShader (shaderSource) {
@@ -72,5 +75,27 @@ export default class WebGlResourceLibrary {
    */
   findBuffer (resourceRef) {
     return this.buffer.get(resourceRef.id)
+  }
+
+  /**
+   * @param {ResourceRef} texRef - resource reference to texture
+   * @returns {ResourceRef} resource reference to WebGlTexture
+   */
+  loadTexture (texRef) {
+    let glTextureRef = this.texture.get(texRef.id)
+    if (!glTextureRef) {
+      // create WebGlTexture
+      const glTex = new WebGlTexture(
+        this.glx,
+        texRef.resource.imgEl,
+        texRef.hints.flipY,
+        texRef.hints.repeatable,
+        texRef.hints.premultiplyAlpha
+      )
+      // create ResourceRef
+      glTextureRef = new ResourceRef(glTex, { id: texRef.id, serial: 0 })
+      this.texture.set(texRef.id, glTextureRef)
+    }
+    return glTextureRef
   }
 }
