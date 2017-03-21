@@ -1,7 +1,7 @@
 
 export default class WebGlTextureManager {
   /**
-   * @param {WebGlContext}
+   * @param {WebGlContext} glx
    */
   constructor (glx) {
     Object.defineProperty(this, 'glx', { value: glx })
