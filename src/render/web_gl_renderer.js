@@ -14,18 +14,19 @@ export default class WebGlRenderer {
   renderFrame (scene) {
     this.shaderContext.clear()
     scene.emit('animateFrame', scene)
-    this.renderBegin()
+    this.beginRenderFrame()
     scene.emit('syncBuffers', this)
     scene.emit('syncTextures', this)
     scene.emit('renderFrame', this)
-    this.renderEnd()
+    this.endRenderFrame()
   }
 
-  renderBegin () {
+  beginRenderFrame () {
     this.clearFrameBuffer()
   }
 
-  renderEnd () {
+  endRenderFrame () {
+    // TODO
   }
 
   clearFrameBuffer () {
@@ -59,13 +60,13 @@ export default class WebGlRenderer {
   }
 
   /**
-   * @param {VOPool} voPool
+   * @param {VOArray|ElementIndexArray} resource
    */
-  syncBuffer (voPool) {
+  syncBuffer (resource) {
     // TODO delay sync until buffer is really used by draw commands aka drawArrays()
-    const voArrayRef = voPool.voArray.resourceRef
-    const bufferRef = this.glx.resourceLibrary.loadBuffer(voArrayRef)
-    bufferRef.sync(voArrayRef, buffer => buffer.bufferData())
+    const { resourceRef } = resource
+    const bufferRef = this.glx.resourceLibrary.loadBuffer(resourceRef)
+    bufferRef.sync(resourceRef, buffer => buffer.bufferData(resourceRef.hints.typedArray))
   }
 
   /**

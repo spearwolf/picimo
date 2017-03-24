@@ -53,18 +53,17 @@ export default class WebGlResourceLibrary {
   }
 
   /**
-   * @param {ResourceRef} voArrayRef - resource reference to VOArray
-   * @returns {ResourceRef} resource reference to WebGlBuffer
+   * @param {ResourceRef} ref - resource reference to VOArray or `ElementIndexArray`
+   * @returns {ResourceRef} resource reference to `WebGlBuffer`
    */
-  loadBuffer (voArrayRef) {
-    let bufferRef = this.buffer.get(voArrayRef.id)
+  loadBuffer (ref) {
+    let bufferRef = this.buffer.get(ref.id)
     if (!bufferRef) {
       // create WebGlBuffer
-      const glBuffer = new WebGlBuffer(this.glx, WebGlBuffer.ARRAY_BUFFER, WEB_GL_BUFFER_USAGE[voArrayRef.hints.usage])
-      glBuffer.voArray = voArrayRef.resource
+      const glBuffer = new WebGlBuffer(this.glx, WebGlBuffer.ARRAY_BUFFER, WEB_GL_BUFFER_USAGE[ref.hints.usage])
       // create ResourceRef
-      bufferRef = new ResourceRef(glBuffer, { id: voArrayRef.id, serial: 0 })
-      this.buffer.set(voArrayRef.id, bufferRef)
+      bufferRef = new ResourceRef(glBuffer, { id: ref.id, serial: 0 })
+      this.buffer.set(ref.id, bufferRef)
     }
     return bufferRef
   }

@@ -38,6 +38,9 @@ export default class VOArray {
       this.float32Array = new Float32Array(new ArrayBuffer(capacity * descriptor.bytesPerVO))
     }
 
+    // needed by WebGlRenderer#syncBuffer
+    this.resourceRef.hints.typedArray = this.float32Array
+
     const { buffer, bufferByteOffset, bufferByteLength } = this
     descriptor.typeList.filter(type => type !== 'float32').forEach(type => {
       this[`${type}Array`] = new (TYPED_ARRAY_CONSTRUCTOR[type])(buffer, bufferByteOffset, bufferByteLength / BYTES_PER_ELEMENT[type])

@@ -9,6 +9,7 @@ import defineBlitpElements from '../../src/dom/define_blitp_elements'
 
 import PowerOf2Image from '../../src/core/power_of_2_image'
 import Texture from '../../src/core/texture'
+import ElementIndexArray from '../../src/core/element_index_array'
 
 // ----- init ---------
 
@@ -22,6 +23,8 @@ const resolutionUniform = new ShaderUniformVariable('resolution')
 const el = document.getElementById('blitpunkCanvas')
 const voPool = initSprites()
 const voPoolAttribs = new ShaderVariableBufferGroup(voPool)
+
+const quadIndices = ElementIndexArray.Generate(10, [0, 1, 2, 0, 2, 3], 4)
 
 const program = new ShaderProgram(
     new ShaderSource(ShaderSource.VERTEX_SHADER, document.getElementById('vs')),
@@ -37,7 +40,8 @@ el.on('animateFrame', function () {
 // ------- sync buffers ----------------------------- /// // ----
 
 el.on('syncBuffers', function (renderer) {
-  renderer.syncBuffer(voPool)
+  renderer.syncBuffer(voPool.voArray)
+  renderer.syncBuffer(quadIndices)
 })
 
 // ------- sync textures ---------------------------- /// // ----

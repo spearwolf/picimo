@@ -8,8 +8,6 @@ export default class WebGlBuffer {
     this.usage = gl[usage]
 
     this.glBuffer = gl.createBuffer()
-
-    this.voArray = null
   }
 
   bindBuffer () {
@@ -19,9 +17,9 @@ export default class WebGlBuffer {
   /**
    * Upload array buffer content to gpu via `g.bufferData(..)`.
    */
-  bufferData () {
+  bufferData (typedArray) {
     this.bindBuffer()
-    this.glx.gl.bufferData(this.target, this.voArray.float32Array, this.usage)
+    this.glx.gl.bufferData(this.target, typedArray, this.usage)
   }
 }
 
