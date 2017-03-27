@@ -1,5 +1,5 @@
-import { simple } from './simple'
+import { descriptor as simpleDescriptor } from './simple'
 
 export default function (spriteLibrary) {
-  spriteLibrary.addDescriptor('simple', simple)
+  spriteLibrary.addDescriptor('simple', simpleDescriptor)
 }
