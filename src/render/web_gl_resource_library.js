@@ -60,7 +60,8 @@ export default class WebGlResourceLibrary {
     let bufferRef = this.buffer.get(ref.id)
     if (!bufferRef) {
       // create WebGlBuffer
-      const glBuffer = new WebGlBuffer(this.glx, WebGlBuffer.ARRAY_BUFFER, WEB_GL_BUFFER_USAGE[ref.hints.usage])
+      const target = ref.hints.target || WebGlBuffer.ARRAY_BUFFER
+      const glBuffer = new WebGlBuffer(this.glx, target, WEB_GL_BUFFER_USAGE[ref.hints.usage])
       // create ResourceRef
       bufferRef = new ResourceRef(glBuffer, { id: ref.id, serial: 0 })
       this.buffer.set(ref.id, bufferRef)

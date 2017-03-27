@@ -60,6 +60,26 @@ export default class WebGlRenderer {
   }
 
   /**
+   * @param {string} primitive
+   * @param {ElementIndexArray} elementIndexArray
+   * @param {number} [count]
+   * @param {number} [offset=0]
+   */
+  drawIndexed (primitive, elementIndexArray, count, offset = 0) {
+    const { gl } = this.glx
+
+    this.glx.resourceLibrary
+      .findBuffer(elementIndexArray.resourceRef)
+      .resource.bindBuffer()
+
+    gl.drawElements(
+      gl[primitive],
+      count || elementIndexArray.length,
+      gl.UNSIGNED_SHORT,
+      offset * elementIndexArray.array.BYTES_PER_ELEMENT)
+  }
+
+  /**
    * @param {VOArray|ElementIndexArray} resource
    */
   syncBuffer (resource) {

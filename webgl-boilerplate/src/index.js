@@ -11,9 +11,12 @@ import PowerOf2Image from '../../src/core/power_of_2_image'
 import Texture from '../../src/core/texture'
 import ElementIndexArray from '../../src/core/element_index_array'
 
+import SpriteLibrary from '../../src/core/sprite_library'
+
 // ----- init ---------
 
 window.PowerOf2Image = PowerOf2Image
+window.spriteLibrary = new SpriteLibrary()
 
 defineBlitpElements()
 
@@ -25,6 +28,7 @@ const voPool = initSprites()
 const voPoolAttribs = new ShaderVariableBufferGroup(voPool)
 
 const quadIndices = ElementIndexArray.Generate(10, [0, 1, 2, 0, 2, 3], 4)
+const triangleIndices = ElementIndexArray.Generate(4, [0, 1, 2], 3)
 
 const program = new ShaderProgram(
     new ShaderSource(ShaderSource.VERTEX_SHADER, document.getElementById('vs')),
@@ -42,6 +46,7 @@ el.on('animateFrame', function () {
 el.on('syncBuffers', function (renderer) {
   renderer.syncBuffer(voPool.voArray)
   renderer.syncBuffer(quadIndices)
+  renderer.syncBuffer(triangleIndices)
 })
 
 // ------- sync textures ---------------------------- /// // ----
@@ -72,7 +77,8 @@ el.on('renderFrame', function (renderer) {
   //
   // Render geometry
   //
-  renderer.drawArrays('TRIANGLES', 12)
+  // renderer.drawArrays('TRIANGLES', 12)
+  renderer.drawIndexed('TRIANGLES', triangleIndices)
 })
 
 // ----- animation startup -----

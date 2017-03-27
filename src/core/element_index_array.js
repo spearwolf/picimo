@@ -1,8 +1,12 @@
 import ResourceRef from '../utils/resource_ref'
+import WebGlBuffer from '../render/web_gl_buffer'
 
 export default class ElementIndexArray {
   constructor (objectCount, itemCount = 1) {
-    this.resourceRef = new ResourceRef(this, { usage: 'static' })
+    this.resourceRef = new ResourceRef(this, {
+      target: WebGlBuffer.ELEMENT_ARRAY_BUFFER,
+      usage: 'static'
+    })
 
     this.objectCount = objectCount
     this.itemCount = itemCount
@@ -17,8 +21,8 @@ export default class ElementIndexArray {
   /**
    * @param {number} objectCount
    * @param {number[]} indices
-   * @param {number} [objectOffset=0]
    * @param {number} [stride=4]
+   * @param {number} [objectOffset=0]
    * @return {ElementIndexArray}
    * @example
    * // Create a ElementIndexArray for 10 quads where each quad made up of 2x triangles (4x vertices and 6x indices)
