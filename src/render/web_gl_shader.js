@@ -1,4 +1,5 @@
 import ShaderSource from '../core/shader_source'
+import sourceToStr from '../utils/shader_helpers/source_to_str'
 
 export default class WebGlShader {
   constructor (glx, source) {
@@ -23,7 +24,9 @@ function compileShader (shader) {
   const { gl } = shader.glx
   const { glShader, source } = shader
 
-  gl.shaderSource(glShader, source.source)
+  const src = sourceToStr({ glx: shader.glx }, source.source)
+
+  gl.shaderSource(glShader, src)
   gl.compileShader(glShader)
 
   if (!gl.getShaderParameter(glShader, gl.COMPILE_STATUS)) {

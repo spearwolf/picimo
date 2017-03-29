@@ -11,12 +11,12 @@ import PowerOf2Image from '../../src/core/power_of_2_image'
 import Texture from '../../src/core/texture'
 import ElementIndexArray from '../../src/core/element_index_array'
 
-import SpriteLibrary from '../../src/core/sprite_library'
+import ResourceLibrary from '../../src/core/resource_library'
 
 // ----- init ---------
 
 window.PowerOf2Image = PowerOf2Image
-window.spriteLibrary = new SpriteLibrary()
+window.resourceLibrary = new ResourceLibrary()
 
 defineBlitpElements()
 
