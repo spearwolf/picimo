@@ -1,5 +1,3 @@
-import initSprites from './init_sprites'
-
 import ShaderSource from '../../src/core/shader_source'
 import ShaderProgram from '../../src/core/shader_program'
 import ShaderUniformVariable from '../../src/core/shader_uniform_variable'
@@ -13,10 +11,15 @@ import ElementIndexArray from '../../src/core/element_index_array'
 
 import ResourceLibrary from '../../src/core/resource_library'
 
+import initSprites from './init_sprites'
+import initQuads from './init_quads'
+
 // ----- init ---------
 
 window.PowerOf2Image = PowerOf2Image
-window.resourceLibrary = new ResourceLibrary()
+
+const resourceLibrary = new ResourceLibrary()
+window.resourceLibrary = resourceLibrary
 
 defineBlitpElements()
 
@@ -24,8 +27,12 @@ const timeUniform = new ShaderUniformVariable('time')
 const resolutionUniform = new ShaderUniformVariable('resolution')
 
 const el = document.getElementById('blitpunkCanvas')
-const voPool = initSprites()
-const voPoolAttribs = new ShaderVariableBufferGroup(voPool)
+
+const trianglePool = initSprites()
+const trianglePoolAttribs = new ShaderVariableBufferGroup(trianglePool)
+
+const quadsPool = initQuads(resourceLibrary)
+// const quadsPoolAttribs = new ShaderVariableBufferGroup(quadsPool)
 
 const quadIndices = ElementIndexArray.Generate(10, [0, 1, 2, 0, 2, 3], 4)
 const triangleIndices = ElementIndexArray.Generate(4, [0, 1, 2], 3)
@@ -44,7 +51,8 @@ el.on('animateFrame', function () {
 // ------- sync buffers ----------------------------- /// // ----
 
 el.on('syncBuffers', function (renderer) {
-  renderer.syncBuffer(voPool.voArray)
+  renderer.syncBuffer(trianglePool.voArray)
+  renderer.syncBuffer(quadsPool.voArray)
   renderer.syncBuffer(quadIndices)
   renderer.syncBuffer(triangleIndices)
 })
@@ -67,7 +75,7 @@ el.on('renderFrame', function (renderer) {
   //
   shaderContext.pushVar(timeUniform)
   shaderContext.pushVar(resolutionUniform)
-  shaderContext.pushVar(voPoolAttribs)
+  shaderContext.pushVar(trianglePoolAttribs)
 
   //
   // Load gpu program

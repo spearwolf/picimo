@@ -42,6 +42,7 @@
     "@spearwolf/eventize": "github:spearwolf/eventize",
     "@spearwolf/jab": "github:spearwolf/jab",
     "document-register-element": "^1.4.1",
+    "gl-matrix": "^2.3.2",
     "uuid": "^3.0.1"
   },
   "standard": {
