@@ -4,7 +4,6 @@
   "version": "0.0.4",
   "scripts": {
     "standard": "standard",
-    "mocha": "NODE_ENV=testing mocha --compilers js:babel-core/register",
     "karma": "NODE_ENV=testing karma start config/karma.conf.js --single-run",
     "karma:watch": "NODE_ENV=testing karma start config/karma.conf.js",
     "esdoc": "esdoc",
