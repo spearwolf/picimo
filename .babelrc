@@ -5,8 +5,8 @@
                 "node": "current",
                 "browsers": [
                     "ios_saf >= 10",
-                    "firefox >= 51",
-                    "chrome >= 56"
+                    "firefox >= 52",
+                    "chrome >= 57"
                 ]
             }
         }]
