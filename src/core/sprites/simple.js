@@ -1,6 +1,6 @@
 import rotate from '../../utils/shader_helpers/rotate'
 
-export const vertexShader = `
+export const vertexShader = [`
 
   attribute vec2 pos2d;
   attribute float posZ;
@@ -14,7 +14,7 @@ export const vertexShader = `
 
   varying vec4 vTextureCoordScaleOpacity;
 
-  ${rotate('rotateZ', 0.0, 0.0, 1.0)}
+  `, rotate('rotateZ', 0.0, 0.0, 1.0), `
 
   void main(void)
   {
@@ -22,7 +22,7 @@ export const vertexShader = `
     gl_Position = viewMatrix * ((rotationMatrix * (vec4(scale, scale, scale, 1.0) * vec4(pos2d.xy, posZ, 1.0))) + vec4(translate.xy, 0.0, 0.0));
     vTextureCoordScaleOpacity = vec4(uv.xy, opacity, 0.0);
   }
-`
+`]
 
 export const fragmentShader = `
 

@@ -17,7 +17,7 @@ export default class ShaderSource {
     /**
      * @type {string}
      */
-    this.source = source instanceof HTMLElement ? source.textContent : source.toString()
+    this.source = source instanceof HTMLElement ? source.textContent : source
   }
 }
 
