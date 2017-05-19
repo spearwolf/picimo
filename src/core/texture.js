@@ -196,6 +196,18 @@ export default class Texture {
   }
 
   /**
+   * @param {object} obj - Any object which has a `.setTexCoords(x0, y0, x1, y0, x1, y1, x0, y1)` method
+   */
+  setTexCoords (obj) {
+    const x0 = this.minS
+    const y0 = this.minT
+    const x1 = this.maxS
+    const y1 = this.maxT
+
+    obj.setTexCoords(x0, y0, x1, y0, x1, y1, x0, y1)
+  }
+
+  /**
     * Loads an image from url and returns a texture.
     * @param {string} url
     * @returns {Promise<Texture>}

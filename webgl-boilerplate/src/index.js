@@ -1,6 +1,7 @@
 import ShaderSource from '../../src/core/shader_source'
 import ShaderProgram from '../../src/core/shader_program'
 import ShaderUniformVariable from '../../src/core/shader_uniform_variable'
+import ShaderTexture2dVariable from '../../src/core/shader_texture_2d_variable'
 import ShaderVariableBufferGroup from '../../src/core/shader_variable_buffer_group'
 
 import defineBlitpElements from '../../src/dom/define_blitp_elements'
@@ -10,6 +11,8 @@ import Texture from '../../src/core/texture'
 import ElementIndexArray from '../../src/core/element_index_array'
 
 import ResourceLibrary from '../../src/core/resource_library'
+
+import Mat4 from '../../src/utils/mat4'
 
 import initSprites from './init_sprites'
 import initQuads from './init_quads'
@@ -25,6 +28,12 @@ defineBlitpElements()
 
 const timeUniform = new ShaderUniformVariable('time')
 const resolutionUniform = new ShaderUniformVariable('resolution')
+const viewMatrixUniform = new ShaderUniformVariable('viewMatrix')
+
+const viewMatrix = new Mat4()
+viewMatrixUniform.value = viewMatrix  // TODO set viewMatrix by <scene .. viewport />
+
+const texUniform = new ShaderTexture2dVariable('tex')
 
 const el = document.getElementById('blitpunkCanvas')
 
@@ -32,7 +41,7 @@ const trianglePool = initSprites()
 const trianglePoolAttribs = new ShaderVariableBufferGroup(trianglePool)
 
 const quadsPool = initQuads(resourceLibrary)
-// const quadsPoolAttribs = new ShaderVariableBufferGroup(quadsPool)
+const quadsPoolAttribs = new ShaderVariableBufferGroup(quadsPool)
 
 const quadIndices = ElementIndexArray.Generate(10, [0, 1, 2, 0, 2, 3], 4)
 const triangleIndices = ElementIndexArray.Generate(4, [0, 1, 2], 3)
@@ -40,6 +49,10 @@ const triangleIndices = ElementIndexArray.Generate(4, [0, 1, 2], 3)
 const program = new ShaderProgram(
     new ShaderSource(ShaderSource.VERTEX_SHADER, document.getElementById('vs')),
     new ShaderSource(ShaderSource.FRAGMENT_SHADER, document.getElementById('fs')))
+
+const prgSimple = new ShaderProgram(
+  resourceLibrary.findVertexShader('simple'),
+  resourceLibrary.findFragmentShader('simple'))
 
 // ------- animate frame ----------------------------- /// // ----
 
@@ -51,17 +64,19 @@ el.on('animateFrame', function () {
 // ------- sync buffers ----------------------------- /// // ----
 
 el.on('syncBuffers', function (renderer) {
-  renderer.syncBuffer(trianglePool.voArray)
-  renderer.syncBuffer(quadsPool.voArray)
-  renderer.syncBuffer(quadIndices)
-  renderer.syncBuffer(triangleIndices)
+  quadsPool.voArray.resourceRef.serial.touch()  // TODO autotouch for VOArray with DYNAMIC hint?
 })
 
 // ------- sync textures ---------------------------- /// // ----
 
 Texture.load('nobinger.png').then(texture => {
+  texUniform.texture = texture  // TODO auto-create shader-tex2d-var -> texture(resource)Library?
+
+  texture.setTexCoords(window.q0)
+  texture.setTexCoords(window.q1)
+
   el.on('syncTextures', function (renderer) {
-    renderer.syncTexture(texture)
+    renderer.syncTexture(texture) // TODO auto-sync texture?
   })
 })
 
@@ -85,8 +100,19 @@ el.on('renderFrame', function (renderer) {
   //
   // Render geometry
   //
-  // renderer.drawArrays('TRIANGLES', 12)
-  renderer.drawIndexed('TRIANGLES', triangleIndices)
+  renderer.drawIndexed('TRIANGLES', triangleIndices)  // renderer.drawArrays('TRIANGLES', 12)
+
+  // ======================
+  // draw textured quads
+  // ======================
+
+  shaderContext.pushVar(texUniform)
+  shaderContext.pushVar(viewMatrixUniform)
+  shaderContext.pushVar(quadsPoolAttribs)
+
+  renderer.useShaderProgram(prgSimple)
+
+  renderer.drawIndexed('TRIANGLES', quadIndices)
 })
 
 // ----- animation startup -----

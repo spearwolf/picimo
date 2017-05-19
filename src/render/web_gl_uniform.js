@@ -38,7 +38,7 @@ function uniformSetter (uniform) {
       return (value) => gl.uniform4f(location, value[0], value[1], value[2], value[3])
 
     case gl.FLOAT_MAT4:
-      return (value) => gl.uniformMatrix4fv(location, gl.FALSE, value)
+      return (value) => gl.uniformMatrix4fv(location, gl.FALSE, value.mat4)
 
     case gl.SAMPLER_2D:
       return (value) => gl.uniform1i(location, value)

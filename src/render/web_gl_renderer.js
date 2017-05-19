@@ -68,9 +68,10 @@ export default class WebGlRenderer {
   drawIndexed (primitive, elementIndexArray, count, offset = 0) {
     const { gl } = this.glx
 
-    this.glx.resourceLibrary
-      .findBuffer(elementIndexArray.resourceRef)
-      .resource.bindBuffer()
+    this.syncBuffer(elementIndexArray).bindBuffer()
+    // this.glx.resourceLibrary
+    //   .findBuffer(elementIndexArray.resourceRef)
+    //   .resource.bindBuffer()
 
     gl.drawElements(
       gl[primitive],
@@ -81,12 +82,13 @@ export default class WebGlRenderer {
 
   /**
    * @param {VOArray|ElementIndexArray} resource
+   * @return {WebGlBuffer}
    */
   syncBuffer (resource) {
-    // TODO delay sync until buffer is really used by draw commands aka drawArrays()
     const { resourceRef } = resource
     const bufferRef = this.glx.resourceLibrary.loadBuffer(resourceRef)
     bufferRef.sync(resourceRef, buffer => buffer.bufferData(resourceRef.hints.typedArray))
+    return bufferRef.resource
   }
 
   /**

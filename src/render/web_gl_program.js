@@ -37,19 +37,32 @@ export default class WebGlProgram {
    */
   loadUniforms (shaderContext) {
     this.uniformNames.forEach(name => {
-      this.uniforms[name].setValue(shaderContext.curUniform(name).value)
+      let shaderVar = shaderContext.curUniform(name)
+      if (shaderVar == null) {
+        shaderVar = shaderContext.curTex2d(name)
+        shaderVar.bindTexture(this.glx)
+      }
+      this.uniforms[name].setValue(shaderVar.value)
     })
   }
 
   /**
+   * sync buffer before load
+   *
    * @param {ShaderContext} shaderContext
    */
   loadAttributes (shaderContext) {
     const { resourceLibrary } = this.glx
     this.attributeNames.forEach(name => {
       const attribValue = shaderContext.curAttrib(name).value
-      const buffer = resourceLibrary.findBuffer(attribValue.resourceRef).resource
-      buffer.bindBuffer()
+      // const buffer = resourceLibrary.findBuffer(attribValue.resourceRef).resource
+      // --- WebGlRenderer.syncBuffer ---
+      const { resourceRef } = attribValue
+      const bufferRef = resourceLibrary.loadBuffer(resourceRef)
+      bufferRef.sync(resourceRef, buffer => buffer.bufferData(resourceRef.hints.typedArray))
+      // --------------------------------
+      // buffer.bindBuffer()
+      bufferRef.resource.bindBuffer()
       this.attributes[name].vertexAttribPointer(attribValue.descriptor)
     })
   }
