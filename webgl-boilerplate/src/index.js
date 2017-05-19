@@ -28,10 +28,7 @@ defineBlitpElements()
 
 const timeUniform = new ShaderUniformVariable('time')
 const resolutionUniform = new ShaderUniformVariable('resolution')
-const viewMatrixUniform = new ShaderUniformVariable('viewMatrix')
-
-const viewMatrix = new Mat4()
-viewMatrixUniform.value = viewMatrix  // TODO set viewMatrix by <scene .. viewport />
+const viewMatrixUniform = new ShaderUniformVariable('viewMatrix', new Mat4())  // TODO set viewMatrix by <scene .. viewport />
 
 const texUniform = new ShaderTexture2dVariable('tex')
 
@@ -64,7 +61,7 @@ el.on('animateFrame', function () {
 // ------- sync buffers ----------------------------- /// // ----
 
 el.on('syncBuffers', function (renderer) {
-  quadsPool.voArray.resourceRef.serial.touch()  // TODO autotouch for VOArray with DYNAMIC hint?
+  quadsPool.voArray.touch()  // TODO autotouch for VOArray with DYNAMIC hint?
 })
 
 // ------- sync textures ---------------------------- /// // ----
@@ -72,12 +69,8 @@ el.on('syncBuffers', function (renderer) {
 Texture.load('nobinger.png').then(texture => {
   texUniform.texture = texture  // TODO auto-create shader-tex2d-var -> texture(resource)Library?
 
-  texture.setTexCoords(window.q0)
-  texture.setTexCoords(window.q1)
-
-  el.on('syncTextures', function (renderer) {
-    renderer.syncTexture(texture) // TODO auto-sync texture?
-  })
+  window.q0.setTexCoordsByTexture(texture)
+  window.q1.setTexCoordsByTexture(texture)
 })
 
 // ------- render frame ----------------------------- /// // ----

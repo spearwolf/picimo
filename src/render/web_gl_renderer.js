@@ -15,8 +15,8 @@ export default class WebGlRenderer {
     this.shaderContext.clear()
     scene.emit('animateFrame', scene)
     this.beginRenderFrame()
-    scene.emit('syncBuffers', this)
-    scene.emit('syncTextures', this)
+    scene.emit('syncBuffers', this)  // TODO remove
+    scene.emit('syncTextures', this)  // TODO remove
     scene.emit('renderFrame', this)
     this.endRenderFrame()
   }
@@ -45,8 +45,8 @@ export default class WebGlRenderer {
     const program = this.glx.resourceLibrary.loadProgram(shaderProgram)
     const { shaderContext } = this
     program.use(shaderContext)
-    program.loadUniforms(shaderContext)
-    program.loadAttributes(shaderContext)
+    program.loadUniforms(shaderContext, this)
+    program.loadAttributes(shaderContext, this)
   }
 
   /**
@@ -93,11 +93,12 @@ export default class WebGlRenderer {
 
   /**
    * @param {Texture} texture
+   * @return {WebGlTexture}
    */
   syncTexture (texture) {
-    // TODO delay sync until texture is really used by draw commands aka drawArrays()
     const texRef = texture.resourceRef
     const glTexRef = this.glx.resourceLibrary.loadTexture(texRef)
     glTexRef.sync(texRef, tex => tex.uploadImageData())
+    return glTexRef.resource
   }
 }

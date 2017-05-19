@@ -91,6 +91,18 @@ export const description = {
     },
 
     /**
+     * @param {Texture} texture
+     */
+    setTexCoordsByTexture (texture) {
+      const x0 = texture.minS
+      const y0 = texture.minT
+      const x1 = texture.maxS
+      const y1 = texture.maxT
+
+      this.setTexCoords(x0, y0, x1, y0, x1, y1, x0, y1)
+    },
+
+    /**
      * @param {number} width
      * @param {number} height
      */

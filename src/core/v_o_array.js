@@ -49,6 +49,13 @@ export default class VOArray {
     Object.freeze(this)
   }
 
+  /**
+   * increase serial value from resource reference
+   */
+  touch () {
+    this.resourceRef.serial.touch()
+  }
+
   /** @type {ArrayBuffer} */
   get buffer () {
     return this.float32Array.buffer

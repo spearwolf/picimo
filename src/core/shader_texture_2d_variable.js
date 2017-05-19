@@ -14,13 +14,14 @@ export default class ShaderTexture2dVariable extends ShaderVariable {
   }
 
   /**
-   * @param {WebGlContext} glx
+   * Sync texture to gpu and update `.value` to the gl texture unit.
+   *
+   * @param {WebGlRenderer} renderer
    */
-  bindTexture (glx) {
+  syncTextureAndValue (renderer) {
     if (this.texture != null) {
-      const texRef = this.texture.resourceRef
-      const glTexRef = glx.resourceLibrary.loadTexture(texRef)
-      this.value = glx.textureManager.bindWebGlTexture(glTexRef.resource)
+      const glTex = renderer.syncTexture(this.texture)
+      this.value = glTex.bind()
     }
   }
 }
