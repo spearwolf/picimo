@@ -1,16 +1,15 @@
 import ShaderSource from '../../src/core/shader_source'
 import ShaderProgram from '../../src/core/shader_program'
 import ShaderUniformVariable from '../../src/core/shader_uniform_variable'
-import ShaderTexture2dVariable from '../../src/core/shader_texture_2d_variable'
 import ShaderVariableBufferGroup from '../../src/core/shader_variable_buffer_group'
 
 import defineBlitpElements from '../../src/dom/define_blitp_elements'
 
 import PowerOf2Image from '../../src/core/power_of_2_image'
-import Texture from '../../src/core/texture'
 import ElementIndexArray from '../../src/core/element_index_array'
 
 import ResourceLibrary from '../../src/core/resource_library'
+import TextureLibrary from '../../src/core/texture_library'
 
 import Mat4 from '../../src/utils/mat4'
 
@@ -24,13 +23,14 @@ window.PowerOf2Image = PowerOf2Image
 const resourceLibrary = new ResourceLibrary()
 window.resourceLibrary = resourceLibrary
 
+const textureLibrary = new TextureLibrary()
+window.textureLibrary = textureLibrary
+
 defineBlitpElements()
 
 const timeUniform = new ShaderUniformVariable('time')
 const resolutionUniform = new ShaderUniformVariable('resolution')
 const viewMatrixUniform = new ShaderUniformVariable('viewMatrix', new Mat4())  // TODO set viewMatrix by <scene .. viewport />
-
-const texUniform = new ShaderTexture2dVariable('tex')
 
 const el = document.getElementById('blitpunkCanvas')
 
@@ -66,12 +66,12 @@ el.on('syncBuffers', function (renderer) {
 
 // ------- sync textures ---------------------------- /// // ----
 
-Texture.load('nobinger.png').then(texture => {
-  texUniform.texture = texture  // TODO auto-create shader-tex2d-var -> texture(resource)Library?
-
-  window.q0.setTexCoordsByTexture(texture)
-  window.q1.setTexCoordsByTexture(texture)
-})
+textureLibrary
+  .loadTexture('nobinger', 'nobinger.png')
+  .then(texture => {
+    window.q0.setTexCoordsByTexture(texture)
+    window.q1.setTexCoordsByTexture(texture)
+  })
 
 // ------- render frame ----------------------------- /// // ----
 
@@ -99,13 +99,15 @@ el.on('renderFrame', function (renderer) {
   // draw textured quads
   // ======================
 
-  shaderContext.pushVar(texUniform)
-  shaderContext.pushVar(viewMatrixUniform)
-  shaderContext.pushVar(quadsPoolAttribs)
+  textureLibrary.whenReady({ tex: 'nobinger' }, texUniforms => {
+    shaderContext.pushVar(texUniforms)
+    shaderContext.pushVar(viewMatrixUniform)
+    shaderContext.pushVar(quadsPoolAttribs)
 
-  renderer.useShaderProgram(prgSimple)
+    renderer.useShaderProgram(prgSimple)
 
-  renderer.drawIndexed('TRIANGLES', quadIndices)
+    renderer.drawIndexed('TRIANGLES', quadIndices)
+  })
 })
 
 // ----- animation startup -----
