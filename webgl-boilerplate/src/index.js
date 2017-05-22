@@ -2,6 +2,7 @@ import ShaderSource from '../../src/core/shader_source'
 import ShaderProgram from '../../src/core/shader_program'
 import ShaderUniformVariable from '../../src/core/shader_uniform_variable'
 import ShaderVariableBufferGroup from '../../src/core/shader_variable_buffer_group'
+import ShaderTextureGroup from '../../src/core/shader_texture_group'
 
 import defineBlitpElements from '../../src/dom/define_blitp_elements'
 
@@ -73,6 +74,8 @@ textureLibrary
     window.q1.setTexCoordsByTexture(texture)
   })
 
+const nobingerTextures = new ShaderTextureGroup(textureLibrary, { tex: 'nobinger' })
+
 // ------- render frame ----------------------------- /// // ----
 
 el.on('renderFrame', function (renderer) {
@@ -99,7 +102,8 @@ el.on('renderFrame', function (renderer) {
   // draw textured quads
   // ======================
 
-  textureLibrary.whenReady({ tex: 'nobinger' }, texUniforms => {
+  // textureLibrary.whenLoaded('nobinger', 'tex', texUniform => {
+  nobingerTextures.whenLoaded(texUniforms => {
     shaderContext.pushVar(texUniforms)
     shaderContext.pushVar(viewMatrixUniform)
     shaderContext.pushVar(quadsPoolAttribs)
