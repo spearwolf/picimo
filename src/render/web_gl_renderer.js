@@ -16,7 +16,6 @@ export default class WebGlRenderer {
     scene.emit('animateFrame', scene)
     this.beginRenderFrame()
     scene.emit('syncBuffers', this)  // TODO remove
-    scene.emit('syncTextures', this)  // TODO remove
     scene.emit('renderFrame', this)
     this.endRenderFrame()
   }
