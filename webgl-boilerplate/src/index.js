@@ -1,10 +1,10 @@
+import Blitpunk from '../../src/blitpunk'
+
 import ShaderSource from '../../src/core/shader_source'
 import ShaderProgram from '../../src/core/shader_program'
 import ShaderUniformVariable from '../../src/core/shader_uniform_variable'
 import ShaderVariableBufferGroup from '../../src/core/shader_variable_buffer_group'
 import ShaderTextureGroup from '../../src/core/shader_texture_group'
-
-import defineBlitpElements from '../../src/dom/define_blitp_elements'
 
 import PowerOf2Image from '../../src/core/power_of_2_image'
 import ElementIndexArray from '../../src/core/element_index_array'
@@ -19,6 +19,8 @@ import initQuads from './init_quads'
 
 // ----- init ---------
 
+Blitpunk()
+
 window.PowerOf2Image = PowerOf2Image
 
 const resourceLibrary = new ResourceLibrary()
@@ -26,8 +28,6 @@ window.resourceLibrary = resourceLibrary
 
 const textureLibrary = new TextureLibrary()
 window.textureLibrary = textureLibrary
-
-defineBlitpElements()
 
 const timeUniform = new ShaderUniformVariable('time')
 const resolutionUniform = new ShaderUniformVariable('resolution')
@@ -113,7 +113,3 @@ el.on('renderFrame', function (renderer) {
     renderer.drawIndexed('TRIANGLES', quadIndices)
   })
 })
-
-// ----- animation startup -----
-
-el.animate()

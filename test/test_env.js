@@ -1,6 +1,6 @@
 /* eslint-env mocha */
 import assert from 'assert'
-import { App } from '../src'
+import App from '../src/app'
 
 describe('Service: env', () => {
   let env

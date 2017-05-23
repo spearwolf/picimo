@@ -98,6 +98,13 @@ export default class BlitpCanvas extends BlitpElement {
      * @type {number}
      */
     this.frameNo = 0
+
+    // autostart animation loop by default
+    this.requestAnimate()
+  }
+
+  requestAnimate () {
+    window.requestAnimationFrame(() => this.animate())
   }
 
   /**
@@ -105,7 +112,7 @@ export default class BlitpCanvas extends BlitpElement {
    */
   animate () {
     this.renderFrame()
-    window.requestAnimationFrame(() => this.animate())
+    this.requestAnimate()
   }
 
   /**

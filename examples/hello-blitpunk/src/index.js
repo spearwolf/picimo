@@ -1,12 +1,7 @@
 import Blitpunk from '../../../src/blitpunk'
 
-// Initialize <blitp-*> custom elements
-//
-Blitpunk()
+Blitpunk()  // Initialize <blitp-*> custom elements
 
-// Start main animation loop
-//
 const el = document.getElementById('blitpunkCanvas')
-el.animate()
 
-console.log('hello blitpunk!', el);
+console.log('hello blitpunk!', el)
