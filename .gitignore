@@ -2,3 +2,4 @@ doc/esdoc
 node_modules
 .build
 bundle.js
+examples/index.html

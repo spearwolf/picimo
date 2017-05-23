@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>blitpunk examples</title>
+</head>
+<body>
+    <h3>blitpunk examples</h3>
+    <ul>
+      <% examples.forEach(function(example) { %>
+        <li>
+            <a href="./<%= example %>/"><%= example %></a>
+        </li>
+      <% }) %>
+    </ul>
+</body>
+</html>
