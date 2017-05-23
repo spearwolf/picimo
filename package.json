@@ -1,7 +1,7 @@
 {
   "name": "@spearwolf/blitpunk",
   "description": "todo",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "scripts": {
     "standard": "standard",
     "karma": "NODE_ENV=testing karma start config/karma.conf.js --single-run",

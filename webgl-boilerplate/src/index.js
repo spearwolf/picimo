@@ -59,12 +59,6 @@ el.on('animateFrame', function () {
   resolutionUniform.value = [ el.width, el.height ]
 })
 
-// ------- sync buffers ----------------------------- /// // ----
-
-el.on('syncBuffers', function (renderer) {
-  quadsPool.voArray.touch()  // TODO autotouch for VOArray with DYNAMIC hint?
-})
-
 // ------- sync textures ---------------------------- /// // ----
 
 textureLibrary

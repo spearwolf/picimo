@@ -77,10 +77,11 @@ export default class VODescriptor {
 
   /**
    * @param {number} [size=1]
+   * @param {string} [usage]
    * @returns {VOArray}
    */
-  createVOArray (size = 1) {
-    return new VOArray(this, size)
+  createVOArray (size = 1, usage = undefined) {
+    return new VOArray(this, size, null, usage)
   }
 
   /**

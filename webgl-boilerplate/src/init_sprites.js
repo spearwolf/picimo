@@ -9,7 +9,8 @@ export default function () {
     ]
   })
 
-  const voPool = new VOPool(voDescriptor, { capacity: 4 })
+  const voPool = new VOPool(voDescriptor, { capacity: 4, usage: VOPool.USAGE.STATIC })
+  window.trianglePool = voPool
 
   voPool.alloc().setPosition(-1.0, -1.0, 0.49, -1.0, -1.0, 1.0)
   voPool.alloc().setPosition(0.49, -1.0, 0.49, 1.0, -1.0, 1.0)

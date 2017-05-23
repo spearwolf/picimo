@@ -7,15 +7,17 @@ export default class WebGlRenderer {
     Object.defineProperty(this, 'glx', { value: glx })
 
     this.shaderContext = new ShaderContext()
+    this.autotouchResources = new Map()
+    this.frameNo = 0
 
     eventize(this)
   }
 
   renderFrame (scene) {
+    ++this.frameNo
     this.shaderContext.clear()
     scene.emit('animateFrame', scene)
     this.beginRenderFrame()
-    scene.emit('syncBuffers', this)  // TODO remove
     scene.emit('renderFrame', this)
     this.endRenderFrame()
   }
@@ -25,7 +27,7 @@ export default class WebGlRenderer {
   }
 
   endRenderFrame () {
-    // TODO
+    this.autotouchResources.clear()
   }
 
   clearFrameBuffer () {
@@ -68,9 +70,6 @@ export default class WebGlRenderer {
     const { gl } = this.glx
 
     this.syncBuffer(elementIndexArray).bindBuffer()
-    // this.glx.resourceLibrary
-    //   .findBuffer(elementIndexArray.resourceRef)
-    //   .resource.bindBuffer()
 
     gl.drawElements(
       gl[primitive],
@@ -85,9 +84,21 @@ export default class WebGlRenderer {
    */
   syncBuffer (resource) {
     const { resourceRef } = resource
+    this.autotouchBuffer(resourceRef)
+
     const bufferRef = this.glx.resourceLibrary.loadBuffer(resourceRef)
     bufferRef.sync(resourceRef, buffer => buffer.bufferData(resourceRef.hints.typedArray))
     return bufferRef.resource
+  }
+
+  autotouchBuffer (resourceRef) {
+    const { resource } = resourceRef
+    if (resource.enableAutotouch) {
+      if (!this.autotouchResources.has(resourceRef.id)) {
+        this.autotouchResources.set(resourceRef.id, true)
+        resource.touch()
+      }
+    }
   }
 
   /**

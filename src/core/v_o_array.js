@@ -11,6 +11,7 @@ import { BYTES_PER_ELEMENT, TYPED_ARRAY_CONSTRUCTOR } from '../utils/typed_array
  * @param {number} capacity - Maximum number of *vertex objects*
  * @param {?ArrayBuffer|DataView|Float32Array} data
  * @param {string} [usage=VOArray.USAGE.DYNAMIC] usage hint
+ * @param {boolean} [autotouch] autotouch
  *
  * @desc
  * An array of *vertex objects*.
@@ -19,7 +20,7 @@ import { BYTES_PER_ELEMENT, TYPED_ARRAY_CONSTRUCTOR } from '../utils/typed_array
  */
 
 export default class VOArray {
-  constructor (descriptor, capacity, data, usage = VOArray.USAGE.DYNAMIC) {
+  constructor (descriptor, capacity, data, usage = VOArray.USAGE.DYNAMIC, autotouch = undefined) {
     /** @type {ResourceRef} */
     this.resourceRef = new ResourceRef(this, { usage })
 
@@ -45,6 +46,9 @@ export default class VOArray {
     descriptor.typeList.filter(type => type !== 'float32').forEach(type => {
       this[`${type}Array`] = new (TYPED_ARRAY_CONSTRUCTOR[type])(buffer, bufferByteOffset, bufferByteLength / BYTES_PER_ELEMENT[type])
     })
+
+    /** @type {boolean} */
+    this.enableAutotouch = typeof autotouch === 'boolean' ? autotouch : usage === VOArray.USAGE.DYNAMIC
 
     Object.freeze(this)
   }
