@@ -2,12 +2,18 @@
   "name": "@spearwolf/blitpunk",
   "description": "todo",
   "version": "0.0.6",
+  "author": "Wolfger Schramm",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spearwolf/blitpunk.git"
+  },
   "scripts": {
     "standard": "standard",
     "karma": "NODE_ENV=testing karma start config/karma.conf.js --single-run",
     "karma:watch": "NODE_ENV=testing karma start config/karma.conf.js",
     "esdoc": "esdoc",
-    "lint:js": "npm run standard -- \"src/**/*.js\" \"test/**/*.js\" \"webgl-boilerplate/src/**/*.js\"",
+    "lint:js": "npm run standard -- \"src/**/*.js\" \"test/**/*.js\" \"webgl-boilerplate/src/**/*.js\" \"examples/**/*.js\"",
     "test": "npm run lint:js && npm run karma",
     "boilerplate:build": "webpack --config config/webpack.webgl-boilerplate.config.js",
     "boilerplate:watch": "npm run boilerplate:build -- --watch",
@@ -18,7 +24,6 @@
     "examples": "run-p examples:serve examples:watch",
     "start": "run-p boilerplate:serve boilerplate:watch"
   },
-  "license": "Apache-2.0",
   "devDependencies": {
     "babel-cli": "^6.22.2",
     "babel-core": "^6.22.1",
@@ -55,7 +60,8 @@
     "parser": "babel-eslint",
     "ignore": [
       "config/*.js",
-      "webgl-boilerplate/bundle.js"
+      "examples/document-register-element.js",
+      "bundle.js"
     ]
   }
 }
