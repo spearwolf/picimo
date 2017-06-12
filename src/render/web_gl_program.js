@@ -34,6 +34,7 @@ export default class WebGlProgram {
 
   /**
    * @param {ShaderContext} shaderContext
+   * @param {WebGlRenderer} renderer
    */
   loadUniforms (shaderContext, renderer) {
     this.uniformNames.forEach(name => {
@@ -50,6 +51,7 @@ export default class WebGlProgram {
    * sync buffer before load
    *
    * @param {ShaderContext} shaderContext
+   * @param {WebGlRenderer} renderer
    */
   loadAttributes (shaderContext, renderer) {
     this.attributeNames.forEach(name => {
