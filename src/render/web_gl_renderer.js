@@ -2,6 +2,16 @@ import eventize from '@spearwolf/eventize'
 
 import ShaderContext from '../core/shader_context'
 
+const autotouchBuffer = (renderer, resourceRef) => {
+  const { resource } = resourceRef
+  if (resource.enableAutotouch) {
+    if (!renderer.autotouchResources.has(resourceRef.id)) {
+      renderer.autotouchResources.set(resourceRef.id, true)
+      resource.touch()
+    }
+  }
+}
+
 export default class WebGlRenderer {
   constructor (glx) {
     Object.defineProperty(this, 'glx', { value: glx })
@@ -84,21 +94,11 @@ export default class WebGlRenderer {
    */
   syncBuffer (resource) {
     const { resourceRef } = resource
-    this.autotouchBuffer(resourceRef)
+    autotouchBuffer(this, resourceRef)
 
     const bufferRef = this.glx.resourceLibrary.loadBuffer(resourceRef)
     bufferRef.sync(resourceRef, buffer => buffer.bufferData(resourceRef.hints.typedArray))
     return bufferRef.resource
-  }
-
-  autotouchBuffer (resourceRef) {
-    const { resource } = resourceRef
-    if (resource.enableAutotouch) {
-      if (!this.autotouchResources.has(resourceRef.id)) {
-        this.autotouchResources.set(resourceRef.id, true)
-        resource.touch()
-      }
-    }
   }
 
   /**
