@@ -8,8 +8,16 @@ module.exports = {
       loader: 'babel-loader?cacheDirectory=.build',
       exclude: [
         /node_modules/
-      ],
-    }],
+      ]
+    }, {
+      test: /\.scss$/,
+      use: [
+        { loader: 'style-loader' },
+        { loader: 'css-loader' },
+        { loader: 'sass-loader' },
+        { loader: 'postcss-loader' }
+      ]
+    }]
   },
   resolve: {
     extensions: ['.js'],

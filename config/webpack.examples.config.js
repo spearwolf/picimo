@@ -13,7 +13,7 @@ const EXAMPLES = _.compact(glob.sync(path.resolve(examplesDir) + '/*/').map(dir 
   }
 }))
 
-console.log('Found blitpunk examples {\n', EXAMPLES.map(example => `  ${example}`).join('\n'), '\n}')
+console.log('Serving blitpunk examples {\n', EXAMPLES.map(example => `  ${example}`).join('\n'), '\n}')
 
 const template = fs.readFileSync(path.resolve(examplesDir, 'index.ejs.html'), 'utf8')
 const html = ejs.render(template, { examples: EXAMPLES })
@@ -45,8 +45,16 @@ module.exports = {
       loader: 'babel-loader?cacheDirectory=.build',
       exclude: [
         /node_modules/
-      ],
-    }],
+      ]
+    }, {
+      test: /\.scss$/,
+      use: [
+        { loader: 'style-loader' },
+        { loader: 'css-loader' },
+        { loader: 'sass-loader', query: { sourceMaps: false } },
+        { loader: 'postcss-loader' }
+      ]
+    }]
   },
   resolve: {
     extensions: ['.js'],

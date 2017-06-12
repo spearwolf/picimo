@@ -3,6 +3,8 @@ import installCE from 'document-register-element/pony'
 
 import BlitpCanvas from './blitp_canvas'
 
+import './blitp.scss'
+
 /**
  * Define all `<blitp-*>` custom html elements.
  * Should be called once at startup.

@@ -67,21 +67,6 @@ export default class BlitpCanvas extends BlitpElement {
     })
 
     /**
-     * @type {WebGlContext}
-     */
-    this.glx = new WebGlContext(createGlContext(this.canvas, this.contextAttributes))
-
-    /**
-     * @type {WebGlRenderer}
-     */
-    this.renderer = new WebGlRenderer(this.glx)
-
-    setCanvasStyles(this.canvas)
-    this.appendChild(this.canvas)
-
-    this.resize()
-
-    /**
      * Seconds since `<blitp-canvas>` startup
      * @type {number}
      */
@@ -98,6 +83,21 @@ export default class BlitpCanvas extends BlitpElement {
      * @type {number}
      */
     this.frameNo = 0
+
+    /**
+     * @type {WebGlContext}
+     */
+    this.glx = new WebGlContext(createGlContext(this.canvas, this.contextAttributes))
+
+    /**
+     * @type {WebGlRenderer}
+     */
+    this.renderer = new WebGlRenderer(this.glx)
+
+    // setCanvasStyles(this.canvas)
+    this.appendChild(this.canvas)
+
+    this.resize()
 
     // autostart animation loop by default
     this.requestAnimate()
@@ -167,6 +167,7 @@ export default class BlitpCanvas extends BlitpElement {
 }
 
 /** @private */
+/*
 function setCanvasStyles (canvas) {
   canvas.style.margin = '0'
   canvas.style.padding = '0'
@@ -174,8 +175,10 @@ function setCanvasStyles (canvas) {
   canvas.style.touchAction = 'none'
   setUserSelectStyle(canvas)
 }
+*/
 
 /** @private */
+/*
 function setUserSelectStyle (element, value = 'none') {
   if ('userSelect' in element.style) {
     element.style.userSelect = value
@@ -185,6 +188,7 @@ function setUserSelectStyle (element, value = 'none') {
     if ('msUserSelect' in element.style) element.style.msUserSelect = value
   }
 }
+*/
 
 /** @private */
 function createGlContext (canvas, ctxAttrs) {

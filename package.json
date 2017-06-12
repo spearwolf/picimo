@@ -25,12 +25,14 @@
     "start": "run-p boilerplate:serve boilerplate:watch"
   },
   "devDependencies": {
+    "autoprefixer": "^7.1.1",
     "babel-cli": "^6.22.2",
-    "babel-core": "^6.22.1",
+    "babel-core": "^6.25.0",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.0.0",
-    "babel-preset-env": "^1.1.8",
-    "chai": "^4.0.0",
+    "babel-preset-env": "^1.5.2",
+    "chai": "^4.0.2",
+    "css-loader": "^0.28.4",
     "ejs": "^2.5.6",
     "esdoc": "^0.5.2",
     "glob": "^7.1.2",
@@ -43,16 +45,21 @@
     "karma-sinon": "^1.0.5",
     "karma-webpack": "^2.0.2",
     "mocha": "^3.2.0",
+    "node-sass": "^4.5.3",
     "npm-run-all": "^4.0.1",
-    "serve": "^5.1.1",
+    "postcss-import": "^10.0.0",
+    "postcss-loader": "^2.0.5",
+    "sass-loader": "^6.0.5",
+    "serve": "^5.2.2",
     "sinon": "^2.0.0",
     "standard": "^10.0.0",
+    "style-loader": "^0.18.2",
     "webpack": "^2.3.2"
   },
   "dependencies": {
     "@spearwolf/eventize": "github:spearwolf/eventize",
     "@spearwolf/jab": "github:spearwolf/jab",
-    "document-register-element": "^1.4.1",
+    "document-register-element": "^1.5.0",
     "gl-matrix": "^2.3.2",
     "uuid": "^3.0.1"
   },
@@ -63,5 +70,9 @@
       "examples/document-register-element.js",
       "bundle.js"
     ]
-  }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
 }
