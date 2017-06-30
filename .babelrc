@@ -4,6 +4,7 @@
             "targets": {
                 "node": "current",
                 "browsers": [
+                    "safari >= 10",
                     "ios_saf >= 10",
                     "firefox >= 52",
                     "chrome >= 57"

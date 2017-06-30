@@ -1,4 +1,7 @@
-const isNumber = (x) => typeof x === 'number'
+
+function isNumber (x) {
+  return typeof x === 'number'
+}
 
 export default function sub (a, b) {
   if (isNumber(a) && isNumber(b)) {

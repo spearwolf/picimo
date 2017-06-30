@@ -1,7 +1,10 @@
-const isNumber = (x) => typeof x === 'number'
 
-export default function mul (a, b) {
-  if (isNumber(a) && isNumber(b)) {
+function isNumber (x) {
+  return typeof x === 'number'
+}
+
+export default (a, b) => {
+  if (isNumber(b) && isNumber(a)) {
     return a * b
   } else if (isNumber(a)) {
     switch (a) {
