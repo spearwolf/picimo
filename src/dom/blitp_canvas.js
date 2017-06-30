@@ -18,7 +18,6 @@ const now = () => window.performance.now() / 1000
  * - `antialias`
  * - `premultipliedAlpha`
  * - `preserveDrawingBuffer`
- * - `failIfMajorPerformanceCaveat`
  *
  * _ATTENTION:_ changing these html attributes has no effect *after* the webgl context is initialized!
  *
@@ -44,6 +43,10 @@ const now = () => window.performance.now() / 1000
  *   ...
  */
 export default class BlitpCanvas extends BlitpElement {
+  static get observedAttributes () {
+    return ['clear-color']
+  }
+
   /** @private */
   initialize () {
     /**
@@ -62,8 +65,7 @@ export default class BlitpCanvas extends BlitpElement {
       stencil: this.hasAttribute('stencil'),
       antialias: this.hasAttribute('antialias'),
       premultipliedAlpha: this.hasAttribute('premultipliedAlpha'),
-      preserveDrawingBuffer: this.hasAttribute('preserveDrawingBuffer'),
-      failIfMajorPerformanceCaveat: this.hasAttribute('failIfMajorPerformanceCaveat')
+      preserveDrawingBuffer: this.hasAttribute('preserveDrawingBuffer')
     })
 
     /**
@@ -94,6 +96,11 @@ export default class BlitpCanvas extends BlitpElement {
      */
     this.renderer = new WebGlRenderer(this.glx)
 
+    const clearColor = this.getAttribute('clear-color')
+    if (clearColor) {
+      this.renderer.setClearColor(clearColor)
+    }
+
     // setCanvasStyles(this.canvas)
     this.appendChild(this.canvas)
 
@@ -101,6 +108,14 @@ export default class BlitpCanvas extends BlitpElement {
 
     // autostart animation loop by default
     this.requestAnimate()
+  }
+
+  attributeChangedCallback (attr, oldValue, newValue) {
+    if (attr === 'clear-color') {
+      if (this.renderer) {
+        this.renderer.setClearColor(newValue)
+      }
+    }
   }
 
   requestAnimate () {

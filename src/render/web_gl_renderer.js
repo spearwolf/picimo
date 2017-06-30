@@ -1,4 +1,5 @@
 import eventize from '@spearwolf/eventize'
+import tinycolor from 'tinycolor2'
 
 import ShaderContext from '../core/shader_context'
 
@@ -19,8 +20,13 @@ export default class WebGlRenderer {
     this.shaderContext = new ShaderContext()
     this.autotouchResources = new Map()
     this.frameNo = 0
+    this.clearColor = null
 
     eventize(this)
+  }
+
+  setClearColor (col) {
+    this.clearColor = tinycolor(col)
   }
 
   renderFrame (scene) {
@@ -46,6 +52,10 @@ export default class WebGlRenderer {
     let clear = gl.COLOR_BUFFER_BIT
     if (this.glx.DEPTH_BITS > 0) clear = clear | gl.DEPTH_BUFFER_BIT
 
+    if (this.clearColor !== null) {
+      const col = this.clearColor.toRgb()
+      gl.clearColor(col.r / 255, col.g / 255, col.b / 255, col.a)
+    }
     gl.clear(clear)
   }
 

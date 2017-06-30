@@ -1,5 +1,7 @@
 import defineBlitpElements from './dom/define_blitp_elements'
 
+defineBlitpElements()
+
 export default function () {
-  defineBlitpElements()
+  // TODO console.log welcome
 }

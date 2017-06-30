@@ -1,7 +1,7 @@
-import Blitpunk from '../../../src/blitpunk'
+import '../../../src/blitpunk'
 
-Blitpunk()  // Initialize <blitp-*> custom elements
-
-const el = document.getElementById('blitpunkCanvas')
-
-console.log('hello blitpunk!', el)
+document.addEventListener('DOMContentLoaded', () => {
+  const el = document.getElementById('blitpunkCanvas')
+  el.setAttribute('clear-color', 'rgba(100, 0, 50, .5)')
+  console.log('hello blitpunk!', el)
+})
