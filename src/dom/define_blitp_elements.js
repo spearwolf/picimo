@@ -2,6 +2,12 @@
 import installCE from 'document-register-element/pony'
 
 import BlitpCanvas from './blitp_canvas'
+import BlitpScene from './blitp_scene'
+
+import {
+  BLITP_CANVAS_ELEMENT,
+  BLITP_SCENE_ELEMENT
+} from './constants'
 
 import './blitp.scss'
 
@@ -14,5 +20,6 @@ export default function defineBlitpElements () {
   installCE(window)
 
   // define element in the CustomElementRegistry
-  window.customElements.define('blitp-canvas', BlitpCanvas)
+  window.customElements.define(BLITP_CANVAS_ELEMENT, BlitpCanvas)
+  window.customElements.define(BLITP_SCENE_ELEMENT, BlitpScene)
 }

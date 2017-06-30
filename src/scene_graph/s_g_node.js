@@ -7,13 +7,18 @@ import { SG_NODE_TYPE, DEFAULT_PRIORITY } from './constants'
  * Common interface used by all scene graph nodes.
  */
 export default class SGNode {
-  constructor ({ nodeType, name, parentNode, priority } = {}) {
+  constructor (options) {
     eventize(this)
+
+    const opts = Object.assign({
+      nodeType: SG_NODE_TYPE,
+      priority: DEFAULT_PRIORITY
+    }, options)
 
     /**
      * @type {number}
      */
-    this.nodeType = nodeType || SG_NODE_TYPE
+    this.nodeType = opts.nodeType
 
     /**
      * @type {string}
@@ -23,17 +28,17 @@ export default class SGNode {
     /**
      * @type {string}
      */
-    this.name = name
+    this.name = opts.name
 
     /**
      * @type {SGNode}
      */
-    this.parentNode = parentNode || null
+    this.parentNode = opts.parentNode || null
 
     /**
      * @private
      */
-    this._priority = priority || DEFAULT_PRIORITY
+    this._priority = opts.priority
 
     /**
      * @type {SGNode[]}

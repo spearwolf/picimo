@@ -1,10 +1,7 @@
 
 /** @ignore */
-const SG_NODE_TYPE = 0
+export const SG_NODE_TYPE = 0
+export const SG_CANVAS = 1
+export const SG_SCENE = 2
 
-const DEFAULT_PRIORITY = 0
-
-export {
-  SG_NODE_TYPE,
-  DEFAULT_PRIORITY
-}
+export const DEFAULT_PRIORITY = 0

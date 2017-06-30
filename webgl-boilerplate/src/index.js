@@ -1,4 +1,4 @@
-import Blitpunk from '../../src/blitpunk'
+import '../../src/blitpunk'
 
 import ShaderSource from '../../src/core/shader_source'
 import ShaderProgram from '../../src/core/shader_program'
@@ -18,8 +18,6 @@ import initSprites from './init_sprites'
 import initQuads from './init_quads'
 
 // ----- init ---------
-
-Blitpunk()
 
 window.PowerOf2Image = PowerOf2Image
 

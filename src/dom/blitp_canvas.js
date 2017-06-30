@@ -1,6 +1,7 @@
 import BlitpElement from './blitp_element'
 import WebGlContext from '../render/web_gl_context'
 import WebGlRenderer from '../render/web_gl_renderer'
+import SGCanvas from '../scene_graph/s_g_canvas'
 
 const now = () => window.performance.now() / 1000
 
@@ -96,6 +97,12 @@ export default class BlitpCanvas extends BlitpElement {
      */
     this.renderer = new WebGlRenderer(this.glx)
 
+    /**
+     * @type {SGCanvas}
+     */
+    this.sgNode = new SGCanvas()
+    this.on(this.sgNode)
+
     const clearColor = this.getAttribute('clear-color')
     if (clearColor) {
       this.renderer.setClearColor(clearColor)
@@ -110,6 +117,10 @@ export default class BlitpCanvas extends BlitpElement {
     this.requestAnimate()
   }
 
+  disconnectedCallback () {
+    window.cancelAnimationFrame(this.rafSubscription)
+  }
+
   attributeChangedCallback (attr, oldValue, newValue) {
     if (attr === 'clear-color') {
       if (this.renderer) {
@@ -119,7 +130,7 @@ export default class BlitpCanvas extends BlitpElement {
   }
 
   requestAnimate () {
-    window.requestAnimationFrame(() => this.animate())
+    this.rafSubscription = window.requestAnimationFrame(() => this.animate())
   }
 
   /**

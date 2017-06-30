@@ -51,7 +51,7 @@
     "postcss-loader": "^2.0.6",
     "sass-loader": "^6.0.6",
     "serve": "^5.2.3",
-    "sinon": "^2.3.5",
+    "sinon": "^2.3.6",
     "standard": "^10.0.0",
     "style-loader": "^0.18.2",
     "webpack": "^3.0.0"
