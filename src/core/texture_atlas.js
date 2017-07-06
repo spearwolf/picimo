@@ -1,5 +1,6 @@
 import Texture from './texture'
 import TextureAtlasSpec from './texture_atlas_spec.js'
+import sample from '../utils/sample.js'
 
 /**
   * @example
@@ -49,6 +50,13 @@ export default class TextureAtlas {
   }
 
   /**
+   * @returns {Texture}
+   */
+  getRandomFrame () {
+    return sample(Array.from(this.frames.values()))
+  }
+
+  /**
    * @returns {Array<string>}
    */
   frameNames () {
@@ -63,6 +71,6 @@ export default class TextureAtlas {
    * @returns {Promise<TextureAtlas>}
    */
   static load (url, fetchOptions = null, image = null) {
-    return TextureAtlasSpec.load(url, fetchOptions).then(atlasSpec => atlasSpec.createTextureAtlas(image))
+    return TextureAtlasSpec.load(url, fetchOptions || {}).then(atlasSpec => atlasSpec.createTextureAtlas(image || atlasSpec.imageUrl))
   }
 }

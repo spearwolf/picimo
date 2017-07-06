@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>blitpunk boilerplate</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            background-color: #999;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        #blitpunkCanvas {
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <blitp-canvas
+        id="blitpunkCanvas"
+        clear-color="rgba(100, 0, 50, .5)"
+        ></blitp-canvas>
+    <script src="bundle.js"></script>
+</body>
+</html>

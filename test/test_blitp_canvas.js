@@ -2,6 +2,7 @@
 /* global HTMLCanvasElement */
 import { assert } from 'chai'
 import sinon from 'sinon'
+
 import '../src/blitpunk.js'
 
 import BlitpCanvas from '../src/dom/blitp_canvas.js'
@@ -29,12 +30,11 @@ describe('<blitp-canvas />', () => {
     assert.instanceOf(blitpCanvas, BlitpCanvas)
   })
 
-  it('should have a <canvas/> element', () => {
-    assert.isOk(blitpCanvas.canvas)
-    assert.instanceOf(blitpCanvas.canvas, HTMLCanvasElement)
-  })
-
-  describe('after initialize', () => {
+  describe('after dom insertion', () => {
+    it('should have a <canvas/> element', () => {
+      assert.isOk(blitpCanvas.canvas)
+      assert.instanceOf(blitpCanvas.canvas, HTMLCanvasElement)
+    })
     it('.time should initialize with 0', () => {
       assert.equal(blitpCanvas.time, 0)
     })
@@ -56,12 +56,16 @@ describe('<blitp-canvas />', () => {
     it('requestAnimationFrame() should has been called', () => {
       assert.isTrue(window.requestAnimationFrame.calledOnce)
     })
-    it('.width should be set', () => {
+    it('.width should be a number', () => {
       assert.typeOf(blitpCanvas.width, 'number')
+    })
+    it('.width should be greater than zero', () => {
       assert.isTrue(blitpCanvas.width > 0)
     })
-    it('.height should be set', () => {
+    it('.height should be a number', () => {
       assert.typeOf(blitpCanvas.height, 'number')
+    })
+    it('.height should be greater than zero', () => {
       assert.isTrue(blitpCanvas.height > 0)
     })
   })
@@ -84,12 +88,13 @@ describe('<blitp-canvas />', () => {
     })
   })
 
-  describe('remove <blitp-canvas /> from dom', () => {
+  describe('removing from dom', () => {
     let spy
 
     before(() => {
       spy = sinon.spy(window, 'cancelAnimationFrame')
     })
+
     after(() => spy.restore())
 
     it('should cancel raf subscription', () => {

@@ -1,7 +1,12 @@
-import BlitpElement from './blitp_element'
+/* global HTMLElement */
+import eventize from '@spearwolf/eventize'
+
+// import BlitpElement from './blitp_element'
 import WebGlContext from '../render/web_gl_context'
 import WebGlRenderer from '../render/web_gl_renderer'
 import SGCanvas from '../scene_graph/s_g_canvas'
+
+import { BLITP_CANVAS_NODE_NAME } from './constants'
 
 const now = () => window.performance.now() / 1000
 
@@ -43,13 +48,23 @@ const now = () => window.performance.now() / 1000
  *   </blitp-canvas>
  *   ...
  */
-export default class BlitpCanvas extends BlitpElement {
+export default class BlitpCanvas extends HTMLElement {
+  /** @ignore */
+  constructor (_) {
+    const self = super(_)
+    return eventize(self)
+  }
+
+  get blitpNodeName () {
+    return BLITP_CANVAS_NODE_NAME
+  }
+
   static get observedAttributes () {
     return ['clear-color']
   }
 
   /** @private */
-  initialize () {
+  connectedCallback () {
     /**
      * @type {CanvasHTMLElement}
      */

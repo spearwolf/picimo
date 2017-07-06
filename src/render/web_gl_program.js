@@ -41,6 +41,9 @@ export default class WebGlProgram {
       let shaderVar = shaderContext.curUniform(name)
       if (shaderVar == null) {
         shaderVar = shaderContext.curTex2d(name)
+        if (shaderVar == null) {
+          console.error('[WebGlProgram] could not load uniform:', name)
+        }
         shaderVar.syncTextureAndValue(renderer)
       }
       this.uniforms[name].setValue(shaderVar.value)
