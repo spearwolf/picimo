@@ -9,11 +9,13 @@ import {
 } from '../src/scene_graph/constants.js'
 
 import {
+  BLITP_CANVAS_ELEMENT,
+  BLITP_CANVAS_NODE_NAME,
   BLITP_SCENE_ELEMENT,
-  BLITP_CANVAS_ELEMENT
+  BLITP_SCENE_NODE_NAME
 } from '../src/dom/constants'
 
-describe('<blitp-scene />', () => {
+describe(`<${BLITP_SCENE_ELEMENT} />`, () => {
   let canvas
   let scene
   let subscene
@@ -35,7 +37,7 @@ describe('<blitp-scene />', () => {
 
   describe('canvas', () => {
     it('.blitpNodeName', () => {
-      assert.equal(canvas.blitpNodeName, 'BLITP-CANVAS')
+      assert.equal(canvas.blitpNodeName, BLITP_CANVAS_NODE_NAME)
     })
     it('.sgNode', () => {
       assert.equal(canvas.sgNode.nodeType, SG_CANVAS)
@@ -45,7 +47,7 @@ describe('<blitp-scene />', () => {
 
   describe('scene', () => {
     it('.blitpNodeName', () => {
-      assert.equal(scene.blitpNodeName, 'BLITP-SCENE')
+      assert.equal(scene.blitpNodeName, BLITP_SCENE_NODE_NAME)
     })
     it('.parentBlitpElement', () => {
       assert.equal(scene.parentBlitpElement, canvas)
@@ -58,7 +60,7 @@ describe('<blitp-scene />', () => {
 
   describe('sub scene', () => {
     it('.blitpNodeName', () => {
-      assert.equal(subscene.blitpNodeName, 'BLITP-SCENE')
+      assert.equal(subscene.blitpNodeName, BLITP_SCENE_NODE_NAME)
     })
     it('.parentBlitpElement', () => {
       assert.equal(subscene.parentBlitpElement, scene)

@@ -11,7 +11,7 @@ import { BLITP_CANVAS_NODE_NAME } from './constants'
 const now = () => window.performance.now() / 1000
 
 /**
- * The **custom HTML `<blitp-canvas></blitp-canvas>` element** represents the *webgl* canvas,
+ * The **custom HTML `<blitpunk-canvas></blitpunk-canvas>` element** represents the *webgl* canvas,
  * which acts also as the main API entrypoint for every *blitpunk* application.
  *
  * The size of the html element should be defined by css styles (eg. `display: block; width: 100%; height: 100%`) &mdash; without
@@ -43,9 +43,9 @@ const now = () => window.performance.now() / 1000
  *   </style>
  * </head>
  * <body>
- *   <blitp-canvas alpha antialias>
+ *   <blitpunk-canvas alpha antialias>
  *     ...
- *   </blitp-canvas>
+ *   </blitpunk-canvas>
  *   ...
  */
 export default class BlitpCanvas extends HTMLElement {
@@ -85,7 +85,7 @@ export default class BlitpCanvas extends HTMLElement {
     })
 
     /**
-     * Seconds since `<blitp-canvas>` startup
+     * Seconds since `<blitpunk-canvas>` startup
      * @type {number}
      */
     this.time = 0
@@ -167,7 +167,7 @@ export default class BlitpCanvas extends HTMLElement {
   }
 
   /**
-   * Resize the canvas dom element to the same size as the `<blitp-canvas>.parentNode`
+   * Resize the canvas dom element to the same size as the `<blitpunk-canvas>.parentNode`
    */
   resize () {
     const style = window.getComputedStyle(this, null)

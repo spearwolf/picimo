@@ -12,7 +12,7 @@ import SGCanvas from '../src/scene_graph/s_g_canvas'
 
 import { BLITP_CANVAS_ELEMENT } from '../src/dom/constants'
 
-describe('<blitp-canvas />', () => {
+describe(`<${BLITP_CANVAS_ELEMENT} />`, () => {
   let blitpCanvas
 
   before(() => {
