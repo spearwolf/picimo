@@ -9,6 +9,12 @@ DOM Element API
   - [ ] `<blitp-scene />`
 
 
+Other
+-----
+
+-[ ] hierachical ResourceLibrary and TextureLibrary (for selective scene-graph-based cleanup)
+
+
 Usage Examples
 --------------
 

@@ -13,7 +13,7 @@ const spriteGroup = new SpriteGroup(new ResourceLibrary(), new TextureLibrary(),
   fragmentShader: 'simple',
   primitive: 'TRIANGLES',
   voNew: (vo) => {
-    vo.scale = 1 / 500.0
+    vo.scale = 1 / 900.0
     vo.opacity = 1
   }
 })
