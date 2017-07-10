@@ -1,10 +1,9 @@
 import 'src/blitpunk'
 
-import Mat4 from 'src/utils/mat4'
 import ResourceLibrary from 'src/core/resource_library'
-import ShaderUniformVariable from 'src/core/shader_uniform_variable'
 import SpriteGroup from 'src/core/sprite_group'
 import TextureLibrary from 'src/core/texture_library'
+import Projection from 'src/core/projection'
 
 const spriteGroup = new SpriteGroup(new ResourceLibrary(), new TextureLibrary(), {
   descriptor: 'simple',
@@ -13,7 +12,7 @@ const spriteGroup = new SpriteGroup(new ResourceLibrary(), new TextureLibrary(),
   fragmentShader: 'simple',
   primitive: 'TRIANGLES',
   voNew: (vo) => {
-    vo.scale = 1 / 900.0
+    vo.scale = 1  // / 900.0
     vo.opacity = 1
   }
 })
@@ -26,7 +25,7 @@ spriteGroup
     console.dir(atlas)
 
     const sprite = spriteGroup.createSprite(atlas.getRandomFrame())
-    sprite.setTranslate(0.25, 0.25)
+    sprite.setTranslate(190, 25)
 
     const nextRandomTexture = () => {
       const tex = atlas.getRandomFrame()
@@ -37,14 +36,22 @@ spriteGroup
     document.body.addEventListener('click', nextRandomTexture)
     document.body.addEventListener('touchstart', nextRandomTexture)
 
-    spriteGroup.createSprite(atlas.getFrame('R')).setTranslate(-0.2, -0.2)
+    spriteGroup.createSprite(atlas.getFrame('R')).setTranslate(-190, -25)
   })
 
-const viewMatrixUniform = new ShaderUniformVariable('viewMatrix', new Mat4())  // TODO set viewMatrix by <scene .. viewport />
+const projection = new Projection({ sizeFit: 'contain', desiredWidth: 600, desiredHeight: 600 })
 
 const el = document.getElementById('blitpunkCanvas')
 
+el.on('animateFrame', (canvas) => {
+  projection.update(canvas.width, canvas.height)
+
+  if (canvas.frameNo === 66) {
+    console.log(projection)
+  }
+})
+
 el.on('renderFrame', (renderer) => {
-  renderer.shaderContext.pushVar(viewMatrixUniform)
+  renderer.shaderContext.pushVar(projection.uniform)
   spriteGroup.renderFrame(renderer)
 })
