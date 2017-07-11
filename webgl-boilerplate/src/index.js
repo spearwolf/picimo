@@ -6,13 +6,13 @@ import ShaderUniformVariable from '../../src/core/shader_uniform_variable'
 import ShaderVariableBufferGroup from '../../src/core/shader_variable_buffer_group'
 import ShaderTextureGroup from '../../src/core/shader_texture_group'
 
+import Projection from '../../src/core/projection'
+
 import PowerOf2Image from '../../src/core/power_of_2_image'
 import ElementIndexArray from '../../src/core/element_index_array'
 
 import ResourceLibrary from '../../src/core/resource_library'
 import TextureLibrary from '../../src/core/texture_library'
-
-import Mat4 from '../../src/utils/mat4'
 
 import initSprites from './init_sprites'
 import initQuads from './init_quads'
@@ -29,7 +29,11 @@ window.textureLibrary = textureLibrary
 
 const timeUniform = new ShaderUniformVariable('time')
 const resolutionUniform = new ShaderUniformVariable('resolution')
-const viewMatrixUniform = new ShaderUniformVariable('viewMatrix', new Mat4())  // TODO set viewMatrix by <scene .. viewport />
+const projection = new Projection({
+  sizeFit: 'contain',
+  desiredWidth: 256,
+  desiredHeight: 512
+})
 
 const el = document.getElementById('blitpunkCanvas')
 
@@ -52,7 +56,8 @@ const prgSimple = new ShaderProgram(
 
 // ------- animate frame ----------------------------- /// // ----
 
-el.on('animateFrame', function () {
+el.on('animateFrame', function (canvas) {
+  projection.update(canvas.width, canvas.height)
   timeUniform.value = el.time
   resolutionUniform.value = [ el.width, el.height ]
 })
@@ -97,7 +102,7 @@ el.on('renderFrame', function (renderer) {
   // textureLibrary.whenLoaded('nobinger', 'tex', texUniform => {
   nobingerTextures.whenLoaded(texUniforms => {
     shaderContext.pushVar(texUniforms)
-    shaderContext.pushVar(viewMatrixUniform)
+    shaderContext.pushVar(projection.uniform)
     shaderContext.pushVar(quadsPoolAttribs)
 
     renderer.useShaderProgram(prgSimple)

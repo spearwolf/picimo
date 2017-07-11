@@ -39,7 +39,7 @@ spriteGroup
     spriteGroup.createSprite(atlas.getFrame('R')).setTranslate(-190, -25)
   })
 
-const projection = new Projection({ sizeFit: 'contain', desiredWidth: 600, desiredHeight: 600 })
+const projection = new Projection({ sizeFit: 'contain', desiredWidth: 800, desiredHeight: 800 })
 
 const el = document.getElementById('blitpunkCanvas')
 

@@ -27,7 +27,7 @@ export default class Projection {
     this.uniform.touch()
   }
 
-  update (currentWidth, currentHeight, currentPixelRatio = 1) {
+  update (currentWidth, currentHeight) {
     // TODO pixelRatio and currentPixelRatio
     if (this.sizeFit === 'fill' && this.desiredWidth > 0 && this.desiredHeight > 0) {
       this.width = this.desiredWidth
