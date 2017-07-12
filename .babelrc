@@ -7,7 +7,7 @@
                     "safari >= 10",
                     "ios_saf >= 10",
                     "firefox >= 52",
-                    "chrome >= 57"
+                    "chrome >= 58"
                 ]
             }
         }]

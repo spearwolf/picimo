@@ -22,46 +22,45 @@ export default class Projection {
     this.height = 0
   }
 
-  updateOrtho () {
-    this.uniform.value.ortho(this.width, this.height)
-    this.uniform.touch()
+  updateOrtho (width, height) {
+    if (width !== this.width || height !== this.height) {
+      this.width = width
+      this.height = height
+      this.uniform.value.ortho(width, height)
+      this.uniform.touch()
+    }
   }
 
   update (currentWidth, currentHeight) {
     // TODO pixelRatio and currentPixelRatio
     if (this.sizeFit === 'fill' && this.desiredWidth > 0 && this.desiredHeight > 0) {
-      this.width = this.desiredWidth
-      this.height = this.desiredHeight
-      this.updateOrtho()
+      this.updateOrtho(this.desiredWidth, this.desiredHeight)
     } else if ((this.sizeFit === 'cover' || this.sizeFit === 'contain') &&
       this.desiredWidth >= 0 && this.desiredHeight >= 0) {
       const currentRatio = currentHeight / currentWidth            // <1 : landscape, >1 : portrait
       const desiredRatio = this.desiredHeight / this.desiredWidth
       const isCover = this.sizeFit === 'cover'
 
-      if ((this.desiredWidth === 0 && this.desiredHeight) || currentRatio < desiredRatio) {
-        this.width = (this.desiredHeight / currentHeight) * currentWidth
-        this.height = this.desiredHeight
+      let width = this.desiredWidth
+      let height = this.desiredHeight
 
+      if ((this.desiredWidth === 0 && this.desiredHeight) || currentRatio < desiredRatio) {
+        width = (this.desiredHeight / currentHeight) * currentWidth
         if (isCover) {
-          const factor = this.desiredWidth / this.width
-          this.width *= factor
-          this.height *= factor
+          const factor = this.desiredWidth / width
+          width *= factor
+          height *= factor
         }
       } else if ((this.desiredWidth && this.desiredHeight === 0) || currentRatio > desiredRatio) {
-        this.width = this.desiredWidth
-        this.height = (this.desiredWidth / currentWidth) * currentHeight
-
+        height = (this.desiredWidth / currentWidth) * currentHeight
         if (isCover) {
-          const factor = this.desiredHeight / this.height
-          this.width *= factor
-          this.height *= factor
+          const factor = this.desiredHeight / height
+          width *= factor
+          height *= factor
         }
-      } else {
-        this.width = this.desiredWidth
-        this.height = this.desiredHeight
       }
-      this.updateOrtho()
+
+      this.updateOrtho(width, height)
     }
   }
 }

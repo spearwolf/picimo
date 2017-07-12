@@ -53,6 +53,10 @@ export default class SpriteGroup {
     return this.textureLibrary.loadTextureAtlas(url)
   }
 
+  getTextureAtlas (sampler) {
+    return this.textureLibrary.getTextureAtlas(this.textures[sampler])
+  }
+
   createSprite (texture, width, height) {
     const w = width || texture.width
     const h = height || texture.height

@@ -123,6 +123,15 @@ export default class BlitpCanvas extends HTMLElement {
       this.renderer.setClearColor(clearColor)
     }
 
+    this.onKeydown = (event) => {
+      if (event.ctrlKey && event.key === 'd') {
+        this.emit('debug', this)
+        this.renderer.emit('debug', this.renderer)
+      }
+    }
+
+    document.body.addEventListener('keydown', this.onKeydown)
+
     // setCanvasStyles(this.canvas)
     this.appendChild(this.canvas)
 
@@ -134,6 +143,7 @@ export default class BlitpCanvas extends HTMLElement {
 
   disconnectedCallback () {
     window.cancelAnimationFrame(this.rafSubscription)
+    document.body.removeEventListener('keydown', this.onKeydown)
   }
 
   attributeChangedCallback (attr, oldValue, newValue) {

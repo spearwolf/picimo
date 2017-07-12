@@ -1,7 +1,8 @@
 
 export default class TextureState {
-  constructor (texture) {
+  constructor (texture, atlas) {
     this.texture = null
+    this.atlas = null
     this.promise = Promise.resolve(texture)
       .then(tex => {
         this.texture = tex
@@ -10,6 +11,9 @@ export default class TextureState {
       .catch(err => {
         console.error('TextureState error:', err)
       })
+    Promise.resolve(atlas).then((atlas) => {
+      this.atlas = atlas
+    })
   }
 
   get isReady () {

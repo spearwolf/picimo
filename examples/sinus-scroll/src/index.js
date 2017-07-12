@@ -11,19 +11,15 @@ const spriteGroup = new SpriteGroup(new ResourceLibrary(), new TextureLibrary(),
   vertexShader: 'simple',
   fragmentShader: 'simple',
   primitive: 'TRIANGLES',
-  voNew: (vo) => {
+  voNew: (vo) => {  // TODO set this as default for 'simple'
     vo.scale = 1  // / 900.0
     vo.opacity = 1
   }
 })
 
-console.dir(spriteGroup)
-
 spriteGroup
   .loadTextureAtlas('tex', 'comic-font.json')
   .then((atlas) => {
-    console.dir(atlas)
-
     const sprite = spriteGroup.createSprite(atlas.getRandomFrame())
     sprite.setTranslate(190, 25)
 
@@ -45,13 +41,15 @@ const el = document.getElementById('blitpunkCanvas')
 
 el.on('animateFrame', (canvas) => {
   projection.update(canvas.width, canvas.height)
-
-  if (canvas.frameNo === 66) {
-    console.log(projection)
-  }
 })
 
 el.on('renderFrame', (renderer) => {
   renderer.shaderContext.pushVar(projection.uniform)
   spriteGroup.renderFrame(renderer)
+})
+
+el.on('debug', () => {
+  console.dir(spriteGroup)
+  console.dir(spriteGroup.getTextureAtlas('tex'))
+  console.dir(projection)
 })

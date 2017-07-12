@@ -17,9 +17,16 @@ export default class TextureLibrary {
 
   loadTextureAtlas (id, url = id) {
     const atlas = TextureAtlas.load(url)
-    const state = new TextureState(atlas.then((atlas) => atlas.rootTexture))
+    const state = new TextureState(atlas.then((atlas) => {
+      state.atlas = atlas
+      return atlas.rootTexture
+    }))
     this.states.set(id, state)
     return atlas
+  }
+
+  getTextureAtlas (id) {
+    return this.states.get(id).atlas
   }
 
   whenLoaded (textureId, shaderVarKey, onLoaded) {
