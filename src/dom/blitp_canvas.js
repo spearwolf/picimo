@@ -1,10 +1,8 @@
 /* global HTMLElement */
 import eventize from '@spearwolf/eventize'
 
-// import BlitpElement from './blitp_element'
 import WebGlContext from '../render/web_gl_context'
 import WebGlRenderer from '../render/web_gl_renderer'
-import SGCanvas from '../scene_graph/s_g_canvas'
 
 import { BLITP_CANVAS_NODE_NAME } from './constants'
 
@@ -112,21 +110,18 @@ export default class BlitpCanvas extends HTMLElement {
      */
     this.renderer = new WebGlRenderer(this.glx)
 
-    /**
-     * @type {SGCanvas}
-     */
-    this.sgNode = new SGCanvas()
-    this.on(this.sgNode)
-
     const clearColor = this.getAttribute('clear-color')
+
     if (clearColor) {
       this.renderer.setClearColor(clearColor)
     }
 
     this.onKeydown = (event) => {
       if (event.ctrlKey && event.key === 'd') {
+        console.group('frame', this.frameNo, 'time', this.time)
         this.emit('debug', this)
         this.renderer.emit('debug', this.renderer)
+        console.groupEnd()
       }
     }
 

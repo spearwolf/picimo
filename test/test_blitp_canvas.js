@@ -8,7 +8,6 @@ import '../src/blitpunk.js'
 import BlitpCanvas from '../src/dom/blitp_canvas.js'
 import WebGlContext from '../src/render/web_gl_context'
 import WebGlRenderer from '../src/render/web_gl_renderer'
-import SGCanvas from '../src/scene_graph/s_g_canvas'
 
 import { BLITP_CANVAS_ELEMENT } from '../src/dom/constants'
 
@@ -50,9 +49,6 @@ describe(`<${BLITP_CANVAS_ELEMENT} />`, () => {
     it('.renderer should be an instance of WebGlRenderer', () => {
       assert.instanceOf(blitpCanvas.renderer, WebGlRenderer)
     })
-    it('.sgNode should be an instance of SGCanvas', () => {
-      assert.instanceOf(blitpCanvas.sgNode, SGCanvas)
-    })
     it('requestAnimationFrame() should has been called', () => {
       assert.isTrue(window.requestAnimationFrame.calledOnce)
     })
@@ -77,14 +73,14 @@ describe(`<${BLITP_CANVAS_ELEMENT} />`, () => {
       assert.equal(frameNo + 1, blitpCanvas.frameNo)
     })
 
-    it('calls blitpCanvas.sgNode.renderFrame()', () => {
-      const spy = sinon.spy(blitpCanvas.sgNode, 'renderFrame')
-      assert.isFalse(spy.calledOnce)
+    it('triggers blitpCanvas -> renderFrame(renderer) event', () => {
+      const stub = sinon.stub()
+      blitpCanvas.on('renderFrame', stub)
+      assert.isFalse(stub.calledOnce)
       blitpCanvas.renderFrame()
-      assert.isTrue(spy.calledOnce)
-      assert.isTrue(spy.calledWith(blitpCanvas.renderer),
+      assert.isTrue(stub.calledOnce)
+      assert.isTrue(stub.calledWith(blitpCanvas.renderer),
         'called renderFrame() with .renderer as first argument')
-      spy.restore()
     })
   })
 
