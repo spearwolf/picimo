@@ -58,7 +58,6 @@
   },
   "dependencies": {
     "@spearwolf/eventize": "github:spearwolf/eventize#semver:^0.1.1",
-    "@spearwolf/jab": "github:spearwolf/jab",
     "document-register-element": "^1.5.0",
     "gl-matrix": "^2.3.2",
     "tinycolor2": "^1.4.1",
