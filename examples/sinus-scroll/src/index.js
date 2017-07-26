@@ -1,11 +1,12 @@
-import 'src/blitpunk'
+import blitpunk from 'src/blitpunk'
 
-import ResourceLibrary from 'src/core/resource_library'
 import SpriteGroup from 'src/core/sprite_group'
-import TextureLibrary from 'src/core/texture_library'
 import Projection from 'src/core/projection'
 
-const spriteGroup = new SpriteGroup(new ResourceLibrary(), new TextureLibrary(), {
+const app = blitpunk() // TODO move app creation to <blitpunk-canvas/>
+                       // and move setup from <blitpunk-canvas/> into app
+
+const spriteGroup = new SpriteGroup(app.resouces, app.textures, {
   descriptor: 'simple',
   capacity: 100,
   vertexShader: 'simple',
