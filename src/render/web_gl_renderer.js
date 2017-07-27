@@ -29,10 +29,10 @@ export default class WebGlRenderer {
     this.clearColor = tinycolor(col)
   }
 
-  renderFrame (scene) {
+  renderFrame (scene, app) {
     ++this.frameNo
     this.shaderContext.clear()
-    scene.emit('animateFrame', scene)
+    scene.emit('animateFrame', app)
     this.beginRenderFrame()
     scene.emit('renderFrame', this)
     this.endRenderFrame()

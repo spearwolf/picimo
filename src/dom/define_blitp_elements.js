@@ -1,8 +1,8 @@
 // https://github.com/WebReflection/document-register-element
 import installCE from 'document-register-element/pony'
 
-import BlitpCanvas from './blitp_canvas'
-import BlitpScene from './blitp_scene'
+import BlitpCanvas from './elements/blitp_canvas'
+import BlitpScene from './elements/blitp_scene'
 
 import {
   BLITP_CANVAS_ELEMENT,

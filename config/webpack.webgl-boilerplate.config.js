@@ -1,5 +1,6 @@
 const path = require('path')
 const baseDir = path.resolve(__dirname, '../webgl-boilerplate')
+const projectDir = path.resolve(__dirname, '..')
 
 module.exports = {
   entry: path.join(baseDir, 'src/index.js'),
@@ -20,6 +21,13 @@ module.exports = {
         { loader: 'postcss-loader' }
       ]
     }]
+  },
+  resolve: {
+    extensions: ['.js'],
+    modules: [
+      path.resolve(projectDir),
+      path.resolve(projectDir, 'node_modules')
+    ]
   },
   output: {
     filename: 'bundle.js',

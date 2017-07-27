@@ -1,9 +1,9 @@
 /* global HTMLElement */
 import eventize from '@spearwolf/eventize'
 
-import App from '../app'
+import App from '../../app'
 
-import { BLITP_CANVAS_NODE_NAME } from './constants'
+import { BLITP_CANVAS_NODE_NAME } from '../constants'
 
 /**
  * The **custom HTML `<blitpunk-canvas></blitpunk-canvas>` element** represents the *webgl* canvas,
@@ -47,8 +47,10 @@ export default class BlitpCanvas extends HTMLElement {
   /** @ignore */
   constructor (_) {
     const self = super(_)
-    this.blitpunk = new App()
-    return eventize(self)
+    eventize(self)
+    self.blitpunk = new App()
+    self.blitpunk.entity.on(self)
+    return self
   }
 
   get blitpunkNodeName () { return BLITP_CANVAS_NODE_NAME }
@@ -68,10 +70,11 @@ export default class BlitpCanvas extends HTMLElement {
   get resourceLibrary () { return this.blitpunk.resourceLibrary }
   get textureLibrary () { return this.blitpunk.textureLibrary }
 
-  renderFrame () { this.blitpunk.renderFrame() }
-
   static get observedAttributes () {
-    return ['clear-color']
+    return [
+      'clear-color',
+      'projection'
+    ]
   }
 
   onKeydown (event) {
@@ -79,7 +82,7 @@ export default class BlitpCanvas extends HTMLElement {
       console.group('<blitpunk/>', 'frame', this.frameNo)
       console.log(this)
       console.log(this.blitpunk)
-      this.emit('debug', this)
+      this.blitpunk.entity.emit('debug', this)
       this.renderer.emit('debug', this.renderer)
       console.groupEnd()
     }
@@ -121,8 +124,12 @@ export default class BlitpCanvas extends HTMLElement {
   }
 
   attributeChangedCallback (attr, oldValue, newValue) {
-    if (attr === 'clear-color') {
-      this.clearColor = newValue
+    switch (attr) {
+      case 'clear-color':
+        this.clearColor = newValue
+        break
+      case 'projection':
+        this.blitpunk.componentRegistry.createOrUpdateComponent(this.blitpunk.entity, 'projection', newValue)
     }
   }
 }

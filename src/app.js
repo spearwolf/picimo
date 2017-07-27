@@ -8,6 +8,8 @@ import TextureLibrary from './core/texture_library'
 import WebGlContext from './render/web_gl_context'
 import WebGlRenderer from './render/web_gl_renderer'
 
+import registerDefaultComponents from './dom/registerDefaultComponents'
+
 const now = () => window.performance.now() / 1000
 
 const defaultOption = (options, key, defaultValueFn) => {
@@ -62,6 +64,11 @@ class App {
     this.clearColor = getOption('clearColor')
 
     this.createGlContext = getOption('createGlContext', () => () => createGlContext(this.canvas, this.contextAttributes))
+
+    registerDefaultComponents(this.componentRegistry)
+
+    this.entity = this.entityManager.createEntity()
+    this.entity.setComponent('blitpunk', this)
   }
 
   get clearColor () {
@@ -126,7 +133,7 @@ class App {
     ++this.frameNo
     this.time = now() - this.startTime
     this.resize()
-    this.renderer.renderFrame(this.el)
+    this.renderer.renderFrame(this.entity, this)
   }
 
   /**

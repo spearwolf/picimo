@@ -3,13 +3,13 @@
 import { assert } from 'chai'
 import sinon from 'sinon'
 
-import '../src/blitpunk.js'
+import 'src/blitpunk.js'
 
-import BlitpCanvas from '../src/dom/blitp_canvas.js'
-import WebGlContext from '../src/render/web_gl_context'
-import WebGlRenderer from '../src/render/web_gl_renderer'
+import BlitpCanvas from 'src/dom/elements/blitp_canvas'
+import WebGlContext from 'src/render/web_gl_context'
+import WebGlRenderer from 'src/render/web_gl_renderer'
 
-import { BLITP_CANVAS_ELEMENT } from '../src/dom/constants'
+import { BLITP_CANVAS_ELEMENT } from 'src/dom/constants'
 
 describe(`<${BLITP_CANVAS_ELEMENT} />`, () => {
   let blitpCanvas
@@ -69,7 +69,7 @@ describe(`<${BLITP_CANVAS_ELEMENT} />`, () => {
   describe('renderFrame', () => {
     it('increases .frameNo', () => {
       const { frameNo } = blitpCanvas
-      blitpCanvas.renderFrame()
+      blitpCanvas.blitpunk.renderFrame()
       assert.equal(frameNo + 1, blitpCanvas.frameNo)
     })
 
@@ -77,7 +77,7 @@ describe(`<${BLITP_CANVAS_ELEMENT} />`, () => {
       const stub = sinon.stub()
       blitpCanvas.on('renderFrame', stub)
       assert.isFalse(stub.calledOnce)
-      blitpCanvas.renderFrame()
+      blitpCanvas.blitpunk.renderFrame()
       assert.isTrue(stub.calledOnce)
       assert.isTrue(stub.calledWith(blitpCanvas.renderer),
         'called renderFrame() with .renderer as first argument')

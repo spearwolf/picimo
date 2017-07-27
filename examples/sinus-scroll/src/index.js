@@ -1,7 +1,6 @@
 import 'src/blitpunk'
 
 import SpriteGroup from 'src/core/sprite_group'
-import Projection from 'src/core/projection'
 
 const el = document.getElementById('blitpunkCanvas')
 
@@ -35,19 +34,11 @@ spriteGroup
     spriteGroup.createSprite(atlas.getFrame('R')).setTranslate(-190, -25)
   })
 
-const projection = new Projection({ sizeFit: 'contain', desiredWidth: 800, desiredHeight: 800 })
-
-el.on('animateFrame', (canvas) => {
-  projection.update(canvas.width, canvas.height)
-})
-
 el.on('renderFrame', (renderer) => {
-  renderer.shaderContext.pushVar(projection.uniform)
   spriteGroup.renderFrame(renderer)
 })
 
 el.on('debug', () => {
   console.dir(spriteGroup)
   console.dir(spriteGroup.getTextureAtlas('tex'))
-  console.dir(projection)
 })
