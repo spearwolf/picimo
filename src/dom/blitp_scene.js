@@ -1,8 +1,8 @@
 /* global HTMLElement */
 import eventize from '@spearwolf/eventize'
 
-// import BlitpElement from './blitp_element'
 import findParentElementByName from './lib/find_parent_element_by_name'
+
 import {
   BLITP_CANVAS_NODE_NAME,
   BLITP_SCENE_NODE_NAME
@@ -15,13 +15,17 @@ export default class BlitpScene extends HTMLElement {
     return eventize(self)
   }
 
-  get blitpNodeName () {
-    return BLITP_SCENE_NODE_NAME
-  }
+  get blitpunkNodeName () { return BLITP_SCENE_NODE_NAME }
+
+  get blitpunk () { return this.blitpunkCanvas.blitpunk }
 
   /** @private */
   connectedCallback () {
-    this.parentBlitpElement = findParentElementByName(this, BLITP_SCENE_NODE_NAME, BLITP_CANVAS_NODE_NAME)
-    // this.sgNode = new SGScene({ parentNode: this.parentBlitpElement.sgNode })
+    this.blitpunkCanvas = findParentElementByName(this, BLITP_CANVAS_NODE_NAME)
+  }
+
+  /** @private */
+  disconnectedCallback () {
+    this.blitpunkCanvas = null
   }
 }

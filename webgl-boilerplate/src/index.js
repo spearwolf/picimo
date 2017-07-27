@@ -11,9 +11,6 @@ import Projection from '../../src/core/projection'
 import PowerOf2Image from '../../src/core/power_of_2_image'
 import ElementIndexArray from '../../src/core/element_index_array'
 
-import ResourceLibrary from '../../src/core/resource_library'
-import TextureLibrary from '../../src/core/texture_library'
-
 import initSprites from './init_sprites'
 import initQuads from './init_quads'
 
@@ -21,11 +18,9 @@ import initQuads from './init_quads'
 
 window.PowerOf2Image = PowerOf2Image
 
-const resourceLibrary = new ResourceLibrary()
-window.resourceLibrary = resourceLibrary
+const el = document.getElementById('blitpunkCanvas')
 
-const textureLibrary = new TextureLibrary()
-window.textureLibrary = textureLibrary
+const { resourceLibrary, textureLibrary } = el
 
 const timeUniform = new ShaderUniformVariable('time')
 const resolutionUniform = new ShaderUniformVariable('resolution')
@@ -34,8 +29,6 @@ const projection = new Projection({
   desiredWidth: 256,
   desiredHeight: 512
 })
-
-const el = document.getElementById('blitpunkCanvas')
 
 const trianglePool = initSprites()
 const trianglePoolAttribs = new ShaderVariableBufferGroup(trianglePool)

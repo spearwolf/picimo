@@ -3,11 +3,6 @@ import { assert } from 'chai'
 
 import '../src/blitpunk.js'
 
-// import {
-  // SG_CANVAS,
-  // SG_SCENE
-// } from '../src/scene_graph/constants.js'
-
 import {
   BLITP_CANVAS_ELEMENT,
   BLITP_CANVAS_NODE_NAME,
@@ -36,38 +31,35 @@ describe(`<${BLITP_SCENE_ELEMENT} />`, () => {
   })
 
   describe('canvas', () => {
-    it('.blitpNodeName', () => {
-      assert.equal(canvas.blitpNodeName, BLITP_CANVAS_NODE_NAME)
+    it('.blitpunkNodeName', () => {
+      assert.equal(canvas.blitpunkNodeName, BLITP_CANVAS_NODE_NAME)
     })
-    // it('.sgNode', () => {
-      // assert.equal(canvas.sgNode.nodeType, SG_CANVAS)
-      // assert.isTrue(canvas.sgNode.isRootNode)
-    // })
+    it('.blitpunk', () => {
+      assert(canvas.blitpunk)
+    })
   })
 
   describe('scene', () => {
-    it('.blitpNodeName', () => {
-      assert.equal(scene.blitpNodeName, BLITP_SCENE_NODE_NAME)
+    it('.blitpunkNodeName', () => {
+      assert.equal(scene.blitpunkNodeName, BLITP_SCENE_NODE_NAME)
     })
-    it('.parentBlitpElement', () => {
-      assert.equal(scene.parentBlitpElement, canvas)
+    it('.blitpunkCanvas', () => {
+      assert.equal(scene.blitpunkCanvas, canvas)
     })
-    // it('.sgNode', () => {
-      // assert.equal(scene.sgNode.nodeType, SG_SCENE)
-      // assert.equal(scene.sgNode.parentNode, canvas.sgNode)
-    // })
+    it('.blitpunk', () => {
+      assert.equal(scene.blitpunk, canvas.blitpunk)
+    })
   })
 
-  describe('sub scene', () => {
-    it('.blitpNodeName', () => {
-      assert.equal(subscene.blitpNodeName, BLITP_SCENE_NODE_NAME)
-    })
-    it('.parentBlitpElement', () => {
-      assert.equal(subscene.parentBlitpElement, scene)
-    })
-    // it('.sgNode', () => {
-      // assert.equal(subscene.sgNode.nodeType, SG_SCENE)
-      // assert.equal(subscene.sgNode.parentNode, scene.sgNode)
+  // describe('sub scene', () => {
+    // it('.blitpunkNodeName', () => {
+      // assert.equal(subscene.blitpunkNodeName, BLITP_SCENE_NODE_NAME)
     // })
-  })
+    // it('.blitpunkCanvas', () => {
+      // assert.equal(subscene.blitpunkCanvas, canvas)
+    // })
+    // it('.blitpunk', () => {
+      // assert.equal(subscene.blitpunk, canvas.blitpunk)
+    // })
+  // })
 })

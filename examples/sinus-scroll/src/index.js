@@ -1,12 +1,11 @@
-import blitpunk from 'src/blitpunk'
+import 'src/blitpunk'
 
 import SpriteGroup from 'src/core/sprite_group'
 import Projection from 'src/core/projection'
 
-const app = blitpunk() // TODO move app creation to <blitpunk-canvas/>
-                       // and move setup from <blitpunk-canvas/> into app
+const el = document.getElementById('blitpunkCanvas')
 
-const spriteGroup = new SpriteGroup(app.resouces, app.textures, {
+const spriteGroup = new SpriteGroup(el.resourceLibrary, el.textureLibrary, {
   descriptor: 'simple',
   capacity: 100,
   vertexShader: 'simple',
@@ -37,8 +36,6 @@ spriteGroup
   })
 
 const projection = new Projection({ sizeFit: 'contain', desiredWidth: 800, desiredHeight: 800 })
-
-const el = document.getElementById('blitpunkCanvas')
 
 el.on('animateFrame', (canvas) => {
   projection.update(canvas.width, canvas.height)
