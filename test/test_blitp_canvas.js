@@ -5,81 +5,80 @@ import sinon from 'sinon'
 
 import 'src/blitpunk.js'
 
-import BlitpCanvas from 'src/dom/elements/blitp_canvas'
+import Canvas from 'src/dom/elements/canvas'
 import WebGlContext from 'src/render/web_gl_context'
 import WebGlRenderer from 'src/render/web_gl_renderer'
 
-import { BLITP_CANVAS_ELEMENT } from 'src/dom/constants'
+import { BLITPUNK_CANVAS_ELEMENT } from 'src/dom/constants'
 
-describe(`<${BLITP_CANVAS_ELEMENT} />`, () => {
-  let blitpCanvas
+describe(`<${BLITPUNK_CANVAS_ELEMENT} />`, () => {
+  let blitpunkCanvas
 
   before(() => {
     sinon.spy(window, 'requestAnimationFrame')
-
-    blitpCanvas = document.createElement(BLITP_CANVAS_ELEMENT)
-    document.body.appendChild(blitpCanvas)
+    blitpunkCanvas = document.createElement(BLITPUNK_CANVAS_ELEMENT)
+    document.body.appendChild(blitpunkCanvas)
   })
 
   after(() => {
     window.requestAnimationFrame.restore()
   })
 
-  it('should be an instance of BlitpCanvas', () => {
-    assert.instanceOf(blitpCanvas, BlitpCanvas)
+  it('should be an instance of Canvas', () => {
+    assert.instanceOf(blitpunkCanvas, Canvas)
   })
 
   describe('after dom insertion', () => {
     it('should have a <canvas/> element', () => {
-      assert.isOk(blitpCanvas.canvas)
-      assert.instanceOf(blitpCanvas.canvas, HTMLCanvasElement)
+      assert.isOk(blitpunkCanvas.canvas)
+      assert.instanceOf(blitpunkCanvas.canvas, HTMLCanvasElement)
     })
     it('.time should initialize with 0', () => {
-      assert.equal(blitpCanvas.time, 0)
+      assert.equal(blitpunkCanvas.time, 0)
     })
     it('.frameNo should initialize with 0', () => {
-      assert.equal(blitpCanvas.frameNo, 0)
+      assert.equal(blitpunkCanvas.frameNo, 0)
     })
     it('.startTime should be a number', () => {
-      assert.typeOf(blitpCanvas.startTime, 'number')
+      assert.typeOf(blitpunkCanvas.startTime, 'number')
     })
     it('.glx should be an instance of WebGlContext', () => {
-      assert.instanceOf(blitpCanvas.glx, WebGlContext)
+      assert.instanceOf(blitpunkCanvas.glx, WebGlContext)
     })
     it('.renderer should be an instance of WebGlRenderer', () => {
-      assert.instanceOf(blitpCanvas.renderer, WebGlRenderer)
+      assert.instanceOf(blitpunkCanvas.renderer, WebGlRenderer)
     })
     it('requestAnimationFrame() should has been called', () => {
       assert.isTrue(window.requestAnimationFrame.calledOnce)
     })
     it('.width should be a number', () => {
-      assert.typeOf(blitpCanvas.width, 'number')
+      assert.typeOf(blitpunkCanvas.width, 'number')
     })
     it('.width should be greater than zero', () => {
-      assert.isTrue(blitpCanvas.width > 0)
+      assert.isTrue(blitpunkCanvas.width > 0)
     })
     it('.height should be a number', () => {
-      assert.typeOf(blitpCanvas.height, 'number')
+      assert.typeOf(blitpunkCanvas.height, 'number')
     })
     it('.height should be greater than zero', () => {
-      assert.isTrue(blitpCanvas.height > 0)
+      assert.isTrue(blitpunkCanvas.height > 0)
     })
   })
 
   describe('renderFrame', () => {
     it('increases .frameNo', () => {
-      const { frameNo } = blitpCanvas
-      blitpCanvas.blitpunk.renderFrame()
-      assert.equal(frameNo + 1, blitpCanvas.frameNo)
+      const { frameNo } = blitpunkCanvas
+      blitpunkCanvas.blitpunk.renderFrame()
+      assert.equal(frameNo + 1, blitpunkCanvas.frameNo)
     })
 
-    it('triggers blitpCanvas -> renderFrame(renderer) event', () => {
+    it('triggers blitpunkCanvas -> renderFrame(renderer) event', () => {
       const stub = sinon.stub()
-      blitpCanvas.on('renderFrame', stub)
+      blitpunkCanvas.on('renderFrame', stub)
       assert.isFalse(stub.calledOnce)
-      blitpCanvas.blitpunk.renderFrame()
+      blitpunkCanvas.blitpunk.renderFrame()
       assert.isTrue(stub.calledOnce)
-      assert.isTrue(stub.calledWith(blitpCanvas.renderer),
+      assert.isTrue(stub.calledWith(blitpunkCanvas.renderer),
         'called renderFrame() with .renderer as first argument')
     })
   })
@@ -95,7 +94,7 @@ describe(`<${BLITP_CANVAS_ELEMENT} />`, () => {
 
     it('should cancel raf subscription', () => {
       assert.isFalse(spy.calledOnce)
-      document.body.removeChild(blitpCanvas)
+      document.body.removeChild(blitpunkCanvas)
       assert.isTrue(spy.calledOnce)
     })
   })

@@ -14,9 +14,9 @@ DOM Element API
 ---------------
 
 - [ ] disconnectedCallback -> free (glx) resources
-  - [ ] `<blitp-canvas />`
-  - [ ] `<blitp-scene />`
-- [ ] rename all `blitp_*` classes to something without `blitp_` prefix
+  - [ ] `<blitpunk-canvas />`
+  - [ ] `<blitpunk-scene />`
+- [*] rename all `blitp_xxx` classes to something without `blitp_` prefix
 
 
 Other
@@ -35,13 +35,13 @@ Usage Examples
 ### Scrolling Font
 
 ```
-  <blitp-canvas>
-    <blitp-scene render-to-texture="my-texture">
-      <blitp-sprites id="my-sprites" texture='..' />
-    </blitp-scene>
-    <blitp-scene>
-      <blitp-picture texture="my-texture" size-fit="cover" />
-    </blitp-scene>
-  </blitp-canvas>
+  <blitpunk-canvas>
+    <blitpunk-scene render-to-texture="my-texture">
+      <blitpunk-sprites id="my-sprites" texture='..' />
+    </blitpunk-scene>
+    <blitpunk-scene>
+      <blitpunk-picture texture="my-texture" size-fit="cover" />
+    </blitpunk-scene>
+  </blitpunk-canvas>
 ```
 

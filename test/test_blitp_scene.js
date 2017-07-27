@@ -4,25 +4,25 @@ import { assert } from 'chai'
 import 'src/blitpunk.js'
 
 import {
-  BLITP_CANVAS_ELEMENT,
-  BLITP_CANVAS_NODE_NAME,
-  BLITP_SCENE_ELEMENT,
-  BLITP_SCENE_NODE_NAME
+  BLITPUNK_CANVAS_ELEMENT,
+  BLITPUNK_CANVAS_NODE_NAME,
+  BLITPUNK_SCENE_ELEMENT,
+  BLITPUNK_SCENE_NODE_NAME
 } from 'src/dom/constants'
 
-describe(`<${BLITP_SCENE_ELEMENT} />`, () => {
+describe(`<${BLITPUNK_SCENE_ELEMENT} />`, () => {
   let canvas
   let scene
   let subscene
 
   before(() => {
-    canvas = document.createElement(BLITP_CANVAS_ELEMENT)
+    canvas = document.createElement(BLITPUNK_CANVAS_ELEMENT)
     document.body.appendChild(canvas)
 
-    scene = document.createElement(BLITP_SCENE_ELEMENT)
+    scene = document.createElement(BLITPUNK_SCENE_ELEMENT)
     canvas.appendChild(scene)
 
-    subscene = document.createElement(BLITP_SCENE_ELEMENT)
+    subscene = document.createElement(BLITPUNK_SCENE_ELEMENT)
     scene.appendChild(subscene)
   })
 
@@ -32,7 +32,7 @@ describe(`<${BLITP_SCENE_ELEMENT} />`, () => {
 
   describe('canvas', () => {
     it('.blitpunkNodeName', () => {
-      assert.equal(canvas.blitpunkNodeName, BLITP_CANVAS_NODE_NAME)
+      assert.equal(canvas.blitpunkNodeName, BLITPUNK_CANVAS_NODE_NAME)
     })
     it('.blitpunk', () => {
       assert(canvas.blitpunk)
@@ -41,7 +41,7 @@ describe(`<${BLITP_SCENE_ELEMENT} />`, () => {
 
   describe('scene', () => {
     it('.blitpunkNodeName', () => {
-      assert.equal(scene.blitpunkNodeName, BLITP_SCENE_NODE_NAME)
+      assert.equal(scene.blitpunkNodeName, BLITPUNK_SCENE_NODE_NAME)
     })
     it('.blitpunkCanvas', () => {
       assert.equal(scene.blitpunkCanvas, canvas)
@@ -53,7 +53,7 @@ describe(`<${BLITP_SCENE_ELEMENT} />`, () => {
 
   // describe('sub scene', () => {
     // it('.blitpunkNodeName', () => {
-      // assert.equal(subscene.blitpunkNodeName, BLITP_SCENE_NODE_NAME)
+      // assert.equal(subscene.blitpunkNodeName, BLITPUNK_SCENE_NODE_NAME)
     // })
     // it('.blitpunkCanvas', () => {
       // assert.equal(subscene.blitpunkCanvas, canvas)

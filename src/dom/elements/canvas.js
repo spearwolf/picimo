@@ -3,7 +3,7 @@ import eventize from '@spearwolf/eventize'
 
 import App from '../../app'
 
-import { BLITP_CANVAS_NODE_NAME } from '../constants'
+import { BLITPUNK_CANVAS_NODE_NAME } from '../constants'
 
 /**
  * The **custom HTML `<blitpunk-canvas></blitpunk-canvas>` element** represents the *webgl* canvas,
@@ -43,7 +43,7 @@ import { BLITP_CANVAS_NODE_NAME } from '../constants'
  *   </blitpunk-canvas>
  *   ...
  */
-export default class BlitpCanvas extends HTMLElement {
+export default class Canvas extends HTMLElement {
   /** @ignore */
   constructor (_) {
     const self = super(_)
@@ -53,7 +53,7 @@ export default class BlitpCanvas extends HTMLElement {
     return self
   }
 
-  get blitpunkNodeName () { return BLITP_CANVAS_NODE_NAME }
+  get blitpunkNodeName () { return BLITPUNK_CANVAS_NODE_NAME }
 
   get canvas () { return this.blitpunk.canvas }
   get width () { return this.blitpunk.width }
@@ -70,6 +70,7 @@ export default class BlitpCanvas extends HTMLElement {
   get resourceLibrary () { return this.blitpunk.resourceLibrary }
   get textureLibrary () { return this.blitpunk.textureLibrary }
 
+  /** @private */
   static get observedAttributes () {
     return [
       'clear-color',
@@ -77,6 +78,7 @@ export default class BlitpCanvas extends HTMLElement {
     ]
   }
 
+  /** @private */
   onKeydown (event) {
     if (event.ctrlKey && event.key === 'd') {
       console.group('<blitpunk/>', 'frame', this.frameNo)
@@ -123,6 +125,7 @@ export default class BlitpCanvas extends HTMLElement {
     document.body.removeEventListener('keydown', this.onKeydown)
   }
 
+  /** @private */
   attributeChangedCallback (attr, oldValue, newValue) {
     switch (attr) {
       case 'clear-color':
