@@ -4,6 +4,23 @@ import SpriteGroup from 'src/core/sprite_group'
 
 const el = document.getElementById('blitpunkCanvas')
 
+const a = el.entityManager.createEntity()
+const b = el.entityManager.createEntity()
+const c = el.entityManager.createEntity()
+
+el.componentRegistry.createComponent(a, 'children')
+
+el.scene.children.appendChild(a)
+el.scene.children.appendChild(b)
+a.children.appendChild(c)
+
+a.on('debug', () => console.log('a'))
+b.on('debug', () => console.log('b'))
+c.on('debug', () => {
+  console.log('c')
+  a.children.removeChild(c)
+})
+
 const spriteGroup = new SpriteGroup(el.resourceLibrary, el.textureLibrary, {
   descriptor: 'simple',
   capacity: 100,

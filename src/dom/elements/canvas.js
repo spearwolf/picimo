@@ -70,6 +70,8 @@ export default class Canvas extends HTMLElement {
   get resourceLibrary () { return this.blitpunk.resourceLibrary }
   get textureLibrary () { return this.blitpunk.textureLibrary }
 
+  get scene () { return this.blitpunk.entity }
+
   /** @private */
   static get observedAttributes () {
     return [

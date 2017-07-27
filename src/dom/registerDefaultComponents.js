@@ -1,6 +1,7 @@
 import parseComponentData from './lib/parseComponentData'
 
 import ProjectionComponent from './components/ProjectionComponent'
+import ChildrenComponent from './components/ChildrenComponent'
 
 const createFactory = (ComponentConstructor) => ({
   create (entity, data) {
@@ -13,4 +14,5 @@ const createFactory = (ComponentConstructor) => ({
 
 export default function (registry) {
   registry.registerComponent('projection', createFactory(ProjectionComponent))
+  registry.registerComponent('children', createFactory(ChildrenComponent))
 }

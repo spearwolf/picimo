@@ -69,6 +69,7 @@ class App {
 
     this.entity = this.entityManager.createEntity()
     this.entity.setComponent('blitpunk', this)
+    this.componentRegistry.createComponent(this.entity, 'children')
   }
 
   get clearColor () {
