@@ -4,14 +4,14 @@ Blitpunk TODOs
 DOM Element API
 ---------------
 
-- [ ] `<blitpunk-texture-atlas/>`
-- [ ] `<blitpunk-sprite-group/>`
-- [ ] `<blitpunk-scene/>`
-- [ ] disconnectedCallback -> free (glx) resources
+- [ ] `<blitpunk-texture-atlas/>`
+- [ ] `<blitpunk-sprite-group/>`
+- [ ] `<blitpunk-scene/>`
+- [ ] disconnectedCallback, free (glx) resources
   - [ ] `<blitpunk-canvas/>`
   - [ ] `<blitpunk-scene/>`
-  - [ ] `<blitpunk-texture-atlas/>`
-  - [ ] `<blitpunk-sprite-group/>`
+  - [ ] `<blitpunk-texture-atlas/>`
+  - [ ] `<blitpunk-sprite-group/>`
 - [x] rename all `blitp_xxx` classes to something without `blitp_` prefix
 
 
