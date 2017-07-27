@@ -18,7 +18,7 @@ DOM Element API
 Other
 -----
 
-- [ ] hierachical ResourceLibrary and TextureLibrary (for selective scene-graph-based cleanup)
+- [ ] hierachical ResourceLibrary and TextureLibrary (for selective scene-graph-based cleanup)
 - [ ] build library using rollup (with full source maps support (compose examples/etc with webpack as before)
 - [ ] fix karma/code coverage generation!
 - [x] remove *jab* reference?
@@ -27,9 +27,9 @@ Other
 Scene Graph
 -----------
 
-- [x] remove scene\_graph/SGNode & friends
-- [x] remove dom/blitp\_element
-- [x] think about an [entity-component-system](https://aframe.io/docs/0.6.0/introduction/entity-component-system.html)
+- [x] remove scene_graph, SGNode and friends
+- [x] remove dom/blitp_element
+- [x] think about an [entity-component-system](https://aframe.io/docs/0.6.0/introduction/entity-component-system.html)
 
 
 Usage Examples
