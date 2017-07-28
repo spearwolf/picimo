@@ -14,3 +14,7 @@ blitpunk-canvas {
     user-select: none;
   }
 }
+blitpunk-scene,
+blitpunk-texture-atlas {
+  display: none;
+}

@@ -4,7 +4,7 @@ Blitpunk TODOs
 DOM Element API
 ---------------
 
-- [ ] `<blitpunk-texture-atlas/>`
+- [x] `<blitpunk-texture-atlas/>`
 - [ ] `<blitpunk-sprite-group/>`
 - [ ] `<blitpunk-scene/>`
 - [ ] disconnectedCallback, free (glx) resources

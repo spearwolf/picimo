@@ -53,6 +53,11 @@ export default class SpriteGroup {
     return this.textureLibrary.loadTextureAtlas(url)
   }
 
+  setTextureAtlas (sampler, textureId) {
+    this.textures[sampler] = textureId
+    this.shaderTextureGroup = null
+  }
+
   getTextureAtlas (sampler) {
     return this.textureLibrary.getTextureAtlas(this.textures[sampler])
   }
