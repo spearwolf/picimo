@@ -72,13 +72,25 @@ function parseImport (sourceFile, importFile, lineNo) {
     let goUpCount = 0
     while (fullImportFile.startsWith('../')) {
       fullImportFile = fullImportFile.substr(3)
+      path.pop()
       ++goUpCount
     }
     for (let i = 0; i < goUpCount; ++i) {
-      fullImportFile = `${path.pop()}/${fullImportFile}`
+      if (path.length) {
+        fullImportFile = `${path.pop()}/${fullImportFile}`
+      }
     }
   }
+  if (!fullImportFile.endsWith('.js')) {
+    if (fs.existsSync(`${fullImportFile}.js`)) {
+      fullImportFile = `${fullImportFile}.js`
+    } else if (fs.existsSync(`${fullImportFile}/index.js`)) {
+      fullImportFile = `${fullImportFile}/index.js`
+    }
+  }
+  const isLibrary = isAbsolute && !fs.existsSync(importFile)
   return {
+    isLibrary,
     isAbsolute,
     lineNo,
     sourceFile,
