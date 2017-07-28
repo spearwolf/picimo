@@ -43,7 +43,7 @@ import { BLITPUNK_CANVAS_NODE_NAME } from '../constants'
  *   </blitpunk-canvas>
  *   ...
  */
-export default class Canvas extends HTMLElement {
+export default class CanvasElement extends HTMLElement {
   /** @ignore */
   constructor (_) {
     const self = super(_)

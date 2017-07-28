@@ -29,7 +29,16 @@
         alpha
         clear-color="rgb(100, 0, 50)"
         projection="sizeFit: contain; desiredWidth: 800; desiredHeight: 800">
-        <blitpunk-texture-atlas id="atlas1" src="comic-font.json" />
+        <blitpunk-texture-atlas id="atlas1" src="comic-font.json"></blitpunk-texture-atlas>
+        <blitpunk-sprite-group
+            id="mySprites"
+            descriptor="simple"
+            capacity="10"
+            vertex-shader="simple"
+            fragment-shader="simple"
+            primitive="TRIANGLES"
+            texture-map="tex: #atlas1"
+            vo-new="scale: 1; opacity: 1"></blitpunk-sprite-group>
     </blitpunk-canvas>
     <script src="bundle.js"></script>
 </body>

@@ -69,6 +69,8 @@ class App {
 
     this.entity = this.entityManager.createEntity()
     this.entity.setComponent('blitpunk', this)
+    this.entity.setComponent('resourceLibrary', this.resourceLibrary)
+    this.entity.setComponent('textureLibrary', this.textureLibrary)
     this.componentRegistry.createComponent(this.entity, 'children')
   }
 

@@ -8,7 +8,7 @@ import {
   BLITPUNK_SCENE_NODE_NAME
 } from '../constants'
 
-export default class Scene extends HTMLElement {
+export default class SceneElement extends HTMLElement {
   /** @ignore */
   constructor (_) {
     const self = super(_)

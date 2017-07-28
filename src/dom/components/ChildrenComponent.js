@@ -9,11 +9,16 @@ export default class ChildrenComponent {
   }
 
   appendChild (entity) {
+    if (entity.hasComponent('parentEntity')) {
+      entity.destroyComponent('parentEntity')
+    }
+    entity.setComponent('parentEntity', this)
     this.on(entity)
   }
 
   removeChild (entity) {
     this.off(entity)
+    entity.destroyComponent('parentEntity')
   }
 
   disconnectedEntity (entity) {

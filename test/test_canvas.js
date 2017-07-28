@@ -5,7 +5,7 @@ import sinon from 'sinon'
 
 import 'src/blitpunk.js'
 
-import Canvas from 'src/dom/elements/canvas'
+import CanvasElement from 'src/dom/elements/CanvasElement'
 import WebGlContext from 'src/render/web_gl_context'
 import WebGlRenderer from 'src/render/web_gl_renderer'
 
@@ -24,8 +24,8 @@ describe(`<${BLITPUNK_CANVAS_ELEMENT} />`, () => {
     window.requestAnimationFrame.restore()
   })
 
-  it('should be an instance of Canvas', () => {
-    assert.instanceOf(blitpunkCanvas, Canvas)
+  it('should be an instance of CanvasElement', () => {
+    assert.instanceOf(blitpunkCanvas, CanvasElement)
   })
 
   describe('after dom insertion', () => {

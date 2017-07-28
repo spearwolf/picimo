@@ -47,15 +47,17 @@ export default class SpriteGroup {
   get usedCount () { return this.voPool.usedCount }
   get availableCount () { return this.voPool.availableCount }
 
+  setTexture (sampler, textureId) {
+    if (this.textures[sampler] !== textureId) {
+      this.textures[sampler] = textureId
+      this.shaderTextureGroup = null
+    }
+  }
+
   loadTextureAtlas (sampler, url) {
     this.textures[sampler] = url
     this.shaderTextureGroup = null
     return this.textureLibrary.loadTextureAtlas(url)
-  }
-
-  setTextureAtlas (sampler, textureId) {
-    this.textures[sampler] = textureId
-    this.shaderTextureGroup = null
   }
 
   getTextureAtlas (sampler) {

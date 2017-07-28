@@ -6,7 +6,7 @@ import findParentElementByProperty from '../lib/findParentElementByProperty.js'
 
 import { BLITPUNK_TEXTURE_ATLAS_NODE_NAME } from '../constants'
 
-export default class TextureAtlas extends HTMLElement {
+export default class TextureAtlasElement extends HTMLElement {
   /** @private */
   static get observedAttributes () {
     return [
@@ -52,7 +52,7 @@ export default class TextureAtlas extends HTMLElement {
 
   /** @private */
   debug () {
-    console.log(`<blitpunk-texture-atlas id='${this.getAttribute('id')}' />`, this.textureAtlas)
+    console.log(this.textureAtlas)
   }
 
   /** @private */
