@@ -1,13 +1,6 @@
 import 'src/blitpunk.js'
 
-const el = document.getElementById('blitpunkCanvas')
-
-const ready = Promise.all([
-  document.getElementById('mySprites').spriteGroupPromise,
-  document.getElementById('atlas1').textureAtlasPromise
-])
-
-ready.then(([spriteGroup, atlas]) => {
+function init (el, spriteGroup, atlas) {
   const sprite = spriteGroup.createSprite(atlas.getRandomFrame())
   sprite.setTranslate(190, 25)
 
@@ -25,4 +18,10 @@ ready.then(([spriteGroup, atlas]) => {
   el.on('debug', () => {
     console.dir(spriteGroup.getTextureAtlas('tex'))
   })
-})
+}
+
+Promise.all([
+  document.getElementById('blitpunk'),
+  document.getElementById('mySprites').spriteGroupPromise,
+  document.getElementById('atlas1').textureAtlasPromise
+]).then((args) => init(...args))

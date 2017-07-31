@@ -3,8 +3,8 @@ import eventize from '@spearwolf/eventize'
 
 import SpriteGroup from 'src/core/sprite_group'
 
-import findBlitpunkCanvasElement from '../lib/findBlitpunkCanvasElement.js'
-import findParentElementByProperty from '../lib/findParentElementByProperty.js'
+import connectElementEntities from '../lib/connectElementEntities.js'
+import disconnectElementEntities from '../lib/disconnectElementEntities.js'
 import parseComponentData from '../lib/parseComponentData.js'
 
 import { BLITPUNK_SPRITE_GROUP_NODE_NAME } from '../constants'
@@ -104,22 +104,23 @@ export default class SpriteGroupElement extends HTMLElement {
 
   /** @private */
   connectedCallback () {
-    this.blitpunkCanvas = findBlitpunkCanvasElement(this)
-    this.blitpunk = this.blitpunkCanvas.blitpunk
-
-    this.parentSceneElement = findParentElementByProperty(this, 'scene')
-    this.parentScene = this.parentSceneElement.scene
-
-    this.entity = this.blitpunk.entityManager.createEntity()
-    this.parentScene.children.appendChild(this.entity)
+    connectElementEntities(this)
 
     this.textureLibrary = this.parentSceneElement.textureLibrary
     this.resourceLibrary = this.parentSceneElement.resourceLibrary
 
-    this.entity.on(this)
-
     createSpriteGroup(this)
     syncTextureMap(this, this.getAttribute('texture-map'))
+  }
+
+  /** @private */
+  disconnectedCallback () {
+    // TODO disconnectedCallback <blitpunk-sprite-group/>
+    this.textureMap = null
+    this.spriteGroup = null
+    this.textureLibrary = null
+    this.resourceLibrary = null
+    disconnectElementEntities(this)
   }
 
   /** @private */
@@ -131,22 +132,5 @@ export default class SpriteGroupElement extends HTMLElement {
         createSpriteGroup(this)
       }
     }
-  }
-
-  /** @private */
-  disconnectedCallback () {
-    this.entity.off(this)
-    this.blitpunk.entityManager.destroyEntity(this.entity)
-    this.parentScene.children.removeChild(this.entity)
-    // TODO disconnectedCallback <blitpunk-sprite-group/>
-    this.textureMap = null
-    this.spriteGroup = null
-    this.textureLibrary = null
-    this.resourceLibrary = null
-    this.parentScene = null
-    this.parentSceneElement = null
-    this.entity = null
-    this.blitpunkCanvas = null
-    this.blitpunk = null
   }
 }

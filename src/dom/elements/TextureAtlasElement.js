@@ -1,8 +1,8 @@
 /* global HTMLElement */
 import eventize from '@spearwolf/eventize'
 
-import findBlitpunkCanvasElement from '../lib/findBlitpunkCanvasElement.js'
-import findParentElementByProperty from '../lib/findParentElementByProperty.js'
+import connectElementEntities from '../lib/connectElementEntities.js'
+import disconnectElementEntities from '../lib/disconnectElementEntities.js'
 
 import { BLITPUNK_TEXTURE_ATLAS_NODE_NAME } from '../constants'
 
@@ -23,17 +23,8 @@ export default class TextureAtlasElement extends HTMLElement {
   /** @type {string} */
   get blitpunkNodeName () { return BLITPUNK_TEXTURE_ATLAS_NODE_NAME }
 
-  /** @type {Canvas} */
-  get blitpunk () { return this.blitpunkCanvas.blitpunk }
-
-  /** @type {Entity} */
-  get parentScene () { return this.parentSceneElement.scene }
-
-  /** @type {TextureLibrary} */
-  get textureLibrary () { return this.parentSceneElement.textureLibrary }
-
   /** @type {string} */
-  get textureId () { return this.entity.id }
+  get textureId () { return this.entity && this.entity.id }
 
   loadTextureAtlas (src) {
     if (src && this.entity) {
@@ -57,12 +48,17 @@ export default class TextureAtlasElement extends HTMLElement {
 
   /** @private */
   connectedCallback () {
-    this.blitpunkCanvas = findBlitpunkCanvasElement(this)
-    this.entity = this.blitpunk.entityManager.createEntity()
-    this.parentSceneElement = findParentElementByProperty(this, 'scene')
-    this.parentScene.children.appendChild(this.entity)
-    this.entity.on(this)
+    connectElementEntities(this)
+    this.textureLibrary = this.parentSceneElement.textureLibrary  // TODO for every element?
     this.loadTextureAtlas(this.getAttribute('src'))
+  }
+
+  /** @private */
+  disconnectedCallback () {
+    // TODO disconnectedCallback <blitpunk-texture-atlas/>
+    this.textureAtlas = null
+    this.textureLibrary = null
+    disconnectElementEntities(this)
   }
 
   /** @private */
@@ -70,16 +66,5 @@ export default class TextureAtlasElement extends HTMLElement {
     if (attr === 'src') {
       this.loadTextureAtlas(newValue)
     }
-  }
-
-  /** @private */
-  disconnectedCallback () {
-    this.parentScene.children.removeChild(this.entity)
-    this.blitpunk.entityManager.destroyEntity(this.entity)
-    this.entity.off(this)
-    this.entity = null
-    this.parentSceneElement = null
-    this.blitpunkCanvas = null
-    this.textureAtlas = null
   }
 }
