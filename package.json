@@ -9,6 +9,9 @@
     "url": "git+https://github.com/spearwolf/blitpunk.git"
   },
   "scripts": {
+    "build": "run-p build:*",
+    "build:dev": "rollup --config config/rollup.config.dev.js",
+    "build:prod": "rollup --config config/rollup.config.prod.js && uglifyjs dist/blitpunk.js --compress --mangle >dist/blitpunk.min.js",
     "standard": "standard",
     "karma": "NODE_ENV=testing karma start config/karma.conf.js --single-run",
     "karma:watch": "NODE_ENV=testing karma start config/karma.conf.js",
@@ -51,11 +54,17 @@
     "npm-run-all": "^4.0.1",
     "postcss-import": "^10.0.0",
     "postcss-loader": "^2.0.6",
+    "rollup": "^0.45.2",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-commonjs": "^8.0.2",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-resolve": "0.0.1-predev.1",
     "sass-loader": "^6.0.6",
     "serve": "^5.2.3",
     "sinon": "^2.3.7",
     "standard": "^10.0.0",
     "style-loader": "^0.18.2",
+    "uglify-es": "^3.0.27",
     "webpack": "^3.2.0"
   },
   "dependencies": {

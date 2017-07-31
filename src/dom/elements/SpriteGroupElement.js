@@ -1,8 +1,8 @@
 /* global HTMLElement */
 import eventize from '@spearwolf/eventize'
 
-import SpriteGroup from 'src/core/sprite_group'
-import parseCssStyledProperties from 'src/utils/parseCssStyledProperties.js'
+import SpriteGroup from '../../core/sprite_group'
+import parseCssStyledProperties from '../../utils/parseCssStyledProperties.js'
 
 import connectElementEntities from '../lib/connectElementEntities.js'
 import disconnectElementEntities from '../lib/disconnectElementEntities.js'

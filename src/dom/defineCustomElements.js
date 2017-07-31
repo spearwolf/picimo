@@ -1,6 +1,3 @@
-// https://github.com/WebReflection/document-register-element
-import installCE from 'document-register-element/pony'
-
 import CanvasElement from './elements/CanvasElement.js'
 import SceneElement from './elements/SceneElement.js'
 import TextureAtlasElement from './elements/TextureAtlasElement.js'
@@ -13,7 +10,11 @@ import {
   BLITPUNK_SPRITE_GROUP_ELEMENT
 } from './constants'
 
-import './blitpunk.scss'
+// https://github.com/WebReflection/document-register-element
+import installCE from 'document-register-element/pony'
+// const installCE = require('document-register-element/pony')
+
+// TODO import './blitpunk.scss'
 
 /**
  * Define all `<blitpunk-*>` custom html elements.

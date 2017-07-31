@@ -1,4 +1,4 @@
-import parseCssStyledProperties from 'src/utils/parseCssStyledProperties.js'
+import parseCssStyledProperties from '../utils/parseCssStyledProperties.js'
 
 import ProjectionComponent from './components/ProjectionComponent'
 import ChildrenComponent from './components/ChildrenComponent'

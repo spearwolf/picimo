@@ -1,4 +1,4 @@
-import Projection from 'src/core/projection'
+import Projection from '../../core/projection'
 
 import { COMPONENT_RENDER_PRIO_PROJECTION } from '../constants'
 
