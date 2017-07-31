@@ -9,4 +9,3 @@ export default function (el) {
   el.blitpunk = null
   el.blitpunkCanvas = null
 }
-

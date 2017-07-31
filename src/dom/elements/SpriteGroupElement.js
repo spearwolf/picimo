@@ -2,10 +2,10 @@
 import eventize from '@spearwolf/eventize'
 
 import SpriteGroup from 'src/core/sprite_group'
+import parseCssStyledProperties from 'src/utils/parseCssStyledProperties.js'
 
 import connectElementEntities from '../lib/connectElementEntities.js'
 import disconnectElementEntities from '../lib/disconnectElementEntities.js'
-import parseComponentData from '../lib/parseComponentData.js'
 
 import { BLITPUNK_SPRITE_GROUP_NODE_NAME } from '../constants'
 
@@ -53,7 +53,7 @@ const createSpriteGroup = (el) => {
 const syncTextureMap = (el, data) => {
   const { spriteGroup } = el
   if (!spriteGroup) return
-  const texMap = parseComponentData(data)
+  const texMap = parseCssStyledProperties(data)
   if (!texMap || typeof texMap !== 'object') return
   el.textureMap = {}
   Object.keys(texMap).forEach((key) => {

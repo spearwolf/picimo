@@ -1,14 +1,14 @@
-import parseComponentData from './lib/parseComponentData'
+import parseCssStyledProperties from 'src/utils/parseCssStyledProperties.js'
 
 import ProjectionComponent from './components/ProjectionComponent'
 import ChildrenComponent from './components/ChildrenComponent'
 
 const createFactory = (ComponentConstructor) => ({
   create (entity, data) {
-    return new ComponentConstructor(entity, parseComponentData(data))
+    return new ComponentConstructor(entity, parseCssStyledProperties(data))
   },
   update (component, data) {
-    component.update(parseComponentData(data))
+    component.update(parseCssStyledProperties(data))
   }
 })
 
