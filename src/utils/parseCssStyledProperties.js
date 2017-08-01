@@ -1,11 +1,27 @@
+const reNumber = /^-?\d+(\.\d+)?$/
 
+// parseValue(str) expects a trimmed string!
+//
+// special transform rules:
+//
+//   (string)   => (type)
+//   ---------------------
+//   '...'      => string: ...
+//   "..."      => string: ...
+//   123        => number
+//   123.456    => number
+//   null       => object: null
+//   undefined  => undefined
+//   true       => boolean: true
+//   false      => boolean: false
+//
 function parseValue (value) {
   const len = value.length
   if (len >= 2 && value.startsWith('"') && value.endsWith('"')) {
     return value.substr(1, value.length - 2)
   } else if (len >= 2 && value.startsWith('\'') && value.endsWith('\'')) {
     return value.substr(1, value.length - 2)
-  } else if (len > 0 && value.match(/^\d+(\.\d+)?$/)) {
+  } else if (len > 0 && reNumber.exec(value)) {
     return parseFloat(value)
   } else if (value === 'null') {
     return null
@@ -30,6 +46,7 @@ function parseProperty (map, property) {
   }
 }
 
+// module.exports = function (data) {
 export default function (data) {
   if (typeof data !== 'string') return data
 
@@ -39,12 +56,12 @@ export default function (data) {
   }
 
   if (str.includes(';') || str.includes(':')) {
-    const map = {}
+    const propsMaps = {}
     const props = str.split(';')
     for (let i = 0; i < props.length; ++i) {
-      parseProperty(map, props[i].trim())
+      parseProperty(propsMaps, props[i].trim())
     }
-    return map
+    return propsMaps
   }
 
   return parseValue(str)
