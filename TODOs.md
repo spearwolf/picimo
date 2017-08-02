@@ -4,8 +4,9 @@ Blitpunk TODOs
 DOM Element API
 ---------------
 
+- [ ] extract `SpriteGroupElement->syncTextureMap()` into a `TextureMapComponent`
 - [x] `<blitpunk-texture-atlas/>`
-- [ ] `<blitpunk-sprite-group/>`
+- [x] `<blitpunk-sprite-group/>`
 - [ ] `<blitpunk-scene/>`
 - [ ] disconnectedCallback, free (glx) resources
   - [ ] `<blitpunk-canvas/>`

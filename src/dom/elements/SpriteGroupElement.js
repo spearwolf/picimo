@@ -6,6 +6,7 @@ import parseCssStyledProperties from '../../utils/parseCssStyledProperties.js'
 
 import connectElementEntities from '../lib/connectElementEntities.js'
 import disconnectElementEntities from '../lib/disconnectElementEntities.js'
+import syncComponent from '../lib/syncComponent.js'
 
 import { BLITPUNK_SPRITE_GROUP_NODE_NAME } from '../constants'
 
@@ -64,11 +65,6 @@ const syncTextureMap = (el, data) => {
   })
 }
 
-const syncComponent = (el, name, data) => {
-  if (el.blitpunk == null || data == null) return
-  el.blitpunk.componentRegistry.createOrUpdateComponent(el.entity, name, data)
-}
-
 export default class SpriteGroupElement extends HTMLElement {
   /** @private */
   static get observedAttributes () {
@@ -117,7 +113,7 @@ export default class SpriteGroupElement extends HTMLElement {
 
     createSpriteGroup(this)
     syncTextureMap(this, this.getAttribute('texture-map'))
-    syncComponent(this, 'blend-mode', this.getAttribute('blend-mode'))
+    syncComponent(this, 'blend-mode')
   }
 
   /** @private */
@@ -134,12 +130,10 @@ export default class SpriteGroupElement extends HTMLElement {
   attributeChangedCallback (attr, oldValue, newValue) {
     switch (attr) {
       case 'texture-map':
-        syncTextureMap(this, this.getAttribute(newValue))
+        syncTextureMap(this, newValue)
         break
       case 'blend-mode':
-        if (this.blitpunk) {
-          syncComponent(this, attr, newValue)
-        }
+        syncComponent(this, attr)
         break
       default:
         if (!this.spriteGroup) {
