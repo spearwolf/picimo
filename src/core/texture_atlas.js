@@ -57,6 +57,13 @@ export default class TextureAtlas {
   }
 
   /**
+   * @returns {string}
+   */
+  getRandomFrameName () {
+    return sample(Array.from(this.frameNames()))
+  }
+
+  /**
    * @returns {Array<string>}
    */
   frameNames () {

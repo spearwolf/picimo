@@ -2,7 +2,7 @@
 
 "cloud1.png":
 {
-	"frame": {"x":512,"y":229,"w":512,"h":301},
+	"frame": {"x":0,"y":465,"w":512,"h":301},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":301},
@@ -11,7 +11,7 @@
 },
 "cloud2.png":
 {
-	"frame": {"x":0,"y":1257,"w":1024,"h":470},
+	"frame": {"x":0,"y":1534,"w":1024,"h":470},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":1024,"h":470},
@@ -20,7 +20,7 @@
 },
 "cloud3.png":
 {
-	"frame": {"x":0,"y":229,"w":512,"h":250},
+	"frame": {"x":256,"y":215,"w":512,"h":250},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":250},
@@ -29,7 +29,7 @@
 },
 "cloud4.png":
 {
-	"frame": {"x":512,"y":857,"w":512,"h":400},
+	"frame": {"x":0,"y":1134,"w":512,"h":400},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":400},
@@ -38,7 +38,7 @@
 },
 "cloud5.png":
 {
-	"frame": {"x":512,"y":530,"w":512,"h":327},
+	"frame": {"x":0,"y":780,"w":512,"h":327},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":327},
@@ -47,7 +47,7 @@
 },
 "cloud6.png":
 {
-	"frame": {"x":0,"y":530,"w":512,"h":315},
+	"frame": {"x":512,"y":465,"w":512,"h":315},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":315},
@@ -56,7 +56,7 @@
 },
 "cloud7.png":
 {
-	"frame": {"x":0,"y":857,"w":512,"h":354},
+	"frame": {"x":512,"y":780,"w":512,"h":354},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":354},
@@ -65,7 +65,7 @@
 },
 "cloud8.png":
 {
-	"frame": {"x":768,"y":0,"w":256,"h":229},
+	"frame": {"x":0,"y":215,"w":256,"h":229},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":229},
@@ -74,7 +74,7 @@
 },
 "cloud9.png":
 {
-	"frame": {"x":512,"y":0,"w":256,"h":215},
+	"frame": {"x":588,"y":0,"w":256,"h":215},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":215},
@@ -83,11 +83,20 @@
 },
 "cloud10.png":
 {
-	"frame": {"x":0,"y":0,"w":512,"h":161},
+	"frame": {"x":76,"y":0,"w":512,"h":161},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":161},
 	"sourceSize": {"w":512,"h":161},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"spw-mini-logo.png":
+{
+	"frame": {"x":0,"y":0,"w":76,"h":12},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":76,"h":12},
+	"sourceSize": {"w":76,"h":12},
 	"pivot": {"x":0.5,"y":0.5}
 }},
 "meta": {
@@ -97,6 +106,6 @@
 	"format": "RGBA8888",
 	"size": {"w":1024,"h":2048},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:1b6802ac4ea9211518c0ebea1edd5c49:d936f81b6be30d403d2481cf03a193f6:e96b5453eed6fb7cc3a8e55168758fa4$"
+	"smartupdate": "$TexturePacker:SmartUpdate:c7879da5d08fd6cda9d7a2e1b276dcc6:8230fad0042b6134f352896a87ce3326:e96b5453eed6fb7cc3a8e55168758fa4$"
 }
 }
