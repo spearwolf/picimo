@@ -22,10 +22,11 @@
     </style>
   </head>
   <body>
-    <blitpunk-canvas alpha
+    <blitpunk-canvas alpha premultiplied-alpha
       id="blitpunk"
-      clear-color="rgb(100, 0, 50)"
-      projection="sizeFit: contain; desiredWidth: 800; desiredHeight: 800">
+      clear-color="rgb(100, 0, 50, 0)"
+      blend-mode="sfactor: srcAlpha; dfactor: oneMinusSrcAlpha"
+      projection="sizeFit: contain; desiredWidth: 1200; desiredHeight: 1200">
       <blitpunk-texture-atlas id="atlas1" src="comic-font.json"></blitpunk-texture-atlas>
       <blitpunk-sprite-group
         id="mySprites"

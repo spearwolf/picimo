@@ -17,9 +17,12 @@
     </style>
 </head>
 <body>
-    <blitpunk-canvas id="blitpunkCanvas" alpha antialias clear-color="#ffffff">
-        <blitpunk-scene>
-        </blitpunk-scene>
+    <blitpunk-canvas id="blitpunkCanvas"
+      alpha premultiplied-alpha antialias clear-color="#ffffff"
+      blend-mode="sfactor: srcAlpha; dfactor: oneMinusSrcAlpha"
+      >
+      <blitpunk-scene>
+      </blitpunk-scene>
     </blitpunk-canvas>
 
     <script id="vs" type="x-shader/vertex">

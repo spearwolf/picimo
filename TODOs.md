@@ -5,7 +5,10 @@ DOM Element API
 ---------------
 
 - [ ] extract `SpriteGroupElement->syncTextureMap()` into a `TextureMapComponent`
+- [ ] `<blitpunk-canvas/>` smart defaults for alpha/premultiplied-alpha
 - [x] `<blitpunk-texture-atlas/>`
+  - [ ] add hints (as properties)
+  - [ ] use name= property instead of id= for texture-map refs
 - [x] `<blitpunk-sprite-group/>`
 - [ ] `<blitpunk-scene/>`
 - [ ] disconnectedCallback, free (glx) resources

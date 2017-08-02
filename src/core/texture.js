@@ -34,7 +34,7 @@ export default class Texture {
    * @param {Object} [hints] texture hints
    * @param {boolean} [hints.flipY=false]
    * @param {boolean} [hints.repeatable=false]
-   * @param {boolean} [hints.premultiplyAlpha=false]
+   * @param {boolean} [hints.premultiplyAlpha=true]
    */
   constructor (source, width, height, x = 0, y = 0, hints = null) {
     if (source instanceof Texture) {
@@ -53,7 +53,7 @@ export default class Texture {
       this._resourceRef = new ResourceRef(this, {
         flipY: !!hints && hints.flipY === true,
         repeatable: !!hints && hints.repeatable === true,
-        premultiplyAlpha: !!hints && hints.premultiplyAlpha === true
+        premultiplyAlpha: !hints || (hints && hints.premultiplyAlpha !== true)
       })
 
       if ('origWidth' in source && 'origHeight' in source) {

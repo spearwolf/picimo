@@ -17,8 +17,8 @@ import { BLITPUNK_CANVAS_NODE_NAME } from '../constants'
  * - `depth`
  * - `stencil`
  * - `antialias`
- * - `premultipliedAlpha`
- * - `preserveDrawingBuffer`
+ * - `premultiplied-alpha`
+ * - `preserve-drawing-buffer`
  *
  * _ATTENTION:_ changing these html attributes has no effect *after* the webgl context is initialized!
  *
@@ -111,8 +111,8 @@ export default class CanvasElement extends HTMLElement {
       depth: this.hasAttribute('depth'),
       stencil: this.hasAttribute('stencil'),
       antialias: this.hasAttribute('antialias'),
-      premultipliedAlpha: this.hasAttribute('premultipliedAlpha'),
-      preserveDrawingBuffer: this.hasAttribute('preserveDrawingBuffer')
+      premultipliedAlpha: this.hasAttribute('premultiplied-alpha'),
+      preserveDrawingBuffer: this.hasAttribute('preserve-drawing-buffer')
     })
 
     this.onKeydown = this.onKeydown.bind(this)
