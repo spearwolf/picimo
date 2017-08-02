@@ -75,6 +75,7 @@ export default class CanvasElement extends HTMLElement {
   /** @private */
   static get observedAttributes () {
     return [
+      'blend-mode',
       'clear-color',
       'projection'
     ]
@@ -133,8 +134,9 @@ export default class CanvasElement extends HTMLElement {
       case 'clear-color':
         this.clearColor = newValue
         break
+      case 'blend-mode':
       case 'projection':
-        this.blitpunk.componentRegistry.createOrUpdateComponent(this.blitpunk.entity, 'projection', newValue)
+        this.blitpunk.componentRegistry.createOrUpdateComponent(this.blitpunk.entity, attr, newValue)
     }
   }
 }

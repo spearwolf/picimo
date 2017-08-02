@@ -1,11 +1,11 @@
 import Projection from '../../core/projection'
 
-import { COMPONENT_RENDER_PRIO_PROJECTION } from '../constants'
+import { COMP_PRIO_PROJECTION } from '../constants'
 
 export default class ProjectionComponent {
   constructor (entity, data) {
     this.projection = new Projection(data)
-    entity.on('*', COMPONENT_RENDER_PRIO_PROJECTION, this)
+    entity.on('*', COMP_PRIO_PROJECTION, this)
   }
 
   animateFrame (app) {

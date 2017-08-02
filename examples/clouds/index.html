@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>blitpunk boilerplate</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <style>
+      html, body {
+        height: 100%;
+      }
+      body {
+        background: linear-gradient(to bottom, #61a5dd 0%, #aeecfe 100%);
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      #blitpunk {
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <blitpunk-canvas alpha id="blitpunk"
+      projection="sizeFit: contain; desiredWidth: 1024; desiredHeight: 768">
+      <blitpunk-texture-atlas id="cloudsAtlas" src="clouds.json"></blitpunk-texture-atlas>
+      <blitpunk-sprite-group
+        id="cloudsSprites"
+        descriptor="simple"
+        capacity="50"
+        vertex-shader="simple"
+        fragment-shader="simple"
+        primitive="TRIANGLES"
+        texture-map="tex: #cloudsAtlas"
+        vo-new="scale: 1; opacity: 1"
+        blend-mode="sfactor: srcAlpha; dfactor: oneMinusSrcAlpha"
+        ></blitpunk-sprite-group>
+    </blitpunk-canvas>
+    <script src="bundle.js"></script>
+  </body>
+</html>

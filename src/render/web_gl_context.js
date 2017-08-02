@@ -19,7 +19,25 @@ export default class WebGlContext {
       this.boundTextures[i] = { TEXTURE_2D: null }
     }
 
+    this.readCurrentState()
     this.activeTexture(0) // enable first texture unit by default
+  }
+
+  /**
+   * @param {BlendMode} blendMode
+   */
+  blend (blendMode) {
+    const { gl } = this
+    if (blendMode.enable) {
+      if (!this.blendEnabled) {
+        gl.enable(gl.BLEND)
+        this.blendEnabled = true
+      }
+      gl.blendFunc(gl[blendMode.sfactor], gl[blendMode.dfactor])
+    } else if (this.blendEnabled) {
+      gl.disable(gl.BLEND)
+      this.blendEnabled = false
+    }
   }
 
   /**
@@ -61,6 +79,7 @@ export default class WebGlContext {
       gl.getParameter(gl.ELEMENT_ARRAY_BUFFER_BINDING))
 
     this.currentProgram = gl.getParameter(gl.CURRENT_PROGRAM)
+    this.blendEnabled = gl.getParameter(gl.BLEND)
   }
 
   bindBuffer (target, buffer) {

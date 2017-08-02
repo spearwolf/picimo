@@ -13,6 +13,14 @@ const autotouchBuffer = (renderer, resourceRef) => {
   }
 }
 
+const applyBlendMode = (renderer) => {
+  const blendMode = renderer.blendStack[renderer.blendStack.length - 1] || renderer.initialBlendMode
+  if (blendMode && !blendMode.isEqual(renderer.currentBlendMode)) {
+    renderer.glx.blend(blendMode)
+    renderer.currentBlendMode = blendMode
+  }
+}
+
 export default class WebGlRenderer {
   constructor (glx) {
     Object.defineProperty(this, 'glx', { value: glx })
@@ -21,12 +29,30 @@ export default class WebGlRenderer {
     this.autotouchResources = new Map()
     this.frameNo = 0
     this.clearColor = null
+    this.blendStack = []
+    this.initialBlendMode = null
+    this.currentBlendMode = null
 
     eventize(this)
   }
 
+  /**
+   * Set the framebuffer clear color.
+   * Use the *tinycolor* library for css color conversion.
+   *
+   * @param {String} col - css color definition
+   */
   setClearColor (col) {
     this.clearColor = tinycolor(col)
+  }
+
+  /**
+   * Set the initial blend mode.
+   *
+   * @param {BlendMode} blendMode
+   */
+  setInitialBlendMode (blendMode) {
+    this.initialBlendMode = blendMode
   }
 
   renderFrame (scene, app) {
@@ -60,6 +86,23 @@ export default class WebGlRenderer {
   }
 
   /**
+   * Push a new blend mode to the stack.
+   *
+   * @param {BlendMode} blendMode
+   */
+  pushBlendMode (blendMode) {
+    this.blendStack.push(blendMode)
+  }
+
+  /**
+   * Remove the current blend mode from internal stack.
+   * The initial blend mode can't be removed.
+   */
+  popBlendMode () {
+    this.blendStack.pop()
+  }
+
+  /**
    * @param {ShaderProgram} shaderProgram
    */
   useShaderProgram (shaderProgram) {
@@ -76,6 +119,8 @@ export default class WebGlRenderer {
    * @param {number} [startIndex=0]
    */
   drawArrays (primitive, count, startIndex = 0) {
+    applyBlendMode(this)
+
     const { gl } = this.glx
     gl.drawArrays(gl[primitive], startIndex, count)
   }
@@ -87,10 +132,10 @@ export default class WebGlRenderer {
    * @param {number} [offset=0]
    */
   drawIndexed (primitive, elementIndexArray, count, offset = 0) {
-    const { gl } = this.glx
-
+    applyBlendMode(this)
     this.syncBuffer(elementIndexArray).bindBuffer()
 
+    const { gl } = this.glx
     gl.drawElements(
       gl[primitive],
       count || elementIndexArray.length,

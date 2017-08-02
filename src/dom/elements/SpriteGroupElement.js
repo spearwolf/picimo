@@ -64,15 +64,21 @@ const syncTextureMap = (el, data) => {
   })
 }
 
+const syncComponent = (el, name, data) => {
+  if (el.blitpunk == null || data == null) return
+  el.blitpunk.componentRegistry.createOrUpdateComponent(el.entity, name, data)
+}
+
 export default class SpriteGroupElement extends HTMLElement {
   /** @private */
   static get observedAttributes () {
     return [
-      'texture-map',
+      'blend-mode',
       'capacity',
       'descriptor',
       'fragment-shader',
       'primitive',
+      'texture-map',
       'vertex-shader'
     ]
   }
@@ -111,6 +117,7 @@ export default class SpriteGroupElement extends HTMLElement {
 
     createSpriteGroup(this)
     syncTextureMap(this, this.getAttribute('texture-map'))
+    syncComponent(this, 'blend-mode', this.getAttribute('blend-mode'))
   }
 
   /** @private */
@@ -125,12 +132,19 @@ export default class SpriteGroupElement extends HTMLElement {
 
   /** @private */
   attributeChangedCallback (attr, oldValue, newValue) {
-    if (attr === 'texture-map') {
-      syncTextureMap(this, this.getAttribute(newValue))
-    } else {
-      if (!this.spriteGroup) {
-        createSpriteGroup(this)
-      }
+    switch (attr) {
+      case 'texture-map':
+        syncTextureMap(this, this.getAttribute(newValue))
+        break
+      case 'blend-mode':
+        if (this.blitpunk) {
+          syncComponent(this, attr, newValue)
+        }
+        break
+      default:
+        if (!this.spriteGroup) {
+          createSpriteGroup(this)
+        }
     }
   }
 }
