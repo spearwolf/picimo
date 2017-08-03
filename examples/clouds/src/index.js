@@ -1,22 +1,12 @@
 import 'src/blitpunk.js'
+import randomCloudFrame from './randomCloudFrame.js'
 
 const LOGO = 'spw-mini-logo.png'
-
-let lastCloudFrame
-
-function randomCloudFrame (atlas) {
-  let frameName
-  do {
-    frameName = atlas.getRandomFrameName()
-  } while (frameName === LOGO || frameName === lastCloudFrame)
-  lastCloudFrame = frameName
-  return atlas.getFrame(frameName)
-}
 
 function init (el, spriteGroup, atlas) {
   const spw = spriteGroup.createSprite(atlas.getFrame(LOGO))
   spw.setTranslate(-420, 370)
-  spw.setSize(76*2, 12*2)
+  spw.setSize(76 * 2, 12 * 2)
 
   const sprite = spriteGroup.createSprite(randomCloudFrame(atlas))
   sprite.setTranslate(190, 25)
