@@ -3,17 +3,22 @@
 DOM Element API
 ---------------
 
+- [ ] Render to texture ..
+  - [ ] `<blitpunk-picture/>` acts as single sprite renderer, support boilerplate example (background)
+    - [ ] support boilerplate example (background shader)
+    - [ ] support free styles buffers .. single quads, mesh, ..
+  - [ ] `<blitpunk-texture/>` acts as single texture source (similary to texture-atlas)
+  - [ ] `<blitpunk-render-to-texture/>` acts as texture source and scene
 - [ ] `<blitpunk-canvas/>` meaningful defaults for alpha/premultiplied-alpha ..
 - [ ] projection= perspective support (distance, near, far), choose sensible defaults
   - [x] main work is done :smile:
   - [ ] fix core/projection.js -> updateOrtho()
   - [ ] utils/mat4.js -> perspective()
-  - [ ] camera?
-  - [ ] pixelRatio
+  - [ ] pixelRatio support
+- [ ] transform= component .. camera?
 - [x] `<blitpunk-texture-atlas/>`
   - [ ] add hints (properties) for: premultiply, anti-alias, ..
   - [ ] use name= property instead of id= for texture-map refs
-- [x] `<blitpunk-texture/>`
 - [ ] `<blitpunk-scene/>`
 - [ ] extract `SpriteGroupElement->syncTextureMap()` into a `TextureMapComponent`
 - [ ] disconnectedCallback, free (glx) resources
@@ -28,6 +33,12 @@ DOM Element API
 Other
 -----
 
+- [ ] firefox windows support
+- [ ] edge windows support
+- [ ] chrome/chromium linux support
+- [ ] firefox linux support
+- [ ] android chrome support
+- [ ] ie11 support
 - [ ] hierachical ResourceLibrary and TextureLibrary (for selective scene-graph-based cleanup)
 - [ ] build library using rollup (with full source maps support (compose examples/etc with webpack as before)
 - [ ] fix karma/code coverage generation!
