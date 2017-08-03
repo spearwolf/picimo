@@ -8,8 +8,8 @@
         height: 100%;
       }
       body {
-        background: linear-gradient(to bottom, #61a5dd 0%, #aeecfe 100%);
-        /* background: linear-gradient(to bottom, #1a57ba 0%,#4899db 35%,#aeecfe 79%,#ffffff 100%,#ffffff 101%); */
+        /* background: linear-gradient(to bottom, #1a579a 0%, #aeecfe 100%); */
+        background: linear-gradient(to bottom, #1a579a 0%,#aeecfe 80%, #ffffff 100%);
         margin: 0;
         display: flex;
         align-items: center;
@@ -24,12 +24,12 @@
   </head>
   <body>
     <blitpunk-canvas id="blitpunk" alpha premultiplied-alpha
-      projection="sizeFit: contain; desiredWidth: 1024; desiredHeight: 768">
+      projection="sizeFit: contain; desiredWidth: 600; desiredHeight: 600">
       <blitpunk-texture-atlas id="cloudsAtlas" src="clouds.json"></blitpunk-texture-atlas>
       <blitpunk-sprite-group
         id="cloudsSprites"
         descriptor="simple"
-        capacity="50"
+        capacity="100"
         vertex-shader="simple"
         fragment-shader="simple"
         primitive="TRIANGLES"

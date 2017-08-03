@@ -19,6 +19,20 @@ export default class Mat4 {
     mat4.ortho(this.mat4, -hw, hw, -hh, hh, -hz, hz)
   }
 
+  perspective (width, height, distance = 100) {
+    // https://webglfundamentals.org/webgl/lessons/webgl-3d-perspective.html
+    // https://stackoverflow.com/questions/6653080/in-opengl-how-can-i-determine-the-bounds-of-the-view-at-a-given-depth
+    // http://glmatrix.net/docs/module-mat4.html
+    const aspect = width / height
+    const near = 0
+    const far = 2000
+    const halfHeight = height / 2.0
+    const fovy = 2 * Math.atan(halfHeight / distance)
+    mat4.perspective(this.mat4, fovy, aspect, near, far)
+    // TODO camera feature
+    mat4.translate(this.mat4, this.mat4, [0, 0, -distance])
+  }
+
   translate (x, y, z = 0) {
     mat4.translate(this.mat4, this.mat4, [x, y, z])
   }

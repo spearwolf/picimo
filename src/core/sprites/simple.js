@@ -118,6 +118,14 @@ export const description = {
       )
     },
 
+    get width () {
+      return this.x1 - this.x3
+    },
+
+    get height () {
+      return this.y0 - this.y2
+    },
+
     get rotateDegree () {
       return this.rotate * 180.0 / Math.PI
     },

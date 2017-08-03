@@ -7,14 +7,12 @@ import {
   BLITPUNK_CANVAS_ELEMENT,
   BLITPUNK_SCENE_ELEMENT,
   BLITPUNK_TEXTURE_ATLAS_ELEMENT,
-  BLITPUNK_SPRITE_GROUP_ELEMENT
-} from './constants'
+  BLITPUNK_SPRITE_GROUP_ELEMENT } from './constants'
 
 // https://github.com/WebReflection/document-register-element
 import installCE from 'document-register-element/pony'
-// const installCE = require('document-register-element/pony')
 
-// TODO import './blitpunk.scss'
+import './blitpunk.scss'
 
 /**
  * Define all `<blitpunk-*>` custom html elements.

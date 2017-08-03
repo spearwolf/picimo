@@ -27,7 +27,6 @@ export default class WebGlRenderer {
 
     this.shaderContext = new ShaderContext()
     this.autotouchResources = new Map()
-    this.frameNo = 0
     this.clearColor = null
     this.blendStack = []
     this.initialBlendMode = null
@@ -56,11 +55,10 @@ export default class WebGlRenderer {
   }
 
   renderFrame (scene, app) {
-    ++this.frameNo
     this.shaderContext.clear()
     scene.emit('animateFrame', app)
     this.beginRenderFrame()
-    scene.emit('renderFrame', this)
+    scene.emit('renderFrame', this, app)
     this.endRenderFrame()
   }
 

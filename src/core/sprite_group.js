@@ -65,11 +65,13 @@ export default class SpriteGroup {
   }
 
   createSprite (texture, width, height) {
-    const w = width || texture.width
-    const h = height || texture.height
     const vo = this.voPool.alloc(1)
-    vo.setSize(w, h)
-    vo.setTexCoordsByTexture(texture)
+    if (texture != null) {
+      const w = width || texture.width
+      const h = height || texture.height
+      vo.setSize(w, h)
+      vo.setTexCoordsByTexture(texture)
+    }
     return vo
   }
 

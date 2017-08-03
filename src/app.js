@@ -55,6 +55,15 @@ class App {
      */
     this.time = getOption('time', 0)
 
+    /** @private */
+    this.lastFrameTime = 0
+
+    /**
+     * Seconds since last frame
+     * @type {number}
+     */
+    this.timeFrameOffset = 0
+
     /**
      * Frame counter since application startup
      * @type {number}
@@ -135,6 +144,10 @@ class App {
   renderFrame () {
     ++this.frameNo
     this.time = now() - this.startTime
+    if (this.lastFrameTime) {
+      this.timeFrameOffset = this.time - this.lastFrameTime
+    }
+    this.lastFrameTime = this.time
     this.resize()
     this.renderer.renderFrame(this.entity, this)
   }

@@ -4,18 +4,24 @@ Blitpunk TODOs
 DOM Element API
 ---------------
 
-- [ ] extract `SpriteGroupElement->syncTextureMap()` into a `TextureMapComponent`
-- [ ] `<blitpunk-canvas/>` smart defaults for alpha/premultiplied-alpha
+- [ ] `<blitpunk-canvas/>` meaningful defaults for alpha/premultiplied-alpha ..
+- [ ] projection= perspective support (distance, near, far), choose sensible defaults
+  - [ ] fix core/projection.js -> updateOrtho()
+  - [ ] utils/mat4.js -> perspective()
+  - [ ] camera?
+  - [ ] pixelRatio
 - [x] `<blitpunk-texture-atlas/>`
-  - [ ] add hints (as properties)
+  - [ ] add hints (properties) for: premultiply, anti-alias, ..
   - [ ] use name= property instead of id= for texture-map refs
-- [x] `<blitpunk-sprite-group/>`
+- [x] `<blitpunk-texture/>`
 - [ ] `<blitpunk-scene/>`
+- [ ] extract `SpriteGroupElement->syncTextureMap()` into a `TextureMapComponent`
 - [ ] disconnectedCallback, free (glx) resources
   - [ ] `<blitpunk-canvas/>`
   - [ ] `<blitpunk-scene/>`
   - [ ] `<blitpunk-texture-atlas/>`
   - [ ] `<blitpunk-sprite-group/>`
+- [x] `<blitpunk-sprite-group/>`
 - [x] rename all `blitp_xxx` classes to something without `blitp_` prefix
 
 
@@ -23,13 +29,13 @@ Other
 -----
 
 - [ ] hierachical ResourceLibrary and TextureLibrary (for selective scene-graph-based cleanup)
-- [ ] build library using rollup (with full source maps support (compose examples/etc with webpack as before)
+- [o] build library using rollup (with full source maps support (compose examples/etc with webpack as before)
 - [ ] fix karma/code coverage generation!
 - [x] remove *jab* reference?
 
 
-Scene Graph
------------
+Scene Graph (obsolete)
+----------------------
 
 - [x] remove scene_graph, SGNode and friends
 - [x] remove dom/blitp_element

@@ -26,7 +26,9 @@ export default class Projection {
     if (width !== this.width || height !== this.height) {
       this.width = width
       this.height = height
-      this.uniform.value.ortho(width, height)
+      // this.uniform.value.ortho(width, height)
+      // TODO enable perspective with distance
+      this.uniform.value.perspective(width, height, 100)
       this.uniform.touch()
     }
   }
