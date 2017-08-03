@@ -1,11 +1,11 @@
-Blitpunk TODOs
-==============
+# &lt;blitpunk/&gt; Backlog
 
 DOM Element API
 ---------------
 
 - [ ] `<blitpunk-canvas/>` meaningful defaults for alpha/premultiplied-alpha ..
 - [ ] projection= perspective support (distance, near, far), choose sensible defaults
+  - [x] main work is done :smile:
   - [ ] fix core/projection.js -> updateOrtho()
   - [ ] utils/mat4.js -> perspective()
   - [ ] camera?
@@ -29,7 +29,7 @@ Other
 -----
 
 - [ ] hierachical ResourceLibrary and TextureLibrary (for selective scene-graph-based cleanup)
-- [o] build library using rollup (with full source maps support (compose examples/etc with webpack as before)
+- [ ] build library using rollup (with full source maps support (compose examples/etc with webpack as before)
 - [ ] fix karma/code coverage generation!
 - [x] remove *jab* reference?
 
@@ -46,6 +46,8 @@ Usage Examples
 --------------
 
 ### Scrolling Font
+
+(example is _partially outdated_, please look into [examples/](examples/))
 
 ```html
   <blitpunk-canvas>
