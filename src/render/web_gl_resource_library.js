@@ -90,7 +90,8 @@ export default class WebGlResourceLibrary {
         texRef.resource.imgEl,
         texRef.hints.flipY,
         texRef.hints.repeatable,
-        texRef.hints.premultiplyAlpha
+        texRef.hints.premultiplyAlpha,
+        texRef.hints.pixelate
       )
       // create ResourceRef
       glTextureRef = new ResourceRef(glTex, { id: texRef.id, serial: 0 })

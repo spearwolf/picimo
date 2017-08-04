@@ -20,7 +20,7 @@ export default class TextureAtlasSpec {
     return this.meta.image
   }
 
-  createTextureAtlas (image = null) {
+  createTextureAtlas (image = null, textureHints = undefined) {
     return (
       Promise.resolve(image)
       .then(image => {
@@ -40,7 +40,7 @@ export default class TextureAtlasSpec {
         }
       })
       .then(image => {
-        const rootTexture = new Texture(image)
+        const rootTexture = new Texture(image, undefined, undefined, 0, 0, textureHints)
         const atlas = new TextureAtlas(rootTexture, this)
         for (let name of Object.keys(this.frames)) {
           const { frame } = this.frames[name]

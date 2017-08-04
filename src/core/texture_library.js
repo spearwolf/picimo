@@ -15,8 +15,8 @@ export default class TextureLibrary {
     return state.promise
   }
 
-  loadTextureAtlas (id, url = id) {
-    const atlas = TextureAtlas.load(url)
+  loadTextureAtlas (id, url = id, textureHints = undefined) {
+    const atlas = TextureAtlas.load(url, null, null, textureHints)
     const state = new TextureState(atlas.then((atlas) => {
       state.atlas = atlas
       return atlas.rootTexture

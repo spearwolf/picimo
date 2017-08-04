@@ -77,7 +77,7 @@ export default class TextureAtlas {
    * @param {string|function|PowerOf2Image|HTMLImageElement|HTMLCanvasElement} [image=null] - per default the image will be loaded from `meta.image` url from the *texture atlas spec*
    * @returns {Promise<TextureAtlas>}
    */
-  static load (url, fetchOptions = null, image = null) {
-    return TextureAtlasSpec.load(url, fetchOptions || {}).then(atlasSpec => atlasSpec.createTextureAtlas(image || atlasSpec.imageUrl))
+  static load (url, fetchOptions = null, image = null, textureHints = undefined) {
+    return TextureAtlasSpec.load(url, fetchOptions || {}).then(atlasSpec => atlasSpec.createTextureAtlas(image || atlasSpec.imageUrl, textureHints))
   }
 }

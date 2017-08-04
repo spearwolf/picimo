@@ -17,7 +17,7 @@ DOM Element API
   - [ ] pixelRatio support
 - [ ] transform= component .. camera?
 - [x] `<blitpunk-texture-atlas/>`
-  - [ ] add hints (properties) for: premultiply, anti-alias, ..
+  - [x] add hints (properties) for: premultiply-alpha, pixelate (nearest or linear), repeatable, flip-y
   - [ ] use name= property instead of id= for texture-map refs
 - [ ] `<blitpunk-scene/>`
 - [ ] extract `SpriteGroupElement->syncTextureMap()` into a `TextureMapComponent`

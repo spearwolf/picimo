@@ -1,6 +1,9 @@
 import PowerOf2Image from './power_of_2_image'
 import ResourceRef from '../utils/resource_ref'
 
+const getOption = (options, key, defaultValue) => options != null
+  ? (options[key] !== undefined ? options[key] : defaultValue) : defaultValue
+
 /**
  * Represents texture coordinates and holds a reference to a `<img>` or `<canvas>` element.
  * Textures can form hierachical structures.
@@ -36,7 +39,7 @@ export default class Texture {
    * @param {boolean} [hints.repeatable=false]
    * @param {boolean} [hints.premultiplyAlpha=true]
    */
-  constructor (source, width, height, x = 0, y = 0, hints = null) {
+  constructor (source, width, height, x = 0, y = 0, hints = undefined) {
     if (source instanceof Texture) {
       /**
        * @type {Texture}
@@ -51,9 +54,10 @@ export default class Texture {
       this.parent = null
 
       this._resourceRef = new ResourceRef(this, {
-        flipY: !!hints && hints.flipY === true,
-        repeatable: !!hints && hints.repeatable === true,
-        premultiplyAlpha: !hints || (hints && hints.premultiplyAlpha !== true)
+        flipY: getOption(hints, 'flipY', false),
+        repeatable: getOption(hints, 'repeatable', false),
+        premultiplyAlpha: getOption(hints, 'premultiplyAlpha', true),
+        pixelate: getOption(hints, 'pixelate', false)
       })
 
       if ('origWidth' in source && 'origHeight' in source) {

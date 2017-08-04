@@ -3,8 +3,16 @@ import eventize from '@spearwolf/eventize'
 
 import connectElementEntities from '../lib/connectElementEntities.js'
 import disconnectElementEntities from '../lib/disconnectElementEntities.js'
+import readBooleanAttribute from '../lib/readBooleanAttribute.js'
 
 import { BLITPUNK_TEXTURE_ATLAS_NODE_NAME } from '../constants'
+
+const createTextureHints = (el) => ({
+  flipY: readBooleanAttribute(el, 'flip-y', false),
+  repeatable: readBooleanAttribute(el, 'repeatable', false),
+  premultiplyAlpha: readBooleanAttribute(el, 'premultiply-alpha', true),
+  pixelate: readBooleanAttribute(el, 'pixelate', false)
+})
 
 export default class TextureAtlasElement extends HTMLElement {
   /** @private */
@@ -30,8 +38,9 @@ export default class TextureAtlasElement extends HTMLElement {
     if (src && this.entity) {
       if (this.prevUrl !== src) {
         this.prevUrl = src
+        this.textureHints = createTextureHints(this)
         this.textureAtlasPromise = this.textureLibrary
-          .loadTextureAtlas(this.textureId, src)
+          .loadTextureAtlas(this.textureId, src, this.textureHints)
           .then((atlas) => {
             this.textureAtlas = atlas
             return atlas

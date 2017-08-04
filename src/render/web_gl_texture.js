@@ -6,14 +6,16 @@ export default class WebGlTexture {
    * @param {boolean} [flipY=false]
    * @param {boolean} [repeatable=false]
    * @param {boolean} [premultiplyAlpha=false]
+   * @param {boolean} [pixelate=false]
    */
-  constructor (glx, imgEl, flipY = false, repeatable = false, premultiplyAlpha = false) {
+  constructor (glx, imgEl, flipY = false, repeatable = false, premultiplyAlpha = false, pixelate = false) {
     this.glx = glx
     this.imgEl = imgEl
 
     this.flipY = flipY
     this.repeatable = repeatable
     this.premultiplyAlpha = premultiplyAlpha
+    this.pixelate = pixelate
 
     this.isInitialized = false
     this.glTexObj = glx.gl.createTexture()
@@ -50,8 +52,9 @@ function initialize (tex) {
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, wrap)
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, wrap)
 
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST)
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST)
+  const filter = tex.pixelate ? gl.NEAREST : gl.LINEAR
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, filter)
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, filter)
 
   gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, tex.imgEl.width, tex.imgEl.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, null)
 }
