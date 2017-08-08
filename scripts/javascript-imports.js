@@ -5,22 +5,41 @@ const program = require('commander')
 const { execSync } = require('child_process')
 
 program
-  .version('0.1.1')
-  .option('-r, --raw', 'Show raw import statements')
+  .version('0.2.0')
+  .option('-R, --raw', 'Show raw import statements')
   .option('-0, --zero', 'Show the full list of all imports')
+  .option('-J, --json', 'Json output')
   .parse(process.argv)
 
-const RAW = program.raw
-const ZERO = program.zero
+const RAW = program.raw && !program.json
+const ZERO = program.zero && !program.json
+const JSON_OUTPUT = program.json
 
 const filesList = execSync('./source-files.sh', { cwd: __dirname, encoding: 'utf-8' }).split('\n')
+
+const jsonOut = {
+  sourceFiles: [],
+  sources: {}
+}
 
 filesList.forEach((filename) => {
   if (!filename) return
 
+  // step-0) load source file
+
   const lines = fs.readFileSync(filename, 'utf-8').split('\n')
   const imports = []
   let isImport = false
+
+  jsonOut.sourceFiles.push(filename)
+
+  const addImport = (sourceFile, importFile, lineNo) => {
+    const imp = parseImport(sourceFile, importFile, lineNo)
+    imports.push(imp)
+    jsonOut.sources[sourceFile] = imp
+  }
+
+  // step-1) parse source file - extract all import statements
 
   lines.forEach((line, idx) => {
     if (!isImport) {
@@ -29,7 +48,8 @@ filesList.forEach((filename) => {
         const m = line.match(/import(\s+.+from)?\s+'([^']+)'[\s;]*$/)
         if (m) {
           if (RAW) console.log(line)
-          imports.push(parseImport(filename, m[m.length - 1], idx))
+          // imports.push(parseImport(filename, m[m.length - 1], idx))
+          addImport(filename, m[m.length - 1], idx)
         } else if (tLine.match(/import\s+[^{]*{\s*$/)) {
           if (RAW) console.log(line)
           isImport = true
@@ -40,12 +60,15 @@ filesList.forEach((filename) => {
       const m = line.match(/^[^}]*\}\s+from\s+'([^']+)'[\s;]*$/)
       if (m) {
         isImport = false
-        imports.push(parseImport(filename, m[m.length - 1], idx))
+        // imports.push(parseImport(filename, m[m.length - 1], idx))
+        addImport(filename, m[m.length - 1], idx)
       }
     }
   })
 
-  if (!RAW) {
+  // step-2-a) show full imports info as human readable text (for current source file)
+
+  if (!RAW && !JSON_OUTPUT) {
     if (imports.length) {
       if (ZERO) {
         imports.forEach(im => console.log(im.importFile))
@@ -59,6 +82,16 @@ filesList.forEach((filename) => {
     }
   }
 })
+
+// step-2-b) show json output
+
+if (JSON_OUTPUT) {
+  console.log(JSON.stringify(jsonOut, null, 2))
+}
+
+// the end.  o==)----- --
+
+// appendix) helpers --------------------------------------------------------------
 
 function parseImport (sourceFile, importFile, lineNo) {
   let fullImportFile = importFile
