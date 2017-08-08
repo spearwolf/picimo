@@ -8,7 +8,7 @@ import connectElementEntities from '../lib/connectElementEntities.js'
 import disconnectElementEntities from '../lib/disconnectElementEntities.js'
 import syncComponent from '../lib/syncComponent.js'
 
-import { BLITPUNK_SPRITE_GROUP_NODE_NAME } from '../constants'
+import { NODE_NAME_SPRITE_GROUP } from '../constants'
 
 const isNonEmptyString = (str) => typeof str === 'string' && str.length > 0
 const isPositiveNumber = (num) => typeof num === 'number' && num > 0
@@ -89,7 +89,7 @@ export default class SpriteGroupElement extends HTMLElement {
   }
 
   /** @type {string} */
-  get blitpunkNodeName () { return BLITPUNK_SPRITE_GROUP_NODE_NAME }
+  get blitpunkNodeName () { return NODE_NAME_SPRITE_GROUP }
 
   /** @private */
   renderFrame (renderer) {

@@ -3,7 +3,7 @@ import eventize from '@spearwolf/eventize'
 
 import App from '../../app'
 
-import { BLITPUNK_CANVAS_NODE_NAME } from '../constants'
+import { NODE_NAME_CANVAS } from '../constants'
 
 /**
  * The **custom HTML `<blitpunk-canvas></blitpunk-canvas>` element** represents the *webgl* canvas,
@@ -53,7 +53,7 @@ export default class CanvasElement extends HTMLElement {
     return self
   }
 
-  get blitpunkNodeName () { return BLITPUNK_CANVAS_NODE_NAME }
+  get blitpunkNodeName () { return NODE_NAME_CANVAS }
 
   get canvas () { return this.blitpunk.canvas }
   get width () { return this.blitpunk.width }

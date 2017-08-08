@@ -9,14 +9,14 @@ import CanvasElement from 'src/dom/elements/CanvasElement'
 import WebGlContext from 'src/render/web_gl_context'
 import WebGlRenderer from 'src/render/web_gl_renderer'
 
-import { BLITPUNK_CANVAS_ELEMENT } from 'src/dom/constants'
+import { DOM_ELEM_CANVAS } from 'src/dom/constants'
 
-describe(`<${BLITPUNK_CANVAS_ELEMENT} />`, () => {
+describe(`<${DOM_ELEM_CANVAS} />`, () => {
   let blitpunkCanvas
 
   before(() => {
     sinon.spy(window, 'requestAnimationFrame')
-    blitpunkCanvas = document.createElement(BLITPUNK_CANVAS_ELEMENT)
+    blitpunkCanvas = document.createElement(DOM_ELEM_CANVAS)
     document.body.appendChild(blitpunkCanvas)
   })
 

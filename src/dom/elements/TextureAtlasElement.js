@@ -5,7 +5,7 @@ import connectElementEntities from '../lib/connectElementEntities.js'
 import disconnectElementEntities from '../lib/disconnectElementEntities.js'
 import readBooleanAttribute from '../lib/readBooleanAttribute.js'
 
-import { BLITPUNK_TEXTURE_ATLAS_NODE_NAME } from '../constants'
+import { NODE_NAME_TEXTURE_ATLAS } from '../constants'
 
 const createTextureHints = (el) => ({
   flipY: readBooleanAttribute(el, 'flip-y', false),
@@ -29,7 +29,7 @@ export default class TextureAtlasElement extends HTMLElement {
   }
 
   /** @type {string} */
-  get blitpunkNodeName () { return BLITPUNK_TEXTURE_ATLAS_NODE_NAME }
+  get blitpunkNodeName () { return NODE_NAME_TEXTURE_ATLAS }
 
   /** @type {string} */
   get textureId () { return this.entity && this.entity.id }

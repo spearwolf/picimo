@@ -4,8 +4,8 @@ import eventize from '@spearwolf/eventize'
 import findParentElementByName from '../lib/find_parent_element_by_name'
 
 import {
-  BLITPUNK_CANVAS_NODE_NAME,
-  BLITPUNK_SCENE_NODE_NAME
+  NODE_NAME_CANVAS,
+  NODE_NAME_SCENE
 } from '../constants'
 
 export default class SceneElement extends HTMLElement {
@@ -15,13 +15,13 @@ export default class SceneElement extends HTMLElement {
     return eventize(self)
   }
 
-  get blitpunkNodeName () { return BLITPUNK_SCENE_NODE_NAME }
+  get blitpunkNodeName () { return NODE_NAME_SCENE }
 
   get blitpunk () { return this.blitpunkCanvas.blitpunk }
 
   /** @private */
   connectedCallback () {
-    this.blitpunkCanvas = findParentElementByName(this, BLITPUNK_CANVAS_NODE_NAME)
+    this.blitpunkCanvas = findParentElementByName(this, NODE_NAME_CANVAS)
   }
 
   /** @private */
