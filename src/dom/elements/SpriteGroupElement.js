@@ -1,17 +1,17 @@
 /* global HTMLElement */
 import eventize from '@spearwolf/eventize'
 
-import SpriteGroup from '../../core/sprite_group'
-import parseCssStyledProperties from '../../utils/parseCssStyledProperties.js'
+import SpriteGroup from 'src/core/sprite_group'
+
+import parseCssStyledProperties from 'src/utils/parseCssStyledProperties.js'
+import isNonEmptyString from 'src/utils/isNonEmptyString.js'
+import isNumberGreaterThanZero from 'src/utils/isNumberGreaterThanZero.js'
 
 import connectElementEntities from '../lib/connectElementEntities.js'
 import disconnectElementEntities from '../lib/disconnectElementEntities.js'
 import syncComponent from '../lib/syncComponent.js'
 
 import { NODE_NAME_SPRITE_GROUP } from '../constants'
-
-const isNonEmptyString = (str) => typeof str === 'string' && str.length > 0
-const isPositiveNumber = (num) => typeof num === 'number' && num > 0
 
 const createConfig = ({ descriptor, capacity, vertexShader, fragmentShader, primitive }) => ({
   descriptor,
@@ -38,7 +38,7 @@ const isValidConfig = (config) => (
   isNonEmptyString(config.vertexShader) &&
   isNonEmptyString(config.fragmentShader) &&
   isNonEmptyString(config.primitive) &&
-  isPositiveNumber(config.capacity)
+  isNumberGreaterThanZero(config.capacity)
 )
 
 const createSpriteGroup = (el) => {
