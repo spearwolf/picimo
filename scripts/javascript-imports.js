@@ -5,7 +5,7 @@ const program = require('commander')
 const { execSync } = require('child_process')
 
 program
-  .version('0.1.0')
+  .version('0.1.1')
   .option('-r, --raw', 'Show raw import statements')
   .option('-0, --zero', 'Show the full list of all imports')
   .parse(process.argv)
@@ -68,16 +68,15 @@ function parseImport (sourceFile, importFile, lineNo) {
     path.pop()
     if (importFile.startsWith('./')) {
       fullImportFile = `${path.join('/')}${importFile.substr(1)}`
-    }
-    let goUpCount = 0
-    while (fullImportFile.startsWith('../')) {
-      fullImportFile = fullImportFile.substr(3)
-      path.pop()
-      ++goUpCount
-    }
-    for (let i = 0; i < goUpCount; ++i) {
-      if (path.length) {
-        fullImportFile = `${path.pop()}/${fullImportFile}`
+    } else {
+      if (fullImportFile.startsWith('../')) {
+        do {
+          fullImportFile = fullImportFile.substr(3)
+          path.pop()
+        } while (fullImportFile.startsWith('../'))
+        if (path.length) {
+          fullImportFile = `${path.join('/')}/${fullImportFile}`
+        }
       }
     }
   }
