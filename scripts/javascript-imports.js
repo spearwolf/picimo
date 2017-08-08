@@ -3,25 +3,47 @@ const fs = require('fs')
 const colors = require('colors')
 const program = require('commander')
 const { execSync } = require('child_process')
+const _ = require('lodash')
 
 program
-  .version('0.2.0')
-  .usage('[options] [<search>]')
-  .option('-R, --raw', 'Show raw import statements')
-  .option('-0, --zero', 'Show the full list of all imported source files')
+  .version('0.2.1')
+  .usage('[<options>...] [<search>]')
+  .option('--raw', 'Show raw import statements from all source files')
+  .option('-0, --zero', 'Show the full list of sources referenced by all imports')
+  .option('-N, --not-referenced', 'Show list of sources which are not referenced by imports')
+  .option('-R, --references', 'Show for source files and their references, optionally filter source files by <search>')
   .option('-J, --json', 'Json output')
   .parse(process.argv)
 
-const RAW = program.raw && !program.json
-const ZERO = program.zero && !program.json
-const JSON_OUTPUT = program.json
-const SEARCH = !JSON_OUTPUT && !RAW && program.args[0]
+const NOT_REFERENCED = program.notReferenced
+const REFERENCES = program.references
+const SEARCH = program.args[0]
+const SHOW_JSON = program.json
+const SHOW_RAW = program.raw
+const SHOW_ZERO = program.zero
+
+let flagsUsedNo = 0
+if (NOT_REFERENCED) ++flagsUsedNo
+if (REFERENCES) ++flagsUsedNo
+if (SEARCH) ++flagsUsedNo
+if (SHOW_JSON) ++flagsUsedNo
+if (SHOW_RAW) ++flagsUsedNo
+if (SHOW_ZERO) ++flagsUsedNo
+
+if (flagsUsedNo > 1 && !(flagsUsedNo === 2 && SEARCH && REFERENCES)) {
+  console.log('Error: the options -R, -O, -J, -N and --raw can\'t be used together.')
+  console.log('use -h (or --help) for details.')
+  process.exit(1)
+}
+
+const SHOW_DEFAULT_OUTPUT = flagsUsedNo === 0
 
 const filesList = execSync('./source-files.sh', { cwd: __dirname, encoding: 'utf-8' }).split('\n')
 
 const jsonOut = {
   sourceFiles: [],
-  sources: {}
+  sources: {},
+  imports: {}
 }
 
 filesList.forEach((filename) => {
@@ -36,9 +58,13 @@ filesList.forEach((filename) => {
   jsonOut.sourceFiles.push(filename)
 
   const addImport = (sourceFile, importFile, lineNo) => {
-    const imp = parseImport(sourceFile, importFile, lineNo)
-    imports.push(imp)
-    jsonOut.sources[sourceFile] = imp
+    const im = parseImport(sourceFile, importFile, lineNo)
+    imports.push(im)
+    jsonOut.sources[sourceFile] = im
+    if (!jsonOut.imports[im.fullImportFile]) {
+      jsonOut.imports[im.fullImportFile] = []
+    }
+    jsonOut.imports[im.fullImportFile].push(sourceFile)
   }
 
   // step-1) parse source file - extract all import statements
@@ -49,20 +75,18 @@ filesList.forEach((filename) => {
       if (tLine.startsWith('import')) {
         const m = line.match(/import(\s+.+from)?\s+'([^']+)'[\s;]*$/)
         if (m) {
-          if (RAW) console.log(line)
-          // imports.push(parseImport(filename, m[m.length - 1], idx))
+          if (SHOW_RAW) console.log(line)
           addImport(filename, m[m.length - 1], idx)
         } else if (tLine.match(/import\s+[^{]*{\s*$/)) {
-          if (RAW) console.log(line)
+          if (SHOW_RAW) console.log(line)
           isImport = true
         }
       }
     } else {
-      if (RAW) console.log(line)
+      if (SHOW_RAW) console.log(line)
       const m = line.match(/^[^}]*\}\s+from\s+'([^']+)'[\s;]*$/)
       if (m) {
         isImport = false
-        // imports.push(parseImport(filename, m[m.length - 1], idx))
         addImport(filename, m[m.length - 1], idx)
       }
     }
@@ -70,10 +94,10 @@ filesList.forEach((filename) => {
 
   // step-2-a) show full imports info as human readable text (for current source file)
 
-  if (SEARCH || (!RAW && !JSON_OUTPUT)) {
+  if ((SEARCH && !REFERENCES) || SHOW_ZERO || SHOW_DEFAULT_OUTPUT) {
     if (imports.length) {
       if (!SEARCH) {
-        if (ZERO) {
+        if (SHOW_ZERO) {
           imports.forEach(im => console.log(im.importFile))
         } else {
           console.log()
@@ -87,7 +111,7 @@ filesList.forEach((filename) => {
         imports.forEach(im => {
           const idx = im.fullImportFile.indexOf(SEARCH)
           if (idx >= 0) {
-            found.push(`- ${im.lineNo}: ${im.fullImportFile.slice(0, idx)}${colors.bgYellow(SEARCH)}${im.fullImportFile.slice(idx + SEARCH.length, im.fullImportFile.length)}`)
+            found.push(`- ${im.lineNo}: ${im.isAbsolute ? '' : `${im.importFile} -> `}${im.fullImportFile.slice(0, idx)}${colors.bgYellow(SEARCH)}${im.fullImportFile.slice(idx + SEARCH.length, im.fullImportFile.length)}`)
           }
         })
         if (found.length) {
@@ -102,8 +126,34 @@ filesList.forEach((filename) => {
 
 // step-2-b) show json output
 
-if (JSON_OUTPUT) {
+if (SHOW_JSON) {
   console.log(JSON.stringify(jsonOut, null, 2))
+}
+
+// step-2-c) show sources which are not referenced by imports
+
+if (NOT_REFERENCED) {
+  _.uniq(jsonOut.sourceFiles.filter(source => !jsonOut.imports[source])).sort().forEach(src => console.log(src))
+}
+
+// step-2-d) show references
+
+if (REFERENCES) {
+  jsonOut.sourceFiles.forEach(source => {
+    const hasReferences = !!jsonOut.imports[source]
+    if (hasReferences) {
+      if (SEARCH) {
+        const idx = source.indexOf(SEARCH)
+        if (idx === -1) return
+        console.log()
+        console.log(colors.bold(`${source.slice(0, idx)}${colors.bgYellow(SEARCH)}${source.slice(idx + SEARCH.length, source.length)}:`))
+      } else {
+        console.log()
+        console.log(colors.bold(`${source}:`))
+      }
+      jsonOut.imports[source].forEach(src => console.log('-', src))
+    }
+  })
 }
 
 // the end.  o==)----- --
@@ -137,9 +187,9 @@ function parseImport (sourceFile, importFile, lineNo) {
       fullImportFile = `${fullImportFile}/index.js`
     }
   }
-  const isLibrary = isAbsolute && !fs.existsSync(importFile)
+  const isExternal = isAbsolute && !fs.existsSync(importFile)
   return {
-    isLibrary,
+    isExternal,
     isAbsolute,
     lineNo,
     sourceFile,
