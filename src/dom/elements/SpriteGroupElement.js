@@ -11,7 +11,16 @@ import connectElementEntities from '../lib/connectElementEntities.js'
 import disconnectElementEntities from '../lib/disconnectElementEntities.js'
 import syncComponent from '../lib/syncComponent.js'
 
-import { NODE_NAME_SPRITE_GROUP } from '../constants'
+import {
+  NODE_NAME_SPRITE_GROUP,
+  ATTR_DESCRIPTOR,
+  ATTR_VERTEX_SHADER,
+  ATTR_FRAGMENT_SHADER,
+  ATTR_PRIMITIVE,
+  ATTR_CAPACITY,
+  ATTR_BLEND_MODE,
+  ATTR_TEXTURE_MAP
+} from '../constants'
 
 const createConfig = ({ descriptor, capacity, vertexShader, fragmentShader, primitive }) => ({
   descriptor,
@@ -26,11 +35,12 @@ const createConfig = ({ descriptor, capacity, vertexShader, fragmentShader, prim
 })
 
 const readConfigFromAttributes = (el) => createConfig({
-  descriptor: el.getAttribute('descriptor'),
-  vertexShader: el.getAttribute('vertex-shader'),
-  fragmentShader: el.getAttribute('fragment-shader'),
-  primitive: el.getAttribute('primitive'),
-  capacity: el.getAttribute('capacity')
+  descriptor: el.getAttribute(ATTR_DESCRIPTOR),
+  vertexShader: el.getAttribute(ATTR_VERTEX_SHADER),
+  fragmentShader: el.getAttribute(ATTR_FRAGMENT_SHADER),
+  primitive: el.getAttribute(ATTR_PRIMITIVE),
+  capacity: el.getAttribute(ATTR_CAPACITY)
+  // TODO vo-new
 })
 
 const isValidConfig = (config) => (
@@ -69,13 +79,13 @@ export default class SpriteGroupElement extends HTMLElement {
   /** @private */
   static get observedAttributes () {
     return [
-      'blend-mode',
-      'capacity',
-      'descriptor',
-      'fragment-shader',
-      'primitive',
-      'texture-map',
-      'vertex-shader'
+      ATTR_BLEND_MODE,
+      ATTR_CAPACITY,
+      ATTR_DESCRIPTOR,
+      ATTR_FRAGMENT_SHADER,
+      ATTR_PRIMITIVE,
+      ATTR_TEXTURE_MAP,
+      ATTR_VERTEX_SHADER
     ]
   }
 
@@ -101,7 +111,7 @@ export default class SpriteGroupElement extends HTMLElement {
   /** @private */
   debug () {
     console.log(this.spriteGroup)
-    if (this.textureMap) console.log('texture-map', this.textureMap)
+    if (this.textureMap) console.log(ATTR_TEXTURE_MAP, this.textureMap)
   }
 
   /** @private */
@@ -112,8 +122,8 @@ export default class SpriteGroupElement extends HTMLElement {
     this.resourceLibrary = this.parentSceneElement.resourceLibrary
 
     createSpriteGroup(this)
-    syncTextureMap(this, this.getAttribute('texture-map'))
-    syncComponent(this, 'blend-mode')
+    syncTextureMap(this, this.getAttribute(ATTR_TEXTURE_MAP))
+    syncComponent(this, ATTR_BLEND_MODE)
   }
 
   /** @private */
@@ -129,10 +139,10 @@ export default class SpriteGroupElement extends HTMLElement {
   /** @private */
   attributeChangedCallback (attr, oldValue, newValue) {
     switch (attr) {
-      case 'texture-map':
+      case ATTR_TEXTURE_MAP:
         syncTextureMap(this, newValue)
         break
-      case 'blend-mode':
+      case ATTR_BLEND_MODE:
         syncComponent(this, attr)
         break
       default:

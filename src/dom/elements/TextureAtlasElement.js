@@ -5,13 +5,16 @@ import connectElementEntities from '../lib/connectElementEntities.js'
 import disconnectElementEntities from '../lib/disconnectElementEntities.js'
 import readTextureHints from '../lib/readTextureHints.js'
 
-import { NODE_NAME_TEXTURE_ATLAS } from '../constants'
+import {
+  NODE_NAME_TEXTURE_ATLAS,
+  ATTR_SRC
+} from '../constants'
 
 export default class TextureAtlasElement extends HTMLElement {
   /** @private */
   static get observedAttributes () {
     return [
-      'src'
+      ATTR_SRC
     ]
   }
 
@@ -52,7 +55,7 @@ export default class TextureAtlasElement extends HTMLElement {
   connectedCallback () {
     connectElementEntities(this)
     this.textureLibrary = this.parentSceneElement.textureLibrary  // TODO for every element?
-    this.loadTextureAtlas(this.getAttribute('src'))
+    this.loadTextureAtlas(this.getAttribute(ATTR_SRC))
   }
 
   /** @private */
@@ -65,7 +68,7 @@ export default class TextureAtlasElement extends HTMLElement {
 
   /** @private */
   attributeChangedCallback (attr, oldValue, newValue) {
-    if (attr === 'src') {
+    if (attr === ATTR_SRC) {
       this.loadTextureAtlas(newValue)
     }
   }
