@@ -159,11 +159,6 @@ function parseCssStyledProperties (data) {
   }
 }
 
-// module.exports = parseCssStyledProperties
-// module.exports.splitIntoPropTokens = splitIntoPropTokens
-// module.exports.splitIntoProps = splitIntoProps
-// module.exports.indexOfNextNonWhitespace = indexOfNextNonWhitespace
-// module.exports.indexOfNextSeperator = indexOfNextSeperator
 export default parseCssStyledProperties
 export {
   splitIntoPropTokens,
