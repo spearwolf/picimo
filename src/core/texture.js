@@ -57,7 +57,7 @@ export default class Texture {
         flipY: getOption(hints, 'flipY', false),
         repeatable: getOption(hints, 'repeatable', false),
         premultiplyAlpha: getOption(hints, 'premultiplyAlpha', true),
-        pixelate: getOption(hints, 'pixelate', false)
+        nearest: getOption(hints, 'nearest', false)
       })
 
       if ('origWidth' in source && 'origHeight' in source) {
