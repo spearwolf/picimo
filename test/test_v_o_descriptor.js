@@ -4,7 +4,7 @@ import VODescriptor from '../src/core/v_o_descriptor'
 import VOArray from '../src/core/v_o_array'
 import { assertProperties, assertVOAttrDescriptor } from './utils'
 
-describe('VODescriptor', () => {
+describe.only('VODescriptor', () => {
   const descriptor = new VODescriptor({
 
     proto: {
@@ -16,10 +16,10 @@ describe('VODescriptor', () => {
         // vertex buffer layout
         // --------------------
         //
-        // v0: (x0)(y0)(z0)(rotate](s0)(t0)(tx)(ty)(scale)(opacity)
-        // v1: (x1)(y1)(z1)(rotate](s1)(t1)(tx)(ty)(scale)(opacity)
-        // v2: (x2)(y2)(z2)(rotate](s2)(t2)(tx)(ty)(scale)(opacity)
-        // v3: (x3)(y3)(z3)(rotate](s3)(t3)(tx)(ty)(scale)(opacity)
+        // v0: (x0)(y0)(z0)(rotate)(s0)(t0)(tx)(ty)(scale)(opacity)
+        // v1: (x1)(y1)(z1)(rotate)(s1)(t1)(tx)(ty)(scale)(opacity)
+        // v2: (x2)(y2)(z2)(rotate)(s2)(t2)(tx)(ty)(scale)(opacity)
+        // v3: (x3)(y3)(z3)(rotate)(s3)(t3)(tx)(ty)(scale)(opacity)
         //
     vertexCount: 4,
 
@@ -221,6 +221,92 @@ describe('VODescriptor', () => {
         number: ['r0', 'r1', 'r2', 'r3'],
         function: ['setR'],
         undefined: ['getR']
+      })
+    })
+
+    describe('attr descriptor value setter', () => {
+      it('setValue(size=1, uniform)', () => {
+        const vo = descriptor.createVO()
+        const attrList = ['position', 'rotate', 'texCoords']
+
+        assert.deepEqual(vo.toArray(attrList), [
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0
+        ], `fresh & clean vertex array buffer`)
+
+        descriptor.attr.rotate.setValue(vo, 7)
+
+        assert.deepEqual(vo.toArray(attrList), [
+          0, 0, 0, 7, 0, 0,
+          0, 0, 0, 7, 0, 0,
+          0, 0, 0, 7, 0, 0,
+          0, 0, 0, 7, 0, 0
+        ], 'attr.setValue()')
+      })
+
+      it('setValue(size=1)', () => {
+        const vo = descriptor.createVO()
+        const attrList = ['position', 'r', 'texCoords']
+
+        assert.deepEqual(vo.toArray(attrList), [
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0
+        ], `fresh & clean vertex array buffer`)
+
+        descriptor.attr.r.setValue(vo, new Float32Array([4, 5, 6, 7]))
+
+        assert.deepEqual(vo.toArray(attrList), [
+          0, 0, 0, 4, 0, 0,
+          0, 0, 0, 5, 0, 0,
+          0, 0, 0, 6, 0, 0,
+          0, 0, 0, 7, 0, 0
+        ], 'attr.setValue()')
+      })
+
+      it('setValue(size>=2, uniform)', () => {
+        const vo = descriptor.createVO()
+        const attrList = ['texCoords', 'translate', 'scale']
+
+        assert.deepEqual(vo.toArray(attrList), [
+          0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0
+        ], `fresh & clean vertex array buffer`)
+
+        descriptor.attr.translate.setValue(vo, new Float32Array([7, 9]))
+
+        assert.deepEqual(vo.toArray(attrList), [
+          0, 0, 7, 9, 0,
+          0, 0, 7, 9, 0,
+          0, 0, 7, 9, 0,
+          0, 0, 7, 9, 0
+        ], 'attr.setValue()')
+      })
+
+      it('setValue(size>=2)', () => {
+        const vo = descriptor.createVO()
+        const attrList = ['rotate', 'texCoords', 'translate']
+
+        assert.deepEqual(vo.toArray(attrList), [
+          0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0
+        ], `fresh & clean vertex array buffer`)
+
+        descriptor.attr.texCoords.setValue(vo, [1, 2, 3, 4, 5, 6, 7, 8])
+
+        assert.deepEqual(vo.toArray(attrList), [
+          0, 1, 2, 0, 0,
+          0, 3, 4, 0, 0,
+          0, 5, 6, 0, 0,
+          0, 7, 8, 0, 0
+        ], 'attr.setValue()')
       })
     })
 

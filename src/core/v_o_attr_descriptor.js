@@ -59,24 +59,24 @@ export default class VOAttrDescriptor {
     if (attrDesc.size === 1) {
       if (attrDesc.uniform) {
         const valueGetter = getV1u(getArray, offset)
+        const valueSetter = setV1u(getArray, vertexCount, vertexAttrCount, offset)
 
-        attrDesc.getValue = function (vo) {
-          return valueGetter.call(vo)
-        }
+        attrDesc.getValue = (vo) => valueGetter.call(vo)
+        attrDesc.setValue = (vo, arg) => valueSetter.call(vo, arg)
 
         propertiesObject[ name ] = {
-
           get: valueGetter,
-          set: setV1u(getArray, vertexCount, vertexAttrCount, offset),
+          set: valueSetter,
           enumerable: true
-
         }
       } else {
+        const valueSetter = setVNv(getArray, 1, vertexCount, vertexAttrCount, offset)
+
+        attrDesc.setValue = (vo, args) => valueSetter.apply(vo, args)
+
         propertiesObject[ 'set' + camelize(name) ] = {
-
-          value: setVNv(getArray, 1, vertexCount, vertexAttrCount, offset),
+          value: valueSetter,
           enumerable: true
-
         }
 
         const valueGetters = []
@@ -102,23 +102,19 @@ export default class VOAttrDescriptor {
     } else if (attrDesc.size >= 2) {
       if (attrDesc.uniform) {
         const valueGetter = getVNu(getArray, offset)
+        const valueSetter = setVNu(getArray, attrDesc.size, vertexCount, vertexAttrCount, offset)
 
-        attrDesc.getValue = function (vo, vi, idx) {
-          return valueGetter.call(vo, idx)
-        }
+        attrDesc.getValue = (vo, vi, idx) => valueGetter.call(vo, idx)
+        attrDesc.setValue = (vo, args) => valueSetter.apply(vo, args)
 
         propertiesObject[ 'get' + camelize(name) ] = {
-
           value: valueGetter,
           enumerable: true
-
         }
 
         propertiesObject[ 'set' + camelize(name) ] = {
-
-          value: setVNu(getArray, attrDesc.size, vertexCount, vertexAttrCount, offset),
+          value: valueSetter,
           enumerable: true
-
         }
 
         for (i = 0; i < attrDesc.size; ++i) {
@@ -133,11 +129,13 @@ export default class VOAttrDescriptor {
           }
         }
       } else {
+        const valueSetter = setVNv(getArray, attrDesc.size, vertexCount, vertexAttrCount, offset)
+
+        attrDesc.setValue = (vo, args) => valueSetter.apply(vo, args)
+
         propertiesObject[ 'set' + camelize(name) ] = {
-
-          value: setVNv(getArray, attrDesc.size, vertexCount, vertexAttrCount, offset),
+          value: valueSetter,
           enumerable: true
-
         }
 
         const valueGetters = []
