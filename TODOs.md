@@ -38,7 +38,7 @@ Other
 - [ ] chrome/chromium linux support
 - [ ] firefox linux support
 - [ ] android chrome support
-- [ ] ie11 support
+- [ ] ie11 support (needs polyfill for: URL, ..)
 - [ ] hierachical ResourceLibrary and TextureLibrary (for selective scene-graph-based cleanup)
 - [ ] build library using rollup (with full source maps support (compose examples/etc with webpack as before)
 - [ ] fix karma/code coverage generation!

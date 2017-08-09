@@ -1,4 +1,10 @@
-const reNumber = /^-?\d+(\.\d+)?$/
+/* eslint-env browser */
+const reNumber = /^[-+]?(\d+\.|\.)?\d+(e\d+|e[-+]\d+)?$/
+const reUrl = /^url\(\s*([^)]+)\)$/
+const reVec2 = /^vec2\(\s*([-+\d.e]+)\s*,\s*([-+\d.e]+)\s*\)$/
+const reVec3 = /^vec3\(\s*([-+\d.e]+)\s*,\s*([-+\d.e]+)\s*,\s*([-+\d.e]+)\s*\)$/
+const reVec4 = /^vec4\(\s*([-+\d.e]+)\s*,\s*([-+\d.e]+)\s*,\s*([-+\d.e]+)\s*,\s*([-+\d.e]+)\s*\)$/
+const reFunc = /^\s*[a-zA-Z]+\(\s*[^)]+\)\s*$/
 
 // parseValue(str) expects a trimmed string!
 //
@@ -15,6 +21,10 @@ const reNumber = /^-?\d+(\.\d+)?$/
 //   true       => boolean: true
 //   false      => boolean: false
 //   {...}      => JSON.parse()
+//   url(...)   => new URL(...)
+//   vec2(<number>, <number>) => new Float32Array([number, number])
+//   vec3(<number>, <number>, <number>) => new Float32Array([number, number, number])
+//   vec4(<number>, <number>, <number>, <number>) => new Float32Array([...])
 //
 function parseValue (value) {
   const len = value.length
@@ -26,16 +36,28 @@ function parseValue (value) {
     return value.substr(1, value.length - 2)
   } else if (len > 0 && reNumber.exec(value)) {
     return parseFloat(value)
-  } else if (value === 'null') {
-    return null
-  } else if (value === 'undefined') {
-    return undefined
-  } else if (value === 'true') {
-    return true
-  } else if (value === 'false') {
-    return false
   }
-  return value
+
+  let m = reUrl.exec(value)
+  if (m) return new URL(m[1].trim())
+
+  m = reVec2.exec(value)
+  if (m) return new Float32Array(m.slice(1, 3).map(parseFloat))
+
+  m = reVec3.exec(value)
+  if (m) return new Float32Array(m.slice(1, 4).map(parseFloat))
+
+  m = reVec4.exec(value)
+  if (m) return new Float32Array(m.slice(1, 5).map(parseFloat))
+
+  switch (value) {
+    case 'null': return null
+    case 'undefined': return undefined
+    case 'true': return true
+    case 'false': return false
+    default:
+      return value
+  }
 }
 
 function indexOfNextNonWhitespace (str, curIdx) {
@@ -52,14 +74,14 @@ function indexOfNextNonWhitespace (str, curIdx) {
   return len
 }
 
-function indexOfNextSeperator (str, curIdx) {
+function indexOfNextSeperator (str, curIdx, seperator = ';') {
   const len = str.length
   let i = curIdx
   let isInside = null
   do {
     if (isInside === null) {
       switch (str[i]) {
-        case ';': return i
+        case seperator: return i
         case '\'':
           isInside = '\''
           ++i
@@ -104,7 +126,7 @@ function splitIntoPropTokens (str) {
 
   let i = indexOfNextNonWhitespace(str, 0)
   do {
-    const to = indexOfNextSeperator(str, i)
+    const to = indexOfNextSeperator(str, i, ';')
     if (to > i) {
       propTokens.push(str.slice(i, to))
     }
@@ -118,6 +140,9 @@ function splitIntoProps (str) {
   const tokens = splitIntoPropTokens(str)
   if (!tokens) return
   return tokens.map((tok) => {
+    if (reFunc.exec(tok)) {
+      return { value: tok.trim() }
+    }
     const colon = tok.indexOf(':')
     if (colon === -1) {
       return { value: tok.trim() }
@@ -164,5 +189,6 @@ export {
   splitIntoPropTokens,
   splitIntoProps,
   indexOfNextNonWhitespace,
-  indexOfNextSeperator
+  indexOfNextSeperator,
+  parseValue
 }

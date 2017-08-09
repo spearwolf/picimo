@@ -1,4 +1,5 @@
 /* eslint-env mocha */
+/* eslint-env browser */
 import { expect } from 'chai'
 import parse, {
   splitIntoPropTokens,
@@ -102,6 +103,32 @@ describe('parseCssStyledProperties()', () => {
     })
 
     describe('should transform single values', () => {
+      it('url(...)', () => {
+        const url = parse('url( http://foo.bar.de/plah.index.html?q=1 )')
+        expect(url).to.be.instanceOf(URL)
+        expect(url.href).to.be.equal('http://foo.bar.de/plah.index.html?q=1')
+      })
+      it('vec4(<number>, <number>, <number>)', () => {
+        const vec4 = parse('vec4(-2, 4, -8, 16)')
+        expect(vec4).to.be.instanceOf(Float32Array)
+        expect(vec4[0]).to.be.equal(-2)
+        expect(vec4[1]).to.be.equal(4)
+        expect(vec4[2]).to.be.equal(-8)
+        expect(vec4[3]).to.be.equal(16)
+      })
+      it('vec3(<number>, <number>, <number>)', () => {
+        const vec3 = parse('vec3(-2, 4, -8)')
+        expect(vec3).to.be.instanceOf(Float32Array)
+        expect(vec3[0]).to.be.equal(-2)
+        expect(vec3[1]).to.be.equal(4)
+        expect(vec3[2]).to.be.equal(-8)
+      })
+      it('vec2(<number>, <number>)', () => {
+        const m = parse('foo: vec2(-2, 4)')
+        expect(m.foo).to.be.instanceOf(Float32Array)
+        expect(m.foo[0]).to.be.equal(-2)
+        expect(m.foo[1]).to.be.equal(4)
+      })
       it('single-quotes string', () => {
         expect(parse('\'foo\'')).to.be.equal('foo')
       })
