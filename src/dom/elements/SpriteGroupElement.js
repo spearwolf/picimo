@@ -19,19 +19,31 @@ import {
   ATTR_PRIMITIVE,
   ATTR_CAPACITY,
   ATTR_BLEND_MODE,
-  ATTR_TEXTURE_MAP
+  ATTR_TEXTURE_MAP,
+  ATTR_VO_NEW
 } from '../constants'
 
-const createConfig = ({ descriptor, capacity, vertexShader, fragmentShader, primitive }) => ({
+const createVoPropsSetter = (voData) => {
+  if (!voData) return
+  const voProps = parseCssStyledProperties(voData)
+  if (!voProps || typeof voProps !== 'object') return
+  return (vo) => {  // TODO vo-new
+    vo.scale = 1
+    vo.opacity = 1
+  }
+}
+
+const createConfig = ({ descriptor, capacity, vertexShader, fragmentShader, primitive, voNew }) => ({
   descriptor,
   vertexShader,
   fragmentShader,
   primitive,
   capacity: parseInt(capacity, 10),
-  voNew: (vo) => {  // TODO
-    vo.scale = 1
-    vo.opacity = 1
-  }
+  voNew: createVoPropsSetter(voNew)
+  // voNew: (vo) => {
+    // vo.scale = 1
+    // vo.opacity = 1
+  // }
 })
 
 const readConfigFromAttributes = (el) => createConfig({
@@ -39,8 +51,8 @@ const readConfigFromAttributes = (el) => createConfig({
   vertexShader: el.getAttribute(ATTR_VERTEX_SHADER),
   fragmentShader: el.getAttribute(ATTR_FRAGMENT_SHADER),
   primitive: el.getAttribute(ATTR_PRIMITIVE),
-  capacity: el.getAttribute(ATTR_CAPACITY)
-  // TODO vo-new
+  capacity: el.getAttribute(ATTR_CAPACITY),
+  voNew: el.getAttribute(ATTR_VO_NEW)
 })
 
 const isValidConfig = (config) => (

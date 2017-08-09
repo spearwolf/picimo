@@ -4,7 +4,7 @@ import VODescriptor from '../src/core/v_o_descriptor'
 import VOArray from '../src/core/v_o_array'
 import { assertProperties, assertVOAttrDescriptor } from './utils'
 
-describe.only('VODescriptor', () => {
+describe('VODescriptor', () => {
   const descriptor = new VODescriptor({
 
     proto: {
