@@ -58,7 +58,7 @@ el.on('animateFrame', function (app) {
 // ------- sync textures ---------------------------- /// // ----
 
 textureLibrary
-  .loadTexture('nobinger', 'nobinger.png')
+  .loadTexture('nobinger', 'nobinger.png', { nearest: true })
   .then(texture => {
     window.q0.setTexCoordsByTexture(texture)
     window.q1.setTexCoordsByTexture(texture)

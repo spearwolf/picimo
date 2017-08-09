@@ -202,9 +202,10 @@ export default class Texture {
   /**
     * Loads an image from url and returns a texture.
     * @param {string} url
+    * @param {object} [textureHints]
     * @returns {Promise<Texture>}
     */
-  static load (url) {
-    return new PowerOf2Image(url).complete.then(p2img => new Texture(p2img))
+  static load (url, textureHints) {
+    return new PowerOf2Image(url).complete.then(p2img => new Texture(p2img, undefined, undefined, 0, 0, textureHints))
   }
 }

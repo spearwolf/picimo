@@ -9,8 +9,8 @@ export default class TextureLibrary {
     this.shaderVars = new Map()
   }
 
-  loadTexture (id, url = id) {
-    const state = new TextureState(Texture.load(url))
+  loadTexture (id, url = id, textureHints = undefined) {
+    const state = new TextureState(Texture.load(url, textureHints))
     this.states.set(id, state)
     return state.promise
   }
