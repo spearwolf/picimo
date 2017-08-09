@@ -81,6 +81,12 @@ class App {
     this.entity.setComponent('resourceLibrary', this.resourceLibrary)
     this.entity.setComponent('textureLibrary', this.textureLibrary)
     this.componentRegistry.createComponent(this.entity, 'children')
+
+    this.el = null
+
+    this.started = false
+    this.stopped = false
+    this.destroyed = false
   }
 
   get clearColor () {
@@ -94,8 +100,22 @@ class App {
     }
   }
 
+  get canStart () {
+    return (!this.started || (this.started && this.stopped)) && !this.destroyed
+  }
+
   start (el = this) {
+    if (!this.canStart) return
+
+    if (this.stopped) {
+      this.stopped = false
+      this.resize()
+      this.requestAnimate()
+      return
+    }
+
     this.el = el
+    this.started = true
 
     /**
      * @type {WebGlContext}
@@ -122,18 +142,39 @@ class App {
     this.requestAnimate()
   }
 
-  destroy () {
+  requestAnimate () {
+    this.rafSubscription = window.requestAnimationFrame(() => this.animate())
+  }
+
+  cancelAnimate () {
     window.cancelAnimationFrame(this.rafSubscription)
   }
 
-  requestAnimate () {
-    this.rafSubscription = window.requestAnimationFrame(() => this.animate())
+  get canStop () {
+    return this.started && !this.stopped && !this.destroyed
+  }
+
+  stop () {
+    if (!this.canStop) return
+    this.stopped = true
+    this.cancelAnimate()
+  }
+
+  destroy () {
+    if (this.destroyed) return
+    this.destroyed = true
+    this.cancelAnimate()
+  }
+
+  get canAnimate () {
+    return this.started && !this.stopped && !this.destroyed
   }
 
   /**
    * Start the main animation loop.
    */
   animate () {
+    if (!this.canAnimate) return
     this.renderFrame()
     this.requestAnimate()
   }
