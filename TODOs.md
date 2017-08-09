@@ -7,6 +7,7 @@ DOM Element API
   - [ ] `<blitpunk-picture/>` acts as single sprite renderer, support boilerplate example (background)
     - [ ] support boilerplate example (background shader)
     - [ ] support free styles buffers .. single quads, mesh, ..
+    - [ ] extract `SpriteGroupElement->syncTextureMap()` into a `TextureMapComponent`
   - [ ] `<blitpunk-texture/>` acts as single texture source (similary to texture-atlas)
   - [ ] `<blitpunk-render-to-texture/>` acts as texture source and scene
 - [ ] `<blitpunk-canvas/>` meaningful defaults for alpha/premultiplied-alpha ..
@@ -20,7 +21,6 @@ DOM Element API
   - [x] add hints (properties) for: premultiply-alpha, pixelate (nearest or linear), repeatable, flip-y
   - [ ] use name= property instead of id= for texture-map refs
 - [ ] `<blitpunk-scene/>`
-- [ ] extract `SpriteGroupElement->syncTextureMap()` into a `TextureMapComponent`
 - [ ] disconnectedCallback, free (glx) resources
   - [ ] `<blitpunk-canvas/>`
   - [ ] `<blitpunk-scene/>`
