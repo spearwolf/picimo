@@ -1,9 +1,31 @@
 /* global HTMLElement */
 import eventize from '@spearwolf/eventize'
 
-import App from '../../app'
+import App from 'src/app.js'
 
-import { NODE_NAME_CANVAS } from '../constants'
+import readBooleanAttribute from '../lib/readBooleanAttribute.js'
+
+import {
+  NODE_NAME_CANVAS,
+  ATTR_ALPHA,
+  ATTR_ANTIALIAS,
+  ATTR_BLEND_MODE,
+  ATTR_CLEAR_COLOR,
+  ATTR_DEPTH,
+  ATTR_PREMULTIPLIED_ALPHA,
+  ATTR_PRESERVE_DRAW,
+  ATTR_PROJECTION,
+  ATTR_STENCIL
+} from '../constants'
+
+const createContextAttributes = (el) => ({
+  alpha: readBooleanAttribute(el, ATTR_ALPHA, false),
+  depth: readBooleanAttribute(el, ATTR_DEPTH, false),
+  stencil: readBooleanAttribute(el, ATTR_STENCIL, false),
+  antialias: readBooleanAttribute(el, ATTR_ANTIALIAS, false),
+  premultipliedAlpha: readBooleanAttribute(el, ATTR_PREMULTIPLIED_ALPHA, false),
+  preserveDrawingBuffer: readBooleanAttribute(el, ATTR_PRESERVE_DRAW, false)
+})
 
 /**
  * The **custom HTML `<blitpunk-canvas></blitpunk-canvas>` element** represents the *webgl* canvas,
@@ -75,16 +97,16 @@ export default class CanvasElement extends HTMLElement {
   /** @private */
   static get observedAttributes () {
     return [
-      'blend-mode',
-      'clear-color',
-      'projection'
+      ATTR_BLEND_MODE,
+      ATTR_CLEAR_COLOR,
+      ATTR_PROJECTION
     ]
   }
 
   /** @private */
   onKeydown (event) {
     if (event.ctrlKey && event.key === 'd') {
-      console.group('<blitpunk/>', 'frame', this.frameNo)
+      console.group('<blitpunk/>', 'frameNo', this.frameNo)
       console.log(this)
       console.log(this.blitpunk)
       this.blitpunk.entity.emit('debug', this)
@@ -106,14 +128,7 @@ export default class CanvasElement extends HTMLElement {
 
   /** @private */
   connectedCallback () {
-    this.blitpunk.contextAttributes = Object.freeze({
-      alpha: this.hasAttribute('alpha'),
-      depth: this.hasAttribute('depth'),
-      stencil: this.hasAttribute('stencil'),
-      antialias: this.hasAttribute('antialias'),
-      premultipliedAlpha: this.hasAttribute('premultiplied-alpha'),
-      preserveDrawingBuffer: this.hasAttribute('preserve-drawing-buffer')
-    })
+    this.blitpunk.contextAttributes = Object.freeze(createContextAttributes(this))
 
     this.onKeydown = this.onKeydown.bind(this)
     document.body.addEventListener('keydown', this.onKeydown)
@@ -131,11 +146,11 @@ export default class CanvasElement extends HTMLElement {
   /** @private */
   attributeChangedCallback (attr, oldValue, newValue) {
     switch (attr) {
-      case 'clear-color':
+      case ATTR_CLEAR_COLOR:
         this.clearColor = newValue
         break
-      case 'blend-mode':
-      case 'projection':
+      case ATTR_BLEND_MODE:
+      case ATTR_PROJECTION:
         this.blitpunk.componentRegistry.createOrUpdateComponent(this.blitpunk.entity, attr, newValue)
     }
   }

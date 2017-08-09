@@ -1,9 +1,13 @@
 
 export default function (el, name, defaultValue) {
-  const val = el.getAttribute(name)
-  if (val) {
-    const VAL = val.toUpperCase()
-    return VAL === 'true' || VAL === 'on' || VAL === 'yes'
+  if (!el.hasAttribute(name)) return defaultValue
+  switch (el.getAttribute(name).toLowerCase()) {
+    case 'true':
+    case 'yes':
+    case 'on':
+    case '':
+    case name:
+      return true
   }
-  return el.hasAttribute(name) || defaultValue
+  return false
 }
