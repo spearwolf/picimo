@@ -73,8 +73,9 @@ export default class TextureAtlas {
   /**
    * Loads a TextureAtlas.
    * @param {string} url - should point to the *texture atlas json spec*
-   * @param {Object} [fetchOptions=undefined] - options for the `fetch()` call
+   * @param {object} [fetchOptions=undefined] - options for the `fetch()` call
    * @param {string|function|PowerOf2Image|HTMLImageElement|HTMLCanvasElement} [image=null] - per default the image will be loaded from `meta.image` url from the *texture atlas spec*
+   * @param {object} [textureHints=undefined] - texture hints
    * @returns {Promise<TextureAtlas>}
    */
   static load (url, fetchOptions = null, image = null, textureHints = undefined) {
