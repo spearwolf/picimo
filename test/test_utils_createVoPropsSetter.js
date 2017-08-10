@@ -38,7 +38,7 @@ describe('createVoPropsSetter()', () => {
     let setter
 
     before(() => {
-      setter = createVoPropsSetter('scale: 2; opacity: 3')
+      setter = createVoPropsSetter('scale: 2; opacity: 3; translate: vec2(4, -5); s1: 6; t2: 7')
     })
 
     it('is a function', () => {
@@ -50,6 +50,17 @@ describe('createVoPropsSetter()', () => {
       setter(vo)
       expect(vo.scale).to.be.equal(2)
       expect(vo.opacity).to.be.equal(3)
+    })
+
+    it('set uniform array value properties and setters', () => {
+      const vo = descriptor.createVO()
+      setter(vo)
+      expect(vo.toArray(['texCoords', 'translate', 'scale'])).to.eql([
+        0, 0, 4, -5, 2,
+        6, 0, 4, -5, 2,
+        0, 7, 4, -5, 2,
+        0, 0, 4, -5, 2
+      ])
     })
   })
 })

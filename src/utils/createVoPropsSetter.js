@@ -9,8 +9,11 @@ export default function createVoPropsSetter (voData) {
     attrKeys.forEach((key) => {
       const attrDesc = vo.descriptor.attr[key]
       if (attrDesc) {
-        const value = voProps[key]
-        attrDesc.setValue(vo, value)
+        attrDesc.setValue(vo, voProps[key])
+      } else if (typeof vo[key] === 'function') {
+        vo[key](voProps[key])
+      } else {
+        vo[key] = voProps[key]
       }
     })
   }

@@ -4,6 +4,7 @@ import eventize from '@spearwolf/eventize'
 import SpriteGroup from 'src/core/sprite_group'
 
 import parseCssStyledProperties from 'src/utils/parseCssStyledProperties.js'
+import createVoPropsSetter from 'src/utils/createVoPropsSetter.js'
 import isNonEmptyString from 'src/utils/isNonEmptyString.js'
 import isNumberGreaterThanZero from 'src/utils/isNumberGreaterThanZero.js'
 
@@ -23,15 +24,15 @@ import {
   ATTR_VO_NEW
 } from '../constants'
 
-const createVoPropsSetter = (voData) => {
-  if (!voData) return
-  const voProps = parseCssStyledProperties(voData)
-  if (!voProps || typeof voProps !== 'object') return
-  return (vo) => {  // TODO vo-new
-    vo.scale = 1
-    vo.opacity = 1
-  }
-}
+// const createVoPropsSetter = (voData) => {
+  // if (!voData) return
+  // const voProps = parseCssStyledProperties(voData)
+  // if (!voProps || typeof voProps !== 'object') return
+  // return (vo) => {  // TODO vo-new
+    // vo.scale = 1
+    // vo.opacity = 1
+  // }
+// }
 
 const createConfig = ({ descriptor, capacity, vertexShader, fragmentShader, primitive, voNew }) => ({
   descriptor,
@@ -40,10 +41,6 @@ const createConfig = ({ descriptor, capacity, vertexShader, fragmentShader, prim
   primitive,
   capacity: parseInt(capacity, 10),
   voNew: createVoPropsSetter(voNew)
-  // voNew: (vo) => {
-    // vo.scale = 1
-    // vo.opacity = 1
-  // }
 })
 
 const readConfigFromAttributes = (el) => createConfig({
