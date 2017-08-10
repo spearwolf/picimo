@@ -31,6 +31,34 @@ DOM Element API
 - [x] rename all `blitp_xxx` classes to something without `blitp_` prefix
 
 
+Release
+-------
+
+- [ ] import examples
+  - [ ] nobinger-benchy demo
+  - [ ] labyrinth demo (3d-cube)
+  - [ ] dungeon-demo?
+  - [ ] react integration (pong game?)
+- [ ] blitpunk website setup
+  - [ ] welcome page
+  - [ ] examples
+  - [ ] quickstart docs
+  - [ ] quickstart jsfiddle?
+  - [ ] custom element docs
+  - [ ] esdoc
+- [ ] changelog
+- [ ] hierachical ResourceLibrary and TextureLibrary (for selective scene-graph-based cleanup)
+- [ ] build library using rollup (with full source maps support (compose examples/etc with webpack as before)
+  - [ ] add dynamic loader (systemjs?) to support specialized builds (chrome, ff, ios, ..
+
+
+Think about
+-----------
+
+- [ ] "create an app" -> how to compile js,css,images,etc..to one single html (webpack?)
+  - [ ] include js,assets updates from server..
+
+
 Other
 -----
 
@@ -40,8 +68,6 @@ Other
 - [x] firefox linux support
 - [ ] android chrome support
 - [ ] ie11 support (needs polyfill for: URL, ..)
-- [ ] hierachical ResourceLibrary and TextureLibrary (for selective scene-graph-based cleanup)
-- [ ] build library using rollup (with full source maps support (compose examples/etc with webpack as before)
 - [ ] fix karma/code coverage generation!
 - [x] remove *jab* reference?
 
