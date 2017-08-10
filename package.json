@@ -69,8 +69,8 @@
   },
   "dependencies": {
     "@spearwolf/eventize": "github:spearwolf/eventize#semver:^0.1.1",
-    "document-register-element": "^1.5.0",
-    "gl-matrix": "^2.3.2",
+    "document-register-element": "^1.7.0",
+    "gl-matrix": "^2.4.0",
     "tinycolor2": "^1.4.1",
     "uuid": "^3.1.0"
   },

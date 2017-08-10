@@ -36,8 +36,8 @@ Other
 
 - [ ] firefox windows support
 - [ ] edge windows support
-- [ ] chrome/chromium linux support
-- [ ] firefox linux support
+- [x] chrome/chromium linux support
+- [x] firefox linux support
 - [ ] android chrome support
 - [ ] ie11 support (needs polyfill for: URL, ..)
 - [ ] hierachical ResourceLibrary and TextureLibrary (for selective scene-graph-based cleanup)

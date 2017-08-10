@@ -2,7 +2,6 @@
     "presets": [
         ["env", {
             "targets": {
-                "node": "current",
                 "browsers": [
                     "safari >= 10",
                     "ios_saf >= 10",

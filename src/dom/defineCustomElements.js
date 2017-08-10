@@ -7,10 +7,8 @@ import {
   DOM_ELEM_CANVAS,
   DOM_ELEM_SCENE,
   DOM_ELEM_TEXTURE_ATLAS,
-  DOM_ELEM_SPRITE_GROUP } from './constants'
-
-// https://github.com/WebReflection/document-register-element
-import installCE from 'document-register-element/pony'
+  DOM_ELEM_SPRITE_GROUP
+} from './constants'
 
 import './blitpunk.scss'
 
@@ -19,9 +17,6 @@ import './blitpunk.scss'
  * Should be called once at startup.
  */
 export default function defineCustomElements () {
-  // install custom elements polyfill
-  installCE(window)
-
   // define element in the CustomElementRegistry
   window.customElements.define(DOM_ELEM_CANVAS, CanvasElement)
   window.customElements.define(DOM_ELEM_SCENE, SceneElement)
