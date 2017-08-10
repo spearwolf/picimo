@@ -3,7 +3,7 @@ import { expect } from 'chai'
 import VODescriptor from 'src/core/v_o_descriptor'
 import createVoPropsSetter from 'src/utils/createVoPropsSetter.js'
 
-describe.only('createVoPropsSetter()', () => {
+describe('createVoPropsSetter()', () => {
   let descriptor
 
   before(() => {
@@ -53,4 +53,3 @@ describe.only('createVoPropsSetter()', () => {
     })
   })
 })
-

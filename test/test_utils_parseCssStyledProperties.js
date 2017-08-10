@@ -129,6 +129,10 @@ describe('parseCssStyledProperties()', () => {
         expect(m.foo[0]).to.be.equal(-2)
         expect(m.foo[1]).to.be.equal(4)
       })
+      it('[<number>, <number>, ...]', () => {
+        const m = parse('bar:  [ 1, 2, 3, 4, 5, 6, 7, 8, 9.001]')
+        expect(m.bar).to.be.eql([1, 2, 3, 4, 5, 6, 7, 8, 9.001])
+      })
       it('single-quotes string', () => {
         expect(parse('\'foo\'')).to.be.equal('foo')
       })

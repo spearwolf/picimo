@@ -20,7 +20,8 @@ const reFunc = /^\s*[a-zA-Z]+\(\s*[^)]+\)\s*$/
 //   undefined  => undefined
 //   true       => boolean: true
 //   false      => boolean: false
-//   {...}      => JSON.parse()
+//   {...}      => JSON.parse(...)
+//   [...]      => JSON.parse(...)
 //   url(...)   => new URL(...)
 //   vec2(<number>, <number>) => new Float32Array([number, number])
 //   vec3(<number>, <number>, <number>) => new Float32Array([number, number, number])
@@ -31,6 +32,8 @@ function parseValue (value) {
   if (len >= 2 && value.startsWith('"') && value.endsWith('"')) {
     return value.substr(1, value.length - 2)
   } else if (len >= 2 && value.startsWith('{') && value.endsWith('}')) {
+    return JSON.parse(value)
+  } else if (len >= 2 && value.startsWith('[') && value.endsWith(']')) {
     return JSON.parse(value)
   } else if (len >= 2 && value.startsWith('\'') && value.endsWith('\'')) {
     return value.substr(1, value.length - 2)
