@@ -53,6 +53,13 @@ Release
   - [ ] add dynamic loader (systemjs?) to support specialized builds (chrome, ff, ios, ..
 
 
+Next Release
+------------
+
+- [ ] tilemaps support `<blitpunk-tilemap .. />`
+- [ ] spine support `<blitpunk-spine-loader .. />`
+
+
 Think about
 -----------
 
