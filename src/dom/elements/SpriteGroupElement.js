@@ -21,35 +21,29 @@ import {
   ATTR_CAPACITY,
   ATTR_BLEND_MODE,
   ATTR_TEXTURE_MAP,
-  ATTR_VO_NEW
+  ATTR_VO_NEW,
+  ATTR_VO_ZERO
 } from '../constants'
 
-// const createVoPropsSetter = (voData) => {
-  // if (!voData) return
-  // const voProps = parseCssStyledProperties(voData)
-  // if (!voProps || typeof voProps !== 'object') return
-  // return (vo) => {  // TODO vo-new
-    // vo.scale = 1
-    // vo.opacity = 1
-  // }
-// }
-
-const createConfig = ({ descriptor, capacity, vertexShader, fragmentShader, primitive, voNew }) => ({
+const createConfig = ({ descriptor, capacity, vertexShader, fragmentShader, primitive, voNew, voZero }) => ({
   descriptor,
   vertexShader,
   fragmentShader,
   primitive,
   capacity: parseInt(capacity, 10),
-  voNew: createVoPropsSetter(voNew)
+  voNew: createVoPropsSetter(voNew),
+  voZero: createVoPropsSetter(voZero)
 })
 
+// TODO add support for all options from src/core/SpriteGroup
 const readConfigFromAttributes = (el) => createConfig({
   descriptor: el.getAttribute(ATTR_DESCRIPTOR),
   vertexShader: el.getAttribute(ATTR_VERTEX_SHADER),
   fragmentShader: el.getAttribute(ATTR_FRAGMENT_SHADER),
   primitive: el.getAttribute(ATTR_PRIMITIVE),
   capacity: el.getAttribute(ATTR_CAPACITY),
-  voNew: el.getAttribute(ATTR_VO_NEW)
+  voNew: el.getAttribute(ATTR_VO_NEW),
+  voZero: el.getAttribute(ATTR_VO_ZERO)
 })
 
 const isValidConfig = (config) => (

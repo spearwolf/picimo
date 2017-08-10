@@ -27,6 +27,7 @@ DOM Element API
   - [ ] `<blitpunk-texture-atlas/>`
   - [ ] `<blitpunk-sprite-group/>`
 - [x] `<blitpunk-sprite-group/>`
+  - [ ] add support for all options from [src/core/SpriteGroup](src/core/sprite_group.js)
 - [x] rename all `blitp_xxx` classes to something without `blitp_` prefix
 
 
