@@ -37,6 +37,7 @@ Release
 - [ ] import examples
   - [ ] nobinger-benchy demo
   - [ ] labyrinth demo (3d-cube)
+  - [ ] parallax endless (runner, scrolling)
   - [ ] dungeon-demo?
   - [ ] react integration (pong game?)
 - [ ] blitpunk website setup
@@ -57,6 +58,7 @@ Think about
 
 - [ ] "create an app" -> how to compile js,css,images,etc..to one single html (webpack?)
   - [ ] include js,assets updates from server..
+- [ ] quick boostrap tool `blitpunk-cli`
 
 
 Other
