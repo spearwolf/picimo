@@ -1,4 +1,3 @@
-import 'src/blitpunk.js'
 import Clouds from './Clouds.js'
 
 const LOGO_URL = 'spw-mini-logo.png'

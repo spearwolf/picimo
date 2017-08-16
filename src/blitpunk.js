@@ -1,5 +1,6 @@
 import defineCustomElements from './dom/defineCustomElements.js'
 import App from './app'
+import sample from './utils/sample'
 
 const BLITPLUNK_CUSTOM_ELEMENTS_DEFINED = Symbol.for('BLITPLUNK_CUSTOM_ELEMENTS_DEFINED')
 
@@ -12,4 +13,9 @@ const api = function () {
   return new App()
 }
 
+const utils = {
+  sample
+}
+
 export default api
+export { utils }

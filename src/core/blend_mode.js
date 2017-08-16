@@ -1,4 +1,4 @@
-import snakeCase from 'lodash/snakeCase'
+const snakeCase = require('lodash/snakeCase')
 
 export default class BlendMode {
   constructor (enable, sfactor = null, dfactor = null) {

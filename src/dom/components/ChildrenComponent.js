@@ -1,6 +1,6 @@
-import eventize from '@spearwolf/eventize'
-
 import { COMP_PRIO_CHILDREN } from '../constants'
+
+const eventize = require('@spearwolf/eventize')
 
 const PRIO_BEFORE_CHILDREN = COMP_PRIO_CHILDREN + 1
 const PRIO_AFTER_CHILDREN = COMP_PRIO_CHILDREN - 1

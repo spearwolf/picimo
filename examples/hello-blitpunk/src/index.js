@@ -1,4 +1,3 @@
-import '../../../src/blitpunk'
 
 document.addEventListener('DOMContentLoaded', () => {
   const el = document.getElementById('blitpunkCanvas')

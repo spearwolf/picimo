@@ -1,10 +1,10 @@
-import pick from 'lodash/pick'
-
 import ElementIndexArray from './element_index_array'
 import ShaderProgram from './shader_program'
 import ShaderTextureGroup from './shader_texture_group'
 import ShaderVariableBufferGroup from './shader_variable_buffer_group'
 import VOPool from './v_o_pool'
+
+const pick = require('lodash/pick')
 
 const getVO = (descriptor, opt) => {
   if (typeof opt === 'function') {

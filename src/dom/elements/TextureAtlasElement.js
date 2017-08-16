@@ -1,6 +1,4 @@
 /* global HTMLElement */
-import eventize from '@spearwolf/eventize'
-
 import connectElementEntities from '../lib/connectElementEntities.js'
 import disconnectElementEntities from '../lib/disconnectElementEntities.js'
 import readTextureHints from '../lib/readTextureHints.js'
@@ -9,6 +7,8 @@ import {
   NODE_NAME_TEXTURE_ATLAS,
   ATTR_SRC
 } from '../constants'
+
+const eventize = require('@spearwolf/eventize')
 
 export default class TextureAtlasElement extends HTMLElement {
   /** @private */

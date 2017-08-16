@@ -1,6 +1,4 @@
 /* global HTMLElement */
-import eventize from '@spearwolf/eventize'
-
 import SpriteGroup from 'src/core/sprite_group'
 
 import parseCssStyledProperties from 'src/utils/parseCssStyledProperties.js'
@@ -24,6 +22,8 @@ import {
   ATTR_VO_NEW,
   ATTR_VO_ZERO
 } from '../constants'
+
+const eventize = require('@spearwolf/eventize')
 
 const createConfig = ({ descriptor, capacity, vertexShader, fragmentShader, primitive, voNew, voZero }) => ({
   descriptor,

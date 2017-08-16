@@ -49,8 +49,8 @@ Release
   - [ ] esdoc
 - [ ] changelog
 - [ ] hierachical ResourceLibrary and TextureLibrary (for selective scene-graph-based cleanup)
-- [ ] build library using rollup (with full source maps support (compose examples/etc with webpack as before)
-  - [ ] add dynamic loader (systemjs?) to support specialized builds (chrome, ff, ios, ..
+- [x] build library using ~~rollup~~ webpack (with full source maps support)
+  - [ ] add dynamic loader (systemjs?) to support lazy-loading of specialized builds (chrome, ff, ios, ..)
 
 
 Next Release

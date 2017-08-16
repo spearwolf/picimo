@@ -1,7 +1,5 @@
 /* global HTMLElement */
-import eventize from '@spearwolf/eventize'
-
-import App from 'src/app.js'
+import App from '../../app.js'
 
 import readBooleanAttribute from '../lib/readBooleanAttribute.js'
 
@@ -17,6 +15,8 @@ import {
   ATTR_PROJECTION,
   ATTR_STENCIL
 } from '../constants'
+
+const eventize = require('@spearwolf/eventize')
 
 const createContextAttributes = (el) => ({
   alpha: readBooleanAttribute(el, ATTR_ALPHA, false),

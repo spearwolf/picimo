@@ -1,4 +1,4 @@
-import { mat4 } from 'gl-matrix'
+const { mat4 } = require('gl-matrix')
 
 const DEG2RAD = Math.PI / 180.0
 

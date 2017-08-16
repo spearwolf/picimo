@@ -1,5 +1,9 @@
 doc/esdoc
 node_modules
 .build
+.build-dev
+.build-prod
+.build-examples
 bundle.js
 examples/index.html
+examples/js

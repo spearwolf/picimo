@@ -1,7 +1,7 @@
-import eventize from '@spearwolf/eventize'
-import tinycolor from 'tinycolor2'
-
 import ShaderContext from '../core/shader_context'
+
+const eventize = require('@spearwolf/eventize')
+const tinycolor = require('tinycolor2')
 
 const autotouchBuffer = (renderer, resourceRef) => {
   const { resource } = resourceRef

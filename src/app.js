@@ -1,6 +1,3 @@
-import eventize from '@spearwolf/eventize'
-import tinycolor from 'tinycolor2'
-
 import ComponentRegistry from './ecs/component_registry'
 import EntityManager from './ecs/entity_manager'
 import ResourceLibrary from './core/resource_library'
@@ -9,6 +6,9 @@ import WebGlContext from './render/web_gl_context'
 import WebGlRenderer from './render/web_gl_renderer'
 
 import registerDefaultComponents from './dom/registerDefaultComponents'
+
+const eventize = require('@spearwolf/eventize')
+const tinycolor = require('tinycolor2')
 
 const now = () => window.performance.now() / 1000
 

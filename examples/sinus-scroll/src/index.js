@@ -1,4 +1,3 @@
-import 'src/blitpunk.js'
 
 function init (el, spriteGroup, atlas) {
   const sprite = spriteGroup.createSprite(atlas.getRandomFrame())
