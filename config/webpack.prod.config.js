@@ -3,7 +3,7 @@ const outDir = path.resolve(__dirname, '../dist')
 const projectDir = path.resolve(__dirname, '..')
 
 module.exports = {
-  entry: path.join(projectDir, 'src/blitpunk.js'),
+  entry: ['babel-polyfill', path.join(projectDir, 'src/blitpunk.js')],
   module: {
     rules: [{
       test: /\.js$/,
@@ -14,7 +14,6 @@ module.exports = {
       options: {
         babelrc: false,
         presets: [
-          'minify',
           ['env', {
             loose: true,
             targets: {
@@ -22,7 +21,8 @@ module.exports = {
                 'safari >= 10',
                 'ios_saf >= 10',
                 'firefox >= 55',
-                'chrome >= 60'
+                'chrome >= 60',
+                'ie 11'
               ]
             }
           }]
@@ -50,6 +50,10 @@ module.exports = {
     path: outDir,
     filename: 'blitpunk.js',
     libraryTarget: 'umd',
-    library: 'Blitpunk'
+    library: {
+      root: 'Blitpunk',
+      amd: 'blitpunk',
+      commonjs: 'blitpunk'
+    }
   }
 }

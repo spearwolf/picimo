@@ -79,7 +79,7 @@ Other
 - [x] chrome/chromium linux support
 - [x] firefox linux support
 - [ ] android chrome support
-- [ ] ie11 support (needs polyfill for: URL, ..)
+- [ ] ie11 support (needs polyfill for: URL, fetch, ..)
 - [ ] fix karma/code coverage generation!
 - [x] remove *jab* reference?
 
