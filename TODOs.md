@@ -50,6 +50,7 @@ Release
 - [ ] changelog
 - [ ] hierachical ResourceLibrary and TextureLibrary (for selective scene-graph-based cleanup)
 - [x] build library using ~~rollup~~ webpack (with full source maps support)
+  - [ ] create es6 module (blitpunk.mjs?) support *new browsers script module syntax*
   - [ ] add dynamic loader (systemjs?) to support lazy-loading of specialized builds (chrome, ff, ios, ..)
 
 
