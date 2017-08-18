@@ -2,33 +2,25 @@ const path = require('path')
 const outDir = path.resolve(__dirname, '../dist')
 const projectDir = path.resolve(__dirname, '..')
 
-module.exports = {
-  entry: ['babel-polyfill', path.join(projectDir, 'src/blitpunk.js')],
+module.exports = ({
+  preEntry = [],
+  cacheDirectory,
+  babelOptions,
+  devtool = false,
+  output,
+  entry = 'src/blitpunk.js'
+}) => ({
+  devtool,
+  stats: 'normal',
+  entry: preEntry.concat([path.join(projectDir, entry)]),
   module: {
     rules: [{
       test: /\.js$/,
-      loader: 'babel-loader?cacheDirectory=.build-dev',
+      loader: `babel-loader?cacheDirectory=${cacheDirectory}`,
       exclude: [
         /node_modules/
       ],
-      options: {
-        babelrc: false,
-        presets: [
-          ['env', {
-            loose: true,
-            debug: true,
-            targets: {
-              browsers: [
-                'safari >= 10',
-                'ios_saf >= 10',
-                'firefox >= 55',
-                'chrome >= 60',
-                'ie 11'
-              ]
-            }
-          }]
-        ]
-      }
+      options: Object.assign({ babelrc: false }, babelOptions)
     }, {
       test: /\.scss$/,
       use: [
@@ -46,15 +38,13 @@ module.exports = {
       path.resolve(projectDir, 'node_modules')
     ]
   },
-  devtool: 'inline-source-map',
-  output: {
+  output: Object.assign({
     path: outDir,
-    filename: 'blitpunk-dev.js',
     libraryTarget: 'umd',
     library: {
       root: 'Blitpunk',
       amd: 'blitpunk',
       commonjs: 'blitpunk'
     }
-  }
-}
+  }, output)
+})

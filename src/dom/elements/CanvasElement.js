@@ -20,7 +20,7 @@ const eventize = require('@spearwolf/eventize')
 
 const createContextAttributes = (el) => ({
   alpha: readBooleanAttribute(el, ATTR_ALPHA, false),
-  depth: readBooleanAttribute(el, ATTR_DEPTH, false),
+  depth: readBooleanAttribute(el, ATTR_DEPTH, true),  // ie 11 has no support for false
   stencil: readBooleanAttribute(el, ATTR_STENCIL, false),
   antialias: readBooleanAttribute(el, ATTR_ANTIALIAS, false),
   premultipliedAlpha: readBooleanAttribute(el, ATTR_PREMULTIPLIED_ALPHA, false),

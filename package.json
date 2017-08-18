@@ -9,9 +9,13 @@
     "url": "git+https://github.com/spearwolf/blitpunk.git"
   },
   "scripts": {
-    "build": "run-p build:dev build:prod",
-    "build:dev": "webpack --config config/webpack.dev.config.js",
-    "build:prod": "webpack --config config/webpack.prod.config.js && uglifyjs dist/blitpunk.js --compress --mangle >dist/blitpunk.min.js",
+    "old:build": "run-p build:dev build:prod",
+    "old:build:dev": "webpack --config config/webpack.dev-legacy.config.js",
+    "old:build:prod": "webpack --config config/webpack.prod.config.js && uglifyjs dist/blitpunk.js --compress --mangle >dist/blitpunk.min.js",
+    "old:build:prod:legacy": "webpack --config config/webpack.prod-legacy.config.js && uglifyjs dist/blitpunk-legacy.js --compress --mangle >dist/blitpunk-legacy.min.js",
+    "old:build:prod:modern": "webpack --config config/webpack.prod-modern.config.js && uglifyjs dist/blitpunk-modern.js --compress --mangle >dist/blitpunk-modern.min.js",
+    "clean": "rm -fr dist/*.js examples/js",
+    "build": "node scripts/build-libs.js",
     "standard": "standard",
     "karma": "NODE_ENV=testing karma start config/karma.conf.js --single-run",
     "karma:watch": "NODE_ENV=testing karma start config/karma.conf.js",
@@ -23,7 +27,7 @@
     "boilerplate:serve": "serve -p 8080 webgl-boilerplate",
     "examples:build": "webpack --config config/webpack.examples.config.js",
     "examples:build:watch": "npm run examples:build -- --watch",
-    "examples:copy_resources": "mkdir -p examples/js && cp dist/blitpunk.min.js dist/blitpunk-dev.js node_modules/document-register-element/build/document-register-element.js examples/js/",
+    "examples:copy_resources": "mkdir -p examples/js && cp dist/blitpunk*.js node_modules/document-register-element/build/document-register-element.js examples/js/",
     "examples:serve": "serve -p 8080 examples",
     "examples": "npm-run-all --serial examples:copy_resources --parallel examples:serve examples:build:watch",
     "start": "run-p boilerplate:serve boilerplate:watch"
@@ -60,6 +64,7 @@
     "postcss-loader": "^2.0.6",
     "sass-loader": "^6.0.6",
     "serve": "^6.0.6",
+    "shelljs": "^0.7.8",
     "sinon": "^3.2.0",
     "standard": "^10.0.3",
     "style-loader": "^0.18.2",
@@ -71,7 +76,8 @@
     "document-register-element": "^1.7.0",
     "gl-matrix": "^2.4.0",
     "tinycolor2": "^1.4.1",
-    "uuid": "^3.1.0"
+    "uuid": "^3.1.0",
+    "whatwg-fetch": "^2.0.3"
   },
   "standard": {
     "parser": "babel-eslint",
