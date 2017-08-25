@@ -77,6 +77,7 @@ export default class CanvasElement extends HTMLElement {
     return self
   }
 
+  get blitpunkApi () { return Blitpunk }
   get blitpunkNodeName () { return NODE_NAME_CANVAS }
 
   get canvas () { return this.blitpunk.canvas }
