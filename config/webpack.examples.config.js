@@ -37,7 +37,8 @@ module.exports = {
   // plugins,
   output: {
     filename: '[name]/bundle.js',
-    path: examplesDir
+    path: examplesDir,
+    libraryTarget: 'umd'
   },
   module: {
     rules: [{
@@ -45,7 +46,20 @@ module.exports = {
       loader: 'babel-loader?cacheDirectory=.build-examples',
       exclude: [
         /node_modules/
-      ]
+      ],
+      options: {
+        babelrc: false,
+        presets: [
+          ['env', {
+            debug: true,
+            loose: true,
+            targets: {
+              chrome: 60,
+              firefox: 55
+            }
+          }]
+        ]
+      }
     }, {
       test: /\.scss$/,
       use: [

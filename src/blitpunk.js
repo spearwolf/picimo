@@ -1,21 +1,21 @@
+/* global customElements */
 import defineCustomElements from './dom/defineCustomElements.js'
-import App from './app'
 import sample from './utils/sample'
+import { DOM_ELEM_CANVAS } from './dom/constants'
 
-const BLITPLUNK_CUSTOM_ELEMENTS_DEFINED = Symbol.for('BLITPLUNK_CUSTOM_ELEMENTS_DEFINED')
-
-if (!window[BLITPLUNK_CUSTOM_ELEMENTS_DEFINED]) {
-  window[BLITPLUNK_CUSTOM_ELEMENTS_DEFINED] = true
+if (customElements.get(DOM_ELEM_CANVAS)) {
+  console.log('custom elements for <blitpunk> aleady defined!')
+} else {
+  console.log('defining custom elements for <blitpunk>')
   defineCustomElements()
 }
 
-const api = function () {
-  return new App()
+const publicApi = {
+  utils: {
+    sample
+  }
 }
 
-const utils = {
-  sample
-}
+publicApi.whenReady = customElements.whenDefined(DOM_ELEM_CANVAS).then(() => publicApi)
 
-export default api
-export { utils }
+export default publicApi

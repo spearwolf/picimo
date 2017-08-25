@@ -1,5 +1,6 @@
-/* global HTMLElement */
+/* global SystemJS HTMLElement */
 import App from '../../app.js'
+import Blitpunk from '../../blitpunk.js'
 
 import readBooleanAttribute from '../lib/readBooleanAttribute.js'
 
@@ -13,7 +14,8 @@ import {
   ATTR_PREMULTIPLIED_ALPHA,
   ATTR_PRESERVE_DRAW,
   ATTR_PROJECTION,
-  ATTR_STENCIL
+  ATTR_STENCIL,
+  ATTR_MODULE_SRC
 } from '../constants'
 
 const eventize = require('@spearwolf/eventize')
@@ -134,6 +136,16 @@ export default class CanvasElement extends HTMLElement {
     document.body.addEventListener('keydown', this.onKeydown)
 
     this.blitpunk.start(this)
+
+    // TODO check for onInit= attribute?
+    const src = this.getAttribute(ATTR_MODULE_SRC)
+    if (src) {
+      SystemJS.import(src).then((appModule) => {
+        appModule.default(this, Blitpunk)
+        // TODO configure blitpunk dynamic package
+        // TODO check for .init() method?
+      })
+    }
   }
 
   /** @private */

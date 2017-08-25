@@ -9,13 +9,8 @@
     "url": "git+https://github.com/spearwolf/blitpunk.git"
   },
   "scripts": {
-    "old:build": "run-p build:dev build:prod",
-    "old:build:dev": "webpack --config config/webpack.dev-legacy.config.js",
-    "old:build:prod": "webpack --config config/webpack.prod.config.js && uglifyjs dist/blitpunk.js --compress --mangle >dist/blitpunk.min.js",
-    "old:build:prod:legacy": "webpack --config config/webpack.prod-legacy.config.js && uglifyjs dist/blitpunk-legacy.js --compress --mangle >dist/blitpunk-legacy.min.js",
-    "old:build:prod:modern": "webpack --config config/webpack.prod-modern.config.js && uglifyjs dist/blitpunk-modern.js --compress --mangle >dist/blitpunk-modern.min.js",
     "clean": "rm -fr dist/*.js examples/js",
-    "build": "node scripts/build-libs.js",
+    "build": "node scripts/build-libs.js && npm run examples:copy_resources",
     "standard": "standard",
     "karma": "NODE_ENV=testing karma start config/karma.conf.js --single-run",
     "karma:watch": "NODE_ENV=testing karma start config/karma.conf.js",
@@ -27,7 +22,7 @@
     "boilerplate:serve": "serve -p 8080 webgl-boilerplate",
     "examples:build": "webpack --config config/webpack.examples.config.js",
     "examples:build:watch": "npm run examples:build -- --watch",
-    "examples:copy_resources": "mkdir -p examples/js && cp dist/blitpunk*.js node_modules/document-register-element/build/document-register-element.js examples/js/",
+    "examples:copy_resources": "mkdir -p examples/js && cp dist/blitpunk*.js node_modules/document-register-element/build/document-register-element.js node_modules/systemjs/dist/system.js* examples/js/",
     "examples:serve": "serve -p 8080 examples",
     "examples": "npm-run-all --serial examples:copy_resources --parallel examples:serve examples:build:watch",
     "start": "run-p boilerplate:serve boilerplate:watch"
@@ -38,6 +33,7 @@
     "babel-core": "^6.25.0",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.1.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-polyfill": "^6.23.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-minify": "^0.2.0",
@@ -68,11 +64,13 @@
     "sinon": "^3.2.0",
     "standard": "^10.0.3",
     "style-loader": "^0.18.2",
+    "systemjs": "^0.20.17",
     "uglify-es": "^3.0.27",
     "webpack": "^3.5.4"
   },
   "dependencies": {
     "@spearwolf/eventize": "github:spearwolf/eventize#semver:^0.1.1",
+    "bowser": "^1.7.2",
     "document-register-element": "^1.7.0",
     "gl-matrix": "^2.4.0",
     "tinycolor2": "^1.4.1",

@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 const outDir = path.resolve(__dirname, '../dist')
 const projectDir = path.resolve(__dirname, '..')
 
@@ -8,8 +9,15 @@ module.exports = ({
   babelOptions,
   devtool = false,
   output,
-  entry = 'src/blitpunk.js'
+  entry = 'src/blitpunk.js',
+  plugins = [],
+  blitpunkEnv = 'development'
 }) => ({
+  plugins: [
+    new webpack.DefinePlugin({
+      BLITPUNK_ENV: JSON.stringify(blitpunkEnv)
+    })
+  ].concat(plugins),
   devtool,
   stats: 'normal',
   entry: preEntry.concat([path.join(projectDir, entry)]),

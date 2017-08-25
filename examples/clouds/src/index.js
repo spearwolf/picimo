@@ -9,15 +9,15 @@ function createLogo (spriteGroup, atlas) {
   logo.scale = 2
 }
 
-function init (el, spriteGroup, atlas) {
+function init (el, blitpunk, spriteGroup, atlas) {
   createLogo(spriteGroup, atlas)
 
-  const clouds = new Clouds(spriteGroup, atlas)
+  const clouds = new Clouds(blitpunk, spriteGroup, atlas)
   el.on('animateFrame', clouds)
 }
 
-Promise.all([
-  document.getElementById('blitpunk'),
+export default (el, blitpunk) => Promise.all([
+  el, blitpunk,
   document.getElementById('cloudsSprites').spriteGroupPromise,
   document.getElementById('cloudsAtlas').textureAtlasPromise
 ]).then((args) => init(...args))

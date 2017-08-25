@@ -24,7 +24,8 @@
   </head>
   <body>
     <blitpunk-canvas id="blitpunk" alpha premultiplied-alpha
-      projection="sizeFit: contain; desiredWidth: 600; desiredHeight: 600">
+      projection="sizeFit: contain; desiredWidth: 600; desiredHeight: 600"
+      module-src="./bundle.js">
       <blitpunk-texture-atlas id="cloudsAtlas" src="clouds.json" nearest></blitpunk-texture-atlas>
       <blitpunk-sprite-group
         id="cloudsSprites"
@@ -38,8 +39,10 @@
         blend-mode="sfactor: srcAlpha; dfactor: oneMinusSrcAlpha"
         ></blitpunk-sprite-group>
     </blitpunk-canvas>
-    <script src="../js/document-register-element.js"></script>
-    <script src="../js/blitpunk-dev-modern.js"></script>
-    <script src="bundle.js"></script>
+    <script src="../js/system.js"></script>
+    <script>
+      SystemJS.config({ baseURL: '../js' });
+      SystemJS.import('blitpunk.js');
+    </script>
   </body>
 </html>

@@ -107,6 +107,7 @@ const ATTR_DEPTH = exports.ATTR_DEPTH = 'depth';
 const ATTR_DESCRIPTOR = exports.ATTR_DESCRIPTOR = 'descriptor';
 const ATTR_FLIP_Y = exports.ATTR_FLIP_Y = 'flip-y';
 const ATTR_FRAGMENT_SHADER = exports.ATTR_FRAGMENT_SHADER = 'fragment-shader';
+const ATTR_MODULE_SRC = exports.ATTR_MODULE_SRC = 'module-src';
 const ATTR_NEAREST = exports.ATTR_NEAREST = 'nearest';
 const ATTR_PREMULTIPLIED_ALPHA = exports.ATTR_PREMULTIPLIED_ALPHA = 'premultiplied-alpha';
 const ATTR_PREMULTIPLY_ALPHA = exports.ATTR_PREMULTIPLY_ALPHA = 'premultiply-alpha';
@@ -2342,288 +2343,35 @@ module.exports = toKey;
 
 exports.__esModule = true;
 
-var _component_registry = __webpack_require__(50);
+var _defineCustomElements = __webpack_require__(47);
 
-var _component_registry2 = _interopRequireDefault(_component_registry);
+var _defineCustomElements2 = _interopRequireDefault(_defineCustomElements);
 
-var _entity_manager = __webpack_require__(51);
+var _sample = __webpack_require__(31);
 
-var _entity_manager2 = _interopRequireDefault(_entity_manager);
+var _sample2 = _interopRequireDefault(_sample);
 
-var _resource_library = __webpack_require__(56);
-
-var _resource_library2 = _interopRequireDefault(_resource_library);
-
-var _texture_library = __webpack_require__(73);
-
-var _texture_library2 = _interopRequireDefault(_texture_library);
-
-var _web_gl_context = __webpack_require__(77);
-
-var _web_gl_context2 = _interopRequireDefault(_web_gl_context);
-
-var _web_gl_renderer = __webpack_require__(86);
-
-var _web_gl_renderer2 = _interopRequireDefault(_web_gl_renderer);
-
-var _registerDefaultComponents = __webpack_require__(88);
-
-var _registerDefaultComponents2 = _interopRequireDefault(_registerDefaultComponents);
+var _constants = __webpack_require__(0);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const eventize = __webpack_require__(2);
-const tinycolor = __webpack_require__(34);
+if (customElements.get(_constants.DOM_ELEM_CANVAS)) {
+  console.log('custom elements for <blitpunk> aleady defined!');
+} else {
+  console.log('defining custom elements for <blitpunk>');
+  (0, _defineCustomElements2.default)();
+} /* global customElements */
 
-const now = () => window.performance.now() / 1000;
 
-const defaultOption = (options, key, defaultValueFn) => {
-  if (options && key in options) {
-    return options[key];
+const publicApi = {
+  utils: {
+    sample: _sample2.default
   }
-  return typeof defaultValueFn === 'function' ? defaultValueFn() : defaultValueFn;
 };
 
-class App {
-  constructor(options) {
-    eventize(this);
+publicApi.whenReady = customElements.whenDefined(_constants.DOM_ELEM_CANVAS).then(() => publicApi);
 
-    const getOption = defaultOption.bind(null, options);
-
-    this.componentRegistry = getOption('componentRegistry', () => new _component_registry2.default());
-    this.entityManager = getOption('entityManager', () => new _entity_manager2.default());
-    this.resourceLibrary = getOption('resourceLibrary', () => new _resource_library2.default());
-    this.textureLibrary = getOption('textureLibrary', () => new _texture_library2.default());
-
-    /**
-     * @type {CanvasHTMLElement}
-     */
-    this.canvas = getOption('canvas', () => document.createElement('canvas'));
-
-    /**
-     * The initial attributes used to create the webgl context
-     * @type {Object}
-     * @see https://developer.mozilla.org/de/docs/Web/API/HTMLCanvasElement/getContext
-     */
-    this.contextAttributes = {
-      alpha: getOption('alpha', false),
-      depth: getOption('depth', false),
-      stencil: getOption('stencil', false),
-      antialias: getOption('antialias', false),
-      premultipliedAlpha: getOption('premultipliedAlpha', false),
-      preserveDrawingBuffer: getOption('preserveDrawingBuffer', false)
-
-      /**
-       * Seconds since App startup
-       * @type {number}
-       */
-    };this.time = getOption('time', 0);
-
-    /** @private */
-    this.lastFrameTime = 0;
-
-    /**
-     * Seconds since last frame
-     * @type {number}
-     */
-    this.timeFrameOffset = 0;
-
-    /**
-     * Frame counter since application startup
-     * @type {number}
-     */
-    this.frameNo = getOption('frameNo', 0);
-
-    this.clearColor = getOption('clearColor');
-
-    this.createGlContext = getOption('createGlContext', () => () => createGlContext(this.canvas, this.contextAttributes));
-
-    (0, _registerDefaultComponents2.default)(this.componentRegistry);
-
-    this.entity = this.entityManager.createEntity();
-    this.entity.setComponent('blitpunk', this);
-    this.entity.setComponent('resourceLibrary', this.resourceLibrary);
-    this.entity.setComponent('textureLibrary', this.textureLibrary);
-    this.componentRegistry.createComponent(this.entity, 'children');
-
-    this.el = null;
-
-    this.started = false;
-    this.stopped = false;
-    this.destroyed = false;
-  }
-
-  get clearColor() {
-    return this.renderer ? this.renderer.clearColor : this._clearColor;
-  }
-
-  set clearColor(color) {
-    this._clearColor = color == null ? color : tinycolor(color);
-    if (this.renderer) {
-      this.renderer.setClearColor(this._clearColor);
-    }
-  }
-
-  get canStart() {
-    return (!this.started || this.started && this.stopped) && !this.destroyed;
-  }
-
-  start(el = this) {
-    if (!this.canStart) return;
-
-    if (this.stopped) {
-      this.stopped = false;
-      this.resize();
-      this.requestAnimate();
-      return;
-    }
-
-    this.el = el;
-    this.started = true;
-
-    /**
-     * @type {WebGlContext}
-     */
-    this.glx = new _web_gl_context2.default(this.createGlContext());
-
-    /**
-     * @type {WebGlRenderer}
-     */
-    this.renderer = new _web_gl_renderer2.default(this.glx);
-
-    if (this._clearColor) {
-      this.renderer.setClearColor(this._clearColor);
-    }
-
-    /**
-     * Startup time in seconds.
-     * @type {number}
-     */
-    this.startTime = now();
-
-    this.el.appendChild(this.canvas);
-    this.resize();
-    this.requestAnimate();
-  }
-
-  requestAnimate() {
-    this.rafSubscription = window.requestAnimationFrame(() => this.animate());
-  }
-
-  cancelAnimate() {
-    window.cancelAnimationFrame(this.rafSubscription);
-  }
-
-  get canStop() {
-    return this.started && !this.stopped && !this.destroyed;
-  }
-
-  stop() {
-    if (!this.canStop) return;
-    this.stopped = true;
-    this.cancelAnimate();
-  }
-
-  destroy() {
-    if (this.destroyed) return;
-    this.destroyed = true;
-    this.cancelAnimate();
-  }
-
-  get canAnimate() {
-    return this.started && !this.stopped && !this.destroyed;
-  }
-
-  /**
-   * Start the main animation loop.
-   */
-  animate() {
-    if (!this.canAnimate) return;
-    this.renderFrame();
-    this.requestAnimate();
-  }
-
-  /**
-   * Render the frame.
-   */
-  renderFrame() {
-    ++this.frameNo;
-    this.time = now() - this.startTime;
-    if (this.lastFrameTime) {
-      this.timeFrameOffset = this.time - this.lastFrameTime;
-    }
-    this.lastFrameTime = this.time;
-    this.resize();
-    this.renderer.renderFrame(this.entity, this);
-  }
-
-  /**
-   * Resize the canvas dom element to the same size as the `<blitpunk-canvas>.parentNode`
-   */
-  resize() {
-    const style = window.getComputedStyle(this.el, null);
-    const el = style.display === 'inline' ? this.el.parentNode : this.el;
-
-    const { canvas } = this;
-    const dpr = window.devicePixelRatio || 1;
-
-    let wPx = el.clientWidth;
-    let hPx = el.clientHeight;
-
-    canvas.style.width = wPx + 'px';
-    canvas.style.height = hPx + 'px';
-
-    const w = Math.round(wPx * dpr);
-    const h = Math.round(hPx * dpr);
-
-    if (w !== canvas.width || h !== canvas.height) {
-      canvas.width = w;
-      canvas.height = h;
-    }
-
-    if (w !== this.width || h !== this.height) {
-      /**
-       * Canvas size in _device_ pixels.
-       * @type {number}
-       */
-      this.width = w;
-      /**
-       * Canvas size in _device_ pixels.
-       * @type {number}
-       */
-      this.height = h;
-
-      this.glx.gl.viewport(0, 0, w, h); // TODO move this into WebGlRenderer
-    }
-  }
-}
-
-/** @private */
-function createGlContext(canvas, ctxAttrs) {
-  let gl;
-
-  try {
-    gl = canvas.getContext('webgl', ctxAttrs);
-  } catch (err0) {
-    console.error(err0);
-  }
-
-  if (!gl) {
-    try {
-      gl = canvas.getContext('experimental-webgl', ctxAttrs);
-    } catch (err1) {
-      console.error(err1);
-    }
-  }
-
-  if (!gl) {
-    throw new Error('cannot create webgl1 context');
-  }
-
-  return gl;
-}
-
-exports.default = App;
+exports.default = publicApi;
 
 /***/ }),
 /* 27 */
@@ -6733,7 +6481,7 @@ module.exports = isArguments;
 /* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(47);
+module.exports = __webpack_require__(26);
 
 
 /***/ }),
@@ -6744,51 +6492,9 @@ module.exports = __webpack_require__(47);
 
 
 exports.__esModule = true;
-exports.utils = undefined;
-
-var _defineCustomElements = __webpack_require__(48);
-
-var _defineCustomElements2 = _interopRequireDefault(_defineCustomElements);
-
-var _app = __webpack_require__(26);
-
-var _app2 = _interopRequireDefault(_app);
-
-var _sample = __webpack_require__(31);
-
-var _sample2 = _interopRequireDefault(_sample);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-const BLITPLUNK_CUSTOM_ELEMENTS_DEFINED = Symbol.for('BLITPLUNK_CUSTOM_ELEMENTS_DEFINED');
-
-if (!window[BLITPLUNK_CUSTOM_ELEMENTS_DEFINED]) {
-  window[BLITPLUNK_CUSTOM_ELEMENTS_DEFINED] = true;
-  (0, _defineCustomElements2.default)();
-}
-
-const api = function () {
-  return new _app2.default();
-};
-
-const utils = {
-  sample: _sample2.default
-};
-
-exports.default = api;
-exports.utils = utils;
-
-/***/ }),
-/* 48 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
 exports.default = defineCustomElements;
 
-var _CanvasElement = __webpack_require__(49);
+var _CanvasElement = __webpack_require__(48);
 
 var _CanvasElement2 = _interopRequireDefault(_CanvasElement);
 
@@ -6823,7 +6529,7 @@ function defineCustomElements() {
 }
 
 /***/ }),
-/* 49 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6831,9 +6537,13 @@ function defineCustomElements() {
 
 exports.__esModule = true;
 
-var _app = __webpack_require__(26);
+var _app = __webpack_require__(49);
 
 var _app2 = _interopRequireDefault(_app);
+
+var _blitpunk = __webpack_require__(26);
+
+var _blitpunk2 = _interopRequireDefault(_blitpunk);
 
 var _readBooleanAttribute = __webpack_require__(38);
 
@@ -6843,8 +6553,8 @@ var _constants = __webpack_require__(0);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const eventize = __webpack_require__(2); /* global HTMLElement */
-
+/* global SystemJS HTMLElement */
+const eventize = __webpack_require__(2);
 
 const createContextAttributes = el => ({
   alpha: (0, _readBooleanAttribute2.default)(el, _constants.ATTR_ALPHA, false),
@@ -6986,6 +6696,16 @@ class CanvasElement extends HTMLElement {
     document.body.addEventListener('keydown', this.onKeydown);
 
     this.blitpunk.start(this);
+
+    // TODO check for onInit= attribute?
+    const src = this.getAttribute(_constants.ATTR_MODULE_SRC);
+    if (src) {
+      SystemJS.import(src).then(appModule => {
+        appModule.default(this, _blitpunk2.default);
+        // TODO configure blitpunk dynamic package
+        // TODO check for .init() method?
+      });
+    }
   }
 
   /** @private */
@@ -7008,6 +6728,298 @@ class CanvasElement extends HTMLElement {
   }
 }
 exports.default = CanvasElement;
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _component_registry = __webpack_require__(50);
+
+var _component_registry2 = _interopRequireDefault(_component_registry);
+
+var _entity_manager = __webpack_require__(51);
+
+var _entity_manager2 = _interopRequireDefault(_entity_manager);
+
+var _resource_library = __webpack_require__(56);
+
+var _resource_library2 = _interopRequireDefault(_resource_library);
+
+var _texture_library = __webpack_require__(73);
+
+var _texture_library2 = _interopRequireDefault(_texture_library);
+
+var _web_gl_context = __webpack_require__(77);
+
+var _web_gl_context2 = _interopRequireDefault(_web_gl_context);
+
+var _web_gl_renderer = __webpack_require__(86);
+
+var _web_gl_renderer2 = _interopRequireDefault(_web_gl_renderer);
+
+var _registerDefaultComponents = __webpack_require__(88);
+
+var _registerDefaultComponents2 = _interopRequireDefault(_registerDefaultComponents);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+const eventize = __webpack_require__(2);
+const tinycolor = __webpack_require__(34);
+
+const now = () => window.performance.now() / 1000;
+
+const defaultOption = (options, key, defaultValueFn) => {
+  if (options && key in options) {
+    return options[key];
+  }
+  return typeof defaultValueFn === 'function' ? defaultValueFn() : defaultValueFn;
+};
+
+class App {
+  constructor(options) {
+    eventize(this);
+
+    const getOption = defaultOption.bind(null, options);
+
+    this.componentRegistry = getOption('componentRegistry', () => new _component_registry2.default());
+    this.entityManager = getOption('entityManager', () => new _entity_manager2.default());
+    this.resourceLibrary = getOption('resourceLibrary', () => new _resource_library2.default());
+    this.textureLibrary = getOption('textureLibrary', () => new _texture_library2.default());
+
+    /**
+     * @type {CanvasHTMLElement}
+     */
+    this.canvas = getOption('canvas', () => document.createElement('canvas'));
+
+    /**
+     * The initial attributes used to create the webgl context
+     * @type {Object}
+     * @see https://developer.mozilla.org/de/docs/Web/API/HTMLCanvasElement/getContext
+     */
+    this.contextAttributes = {
+      alpha: getOption('alpha', false),
+      depth: getOption('depth', false),
+      stencil: getOption('stencil', false),
+      antialias: getOption('antialias', false),
+      premultipliedAlpha: getOption('premultipliedAlpha', false),
+      preserveDrawingBuffer: getOption('preserveDrawingBuffer', false)
+
+      /**
+       * Seconds since App startup
+       * @type {number}
+       */
+    };this.time = getOption('time', 0);
+
+    /** @private */
+    this.lastFrameTime = 0;
+
+    /**
+     * Seconds since last frame
+     * @type {number}
+     */
+    this.timeFrameOffset = 0;
+
+    /**
+     * Frame counter since application startup
+     * @type {number}
+     */
+    this.frameNo = getOption('frameNo', 0);
+
+    this.clearColor = getOption('clearColor');
+
+    this.createGlContext = getOption('createGlContext', () => () => createGlContext(this.canvas, this.contextAttributes));
+
+    (0, _registerDefaultComponents2.default)(this.componentRegistry);
+
+    this.entity = this.entityManager.createEntity();
+    this.entity.setComponent('blitpunk', this);
+    this.entity.setComponent('resourceLibrary', this.resourceLibrary);
+    this.entity.setComponent('textureLibrary', this.textureLibrary);
+    this.componentRegistry.createComponent(this.entity, 'children');
+
+    this.el = null;
+
+    this.started = false;
+    this.stopped = false;
+    this.destroyed = false;
+  }
+
+  get clearColor() {
+    return this.renderer ? this.renderer.clearColor : this._clearColor;
+  }
+
+  set clearColor(color) {
+    this._clearColor = color == null ? color : tinycolor(color);
+    if (this.renderer) {
+      this.renderer.setClearColor(this._clearColor);
+    }
+  }
+
+  get canStart() {
+    return (!this.started || this.started && this.stopped) && !this.destroyed;
+  }
+
+  start(el = this) {
+    if (!this.canStart) return;
+
+    if (this.stopped) {
+      this.stopped = false;
+      this.resize();
+      this.requestAnimate();
+      return;
+    }
+
+    this.el = el;
+    this.started = true;
+
+    /**
+     * @type {WebGlContext}
+     */
+    this.glx = new _web_gl_context2.default(this.createGlContext());
+
+    /**
+     * @type {WebGlRenderer}
+     */
+    this.renderer = new _web_gl_renderer2.default(this.glx);
+
+    if (this._clearColor) {
+      this.renderer.setClearColor(this._clearColor);
+    }
+
+    /**
+     * Startup time in seconds.
+     * @type {number}
+     */
+    this.startTime = now();
+
+    this.el.appendChild(this.canvas);
+    this.resize();
+    this.requestAnimate();
+  }
+
+  requestAnimate() {
+    this.rafSubscription = window.requestAnimationFrame(() => this.animate());
+  }
+
+  cancelAnimate() {
+    window.cancelAnimationFrame(this.rafSubscription);
+  }
+
+  get canStop() {
+    return this.started && !this.stopped && !this.destroyed;
+  }
+
+  stop() {
+    if (!this.canStop) return;
+    this.stopped = true;
+    this.cancelAnimate();
+  }
+
+  destroy() {
+    if (this.destroyed) return;
+    this.destroyed = true;
+    this.cancelAnimate();
+  }
+
+  get canAnimate() {
+    return this.started && !this.stopped && !this.destroyed;
+  }
+
+  /**
+   * Start the main animation loop.
+   */
+  animate() {
+    if (!this.canAnimate) return;
+    this.renderFrame();
+    this.requestAnimate();
+  }
+
+  /**
+   * Render the frame.
+   */
+  renderFrame() {
+    ++this.frameNo;
+    this.time = now() - this.startTime;
+    if (this.lastFrameTime) {
+      this.timeFrameOffset = this.time - this.lastFrameTime;
+    }
+    this.lastFrameTime = this.time;
+    this.resize();
+    this.renderer.renderFrame(this.entity, this);
+  }
+
+  /**
+   * Resize the canvas dom element to the same size as the `<blitpunk-canvas>.parentNode`
+   */
+  resize() {
+    const style = window.getComputedStyle(this.el, null);
+    const el = style.display === 'inline' ? this.el.parentNode : this.el;
+
+    const { canvas } = this;
+    const dpr = window.devicePixelRatio || 1;
+
+    let wPx = el.clientWidth;
+    let hPx = el.clientHeight;
+
+    canvas.style.width = wPx + 'px';
+    canvas.style.height = hPx + 'px';
+
+    const w = Math.round(wPx * dpr);
+    const h = Math.round(hPx * dpr);
+
+    if (w !== canvas.width || h !== canvas.height) {
+      canvas.width = w;
+      canvas.height = h;
+    }
+
+    if (w !== this.width || h !== this.height) {
+      /**
+       * Canvas size in _device_ pixels.
+       * @type {number}
+       */
+      this.width = w;
+      /**
+       * Canvas size in _device_ pixels.
+       * @type {number}
+       */
+      this.height = h;
+
+      this.glx.gl.viewport(0, 0, w, h); // TODO move this into WebGlRenderer
+    }
+  }
+}
+
+/** @private */
+function createGlContext(canvas, ctxAttrs) {
+  let gl;
+
+  try {
+    gl = canvas.getContext('webgl', ctxAttrs);
+  } catch (err0) {
+    console.error(err0);
+  }
+
+  if (!gl) {
+    try {
+      gl = canvas.getContext('experimental-webgl', ctxAttrs);
+    } catch (err1) {
+      console.error(err1);
+    }
+  }
+
+  if (!gl) {
+    throw new Error('cannot create webgl1 context');
+  }
+
+  return gl;
+}
+
+exports.default = App;
 
 /***/ }),
 /* 50 */

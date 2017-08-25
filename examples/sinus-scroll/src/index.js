@@ -1,5 +1,8 @@
 
-function init (el, spriteGroup, atlas) {
+export default async (el) => {
+  const spriteGroup = await document.getElementById('mySprites').spriteGroupPromise
+  const atlas = await document.getElementById('atlas1').textureAtlasPromise
+
   const sprite = spriteGroup.createSprite(atlas.getRandomFrame())
   sprite.setTranslate(190, 25)
 
@@ -18,9 +21,3 @@ function init (el, spriteGroup, atlas) {
     console.dir(spriteGroup.getTextureAtlas('tex'))
   })
 }
-
-Promise.all([
-  document.getElementById('blitpunk'),
-  document.getElementById('mySprites').spriteGroupPromise,
-  document.getElementById('atlas1').textureAtlasPromise
-]).then((args) => init(...args))

@@ -1,18 +1,18 @@
 import randomCloudFrame from './randomCloudFrame.js'
 import shuffle from 'lodash/shuffle'
 
-const makeCloud = (sprite, atlas) => {
-  const texture = randomCloudFrame(atlas)
+const makeCloud = (blitpunk, sprite, atlas) => {
+  const texture = randomCloudFrame(blitpunk, atlas)
   sprite.setSize(texture.width, texture.height)
   sprite.setTexCoordsByTexture(texture)
   sprite.setTranslate((Math.random() * 800) - 400, -(sprite.height / 2) + (Math.random() * 100) - 50)
 }
 
-const createClouds = (spriteGroup, atlas, clouds, maxClouds, zStart, zRange) => {
+const createClouds = (blitpunk, spriteGroup, atlas, clouds, maxClouds, zStart, zRange) => {
   let zValues = []
   for (let i = 0; i < maxClouds; ++i) {
     const sprite = spriteGroup.createSprite()
-    makeCloud(sprite, atlas)
+    makeCloud(blitpunk, sprite, atlas)
     zValues.push(zStart - (i * (zRange / maxClouds)))
     clouds.push(sprite)
   }
@@ -38,7 +38,8 @@ const fadeByOpacity = (cloud, zStart, zMax, fadeInMargin, fadeOutMargin) => {
 }
 
 export default class Clouds {
-  constructor (spriteGroup, atlas, options) {
+  constructor (blitpunk, spriteGroup, atlas, options) {
+    this.blitpunk = blitpunk
     this.spriteGroup = spriteGroup
     this.atlas = atlas
     Object.assign(this, {
@@ -49,7 +50,7 @@ export default class Clouds {
       fadeOutMarginFactor: 0.05,
       maxClouds: 50
     }, options)
-    this.clouds = createClouds(spriteGroup, atlas, [], this.maxClouds, this.zStart, this.zRange)
+    this.clouds = createClouds(blitpunk, spriteGroup, atlas, [], this.maxClouds, this.zStart, this.zRange)
   }
 
   get zRange () {
@@ -68,7 +69,7 @@ export default class Clouds {
     this.clouds.forEach((sprite) => {
       sprite.z += app.timeFrameOffset * this.speed
       if (sprite.z > this.zMax) {
-        makeCloud(sprite, this.atlas)
+        makeCloud(this.blitpunk, sprite, this.atlas)
         sprite.z -= this.zRange
       }
       fadeByOpacity(sprite, this.zStart, this.zMax, this.fadeInMargin, this.fadeOutMargin)

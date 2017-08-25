@@ -21,11 +21,14 @@
             height: 80vh;
         }
     </style>
-    <script src="../js/document-register-element.js"></script>
-    <script src="../js/blitpunk-dev.js"></script>
-    <script src="bundle.js"></script>
+    <script src="../js/system.js"></script>
+    <script>
+      SystemJS.config({ baseURL: '../js' });
+      SystemJS.import('blitpunk.js');
+    </script>
 </head>
 <body>
-    <blitpunk-canvas id="blitpunkCanvas" clear-color="rgba(0, 0, 44, .5)" />
+  <blitpunk-canvas id="blitpunkCanvas" clear-color="rgba(0, 0, 44, .5)"
+    module-src="./bundle.js"/>
 </body>
 </html>

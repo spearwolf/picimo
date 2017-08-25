@@ -26,7 +26,8 @@
       id="blitpunk"
       clear-color="rgb(100, 0, 50, 0)"
       blend-mode="sfactor: srcAlpha; dfactor: oneMinusSrcAlpha"
-      projection="sizeFit: contain; desiredWidth: 1200; desiredHeight: 1200">
+      projection="sizeFit: contain; desiredWidth: 1200; desiredHeight: 1200"
+      module-src="./bundle.js">
       <blitpunk-texture-atlas id="atlas1" src="comic-font.json" repeatable="true"></blitpunk-texture-atlas>
       <blitpunk-sprite-group
         id="mySprites"
@@ -39,8 +40,10 @@
         vo-new="scale: 1; opacity: 1"
         ></blitpunk-sprite-group>
     </blitpunk-canvas>
-    <script src="../js/document-register-element.js"></script>
-    <script src="../js/blitpunk-dev.js"></script>
-    <script src="bundle.js"></script>
+    <script src="../js/system.js"></script>
+    <script>
+      SystemJS.config({ baseURL: '../js' });
+      SystemJS.import('blitpunk.js');
+    </script>
   </body>
 </html>
