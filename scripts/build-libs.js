@@ -4,7 +4,7 @@ const colors = require('colors')
 const shelljs = require('shelljs')
 const program = require('commander')
 
-const VARIANTS = ['legacy', 'modern', 'bootstrap']
+const VARIANTS = ['legacy', 'safari', 'modern', 'bootstrap']
 
 const PROJECT_DIR = path.join(__dirname, '..')
 const WEBPACK = path.join(PROJECT_DIR, 'node_modules', '.bin', 'webpack')

@@ -700,14 +700,14 @@ var _detectCustomElements = __webpack_require__(3);
 
 var _detectCustomElements2 = _interopRequireDefault(_detectCustomElements);
 
-var _detectModernJavascript = __webpack_require__(5);
+var _detectJavascriptVariant = __webpack_require__(5);
 
-var _detectModernJavascript2 = _interopRequireDefault(_detectModernJavascript);
+var _detectJavascriptVariant2 = _interopRequireDefault(_detectJavascriptVariant);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* global SystemJS BLITPUNK_ENV */
-var isModernJavascript = (0, _detectModernJavascript2.default)();
+var javascriptVariant = (0, _detectJavascriptVariant2.default)();
 var needsCustomElementsPolyfill = !(0, _detectCustomElements2.default)();
 
 var log = typeof console !== 'undefined' ? typeof console.debug === 'function' ? function () {
@@ -722,15 +722,15 @@ var log = typeof console !== 'undefined' ? typeof console.debug === 'function' ?
   return 1;
 };
 
-log('blitpunk bootstrap (' + "development" + ')', 'isModernJavascript=', isModernJavascript, 'needsCustomElementsPolyfill=', needsCustomElementsPolyfill);
+log('blitpunk bootstrap (' + "development" + ')', 'javascriptVariant=', javascriptVariant, 'needsCustomElementsPolyfill=', needsCustomElementsPolyfill);
 
 var loadPolyfills = needsCustomElementsPolyfill ? SystemJS.import('document-register-element.js').then(function () {
   log('loaded polyfill: customElements');
 }) : Promise.resolve();
 
 var loadBlitpunk = function loadBlitpunk() {
-  var variant = isModernJavascript ? 'modern' : 'legacy';
-  var jsFile = 'blitpunk' + ( true ? '-dev' : '') + '-' + variant + '.js';
+  // const variant = javascriptVariant ? 'modern' : 'legacy'
+  var jsFile = 'blitpunk' + ( true ? '-dev' : '') + '-' + javascriptVariant + '.js';
   log('fetching', jsFile);
 
   return SystemJS.import(jsFile).then(function (_ref) {
@@ -757,7 +757,7 @@ var bowser = __webpack_require__(0);
 
 exports.default = function () {
   if (typeof customElements === 'undefined') return false;
-  if (bowser.firefox || bowser.msie || bowser.msedge) return false;
+  if (bowser.firefox || bowser.safari || bowser.ios || bowser.msie || bowser.msedge) return false;
   if (bowser.ios) return false; // TODO what about ios safari 10.3 or 11?
   if (bowser.check({
     chrome: '58',
@@ -786,15 +786,21 @@ module.exports = function() {
 exports.__esModule = true;
 var bowser = __webpack_require__(0);
 
+window.bowser = bowser;
+
 exports.default = function () {
-  if (bowser.check({
-    // TODO ios / safari
+  if (!bowser.safari && !bowser.ios && bowser.check({
     firefox: '55',
     chrome: '58',
     opera: '46',
     vivaldi: '1.92'
-  })) return true;
-  return false; // return false if unsure
+  })) {
+    return 'modern';
+  }
+  if (bowser.check({ safari: '10', ios: '10' })) {
+    return 'safari';
+  }
+  return 'legacy';
 };
 
 /***/ })

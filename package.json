@@ -10,7 +10,7 @@
   },
   "scripts": {
     "clean": "rm -fr dist/*.js examples/js",
-    "build:uglify": "uglifyjs -c -m -o dist/blitpunk-modern.js dist/blitpunk-modern.js && uglifyjs -c -m -o dist/blitpunk-legacy.js dist/blitpunk-legacy.js && uglifyjs -c -m -o dist/blitpunk.js dist/blitpunk.js",
+    "build:uglify": "uglifyjs -c -m -o dist/blitpunk-modern.js dist/blitpunk-modern.js && uglifyjs -c -m -o dist/blitpunk-safari.js dist/blitpunk-safari.js && uglifyjs -c -m -o dist/blitpunk-legacy.js dist/blitpunk-legacy.js && uglifyjs -c -m -o dist/blitpunk.js dist/blitpunk.js",
     "build": "node scripts/build-libs.js && npm run build:uglify && npm run examples:copy_resources",
     "standard": "standard",
     "karma": "NODE_ENV=testing karma start config/karma.conf.js --single-run",

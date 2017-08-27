@@ -4,7 +4,7 @@ const bowser = require('bowser')
 
 export default () => {
   if (typeof customElements === 'undefined') return false
-  if (bowser.firefox || bowser.msie || bowser.msedge) return false
+  if (bowser.firefox || bowser.safari || bowser.ios || bowser.msie || bowser.msedge) return false
   if (bowser.ios) return false  // TODO what about ios safari 10.3 or 11?
   if (bowser.check({
     chrome: '58',
