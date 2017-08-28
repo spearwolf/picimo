@@ -6,6 +6,7 @@ const glob = require('glob')
 const fs = require('fs')
 const ejs = require('ejs')
 const _ = require('lodash')
+const colors = require('colors')
 
 const EXAMPLES = _.compact(glob.sync(path.resolve(examplesDir) + '/*/').map(dir => {
   if (fs.lstatSync(dir).isDirectory()) {
@@ -34,12 +35,29 @@ EXAMPLES.forEach(example => {
 
 module.exports = {
   entry,
+  devServer: {
+    port: 8080,
+    compress: true,
+    contentBase: examplesDir,
+    setup: (app) => {
+      app.use((req, res, next) => {
+        const m = req.path.match(/\/blitpunk(-dev)?(\.[^.]+)?\.js$/)
+        if (m) {
+          const target = path.join(m[1] ? 'dist/dev' : 'dist', `blitpunk${m[1] || ''}${m[2] || ''}.js`)
+          console.log('PROXY', colors.bold.blue(req.path), '-->', colors.bold.yellow(target))
+          res.type('application/javascript')
+          res.status(200).sendFile(path.join(baseDir, target))
+        } else {
+          next()
+        }
+      })
+    }
+  },
   // plugins,
   output: {
     filename: '[name]/bundle.js',
     path: examplesDir,
-    libraryTarget: 'umd',
-    publicPath: '/js/'
+    libraryTarget: 'umd'
   },
   module: {
     rules: [{

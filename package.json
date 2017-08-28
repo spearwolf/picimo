@@ -10,7 +10,7 @@
   },
   "scripts": {
     "clean": "rm -fr dist/* examples/js",
-    "build": "node scripts/build-libs.js && npm run examples:copy_resources",
+    "build": "node scripts/build-libs.js",
     "standard": "standard",
     "karma": "NODE_ENV=testing karma start config/karma.conf.js --single-run",
     "karma:watch": "NODE_ENV=testing karma start config/karma.conf.js",
@@ -22,9 +22,11 @@
     "boilerplate:serve": "serve -p 8080 webgl-boilerplate",
     "examples:build": "webpack --config config/webpack.examples.config.js",
     "examples:build:watch": "npm run examples:build -- --watch",
-    "examples:copy_resources": "mkdir -p examples/js && cp dist/blitpunk*.js dist/dev/blitpunk*.js examples/js/",
+    "examples:copy_resourcesOLD": "mkdir -p examples/js && cp dist/blitpunk*.js dist/dev/blitpunk*.js examples/js/",
     "examples:serve": "serve -p 8080 examples",
-    "examples": "npm-run-all --serial examples:copy_resources --parallel examples:serve examples:build:watch",
+    "examples:devserver": "webpack-dev-server --watch --config config/webpack.examples.config.js",
+    "examplesOLD": "npm-run-all --serial examples:copy_resources --parallel examples:serve examples:build:watch",
+    "examples": "npm-run-all --serial build examples:devserver",
     "start": "run-p boilerplate:serve boilerplate:watch"
   },
   "devDependencies": {
@@ -66,7 +68,8 @@
     "style-loader": "^0.18.2",
     "systemjs": "^0.20.17",
     "uglify-es": "^3.0.27",
-    "webpack": "^3.5.5"
+    "webpack": "^3.5.5",
+    "webpack-dev-server": "^2.7.1"
   },
   "dependencies": {
     "@spearwolf/eventize": "github:spearwolf/eventize#semver:^0.1.1",
