@@ -20,6 +20,6 @@ module.exports = config({
   },
   devtool: 'inline-source-map',
   output: {
-    filename: 'blitpunk-dev-safari.js'
+    filename: 'variants/blitpunk-dev-safari.js'
   }
 })

@@ -22,6 +22,6 @@ module.exports = config({
   },
   devtool: 'inline-source-map',
   output: {
-    filename: 'blitpunk-dev-legacy.js'
+    filename: 'variants/blitpunk-dev-legacy.js'
   }
 })

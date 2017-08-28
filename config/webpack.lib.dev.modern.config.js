@@ -16,6 +16,6 @@ module.exports = config({
   },
   devtool: 'inline-source-map',
   output: {
-    filename: 'blitpunk-dev-modern.js'
+    filename: 'variants/blitpunk-dev-modern.js'
   }
 })

@@ -38,7 +38,8 @@ module.exports = {
   output: {
     filename: '[name]/bundle.js',
     path: examplesDir,
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
+    publicPath: '/js/'
   },
   module: {
     rules: [{

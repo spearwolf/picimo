@@ -20,6 +20,6 @@ module.exports = config({
     ]
   },
   output: {
-    filename: 'blitpunk-legacy.js'
+    filename: 'variants/blitpunk-legacy.js'
   }
 })

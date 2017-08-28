@@ -26,7 +26,8 @@ module.exports = ({
       test: /\.js$/,
       loader: `babel-loader?cacheDirectory=${cacheDirectory}`,
       exclude: [
-        /node_modules/
+        /node_modules/,
+        /dist.variants/
       ],
       options: Object.assign({ babelrc: false }, babelOptions)
     }, {
@@ -43,14 +44,15 @@ module.exports = ({
     extensions: ['.js'],
     modules: [
       path.resolve(projectDir),
-      path.resolve(projectDir, 'node_modules')
+      path.resolve(projectDir, 'node_modules'),
+      path.resolve(projectDir, 'dist/variants')
     ]
   },
   output: Object.assign({
     path: outDir,
     libraryTarget: 'umd',
     library: {
-      root: 'Blitpunk',
+      root: 'blitpunk',
       amd: 'blitpunk',
       commonjs: 'blitpunk'
     }

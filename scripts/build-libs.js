@@ -4,10 +4,11 @@ const colors = require('colors')
 const shelljs = require('shelljs')
 const program = require('commander')
 
-const VARIANTS = ['legacy', 'safari', 'modern', 'bootstrap']
+const VARIANTS = ['legacy', 'safari', 'modern', /* should be always the last --> */'bootstrap']
 
 const PROJECT_DIR = path.join(__dirname, '..')
 const WEBPACK = path.join(PROJECT_DIR, 'node_modules', '.bin', 'webpack')
+const UGLIFYJS = path.join(PROJECT_DIR, 'node_modules', '.bin', 'uglifyjs')
 
 const VALID_VARIANTS = `Valid variants are:${VARIANTS.map(v => `\n - ${colors.bold(v)}`).join('')}`
 
@@ -33,6 +34,22 @@ if (variant && !VARIANTS.includes(variant)) {
 function build (variant, dev) {
   banner('Building library variant:', colors.bold.red(variant), colors.bold(dev ? '(development)' : '(production)'))
   shelljs.exec(`${WEBPACK} --config ${PROJECT_DIR}/config/webpack.lib.${dev ? 'dev' : 'prod'}.${variant}.config.js`)
+  if (!dev) {
+    let subDir
+    let subVariant
+    if (variant === 'bootstrap') {
+      // subDir = dev ? 'dist/dev' : 'dist'
+      // subVariant = ''
+      return
+    } else {
+      subDir = 'dist/variants'
+      subVariant = `-${variant}`
+    }
+    const jsFile = path.join(PROJECT_DIR, `${subDir}/blitpunk${dev ? '-dev' : ''}${subVariant}.js`)
+    console.log()
+    console.log(colors.bold.blue('Uglify:'), jsFile)
+    shelljs.exec(`${UGLIFYJS} --compress --mangle -o ${jsFile} ${jsFile}`)
+  }
 }
 
 function banner (...args) {
@@ -59,7 +76,9 @@ if (variant) {
 } else {
   VARIANTS.forEach((variant) => {
     build(variant, true)
-    build(variant, false)
+    if (!program.development) {
+      build(variant, false)
+    }
   })
 }
 byebye()

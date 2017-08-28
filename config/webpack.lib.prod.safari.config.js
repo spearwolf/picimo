@@ -18,6 +18,6 @@ module.exports = config({
     ]
   },
   output: {
-    filename: 'blitpunk-safari.js'
+    filename: 'variants/blitpunk-safari.js'
   }
 })

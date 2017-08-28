@@ -7,3 +7,4 @@ node_modules
 bundle.js
 examples/index.html
 examples/js
+dist/variants

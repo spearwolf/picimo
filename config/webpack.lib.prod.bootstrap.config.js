@@ -5,6 +5,9 @@ module.exports = config({
   cacheDirectory: '.build/prod.bootstrap',
   blitpunkEnv: 'production',
   babelOptions: {
+    plugins: [
+      'syntax-dynamic-import'
+    ],
     presets: [
       ['env', {
         loose: true,
@@ -18,6 +21,8 @@ module.exports = config({
     ]
   },
   output: {
-    filename: 'blitpunk.js'
+    filename: 'blitpunk.js',
+    chunkFilename: 'blitpunk.[name].js'
+    // publicPath: '/js/'
   }
 })

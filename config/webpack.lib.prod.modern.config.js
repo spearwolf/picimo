@@ -14,6 +14,6 @@ module.exports = config({
     ]
   },
   output: {
-    filename: 'blitpunk-modern.js'
+    filename: 'variants/blitpunk-modern.js'
   }
 })

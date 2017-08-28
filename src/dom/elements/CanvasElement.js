@@ -1,4 +1,4 @@
-/* global SystemJS HTMLElement */
+/* global HTMLElement */
 import App from '../../app.js'
 import Blitpunk from '../../blitpunk.js'
 
@@ -139,14 +139,14 @@ export default class CanvasElement extends HTMLElement {
     this.blitpunk.start(this)
 
     // TODO check for onInit= attribute?
-    const src = this.getAttribute(ATTR_MODULE_SRC)
-    if (src) {
-      SystemJS.import(src).then((appModule) => {
-        appModule.default(this, Blitpunk)
+    // const src = this.getAttribute(ATTR_MODULE_SRC)
+    // if (src) {
+      // SystemJS.import(src).then((appModule) => {
+        // appModule.default(this, Blitpunk)
         // TODO configure blitpunk dynamic package
         // TODO check for .init() method?
-      })
-    }
+      // })
+    // }
   }
 
   /** @private */

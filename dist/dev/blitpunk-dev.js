@@ -6,11 +6,41 @@
 	else if(typeof exports === 'object')
 		exports["blitpunk"] = factory();
 	else
-		root["Blitpunk"] = factory();
+		root["blitpunk"] = factory();
 })(this, function() {
 return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// install a JSONP callback for chunk loading
+/******/ 	var parentJsonpFunction = window["webpackJsonp_object_Object_"];
+/******/ 	window["webpackJsonp_object_Object_"] = function webpackJsonpCallback(chunkIds, moreModules, executeModules) {
+/******/ 		// add "moreModules" to the modules object,
+/******/ 		// then flag all "chunkIds" as loaded and fire callback
+/******/ 		var moduleId, chunkId, i = 0, resolves = [], result;
+/******/ 		for(;i < chunkIds.length; i++) {
+/******/ 			chunkId = chunkIds[i];
+/******/ 			if(installedChunks[chunkId]) {
+/******/ 				resolves.push(installedChunks[chunkId][0]);
+/******/ 			}
+/******/ 			installedChunks[chunkId] = 0;
+/******/ 		}
+/******/ 		for(moduleId in moreModules) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 		if(parentJsonpFunction) parentJsonpFunction(chunkIds, moreModules, executeModules);
+/******/ 		while(resolves.length) {
+/******/ 			resolves.shift()();
+/******/ 		}
+/******/
+/******/ 	};
+/******/
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
+/******/
+/******/ 	// objects to store loaded and loading chunks
+/******/ 	var installedChunks = {
+/******/ 		4: 0
+/******/ 	};
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
@@ -36,6 +66,55 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 		return module.exports;
 /******/ 	}
 /******/
+/******/ 	// This file contains only the entry chunk.
+/******/ 	// The chunk loading function for additional chunks
+/******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
+/******/ 		var installedChunkData = installedChunks[chunkId];
+/******/ 		if(installedChunkData === 0) {
+/******/ 			return new Promise(function(resolve) { resolve(); });
+/******/ 		}
+/******/
+/******/ 		// a Promise means "currently loading".
+/******/ 		if(installedChunkData) {
+/******/ 			return installedChunkData[2];
+/******/ 		}
+/******/
+/******/ 		// setup Promise in chunk cache
+/******/ 		var promise = new Promise(function(resolve, reject) {
+/******/ 			installedChunkData = installedChunks[chunkId] = [resolve, reject];
+/******/ 		});
+/******/ 		installedChunkData[2] = promise;
+/******/
+/******/ 		// start chunk loading
+/******/ 		var head = document.getElementsByTagName('head')[0];
+/******/ 		var script = document.createElement('script');
+/******/ 		script.type = 'text/javascript';
+/******/ 		script.charset = 'utf-8';
+/******/ 		script.async = true;
+/******/ 		script.timeout = 120000;
+/******/
+/******/ 		if (__webpack_require__.nc) {
+/******/ 			script.setAttribute("nonce", __webpack_require__.nc);
+/******/ 		}
+/******/ 		script.src = __webpack_require__.p + "blitpunk-dev." + ({"0":"document-register-element","1":"safari-dev","2":"modern-dev","3":"legacy-dev"}[chunkId]||chunkId) + ".js";
+/******/ 		var timeout = setTimeout(onScriptComplete, 120000);
+/******/ 		script.onerror = script.onload = onScriptComplete;
+/******/ 		function onScriptComplete() {
+/******/ 			// avoid mem leaks in IE.
+/******/ 			script.onerror = script.onload = null;
+/******/ 			clearTimeout(timeout);
+/******/ 			var chunk = installedChunks[chunkId];
+/******/ 			if(chunk !== 0) {
+/******/ 				if(chunk) {
+/******/ 					chunk[1](new Error('Loading chunk ' + chunkId + ' failed.'));
+/******/ 				}
+/******/ 				installedChunks[chunkId] = undefined;
+/******/ 			}
+/******/ 		};
+/******/ 		head.appendChild(script);
+/******/
+/******/ 		return promise;
+/******/ 	};
 /******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
@@ -68,6 +147,9 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// on error function for async loading
+/******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 1);
@@ -706,7 +788,7 @@ var _detectJavascriptVariant2 = _interopRequireDefault(_detectJavascriptVariant)
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/* global SystemJS BLITPUNK_ENV */
+/* global BLITPUNK_ENV */
 var javascriptVariant = (0, _detectJavascriptVariant2.default)();
 var needsCustomElementsPolyfill = !(0, _detectCustomElements2.default)();
 
@@ -724,22 +806,22 @@ var log = typeof console !== 'undefined' ? typeof console.debug === 'function' ?
 
 log('blitpunk bootstrap (' + "development" + ')', 'javascriptVariant=', javascriptVariant, 'needsCustomElementsPolyfill=', needsCustomElementsPolyfill);
 
-var loadPolyfills = needsCustomElementsPolyfill ? SystemJS.import('document-register-element.js').then(function () {
+var loadPolyfills = needsCustomElementsPolyfill ? __webpack_require__.e/* import() */(0).then(__webpack_require__.bind(null, 10)).then(function () {
   log('loaded polyfill: customElements');
 }) : Promise.resolve();
 
-var loadBlitpunk = function loadBlitpunk() {
-  // const variant = javascriptVariant ? 'modern' : 'legacy'
-  var jsFile = 'blitpunk' + ( true ? '-dev' : '') + '-' + javascriptVariant + '.js';
-  log('fetching', jsFile);
+var loadBlitpunk = void 0;
+if (true) {
+  loadBlitpunk = __webpack_require__(6);
+} else {
+  loadBlitpunk = require('./bootstrap/importBlitpunkJsProd');
+}
+loadBlitpunk = loadBlitpunk.default(javascriptVariant, log).then(function (_ref) {
+  var blitpunk = _ref.default;
 
-  return SystemJS.import(jsFile).then(function (_ref) {
-    var blitpunk = _ref.default;
-
-    log('loaded blitpunk', blitpunk);
-    return blitpunk;
-  });
-};
+  log('loaded blitpunk', blitpunk);
+  return blitpunk;
+});
 
 exports.default = loadPolyfills.then(loadBlitpunk);
 
@@ -801,6 +883,33 @@ exports.default = function () {
     return 'safari';
   }
   return 'legacy';
+};
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+exports.default = function (javascriptVariant, log) {
+  var jsImport = void 0;
+  switch (javascriptVariant) {
+    case 'modern':
+      log('fetching', 'blitpunk-dev-modern.js');
+      jsImport = __webpack_require__.e/* import() */(2).then(__webpack_require__.bind(null, 7));
+      break;
+    case 'safari':
+      log('fetching', 'blitpunk-dev-safari.js');
+      jsImport = __webpack_require__.e/* import() */(1).then(__webpack_require__.bind(null, 8));
+      break;
+    default:
+      log('fetching', 'blitpunk-dev-legacy.js');
+      jsImport = __webpack_require__.e/* import() */(3).then(__webpack_require__.bind(null, 9));
+  }
+  return jsImport;
 };
 
 /***/ })

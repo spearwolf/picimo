@@ -1,9 +1,13 @@
+const path = require('path')
 const config = require('./webpack.lib.common.config')
 
 module.exports = config({
   entry: 'src/bootstrap.js',
   cacheDirectory: '.build/dev.bootstrap',
   babelOptions: {
+    plugins: [
+      'syntax-dynamic-import'
+    ],
     presets: [
       ['env', {
         loose: true,
@@ -18,6 +22,9 @@ module.exports = config({
     ]
   },
   output: {
-    filename: 'blitpunk-dev.js'
+    path: path.resolve(__dirname, '../dist/dev'),
+    filename: 'blitpunk-dev.js',
+    chunkFilename: 'blitpunk-dev.[name].js'
+    // publicPath: '/js/dev/'
   }
 })
