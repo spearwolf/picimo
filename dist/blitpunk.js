@@ -1,17 +1,8 @@
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define([], factory);
-	else if(typeof exports === 'object')
-		exports["blitpunk"] = factory();
-	else
-		root["blitpunk"] = factory();
-})(this, function() {
-return /******/ (function(modules) { // webpackBootstrap
+window["blitpunk"] =
+/******/ (function(modules) { // webpackBootstrap
 /******/ 	// install a JSONP callback for chunk loading
-/******/ 	var parentJsonpFunction = window["webpackJsonp_object_Object_"];
-/******/ 	window["webpackJsonp_object_Object_"] = function webpackJsonpCallback(chunkIds, moreModules, executeModules) {
+/******/ 	var parentJsonpFunction = window["webpackJsonpblitpunk"];
+/******/ 	window["webpackJsonpblitpunk"] = function webpackJsonpCallback(chunkIds, moreModules, executeModules) {
 /******/ 		// add "moreModules" to the modules object,
 /******/ 		// then flag all "chunkIds" as loaded and fire callback
 /******/ 		var moduleId, chunkId, i = 0, resolves = [], result;
@@ -777,6 +768,7 @@ module.exports = __webpack_require__(2);
 
 
 exports.__esModule = true;
+exports.whenReady = undefined;
 
 var _detectCustomElements = __webpack_require__(3);
 
@@ -786,44 +778,45 @@ var _detectJavascriptVariant = __webpack_require__(5);
 
 var _detectJavascriptVariant2 = _interopRequireDefault(_detectJavascriptVariant);
 
+var _log = __webpack_require__(6);
+
+var _log2 = _interopRequireDefault(_log);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/* global BLITPUNK_ENV */
-var javascriptVariant = (0, _detectJavascriptVariant2.default)();
+var javascriptVariant = (0, _detectJavascriptVariant2.default)(); /* global BLITPUNK_ENV */
+
 var needsCustomElementsPolyfill = !(0, _detectCustomElements2.default)();
 
-var log = typeof console !== 'undefined' ? typeof console.debug === 'function' ? function () {
-  var _console;
+(0, _log2.default)('blitpunk bootstrap (' + "production" + ')', 'javascriptVariant=', javascriptVariant, 'needsCustomElementsPolyfill=', needsCustomElementsPolyfill);
 
-  return (_console = console).debug.apply(_console, arguments);
-} : function () {
-  var _console2;
-
-  return (_console2 = console).log.apply(_console2, arguments);
-} : function () {
-  return 1;
-};
-
-log('blitpunk bootstrap (' + "production" + ')', 'javascriptVariant=', javascriptVariant, 'needsCustomElementsPolyfill=', needsCustomElementsPolyfill);
-
-var loadPolyfills = needsCustomElementsPolyfill ? __webpack_require__.e/* import() */(0).then(__webpack_require__.bind(null, 10)).then(function () {
-  log('loaded polyfill: customElements');
+var loadPolyfills = needsCustomElementsPolyfill ? __webpack_require__.e/* import() */(0).then(__webpack_require__.bind(null, 11)).then(function () {
+  (0, _log2.default)('loaded polyfill: customElements');
 }) : Promise.resolve();
 
 var loadBlitpunk = void 0;
 if (false) {
   loadBlitpunk = require('./bootstrap/importBlitpunkJsDev');
 } else {
-  loadBlitpunk = __webpack_require__(6);
+  loadBlitpunk = __webpack_require__(7);
 }
-loadBlitpunk = loadBlitpunk.default(javascriptVariant, log).then(function (_ref) {
-  var blitpunk = _ref.default;
-
-  log('loaded blitpunk', blitpunk);
-  return blitpunk;
+loadBlitpunk = loadBlitpunk.default(javascriptVariant, _log2.default).then(function (_ref) {
+  var whenReady = _ref.default;
+  return whenReady;
+}).then(function (blitpunkApi) {
+  (0, _log2.default)('loaded blitpunk', blitpunkApi);
+  var publicApi = window.blitpunk;
+  Object.assign(publicApi, blitpunkApi);
+  return publicApi;
 });
 
-exports.default = loadPolyfills.then(loadBlitpunk);
+var whenReady = function whenReady() {
+  return loadPolyfills.then(function () {
+    return loadBlitpunk;
+  });
+};
+
+exports.whenReady = whenReady;
 
 /***/ }),
 /* 3 */
@@ -894,24 +887,46 @@ exports.default = function () {
 
 exports.__esModule = true;
 
+var log = typeof console !== 'undefined' ? typeof console.debug === 'function' ? function () {
+  var _console;
+
+  return (_console = console).debug.apply(_console, arguments);
+} : function () {
+  var _console2;
+
+  return (_console2 = console).log.apply(_console2, arguments);
+} : function () {
+  return 1;
+};
+
+exports.default = log;
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
 exports.default = function (javascriptVariant, log) {
   var jsImport = void 0;
   switch (javascriptVariant) {
     case 'modern':
       log('fetching', 'blitpunk-modern.js');
-      jsImport = __webpack_require__.e/* import() */(2).then(__webpack_require__.bind(null, 7));
+      jsImport = __webpack_require__.e/* import() */(2).then(__webpack_require__.bind(null, 8));
       break;
     case 'safari':
       log('fetching', 'blitpunk-safari.js');
-      jsImport = __webpack_require__.e/* import() */(1).then(__webpack_require__.bind(null, 8));
+      jsImport = __webpack_require__.e/* import() */(1).then(__webpack_require__.bind(null, 9));
       break;
     default:
       log('fetching', 'blitpunk-legacy.js');
-      jsImport = __webpack_require__.e/* import() */(3).then(__webpack_require__.bind(null, 9));
+      jsImport = __webpack_require__.e/* import() */(3).then(__webpack_require__.bind(null, 10));
   }
   return jsImport;
 };
 
 /***/ })
 /******/ ]);
-});

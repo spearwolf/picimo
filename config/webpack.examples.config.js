@@ -1,14 +1,15 @@
-// const HtmlWebpackPlugin = require('html-webpack-plugin')
-const path = require('path')
-const baseDir = path.resolve(__dirname, '..')
-const examplesDir = path.resolve(baseDir, 'examples')
-const glob = require('glob')
-const fs = require('fs')
-const ejs = require('ejs')
 const _ = require('lodash')
 const colors = require('colors')
+const ejs = require('ejs')
+const fs = require('fs')
+const glob = require('glob')
+const path = require('path')
+// const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const EXAMPLES = _.compact(glob.sync(path.resolve(examplesDir) + '/*/').map(dir => {
+const BASE_DIR = path.resolve(__dirname, '..')
+const EXAMPLES_DIR = path.resolve(BASE_DIR, 'examples')
+
+const EXAMPLES = _.compact(glob.sync(path.resolve(EXAMPLES_DIR) + '/*/').map(dir => {
   if (fs.lstatSync(dir).isDirectory()) {
     return /.*\/examples\/(.*)\/$/.exec(dir)[1]
   }
@@ -16,18 +17,18 @@ const EXAMPLES = _.compact(glob.sync(path.resolve(examplesDir) + '/*/').map(dir 
 
 console.log(`Serving blitpunk examples {\n${EXAMPLES.map(example => `  ${example}`).join('\n')}\n}`)
 
-const template = fs.readFileSync(path.resolve(examplesDir, 'index.ejs.html'), 'utf8')
+const template = fs.readFileSync(path.resolve(EXAMPLES_DIR, 'index.ejs.html'), 'utf8')
 const html = ejs.render(template, { examples: EXAMPLES })
-fs.writeFileSync(path.resolve(examplesDir, 'index.html'), html, 'utf8')
+fs.writeFileSync(path.resolve(EXAMPLES_DIR, 'index.html'), html, 'utf8')
 
 const entry = {}
 // const plugins = []
 
 EXAMPLES.forEach(example => {
-  entry[example] = path.resolve(examplesDir, example, 'src/index.js')
+  entry[example] = path.resolve(EXAMPLES_DIR, example, 'src/index.js')
   // plugins.push(
   //   new HtmlWebpackPlugin({
-  //     filename: path.resolve(examplesDir, example, 'index.html'),
+  //     filename: path.resolve(EXAMPLES_DIR, example, 'index.html'),
   //     chunks: [example]
   //   })
   // )
@@ -35,10 +36,11 @@ EXAMPLES.forEach(example => {
 
 module.exports = {
   entry,
+  // plugins,
   devServer: {
     port: 8080,
     compress: true,
-    contentBase: examplesDir,
+    contentBase: EXAMPLES_DIR,
     setup: (app) => {
       app.use((req, res, next) => {
         const m = req.path.match(/\/blitpunk(-dev)?(\.[^.]+)?\.js$/)
@@ -46,18 +48,16 @@ module.exports = {
           const target = path.join(m[1] ? 'dist/dev' : 'dist', `blitpunk${m[1] || ''}${m[2] || ''}.js`)
           console.log('PROXY', colors.bold.blue(req.path), '-->', colors.bold.yellow(target))
           res.type('application/javascript')
-          res.status(200).sendFile(path.join(baseDir, target))
+          res.status(200).sendFile(path.join(BASE_DIR, target))
         } else {
           next()
         }
       })
     }
   },
-  // plugins,
   output: {
     filename: '[name]/bundle.js',
-    path: examplesDir,
-    libraryTarget: 'umd'
+    path: EXAMPLES_DIR
   },
   module: {
     rules: [{
@@ -93,7 +93,7 @@ module.exports = {
   resolve: {
     extensions: ['.js'],
     modules: [
-      path.resolve(baseDir, 'node_modules')
+      path.resolve(BASE_DIR, 'node_modules')
     ]
   }
 }

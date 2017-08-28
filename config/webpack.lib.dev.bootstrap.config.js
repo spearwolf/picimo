@@ -22,6 +22,7 @@ module.exports = config({
     ]
   },
   output: {
+    libraryTarget: 'window',
     path: path.resolve(__dirname, '../dist/dev'),
     filename: 'blitpunk-dev.js',
     chunkFilename: 'blitpunk-dev.[name].js'

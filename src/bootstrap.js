@@ -1,15 +1,10 @@
 /* global BLITPUNK_ENV */
 import detectCustomElements from './bootstrap/detectCustomElements.js'
 import detectJavascriptVariant from './bootstrap/detectJavascriptVariant.js'
+import log from './log.js'
 
 const javascriptVariant = detectJavascriptVariant()
 const needsCustomElementsPolyfill = !detectCustomElements()
-
-const log = typeof console !== 'undefined' ? (
-  typeof console.debug === 'function'
-  ? (...args) => console.debug(...args)
-  : (...args) => console.log(...args)
-) : () => 1
 
 log(`blitpunk bootstrap (${BLITPUNK_ENV})`, 'javascriptVariant=', javascriptVariant, 'needsCustomElementsPolyfill=', needsCustomElementsPolyfill)
 
@@ -28,9 +23,15 @@ if (BLITPUNK_ENV === 'development') {
 } else {
   loadBlitpunk = require('./bootstrap/importBlitpunkJsProd')
 }
-loadBlitpunk = loadBlitpunk.default(javascriptVariant, log).then(({ default: blitpunk }) => {
-  log('loaded blitpunk', blitpunk)
-  return blitpunk
+loadBlitpunk = loadBlitpunk.default(javascriptVariant, log).then(({ default: whenReady }) => whenReady).then((blitpunkApi) => {
+  log('loaded blitpunk', blitpunkApi)
+  const publicApi = window.blitpunk
+  Object.assign(publicApi, blitpunkApi)
+  return publicApi
 })
 
-export default loadPolyfills.then(loadBlitpunk)
+const whenReady = () => loadPolyfills.then(() => loadBlitpunk)
+
+export {
+  whenReady
+}

@@ -2,11 +2,12 @@
 import defineCustomElements from './dom/defineCustomElements.js'
 import sample from './utils/sample'
 import { DOM_ELEM_CANVAS } from './dom/constants'
+import log from './log.js'
 
 if (customElements.get(DOM_ELEM_CANVAS)) {
-  console.log('custom elements for <blitpunk> aleady defined!')
+  log('custom elements for <blitpunk> aleady defined!')
 } else {
-  console.log('defining custom elements for <blitpunk>')
+  log('defining custom elements for <blitpunk>')
   defineCustomElements()
 }
 
@@ -16,6 +17,9 @@ const publicApi = {
   }
 }
 
-publicApi.whenReady = customElements.whenDefined(DOM_ELEM_CANVAS).then(() => publicApi)
+const whenReady = customElements.whenDefined(DOM_ELEM_CANVAS).then(() => {
+  log('<blitpunk> elements are defined!')
+  return publicApi
+})
 
-export default publicApi
+export default whenReady
