@@ -5,9 +5,9 @@ import { DOM_ELEM_CANVAS } from './dom/constants'
 import log from './log.js'
 
 if (customElements.get(DOM_ELEM_CANVAS)) {
-  log('custom elements for <blitpunk> aleady defined!')
+  log('custom elements for <blitpunk> already defined!')
 } else {
-  log('defining custom elements for <blitpunk>')
+  log('defining custom elements for <blitpunk> ..')
   defineCustomElements()
 }
 
@@ -18,7 +18,7 @@ const publicApi = {
 }
 
 const whenReady = customElements.whenDefined(DOM_ELEM_CANVAS).then(() => {
-  log('<blitpunk> elements are defined!')
+  log('.. <blitpunk> elements are defined!')
   return publicApi
 })
 
