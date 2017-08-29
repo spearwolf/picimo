@@ -52,7 +52,7 @@ Release
 - [x] build library using ~~rollup~~ webpack (with full source maps support)
   - [x] add dynamic loader (~~systemjs~~ webpack) to support lazy-loading of
     - [x] specialized builds for (chrome, ff, ios, legacy(ie11), ..)
-    - [ ] polyfills for URL, fetch, ..
+    - [x] polyfills for URL, fetch, ..
 
 
 Next Release
