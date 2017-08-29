@@ -13,11 +13,12 @@ const UGLIFYJS = path.join(PROJECT_DIR, 'node_modules', '.bin', 'uglifyjs')
 const VALID_VARIANTS = `Valid variants are:${VARIANTS.map(v => `\n - ${colors.bold(v)}`).join('')}`
 
 program
-  .version('0.1.0')
+  .version('0.1.1')
   .usage('[<options>...]')
   .option('--variant <value>', 'Build library for a variant')
   .option('-l, --list', 'List all valid variants')
-  .option('-D, --development', 'use development mode (default: production)')
+  .option('-D, --development', 'build for development (default: production and development)')
+  .option('-P, --production', 'build for production (default: production and development)')
   .parse(process.argv)
 
 if (program.list) {
@@ -26,6 +27,10 @@ if (program.list) {
 }
 
 const { variant } = program
+
+const buildBoth = !!(program.development && program.production) || (!program.development && !program.production)
+const buildDev = !!program.development || buildBoth
+const buildProd = !!program.production || buildBoth
 
 if (variant && !VARIANTS.includes(variant)) {
   err(1, 'unknown variant:', colors.bold.blue(variant), `\n${VALID_VARIANTS}`)
@@ -72,13 +77,12 @@ function err (exitCode, ...args) {
 // START o)===]}------ ---  -
 
 if (variant) {
-  build(variant, program.development)
+  if (buildDev) build(variant, true)
+  if (buildProd) build(variant, false)
 } else {
   VARIANTS.forEach((variant) => {
-    build(variant, true)
-    if (!program.development) {
-      build(variant, false)
-    }
+    if (buildDev) build(variant, true)
+    if (buildProd) build(variant, false)
   })
 }
 byebye()

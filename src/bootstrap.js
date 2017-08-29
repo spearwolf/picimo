@@ -17,20 +17,22 @@ const loadPolyfills = needsCustomElementsPolyfill
     })
   : Promise.resolve()
 
-let loadBlitpunk
-if (BLITPUNK_ENV === 'development') {
-  loadBlitpunk = require('./bootstrap/importBlitpunkJsDev')
-} else {
-  loadBlitpunk = require('./bootstrap/importBlitpunkJsProd')
+const loadApi = () => {
+  let mod
+  if (BLITPUNK_ENV === 'development') {
+    mod = require('./bootstrap/importBlitpunkJsDev')
+  } else {
+    mod = require('./bootstrap/importBlitpunkJsProd')
+  }
+  return mod.default(javascriptVariant, log).then(({ default: whenReady }) => whenReady).then((api) => {
+    log('created blitpunk api', api)
+    const publicApi = window.blitpunk
+    Object.assign(publicApi, api)
+    return publicApi
+  })
 }
-loadBlitpunk = loadBlitpunk.default(javascriptVariant, log).then(({ default: whenReady }) => whenReady).then((blitpunkApi) => {
-  log('loaded blitpunk', blitpunkApi)
-  const publicApi = window.blitpunk
-  Object.assign(publicApi, blitpunkApi)
-  return publicApi
-})
 
-const whenReady = () => loadPolyfills.then(() => loadBlitpunk)
+const whenReady = () => loadPolyfills.then(loadApi)
 
 export {
   whenReady

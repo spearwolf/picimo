@@ -1,3 +1,4 @@
+/* global blitpunk */
 import Clouds from './Clouds.js'
 
 const LOGO_URL = 'spw-mini-logo.png'
@@ -9,12 +10,16 @@ function createLogo (spriteGroup, atlas) {
   logo.scale = 2
 }
 
-export default async (el, blitpunkApi) => {
+async function init (el) {
   const spriteGroup = await document.getElementById('cloudsSprites').spriteGroupPromise
   const atlas = await document.getElementById('cloudsAtlas').textureAtlasPromise
 
   createLogo(spriteGroup, atlas)
 
-  const clouds = new Clouds(blitpunkApi, spriteGroup, atlas)
+  const clouds = new Clouds(spriteGroup, atlas)
   el.on('animateFrame', clouds)
 }
+
+blitpunk.whenReady().then(() => {
+  init(document.querySelector('#blitpunk'), blitpunk)
+})

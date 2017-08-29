@@ -1,7 +1,8 @@
+/* global blitpunk */
 let cloudFrameNames
 let lastCloudFrame
 
-export default function randomCloudFrame (blitpunk, atlas) {
+export default function randomCloudFrame (atlas) {
   if (!cloudFrameNames) {
     cloudFrameNames = atlas.frameNames().filter((name) => name.match(/^cloud/))
     console.log('cloudFrameNames', cloudFrameNames)

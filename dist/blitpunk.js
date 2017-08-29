@@ -794,26 +794,26 @@ var loadPolyfills = needsCustomElementsPolyfill ? __webpack_require__.e/* import
   (0, _log2.default)('loaded polyfill: customElements');
 }) : Promise.resolve();
 
-var loadBlitpunk = void 0;
-if (false) {
-  loadBlitpunk = require('./bootstrap/importBlitpunkJsDev');
-} else {
-  loadBlitpunk = __webpack_require__(7);
-}
-loadBlitpunk = loadBlitpunk.default(javascriptVariant, _log2.default).then(function (_ref) {
-  var whenReady = _ref.default;
-  return whenReady;
-}).then(function (blitpunkApi) {
-  (0, _log2.default)('loaded blitpunk', blitpunkApi);
-  var publicApi = window.blitpunk;
-  Object.assign(publicApi, blitpunkApi);
-  return publicApi;
-});
+var loadApi = function loadApi() {
+  var mod = void 0;
+  if (false) {
+    mod = require('./bootstrap/importBlitpunkJsDev');
+  } else {
+    mod = __webpack_require__(7);
+  }
+  return mod.default(javascriptVariant, _log2.default).then(function (_ref) {
+    var whenReady = _ref.default;
+    return whenReady;
+  }).then(function (api) {
+    (0, _log2.default)('created blitpunk api', api);
+    var publicApi = window.blitpunk;
+    Object.assign(publicApi, api);
+    return publicApi;
+  });
+};
 
 var whenReady = function whenReady() {
-  return loadPolyfills.then(function () {
-    return loadBlitpunk;
-  });
+  return loadPolyfills.then(loadApi);
 };
 
 exports.whenReady = whenReady;

@@ -46,7 +46,7 @@ module.exports = {
         const m = req.path.match(/\/blitpunk(-dev)?(\.[^.]+)?\.js$/)
         if (m) {
           const target = path.join(m[1] ? 'dist/dev' : 'dist', `blitpunk${m[1] || ''}${m[2] || ''}.js`)
-          console.log('PROXY', colors.bold.blue(req.path), '-->', colors.bold.yellow(target))
+          console.log('GET', colors.bold.blue(req.path), '->', colors.bold.yellow(target))
           res.type('application/javascript')
           res.status(200).sendFile(path.join(BASE_DIR, target))
         } else {

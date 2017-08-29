@@ -1,5 +1,6 @@
+/* global blitpunk */
 
-export default async (el) => {
+const init = async (el) => {
   const spriteGroup = await document.getElementById('mySprites').spriteGroupPromise
   const atlas = await document.getElementById('atlas1').textureAtlasPromise
 
@@ -21,3 +22,7 @@ export default async (el) => {
     console.dir(spriteGroup.getTextureAtlas('tex'))
   })
 }
+
+blitpunk.whenReady().then(() => {
+  init(document.querySelector('#blitpunk'))
+})
