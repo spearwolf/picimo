@@ -70,16 +70,23 @@ Think about
 - [ ] quick boostrap tool `blitpunk-cli`
 
 
-Other
------
+Browser Support
+---------------
 
 - [ ] firefox windows support
 - [ ] edge windows support
+- [ ] ie11 support (needs polyfill for: URL, fetch, ..)
 - [x] chrome/chromium linux support
 - [x] firefox linux support
+- [ ] safari mac support
+- [ ] ios support
 - [ ] android chrome support
-- [ ] ie11 support (needs polyfill for: URL, fetch, ..)
-- [ ] fix karma/code coverage generation!
+
+
+Other
+-----
+
+- [ ] fix karma/code *coverage* generation!
 - [x] remove *jab* reference?
 
 
