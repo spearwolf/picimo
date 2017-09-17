@@ -22,6 +22,7 @@ DOM Element API
   - [ ] use name= property instead of id= for texture-map refs
 - [ ] `<blitpunk-scene/>`
 - [ ] disconnectedCallback, free (glx) resources
+  - [ ] support moving (append followed by remove) of dom element
   - [ ] `<blitpunk-canvas/>`
   - [ ] `<blitpunk-scene/>`
   - [ ] `<blitpunk-texture-atlas/>`
@@ -53,6 +54,9 @@ Release
   - [x] add dynamic loader (~~systemjs~~ webpack) to support lazy-loading of
     - [x] specialized builds for (chrome, ff, ios, legacy(ie11), ..)
     - [x] polyfills for URL, fetch, ..
+- [ ] multi-threaded builds (build-libs.js)
+- [ ] support native javascript modules
+- [ ] webpack dev server examples + build library integration
 
 
 Next Release
