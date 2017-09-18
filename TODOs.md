@@ -54,7 +54,7 @@ Release
   - [x] add dynamic loader (~~systemjs~~ webpack) to support lazy-loading of
     - [x] specialized builds for (chrome, ff, ios, legacy(ie11), ..)
     - [x] polyfills for URL, fetch, ..
-- [ ] multi-threaded builds (build-libs.js)
+- [x] multi-threaded builds (build-libs.js)
 - [ ] support native javascript modules
 - [ ] webpack dev server examples + build library integration
 
