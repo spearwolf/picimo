@@ -22,4 +22,4 @@ const whenReady = customElements.whenDefined(DOM_ELEM_CANVAS).then(() => {
   return publicApi
 })
 
-export default whenReady
+export default () => whenReady

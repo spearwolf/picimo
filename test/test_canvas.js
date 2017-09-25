@@ -1,9 +1,9 @@
 /* eslint-env mocha */
 /* global HTMLCanvasElement */
+import whenReady from 'src/blitpunk.js'
+
 import { assert } from 'chai'
 import sinon from 'sinon'
-
-import 'src/blitpunk.js'
 
 import CanvasElement from 'src/dom/elements/CanvasElement'
 import WebGlContext from 'src/render/web_gl_context'
@@ -14,10 +14,11 @@ import { DOM_ELEM_CANVAS } from 'src/dom/constants'
 describe(`<${DOM_ELEM_CANVAS} />`, () => {
   let blitpunkCanvas
 
-  before(() => {
+  before(async () => {
     sinon.spy(window, 'requestAnimationFrame')
     blitpunkCanvas = document.createElement(DOM_ELEM_CANVAS)
     document.body.appendChild(blitpunkCanvas)
+    await whenReady()
   })
 
   after(() => {
@@ -33,12 +34,6 @@ describe(`<${DOM_ELEM_CANVAS} />`, () => {
       assert.isOk(blitpunkCanvas.canvas)
       assert.instanceOf(blitpunkCanvas.canvas, HTMLCanvasElement)
     })
-    it('.time should initialize with 0', () => {
-      assert.equal(blitpunkCanvas.time, 0)
-    })
-    it('.frameNo should initialize with 0', () => {
-      assert.equal(blitpunkCanvas.frameNo, 0)
-    })
     it('.startTime should be a number', () => {
       assert.typeOf(blitpunkCanvas.startTime, 'number')
     })
@@ -47,9 +42,6 @@ describe(`<${DOM_ELEM_CANVAS} />`, () => {
     })
     it('.renderer should be an instance of WebGlRenderer', () => {
       assert.instanceOf(blitpunkCanvas.renderer, WebGlRenderer)
-    })
-    it('requestAnimationFrame() should has been called', () => {
-      assert.isTrue(window.requestAnimationFrame.calledOnce)
     })
     it('.width should be a number', () => {
       assert.typeOf(blitpunkCanvas.width, 'number')

@@ -14,8 +14,7 @@ import {
   ATTR_PREMULTIPLIED_ALPHA,
   ATTR_PRESERVE_DRAW,
   ATTR_PROJECTION,
-  ATTR_STENCIL,
-  ATTR_MODULE_SRC
+  ATTR_STENCIL
 } from '../constants'
 
 const eventize = require('@spearwolf/eventize')

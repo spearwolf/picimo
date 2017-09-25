@@ -208,7 +208,7 @@ window["blitpunk"] =
       , opera: t
       , version: versionIdentifier || getFirstMatch(/(?:opera|opr|opios)[\s\/](\d+(\.\d+)?)/i)
       }
-    } else if (/opr|opios/i.test(ua)) {
+    } else if (/opr\/|opios/i.test(ua)) {
       // a new Opera
       result = {
         name: 'Opera'
@@ -503,7 +503,7 @@ window["blitpunk"] =
         default: return undefined
       }
     }
-    
+
     // OS version extraction
     var osVersion = '';
     if (result.windows) {
@@ -803,7 +803,7 @@ var loadApi = function loadApi() {
   }
   return mod.default(javascriptVariant, _log2.default).then(function (_ref) {
     var whenReady = _ref.default;
-    return whenReady;
+    return whenReady();
   }).then(function (api) {
     (0, _log2.default)('created blitpunk api', api);
     var publicApi = window.blitpunk;

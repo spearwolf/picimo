@@ -5,7 +5,7 @@ module.exports = {
   module: {
     rules: [{
       test: /\.js$/,
-      loader: 'babel-loader?cacheDirectory=.build',
+      loader: 'babel-loader?cacheDirectory=.build/karma',
       exclude: [
         /node_modules/
       ]

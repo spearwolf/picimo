@@ -24,7 +24,7 @@ const loadApi = () => {
   } else {
     mod = require('./bootstrap/importBlitpunkJsProd')
   }
-  return mod.default(javascriptVariant, log).then(({ default: whenReady }) => whenReady).then((api) => {
+  return mod.default(javascriptVariant, log).then(({ default: whenReady }) => whenReady()).then((api) => {
     log('created blitpunk api', api)
     const publicApi = window.blitpunk
     Object.assign(publicApi, api)
