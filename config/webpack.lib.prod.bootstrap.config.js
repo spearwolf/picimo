@@ -23,7 +23,7 @@ module.exports = config({
   output: {
     libraryTarget: 'window',
     filename: 'blitpunk.js',
-    chunkFilename: 'blitpunk.[name].js'
-    // publicPath: '/js/'
+    chunkFilename: 'blitpunk.[name].js',
+    publicPath: '/blitpunk/'
   }
 })

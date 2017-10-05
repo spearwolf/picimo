@@ -25,7 +25,7 @@ module.exports = config({
     libraryTarget: 'window',
     path: path.resolve(__dirname, '../dist/dev'),
     filename: 'blitpunk-dev.js',
-    chunkFilename: 'blitpunk-dev.[name].js'
-    // publicPath: '/js/dev/'
+    chunkFilename: 'blitpunk-dev.[name].js',
+    publicPath: '/blitpunk/dev/'
   }
 })
