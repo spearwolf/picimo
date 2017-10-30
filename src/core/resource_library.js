@@ -1,6 +1,8 @@
 import VODescriptor from './v_o_descriptor'
 import ShaderSource from './shader_source'
 
+import destroy from '../utils/destroy'
+
 import addCommonSprites from './sprites'
 
 export default class ResourceLibrary {
@@ -10,6 +12,13 @@ export default class ResourceLibrary {
     this.fragmentShaders = new Map()
 
     addCommonSprites(this)
+  }
+
+  destroy () {
+    this.descriptors.clear()
+    this.vertexShaders.clear()
+    this.fragmentShaders.clear()
+    destroy(this)
   }
 
   /**

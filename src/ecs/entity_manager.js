@@ -1,4 +1,5 @@
 import Entity from './entity'
+import destroy from '../utils/destroy'
 
 /**
  * The entity manager holds references to all entities.
@@ -26,5 +27,17 @@ export default class EntityManager {
       return true
     }
     return false
+  }
+
+  destroyAllEntities () {
+    for (const id of this.entities.keys()) {
+      this.destroyEntity(id)
+    }
+  }
+
+  destroy () {
+    this.destroyAllEntities()
+    this.entities.clear()
+    destroy(this)
   }
 }

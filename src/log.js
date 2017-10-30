@@ -5,4 +5,13 @@ const log = typeof console !== 'undefined' ? (
   : (...args) => console.log(...args)
 ) : () => 1
 
+const error = typeof console !== 'undefined' ? (
+  typeof console.error === 'function'
+  ? (...args) => console.error(...args)
+  : (...args) => console.log(...args)
+) : () => 1
+
 export default log
+export {
+  error
+}

@@ -1,6 +1,8 @@
 import ShaderVariable from './shader_variable'
 import ShaderVariableGroup from './shader_variable_group'
 
+import destroy from '../utils/destroy'
+
 /**
  * A ShaderContext keeps named references to all shader _variables_
  * to make them available for shader _programs_.
@@ -18,6 +20,11 @@ export default class ShaderContext {
     this.uniform.clear()
     this.attrib.clear()
     this.tex2d.clear()
+  }
+
+  destroy () {
+    this.clear()
+    destroy(this)
   }
 
   /**

@@ -6,6 +6,8 @@ import WebGlContext from './render/web_gl_context'
 import WebGlRenderer from './render/web_gl_renderer'
 
 import registerDefaultComponents from './dom/registerDefaultComponents'
+import destroy from './utils/destroy'
+import { error } from './log'
 
 const eventize = require('@spearwolf/eventize')
 const tinycolor = require('tinycolor2')
@@ -162,8 +164,35 @@ class App {
 
   destroy () {
     if (this.destroyed) return
-    this.destroyed = true
     this.cancelAnimate()
+    try {
+      this.glx.destroy()
+    } catch (err0) {
+      error('blitpunk->destroy(WebGlContext) panic!', err0)
+    }
+    try {
+      this.renderer.destroy()
+    } catch (err1) {
+      error('blitpunk->destroy(WebGlRenderer) panic!', err1)
+    }
+    try {
+      this.textureLibrary.destroy()
+    } catch (err2) {
+      error('blitpunk->destroy(TextureLibrary) panic!', err2)
+    }
+    try {
+      this.resourceLibrary.destroy()
+    } catch (err3) {
+      error('blitpunk->destroy(ResourceLibrary) panic!', err3)
+    }
+    try {
+      this.entityManager.destroy()
+    } catch (err4) {
+      error('blitpunk->destroy(EntityManager) panic!', err4)
+    }
+    // this.componentRegistry (ComponentRegistry)
+    this.el.removeChild(this.canvas)
+    destroy(this)
   }
 
   get canAnimate () {
@@ -241,14 +270,14 @@ function createGlContext (canvas, ctxAttrs) {
   try {
     gl = canvas.getContext('webgl', ctxAttrs)
   } catch (err0) {
-    console.error(err0)
+    error(err0)
   }
 
   if (!gl) {
     try {
       gl = canvas.getContext('experimental-webgl', ctxAttrs)
     } catch (err1) {
-      console.error(err1)
+      error(err1)
     }
   }
 

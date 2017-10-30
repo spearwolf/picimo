@@ -1,3 +1,4 @@
+import destroy from '../utils/destroy'
 
 export default class WebGlTextureManager {
   /**
@@ -17,6 +18,11 @@ export default class WebGlTextureManager {
     }
 
     this.lastBoundTexUnit = 0
+  }
+
+  destroy () {
+    this.boundTextures.length = 0
+    destroy(this)
   }
 
   /**

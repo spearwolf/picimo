@@ -1,5 +1,6 @@
 import WebGlResourceLibrary from './web_gl_resource_library'
 import WebGlTextureManager from './web_gl_texture_manager'
+import destroy from '../utils/destroy'
 
 export default class WebGlContext {
   constructor (gl) {
@@ -21,6 +22,13 @@ export default class WebGlContext {
 
     this.readCurrentState()
     this.activeTexture(0) // enable first texture unit by default
+  }
+
+  destroy () {
+    this.textureManager.destroy()
+    this.boundBuffers.clear()
+    this.resourceLibrary.destroy()
+    destroy(this)
   }
 
   /**

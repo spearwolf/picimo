@@ -2,11 +2,18 @@ import Texture from './texture'
 import TextureState from './texture_state'
 import TextureAtlas from './texture_atlas'
 import ShaderTexture2dVariable from './shader_texture_2d_variable'
+import destroy from '../utils/destroy'
 
 export default class TextureLibrary {
   constructor () {
     this.states = new Map()
     this.shaderVars = new Map()
+  }
+
+  destroy () {
+    this.states.clear()
+    this.shaderVars.clear()
+    destroy(this)
   }
 
   loadTexture (id, url = id, textureHints = undefined) {

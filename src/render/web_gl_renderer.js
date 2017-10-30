@@ -1,4 +1,5 @@
 import ShaderContext from '../core/shader_context'
+import destroy from '../utils/destroy'
 
 const eventize = require('@spearwolf/eventize')
 const tinycolor = require('tinycolor2')
@@ -33,6 +34,13 @@ export default class WebGlRenderer {
     this.currentBlendMode = null
 
     eventize(this)
+  }
+
+  destroy () {
+    this.shaderContext.destroy()
+    this.autotouchResources.clear()
+    this.blendStack.length = 0
+    destroy(this)
   }
 
   /**

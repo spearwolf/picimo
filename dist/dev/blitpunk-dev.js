@@ -899,7 +899,20 @@ var log = typeof console !== 'undefined' ? typeof console.debug === 'function' ?
   return 1;
 };
 
+var error = typeof console !== 'undefined' ? typeof console.error === 'function' ? function () {
+  var _console3;
+
+  return (_console3 = console).error.apply(_console3, arguments);
+} : function () {
+  var _console4;
+
+  return (_console4 = console).log.apply(_console4, arguments);
+} : function () {
+  return 1;
+};
+
 exports.default = log;
+exports.error = error;
 
 /***/ }),
 /* 7 */

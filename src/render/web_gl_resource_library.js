@@ -4,6 +4,8 @@ import WebGlProgram from './web_gl_program'
 import WebGlBuffer from './web_gl_buffer'
 import WebGlTexture from './web_gl_texture'
 
+import destroy from '../utils/destroy'
+
 const WEB_GL_BUFFER_USAGE = Object.freeze({
   static: WebGlBuffer.STATIC_DRAW,
   dynamic: WebGlBuffer.DYNAMIC_DRAW
@@ -23,6 +25,15 @@ export default class WebGlResourceLibrary {
     this.buffer = new Map()
     /** @private */
     this.texture = new Map()
+  }
+
+  destroy () {
+    this.texture.clear()
+    this.buffer.clear()
+    this.shaderProgram.clear()
+    this.fragmentShader.clear()
+    this.vertexShader.clear()
+    destroy(this)
   }
 
   loadVertexShader (shaderSource) {
