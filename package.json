@@ -12,7 +12,7 @@
     "boilerplate:build": "webpack --config config/webpack.webgl-boilerplate.config.js",
     "boilerplate:serve": "serve -p 8080 webgl-boilerplate",
     "boilerplate:watch": "yarn run boilerplate:build --watch",
-    "testrunner:serve": "serve -p 9090 testrunner",
+    "testrunner": "webpack-dev-server --watch --config config/webpack.testrunner.config.js",
     "build": "node scripts/build-libs.js",
     "clean": "rm -fr dist/* examples/js",
     "esdoc": "esdoc",

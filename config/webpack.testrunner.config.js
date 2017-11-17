@@ -1,39 +1,22 @@
-const _ = require('lodash')
 const colors = require('colors')
-const ejs = require('ejs')
-const fs = require('fs')
-const glob = require('glob')
 const path = require('path')
 
 const BASE_DIR = path.resolve(__dirname, '..')
-const EXAMPLES_DIR = path.resolve(BASE_DIR, 'examples')
-
-const EXAMPLES = _.compact(glob.sync(path.resolve(EXAMPLES_DIR) + '/*/').map(dir => {
-  if (fs.lstatSync(dir).isDirectory()) {
-    return /.*\/examples\/(.*)\/$/.exec(dir)[1]
-  }
-})).filter(name => name !== 'js')
-
-console.log(`Serving blitpunk examples {\n${EXAMPLES.map(example => `  ${example}`).join('\n')}\n}`)
-
-const template = fs.readFileSync(path.resolve(EXAMPLES_DIR, 'index.ejs.html'), 'utf8')
-const html = ejs.render(template, { examples: EXAMPLES })
-fs.writeFileSync(path.resolve(EXAMPLES_DIR, 'index.html'), html, 'utf8')
-
-const entry = {}
-
-EXAMPLES.forEach(example => {
-  entry[example] = path.resolve(EXAMPLES_DIR, example, 'src/index.js')
-})
+const TESTRUNNER_DIR = path.resolve(BASE_DIR, 'testrunner')
 
 module.exports = {
-  entry,
+  entry: {
+    tests: path.resolve(TESTRUNNER_DIR, 'tests', 'index.js')
+  },
+  output: {
+    filename: '[name].js'
+  },
   devServer: {
-    port: 8080,
+    port: 9090,
     host: '0.0.0.0',
     compress: true,
-    contentBase: EXAMPLES_DIR,
-    setup: (app) => {
+    contentBase: TESTRUNNER_DIR,
+    before: (app) => {
       app.use((req, res, next) => {
         const m = req.path.match(/\/blitpunk(-dev)?(\.[^.]+)?\.js$/)
         if (m) {
@@ -47,14 +30,10 @@ module.exports = {
       })
     }
   },
-  output: {
-    filename: '[name]/bundle.js',
-    path: EXAMPLES_DIR
-  },
   module: {
     rules: [{
       test: /\.js$/,
-      loader: 'babel-loader?cacheDirectory=.build-examples',
+      loader: 'babel-loader?cacheDirectory=.build-testrunner',
       exclude: [
         /node_modules/
       ],
