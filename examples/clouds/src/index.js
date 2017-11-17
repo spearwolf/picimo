@@ -1,4 +1,4 @@
-/* global blitpunk */
+/* global BLITPUNK */
 import Clouds from './Clouds.js'
 
 const LOGO_URL = 'spw-mini-logo.png'
@@ -20,6 +20,6 @@ async function init (el) {
   el.on('animateFrame', clouds)
 }
 
-blitpunk.whenReady().then(() => {
-  init(document.querySelector('#blitpunk'), blitpunk)
+BLITPUNK.whenReady().then(() => {
+  init(document.querySelector('#blitpunk'))
 })

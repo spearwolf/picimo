@@ -137,6 +137,8 @@ if (allBuilds.length === 1 && buildBoth) {
   })
 }
 
+// TODO first build all variant (except bootstrap)
+// after all variants are finished we can build bootstrap
 Promise.all(allBuilds.map(b => {
   if (progressBar) {
     return b.promise.then(() => {

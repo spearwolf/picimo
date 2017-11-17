@@ -51,6 +51,6 @@ module.exports = ({
   output: Object.assign({
     path: outDir,
     libraryTarget: 'umd',
-    library: 'blitpunk'
+    library: 'BLITPUNK'
   }, output)
 })

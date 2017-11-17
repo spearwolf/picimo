@@ -1,8 +1,8 @@
-window["blitpunk"] =
+window["BLITPUNK"] =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// install a JSONP callback for chunk loading
-/******/ 	var parentJsonpFunction = window["webpackJsonpblitpunk"];
-/******/ 	window["webpackJsonpblitpunk"] = function webpackJsonpCallback(chunkIds, moreModules, executeModules) {
+/******/ 	var parentJsonpFunction = window["webpackJsonpBLITPUNK"];
+/******/ 	window["webpackJsonpBLITPUNK"] = function webpackJsonpCallback(chunkIds, moreModules, executeModules) {
 /******/ 		// add "moreModules" to the modules object,
 /******/ 		// then flag all "chunkIds" as loaded and fire callback
 /******/ 		var moduleId, chunkId, i = 0, resolves = [], result;
@@ -819,8 +819,8 @@ var loadApi = function loadApi() {
     var whenReady = _ref.default;
     return whenReady();
   }).then(function (api) {
-    (0, _log2.default)('created blitpunk api', api);
-    var publicApi = window.blitpunk;
+    // log('blitpunk api', api)
+    var publicApi = window.BLITPUNK;
     Object.assign(publicApi, api);
     return publicApi;
   });
@@ -941,15 +941,12 @@ exports.default = function (javascriptVariant, log) {
   var jsImport = void 0;
   switch (javascriptVariant) {
     case 'modern':
-      log('fetching', 'blitpunk-modern.js');
       jsImport = __webpack_require__.e/* import() */(2).then(__webpack_require__.bind(null, 8));
       break;
     case 'safari':
-      log('fetching', 'blitpunk-safari.js');
       jsImport = __webpack_require__.e/* import() */(1).then(__webpack_require__.bind(null, 9));
       break;
     default:
-      log('fetching', 'blitpunk-legacy.js');
       jsImport = __webpack_require__.e/* import() */(3).then(__webpack_require__.bind(null, 10));
   }
   return jsImport;

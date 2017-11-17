@@ -1,4 +1,4 @@
-/* global blitpunk */
+/* global BLITPUNK */
 let cloudFrameNames
 let lastCloudFrame
 
@@ -9,7 +9,7 @@ export default function randomCloudFrame (atlas) {
   }
   let frameName
   do {
-    frameName = blitpunk.utils.sample(cloudFrameNames)
+    frameName = BLITPUNK.sample(cloudFrameNames)
   } while (frameName === lastCloudFrame)
   lastCloudFrame = frameName
   return atlas.getFrame(frameName)

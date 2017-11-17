@@ -1,25 +1,16 @@
 /* global customElements */
 import defineCustomElements from './dom/defineCustomElements.js'
-import sample from './utils/sample'
+import publicApi from './api'
 import { DOM_ELEM_CANVAS } from './dom/constants'
 import log from './log.js'
 
 if (customElements.get(DOM_ELEM_CANVAS)) {
-  log('custom elements for <blitpunk> already defined!')
+  log('<blitpunk> custom elements have already been defined')
 } else {
-  log('defining custom elements for <blitpunk> ..')
+  log('<blitpunk> custom elements are now defined')
   defineCustomElements()
 }
 
-const publicApi = {
-  utils: {
-    sample
-  }
-}
-
-const whenReady = customElements.whenDefined(DOM_ELEM_CANVAS).then(() => {
-  log('.. <blitpunk> elements are defined!')
-  return publicApi
-})
+const whenReady = customElements.whenDefined(DOM_ELEM_CANVAS).then(() => publicApi)
 
 export default () => whenReady

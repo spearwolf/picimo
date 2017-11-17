@@ -1,4 +1,4 @@
-/* global blitpunk */
+/* global BLITPUNK */
 
 const init = async (el) => {
   const spriteGroup = await document.getElementById('mySprites').spriteGroupPromise
@@ -23,6 +23,6 @@ const init = async (el) => {
   })
 }
 
-blitpunk.whenReady().then(() => {
+BLITPUNK.whenReady().then(() => {
   init(document.querySelector('#blitpunk'))
 })

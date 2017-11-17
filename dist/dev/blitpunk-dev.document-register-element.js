@@ -1,4 +1,4 @@
-webpackJsonpblitpunk([0],{
+webpackJsonpBLITPUNK([0],{
 
 /***/ 11:
 /***/ (function(module, exports) {
