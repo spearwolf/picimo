@@ -1,8 +1,2 @@
-/* eslint-env mocha */
-import assert from 'assert'
-
-describe('hello world', () => {
-  it('works', () => {
-    assert.equal(true, true)
-  })
-})
+import './blitpunk_global_var'
+import './blitpunk_whenReady'

@@ -6,7 +6,8 @@ const TESTRUNNER_DIR = path.resolve(BASE_DIR, 'testrunner')
 
 module.exports = {
   entry: {
-    tests: path.resolve(TESTRUNNER_DIR, 'tests', 'index.js')
+    tests: path.resolve(TESTRUNNER_DIR, 'tests', 'index.js'),
+    setup: path.resolve(TESTRUNNER_DIR, 'setup.js')
   },
   output: {
     filename: '[name].js'
