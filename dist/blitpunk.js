@@ -158,7 +158,7 @@ window["BLITPUNK"] =
 
 !function (root, name, definition) {
   if (typeof module != 'undefined' && module.exports) module.exports = definition()
-  else if (true) __webpack_require__(4)(name, definition)
+  else if (true) __webpack_require__(5)(name, definition)
   else root[name] = definition()
 }(this, 'bowser', function () {
   /**
@@ -779,20 +779,20 @@ module.exports = __webpack_require__(2);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function(global) {
 
 exports.__esModule = true;
-exports.whenReady = undefined;
+exports.initialize = undefined;
 
-var _detectCustomElements = __webpack_require__(3);
+var _detectCustomElements = __webpack_require__(4);
 
 var _detectCustomElements2 = _interopRequireDefault(_detectCustomElements);
 
-var _detectJavascriptVariant = __webpack_require__(5);
+var _detectJavascriptVariant = __webpack_require__(6);
 
 var _detectJavascriptVariant2 = _interopRequireDefault(_detectJavascriptVariant);
 
-var _log = __webpack_require__(6);
+var _log = __webpack_require__(7);
 
 var _log2 = _interopRequireDefault(_log);
 
@@ -804,7 +804,7 @@ var needsCustomElementsPolyfill = !(0, _detectCustomElements2.default)();
 
 (0, _log2.default)('blitpunk bootstrap (' + "production" + ')', 'javascriptVariant=', javascriptVariant, 'needsCustomElementsPolyfill=', needsCustomElementsPolyfill);
 
-var loadPolyfills = needsCustomElementsPolyfill ? __webpack_require__.e/* import() */(0).then(__webpack_require__.bind(null, 11)).then(function () {
+var loadPolyfills = needsCustomElementsPolyfill ? __webpack_require__.e/* import() */(0).then(__webpack_require__.bind(null, 12)).then(function () {
   (0, _log2.default)('loaded polyfill: customElements');
 }) : Promise.resolve();
 
@@ -813,27 +813,60 @@ var loadApi = function loadApi() {
   if (false) {
     mod = require('./bootstrap/importBlitpunkJsDev');
   } else {
-    mod = __webpack_require__(7);
+    mod = __webpack_require__(8);
   }
   return mod.default(javascriptVariant, _log2.default).then(function (_ref) {
-    var whenReady = _ref.default;
-    return whenReady();
+    var initialize = _ref.default;
+    return initialize();
   }).then(function (api) {
-    // log('blitpunk api', api)
-    var publicApi = window.BLITPUNK;
-    Object.assign(publicApi, api);
-    return publicApi;
+    var globalApi = global.BLITPUNK;
+    if (globalApi) {
+      Object.assign(globalApi, api);
+      globalApi.initialize = function () {
+        return Promise.resolve(globalApi);
+      };
+      return globalApi;
+    }
+    return api;
   });
 };
 
-var whenReady = function whenReady() {
+var initialize = function initialize() {
   return loadPolyfills.then(loadApi);
 };
 
-exports.whenReady = whenReady;
+exports.initialize = initialize;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -857,7 +890,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports) {
 
 module.exports = function() {
@@ -866,7 +899,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -893,7 +926,7 @@ exports.default = function () {
 };
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -929,7 +962,7 @@ exports.default = log;
 exports.error = error;
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -941,13 +974,13 @@ exports.default = function (javascriptVariant, log) {
   var jsImport = void 0;
   switch (javascriptVariant) {
     case 'modern':
-      jsImport = __webpack_require__.e/* import() */(2).then(__webpack_require__.bind(null, 8));
+      jsImport = __webpack_require__.e/* import() */(2).then(__webpack_require__.bind(null, 9));
       break;
     case 'safari':
-      jsImport = __webpack_require__.e/* import() */(1).then(__webpack_require__.bind(null, 9));
+      jsImport = __webpack_require__.e/* import() */(1).then(__webpack_require__.bind(null, 10));
       break;
     default:
-      jsImport = __webpack_require__.e/* import() */(3).then(__webpack_require__.bind(null, 10));
+      jsImport = __webpack_require__.e/* import() */(3).then(__webpack_require__.bind(null, 11));
   }
   return jsImport;
 };

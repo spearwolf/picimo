@@ -24,16 +24,19 @@ const loadApi = () => {
   } else {
     mod = require('./bootstrap/importBlitpunkJsProd')
   }
-  return mod.default(javascriptVariant, log).then(({ default: whenReady }) => whenReady()).then((api) => {
-    // log('blitpunk api', api)
-    const publicApi = window.BLITPUNK
-    Object.assign(publicApi, api)
-    return publicApi
+  return mod.default(javascriptVariant, log).then(({ default: initialize }) => initialize()).then((api) => {
+    const globalApi = global.BLITPUNK
+    if (globalApi) {
+      Object.assign(globalApi, api)
+      globalApi.initialize = () => Promise.resolve(globalApi)
+      return globalApi
+    }
+    return api
   })
 }
 
-const whenReady = () => loadPolyfills.then(loadApi)
+const initialize = () => loadPolyfills.then(loadApi)
 
 export {
-  whenReady
+  initialize
 }

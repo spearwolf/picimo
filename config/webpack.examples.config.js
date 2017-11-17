@@ -33,7 +33,7 @@ module.exports = {
     host: '0.0.0.0',
     compress: true,
     contentBase: EXAMPLES_DIR,
-    setup: (app) => {
+    before: (app) => {
       app.use((req, res, next) => {
         const m = req.path.match(/\/blitpunk(-dev)?(\.[^.]+)?\.js$/)
         if (m) {

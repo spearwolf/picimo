@@ -20,6 +20,6 @@ async function init (el) {
   el.on('animateFrame', clouds)
 }
 
-BLITPUNK.whenReady().then(() => {
+BLITPUNK.initialize().then(() => {
   init(document.querySelector('#blitpunk'))
 })

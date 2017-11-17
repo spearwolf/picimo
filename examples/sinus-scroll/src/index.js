@@ -23,6 +23,6 @@ const init = async (el) => {
   })
 }
 
-BLITPUNK.whenReady().then(() => {
+BLITPUNK.initialize().then(() => {
   init(document.querySelector('#blitpunk'))
 })

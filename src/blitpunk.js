@@ -11,6 +11,6 @@ if (customElements.get(DOM_ELEM_CANVAS)) {
   defineCustomElements()
 }
 
-const whenReady = customElements.whenDefined(DOM_ELEM_CANVAS).then(() => publicApi)
+const initialize = customElements.whenDefined(DOM_ELEM_CANVAS).then(() => publicApi)
 
-export default () => whenReady
+export default () => initialize
