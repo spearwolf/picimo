@@ -76,13 +76,14 @@ class App {
 
     this.createGlContext = getOption('createGlContext', () => () => createGlContext(this.canvas, this.contextAttributes))
 
+    // TODO add global componentRegistry ?
     registerDefaultComponents(this.componentRegistry)
 
     this.entity = this.entityManager.createEntity()
-    this.entity.setComponent('blitpunk', this)
-    this.entity.setComponent('resourceLibrary', this.resourceLibrary)
-    this.entity.setComponent('textureLibrary', this.textureLibrary)
-    this.componentRegistry.createComponent(this.entity, 'children')
+    this.entity.setComponent('blitpunk', this)  // why?
+    this.entity.setComponent('resourceLibrary', this.resourceLibrary)  // why?
+    this.entity.setComponent('textureLibrary', this.textureLibrary) // why?
+    this.componentRegistry.createComponent(this.entity, 'children') // why?
 
     this.el = null
 
@@ -115,6 +116,8 @@ class App {
       this.requestAnimate()
       return
     }
+
+    // first-time initialization follows now ..
 
     this.el = el
     this.started = true
