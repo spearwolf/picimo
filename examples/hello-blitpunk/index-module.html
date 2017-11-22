@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>blitpunk boilerplate</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            background-color: #666;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #blitpunkCanvas {
+            width: 80vw;
+            height: 80vh;
+        }
+    </style>
+    <script src="./document-register-element.js"></script>
+    <script type="module">
+      import('./blitpunk-dev.mjs').then(module => {
+        console.log('blitpunk.mjs', module)
+        module.initialize().then(blitpunk => {
+          console.log('initialize()', blitpunk)
+          const el = document.querySelector('blitpunk-canvas')
+          el.setAttribute('clear-color', 'rgba(100, 0, 50, .5)')
+          console.log('Press Ctrl-D for <blitpunk> debug output ..')
+        })
+      })
+    </script>
+</head>
+<body>
+  <blitpunk-canvas id="blitpunkCanvas" clear-color="rgba(0, 0, 44, .5)" />
+</body>
+</html>

@@ -3,11 +3,21 @@ const path = require('path')
 const colors = require('colors')
 const shelljs = require('shelljs')
 const program = require('commander')
-// const { terminal } = require('terminal-kit')
 const uniq = require('lodash/uniq')
 
+const VARIANTS = [
+  'legacy',
+  'safari',
+  'modern',
+  'es6-module'
+]
 const BOOTSTRAP = 'bootstrap'
-const VARIANTS = ['legacy', 'safari', 'modern', /* should be always the last --> */BOOTSTRAP]
+
+VARIANTS.push(/* should be always the last --> */BOOTSTRAP)
+
+const OUTPUT = {
+  'es6-module': 'dist/blitpunk.mjs'
+}
 
 const PROJECT_DIR = path.join(__dirname, '..')
 const WEBPACK = path.join(PROJECT_DIR, 'node_modules', '.bin', 'webpack')
@@ -40,7 +50,8 @@ if (variant && !VARIANTS.includes(variant)) {
 }
 
 function build (variant, dev, silent) {
-  return new Promise((resolve, reject) => {
+  return () => new Promise((resolve, reject) => {
+    // console.log('START', `${variant}${dev ? '-dev' : ''}`)
     if (!silent) {
       banner('Building library variant:', colors.bold.red(variant), colors.bold(dev ? '(development)' : '(production)'))
     }
@@ -48,10 +59,10 @@ function build (variant, dev, silent) {
     if (silent) cmd += ' --display none'
     shelljs.exec(cmd, { silent }, (code, stdout, stderr) => {
       if (code) {
-        if (silent) err(code, `build:${variant}`, stderr)
+        if (silent) err(code, `build:${variant}`, stdout, stderr)
         reject(stderr)
       } else if (!dev) {
-        resolve(minify(variant, dev, silent))
+        resolve(minify(variant, dev, silent, OUTPUT[variant]))
       } else {
         resolve()
       }
@@ -59,19 +70,26 @@ function build (variant, dev, silent) {
   })
 }
 
-function minify (variant, dev, silent) {
+function minify (variant, dev, silent, filepath) {
   return new Promise((resolve, reject) => {
-    let subDir
-    let subVariant
-    if (variant === BOOTSTRAP) {
-      // subDir = dev ? 'dist/dev' : 'dist'
-      // subVariant = ''
-      return resolve()
+    let jsFile
+
+    if (filepath) {
+      jsFile = filepath
     } else {
-      subDir = 'dist/variants'
-      subVariant = `-${variant}`
+      let subDir
+      let subVariant
+      if (variant === BOOTSTRAP) {
+        return resolve()
+      } else {
+        subDir = 'dist/variants'
+        subVariant = `-${variant}`
+      }
+      jsFile = `${subDir}/blitpunk${dev ? '-dev' : ''}${subVariant}.js`
     }
-    const jsFile = path.join(PROJECT_DIR, `${subDir}/blitpunk${dev ? '-dev' : ''}${subVariant}.js`)
+
+    jsFile = path.join(PROJECT_DIR, jsFile)
+
     if (!silent) {
       console.log()
       console.log(colors.bold.blue('Uglify:'), jsFile)
@@ -115,10 +133,6 @@ const addBuildStep = (buildStep, addTo = runPreBuilds) => {
 
 if (variant) {
   if (buildBoth) {
-    // addBuildStep({
-      // variant,
-      // promise: build(variant, true, true).then(() => build(variant, false, true))
-    // })
     addBuildStep({ variant: `${variant}-dev`, promise: build(variant, true, true) })
     addBuildStep({ variant, promise: build(variant, false, true) }, runPostBuilds)
   } else {
@@ -142,16 +156,9 @@ if (allBuildSteps.length === 1 && buildBoth) {
   console.log('Building Library variant:', colors.bold.red(variant))
 } else if (allBuildSteps.length > 1) {
   console.log(`Library variants: ${uniq(allBuildSteps.map(b => colors.bold.red(b.variant))).join(', ')}`)
-  // progressBar = terminal.progressBar({
-    // title: 'Building',
-    // width: 80,
-    // eta: true,
-    // percent: true
-  // })
-  // progressBar.update(0.01)
 }
 
-const updateProgressBar = build => build.promise.then(() => {
+const updateProgressBar = build => build.promise().then(() => {
   console.log('Built successfully:', colors.bold.blue(build.variant))
   if (progressBar) {
     progress += progressStep

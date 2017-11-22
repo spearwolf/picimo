@@ -35,9 +35,9 @@ module.exports = {
     contentBase: EXAMPLES_DIR,
     before: (app) => {
       app.use((req, res, next) => {
-        const m = req.path.match(/\/blitpunk(-dev)?(\.[^.]+)?\.js$/)
+        const m = req.path.match(/\/blitpunk(-dev)?(\.[^.]+)?\.(m)?js$/)
         if (m) {
-          const target = path.join(m[1] ? 'dist/dev' : 'dist', `blitpunk${m[1] || ''}${m[2] || ''}.js`)
+          const target = path.join(m[1] ? 'dist/dev' : 'dist', `blitpunk${m[1] || ''}${m[2] || ''}.${m[3] || ''}js`)
           console.log('GET', colors.bold.blue(req.path), '->', colors.bold.yellow(target))
           res.type('application/javascript')
           res.status(200).sendFile(path.join(BASE_DIR, target))

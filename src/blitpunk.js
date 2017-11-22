@@ -1,6 +1,6 @@
 /* global customElements */
 import defineCustomElements from './dom/defineCustomElements.js'
-import publicApi from './api'
+import * as publicApi from './api'
 import { DOM_ELEM_CANVAS } from './dom/constants'
 import log from './log.js'
 
@@ -14,3 +14,4 @@ if (customElements.get(DOM_ELEM_CANVAS)) {
 const initialize = customElements.whenDefined(DOM_ELEM_CANVAS).then(() => publicApi)
 
 export default () => initialize
+export * from './api'

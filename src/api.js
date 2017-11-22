@@ -40,7 +40,7 @@ import { maxOf, findNextPowerOf2, isPowerOf2 } from './utils/math_helpers'
 import parseCssStyledProperties from './utils/parseCssStyledProperties'
 import sample from './utils/sample'
 
-export default {
+export {
   App,
 
   // core
