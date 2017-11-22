@@ -3,10 +3,11 @@ const path = require('path')
 const colors = require('colors')
 const shelljs = require('shelljs')
 const program = require('commander')
-const { terminal } = require('terminal-kit')
+// const { terminal } = require('terminal-kit')
 const uniq = require('lodash/uniq')
 
-const VARIANTS = ['legacy', 'safari', 'modern', /* should be always the last --> */'bootstrap']
+const BOOTSTRAP = 'bootstrap'
+const VARIANTS = ['legacy', 'safari', 'modern', /* should be always the last --> */BOOTSTRAP]
 
 const PROJECT_DIR = path.join(__dirname, '..')
 const WEBPACK = path.join(PROJECT_DIR, 'node_modules', '.bin', 'webpack')
@@ -15,7 +16,7 @@ const UGLIFYJS = path.join(PROJECT_DIR, 'node_modules', '.bin', 'uglifyjs')
 const VALID_VARIANTS = `Valid variants are:${VARIANTS.map(v => `\n - ${colors.bold(v)}`).join('')}`
 
 program
-  .version('0.1.2')
+  .version('0.1.3')
   .usage('[<options>...]')
   .option('--variant <value>', 'Build library for a variant')
   .option('-l, --list', 'List all valid variants')
@@ -62,7 +63,7 @@ function minify (variant, dev, silent) {
   return new Promise((resolve, reject) => {
     let subDir
     let subVariant
-    if (variant === 'bootstrap') {
+    if (variant === BOOTSTRAP) {
       // subDir = dev ? 'dist/dev' : 'dist'
       // subVariant = ''
       return resolve()
@@ -103,55 +104,74 @@ function err (exitCode, ...args) {
 
 // START o)===]}------ ---  -
 
-const allBuilds = []
+const runPreBuilds = []
+const runPostBuilds = []
+const allBuildSteps = []
+
+const addBuildStep = (buildStep, addTo = runPreBuilds) => {
+  allBuildSteps.push(buildStep)
+  addTo.push(buildStep)
+}
+
 if (variant) {
   if (buildBoth) {
-    allBuilds.push({
-      variant,
-      promise: build(variant, true, true).then(() => build(variant, false, true))
-    })
+    // addBuildStep({
+      // variant,
+      // promise: build(variant, true, true).then(() => build(variant, false, true))
+    // })
+    addBuildStep({ variant: `${variant}-dev`, promise: build(variant, true, true) })
+    addBuildStep({ variant, promise: build(variant, false, true) }, runPostBuilds)
   } else {
-    if (buildDev) allBuilds.push({ variant, promise: build(variant, true, false) })
-    if (buildProd) allBuilds.push({ variant, promise: build(variant, false, false) })
+    if (buildDev) addBuildStep({ variant, promise: build(variant, true, false) })
+    if (buildProd) addBuildStep({ variant, promise: build(variant, false, false) })
   }
 } else {
-  VARIANTS.forEach((variant) => {
-    if (buildDev) allBuilds.push({ variant, promise: build(variant, true, true) })
-    if (buildProd) allBuilds.push({ variant, promise: build(variant, false, true) })
+  VARIANTS.filter(variant => variant !== BOOTSTRAP).forEach((variant) => {
+    if (buildDev) addBuildStep({ variant: `${variant}-dev`, promise: build(variant, true, true) })
+    if (buildProd) addBuildStep({ variant, promise: build(variant, false, true) })
   })
+  if (buildDev) addBuildStep({ variant: `${BOOTSTRAP}-dev`, promise: build(BOOTSTRAP, true, true) }, runPostBuilds)
+  if (buildProd) addBuildStep({ variant: BOOTSTRAP, promise: build(BOOTSTRAP, false, true) }, runPostBuilds)
 }
 
 let progressBar
 let progress = 0
-const progressStep = 1 / allBuilds.length
+const progressStep = 1 / allBuildSteps.length
 
-if (allBuilds.length === 1 && buildBoth) {
+if (allBuildSteps.length === 1 && buildBoth) {
   console.log('Building Library variant:', colors.bold.red(variant))
-} else if (allBuilds.length > 1) {
-  console.log(`Library variants: ${uniq(allBuilds.map(b => colors.bold.red(b.variant))).join(', ')}`)
-  progressBar = terminal.progressBar({
-    title: 'Building',
-    width: 80,
-    eta: true,
-    percent: true
-  })
+} else if (allBuildSteps.length > 1) {
+  console.log(`Library variants: ${uniq(allBuildSteps.map(b => colors.bold.red(b.variant))).join(', ')}`)
+  // progressBar = terminal.progressBar({
+    // title: 'Building',
+    // width: 80,
+    // eta: true,
+    // percent: true
+  // })
+  // progressBar.update(0.01)
 }
 
-// TODO first build all variant (except bootstrap)
-// after all variants are finished we can build bootstrap
-Promise.all(allBuilds.map(b => {
+const updateProgressBar = build => build.promise.then(() => {
+  console.log('Built successfully:', colors.bold.blue(build.variant))
   if (progressBar) {
-    return b.promise.then(() => {
-      progress += progressStep
-      progressBar.update(progress)
-    })
-  } else {
-    return b.promise
+    progress += progressStep
+    progressBar.update(progress)
   }
-})).then(() => {
+})
+
+const startBuild = (build) => {
+  if (Array.isArray(build)) {
+    return Promise.all(build.map(startBuild))
+  }
+  return updateProgressBar(build)
+}
+
+const finishBuild = () => {
   if (progressBar) {
     progressBar.stop()
     console.log()
   }
   byebye()
-})
+}
+
+startBuild(runPreBuilds).then(() => startBuild(runPostBuilds)).then(finishBuild)

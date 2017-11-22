@@ -1,5 +1,5 @@
 
-export default (javascriptVariant, log) => {
+export default (javascriptVariant) => {
   let jsImport
   switch (javascriptVariant) {
     case 'modern':

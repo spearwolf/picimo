@@ -970,7 +970,7 @@ exports.error = error;
 
 exports.__esModule = true;
 
-exports.default = function (javascriptVariant, log) {
+exports.default = function (javascriptVariant) {
   var jsImport = void 0;
   switch (javascriptVariant) {
     case 'modern':
