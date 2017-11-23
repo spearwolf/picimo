@@ -1,9 +1,10 @@
-import ComponentRegistry from '../ecs/component_registry'
-import EntityManager from '../ecs/entity_manager'
-import ResourceLibrary from '../core/resource_library'
-import TextureLibrary from '../core/texture_library'
 import WebGlContext from '../render/web_gl_context'
 import WebGlRenderer from '../render/web_gl_renderer'
+
+import componentRegistry from '../componentRegistry'
+import entityManager from '../entityManager'
+import resourceLibrary from '../resourceLibrary'
+import textureLibrary from '../textureLibrary'
 
 import registerDefaultComponents from '../dom/registerDefaultComponents'
 import destroy from '../utils/destroy'
@@ -27,10 +28,10 @@ class App {
 
     const getOption = defaultOption.bind(null, options)
 
-    this.componentRegistry = getOption('componentRegistry', () => new ComponentRegistry())
-    this.entityManager = getOption('entityManager', () => new EntityManager())
-    this.resourceLibrary = getOption('resourceLibrary', () => new ResourceLibrary())
-    this.textureLibrary = getOption('textureLibrary', () => new TextureLibrary())
+    this.componentRegistry = componentRegistry
+    this.entityManager = entityManager
+    this.resourceLibrary = resourceLibrary
+    this.textureLibrary = textureLibrary
 
     /**
      * @type {CanvasHTMLElement}
@@ -178,21 +179,21 @@ class App {
     } catch (err1) {
       error('blitpunk->destroy(WebGlRenderer) panic!', err1)
     }
-    try {
-      this.textureLibrary.destroy()
-    } catch (err2) {
-      error('blitpunk->destroy(TextureLibrary) panic!', err2)
-    }
-    try {
-      this.resourceLibrary.destroy()
-    } catch (err3) {
-      error('blitpunk->destroy(ResourceLibrary) panic!', err3)
-    }
-    try {
-      this.entityManager.destroy()
-    } catch (err4) {
-      error('blitpunk->destroy(EntityManager) panic!', err4)
-    }
+    // try {
+      // this.textureLibrary.destroy()
+    // } catch (err2) {
+      // error('blitpunk->destroy(TextureLibrary) panic!', err2)
+    // }
+    // try {
+      // this.resourceLibrary.destroy()
+    // } catch (err3) {
+      // error('blitpunk->destroy(ResourceLibrary) panic!', err3)
+    // }
+    // try {
+      // this.entityManager.destroy()
+    // } catch (err4) {
+      // error('blitpunk->destroy(EntityManager) panic!', err4)
+    // }
     // this.componentRegistry (ComponentRegistry)
     this.el.removeChild(this.canvas)
     destroy(this)

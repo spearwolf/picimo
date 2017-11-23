@@ -3,15 +3,11 @@ import ShaderSource from './shader_source'
 
 import destroy from '../utils/destroy'
 
-import addCommonSprites from './sprites'
-
 export default class ResourceLibrary {
   constructor () {
     this.descriptors = new Map()
     this.vertexShaders = new Map()
     this.fragmentShaders = new Map()
-
-    addCommonSprites(this)
   }
 
   destroy () {

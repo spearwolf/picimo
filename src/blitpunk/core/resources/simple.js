@@ -1,4 +1,4 @@
-import rotate from '../../utils/shader_helpers/rotate'
+import rotate from 'blitpunk/utils/shader_helpers/rotate'
 
 export const vertexShader = [`
 

@@ -6,6 +6,8 @@ import * as utils from './utils'
 
 import componentRegistry from './componentRegistry'
 import entityManager from './entityManager'
+import resourceLibrary from './resourceLibrary'
+import textureLibrary from './textureLibrary'
 
 export {
   App,
@@ -15,5 +17,8 @@ export {
   utils,
 
   componentRegistry,
-  entityManager
+  entityManager,
+
+  resourceLibrary,
+  textureLibrary
 }
