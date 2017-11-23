@@ -6,5 +6,5 @@ mocha.setup('bdd')
 require('./tests')
 
 mocha.checkLeaks()
-mocha.globals(['blitpunk'])
+mocha.globals(['BLITPUNK'])
 mocha.run()
