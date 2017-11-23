@@ -83,7 +83,8 @@
     "ignore": [
       "config/*.js",
       "examples/js/*.js",
-      "bundle.js"
+      "bundle.js",
+      "document-register-element.js"
     ]
   },
   "browserslist": [

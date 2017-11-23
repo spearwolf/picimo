@@ -5,7 +5,7 @@ export default class EntityElement extends HTMLElement {
   constructor (_) {
     const self = super(_)
 
-    Object.defineProperties(this, {
+    Object.defineProperties(self, {
       attributesValueCache: {
         value: new Map()
       }
