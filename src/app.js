@@ -7,7 +7,7 @@ import WebGlRenderer from './render/web_gl_renderer'
 
 import registerDefaultComponents from './dom/registerDefaultComponents'
 import destroy from './utils/destroy'
-import { error } from './log'
+import { error } from './common/log'
 
 const eventize = require('@spearwolf/eventize')
 const tinycolor = require('tinycolor2')

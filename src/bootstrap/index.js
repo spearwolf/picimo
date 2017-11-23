@@ -1,7 +1,7 @@
 /* global BLITPUNK_ENV */
-import detectCustomElements from './detectCustomElements.js'
-import detectJavascriptVariant from './detectJavascriptVariant.js'
-import log from '../log.js'
+import detectCustomElements from './detectCustomElements'
+import detectJavascriptVariant from './detectJavascriptVariant'
+import log from '../common/log'
 
 const javascriptVariant = detectJavascriptVariant()
 const needsCustomElementsPolyfill = !detectCustomElements()
