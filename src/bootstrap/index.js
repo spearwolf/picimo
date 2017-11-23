@@ -17,23 +17,15 @@ const loadPolyfills = needsCustomElementsPolyfill
     })
   : Promise.resolve()
 
-const loadApi = () => {
-  let mod
-  if (BLITPUNK_ENV === 'development') {
-    mod = require('./importBlitpunkJsDev')
-  } else {
-    mod = require('./importBlitpunkJsProd')
+const loadApi = () => require('./loadBlitpunk').default(javascriptVariant).then(({ default: initialize }) => initialize()).then((api) => {
+  const globalApi = global && global.BLITPUNK
+  if (globalApi) {
+    Object.assign(globalApi, api)
+    globalApi.initialize = () => Promise.resolve(globalApi)
+    return globalApi
   }
-  return mod.default(javascriptVariant, log).then(({ default: initialize }) => initialize()).then((api) => {
-    const globalApi = global && global.BLITPUNK
-    if (globalApi) {
-      Object.assign(globalApi, api)
-      globalApi.initialize = () => Promise.resolve(globalApi)
-      return globalApi
-    }
-    return api
-  })
-}
+  return api
+})
 
 const initialize = () => loadPolyfills.then(loadApi)
 
