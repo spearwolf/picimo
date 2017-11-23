@@ -1,5 +1,6 @@
 const colors = require('colors')
 const path = require('path')
+const babelEnvTargets = require('./babel.env.targets')
 
 const BASE_DIR = path.resolve(__dirname, '..')
 const TESTRUNNER_DIR = path.resolve(BASE_DIR, 'testrunner')
@@ -44,10 +45,7 @@ module.exports = {
           ['env', {
             debug: true,
             loose: true,
-            targets: {
-              chrome: 60,
-              firefox: 55
-            }
+            targets: babelEnvTargets.modern
           }]
         ]
       }

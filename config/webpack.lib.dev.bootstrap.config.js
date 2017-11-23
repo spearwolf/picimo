@@ -5,16 +5,15 @@ module.exports = config({
   dev: true,
   variant: 'bootstrap',
   entry: 'src/bootstrap.js',
+  preEntry: [
+    'babel-polyfill'
+  ],
   babelOptions: {
     plugins: [
       'syntax-dynamic-import'
     ]
   },
-  presetEnvTargets: {
-    safari: 10,
-    ios_saf: 10,
-    ie: 11
-  },
+  presetEnvTargets: 'legacy',
   output: {
     libraryTarget: 'window',
     path: path.resolve(__dirname, '../dist/dev'),

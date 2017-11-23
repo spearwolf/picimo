@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const babelEnvTargets = require('./babel.env.targets')
 const outDir = path.resolve(__dirname, '../dist')
 const projectDir = path.resolve(__dirname, '..')
 
@@ -19,11 +20,12 @@ const getBabelOptions = (babelOptions, presetEnvTargets, dev) => {
   if (!presetEnvTargets) return babelOptions
   const options = babelOptions || {}
   if (!options.presets) options.presets = []
+  const targets = typeof presetEnvTargets === 'string' ? babelEnvTargets[presetEnvTargets] : presetEnvTargets
   options.presets.push(['env', {
+    targets,
     debug: dev,
     loose: true,
-    useBuiltIns: true,
-    targets: presetEnvTargets
+    useBuiltIns: true
   }])
   return options
 }
@@ -45,20 +47,19 @@ const getOutputOptions = (output, variant, dev) => {
 module.exports = ({
   dev = false,
   preEntry = [],
-  cacheDirectory,
   babelOptions,
   presetEnvTargets = false,
   devtool = false,
   output,
   entry = 'src/blitpunk.js',
   plugins = [],
-  blitpunkEnv = 'development',
+  blitpunkEnv,
   variant = false,
   defines
 }) => ({
   plugins: [
     new webpack.DefinePlugin(Object.assign({
-      BLITPUNK_ENV: JSON.stringify(blitpunkEnv)
+      BLITPUNK_ENV: JSON.stringify(blitpunkEnv ? blitpunkEnv : (dev ? 'development' : 'production'))
     }, defines))
   ].concat(plugins),
   devtool: getDevtoolOption(devtool, dev),

@@ -442,44 +442,44 @@ module.exports = function (method, arg) {
 exports.__esModule = true;
 /* eslint no-multi-spaces: ["error", { exceptions: { "VariableDeclarator": true } }] */
 
-var DOM_ELEM_CANVAS = exports.DOM_ELEM_CANVAS = 'blitpunk-canvas';
-var DOM_ELEM_SCENE = exports.DOM_ELEM_SCENE = 'blitpunk-scene';
-var DOM_ELEM_SPRITE_GROUP = exports.DOM_ELEM_SPRITE_GROUP = 'blitpunk-sprite-group';
-var DOM_ELEM_TEXTURE_ATLAS = exports.DOM_ELEM_TEXTURE_ATLAS = 'blitpunk-texture-atlas';
+const DOM_ELEM_CANVAS = exports.DOM_ELEM_CANVAS = 'blitpunk-canvas';
+const DOM_ELEM_SCENE = exports.DOM_ELEM_SCENE = 'blitpunk-scene';
+const DOM_ELEM_SPRITE_GROUP = exports.DOM_ELEM_SPRITE_GROUP = 'blitpunk-sprite-group';
+const DOM_ELEM_TEXTURE_ATLAS = exports.DOM_ELEM_TEXTURE_ATLAS = 'blitpunk-texture-atlas';
 
-var NODE_NAME_CANVAS = exports.NODE_NAME_CANVAS = DOM_ELEM_CANVAS.toUpperCase();
-var NODE_NAME_SCENE = exports.NODE_NAME_SCENE = DOM_ELEM_SCENE.toUpperCase();
-var NODE_NAME_SPRITE_GROUP = exports.NODE_NAME_SPRITE_GROUP = DOM_ELEM_SPRITE_GROUP.toUpperCase();
-var NODE_NAME_TEXTURE_ATLAS = exports.NODE_NAME_TEXTURE_ATLAS = DOM_ELEM_TEXTURE_ATLAS.toUpperCase();
+const NODE_NAME_CANVAS = exports.NODE_NAME_CANVAS = DOM_ELEM_CANVAS.toUpperCase();
+const NODE_NAME_SCENE = exports.NODE_NAME_SCENE = DOM_ELEM_SCENE.toUpperCase();
+const NODE_NAME_SPRITE_GROUP = exports.NODE_NAME_SPRITE_GROUP = DOM_ELEM_SPRITE_GROUP.toUpperCase();
+const NODE_NAME_TEXTURE_ATLAS = exports.NODE_NAME_TEXTURE_ATLAS = DOM_ELEM_TEXTURE_ATLAS.toUpperCase();
 
-var COMP_PRIO_PROJECTION = exports.COMP_PRIO_PROJECTION = 1000;
-var COMP_PRIO_BLEND_BEFORE = exports.COMP_PRIO_BLEND_BEFORE = 500;
-var COMP_PRIO_CHILDREN = exports.COMP_PRIO_CHILDREN = 100;
-var COMP_PRIO_BLEND_AFTER = exports.COMP_PRIO_BLEND_AFTER = -500;
+const COMP_PRIO_PROJECTION = exports.COMP_PRIO_PROJECTION = 1000;
+const COMP_PRIO_BLEND_BEFORE = exports.COMP_PRIO_BLEND_BEFORE = 500;
+const COMP_PRIO_CHILDREN = exports.COMP_PRIO_CHILDREN = 100;
+const COMP_PRIO_BLEND_AFTER = exports.COMP_PRIO_BLEND_AFTER = -500;
 
-var ATTR_ALPHA = exports.ATTR_ALPHA = 'alpha';
-var ATTR_ANTIALIAS = exports.ATTR_ANTIALIAS = 'antialias';
-var ATTR_BLEND_MODE = exports.ATTR_BLEND_MODE = 'blend-mode';
-var ATTR_CAPACITY = exports.ATTR_CAPACITY = 'capacity';
-var ATTR_CLEAR_COLOR = exports.ATTR_CLEAR_COLOR = 'clear-color';
-var ATTR_DEPTH = exports.ATTR_DEPTH = 'depth';
-var ATTR_DESCRIPTOR = exports.ATTR_DESCRIPTOR = 'descriptor';
-var ATTR_FLIP_Y = exports.ATTR_FLIP_Y = 'flip-y';
-var ATTR_FRAGMENT_SHADER = exports.ATTR_FRAGMENT_SHADER = 'fragment-shader';
-var ATTR_MODULE_SRC = exports.ATTR_MODULE_SRC = 'module-src';
-var ATTR_NEAREST = exports.ATTR_NEAREST = 'nearest';
-var ATTR_PREMULTIPLIED_ALPHA = exports.ATTR_PREMULTIPLIED_ALPHA = 'premultiplied-alpha';
-var ATTR_PREMULTIPLY_ALPHA = exports.ATTR_PREMULTIPLY_ALPHA = 'premultiply-alpha';
-var ATTR_PRESERVE_DRAW = exports.ATTR_PRESERVE_DRAW = 'preserve-drawing-buffer';
-var ATTR_PRIMITIVE = exports.ATTR_PRIMITIVE = 'primitive';
-var ATTR_PROJECTION = exports.ATTR_PROJECTION = 'projection';
-var ATTR_REPEATABLE = exports.ATTR_REPEATABLE = 'repeatable';
-var ATTR_SRC = exports.ATTR_SRC = 'src';
-var ATTR_STENCIL = exports.ATTR_STENCIL = 'stencil';
-var ATTR_TEXTURE_MAP = exports.ATTR_TEXTURE_MAP = 'texture-map';
-var ATTR_VERTEX_SHADER = exports.ATTR_VERTEX_SHADER = 'vertex-shader';
-var ATTR_VO_NEW = exports.ATTR_VO_NEW = 'vo-new';
-var ATTR_VO_ZERO = exports.ATTR_VO_ZERO = 'vo-zero';
+const ATTR_ALPHA = exports.ATTR_ALPHA = 'alpha';
+const ATTR_ANTIALIAS = exports.ATTR_ANTIALIAS = 'antialias';
+const ATTR_BLEND_MODE = exports.ATTR_BLEND_MODE = 'blend-mode';
+const ATTR_CAPACITY = exports.ATTR_CAPACITY = 'capacity';
+const ATTR_CLEAR_COLOR = exports.ATTR_CLEAR_COLOR = 'clear-color';
+const ATTR_DEPTH = exports.ATTR_DEPTH = 'depth';
+const ATTR_DESCRIPTOR = exports.ATTR_DESCRIPTOR = 'descriptor';
+const ATTR_FLIP_Y = exports.ATTR_FLIP_Y = 'flip-y';
+const ATTR_FRAGMENT_SHADER = exports.ATTR_FRAGMENT_SHADER = 'fragment-shader';
+const ATTR_MODULE_SRC = exports.ATTR_MODULE_SRC = 'module-src';
+const ATTR_NEAREST = exports.ATTR_NEAREST = 'nearest';
+const ATTR_PREMULTIPLIED_ALPHA = exports.ATTR_PREMULTIPLIED_ALPHA = 'premultiplied-alpha';
+const ATTR_PREMULTIPLY_ALPHA = exports.ATTR_PREMULTIPLY_ALPHA = 'premultiply-alpha';
+const ATTR_PRESERVE_DRAW = exports.ATTR_PRESERVE_DRAW = 'preserve-drawing-buffer';
+const ATTR_PRIMITIVE = exports.ATTR_PRIMITIVE = 'primitive';
+const ATTR_PROJECTION = exports.ATTR_PROJECTION = 'projection';
+const ATTR_REPEATABLE = exports.ATTR_REPEATABLE = 'repeatable';
+const ATTR_SRC = exports.ATTR_SRC = 'src';
+const ATTR_STENCIL = exports.ATTR_STENCIL = 'stencil';
+const ATTR_TEXTURE_MAP = exports.ATTR_TEXTURE_MAP = 'texture-map';
+const ATTR_VERTEX_SHADER = exports.ATTR_VERTEX_SHADER = 'vertex-shader';
+const ATTR_VO_NEW = exports.ATTR_VO_NEW = 'vo-new';
+const ATTR_VO_ZERO = exports.ATTR_VO_ZERO = 'vo-zero';
 
 /***/ }),
 /* 22 */
@@ -1872,10 +1872,8 @@ module.exports = eventize;
 
 exports.__esModule = true;
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 exports.default = function (obj) {
-  if ((typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) !== 'object') return;
+  if (typeof obj !== 'object') return;
   if (obj.destroyed) return;
 
   if (eventize.is(obj) && typeof obj.off === 'function') {
@@ -1883,14 +1881,14 @@ exports.default = function (obj) {
     obj.off();
   }
 
-  Object.keys(obj).forEach(function (key) {
+  Object.keys(obj).forEach(key => {
     delete obj[key];
   });
 
   Object.defineProperty(obj, 'destroyed', { value: true });
 };
 
-var eventize = __webpack_require__(30);
+const eventize = __webpack_require__(30);
 
 /***/ }),
 /* 32 */
@@ -2311,7 +2309,7 @@ exports.__esModule = true;
 
 // https://github.com/kelektiv/node-uuid
 /** @private */
-var uuid = __webpack_require__(400);
+const uuid = __webpack_require__(400);
 
 exports.default = uuid;
 
@@ -2371,26 +2369,19 @@ module.exports = function (it) {
 
 
 exports.__esModule = true;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 /**
  * Generic container for shader variables. eg. uniform, vertex attributes, textures ..
  * @desc
  * Each time you change the value, a serial number will be increased.
  * Use `.touch()` if you want to increase the serial number without changing the value.
  */
-var ShaderVariable = function () {
+class ShaderVariable {
   /**
    * @param {string} name
    * @param {string} type
    * @param {number|Object} value
    */
-  function ShaderVariable(name, type, value) {
-    _classCallCheck(this, ShaderVariable);
-
+  constructor(name, type, value) {
     this.name = name;
     this.type = type;
     this._value = value;
@@ -2402,32 +2393,26 @@ var ShaderVariable = function () {
     this.serial = 0;
   }
 
+  get value() {
+    return this._value;
+  }
+
+  set value(val) {
+    if (this._value !== val) {
+      this._value = val;
+      ++this.serial;
+    }
+  }
+
   /**
    * Increase serial number.
    */
-  ShaderVariable.prototype.touch = function touch() {
+  touch() {
     ++this.serial;
-  };
-
-  _createClass(ShaderVariable, [{
-    key: 'value',
-    get: function get() {
-      return this._value;
-    },
-    set: function set(val) {
-      if (this._value !== val) {
-        this._value = val;
-        ++this.serial;
-      }
-    }
-  }]);
-
-  return ShaderVariable;
-}();
+  }
+}
 
 exports.default = ShaderVariable;
-
-
 ShaderVariable.TYPE = Object.freeze({
   UNIFORM: 'uniform',
   ATTRIB: 'attrib',
@@ -2869,8 +2854,6 @@ module.exports = function (COLLECTION) {
 
 exports.__esModule = true;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _resource_ref = __webpack_require__(72);
 
 var _resource_ref2 = _interopRequireDefault(_resource_ref);
@@ -2878,8 +2861,6 @@ var _resource_ref2 = _interopRequireDefault(_resource_ref);
 var _typed_array_helpers = __webpack_require__(73);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
  * Vertex Object Array
@@ -2898,17 +2879,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  *
  */
 
-var VOArray = function () {
-  function VOArray(descriptor, capacity, data) {
-    var _this = this;
-
-    var usage = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : VOArray.USAGE.DYNAMIC;
-    var autotouch = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : undefined;
-
-    _classCallCheck(this, VOArray);
-
+class VOArray {
+  constructor(descriptor, capacity, data, usage = VOArray.USAGE.DYNAMIC, autotouch = undefined) {
     /** @type {ResourceRef} */
-    this.resourceRef = new _resource_ref2.default(this, { usage: usage });
+    this.resourceRef = new _resource_ref2.default(this, { usage });
 
     /** @type {VODescriptor} */
     this.descriptor = descriptor;
@@ -2928,14 +2902,9 @@ var VOArray = function () {
     // needed by WebGlRenderer#syncBuffer
     this.resourceRef.hints.typedArray = this.float32Array;
 
-    var buffer = this.buffer,
-        bufferByteOffset = this.bufferByteOffset,
-        bufferByteLength = this.bufferByteLength;
-
-    descriptor.typeList.filter(function (type) {
-      return type !== 'float32';
-    }).forEach(function (type) {
-      _this[type + 'Array'] = new _typed_array_helpers.TYPED_ARRAY_CONSTRUCTOR[type](buffer, bufferByteOffset, bufferByteLength / _typed_array_helpers.BYTES_PER_ELEMENT[type]);
+    const { buffer, bufferByteOffset, bufferByteLength } = this;
+    descriptor.typeList.filter(type => type !== 'float32').forEach(type => {
+      this[`${type}Array`] = new _typed_array_helpers.TYPED_ARRAY_CONSTRUCTOR[type](buffer, bufferByteOffset, bufferByteLength / _typed_array_helpers.BYTES_PER_ELEMENT[type]);
     });
 
     /** @type {boolean} */
@@ -2947,29 +2916,39 @@ var VOArray = function () {
   /**
    * increase serial value from resource reference
    */
-
-
-  VOArray.prototype.touch = function touch() {
+  touch() {
     this.resourceRef.serial.touch();
-  };
+  }
 
   /** @type {ArrayBuffer} */
+  get buffer() {
+    return this.float32Array.buffer;
+  }
 
+  /** @type {number} */
+  get bufferByteOffset() {
+    return this.float32Array.byteOffset;
+  }
+
+  /** @type {number} */
+  get bufferByteLength() {
+    return this.float32Array.byteLength;
+  }
 
   /**
    * Copy **all** *vertex object* data from an external vertex array to the internal array
    * @param {VOArray} fromVOArray - The source vertex array
    * @param {number} [toOffset=0] - *Vertex object* offset for the internal vertex array
    */
-  VOArray.prototype.copy = function copy(fromVOArray, toOffset) {
-    var offset = 0;
+  copy(fromVOArray, toOffset) {
+    let offset = 0;
 
     if (toOffset === undefined) {
       offset = toOffset * (this.descriptor.bytesPerVO >> 2);
     }
 
     this.float32Array.set(fromVOArray.float32Array, offset);
-  };
+  }
 
   /**
    * Create a VOArray *sub* array
@@ -2982,43 +2961,12 @@ var VOArray = function () {
    * @param {number} [size=1]
    * @return {VOArray}
    */
-
-
-  VOArray.prototype.subarray = function subarray(begin) {
-    var size = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-
+  subarray(begin, size = 1) {
     return new VOArray(this.descriptor, size, new DataView(this.buffer, this.bufferByteOffset + begin * this.descriptor.bytesPerVO, size * this.descriptor.bytesPerVO));
-  };
-
-  _createClass(VOArray, [{
-    key: 'buffer',
-    get: function get() {
-      return this.float32Array.buffer;
-    }
-
-    /** @type {number} */
-
-  }, {
-    key: 'bufferByteOffset',
-    get: function get() {
-      return this.float32Array.byteOffset;
-    }
-
-    /** @type {number} */
-
-  }, {
-    key: 'bufferByteLength',
-    get: function get() {
-      return this.float32Array.byteLength;
-    }
-  }]);
-
-  return VOArray;
-}();
+  }
+}
 
 exports.default = VOArray;
-
-
 VOArray.USAGE = Object.freeze({
   STATIC: 'static',
   DYNAMIC: 'dynamic'
@@ -3043,20 +2991,14 @@ var _serial2 = _interopRequireDefault(_serial);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 /**
  * Represents a resource reference which points to a *renderable resource*.
  * Every resource has an id, serial and possible resource allocation *hints*.
  * The resource reference will be used by the resource library to find or
  * create *renderable resources* (like WebGlBuffer, WebGlTexture, ..).
  */
-var ResourceRef = function () {
-  function ResourceRef(resource) {
-    var hints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-    _classCallCheck(this, ResourceRef);
-
+class ResourceRef {
+  constructor(resource, hints = {}) {
     this.resource = resource;
     this.hints = hints;
     this.id = hints.id || (0, _generate_uuid2.default)();
@@ -3067,40 +3009,30 @@ var ResourceRef = function () {
    * @param {ResourceRef} sourceRef
    * @returns {boolean}
    */
-
-
-  ResourceRef.prototype.isSynced = function isSynced(sourceRef) {
-    var value = this.serial.value;
-
+  isSynced(sourceRef) {
+    const { value } = this.serial;
     return value > 0 && value === sourceRef.serial.value;
-  };
+  }
 
   /**
    * @param {ResourceRef} sourceRef
    * @returns {boolean}
    */
-
-
-  ResourceRef.prototype.needSync = function needSync(sourceRef) {
+  needSync(sourceRef) {
     return !this.isSynced(sourceRef);
-  };
+  }
 
   /**
    * @param {ResourceRef} sourceRef
    * @param {function} cb
    */
-
-
-  ResourceRef.prototype.sync = function sync(sourceRef, cb) {
+  sync(sourceRef, cb) {
     if (this.needSync(sourceRef)) {
       cb(this.resource);
       this.serial.value = sourceRef.serial.value;
     }
-  };
-
-  return ResourceRef;
-}();
-
+  }
+}
 exports.default = ResourceRef;
 
 /***/ }),
@@ -3113,7 +3045,7 @@ exports.default = ResourceRef;
 exports.__esModule = true;
 
 /** @private */
-var BYTES_PER_ELEMENT = Object.freeze({
+const BYTES_PER_ELEMENT = Object.freeze({
   float32: 4,
   int16: 2,
   int32: 4,
@@ -3124,7 +3056,7 @@ var BYTES_PER_ELEMENT = Object.freeze({
 });
 
 /** @private */
-var TYPED_ARRAY_CONSTRUCTOR = Object.freeze({
+const TYPED_ARRAY_CONSTRUCTOR = Object.freeze({
   float32: Float32Array,
   int16: Int16Array,
   int32: Int32Array,
@@ -3135,32 +3067,18 @@ var TYPED_ARRAY_CONSTRUCTOR = Object.freeze({
 });
 
 /** @private */
-var TYPED_ARRAY_GETTER = Object.freeze({
-  float32: function float32(obj) {
-    return obj.float32Array;
-  },
-  int32: function int32(obj) {
-    return obj.int32Array;
-  },
-  int16: function int16(obj) {
-    return obj.int16Array;
-  },
-  int8: function int8(obj) {
-    return obj.int8Array;
-  },
-  uint32: function uint32(obj) {
-    return obj.uint32Array;
-  },
-  uint16: function uint16(obj) {
-    return obj.uint16Array;
-  },
-  uint8: function uint8(obj) {
-    return obj.uint8Array;
-  }
+const TYPED_ARRAY_GETTER = Object.freeze({
+  float32: obj => obj.float32Array,
+  int32: obj => obj.int32Array,
+  int16: obj => obj.int16Array,
+  int8: obj => obj.int8Array,
+  uint32: obj => obj.uint32Array,
+  uint16: obj => obj.uint16Array,
+  uint8: obj => obj.uint8Array
 });
 
 /** @private */
-var GL_ITEM_TYPES = Object.freeze({
+const GL_ITEM_TYPES = Object.freeze({
   float32: 'FLOAT',
   int16: 'SHORT',
   int32: 'INT',
@@ -3186,12 +3104,10 @@ exports.__esModule = true;
 
 var _typed_array_helpers = __webpack_require__(73);
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 /**
  * Vertex object *attribute* descriptor.
  */
-var VOAttrDescriptor = function () {
+class VOAttrDescriptor {
   /**
    * @param {string} name
    * @param {string} type
@@ -3201,9 +3117,7 @@ var VOAttrDescriptor = function () {
    * @param {boolean} uniform
    * @param {string[]} [attrNames]
    */
-  function VOAttrDescriptor(name, type, size, offset, byteOffset, uniform, attrNames) {
-    _classCallCheck(this, VOAttrDescriptor);
-
+  constructor(name, type, size, offset, byteOffset, uniform, attrNames) {
     this.name = name;
     this.type = type;
     this.size = size;
@@ -3230,39 +3144,29 @@ var VOAttrDescriptor = function () {
    * Number of attributes per vertex
    * @type {number}
    */
-
-
-  VOAttrDescriptor.prototype.vertexAttrCount = function vertexAttrCount(descriptor) {
+  vertexAttrCount(descriptor) {
     return descriptor.bytesPerVertex / this.bytesPerElement;
-  };
+  }
 
   /**
    * @private
    */
+  static defineProperties(attrDesc, propertiesObject, descriptor) {
+    const { name } = attrDesc;
+    const getArray = _typed_array_helpers.TYPED_ARRAY_GETTER[attrDesc.type];
+    const vertexCount = descriptor.vertexCount;
+    const vertexAttrCount = attrDesc.vertexAttrCount(descriptor);
+    const offset = attrDesc.byteOffset / attrDesc.bytesPerElement;
 
-
-  VOAttrDescriptor.defineProperties = function defineProperties(attrDesc, propertiesObject, descriptor) {
-    var name = attrDesc.name;
-
-    var getArray = _typed_array_helpers.TYPED_ARRAY_GETTER[attrDesc.type];
-    var vertexCount = descriptor.vertexCount;
-    var vertexAttrCount = attrDesc.vertexAttrCount(descriptor);
-    var offset = attrDesc.byteOffset / attrDesc.bytesPerElement;
-
-    var i = void 0,
-        j = void 0;
+    let i, j;
 
     if (attrDesc.size === 1) {
       if (attrDesc.uniform) {
-        var valueGetter = getV1u(getArray, offset);
-        var valueSetter = setV1u(getArray, vertexCount, vertexAttrCount, offset);
+        const valueGetter = getV1u(getArray, offset);
+        const valueSetter = setV1u(getArray, vertexCount, vertexAttrCount, offset);
 
-        attrDesc.getValue = function (vo) {
-          return valueGetter.call(vo);
-        };
-        attrDesc.setValue = function (vo, arg) {
-          return valueSetter.call(vo, arg);
-        };
+        attrDesc.getValue = vo => valueGetter.call(vo);
+        attrDesc.setValue = (vo, arg) => valueSetter.call(vo, arg);
 
         propertiesObject[name] = {
           get: valueGetter,
@@ -3270,21 +3174,19 @@ var VOAttrDescriptor = function () {
           enumerable: true
         };
       } else {
-        var _valueSetter = setVNv(getArray, 1, vertexCount, vertexAttrCount, offset);
+        const valueSetter = setVNv(getArray, 1, vertexCount, vertexAttrCount, offset);
 
-        attrDesc.setValue = function (vo, args) {
-          return _valueSetter.apply(vo, args);
-        };
+        attrDesc.setValue = (vo, args) => valueSetter.apply(vo, args);
 
         propertiesObject['set' + camelize(name)] = {
-          value: _valueSetter,
+          value: valueSetter,
           enumerable: true
         };
 
-        var valueGetters = [];
+        const valueGetters = [];
 
         for (i = 0; i < descriptor.vertexCount; ++i) {
-          var curValueGetter = getV1u(getArray, offset + i * vertexAttrCount);
+          const curValueGetter = getV1u(getArray, offset + i * vertexAttrCount);
 
           valueGetters.push(curValueGetter);
 
@@ -3303,28 +3205,24 @@ var VOAttrDescriptor = function () {
       }
     } else if (attrDesc.size >= 2) {
       if (attrDesc.uniform) {
-        var _valueGetter = getVNu(getArray, offset);
-        var _valueSetter2 = setVNu(getArray, attrDesc.size, vertexCount, vertexAttrCount, offset);
+        const valueGetter = getVNu(getArray, offset);
+        const valueSetter = setVNu(getArray, attrDesc.size, vertexCount, vertexAttrCount, offset);
 
-        attrDesc.getValue = function (vo, vi, idx) {
-          return _valueGetter.call(vo, idx);
-        };
-        attrDesc.setValue = function (vo, args) {
-          return _valueSetter2.apply(vo, args);
-        };
+        attrDesc.getValue = (vo, vi, idx) => valueGetter.call(vo, idx);
+        attrDesc.setValue = (vo, args) => valueSetter.apply(vo, args);
 
         propertiesObject['get' + camelize(name)] = {
-          value: _valueGetter,
+          value: valueGetter,
           enumerable: true
         };
 
         propertiesObject['set' + camelize(name)] = {
-          value: _valueSetter2,
+          value: valueSetter,
           enumerable: true
         };
 
         for (i = 0; i < attrDesc.size; ++i) {
-          var setterName = attrPostfix(attrDesc, name, i);
+          const setterName = attrPostfix(attrDesc, name, i);
 
           propertiesObject[setterName] = {
 
@@ -3335,57 +3233,51 @@ var VOAttrDescriptor = function () {
           };
         }
       } else {
-        var _valueSetter3 = setVNv(getArray, attrDesc.size, vertexCount, vertexAttrCount, offset);
+        const valueSetter = setVNv(getArray, attrDesc.size, vertexCount, vertexAttrCount, offset);
 
-        attrDesc.setValue = function (vo, args) {
-          return _valueSetter3.apply(vo, args);
-        };
+        attrDesc.setValue = (vo, args) => valueSetter.apply(vo, args);
 
         propertiesObject['set' + camelize(name)] = {
-          value: _valueSetter3,
+          value: valueSetter,
           enumerable: true
         };
 
-        var _valueGetters = [];
+        const valueGetters = [];
 
         for (i = 0; i < descriptor.vertexCount; ++i) {
-          var curVertexValueGetters = [];
+          const curVertexValueGetters = [];
 
           for (j = 0; j < attrDesc.size; ++j) {
-            var _setterName = attrPostfix(attrDesc, name, j) + i;
-            var _curValueGetter = getV1u(getArray, offset + i * vertexAttrCount + j);
+            const setterName = attrPostfix(attrDesc, name, j) + i;
+            const curValueGetter = getV1u(getArray, offset + i * vertexAttrCount + j);
 
-            curVertexValueGetters.push(_curValueGetter);
+            curVertexValueGetters.push(curValueGetter);
 
-            propertiesObject[_setterName] = {
+            propertiesObject[setterName] = {
 
-              get: _curValueGetter,
+              get: curValueGetter,
               set: setVNv(getArray, 1, 1, 0, offset + i * vertexAttrCount + j),
               enumerable: true
 
             };
           }
 
-          _valueGetters.push(curVertexValueGetters);
+          valueGetters.push(curVertexValueGetters);
         }
 
         attrDesc.getValue = function (vo, vi, idx) {
-          return _valueGetters[vi][idx].call(vo);
+          return valueGetters[vi][idx].call(vo);
         };
       }
     }
-  };
+  }
+}
 
-  return VOAttrDescriptor;
-}();
+exports.default = VOAttrDescriptor; /** @private */
 
-/** @private */
-
-
-exports.default = VOAttrDescriptor;
 function attrPostfix(attrDesc, name, index) {
   if (attrDesc.attrNames) {
-    var postfix = attrDesc.attrNames[index];
+    let postfix = attrDesc.attrNames[index];
 
     if (postfix !== undefined) {
       return postfix;
@@ -3405,9 +3297,9 @@ function getVNu(getArray, offset) {
 /** @private */
 function setVNu(getArray, vectorLength, vertexCount, vertexAttrCount, offset) {
   return function () {
-    var _array = getArray(this.voArray);
-    var i = void 0;
-    var n = void 0;
+    const _array = getArray(this.voArray);
+    let i;
+    let n;
 
     for (i = 0; i < vertexCount; ++i) {
       for (n = 0; n < vectorLength; ++n) {
@@ -3427,9 +3319,9 @@ function getV1u(getArray, offset) {
 /** @private */
 function setVNv(getArray, vectorLength, vertexCount, vertexAttrCount, offset) {
   return function () {
-    var _array = getArray(this.voArray);
-    var i = void 0;
-    var n = void 0;
+    const _array = getArray(this.voArray);
+    let i;
+    let n;
 
     for (i = 0; i < vertexCount; ++i) {
       for (n = 0; n < vectorLength; ++n) {
@@ -3442,9 +3334,9 @@ function setVNv(getArray, vectorLength, vertexCount, vertexAttrCount, offset) {
 /** @private */
 function setV1u(getArray, vertexCount, vertexAttrCount, offset) {
   return function (value) {
-    var _array = getArray(this.voArray);
+    const _array = getArray(this.voArray);
 
-    for (var i = 0; i < vertexCount; ++i) {
+    for (let i = 0; i < vertexCount; ++i) {
       _array[i * vertexAttrCount + offset] = value;
     }
   };
@@ -3464,10 +3356,6 @@ function camelize(name) {
 
 exports.__esModule = true;
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _power_of_2_image = __webpack_require__(110);
 
 var _power_of_2_image2 = _interopRequireDefault(_power_of_2_image);
@@ -3478,11 +3366,7 @@ var _resource_ref2 = _interopRequireDefault(_resource_ref);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var getOption = function getOption(options, key, defaultValue) {
-  return options != null ? options[key] !== undefined ? options[key] : defaultValue : defaultValue;
-};
+const getOption = (options, key, defaultValue) => options != null ? options[key] !== undefined ? options[key] : defaultValue : defaultValue;
 
 /**
  * Represents texture coordinates and holds a reference to a `<img>` or `<canvas>` element.
@@ -3507,7 +3391,7 @@ var getOption = function getOption(options, key, defaultValue) {
  * })
  */
 
-var Texture = function () {
+class Texture {
   /**
    * @param {Texture|PowerOf2Image|HTMLImageElement|HTMLCanvasElement} source - image elements must be *completed* (loaded)
    * @param {number} [width]
@@ -3519,13 +3403,7 @@ var Texture = function () {
    * @param {boolean} [hints.repeatable=false]
    * @param {boolean} [hints.premultiplyAlpha=true]
    */
-  function Texture(source, width, height) {
-    var x = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-    var y = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
-    var hints = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : undefined;
-
-    _classCallCheck(this, Texture);
-
+  constructor(source, width, height, x = 0, y = 0, hints = undefined) {
     if (source instanceof Texture) {
       /**
        * @type {Texture}
@@ -3535,7 +3413,7 @@ var Texture = function () {
        * @type {PowerOf2Image|HTMLImageElement|HTMLCanvasElement}
        */
       this.image = null;
-    } else if ((typeof source === 'undefined' ? 'undefined' : _typeof(source)) === 'object' && 'width' in source && 'height' in source) {
+    } else if (typeof source === 'object' && 'width' in source && 'height' in source) {
       this.image = source;
       this.parent = null;
 
@@ -3570,7 +3448,102 @@ var Texture = function () {
   /**
    * @type {Texture}
    */
+  get root() {
+    return this.parent && this.parent.root || this;
+  }
 
+  /**
+   * @type {HTMLImageElement|HTMLCanvasElement}
+   */
+  get imgEl() {
+    const { root } = this;
+    return root.image.imgEl || root.image;
+  }
+
+  /**
+   * @type {ResourceRef}
+   */
+  get resourceRef() {
+    return this._resourceRef || this.root.resourceRef;
+  }
+
+  /**
+   * @type {number}
+   */
+  get width() {
+    return typeof this._width === 'number' ? this._width : this.image ? this.image.width : this.parent ? this.root.width : 0;
+  }
+
+  set width(w) {
+    this._width = w;
+  }
+
+  /**
+   * @type {number}
+   */
+  get height() {
+    return typeof this._height === 'number' ? this._height : this.image ? this.image.height : this.parent ? this.root.height : 0;
+  }
+
+  set height(h) {
+    this._height = h;
+  }
+
+  /**
+   * @type {number}
+   */
+  get minS() {
+    let x = this.x;
+    let texture = this;
+
+    while ((texture = texture.parent) != null) {
+      x += texture.x;
+    }
+
+    return x / this.root.image.width;
+  }
+
+  /**
+   * @type {number}
+   */
+  get minT() {
+    let y = this.y;
+    let texture = this;
+
+    while ((texture = texture.parent) != null) {
+      y += texture.y;
+    }
+
+    return y / this.root.image.height;
+  }
+
+  /**
+   * @type {number}
+   */
+  get maxS() {
+    let x = this.x + this.width;
+    let texture = this;
+
+    while ((texture = texture.parent) != null) {
+      x += texture.x;
+    }
+
+    return x / this.root.image.width;
+  }
+
+  /**
+   * @type {number}
+   */
+  get maxT() {
+    let y = this.y + this.height;
+    let texture = this;
+
+    while ((texture = texture.parent) != null) {
+      y += texture.y;
+    }
+
+    return y / this.root.image.height;
+  }
 
   /**
     * Loads an image from url and returns a texture.
@@ -3578,138 +3551,10 @@ var Texture = function () {
     * @param {object} [textureHints]
     * @returns {Promise<Texture>}
     */
-  Texture.load = function load(url, textureHints) {
-    return new _power_of_2_image2.default(url).complete.then(function (p2img) {
-      return new Texture(p2img, undefined, undefined, 0, 0, textureHints);
-    });
-  };
-
-  _createClass(Texture, [{
-    key: 'root',
-    get: function get() {
-      return this.parent && this.parent.root || this;
-    }
-
-    /**
-     * @type {HTMLImageElement|HTMLCanvasElement}
-     */
-
-  }, {
-    key: 'imgEl',
-    get: function get() {
-      var root = this.root;
-
-      return root.image.imgEl || root.image;
-    }
-
-    /**
-     * @type {ResourceRef}
-     */
-
-  }, {
-    key: 'resourceRef',
-    get: function get() {
-      return this._resourceRef || this.root.resourceRef;
-    }
-
-    /**
-     * @type {number}
-     */
-
-  }, {
-    key: 'width',
-    get: function get() {
-      return typeof this._width === 'number' ? this._width : this.image ? this.image.width : this.parent ? this.root.width : 0;
-    },
-    set: function set(w) {
-      this._width = w;
-    }
-
-    /**
-     * @type {number}
-     */
-
-  }, {
-    key: 'height',
-    get: function get() {
-      return typeof this._height === 'number' ? this._height : this.image ? this.image.height : this.parent ? this.root.height : 0;
-    },
-    set: function set(h) {
-      this._height = h;
-    }
-
-    /**
-     * @type {number}
-     */
-
-  }, {
-    key: 'minS',
-    get: function get() {
-      var x = this.x;
-      var texture = this;
-
-      while ((texture = texture.parent) != null) {
-        x += texture.x;
-      }
-
-      return x / this.root.image.width;
-    }
-
-    /**
-     * @type {number}
-     */
-
-  }, {
-    key: 'minT',
-    get: function get() {
-      var y = this.y;
-      var texture = this;
-
-      while ((texture = texture.parent) != null) {
-        y += texture.y;
-      }
-
-      return y / this.root.image.height;
-    }
-
-    /**
-     * @type {number}
-     */
-
-  }, {
-    key: 'maxS',
-    get: function get() {
-      var x = this.x + this.width;
-      var texture = this;
-
-      while ((texture = texture.parent) != null) {
-        x += texture.x;
-      }
-
-      return x / this.root.image.width;
-    }
-
-    /**
-     * @type {number}
-     */
-
-  }, {
-    key: 'maxT',
-    get: function get() {
-      var y = this.y + this.height;
-      var texture = this;
-
-      while ((texture = texture.parent) != null) {
-        y += texture.y;
-      }
-
-      return y / this.root.image.height;
-    }
-  }]);
-
-  return Texture;
-}();
-
+  static load(url, textureHints) {
+    return new _power_of_2_image2.default(url).complete.then(p2img => new Texture(p2img, undefined, undefined, 0, 0, textureHints));
+  }
+}
 exports.default = Texture;
 
 /***/ }),
@@ -3721,32 +3566,25 @@ exports.default = Texture;
 
 exports.__esModule = true;
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 /**
  * Group of shader variables.
  */
-var ShaderVariableGroup = function () {
+class ShaderVariableGroup {
   /**
   * @param {Array<ShaderVariable|ShaderVariableAlias>} shaderVars
    */
-  function ShaderVariableGroup(shaderVars) {
-    _classCallCheck(this, ShaderVariableGroup);
-
+  constructor(shaderVars) {
     this.shaderVars = shaderVars;
   }
 
-  ShaderVariableGroup.prototype.pushVar = function pushVar(shaderContext) {
+  pushVar(shaderContext) {
     this.shaderVars.forEach(shaderContext.pushVar.bind(shaderContext));
-  };
+  }
 
-  ShaderVariableGroup.prototype.popVar = function popVar(shaderContext) {
+  popVar(shaderContext) {
     this.shaderVars.forEach(shaderContext.popVar.bind(shaderContext));
-  };
-
-  return ShaderVariableGroup;
-}();
-
+  }
+}
 exports.default = ShaderVariableGroup;
 
 /***/ }),
@@ -3758,12 +3596,12 @@ exports.default = ShaderVariableGroup;
 
 exports.__esModule = true;
 /* eslint-env browser */
-var reNumber = /^[-+]?(\d+\.|\.)?\d+(e\d+|e[-+]\d+)?$/;
-var reUrl = /^url\(\s*([^)]+)\)$/;
-var reVec2 = /^vec2\(\s*([-+\d.e]+)\s*,\s*([-+\d.e]+)\s*\)$/;
-var reVec3 = /^vec3\(\s*([-+\d.e]+)\s*,\s*([-+\d.e]+)\s*,\s*([-+\d.e]+)\s*\)$/;
-var reVec4 = /^vec4\(\s*([-+\d.e]+)\s*,\s*([-+\d.e]+)\s*,\s*([-+\d.e]+)\s*,\s*([-+\d.e]+)\s*\)$/;
-var reFunc = /^\s*[a-zA-Z]+\(\s*[^)]+\)\s*$/;
+const reNumber = /^[-+]?(\d+\.|\.)?\d+(e\d+|e[-+]\d+)?$/;
+const reUrl = /^url\(\s*([^)]+)\)$/;
+const reVec2 = /^vec2\(\s*([-+\d.e]+)\s*,\s*([-+\d.e]+)\s*\)$/;
+const reVec3 = /^vec3\(\s*([-+\d.e]+)\s*,\s*([-+\d.e]+)\s*,\s*([-+\d.e]+)\s*\)$/;
+const reVec4 = /^vec4\(\s*([-+\d.e]+)\s*,\s*([-+\d.e]+)\s*,\s*([-+\d.e]+)\s*,\s*([-+\d.e]+)\s*\)$/;
+const reFunc = /^\s*[a-zA-Z]+\(\s*[^)]+\)\s*$/;
 
 // parseValue(str) expects a trimmed string!
 //
@@ -3787,7 +3625,7 @@ var reFunc = /^\s*[a-zA-Z]+\(\s*[^)]+\)\s*$/;
 //   vec4(<number>, <number>, <number>, <number>) => new Float32Array([...])
 //
 function parseValue(value) {
-  var len = value.length;
+  const len = value.length;
   if (len >= 2 && value.startsWith('"') && value.endsWith('"')) {
     return value.substr(1, value.length - 2);
   } else if (len >= 2 && value.startsWith('{') && value.endsWith('}')) {
@@ -3800,7 +3638,7 @@ function parseValue(value) {
     return parseFloat(value);
   }
 
-  var m = reUrl.exec(value);
+  let m = reUrl.exec(value);
   if (m) return new URL(m[1].trim());
 
   m = reVec2.exec(value);
@@ -3827,8 +3665,8 @@ function parseValue(value) {
 }
 
 function indexOfNextNonWhitespace(str, curIdx) {
-  var len = str.length;
-  var i = curIdx;
+  const len = str.length;
+  let i = curIdx;
   if (i >= len) return len;
   do {
     if (str[i] === ' ' || str[i] === '\t') {
@@ -3840,12 +3678,10 @@ function indexOfNextNonWhitespace(str, curIdx) {
   return len;
 }
 
-function indexOfNextSeperator(str, curIdx) {
-  var seperator = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : ';';
-
-  var len = str.length;
-  var i = curIdx;
-  var isInside = null;
+function indexOfNextSeperator(str, curIdx, seperator = ';') {
+  const len = str.length;
+  let i = curIdx;
+  let isInside = null;
   do {
     if (isInside === null) {
       switch (str[i]) {
@@ -3890,12 +3726,12 @@ function indexOfNextSeperator(str, curIdx) {
 function splitIntoPropTokens(str) {
   if (typeof str !== 'string' || !str) return;
 
-  var propTokens = [];
-  var len = str.length;
+  const propTokens = [];
+  const len = str.length;
 
-  var i = indexOfNextNonWhitespace(str, 0);
+  let i = indexOfNextNonWhitespace(str, 0);
   do {
-    var to = indexOfNextSeperator(str, i, ';');
+    const to = indexOfNextSeperator(str, i, ';');
     if (to > i) {
       propTokens.push(str.slice(i, to));
     }
@@ -3906,57 +3742,49 @@ function splitIntoPropTokens(str) {
 }
 
 function splitIntoProps(str) {
-  var tokens = splitIntoPropTokens(str);
+  const tokens = splitIntoPropTokens(str);
   if (!tokens) return;
-  return tokens.map(function (tok) {
+  return tokens.map(tok => {
     if (reFunc.exec(tok)) {
       return { value: tok.trim() };
     }
-    var colon = tok.indexOf(':');
+    const colon = tok.indexOf(':');
     if (colon === -1) {
       return { value: tok.trim() };
     }
-    var key = tok.slice(0, colon).trim();
-    var value = tok.substr(colon + 1).trim();
+    const key = tok.slice(0, colon).trim();
+    const value = tok.substr(colon + 1).trim();
     return {
-      key: key,
-      value: value
+      key,
+      value
     };
-  }).filter(function (prop) {
-    return !(prop.key === '' && prop.value === '');
-  });
+  }).filter(prop => !(prop.key === '' && prop.value === ''));
 }
 
 function parseCssStyledProperties(data) {
   if (typeof data !== 'string') return data;
 
   // => json
-  var str = data.trim();
+  const str = data.trim();
   if (str.startsWith('{') && str.endsWith('}')) {
     return JSON.parse(str);
   }
 
-  var props = splitIntoProps(str);
+  const props = splitIntoProps(str);
 
   // => undefined
   if (!props || props.length === 0) return;
 
   if ('key' in props[0]) {
     // => properties
-    var map = {};
-    props.forEach(function (_ref) {
-      var key = _ref.key,
-          value = _ref.value;
-
+    const map = {};
+    props.forEach(({ key, value }) => {
       map[key] = parseValue(value);
     });
     return map;
   } else {
     // => array of values OR single value
-    var values = props.map(function (_ref2) {
-      var value = _ref2.value;
-      return parseValue(value);
-    });
+    const values = props.map(({ value }) => parseValue(value));
     return values.length === 1 ? values[0] : values;
   }
 }
@@ -4984,32 +4812,27 @@ var _generate_uuid2 = _interopRequireDefault(_generate_uuid);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } } /* global HTMLElement */
-
-
-var ShaderSource =
-/**
- * @param {string} type - `VERTEX_SHADER` or `FRAGMENT_SHADER`
- * @param {HTMLElement|string} source
- */
-function ShaderSource(type, source) {
-  _classCallCheck(this, ShaderSource);
-
+class ShaderSource {
   /**
-   * @type {string}
+   * @param {string} type - `VERTEX_SHADER` or `FRAGMENT_SHADER`
+   * @param {HTMLElement|string} source
    */
-  this.id = (0, _generate_uuid2.default)();
+  constructor(type, source) {
+    /**
+     * @type {string}
+     */
+    this.id = (0, _generate_uuid2.default)();
 
-  this.type = type;
+    this.type = type;
 
-  /**
-   * @type {string}
-   */
-  this.source = source instanceof HTMLElement ? source.textContent : source;
-};
+    /**
+     * @type {string}
+     */
+    this.source = source instanceof HTMLElement ? source.textContent : source;
+  }
+}
 
-exports.default = ShaderSource;
-
+exports.default = ShaderSource; /* global HTMLElement */
 
 ShaderSource.VERTEX_SHADER = 'VERTEX_SHADER';
 ShaderSource.FRAGMENT_SHADER = 'FRAGMENT_SHADER';
@@ -5023,17 +4846,13 @@ ShaderSource.FRAGMENT_SHADER = 'FRAGMENT_SHADER';
 
 exports.__esModule = true;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _math_helpers = __webpack_require__(163);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
  * Represents a `<img>` or `<canvas>` element which sizes (width and height) are
  * always power of 2.
  */
-var PowerOf2Image = function () {
+class PowerOf2Image {
   /**
    * If image dimension is NOT power of 2 then create a new `<canvas>`
    * (with power of 2 dimension) and copy the original image content onto it.
@@ -5043,12 +4862,8 @@ var PowerOf2Image = function () {
    *
    * @param {string|HTMLImageElement|HTMLCanvasElement} from - url or html *image* element
    */
-  function PowerOf2Image(from) {
-    var _this = this;
-
-    _classCallCheck(this, PowerOf2Image);
-
-    var imgEl = void 0;
+  constructor(from) {
+    let imgEl;
     if (typeof from === 'string') {
       imgEl = new window.Image();
       imgEl.src = from;
@@ -5063,12 +4878,12 @@ var PowerOf2Image = function () {
       /**
        * @type {Promise<PowerOf2Image>}
        */
-      this.complete = new Promise(function (resolve) {
-        var origOnLoad = imgEl.onload;
-        imgEl.onload = function () {
+      this.complete = new Promise(resolve => {
+        const origOnLoad = imgEl.onload;
+        imgEl.onload = () => {
           if (origOnLoad) origOnLoad.call(imgEl);
-          setPowerOf2ImgEl(_this, imgEl);
-          resolve(_this);
+          setPowerOf2ImgEl(this, imgEl);
+          resolve(this);
         };
       });
     } else {
@@ -5084,43 +4899,28 @@ var PowerOf2Image = function () {
    * A boolean that is `true` if the image has loaded and possible converted.
    * @type {boolean}
    */
+  get isComplete() {
+    return this.imgEl != null;
+  }
 
+  /**
+   * Returns image width or `0` if image loading is not finished.
+   * @type {number}
+   */
+  get width() {
+    return this.imgEl && this.imgEl.width || 0;
+  }
 
-  _createClass(PowerOf2Image, [{
-    key: 'isComplete',
-    get: function get() {
-      return this.imgEl != null;
-    }
-
-    /**
-     * Returns image width or `0` if image loading is not finished.
-     * @type {number}
-     */
-
-  }, {
-    key: 'width',
-    get: function get() {
-      return this.imgEl && this.imgEl.width || 0;
-    }
-
-    /**
-     * Returns image height or `0` if image loading is not finished.
-     * @type {number}
-     */
-
-  }, {
-    key: 'height',
-    get: function get() {
-      return this.imgEl && this.imgEl.height || 0;
-    }
-  }]);
-
-  return PowerOf2Image;
-}();
+  /**
+   * Returns image height or `0` if image loading is not finished.
+   * @type {number}
+   */
+  get height() {
+    return this.imgEl && this.imgEl.height || 0;
+  }
+}
 
 exports.default = PowerOf2Image;
-
-
 function setPowerOf2ImgEl(p2img, imgEl) {
   p2img.imgEl = (0, _math_helpers.isPowerOf2)(imgEl.width) && (0, _math_helpers.isPowerOf2)(imgEl.height) ? imgEl : convertToPowerOf2(imgEl);
   p2img.origWidth = imgEl.width;
@@ -5128,10 +4928,10 @@ function setPowerOf2ImgEl(p2img, imgEl) {
 }
 
 function convertToPowerOf2(image) {
-  var w = (0, _math_helpers.findNextPowerOf2)(image.width);
-  var h = (0, _math_helpers.findNextPowerOf2)(image.height);
+  const w = (0, _math_helpers.findNextPowerOf2)(image.width);
+  const h = (0, _math_helpers.findNextPowerOf2)(image.height);
 
-  var canvas = document.createElement('canvas');
+  const canvas = document.createElement('canvas');
   canvas.width = w;
   canvas.height = h;
   canvas.getContext('2d').drawImage(image, 0, 0);
@@ -5162,8 +4962,6 @@ var _sample2 = _interopRequireDefault(_sample);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 /**
   * @example
   * TextureAtlas.load('nobinger.json').then(atlas => {
@@ -5172,16 +4970,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   *   blau.height  # => 61
   * })
   */
-var TextureAtlas = function () {
+class TextureAtlas {
   /**
    * @param {Texture} rootTexture
    * @param {TextureAtlasSpec} [spec=null]
    */
-  function TextureAtlas(rootTexture) {
-    var spec = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-
-    _classCallCheck(this, TextureAtlas);
-
+  constructor(rootTexture, spec = null) {
     /**
      * @type {Texture}
      */
@@ -5203,48 +4997,38 @@ var TextureAtlas = function () {
    * @param {number} x
    * @param {number} y
    */
-
-
-  TextureAtlas.prototype.addFrame = function addFrame(name, width, height, x, y) {
+  addFrame(name, width, height, x, y) {
     this.frames.set(name, new _texture2.default(this.rootTexture, width, height, x, y));
-  };
+  }
 
   /**
    * @param {string} name
    * @returns {Texture}
    */
-
-
-  TextureAtlas.prototype.getFrame = function getFrame(name) {
+  getFrame(name) {
     return this.frames.get(name);
-  };
+  }
 
   /**
    * @returns {Texture}
    */
-
-
-  TextureAtlas.prototype.getRandomFrame = function getRandomFrame() {
+  getRandomFrame() {
     return (0, _sample2.default)(Array.from(this.frames.values()));
-  };
+  }
 
   /**
    * @returns {string}
    */
-
-
-  TextureAtlas.prototype.getRandomFrameName = function getRandomFrameName() {
+  getRandomFrameName() {
     return (0, _sample2.default)(this.frameNames());
-  };
+  }
 
   /**
    * @returns {Array<string>}
    */
-
-
-  TextureAtlas.prototype.frameNames = function frameNames() {
+  frameNames() {
     return Array.from(this.frames.keys());
-  };
+  }
 
   /**
    * Loads a TextureAtlas.
@@ -5254,21 +5038,10 @@ var TextureAtlas = function () {
    * @param {object} [textureHints=undefined] - texture hints
    * @returns {Promise<TextureAtlas>}
    */
-
-
-  TextureAtlas.load = function load(url) {
-    var fetchOptions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-    var image = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-    var textureHints = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : undefined;
-
-    return _texture_atlas_spec2.default.load(url, fetchOptions || {}).then(function (atlasSpec) {
-      return atlasSpec.createTextureAtlas(image || atlasSpec.imageUrl, textureHints);
-    });
-  };
-
-  return TextureAtlas;
-}();
-
+  static load(url, fetchOptions = null, image = null, textureHints = undefined) {
+    return _texture_atlas_spec2.default.load(url, fetchOptions || {}).then(atlasSpec => atlasSpec.createTextureAtlas(image || atlasSpec.imageUrl, textureHints));
+  }
+}
 exports.default = TextureAtlas;
 
 /***/ }),
@@ -5286,29 +5059,17 @@ var _shader_variable2 = _interopRequireDefault(_shader_variable);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 /**
  * Shader texture 2d variable.
  */
-var ShaderTexture2dVariable = function (_ShaderVariable) {
-  _inherits(ShaderTexture2dVariable, _ShaderVariable);
-
+class ShaderTexture2dVariable extends _shader_variable2.default {
   /**
    * @param {string} name
    * @param {number|Object} value
    */
-  function ShaderTexture2dVariable(name, value) {
-    _classCallCheck(this, ShaderTexture2dVariable);
-
-    var _this = _possibleConstructorReturn(this, _ShaderVariable.call(this, name, _shader_variable2.default.TYPE.TEXTURE_2D, value));
-
-    _this.texture = null;
-    return _this;
+  constructor(name, value) {
+    super(name, _shader_variable2.default.TYPE.TEXTURE_2D, value);
+    this.texture = null;
   }
 
   /**
@@ -5316,18 +5077,13 @@ var ShaderTexture2dVariable = function (_ShaderVariable) {
    *
    * @param {WebGlRenderer} renderer
    */
-
-
-  ShaderTexture2dVariable.prototype.syncTextureAndValue = function syncTextureAndValue(renderer) {
+  syncTextureAndValue(renderer) {
     if (this.texture != null) {
-      var glTex = renderer.syncTexture(this.texture);
+      const glTex = renderer.syncTexture(this.texture);
       this.value = glTex.bind();
     }
-  };
-
-  return ShaderTexture2dVariable;
-}(_shader_variable2.default);
-
+  }
+}
 exports.default = ShaderTexture2dVariable;
 
 /***/ }),
@@ -6520,7 +6276,7 @@ Object.keys(_api).forEach(function (key) {
   if (key === "default" || key === "__esModule") return;
   Object.defineProperty(exports, key, {
     enumerable: true,
-    get: function get() {
+    get: function () {
       return _api[key];
     }
   });
@@ -6550,13 +6306,9 @@ if (customElements.get(_constants.DOM_ELEM_CANVAS)) {
   (0, _defineCustomElements2.default)();
 }
 
-var initialize = customElements.whenDefined(_constants.DOM_ELEM_CANVAS).then(function () {
-  return publicApi;
-});
+const initialize = customElements.whenDefined(_constants.DOM_ELEM_CANVAS).then(() => publicApi);
 
-exports.default = function () {
-  return initialize;
-};
+exports.default = () => initialize;
 
 /***/ }),
 /* 156 */
@@ -6566,8 +6318,6 @@ exports.default = function () {
 
 
 exports.__esModule = true;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _component_registry = __webpack_require__(157);
 
@@ -6597,59 +6347,41 @@ var _registerDefaultComponents = __webpack_require__(428);
 
 var _registerDefaultComponents2 = _interopRequireDefault(_registerDefaultComponents);
 
-var _destroy2 = __webpack_require__(31);
+var _destroy = __webpack_require__(31);
 
-var _destroy3 = _interopRequireDefault(_destroy2);
+var _destroy2 = _interopRequireDefault(_destroy);
 
 var _log = __webpack_require__(177);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+const eventize = __webpack_require__(30);
+const tinycolor = __webpack_require__(169);
 
-var eventize = __webpack_require__(30);
-var tinycolor = __webpack_require__(169);
+const now = () => window.performance.now() / 1000;
 
-var now = function now() {
-  return window.performance.now() / 1000;
-};
-
-var defaultOption = function defaultOption(options, key, defaultValueFn) {
+const defaultOption = (options, key, defaultValueFn) => {
   if (options && key in options) {
     return options[key];
   }
   return typeof defaultValueFn === 'function' ? defaultValueFn() : defaultValueFn;
 };
 
-var App = function () {
-  function App(options) {
-    var _this = this;
-
-    _classCallCheck(this, App);
-
+class App {
+  constructor(options) {
     eventize(this);
 
-    var getOption = defaultOption.bind(null, options);
+    const getOption = defaultOption.bind(null, options);
 
-    this.componentRegistry = getOption('componentRegistry', function () {
-      return new _component_registry2.default();
-    });
-    this.entityManager = getOption('entityManager', function () {
-      return new _entity_manager2.default();
-    });
-    this.resourceLibrary = getOption('resourceLibrary', function () {
-      return new _resource_library2.default();
-    });
-    this.textureLibrary = getOption('textureLibrary', function () {
-      return new _texture_library2.default();
-    });
+    this.componentRegistry = getOption('componentRegistry', () => new _component_registry2.default());
+    this.entityManager = getOption('entityManager', () => new _entity_manager2.default());
+    this.resourceLibrary = getOption('resourceLibrary', () => new _resource_library2.default());
+    this.textureLibrary = getOption('textureLibrary', () => new _texture_library2.default());
 
     /**
      * @type {CanvasHTMLElement}
      */
-    this.canvas = getOption('canvas', function () {
-      return document.createElement('canvas');
-    });
+    this.canvas = getOption('canvas', () => document.createElement('canvas'));
 
     /**
      * The initial attributes used to create the webgl context
@@ -6687,11 +6419,7 @@ var App = function () {
 
     this.clearColor = getOption('clearColor');
 
-    this.createGlContext = getOption('createGlContext', function () {
-      return function () {
-        return createGlContext(_this.canvas, _this.contextAttributes);
-      };
-    });
+    this.createGlContext = getOption('createGlContext', () => () => createGlContext(this.canvas, this.contextAttributes));
 
     // TODO add global componentRegistry ?
     (0, _registerDefaultComponents2.default)(this.componentRegistry);
@@ -6709,9 +6437,22 @@ var App = function () {
     this.destroyed = false;
   }
 
-  App.prototype.start = function start() {
-    var el = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this;
+  get clearColor() {
+    return this.renderer ? this.renderer.clearColor : this._clearColor;
+  }
 
+  set clearColor(color) {
+    this._clearColor = color == null ? color : tinycolor(color);
+    if (this.renderer) {
+      this.renderer.setClearColor(this._clearColor);
+    }
+  }
+
+  get canStart() {
+    return (!this.started || this.started && this.stopped) && !this.destroyed;
+  }
+
+  start(el = this) {
     if (!this.canStart) return;
 
     if (this.stopped) {
@@ -6749,27 +6490,27 @@ var App = function () {
     this.el.appendChild(this.canvas);
     this.resize();
     this.requestAnimate();
-  };
+  }
 
-  App.prototype.requestAnimate = function requestAnimate() {
-    var _this2 = this;
+  requestAnimate() {
+    this.rafSubscription = window.requestAnimationFrame(() => this.animate());
+  }
 
-    this.rafSubscription = window.requestAnimationFrame(function () {
-      return _this2.animate();
-    });
-  };
-
-  App.prototype.cancelAnimate = function cancelAnimate() {
+  cancelAnimate() {
     window.cancelAnimationFrame(this.rafSubscription);
-  };
+  }
 
-  App.prototype.stop = function stop() {
+  get canStop() {
+    return this.started && !this.stopped && !this.destroyed;
+  }
+
+  stop() {
     if (!this.canStop) return;
     this.stopped = true;
     this.cancelAnimate();
-  };
+  }
 
-  App.prototype.destroy = function destroy() {
+  destroy() {
     if (this.destroyed) return;
     this.cancelAnimate();
     try {
@@ -6799,24 +6540,26 @@ var App = function () {
     }
     // this.componentRegistry (ComponentRegistry)
     this.el.removeChild(this.canvas);
-    (0, _destroy3.default)(this);
-  };
+    (0, _destroy2.default)(this);
+  }
+
+  get canAnimate() {
+    return this.started && !this.stopped && !this.destroyed;
+  }
 
   /**
    * Start the main animation loop.
    */
-  App.prototype.animate = function animate() {
+  animate() {
     if (!this.canAnimate) return;
     this.renderFrame();
     this.requestAnimate();
-  };
+  }
 
   /**
    * Render the frame.
    */
-
-
-  App.prototype.renderFrame = function renderFrame() {
+  renderFrame() {
     ++this.frameNo;
     this.time = now() - this.startTime;
     if (this.lastFrameTime) {
@@ -6825,29 +6568,26 @@ var App = function () {
     this.lastFrameTime = this.time;
     this.resize();
     this.renderer.renderFrame(this.entity, this);
-  };
+  }
 
   /**
    * Resize the canvas dom element to the same size as the `<blitpunk-canvas>.parentNode`
    */
+  resize() {
+    const style = window.getComputedStyle(this.el, null);
+    const el = style.display === 'inline' ? this.el.parentNode : this.el;
 
+    const { canvas } = this;
+    const dpr = window.devicePixelRatio || 1;
 
-  App.prototype.resize = function resize() {
-    var style = window.getComputedStyle(this.el, null);
-    var el = style.display === 'inline' ? this.el.parentNode : this.el;
-
-    var canvas = this.canvas;
-
-    var dpr = window.devicePixelRatio || 1;
-
-    var wPx = el.clientWidth;
-    var hPx = el.clientHeight;
+    let wPx = el.clientWidth;
+    let hPx = el.clientHeight;
 
     canvas.style.width = wPx + 'px';
     canvas.style.height = hPx + 'px';
 
-    var w = Math.round(wPx * dpr);
-    var h = Math.round(hPx * dpr);
+    const w = Math.round(wPx * dpr);
+    const h = Math.round(hPx * dpr);
 
     if (w !== canvas.width || h !== canvas.height) {
       canvas.width = w;
@@ -6868,44 +6608,12 @@ var App = function () {
 
       this.glx.gl.viewport(0, 0, w, h); // TODO move this into WebGlRenderer
     }
-  };
-
-  _createClass(App, [{
-    key: 'clearColor',
-    get: function get() {
-      return this.renderer ? this.renderer.clearColor : this._clearColor;
-    },
-    set: function set(color) {
-      this._clearColor = color == null ? color : tinycolor(color);
-      if (this.renderer) {
-        this.renderer.setClearColor(this._clearColor);
-      }
-    }
-  }, {
-    key: 'canStart',
-    get: function get() {
-      return (!this.started || this.started && this.stopped) && !this.destroyed;
-    }
-  }, {
-    key: 'canStop',
-    get: function get() {
-      return this.started && !this.stopped && !this.destroyed;
-    }
-  }, {
-    key: 'canAnimate',
-    get: function get() {
-      return this.started && !this.stopped && !this.destroyed;
-    }
-  }]);
-
-  return App;
-}();
+  }
+}
 
 /** @private */
-
-
 function createGlContext(canvas, ctxAttrs) {
-  var gl = void 0;
+  let gl;
 
   try {
     gl = canvas.getContext('webgl', ctxAttrs);
@@ -6938,13 +6646,8 @@ exports.default = App;
 
 
 exports.__esModule = true;
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var ComponentRegistry = function () {
-  function ComponentRegistry() {
-    _classCallCheck(this, ComponentRegistry);
-
+class ComponentRegistry {
+  constructor() {
     this.registry = new Map();
   }
 
@@ -6954,39 +6657,34 @@ var ComponentRegistry = function () {
    * @param {function} componentFactory.create - create a new component instance
    * @param {function} componentFactory.update - update a component
    */
-
-
-  ComponentRegistry.prototype.registerComponent = function registerComponent(name, componentFactory) {
+  registerComponent(name, componentFactory) {
     this.registry.set(name, componentFactory);
     return this;
-  };
+  }
 
-  ComponentRegistry.prototype.createComponent = function createComponent(entity, name, data) {
-    var factory = this.registry.get(name);
-    var component = factory.create(entity, data);
+  createComponent(entity, name, data) {
+    const factory = this.registry.get(name);
+    const component = factory.create(entity, data);
     entity.setComponent(name, component);
     return this;
-  };
+  }
 
-  ComponentRegistry.prototype.updateComponent = function updateComponent(entity, name, data) {
-    var component = entity[name];
-    var factory = this.registry.get(name);
+  updateComponent(entity, name, data) {
+    const component = entity[name];
+    const factory = this.registry.get(name);
     factory.update(component, data);
     return this;
-  };
+  }
 
-  ComponentRegistry.prototype.createOrUpdateComponent = function createOrUpdateComponent(entity, name, data) {
+  createOrUpdateComponent(entity, name, data) {
     if (entity[name] != null) {
       this.updateComponent(entity, name, data);
     } else {
       this.createComponent(entity, name, data);
     }
     return this;
-  };
-
-  return ComponentRegistry;
-}();
-
+  }
+}
 exports.default = ComponentRegistry;
 
 /***/ }),
@@ -7002,72 +6700,52 @@ var _entity = __webpack_require__(159);
 
 var _entity2 = _interopRequireDefault(_entity);
 
-var _destroy2 = __webpack_require__(31);
+var _destroy = __webpack_require__(31);
 
-var _destroy3 = _interopRequireDefault(_destroy2);
+var _destroy2 = _interopRequireDefault(_destroy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
  * The entity manager holds references to all entities.
  */
-var EntityManager = function () {
-  function EntityManager() {
-    _classCallCheck(this, EntityManager);
-
+class EntityManager {
+  constructor() {
     this.entities = new Map();
   }
 
-  EntityManager.prototype.createEntity = function createEntity() {
-    var entity = new _entity2.default();
+  createEntity() {
+    const entity = new _entity2.default();
     this.entities.set(entity.id, entity);
     return entity;
-  };
+  }
 
-  EntityManager.prototype.getEntity = function getEntity(id) {
+  getEntity(id) {
     return this.entities.get(id);
-  };
+  }
 
-  EntityManager.prototype.destroyEntity = function destroyEntity(id) {
-    var entity = this.entities.get(id);
+  destroyEntity(id) {
+    const entity = this.entities.get(id);
     if (entity) {
       entity.destroy();
       this.entities.delete(id);
       return true;
     }
     return false;
-  };
+  }
 
-  EntityManager.prototype.destroyAllEntities = function destroyAllEntities() {
-    for (var _iterator = this.entities.keys(), _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-      var _ref;
-
-      if (_isArray) {
-        if (_i >= _iterator.length) break;
-        _ref = _iterator[_i++];
-      } else {
-        _i = _iterator.next();
-        if (_i.done) break;
-        _ref = _i.value;
-      }
-
-      var id = _ref;
-
+  destroyAllEntities() {
+    for (const id of this.entities.keys()) {
       this.destroyEntity(id);
     }
-  };
+  }
 
-  EntityManager.prototype.destroy = function destroy() {
+  destroy() {
     this.destroyAllEntities();
     this.entities.clear();
-    (0, _destroy3.default)(this);
-  };
-
-  return EntityManager;
-}();
-
+    (0, _destroy2.default)(this);
+  }
+}
 exports.default = EntityManager;
 
 /***/ }),
@@ -7085,25 +6763,10 @@ var _generate_uuid2 = _interopRequireDefault(_generate_uuid);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+const eventize = __webpack_require__(30);
 
-var eventize = __webpack_require__(30);
-
-var destroyAllComponents = function destroyAllComponents(entity) {
-  for (var _iterator = entity.components.keys(), _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-    var _ref;
-
-    if (_isArray) {
-      if (_i >= _iterator.length) break;
-      _ref = _iterator[_i++];
-    } else {
-      _i = _iterator.next();
-      if (_i.done) break;
-      _ref = _i.value;
-    }
-
-    var name = _ref;
-
+const destroyAllComponents = entity => {
+  for (const name of entity.components.keys()) {
     entity.destroyComponent(name);
   }
 };
@@ -7111,11 +6774,8 @@ var destroyAllComponents = function destroyAllComponents(entity) {
 /**
  * An Entity.
  */
-
-var Entity = function () {
-  function Entity() {
-    _classCallCheck(this, Entity);
-
+class Entity {
+  constructor() {
     this.components = new Map();
 
     /**
@@ -7126,13 +6786,13 @@ var Entity = function () {
     eventize(this);
   }
 
-  Entity.prototype.hasComponent = function hasComponent(name) {
+  hasComponent(name) {
     return this.components.has(name);
-  };
+  }
 
-  Entity.prototype.setComponent = function setComponent(name, component) {
+  setComponent(name, component) {
     if (this[name]) {
-      throw new Error('Component name "' + name + '" is already assigned!');
+      throw new Error(`Component name "${name}" is already assigned!`);
     }
     this.components.set(name, component);
     this[name] = component;
@@ -7140,27 +6800,24 @@ var Entity = function () {
       component.connectedEntity(this);
     }
     return this;
-  };
+  }
 
-  Entity.prototype.destroyComponent = function destroyComponent(name) {
+  destroyComponent(name) {
     if (this.components.delete(name)) {
-      var component = this[name];
+      const component = this[name];
       delete this[name];
       if (component.disconnectedEntity) {
         component.disconnectedEntity(this);
       }
     }
     return this;
-  };
+  }
 
-  Entity.prototype.destroy = function destroy() {
+  destroy() {
     this.emit('destroy', this);
     destroyAllComponents(this);
-  };
-
-  return Entity;
-}();
-
+  }
+}
 exports.default = Entity;
 
 /***/ }),
@@ -7180,9 +6837,9 @@ var _shader_source = __webpack_require__(109);
 
 var _shader_source2 = _interopRequireDefault(_shader_source);
 
-var _destroy2 = __webpack_require__(31);
+var _destroy = __webpack_require__(31);
 
-var _destroy3 = _interopRequireDefault(_destroy2);
+var _destroy2 = _interopRequireDefault(_destroy);
 
 var _sprites = __webpack_require__(409);
 
@@ -7190,12 +6847,8 @@ var _sprites2 = _interopRequireDefault(_sprites);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var ResourceLibrary = function () {
-  function ResourceLibrary() {
-    _classCallCheck(this, ResourceLibrary);
-
+class ResourceLibrary {
+  constructor() {
     this.descriptors = new Map();
     this.vertexShaders = new Map();
     this.fragmentShaders = new Map();
@@ -7203,79 +6856,64 @@ var ResourceLibrary = function () {
     (0, _sprites2.default)(this);
   }
 
-  ResourceLibrary.prototype.destroy = function destroy() {
+  destroy() {
     this.descriptors.clear();
     this.vertexShaders.clear();
     this.fragmentShaders.clear();
-    (0, _destroy3.default)(this);
-  };
+    (0, _destroy2.default)(this);
+  }
 
   /**
    * @param {string} name
    * @param {Object} description - see `VODescriptor` for more details
    */
-
-
-  ResourceLibrary.prototype.addDescriptor = function addDescriptor(name, description) {
+  addDescriptor(name, description) {
     this.descriptors.set(name, new _v_o_descriptor2.default(description));
     return this;
-  };
+  }
 
   /**
    * @param {string} name
    * @param {string|function|string[]} source - see `ShaderSource` for more details
    */
-
-
-  ResourceLibrary.prototype.addVertexShader = function addVertexShader(name, source) {
+  addVertexShader(name, source) {
     this.vertexShaders.set(name, new _shader_source2.default(_shader_source2.default.VERTEX_SHADER, source));
     return this;
-  };
+  }
 
   /**
    * @param {string} name
    * @param {string|function|string[]} source - see `ShaderSource` for more details
    */
-
-
-  ResourceLibrary.prototype.addFragmentShader = function addFragmentShader(name, source) {
+  addFragmentShader(name, source) {
     this.fragmentShaders.set(name, new _shader_source2.default(_shader_source2.default.FRAGMENT_SHADER, source));
     return this;
-  };
+  }
 
   /**
    * @param {string} name
    * @returns {VODescriptor}
    */
-
-
-  ResourceLibrary.prototype.findDescriptor = function findDescriptor(name) {
+  findDescriptor(name) {
     return this.descriptors.get(name);
-  };
+  }
 
   /**
    * @param {string} name
    * @returns {ShaderSource}
    */
-
-
-  ResourceLibrary.prototype.findVertexShader = function findVertexShader(name) {
+  findVertexShader(name) {
     return this.vertexShaders.get(name);
-  };
+  }
 
   /**
    * @param {string} name
    * @returns {ShaderSource}
    */
-
-
-  ResourceLibrary.prototype.findFragmentShader = function findFragmentShader(name) {
+  findFragmentShader(name) {
     return this.fragmentShaders.get(name);
-  };
-
-  return ResourceLibrary;
-}();
-
+  }
+}
 exports.default = ResourceLibrary;
 
 /***/ }),
@@ -7286,8 +6924,6 @@ exports.default = ResourceLibrary;
 
 
 exports.__esModule = true;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _v_o_helper = __webpack_require__(403);
 
@@ -7312,8 +6948,6 @@ var _create_aliases = __webpack_require__(408);
 var _create_aliases2 = _interopRequireDefault(_create_aliases);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
  * Vertex object descriptor.
@@ -7369,17 +7003,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  *
  */
 
-var VODescriptor = function () {
-  function VODescriptor(_ref) {
-    var _this = this;
-
-    var vertexCount = _ref.vertexCount,
-        attributes = _ref.attributes,
-        aliases = _ref.aliases,
-        proto = _ref.proto;
-
-    _classCallCheck(this, VODescriptor);
-
+class VODescriptor {
+  constructor({ vertexCount, attributes, aliases, proto }) {
     this.vertexCount = parseInt(vertexCount, 10);
 
     (0, _create_attributes2.default)(this, attributes);
@@ -7389,9 +7014,7 @@ var VODescriptor = function () {
 
     // === winterkälte jetzt
 
-    Object.keys(this.attr).forEach(function (name) {
-      return Object.freeze(_this.attr[name]);
-    });
+    Object.keys(this.attr).forEach(name => Object.freeze(this.attr[name]));
     Object.freeze(this.attr);
     Object.freeze(this);
   }
@@ -7401,14 +7024,9 @@ var VODescriptor = function () {
    * @param {string} [usage]
    * @returns {VOArray}
    */
-
-
-  VODescriptor.prototype.createVOArray = function createVOArray() {
-    var size = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-    var usage = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
-
+  createVOArray(size = 1, usage = undefined) {
     return new _v_o_array2.default(this, size, null, usage);
-  };
+  }
 
   /**
    * Create a new *vertex object*
@@ -7416,23 +7034,19 @@ var VODescriptor = function () {
    * @param {VOArray} [voArray]
    * @returns {Object} the *vertex object*
    */
-
-
-  VODescriptor.prototype.createVO = function createVO(voArray) {
+  createVO(voArray) {
     return (0, _v_o_helper.createVO)(Object.create(this.voPrototype), this, voArray);
-  };
+  }
 
   /**
    * @param {string} name
    * @param {number} size - attribute item count
    * @returns {boolean}
    */
-
-
-  VODescriptor.prototype.hasAttribute = function hasAttribute(name, size) {
-    var attr = this.attr[name];
+  hasAttribute(name, size) {
+    const attr = this.attr[name];
     return attr && attr.size === size;
-  };
+  }
 
   /**
    * Max number of vertex objects when a vertex buffer is used together
@@ -7442,16 +7056,10 @@ var VODescriptor = function () {
    * @type {number}
    */
 
-  _createClass(VODescriptor, [{
-    key: 'maxIndexedVOPoolSize',
-    get: function get() {
-      return Math.floor(65536 / this.vertexCount);
-    }
-  }]);
-
-  return VODescriptor;
-}();
-
+  get maxIndexedVOPoolSize() {
+    return Math.floor(65536 / this.vertexCount);
+  }
+}
 exports.default = VODescriptor;
 
 /***/ }),
@@ -7479,59 +7087,49 @@ var _shader_texture_2d_variable = __webpack_require__(112);
 
 var _shader_texture_2d_variable2 = _interopRequireDefault(_shader_texture_2d_variable);
 
-var _destroy2 = __webpack_require__(31);
+var _destroy = __webpack_require__(31);
 
-var _destroy3 = _interopRequireDefault(_destroy2);
+var _destroy2 = _interopRequireDefault(_destroy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var TextureLibrary = function () {
-  function TextureLibrary() {
-    _classCallCheck(this, TextureLibrary);
-
+class TextureLibrary {
+  constructor() {
     this.states = new Map();
     this.shaderVars = new Map();
   }
 
-  TextureLibrary.prototype.destroy = function destroy() {
+  destroy() {
     this.states.clear();
     this.shaderVars.clear();
-    (0, _destroy3.default)(this);
-  };
+    (0, _destroy2.default)(this);
+  }
 
-  TextureLibrary.prototype.loadTexture = function loadTexture(id) {
-    var url = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : id;
-    var textureHints = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
-
-    var state = new _texture_state2.default(_texture2.default.load(url, textureHints));
+  loadTexture(id, url = id, textureHints = undefined) {
+    const state = new _texture_state2.default(_texture2.default.load(url, textureHints));
     this.states.set(id, state);
     return state.promise;
-  };
+  }
 
-  TextureLibrary.prototype.loadTextureAtlas = function loadTextureAtlas(id) {
-    var url = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : id;
-    var textureHints = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : undefined;
-
-    var atlas = _texture_atlas2.default.load(url, null, null, textureHints);
-    var state = new _texture_state2.default(atlas.then(function (atlas) {
+  loadTextureAtlas(id, url = id, textureHints = undefined) {
+    const atlas = _texture_atlas2.default.load(url, null, null, textureHints);
+    const state = new _texture_state2.default(atlas.then(atlas => {
       state.atlas = atlas;
       return atlas.rootTexture;
     }));
     this.states.set(id, state);
     return atlas;
-  };
+  }
 
-  TextureLibrary.prototype.getTextureAtlas = function getTextureAtlas(id) {
+  getTextureAtlas(id) {
     return this.states.get(id).atlas;
-  };
+  }
 
-  TextureLibrary.prototype.whenLoaded = function whenLoaded(textureId, shaderVarKey, onLoaded) {
-    var state = this.states.get(textureId);
+  whenLoaded(textureId, shaderVarKey, onLoaded) {
+    const state = this.states.get(textureId);
     if (state === undefined || !state.isReady) return;
 
-    var shaderVar = this.shaderVars.get(shaderVarKey);
+    let shaderVar = this.shaderVars.get(shaderVarKey);
     if (shaderVar === undefined) {
       shaderVar = new _shader_texture_2d_variable2.default(shaderVarKey);
       this.shaderVars.set(shaderVarKey, shaderVar);
@@ -7539,11 +7137,8 @@ var TextureLibrary = function () {
 
     shaderVar.texture = state.texture;
     onLoaded(shaderVar);
-  };
-
-  return TextureLibrary;
-}();
-
+  }
+}
 exports.default = TextureLibrary;
 
 /***/ }),
@@ -7560,28 +7155,23 @@ exports.__esModule = true;
  * @param {number} b
  * @return {number}
  */
-var maxOf = function maxOf(a, b) {
-  return a > b ? a : b;
-};
+const maxOf = (a, b) => a > b ? a : b;
 
 /**
  * @param {number} x
  * @return {number}
  */
 function findNextPowerOf2(x) {
-  var p = 1;
-  while (x > p) {
-    p <<= 1;
-  }return p;
+  let p = 1;
+  while (x > p) p <<= 1;
+  return p;
 }
 
 /**
  * @param {number} n
  * @return {boolean}
  */
-var isPowerOf2 = function isPowerOf2(n) {
-  return n !== 0 && (n & n - 1) === 0;
-};
+const isPowerOf2 = n => n !== 0 && (n & n - 1) === 0;
 
 exports.maxOf = maxOf;
 exports.findNextPowerOf2 = findNextPowerOf2;
@@ -7595,40 +7185,25 @@ exports.isPowerOf2 = isPowerOf2;
 
 
 exports.__esModule = true;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var TextureState = function () {
-  function TextureState(texture, atlas) {
-    var _this = this;
-
-    _classCallCheck(this, TextureState);
-
+class TextureState {
+  constructor(texture, atlas) {
     this.texture = null;
     this.atlas = null;
-    this.promise = Promise.resolve(texture).then(function (tex) {
-      _this.texture = tex;
+    this.promise = Promise.resolve(texture).then(tex => {
+      this.texture = tex;
       return tex;
-    }).catch(function (err) {
+    }).catch(err => {
       console.error('TextureState error:', err);
     });
-    Promise.resolve(atlas).then(function (atlas) {
-      _this.atlas = atlas;
+    Promise.resolve(atlas).then(atlas => {
+      this.atlas = atlas;
     });
   }
 
-  _createClass(TextureState, [{
-    key: 'isReady',
-    get: function get() {
-      return this.texture != null;
-    }
-  }]);
-
-  return TextureState;
-}();
-
+  get isReady() {
+    return this.texture != null;
+  }
+}
 exports.default = TextureState;
 
 /***/ }),
@@ -7639,8 +7214,6 @@ exports.default = TextureState;
 
 
 exports.__esModule = true;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _texture = __webpack_require__(75);
 
@@ -7656,25 +7229,28 @@ var _power_of_2_image2 = _interopRequireDefault(_power_of_2_image);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var TextureAtlasSpec = function () {
-  function TextureAtlasSpec(jsonDef) {
-    _classCallCheck(this, TextureAtlasSpec);
-
+class TextureAtlasSpec {
+  constructor(jsonDef) {
     this.jsonDef = jsonDef;
     this.frameNames = Object.keys(jsonDef.frames);
   }
 
-  TextureAtlasSpec.prototype.createTextureAtlas = function createTextureAtlas() {
-    var _this = this;
+  get frames() {
+    return this.jsonDef.frames;
+  }
 
-    var image = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-    var textureHints = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
+  get meta() {
+    return this.jsonDef.meta;
+  }
 
-    return Promise.resolve(image).then(function (image) {
+  get imageUrl() {
+    return this.meta.image;
+  }
+
+  createTextureAtlas(image = null, textureHints = undefined) {
+    return Promise.resolve(image).then(image => {
       if (typeof image === 'function') {
-        return Promise.resolve(image(_this)).then(function (img) {
+        return Promise.resolve(image(this)).then(img => {
           if (typeof img === 'string') {
             return new _power_of_2_image2.default(img).complete;
           }
@@ -7687,58 +7263,21 @@ var TextureAtlasSpec = function () {
       } else {
         throw new Error('TextureAtlasSpec.createTextureAtlas(): no image found!');
       }
-    }).then(function (image) {
-      var rootTexture = new _texture2.default(image, undefined, undefined, 0, 0, textureHints);
-      var atlas = new _texture_atlas2.default(rootTexture, _this);
-      for (var _iterator = Object.keys(_this.frames), _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-        var _ref;
-
-        if (_isArray) {
-          if (_i >= _iterator.length) break;
-          _ref = _iterator[_i++];
-        } else {
-          _i = _iterator.next();
-          if (_i.done) break;
-          _ref = _i.value;
-        }
-
-        var name = _ref;
-        var frame = _this.frames[name].frame;
-
+    }).then(image => {
+      const rootTexture = new _texture2.default(image, undefined, undefined, 0, 0, textureHints);
+      const atlas = new _texture_atlas2.default(rootTexture, this);
+      for (let name of Object.keys(this.frames)) {
+        const { frame } = this.frames[name];
         atlas.addFrame(name, frame.w, frame.h, frame.x, frame.y);
       }
       return atlas;
     });
-  };
+  }
 
-  TextureAtlasSpec.load = function load(url, options) {
-    return window.fetch(url, options).then(function (response) {
-      return response.json();
-    }).then(function (json) {
-      return new TextureAtlasSpec(json);
-    });
-  };
-
-  _createClass(TextureAtlasSpec, [{
-    key: 'frames',
-    get: function get() {
-      return this.jsonDef.frames;
-    }
-  }, {
-    key: 'meta',
-    get: function get() {
-      return this.jsonDef.meta;
-    }
-  }, {
-    key: 'imageUrl',
-    get: function get() {
-      return this.meta.image;
-    }
-  }]);
-
-  return TextureAtlasSpec;
-}();
-
+  static load(url, options) {
+    return window.fetch(url, options).then(response => response.json()).then(json => new TextureAtlasSpec(json));
+  }
+}
 exports.default = TextureAtlasSpec;
 
 /***/ }),
@@ -7762,46 +7301,31 @@ function sample(arr) {
 
 
 exports.__esModule = true;
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var WebGlBuffer = function () {
-  function WebGlBuffer(glx) {
-    var target = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : WebGlBuffer.ARRAY_BUFFER;
-    var usage = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : WebGlBuffer.STATIC_DRAW;
-
-    _classCallCheck(this, WebGlBuffer);
-
+class WebGlBuffer {
+  constructor(glx, target = WebGlBuffer.ARRAY_BUFFER, usage = WebGlBuffer.STATIC_DRAW) {
     this.glx = glx;
 
-    var gl = glx.gl;
-
+    const { gl } = glx;
     this.target = gl[target];
     this.usage = gl[usage];
 
     this.glBuffer = gl.createBuffer();
   }
 
-  WebGlBuffer.prototype.bindBuffer = function bindBuffer() {
+  bindBuffer() {
     this.glx.bindBuffer(this.target, this.glBuffer);
-  };
+  }
 
   /**
    * Upload array buffer content to gpu via `g.bufferData(..)`.
    */
-
-
-  WebGlBuffer.prototype.bufferData = function bufferData(typedArray) {
+  bufferData(typedArray) {
     this.bindBuffer();
     this.glx.gl.bufferData(this.target, typedArray, this.usage);
-  };
-
-  return WebGlBuffer;
-}();
+  }
+}
 
 exports.default = WebGlBuffer;
-
-
 WebGlBuffer.ARRAY_BUFFER = 'ARRAY_BUFFER';
 WebGlBuffer.ELEMENT_ARRAY_BUFFER = 'ELEMENT_ARRAY_BUFFER';
 
@@ -7825,13 +7349,11 @@ var _shader_variable_group = __webpack_require__(76);
 
 var _shader_variable_group2 = _interopRequireDefault(_shader_variable_group);
 
-var _destroy2 = __webpack_require__(31);
+var _destroy = __webpack_require__(31);
 
-var _destroy3 = _interopRequireDefault(_destroy2);
+var _destroy2 = _interopRequireDefault(_destroy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
  * A ShaderContext keeps named references to all shader _variables_
@@ -7839,115 +7361,97 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * Each named reference is organized as a _stack_ where you can push
  * or pop shader variable _values_.
  */
-var ShaderContext = function () {
-  function ShaderContext() {
-    _classCallCheck(this, ShaderContext);
-
+class ShaderContext {
+  constructor() {
     this.uniform = new Map();
     this.attrib = new Map();
     this.tex2d = new Map();
   }
 
-  ShaderContext.prototype.clear = function clear() {
+  clear() {
     this.uniform.clear();
     this.attrib.clear();
     this.tex2d.clear();
-  };
+  }
 
-  ShaderContext.prototype.destroy = function destroy() {
+  destroy() {
     this.clear();
-    (0, _destroy3.default)(this);
-  };
+    (0, _destroy2.default)(this);
+  }
 
   /**
    * @param {ShaderVariable|ShaderVariableGroup} shaderVariable
    */
-
-
-  ShaderContext.prototype.pushVar = function pushVar(shaderVariable) {
+  pushVar(shaderVariable) {
     if (shaderVariable instanceof _shader_variable_group2.default) {
       shaderVariable.pushVar(this);
     } else {
-      var lane = shaderVarLane(this, shaderVariable.type, shaderVariable.name);
+      const lane = shaderVarLane(this, shaderVariable.type, shaderVariable.name);
       lane.push(shaderVariable);
     }
-  };
+  }
 
   /**
    * Remove current shader variable plus all later set variables from named shader variable stack.
    * @param {ShaderVariable|ShaderVariableGroup} shaderVariable
    */
-
-
-  ShaderContext.prototype.popVar = function popVar(shaderVariable) {
+  popVar(shaderVariable) {
     if (shaderVariable instanceof _shader_variable_group2.default) {
       shaderVariable.popVar(this);
     } else {
-      var lane = shaderVarLane(this, shaderVariable.type, shaderVariable.name);
-      var len = lane.length;
-      for (var i = 0; i < len; ++i) {
+      const lane = shaderVarLane(this, shaderVariable.type, shaderVariable.name);
+      const len = lane.length;
+      for (let i = 0; i < len; ++i) {
         if (lane[i] === shaderVariable) {
           lane.length = i;
           return;
         }
       }
     }
-  };
+  }
 
   /**
    * Return current shader variable by name and type.
    * @param {ShaderVariable} shaderVariable
    * @return {ShaderVariable} or `null`
    */
-
-
-  ShaderContext.prototype.curVar = function curVar(shaderVariable) {
-    var lane = shaderVarMap(this, shaderVariable.type).get(shaderVariable.name);
+  curVar(shaderVariable) {
+    const lane = shaderVarMap(this, shaderVariable.type).get(shaderVariable.name);
     return lane && lane.length ? lane[lane.length - 1] : null;
-  };
+  }
 
   /**
    * Return current _uniform_ shader variable by name.
    * @param {string} name
    * @return {ShaderUniformVariable} or `null`
    */
-
-
-  ShaderContext.prototype.curUniform = function curUniform(name) {
-    var lane = this.uniform.get(name);
+  curUniform(name) {
+    const lane = this.uniform.get(name);
     return lane && lane.length ? lane[lane.length - 1] : null;
-  };
+  }
 
   /**
    * Return current _attribute_ shader variable by name.
    * @param {string} name
    * @return {ShaderAttribVariable} or `null`
    */
-
-
-  ShaderContext.prototype.curAttrib = function curAttrib(name) {
-    var lane = this.attrib.get(name);
+  curAttrib(name) {
+    const lane = this.attrib.get(name);
     return lane && lane.length ? lane[lane.length - 1] : null;
-  };
+  }
 
   /**
    * Return current _texture2d_ shader variable by name.
    * @param {string} name
    * @return {ShaderTexture2dVariable} or `null`
    */
-
-
-  ShaderContext.prototype.curTex2d = function curTex2d(name) {
-    var lane = this.tex2d.get(name);
+  curTex2d(name) {
+    const lane = this.tex2d.get(name);
     return lane && lane.length ? lane[lane.length - 1] : null;
-  };
-
-  return ShaderContext;
-}();
+  }
+}
 
 exports.default = ShaderContext;
-
-
 function shaderVarMap(shaderContext, type) {
   switch (type) {
     case _shader_variable2.default.TYPE.UNIFORM:
@@ -7960,8 +7464,8 @@ function shaderVarMap(shaderContext, type) {
 }
 
 function shaderVarLane(shaderContext, type, name) {
-  var map = shaderVarMap(shaderContext, type);
-  var lane = map.get(name);
+  const map = shaderVarMap(shaderContext, type);
+  let lane = map.get(name);
 
   if (!lane) {
     lane = [];
@@ -9192,9 +8696,7 @@ var _shader_uniform_variable2 = _interopRequireDefault(_shader_uniform_variable)
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var UNIFORM_NAME = 'viewMatrix';
+const UNIFORM_NAME = 'viewMatrix';
 
 /**
  * @param {object} options
@@ -9204,17 +8706,8 @@ var UNIFORM_NAME = 'viewMatrix';
  * @param {string} [options.sizeFit] - `cover`, `contain` or `fill`
  * @param {string} [options.uniformName='viewMatrix'] - name of the uniform value
  */
-
-var Projection = function () {
-  function Projection(_ref) {
-    var desiredWidth = _ref.desiredWidth,
-        desiredHeight = _ref.desiredHeight,
-        pixelRatio = _ref.pixelRatio,
-        sizeFit = _ref.sizeFit,
-        uniformName = _ref.uniformName;
-
-    _classCallCheck(this, Projection);
-
+class Projection {
+  constructor({ desiredWidth, desiredHeight, pixelRatio, sizeFit, uniformName }) {
     this.desiredWidth = desiredWidth;
     this.desiredHeight = desiredHeight;
     this.pixelRatio = pixelRatio;
@@ -9224,7 +8717,7 @@ var Projection = function () {
     this.height = 0;
   }
 
-  Projection.prototype.updateOrtho = function updateOrtho(width, height) {
+  updateOrtho(width, height) {
     if (width !== this.width || height !== this.height) {
       this.width = width;
       this.height = height;
@@ -9233,43 +8726,40 @@ var Projection = function () {
       this.uniform.value.perspective(width, height, 100);
       this.uniform.touch();
     }
-  };
+  }
 
-  Projection.prototype.update = function update(currentWidth, currentHeight) {
+  update(currentWidth, currentHeight) {
     // TODO pixelRatio and currentPixelRatio
     if (this.sizeFit === 'fill' && this.desiredWidth > 0 && this.desiredHeight > 0) {
       this.updateOrtho(this.desiredWidth, this.desiredHeight);
     } else if ((this.sizeFit === 'cover' || this.sizeFit === 'contain') && this.desiredWidth >= 0 && this.desiredHeight >= 0) {
-      var currentRatio = currentHeight / currentWidth; // <1 : landscape, >1 : portrait
-      var desiredRatio = this.desiredHeight / this.desiredWidth;
-      var isCover = this.sizeFit === 'cover';
+      const currentRatio = currentHeight / currentWidth; // <1 : landscape, >1 : portrait
+      const desiredRatio = this.desiredHeight / this.desiredWidth;
+      const isCover = this.sizeFit === 'cover';
 
-      var width = this.desiredWidth;
-      var height = this.desiredHeight;
+      let width = this.desiredWidth;
+      let height = this.desiredHeight;
 
       if (this.desiredWidth === 0 && this.desiredHeight || currentRatio < desiredRatio) {
         width = this.desiredHeight / currentHeight * currentWidth;
         if (isCover) {
-          var factor = this.desiredWidth / width;
+          const factor = this.desiredWidth / width;
           width *= factor;
           height *= factor;
         }
       } else if (this.desiredWidth && this.desiredHeight === 0 || currentRatio > desiredRatio) {
         height = this.desiredWidth / currentWidth * currentHeight;
         if (isCover) {
-          var _factor = this.desiredHeight / height;
-          width *= _factor;
-          height *= _factor;
+          const factor = this.desiredHeight / height;
+          width *= factor;
+          height *= factor;
         }
       }
 
       this.updateOrtho(width, height);
     }
-  };
-
-  return Projection;
-}();
-
+  }
+}
 exports.default = Projection;
 
 /***/ }),
@@ -9280,144 +8770,123 @@ exports.default = Projection;
 
 
 exports.__esModule = true;
+const { mat4 } = __webpack_require__(430);
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+const DEG2RAD = Math.PI / 180.0;
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var _require = __webpack_require__(430),
-    mat4 = _require.mat4;
-
-var DEG2RAD = Math.PI / 180.0;
-
-var Mat4 = function () {
-  function Mat4() {
-    _classCallCheck(this, Mat4);
-
+class Mat4 {
+  constructor() {
     this.mat4 = mat4.create();
     Object.freeze(this);
   }
 
-  Mat4.prototype.identity = function identity() {
+  identity() {
     mat4.identity(this.mat4);
-  };
+  }
 
-  Mat4.prototype.ortho = function ortho(width, height) {
-    var zRange = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : Math.pow(2, 16);
-
-    var hw = width >> 1;
-    var hh = height >> 1;
-    var hz = zRange >> 1;
+  ortho(width, height, zRange = Math.pow(2, 16)) {
+    const hw = width >> 1;
+    const hh = height >> 1;
+    const hz = zRange >> 1;
     mat4.ortho(this.mat4, -hw, hw, -hh, hh, -hz, hz);
-  };
+  }
 
-  Mat4.prototype.perspective = function perspective(width, height) {
-    var distance = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 100;
-
+  perspective(width, height, distance = 100) {
     // https://webglfundamentals.org/webgl/lessons/webgl-3d-perspective.html
     // https://stackoverflow.com/questions/6653080/in-opengl-how-can-i-determine-the-bounds-of-the-view-at-a-given-depth
     // http://glmatrix.net/docs/module-mat4.html
-    var aspect = width / height;
-    var near = 0;
-    var far = 2000;
-    var halfHeight = height / 2.0;
-    var fovy = 2 * Math.atan(halfHeight / distance);
+    const aspect = width / height;
+    const near = 0;
+    const far = 2000;
+    const halfHeight = height / 2.0;
+    const fovy = 2 * Math.atan(halfHeight / distance);
     mat4.perspective(this.mat4, fovy, aspect, near, far);
     // TODO camera feature
     mat4.translate(this.mat4, this.mat4, [0, 0, -distance]);
-  };
+  }
 
-  Mat4.prototype.translate = function translate(x, y) {
-    var z = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-
+  translate(x, y, z = 0) {
     mat4.translate(this.mat4, this.mat4, [x, y, z]);
-  };
+  }
 
-  Mat4.prototype.scale = function scale(x, y) {
-    var z = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-
+  scale(x, y, z = 1) {
     mat4.scale(this.mat4, this.mat4, [x, y, z]);
-  };
+  }
 
-  Mat4.prototype.rotateX = function rotateX(deg) {
+  rotateX(deg) {
     mat4.rotateX(this.mat4, this.mat4, deg * DEG2RAD);
-  };
+  }
 
-  Mat4.prototype.rotateY = function rotateY(deg) {
+  rotateY(deg) {
     mat4.rotateY(this.mat4, this.mat4, deg * DEG2RAD);
-  };
+  }
 
-  Mat4.prototype.rotateZ = function rotateZ(deg) {
+  rotateZ(deg) {
     mat4.rotateZ(this.mat4, this.mat4, deg * DEG2RAD);
-  };
+  }
 
-  Mat4.prototype.multiply = function multiply(a, b) {
+  multiply(a, b) {
     mat4.multiply(this.mat4, a.mat4, b.mat4);
-  };
+  }
 
-  Mat4.prototype.copy = function copy(src) {
+  copy(src) {
     mat4.copy(this.mat4, src.mat4);
-  };
+  }
 
-  Mat4.prototype.clone = function clone() {
-    var dolly = new Mat4();
+  clone() {
+    const dolly = new Mat4();
     dolly.copy(this);
     return dolly;
-  };
+  }
 
-  _createClass(Mat4, [{
-    key: 'x',
-    get: function get() {
-      return this.mat4[12];
-    },
-    set: function set(val) {
-      this.mat4[12] = val;
-    }
-  }, {
-    key: 'y',
-    get: function get() {
-      return this.mat4[13];
-    },
-    set: function set(val) {
-      this.mat4[13] = val;
-    }
-  }, {
-    key: 'z',
-    get: function get() {
-      return this.mat4[14];
-    },
-    set: function set(val) {
-      this.mat4[14] = val;
-    }
-  }, {
-    key: 'sx',
-    get: function get() {
-      return this.mat4[0];
-    },
-    set: function set(val) {
-      this.mat4[0] = val;
-    }
-  }, {
-    key: 'sy',
-    get: function get() {
-      return this.mat4[5];
-    },
-    set: function set(val) {
-      this.mat4[5] = val;
-    }
-  }, {
-    key: 'sz',
-    get: function get() {
-      return this.mat4[10];
-    },
-    set: function set(val) {
-      this.mat4[10] = val;
-    }
-  }]);
+  get x() {
+    return this.mat4[12];
+  }
 
-  return Mat4;
-}();
+  set x(val) {
+    this.mat4[12] = val;
+  }
 
+  get y() {
+    return this.mat4[13];
+  }
+
+  set y(val) {
+    this.mat4[13] = val;
+  }
+
+  get z() {
+    return this.mat4[14];
+  }
+
+  set z(val) {
+    this.mat4[14] = val;
+  }
+
+  get sx() {
+    return this.mat4[0];
+  }
+
+  set sx(val) {
+    this.mat4[0] = val;
+  }
+
+  get sy() {
+    return this.mat4[5];
+  }
+
+  set sy(val) {
+    this.mat4[5] = val;
+  }
+
+  get sz() {
+    return this.mat4[10];
+  }
+
+  set sz(val) {
+    this.mat4[10] = val;
+  }
+}
 exports.default = Mat4;
 
 /***/ }),
@@ -11745,31 +11214,18 @@ var _shader_variable2 = _interopRequireDefault(_shader_variable);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 /**
  * Shader uniform variable.
  */
-var ShaderUniformVariable = function (_ShaderVariable) {
-  _inherits(ShaderUniformVariable, _ShaderVariable);
-
+class ShaderUniformVariable extends _shader_variable2.default {
   /**
    * @param {string} name
    * @param {number|Object} value
    */
-  function ShaderUniformVariable(name, value) {
-    _classCallCheck(this, ShaderUniformVariable);
-
-    return _possibleConstructorReturn(this, _ShaderVariable.call(this, name, _shader_variable2.default.TYPE.UNIFORM, value));
+  constructor(name, value) {
+    super(name, _shader_variable2.default.TYPE.UNIFORM, value);
   }
-
-  return ShaderUniformVariable;
-}(_shader_variable2.default);
-
+}
 exports.default = ShaderUniformVariable;
 
 /***/ }),
@@ -11780,50 +11236,35 @@ exports.default = ShaderUniformVariable;
 
 
 exports.__esModule = true;
+const snakeCase = __webpack_require__(438);
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var snakeCase = __webpack_require__(438);
-
-var BlendMode = function () {
-  function BlendMode(enable) {
-    var sfactor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-    var dfactor = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-
-    _classCallCheck(this, BlendMode);
-
+class BlendMode {
+  constructor(enable, sfactor = null, dfactor = null) {
     this.enable = enable;
     this.sfactor = sfactor;
     this.dfactor = dfactor;
   }
 
-  BlendMode.prototype.isEqual = function isEqual(other) {
+  set sfactor(value) {
+    this._sfactor = typeof value === 'string' ? snakeCase(value).toUpperCase() : undefined;
+  }
+
+  get sfactor() {
+    return this._sfactor;
+  }
+
+  set dfactor(value) {
+    this._dfactor = typeof value === 'string' ? snakeCase(value).toUpperCase() : undefined;
+  }
+
+  get dfactor() {
+    return this._dfactor;
+  }
+
+  isEqual(other) {
     return other && this.enable === other.enable && this._sfactor === other._sfactor && this._dfactor === other._dfactor;
-  };
-
-  _createClass(BlendMode, [{
-    key: 'sfactor',
-    set: function set(value) {
-      this._sfactor = typeof value === 'string' ? snakeCase(value).toUpperCase() : undefined;
-    },
-    get: function get() {
-      return this._sfactor;
-    }
-  }, {
-    key: 'dfactor',
-    set: function set(value) {
-      this._dfactor = typeof value === 'string' ? snakeCase(value).toUpperCase() : undefined;
-    },
-    get: function get() {
-      return this._dfactor;
-    }
-  }]);
-
-  return BlendMode;
-}();
-
+  }
+}
 exports.default = BlendMode;
 
 /***/ }),
@@ -11835,29 +11276,9 @@ exports.default = BlendMode;
 
 exports.__esModule = true;
 
-var log = typeof console !== 'undefined' ? typeof console.debug === 'function' ? function () {
-  var _console;
+const log = typeof console !== 'undefined' ? typeof console.debug === 'function' ? (...args) => console.debug(...args) : (...args) => console.log(...args) : () => 1;
 
-  return (_console = console).debug.apply(_console, arguments);
-} : function () {
-  var _console2;
-
-  return (_console2 = console).log.apply(_console2, arguments);
-} : function () {
-  return 1;
-};
-
-var error = typeof console !== 'undefined' ? typeof console.error === 'function' ? function () {
-  var _console3;
-
-  return (_console3 = console).error.apply(_console3, arguments);
-} : function () {
-  var _console4;
-
-  return (_console4 = console).log.apply(_console4, arguments);
-} : function () {
-  return 1;
-};
+const error = typeof console !== 'undefined' ? typeof console.error === 'function' ? (...args) => console.error(...args) : (...args) => console.log(...args) : () => 1;
 
 exports.default = log;
 exports.error = error;
@@ -11870,8 +11291,6 @@ exports.error = error;
 
 
 exports.__esModule = true;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _create_vertex_objects = __webpack_require__(453);
 
@@ -11887,9 +11306,7 @@ var _v_o_array2 = _interopRequireDefault(_v_o_array);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var VOPool = function () {
+class VOPool {
   /**
    * @param {VODescriptor} descriptor - vertex object descriptor
    * @param {Object} [options] - Advanced options
@@ -11901,9 +11318,7 @@ var VOPool = function () {
    * @param {string} [options.usage=VOPool.USAGE.DYNAMIC] - vertex data usage hint
    */
 
-  function VOPool(descriptor, options) {
-    _classCallCheck(this, VOPool);
-
+  constructor(descriptor, options) {
     this.id = (0, _generate_uuid2.default)();
 
     this.descriptor = descriptor;
@@ -11912,10 +11327,10 @@ var VOPool = function () {
 
     this.usage = options && options.usage || VOPool.USAGE.DYNAMIC;
 
-    var voArray = options && options.voArray;
+    let voArray = options && options.voArray;
     if (voArray) {
       if (voArray.usage !== this.usage) {
-        throw new Error('VOPool usage(=' + this.usage + ') mismatch with given voArray(usage=' + voArray.usage + ')');
+        throw new Error(`VOPool usage(=${this.usage}) mismatch with given voArray(usage=${voArray.usage})`);
       }
     } else {
       voArray = descriptor.createVOArray(this.capacity, this.usage);
@@ -11936,20 +11351,40 @@ var VOPool = function () {
    * @type {number}
    */
 
+  get usedCount() {
+    return this.usedVOs.length;
+  }
+
+  /**
+   * Number of free and unused *vertex objects*.
+   * @type {number}
+   */
+
+  get availableCount() {
+    return this.capacity - this.usedVOs.length;
+  }
+
+  /**
+   * Number of **allocated** *vertex objects*.
+   * @type {number}
+   */
+
+  get allocatedCount() {
+    return this.availableVOs.length + this.usedVOs.length;
+  }
+
   /**
    * Return **size** *vertex objects*
    * @return {VertexObject|VertexObject[]}
    */
 
-  VOPool.prototype.alloc = function alloc() {
-    var size = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
+  alloc(size = 1) {
     if (size > 1) {
-      var arr = [];
-      for (var i = 0; i < size; ++i) {
-        var _vo2 = this.alloc(1);
-        if (_vo2 !== undefined) {
-          arr.push(_vo2);
+      const arr = [];
+      for (let i = 0; i < size; ++i) {
+        const vo = this.alloc(1);
+        if (vo !== undefined) {
+          arr.push(vo);
         } else {
           break;
         }
@@ -11957,7 +11392,7 @@ var VOPool = function () {
       return arr;
     }
 
-    var vo = this.availableVOs.shift();
+    const vo = this.availableVOs.shift();
 
     if (vo === undefined) {
       if (this.capacity - this.allocatedCount > 0) {
@@ -11973,31 +11408,29 @@ var VOPool = function () {
     vo.voArray.copy(this.voNew.voArray);
 
     return vo;
-  };
+  }
 
   /**
    * @param {VertexObject|VertexObject[]} vo - vertex object(s)
    */
 
-  VOPool.prototype.free = function free(vo) {
+  free(vo) {
     if (Array.isArray(vo)) {
-      vo.forEach(function (_vo) {
-        return _vo.free();
-      });
+      vo.forEach(_vo => _vo.free());
       return;
     }
 
-    var idx = this.usedVOs.indexOf(vo);
+    const idx = this.usedVOs.indexOf(vo);
 
     if (idx === -1) return;
 
-    var lastIdx = this.usedVOs.length - 1;
+    const lastIdx = this.usedVOs.length - 1;
 
     if (idx !== lastIdx) {
-      var last = this.usedVOs[lastIdx];
+      const last = this.usedVOs[lastIdx];
       vo.voArray.copy(last.voArray);
 
-      var tmp = last.voArray;
+      const tmp = last.voArray;
       last.voArray = vo.voArray;
       vo.voArray = tmp;
 
@@ -12008,43 +11441,10 @@ var VOPool = function () {
     this.availableVOs.unshift(vo);
 
     vo.voArray.copy(this.voZero.voArray);
-  };
-
-  _createClass(VOPool, [{
-    key: 'usedCount',
-    get: function get() {
-      return this.usedVOs.length;
-    }
-
-    /**
-     * Number of free and unused *vertex objects*.
-     * @type {number}
-     */
-
-  }, {
-    key: 'availableCount',
-    get: function get() {
-      return this.capacity - this.usedVOs.length;
-    }
-
-    /**
-     * Number of **allocated** *vertex objects*.
-     * @type {number}
-     */
-
-  }, {
-    key: 'allocatedCount',
-    get: function get() {
-      return this.availableVOs.length + this.usedVOs.length;
-    }
-  }]);
-
-  return VOPool;
-}();
+  }
+}
 
 exports.default = VOPool;
-
-
 VOPool.USAGE = _v_o_array2.default.USAGE;
 
 /***/ }),
@@ -12056,10 +11456,6 @@ VOPool.USAGE = _v_o_array2.default.USAGE;
 
 exports.__esModule = true;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 /**
  * Represents a 2d axis aligned boundary box.
  *
@@ -12070,15 +11466,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @param {number} [y1=0] - y1
  */
 
-var AABB2 = function () {
-  function AABB2() {
-    var x0 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-    var x1 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-    var y0 = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-    var y1 = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-
-    _classCallCheck(this, AABB2);
-
+class AABB2 {
+  constructor(x0 = 0, x1 = 0, y0 = 0, y1 = 0) {
     if (x0 < x1) {
       /**
        * @type {number}
@@ -12123,7 +11512,30 @@ var AABB2 = function () {
   /**
    * @type {number}
    */
+  get width() {
+    return this.maxX - this.minX + 1;
+  }
 
+  /**
+   * @type {number}
+   */
+  get height() {
+    return this.maxY - this.minY + 1;
+  }
+
+  /**
+   * @type {number}
+   */
+  get centerX() {
+    return (this.maxX - this.minX) / 2;
+  }
+
+  /**
+   * @type {number}
+   */
+  get centerY() {
+    return (this.maxY - this.minY) / 2;
+  }
 
   /**
    * Extend the boundary box.
@@ -12131,7 +11543,7 @@ var AABB2 = function () {
    * @param {number} x - x
    * @param {number} y - y
    */
-  AABB2.prototype.addPoint = function addPoint(x, y) {
+  addPoint(x, y) {
     if (x < this.minX) {
       this.minX = x;
     } else if (x > this.maxX) {
@@ -12143,7 +11555,7 @@ var AABB2 = function () {
     } else if (y > this.maxY) {
       this.maxY = y;
     }
-  };
+  }
 
   /**
    * Determinates wether or the 2d point is inside this AABB.
@@ -12152,11 +11564,9 @@ var AABB2 = function () {
    * @param {number} y - y
    * @return {boolean} return true when point is inside the aabb
    */
-
-
-  AABB2.prototype.isInside = function isInside(x, y) {
+  isInside(x, y) {
     return x >= this.minX && x <= this.maxX && y >= this.minY && y <= this.maxY;
-  };
+  }
 
   /**
    * Determinates wether or not this AABB intersects *aabb*.
@@ -12164,52 +11574,10 @@ var AABB2 = function () {
    * @param {AABB2} aabb - aabb
    * @return {boolean} return true when there is some intersection between both
    */
-
-
-  AABB2.prototype.isIntersection = function isIntersection(aabb) {
+  isIntersection(aabb) {
     return !(aabb.maxX < this.minX || aabb.minX > this.maxX || aabb.maxY < this.minY || aabb.minY > this.maxY);
-  };
-
-  _createClass(AABB2, [{
-    key: "width",
-    get: function get() {
-      return this.maxX - this.minX + 1;
-    }
-
-    /**
-     * @type {number}
-     */
-
-  }, {
-    key: "height",
-    get: function get() {
-      return this.maxY - this.minY + 1;
-    }
-
-    /**
-     * @type {number}
-     */
-
-  }, {
-    key: "centerX",
-    get: function get() {
-      return (this.maxX - this.minX) / 2;
-    }
-
-    /**
-     * @type {number}
-     */
-
-  }, {
-    key: "centerY",
-    get: function get() {
-      return (this.maxY - this.minY) / 2;
-    }
-  }]);
-
-  return AABB2;
-}();
-
+  }
+}
 exports.default = AABB2;
 
 /***/ }),
@@ -12231,14 +11599,8 @@ var _web_gl_buffer2 = _interopRequireDefault(_web_gl_buffer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var ElementIndexArray = function () {
-  function ElementIndexArray(objectCount) {
-    var itemCount = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-
-    _classCallCheck(this, ElementIndexArray);
-
+class ElementIndexArray {
+  constructor(objectCount, itemCount = 1) {
     this.resourceRef = new _resource_ref2.default(this, {
       target: _web_gl_buffer2.default.ELEMENT_ARRAY_BUFFER,
       usage: 'static'
@@ -12266,26 +11628,18 @@ var ElementIndexArray = function () {
    * quadIndices.length        // => 60
    * quadIndices.itemCount     // => 6
    */
+  static Generate(objectCount, indices, stride = 4, objectOffset = 0) {
+    const arr = new ElementIndexArray(objectCount, indices.length);
 
-
-  ElementIndexArray.Generate = function Generate(objectCount, indices) {
-    var stride = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 4;
-    var objectOffset = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-
-    var arr = new ElementIndexArray(objectCount, indices.length);
-
-    for (var i = 0; i < objectCount; ++i) {
-      for (var j = 0; j < indices.length; ++j) {
+    for (let i = 0; i < objectCount; ++i) {
+      for (let j = 0; j < indices.length; ++j) {
         arr.array[i * arr.itemCount + j] = indices[j] + (i + objectOffset) * stride;
       }
     }
 
     return arr;
-  };
-
-  return ElementIndexArray;
-}();
-
+  }
+}
 exports.default = ElementIndexArray;
 
 /***/ }),
@@ -12297,42 +11651,28 @@ exports.default = ElementIndexArray;
 
 exports.__esModule = true;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _v_o_array = __webpack_require__(71);
 
 var _v_o_array2 = _interopRequireDefault(_v_o_array);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var ShaderAttribValue = function () {
-  function ShaderAttribValue(name, descriptor, bufferSource) {
-    _classCallCheck(this, ShaderAttribValue);
-
+class ShaderAttribValue {
+  constructor(name, descriptor, bufferSource) {
     this.name = name;
     this.descriptor = descriptor;
     this.bufferSource = bufferSource;
   }
 
-  _createClass(ShaderAttribValue, [{
-    key: 'attrDescriptor',
-    get: function get() {
-      return this.descriptor.attr[this.name];
-    }
-  }, {
-    key: 'resourceRef',
-    get: function get() {
-      var bufferSource = this.bufferSource;
+  get attrDescriptor() {
+    return this.descriptor.attr[this.name];
+  }
 
-      return bufferSource instanceof _v_o_array2.default ? bufferSource.resourceRef : bufferSource.voArray.resourceRef;
-    }
-  }]);
-
-  return ShaderAttribValue;
-}();
-
+  get resourceRef() {
+    const { bufferSource } = this;
+    return bufferSource instanceof _v_o_array2.default ? bufferSource.resourceRef : bufferSource.voArray.resourceRef;
+  }
+}
 exports.default = ShaderAttribValue;
 
 /***/ }),
@@ -12350,31 +11690,18 @@ var _shader_variable2 = _interopRequireDefault(_shader_variable);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 /**
  * Shader attribute variable.
  */
-var ShaderAttribVariable = function (_ShaderVariable) {
-  _inherits(ShaderAttribVariable, _ShaderVariable);
-
+class ShaderAttribVariable extends _shader_variable2.default {
   /**
    * @param {string} name
    * @param {number|Object} value
    */
-  function ShaderAttribVariable(name, value) {
-    _classCallCheck(this, ShaderAttribVariable);
-
-    return _possibleConstructorReturn(this, _ShaderVariable.call(this, name, _shader_variable2.default.TYPE.ATTRIB, value));
+  constructor(name, value) {
+    super(name, _shader_variable2.default.TYPE.ATTRIB, value);
   }
-
-  return ShaderAttribVariable;
-}(_shader_variable2.default);
-
+}
 exports.default = ShaderAttribVariable;
 
 /***/ }),
@@ -12392,32 +11719,28 @@ var _generate_uuid2 = _interopRequireDefault(_generate_uuid);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var ShaderProgram =
-/**
- * @param {ShaderSource} vertexShader
- * @param {ShaderSource} fragmentShader
- */
-function ShaderProgram(vertexShader, fragmentShader) {
-  _classCallCheck(this, ShaderProgram);
-
+class ShaderProgram {
   /**
-   * @type {string}
+   * @param {ShaderSource} vertexShader
+   * @param {ShaderSource} fragmentShader
    */
-  this.id = (0, _generate_uuid2.default)();
+  constructor(vertexShader, fragmentShader) {
+    /**
+     * @type {string}
+     */
+    this.id = (0, _generate_uuid2.default)();
 
-  /**
-   * @type {ShaderSource}
-   */
-  this.vertexShader = vertexShader;
+    /**
+     * @type {ShaderSource}
+     */
+    this.vertexShader = vertexShader;
 
-  /**
-   * @type {ShaderSource}
-   */
-  this.fragmentShader = fragmentShader;
-};
-
+    /**
+     * @type {ShaderSource}
+     */
+    this.fragmentShader = fragmentShader;
+  }
+}
 exports.default = ShaderProgram;
 
 /***/ }),
@@ -12429,8 +11752,6 @@ exports.default = ShaderProgram;
 
 exports.__esModule = true;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _shader_variable_group = __webpack_require__(76);
 
 var _shader_variable_group2 = _interopRequireDefault(_shader_variable_group);
@@ -12441,61 +11762,45 @@ var _shader_texture_2d_variable2 = _interopRequireDefault(_shader_texture_2d_var
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var ShaderTextureGroup = function () {
-  function ShaderTextureGroup(shaderLibrary, shaderTextureMap) {
-    _classCallCheck(this, ShaderTextureGroup);
-
+class ShaderTextureGroup {
+  constructor(shaderLibrary, shaderTextureMap) {
     this.shaderLibrary = shaderLibrary;
-    this.waitFor = Object.keys(shaderTextureMap).map(function (shaderVarKey) {
-      return {
-        shaderVarKey: shaderVarKey,
-        textureId: shaderTextureMap[shaderVarKey],
-        isLoaded: false
-      };
-    });
+    this.waitFor = Object.keys(shaderTextureMap).map(shaderVarKey => ({
+      shaderVarKey,
+      textureId: shaderTextureMap[shaderVarKey],
+      isLoaded: false
+    }));
     this.shaderVarGroup = new _shader_variable_group2.default([]);
     this.shaderVarStore = new Map();
   }
 
-  ShaderTextureGroup.prototype.whenLoaded = function whenLoaded(onLoaded) {
-    var _this = this;
+  get isLoaded() {
+    return this.waitFor.length === 0 && this.shaderVarGroup.shaderVars.length > 0;
+  }
 
+  whenLoaded(onLoaded) {
     if (!this.isLoaded) {
-      this.waitFor.forEach(function (waitFor) {
+      this.waitFor.forEach(waitFor => {
         if (!waitFor.isLoaded) {
-          var state = _this.shaderLibrary.states.get(waitFor.textureId);
+          const state = this.shaderLibrary.states.get(waitFor.textureId);
           if (state === undefined || !state.isReady) return;
 
-          var shaderVar = new _shader_texture_2d_variable2.default(waitFor.shaderVarKey);
+          const shaderVar = new _shader_texture_2d_variable2.default(waitFor.shaderVarKey);
           shaderVar.texture = state.texture;
-          _this.shaderVarGroup.shaderVars.push(shaderVar);
+          this.shaderVarGroup.shaderVars.push(shaderVar);
 
           waitFor.isLoaded = true;
         }
       });
-      this.waitFor = this.waitFor.filter(function (waitFor) {
-        return waitFor.isLoaded === false;
-      });
+      this.waitFor = this.waitFor.filter(waitFor => waitFor.isLoaded === false);
       if (this.isLoaded) {
         onLoaded(this.shaderVarGroup);
       }
     } else {
       onLoaded(this.shaderVarGroup);
     }
-  };
-
-  _createClass(ShaderTextureGroup, [{
-    key: 'isLoaded',
-    get: function get() {
-      return this.waitFor.length === 0 && this.shaderVarGroup.shaderVars.length > 0;
-    }
-  }]);
-
-  return ShaderTextureGroup;
-}();
-
+  }
+}
 exports.default = ShaderTextureGroup;
 
 /***/ }),
@@ -12506,46 +11811,31 @@ exports.default = ShaderTextureGroup;
 
 
 exports.__esModule = true;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 /**
  * Shader attribute variable *alias*.
  */
-var ShaderVariableAlias = function () {
+class ShaderVariableAlias {
   /**
    * @param {string} name
    * @param {number|Object} value
    */
-  function ShaderVariableAlias(name, shaderVar) {
-    _classCallCheck(this, ShaderVariableAlias);
-
+  constructor(name, shaderVar) {
     this.name = name;
     this.shaderVar = shaderVar;
   }
 
-  _createClass(ShaderVariableAlias, [{
-    key: "type",
-    get: function get() {
-      return this.shaderVar.type;
-    }
-  }, {
-    key: "value",
-    get: function get() {
-      return this.shaderVar.value;
-    }
-  }, {
-    key: "serial",
-    get: function get() {
-      return this.shaderVar.serial;
-    }
-  }]);
+  get type() {
+    return this.shaderVar.type;
+  }
 
-  return ShaderVariableAlias;
-}();
+  get value() {
+    return this.shaderVar.value;
+  }
 
+  get serial() {
+    return this.shaderVar.serial;
+  }
+}
 exports.default = ShaderVariableAlias;
 
 /***/ }),
@@ -12556,8 +11846,6 @@ exports.default = ShaderVariableAlias;
 
 
 exports.__esModule = true;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _shader_variable_group = __webpack_require__(76);
 
@@ -12577,58 +11865,39 @@ var _shader_variable_alias2 = _interopRequireDefault(_shader_variable_alias);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 /**
  * Group of shader variables which are referencing one single buffer.
  */
-var ShaderVariableBufferGroup = function (_ShaderVariableGroup) {
-  _inherits(ShaderVariableBufferGroup, _ShaderVariableGroup);
-
+class ShaderVariableBufferGroup extends _shader_variable_group2.default {
   /**
    * @param {VOPool} bufferSource
    */
-  function ShaderVariableBufferGroup(bufferSource) {
-    _classCallCheck(this, ShaderVariableBufferGroup);
-
-    var _this = _possibleConstructorReturn(this, _ShaderVariableGroup.call(this, []));
-
-    var descriptor = bufferSource.descriptor;
-    var firstVar = void 0;
-    Object.keys(descriptor.attr).forEach(function (attrName) {
+  constructor(bufferSource) {
+    super([]);
+    const descriptor = bufferSource.descriptor;
+    let firstVar;
+    Object.keys(descriptor.attr).forEach(attrName => {
       if (!firstVar) {
         firstVar = new _shader_attrib_variable2.default(attrName, new _shader_attrib_value2.default(attrName, descriptor, bufferSource));
-        _this.shaderVars.push(firstVar);
+        this.shaderVars.push(firstVar);
       } else {
-        _this.shaderVars.push(new _shader_variable_alias2.default(attrName, firstVar));
+        this.shaderVars.push(new _shader_variable_alias2.default(attrName, firstVar));
       }
     });
-    return _this;
   }
 
-  ShaderVariableBufferGroup.prototype.touch = function touch() {
+  get bufferSource() {
+    return this.shaderVars[0].value.bufferSource;
+  }
+
+  get serial() {
+    return this.shaderVars[0].serial;
+  }
+
+  touch() {
     return this.shaderVars[0].touch();
-  };
-
-  _createClass(ShaderVariableBufferGroup, [{
-    key: 'bufferSource',
-    get: function get() {
-      return this.shaderVars[0].value.bufferSource;
-    }
-  }, {
-    key: 'serial',
-    get: function get() {
-      return this.shaderVars[0].serial;
-    }
-  }]);
-
-  return ShaderVariableBufferGroup;
-}(_shader_variable_group2.default);
-
+  }
+}
 exports.default = ShaderVariableBufferGroup;
 
 /***/ }),
@@ -12639,8 +11908,6 @@ exports.default = ShaderVariableBufferGroup;
 
 
 exports.__esModule = true;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _element_index_array = __webpack_require__(180);
 
@@ -12664,23 +11931,19 @@ var _v_o_pool2 = _interopRequireDefault(_v_o_pool);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+const pick = __webpack_require__(454);
 
-var pick = __webpack_require__(454);
-
-var getVO = function getVO(descriptor, opt) {
+const getVO = (descriptor, opt) => {
   if (typeof opt === 'function') {
-    var vo = descriptor.createVO();
+    const vo = descriptor.createVO();
     opt(vo);
     return vo;
   }
   return opt;
 };
 
-var SpriteGroup = function () {
-  function SpriteGroup(resourceLibrary, textureLibrary, options) {
-    _classCallCheck(this, SpriteGroup);
-
+class SpriteGroup {
+  constructor(resourceLibrary, textureLibrary, options) {
     this.resourceLibrary = resourceLibrary;
     this.textureLibrary = textureLibrary;
     this.descriptor = resourceLibrary.findDescriptor(options.descriptor);
@@ -12698,73 +11961,61 @@ var SpriteGroup = function () {
     this.shaderTextureGroup = null;
   }
 
-  SpriteGroup.prototype.setTexture = function setTexture(sampler, textureId) {
+  get capacity() {
+    return this.voPool.capacity;
+  }
+
+  get usedCount() {
+    return this.voPool.usedCount;
+  }
+  get availableCount() {
+    return this.voPool.availableCount;
+  }
+
+  setTexture(sampler, textureId) {
     if (this.textures[sampler] !== textureId) {
       this.textures[sampler] = textureId;
       this.shaderTextureGroup = null;
     }
-  };
+  }
 
-  SpriteGroup.prototype.loadTextureAtlas = function loadTextureAtlas(sampler, url) {
+  loadTextureAtlas(sampler, url) {
     this.textures[sampler] = url;
     this.shaderTextureGroup = null;
     return this.textureLibrary.loadTextureAtlas(url);
-  };
+  }
 
-  SpriteGroup.prototype.getTextureAtlas = function getTextureAtlas(sampler) {
+  getTextureAtlas(sampler) {
     return this.textureLibrary.getTextureAtlas(this.textures[sampler]);
-  };
+  }
 
-  SpriteGroup.prototype.createSprite = function createSprite(texture, width, height) {
-    var vo = this.voPool.alloc(1);
+  createSprite(texture, width, height) {
+    const vo = this.voPool.alloc(1);
     if (texture != null) {
-      var w = width || texture.width;
-      var h = height || texture.height;
+      const w = width || texture.width;
+      const h = height || texture.height;
       vo.setSize(w, h);
       vo.setTexCoordsByTexture(texture);
     }
     return vo;
-  };
+  }
 
-  SpriteGroup.prototype.renderFrame = function renderFrame(renderer) {
-    var _this = this;
-
+  renderFrame(renderer) {
     if (this.shaderTextureGroup == null) {
       this.shaderTextureGroup = new _shader_texture_group2.default(this.textureLibrary, this.textures);
     }
-    this.shaderTextureGroup.whenLoaded(function (texUniforms) {
-      var shaderContext = renderer.shaderContext;
-
+    this.shaderTextureGroup.whenLoaded(texUniforms => {
+      const { shaderContext } = renderer;
 
       shaderContext.pushVar(texUniforms);
-      shaderContext.pushVar(_this.voPoolShaderAttribs);
+      shaderContext.pushVar(this.voPoolShaderAttribs);
 
-      renderer.useShaderProgram(_this.shaderProgram);
+      renderer.useShaderProgram(this.shaderProgram);
 
-      renderer.drawIndexed(_this.primitive, _this.indices);
+      renderer.drawIndexed(this.primitive, this.indices);
     });
-  };
-
-  _createClass(SpriteGroup, [{
-    key: 'capacity',
-    get: function get() {
-      return this.voPool.capacity;
-    }
-  }, {
-    key: 'usedCount',
-    get: function get() {
-      return this.voPool.usedCount;
-    }
-  }, {
-    key: 'availableCount',
-    get: function get() {
-      return this.voPool.availableCount;
-    }
-  }]);
-
-  return SpriteGroup;
-}();
-
+  }
+}
 exports.default = SpriteGroup;
 
 /***/ }),
@@ -12928,17 +12179,12 @@ exports.default = function (el, name, defaultValue) {
 
 exports.__esModule = true;
 exports.default = findParentElementByName;
-var EXIT_NODES = ['BODY', 'HTML'];
+const EXIT_NODES = ['BODY', 'HTML'];
 
-function findParentElementByName(node) {
-  var parent = node.parentElement;
+function findParentElementByName(node, ...names) {
+  const parent = node.parentElement;
   if (!parent || parent.nodeType !== 1) return;
-  var nodeName = parent.nodeName;
-
-  for (var _len = arguments.length, names = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-    names[_key - 1] = arguments[_key];
-  }
-
+  const { nodeName } = parent;
   if (names.includes(nodeName)) return parent;
   if (EXIT_NODES.includes(nodeName)) return;
   return parent;
@@ -18659,28 +17905,18 @@ function createVO(obj, descriptor, voArray) {
 
 
 exports.__esModule = true;
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Serial = function () {
+class Serial {
   /**
    * @param {number} [initialValue=1]
    */
-  function Serial() {
-    var initialValue = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
-    _classCallCheck(this, Serial);
-
+  constructor(initialValue = 1) {
     this.value = initialValue;
   }
 
-  Serial.prototype.touch = function touch() {
+  touch() {
     ++this.value;
-  };
-
-  return Serial;
-}();
-
+  }
+}
 exports.default = Serial;
 
 /***/ }),
@@ -18692,26 +17928,19 @@ exports.default = Serial;
 
 exports.__esModule = true;
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-/** @private */
-
-
 exports.default = function (descriptor, proto) {
-  var propertiesObject = {
+  const propertiesObject = {
 
     toArray: {
 
-      value: function value(attrNames) {
-        var arr = [];
-        var attrList = Array.isArray(attrNames) ? attrNames.map(function (name) {
-          return descriptor.attr[name];
-        }) : descriptor.attrList;
-        var len = attrList.length;
-        for (var i = 0; i < descriptor.vertexCount; ++i) {
-          for (var j = 0; j < len; ++j) {
-            var attr = attrList[j];
-            for (var k = 0; k < attr.size; ++k) {
+      value: function (attrNames) {
+        const arr = [];
+        const attrList = Array.isArray(attrNames) ? attrNames.map(name => descriptor.attr[name]) : descriptor.attrList;
+        const len = attrList.length;
+        for (let i = 0; i < descriptor.vertexCount; ++i) {
+          for (let j = 0; j < len; ++j) {
+            const attr = attrList[j];
+            for (let k = 0; k < attr.size; ++k) {
               arr.push(attr.getValue(this, i, k));
             }
           }
@@ -18723,13 +17952,13 @@ exports.default = function (descriptor, proto) {
 
   };
 
-  Object.keys(descriptor.attr).forEach(function (name) {
-    var attr = descriptor.attr[name];
+  Object.keys(descriptor.attr).forEach(name => {
+    const attr = descriptor.attr[name];
 
     _v_o_attr_descriptor2.default.defineProperties(attr, propertiesObject, descriptor);
   });
 
-  descriptor.voPrototype = Object.create((typeof proto === 'undefined' ? 'undefined' : _typeof(proto)) === 'object' ? proto : {}, propertiesObject);
+  descriptor.voPrototype = Object.create(typeof proto === 'object' ? proto : {}, propertiesObject);
 };
 
 var _v_o_attr_descriptor = __webpack_require__(74);
@@ -18758,15 +17987,13 @@ exports.default = function (descriptor) {
     uint8: false
   };
 
-  Object.keys(descriptor.attr).forEach(function (name) {
+  Object.keys(descriptor.attr).forEach(name => {
     descriptor.typedArrays[descriptor.attr[name].type] = true;
   });
 
   Object.freeze(descriptor.typedArrays);
 
-  descriptor.typeList = Object.keys(descriptor.typedArrays).filter(function (type) {
-    return descriptor.typedArrays[type];
-  }).sort();
+  descriptor.typeList = Object.keys(descriptor.typedArrays).filter(type => descriptor.typedArrays[type]).sort();
 };
 
 /***/ }),
@@ -18783,15 +18010,15 @@ exports.default = function (descriptor, attributes) {
   descriptor.attrNames = [];
 
   if (Array.isArray(attributes)) {
-    var offset = 0;
-    var byteOffset = 0;
+    let offset = 0;
+    let byteOffset = 0;
 
-    for (var i = 0; i < attributes.length; ++i) {
-      var attr = attributes[i];
+    for (let i = 0; i < attributes.length; ++i) {
+      const attr = attributes[i];
 
       if (attr.size === undefined) throw new Error('vertex object attribute descriptor has no size!');
 
-      var type = attr.type || 'float32';
+      const type = attr.type || 'float32';
 
       if (attr.name !== undefined) {
         descriptor.attrNames.push(attr.name);
@@ -18809,9 +18036,7 @@ exports.default = function (descriptor, attributes) {
     descriptor.vertexAttrCount = offset;
   }
 
-  descriptor.attrList = descriptor.attrNames.map(function (name) {
-    return descriptor.attr[name];
-  });
+  descriptor.attrList = descriptor.attrNames.map(name => descriptor.attr[name]);
 };
 
 var _typed_array_helpers = __webpack_require__(73);
@@ -18831,16 +18056,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.__esModule = true;
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-/** @private */
-
-
 exports.default = function (descriptor, aliases) {
-  if ((typeof aliases === 'undefined' ? 'undefined' : _typeof(aliases)) !== 'object') return;
+  if (typeof aliases !== 'object') return;
 
-  Object.keys(aliases).forEach(function (name) {
-    var attr = aliases[name];
+  Object.keys(aliases).forEach(name => {
+    let attr = aliases[name];
 
     if (typeof attr === 'string') {
       attr = descriptor.attr[attr];
@@ -18895,11 +18115,44 @@ var _rotate2 = _interopRequireDefault(_rotate);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var vertexShader = exports.vertexShader = ['\n\n  attribute vec2 pos2d;\n  attribute float posZ;\n  attribute vec2 uv;\n  attribute vec2 translate;\n  attribute float rotate;\n  attribute float scale;\n  attribute float opacity;\n\n  uniform mat4 viewMatrix;\n\n  varying vec4 vTextureCoordScaleOpacity;\n\n  ', (0, _rotate2.default)('rotateZ', 0.0, 0.0, 1.0), '\n\n  void main(void)\n  {\n    mat4 rotationMatrix = rotateZ(rotate);\n    gl_Position = viewMatrix * ((rotationMatrix * (vec4(scale, scale, scale, 1.0) * vec4(pos2d.xy, posZ, 1.0))) + vec4(translate.xy, 0.0, 0.0));\n    vTextureCoordScaleOpacity = vec4(uv.xy, opacity, 0.0);\n  }\n'];
+const vertexShader = exports.vertexShader = [`
 
-var fragmentShader = exports.fragmentShader = '\n\n  precision mediump float;\n\n  varying vec4 vTextureCoordScaleOpacity;\n  uniform sampler2D tex;\n\n  void main(void) {\n    gl_FragColor = vTextureCoordScaleOpacity.z * texture2D(tex, vec2(vTextureCoordScaleOpacity.s, vTextureCoordScaleOpacity.t));\n  }\n\n';
+  attribute vec2 pos2d;
+  attribute float posZ;
+  attribute vec2 uv;
+  attribute vec2 translate;
+  attribute float rotate;
+  attribute float scale;
+  attribute float opacity;
 
-var description = exports.description = {
+  uniform mat4 viewMatrix;
+
+  varying vec4 vTextureCoordScaleOpacity;
+
+  `, (0, _rotate2.default)('rotateZ', 0.0, 0.0, 1.0), `
+
+  void main(void)
+  {
+    mat4 rotationMatrix = rotateZ(rotate);
+    gl_Position = viewMatrix * ((rotationMatrix * (vec4(scale, scale, scale, 1.0) * vec4(pos2d.xy, posZ, 1.0))) + vec4(translate.xy, 0.0, 0.0));
+    vTextureCoordScaleOpacity = vec4(uv.xy, opacity, 0.0);
+  }
+`];
+
+const fragmentShader = exports.fragmentShader = `
+
+  precision mediump float;
+
+  varying vec4 vTextureCoordScaleOpacity;
+  uniform sampler2D tex;
+
+  void main(void) {
+    gl_FragColor = vTextureCoordScaleOpacity.z * texture2D(tex, vec2(vTextureCoordScaleOpacity.s, vTextureCoordScaleOpacity.t));
+  }
+
+`;
+
+const description = exports.description = {
   vertexCount: 4,
 
   // +-+-+-+-+ +-+-+-+-+ +-+-+
@@ -18929,11 +18182,11 @@ var description = exports.description = {
      * @param {number} textureHeight
      * @param {number} [repeat] - texture repeat factor
      */
-    setTexCoordsByViewport: function setTexCoordsByViewport(viewport, textureWidth, textureHeight, repeat) {
-      var x0 = viewport.x === 0 ? 0 : viewport.x / textureWidth;
-      var x1 = (viewport.x + viewport.width) / textureWidth;
-      var y0 = 1 - (viewport.y + viewport.height) / textureHeight;
-      var y1 = viewport.y === 0 ? 1 : 1 - viewport.y / textureHeight;
+    setTexCoordsByViewport(viewport, textureWidth, textureHeight, repeat) {
+      let x0 = viewport.x === 0 ? 0 : viewport.x / textureWidth;
+      let x1 = (viewport.x + viewport.width) / textureWidth;
+      let y0 = 1 - (viewport.y + viewport.height) / textureHeight;
+      let y1 = viewport.y === 0 ? 1 : 1 - viewport.y / textureHeight;
 
       if (repeat !== undefined) {
         x0 *= repeat;
@@ -18945,31 +18198,28 @@ var description = exports.description = {
       this.setTexCoords(x0, y0, x1, y0, x1, y1, x0, y1);
     },
 
-
     /**
      * @param {Texture} texture
      */
-    setTexCoordsByTexture: function setTexCoordsByTexture(texture) {
-      var x0 = texture.minS;
-      var y0 = texture.minT;
-      var x1 = texture.maxS;
-      var y1 = texture.maxT;
+    setTexCoordsByTexture(texture) {
+      const x0 = texture.minS;
+      const y0 = texture.minT;
+      const x1 = texture.maxS;
+      const y1 = texture.maxT;
 
       this.setTexCoords(x0, y0, x1, y0, x1, y1, x0, y1);
     },
-
 
     /**
      * @param {number} width
      * @param {number} height
      */
-    setSize: function setSize(width, height) {
-      var halfWidth = width * 0.5;
-      var halfHeight = (height == null ? width : height) * 0.5;
+    setSize(width, height) {
+      const halfWidth = width * 0.5;
+      const halfHeight = (height == null ? width : height) * 0.5;
 
       this.setPos2d(-halfWidth, halfHeight, halfWidth, halfHeight, halfWidth, -halfHeight, -halfWidth, -halfHeight);
     },
-
 
     get width() {
       return this.x1 - this.x3;
@@ -19009,13 +18259,8 @@ var description = exports.description = {
 
 exports.__esModule = true;
 
-exports.default = function () {
-  var funcName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'rotate';
-  var x = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.0;
-  var y = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0.0;
-  var z = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1.0;
-
-  return ['mat4 ' + funcName + '(float angle) {', 'float s = sin(angle);', 'float c = cos(angle);', 'float oc = 1.0 - c;', (0, _ret2.default)((0, _mat2.default)((0, _add2.default)((0, _mul2.default)('oc', x * x), 'c'), (0, _sub2.default)((0, _mul2.default)('oc', x * y), (0, _mul2.default)(z, 's')), (0, _add2.default)((0, _mul2.default)('oc', z * x), (0, _mul2.default)(y, 's')), 0, (0, _add2.default)((0, _mul2.default)('oc', x * y), (0, _mul2.default)(z, 's')), (0, _add2.default)((0, _mul2.default)('oc', y * y), 'c'), (0, _sub2.default)((0, _mul2.default)('oc', y * z), (0, _mul2.default)(x, 's')), 0, (0, _sub2.default)((0, _mul2.default)('oc', z * x), (0, _mul2.default)(y, 's')), (0, _add2.default)((0, _mul2.default)('oc', y * z), (0, _mul2.default)(x, 's')), (0, _add2.default)((0, _mul2.default)('oc', z * z), 'c'))), '}'];
+exports.default = function (funcName = 'rotate', x = 0.0, y = 0.0, z = 1.0) {
+  return [`mat4 ${funcName}(float angle) {`, 'float s = sin(angle);', 'float c = cos(angle);', 'float oc = 1.0 - c;', (0, _ret2.default)((0, _mat2.default)((0, _add2.default)((0, _mul2.default)('oc', x * x), 'c'), (0, _sub2.default)((0, _mul2.default)('oc', x * y), (0, _mul2.default)(z, 's')), (0, _add2.default)((0, _mul2.default)('oc', z * x), (0, _mul2.default)(y, 's')), 0, (0, _add2.default)((0, _mul2.default)('oc', x * y), (0, _mul2.default)(z, 's')), (0, _add2.default)((0, _mul2.default)('oc', y * y), 'c'), (0, _sub2.default)((0, _mul2.default)('oc', y * z), (0, _mul2.default)(x, 's')), 0, (0, _sub2.default)((0, _mul2.default)('oc', z * x), (0, _mul2.default)(y, 's')), (0, _add2.default)((0, _mul2.default)('oc', y * z), (0, _mul2.default)(x, 's')), (0, _add2.default)((0, _mul2.default)('oc', z * z), 'c'))), '}'];
 };
 
 var _ret = __webpack_require__(412);
@@ -19050,7 +18295,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.__esModule = true;
 exports.default = ret;
 function ret(res) {
-  return "return " + res + ";";
+  return `return ${res};`;
 }
 
 /***/ }),
@@ -19069,29 +18314,9 @@ var _as_float2 = _interopRequireDefault(_as_float);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function mat4() {
-                              var m00 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-                              var m01 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-                              var m02 = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-                              var m03 = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-                              var m10 = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
-                              var m11 = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
-                              var m12 = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
-                              var m13 = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 0;
-                              var m20 = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : 0;
-                              var m21 = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : 0;
-                              var m22 = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : 0;
-                              var m23 = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : 0;
-                              var m30 = arguments.length > 12 && arguments[12] !== undefined ? arguments[12] : 0;
-                              var m31 = arguments.length > 13 && arguments[13] !== undefined ? arguments[13] : 0;
-                              var m32 = arguments.length > 14 && arguments[14] !== undefined ? arguments[14] : 0;
-                              var m33 = arguments.length > 15 && arguments[15] !== undefined ? arguments[15] : 1;
-                              var as = arguments.length > 16 && arguments[16] !== undefined ? arguments[16] : _as_float2.default;
-
-                              var toStr = as || function (x) {
-                                                            return x + '';
-                              };
-                              return 'mat4(' + toStr(m00) + ', ' + toStr(m01) + ', ' + toStr(m02) + ', ' + toStr(m03) + ', ' + toStr(m10) + ', ' + toStr(m11) + ', ' + toStr(m12) + ', ' + toStr(m13) + ', ' + toStr(m20) + ', ' + toStr(m21) + ', ' + toStr(m22) + ', ' + toStr(m23) + ', ' + toStr(m30) + ', ' + toStr(m31) + ', ' + toStr(m32) + ', ' + toStr(m33) + ')';
+function mat4(m00 = 0, m01 = 0, m02 = 0, m03 = 0, m10 = 0, m11 = 0, m12 = 0, m13 = 0, m20 = 0, m21 = 0, m22 = 0, m23 = 0, m30 = 0, m31 = 0, m32 = 0, m33 = 1, as = _as_float2.default) {
+                              const toStr = as || (x => x + '');
+                              return `mat4(${toStr(m00)}, ${toStr(m01)}, ${toStr(m02)}, ${toStr(m03)}, ${toStr(m10)}, ${toStr(m11)}, ${toStr(m12)}, ${toStr(m13)}, ${toStr(m20)}, ${toStr(m21)}, ${toStr(m22)}, ${toStr(m23)}, ${toStr(m30)}, ${toStr(m31)}, ${toStr(m32)}, ${toStr(m33)})`;
 }
 
 /***/ }),
@@ -19104,7 +18329,7 @@ function mat4() {
 exports.__esModule = true;
 
 exports.default = function (number) {
-  var str = (number + '').trim();
+  const str = (number + '').trim();
   if (str.match(/^[0-9]+$/)) {
     return str + '.0';
   }
@@ -19124,7 +18349,7 @@ function isNumber(x) {
   return typeof x === 'number';
 }
 
-exports.default = function (a, b) {
+exports.default = (a, b) => {
   if (isNumber(b) && isNumber(a)) {
     return a * b;
   } else if (isNumber(a)) {
@@ -19134,7 +18359,7 @@ exports.default = function (a, b) {
       case 1:
         return b;
       default:
-        return a + ' * ' + b;
+        return `${a} * ${b}`;
     }
   } else if (isNumber(b)) {
     switch (b) {
@@ -19143,10 +18368,10 @@ exports.default = function (a, b) {
       case 1:
         return a;
       default:
-        return a + ' * ' + b;
+        return `${a} * ${b}`;
     }
   } else {
-    return a + ' * ' + b;
+    return `${a} * ${b}`;
   }
 };
 
@@ -19170,19 +18395,19 @@ function sub(a, b) {
   } else if (isNumber(a)) {
     switch (a) {
       case 0:
-        return '-' + b;
+        return `-${b}`;
       default:
-        return a + ' - ' + b;
+        return `${a} - ${b}`;
     }
   } else if (isNumber(b)) {
     switch (b) {
       case 0:
         return a;
       default:
-        return a + ' - ' + b;
+        return `${a} - ${b}`;
     }
   } else {
-    return a + ' - ' + b;
+    return `${a} - ${b}`;
   }
 }
 
@@ -19208,17 +18433,17 @@ function add(a, b) {
       case 0:
         return b;
       default:
-        return a + ' + ' + b;
+        return `${a} + ${b}`;
     }
   } else if (isNumber(b)) {
     switch (b) {
       case 0:
         return a;
       default:
-        return a + ' + ' + b;
+        return `${a} + ${b}`;
     }
   } else {
-    return a + ' + ' + b;
+    return `${a} + ${b}`;
   }
 }
 
@@ -19239,18 +18464,14 @@ var _web_gl_texture_manager = __webpack_require__(426);
 
 var _web_gl_texture_manager2 = _interopRequireDefault(_web_gl_texture_manager);
 
-var _destroy2 = __webpack_require__(31);
+var _destroy = __webpack_require__(31);
 
-var _destroy3 = _interopRequireDefault(_destroy2);
+var _destroy2 = _interopRequireDefault(_destroy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var WebGlContext = function () {
-  function WebGlContext(gl) {
-    _classCallCheck(this, WebGlContext);
-
+class WebGlContext {
+  constructor(gl) {
     Object.defineProperty(this, 'gl', { value: gl });
 
     initialize(this);
@@ -19263,7 +18484,7 @@ var WebGlContext = function () {
     this.textureManager = new _web_gl_texture_manager2.default(this);
 
     this.boundTextures = new Array(this.MAX_TEXTURE_IMAGE_UNITS);
-    for (var i = 0; i < this.boundTextures.length; i++) {
+    for (let i = 0; i < this.boundTextures.length; i++) {
       this.boundTextures[i] = { TEXTURE_2D: null };
     }
 
@@ -19271,21 +18492,18 @@ var WebGlContext = function () {
     this.activeTexture(0); // enable first texture unit by default
   }
 
-  WebGlContext.prototype.destroy = function destroy() {
+  destroy() {
     this.textureManager.destroy();
     this.boundBuffers.clear();
     this.resourceLibrary.destroy();
-    (0, _destroy3.default)(this);
-  };
+    (0, _destroy2.default)(this);
+  }
 
   /**
    * @param {BlendMode} blendMode
    */
-
-
-  WebGlContext.prototype.blend = function blend(blendMode) {
-    var gl = this.gl;
-
+  blend(blendMode) {
+    const { gl } = this;
     if (blendMode.enable) {
       if (!this.blendEnabled) {
         gl.enable(gl.BLEND);
@@ -19296,42 +18514,36 @@ var WebGlContext = function () {
       gl.disable(gl.BLEND);
       this.blendEnabled = false;
     }
-  };
+  }
 
   /**
    * @param {number} texUnit
    */
-
-
-  WebGlContext.prototype.activeTexture = function activeTexture(texUnit) {
-    var gl = this.gl;
-
-    var tex = gl.TEXTURE0 + texUnit;
+  activeTexture(texUnit) {
+    const { gl } = this;
+    const tex = gl.TEXTURE0 + texUnit;
 
     if (this.activeTexUnit !== tex) {
       this.activeTexUnit = tex;
       gl.activeTexture(this.activeTexUnit);
     }
-  };
+  }
 
   /**
    * @param {number} glTextureId
    */
-
-
-  WebGlContext.prototype.bindTexture2d = function bindTexture2d(glTextureId) {
-    var gl = this.gl;
-
-    var bound = this.boundTextures[this.activeTexUnit - gl.TEXTURE0];
+  bindTexture2d(glTextureId) {
+    const { gl } = this;
+    const bound = this.boundTextures[this.activeTexUnit - gl.TEXTURE0];
 
     if (bound.TEXTURE_2D !== glTextureId) {
       bound.TEXTURE_2D = glTextureId;
       gl.bindTexture(gl.TEXTURE_2D, glTextureId);
     }
-  };
+  }
 
-  WebGlContext.prototype.readCurrentState = function readCurrentState() {
-    var gl = this.gl;
+  readCurrentState() {
+    const { gl } = this;
 
     // https://developer.mozilla.org/de/docs/Web/API/WebGLRenderingContext/getParameter
 
@@ -19340,61 +18552,49 @@ var WebGlContext = function () {
 
     this.currentProgram = gl.getParameter(gl.CURRENT_PROGRAM);
     this.blendEnabled = gl.getParameter(gl.BLEND);
-  };
+  }
 
-  WebGlContext.prototype.bindBuffer = function bindBuffer(target, buffer) {
+  bindBuffer(target, buffer) {
     if (this.boundBuffers.get(target) !== buffer) {
       this.gl.bindBuffer(target, buffer);
       this.boundBuffers.set(target, buffer);
     }
-  };
+  }
 
   /**
    * @return {boolean}
    */
-
-
-  WebGlContext.prototype.useProgram = function useProgram(glProgram) {
+  useProgram(glProgram) {
     if (this.currentProgram !== glProgram) {
       this.gl.useProgram(glProgram);
       this.currentProgram = glProgram;
       return true;
     }
     return false;
-  };
+  }
 
-  WebGlContext.prototype.enableVertexAttribArrays = function enableVertexAttribArrays(enableLocations) {
-    var _this = this;
+  enableVertexAttribArrays(enableLocations) {
+    const { gl } = this;
 
-    var gl = this.gl;
-
-
-    this.enabledVertexAttribLocations.filter(function (location) {
-      return enableLocations.indexOf(location) === -1;
-    }).forEach(function (location) {
+    this.enabledVertexAttribLocations.filter(location => enableLocations.indexOf(location) === -1).forEach(location => {
       gl.disableVertexAttribArray(location);
-      _this.enabledVertexAttribLocations.splice(enableLocations.indexOf(location), 1);
+      this.enabledVertexAttribLocations.splice(enableLocations.indexOf(location), 1);
     });
 
-    enableLocations.forEach(function (loc) {
-      var idx = _this.enabledVertexAttribLocations.indexOf(loc);
+    enableLocations.forEach(loc => {
+      const idx = this.enabledVertexAttribLocations.indexOf(loc);
       if (idx === -1) {
         gl.enableVertexAttribArray(loc);
-        _this.enabledVertexAttribLocations.push(loc);
+        this.enabledVertexAttribLocations.push(loc);
       }
     });
-  };
+  }
+}
 
-  return WebGlContext;
-}();
+exports.default = WebGlContext; /** @private */
 
-/** @private */
-
-
-exports.default = WebGlContext;
 function initialize(glx) {
-  var gl = glx.gl;
-
+  const { gl } = glx;
 
   glx.DEPTH_BITS = gl.getParameter(gl.DEPTH_BITS);
   glx.MAX_TEXTURE_IMAGE_UNITS = gl.getParameter(gl.MAX_TEXTURE_IMAGE_UNITS);
@@ -19429,23 +18629,19 @@ var _web_gl_texture = __webpack_require__(425);
 
 var _web_gl_texture2 = _interopRequireDefault(_web_gl_texture);
 
-var _destroy2 = __webpack_require__(31);
+var _destroy = __webpack_require__(31);
 
-var _destroy3 = _interopRequireDefault(_destroy2);
+var _destroy2 = _interopRequireDefault(_destroy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var WEB_GL_BUFFER_USAGE = Object.freeze({
+const WEB_GL_BUFFER_USAGE = Object.freeze({
   static: _web_gl_buffer2.default.STATIC_DRAW,
   dynamic: _web_gl_buffer2.default.DYNAMIC_DRAW
 });
 
-var WebGlResourceLibrary = function () {
-  function WebGlResourceLibrary(glx) {
-    _classCallCheck(this, WebGlResourceLibrary);
-
+class WebGlResourceLibrary {
+  constructor(glx) {
     Object.defineProperty(this, 'glx', { value: glx });
 
     /** @private */
@@ -19460,92 +18656,83 @@ var WebGlResourceLibrary = function () {
     this.texture = new Map();
   }
 
-  WebGlResourceLibrary.prototype.destroy = function destroy() {
+  destroy() {
     this.texture.clear();
     this.buffer.clear();
     this.shaderProgram.clear();
     this.fragmentShader.clear();
     this.vertexShader.clear();
-    (0, _destroy3.default)(this);
-  };
+    (0, _destroy2.default)(this);
+  }
 
-  WebGlResourceLibrary.prototype.loadVertexShader = function loadVertexShader(shaderSource) {
-    var glShader = this.vertexShader.get(shaderSource.id);
+  loadVertexShader(shaderSource) {
+    let glShader = this.vertexShader.get(shaderSource.id);
     if (!glShader) {
       glShader = new _web_gl_shader2.default(this.glx, shaderSource);
       this.vertexShader.set(shaderSource.id, glShader);
     }
     return glShader;
-  };
+  }
 
-  WebGlResourceLibrary.prototype.loadFragementShader = function loadFragementShader(shaderSource) {
-    var glShader = this.fragmentShader.get(shaderSource.id);
+  loadFragementShader(shaderSource) {
+    let glShader = this.fragmentShader.get(shaderSource.id);
     if (!glShader) {
       glShader = new _web_gl_shader2.default(this.glx, shaderSource);
       this.vertexShader.set(shaderSource.id, glShader);
     }
     return glShader;
-  };
+  }
 
-  WebGlResourceLibrary.prototype.loadProgram = function loadProgram(shaderProgram) {
-    var program = this.shaderProgram.get(shaderProgram.id);
+  loadProgram(shaderProgram) {
+    let program = this.shaderProgram.get(shaderProgram.id);
     if (!program) {
       program = new _web_gl_program2.default(this.glx, shaderProgram);
       this.shaderProgram.set(shaderProgram.id, program);
     }
     return program;
-  };
+  }
 
   /**
    * @param {ResourceRef} ref - resource reference to VOArray or `ElementIndexArray`
    * @returns {ResourceRef} resource reference to `WebGlBuffer`
    */
-
-
-  WebGlResourceLibrary.prototype.loadBuffer = function loadBuffer(ref) {
-    var bufferRef = this.buffer.get(ref.id);
+  loadBuffer(ref) {
+    let bufferRef = this.buffer.get(ref.id);
     if (!bufferRef) {
       // create WebGlBuffer
-      var target = ref.hints.target || _web_gl_buffer2.default.ARRAY_BUFFER;
-      var glBuffer = new _web_gl_buffer2.default(this.glx, target, WEB_GL_BUFFER_USAGE[ref.hints.usage]);
+      const target = ref.hints.target || _web_gl_buffer2.default.ARRAY_BUFFER;
+      const glBuffer = new _web_gl_buffer2.default(this.glx, target, WEB_GL_BUFFER_USAGE[ref.hints.usage]);
       // create ResourceRef
       bufferRef = new _resource_ref2.default(glBuffer, { id: ref.id, serial: 0 });
       this.buffer.set(ref.id, bufferRef);
     }
     return bufferRef;
-  };
+  }
 
   /**
    * @param {ResourceRef} resourceRef
    * @returns {ResourceRef} resource reference to WebGlBuffer
    */
-
-
-  WebGlResourceLibrary.prototype.findBuffer = function findBuffer(resourceRef) {
+  findBuffer(resourceRef) {
     return this.buffer.get(resourceRef.id);
-  };
+  }
 
   /**
    * @param {ResourceRef} texRef - resource reference to texture
    * @returns {ResourceRef} resource reference to WebGlTexture
    */
-
-
-  WebGlResourceLibrary.prototype.loadTexture = function loadTexture(texRef) {
-    var glTextureRef = this.texture.get(texRef.id);
+  loadTexture(texRef) {
+    let glTextureRef = this.texture.get(texRef.id);
     if (!glTextureRef) {
       // create WebGlTexture
-      var glTex = new _web_gl_texture2.default(this.glx, texRef.resource.imgEl, texRef.hints.flipY, texRef.hints.repeatable, texRef.hints.premultiplyAlpha, texRef.hints.nearest);
+      const glTex = new _web_gl_texture2.default(this.glx, texRef.resource.imgEl, texRef.hints.flipY, texRef.hints.repeatable, texRef.hints.premultiplyAlpha, texRef.hints.nearest);
       // create ResourceRef
       glTextureRef = new _resource_ref2.default(glTex, { id: texRef.id, serial: 0 });
       this.texture.set(texRef.id, glTextureRef);
     }
     return glTextureRef;
-  };
-
-  return WebGlResourceLibrary;
-}();
-
+  }
+}
 exports.default = WebGlResourceLibrary;
 
 /***/ }),
@@ -19567,44 +18754,37 @@ var _source_to_str2 = _interopRequireDefault(_source_to_str);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+class WebGlShader {
+  constructor(glx, source) {
+    this.glx = glx;
 
-var WebGlShader = function WebGlShader(glx, source) {
-  _classCallCheck(this, WebGlShader);
+    if (!(source instanceof _shader_source2.default)) {
+      throw new Error('WebGlShader panic! source must be an instance of ShaderSource!');
+    }
+    this.source = source;
 
-  this.glx = glx;
+    const { gl } = glx;
+    this.shaderType = gl[source.type];
 
-  if (!(source instanceof _shader_source2.default)) {
-    throw new Error('WebGlShader panic! source must be an instance of ShaderSource!');
+    this.glShader = gl.createShader(this.shaderType);
+    compileShader(this);
+
+    Object.freeze(this);
   }
-  this.source = source;
-
-  var gl = glx.gl;
-
-  this.shaderType = gl[source.type];
-
-  this.glShader = gl.createShader(this.shaderType);
-  compileShader(this);
-
-  Object.freeze(this);
-};
+}
 
 exports.default = WebGlShader;
-
-
 function compileShader(shader) {
-  var gl = shader.glx.gl;
-  var glShader = shader.glShader,
-      source = shader.source;
+  const { gl } = shader.glx;
+  const { glShader, source } = shader;
 
-
-  var src = (0, _source_to_str2.default)({ glx: shader.glx }, source.source);
+  const src = (0, _source_to_str2.default)({ glx: shader.glx }, source.source);
 
   gl.shaderSource(glShader, src);
   gl.compileShader(glShader);
 
   if (!gl.getShaderParameter(glShader, gl.COMPILE_STATUS)) {
-    var shaderInfoLog = gl.getShaderInfoLog(glShader);
+    const shaderInfoLog = gl.getShaderInfoLog(glShader);
 
     console.error(shaderInfoLog);
     console.group('shader-info');
@@ -19612,7 +18792,7 @@ function compileShader(shader) {
     console.log(source);
     console.groupEnd();
 
-    var err = new Error('WebGlShader compile panic!');
+    const err = new Error('WebGlShader compile panic!');
     err.webGlShader = shader;
     err.shaderInfoLog = shaderInfoLog;
     throw err;
@@ -19659,19 +18839,14 @@ var _web_gl_attribute2 = _interopRequireDefault(_web_gl_attribute);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var WebGlProgram = function () {
-  function WebGlProgram(glx, shaderProgram) {
-    _classCallCheck(this, WebGlProgram);
-
+class WebGlProgram {
+  constructor(glx, shaderProgram) {
     this.glx = glx;
 
     this.vertexShader = glx.resourceLibrary.loadVertexShader(shaderProgram.vertexShader);
     this.fragmentShader = glx.resourceLibrary.loadFragementShader(shaderProgram.fragmentShader);
 
-    var gl = glx.gl;
-
+    const { gl } = glx;
     this.glProgram = gl.createProgram();
 
     linkProgram(this, this.vertexShader.glShader, this.fragmentShader.glShader);
@@ -19686,29 +18861,22 @@ var WebGlProgram = function () {
   /**
    * @return {boolean}
    */
-
-
-  WebGlProgram.prototype.use = function use() {
-    var glx = this.glx;
-
+  use() {
+    const { glx } = this;
     if (glx.useProgram(this.glProgram)) {
       glx.enableVertexAttribArrays(this.attributeLocations);
       return true;
     }
     return false;
-  };
+  }
 
   /**
    * @param {ShaderContext} shaderContext
    * @param {WebGlRenderer} renderer
    */
-
-
-  WebGlProgram.prototype.loadUniforms = function loadUniforms(shaderContext, renderer) {
-    var _this = this;
-
-    this.uniformNames.forEach(function (name) {
-      var shaderVar = shaderContext.curUniform(name);
+  loadUniforms(shaderContext, renderer) {
+    this.uniformNames.forEach(name => {
+      let shaderVar = shaderContext.curUniform(name);
       if (shaderVar == null) {
         shaderVar = shaderContext.curTex2d(name);
         if (shaderVar == null) {
@@ -19716,9 +18884,9 @@ var WebGlProgram = function () {
         }
         shaderVar.syncTextureAndValue(renderer);
       }
-      _this.uniforms[name].setValue(shaderVar.value);
+      this.uniforms[name].setValue(shaderVar.value);
     });
-  };
+  }
 
   /**
    * sync buffer before load
@@ -19726,36 +18894,27 @@ var WebGlProgram = function () {
    * @param {ShaderContext} shaderContext
    * @param {WebGlRenderer} renderer
    */
-
-
-  WebGlProgram.prototype.loadAttributes = function loadAttributes(shaderContext, renderer) {
-    var _this2 = this;
-
-    this.attributeNames.forEach(function (name) {
-      var attribValue = shaderContext.curAttrib(name).value;
+  loadAttributes(shaderContext, renderer) {
+    this.attributeNames.forEach(name => {
+      const attribValue = shaderContext.curAttrib(name).value;
       renderer.syncBuffer(attribValue).bindBuffer();
-      _this2.attributes[name].vertexAttribPointer(attribValue.descriptor);
+      this.attributes[name].vertexAttribPointer(attribValue.descriptor);
     });
-  };
+  }
+}
 
-  return WebGlProgram;
-}();
+exports.default = WebGlProgram; /** @private */
 
-/** @private */
-
-
-exports.default = WebGlProgram;
 function createAttributes(program) {
-  var gl = program.glx.gl;
-
-  var len = gl.getProgramParameter(program.glProgram, gl.ACTIVE_ATTRIBUTES);
+  const { gl } = program.glx;
+  const len = gl.getProgramParameter(program.glProgram, gl.ACTIVE_ATTRIBUTES);
 
   program.attributes = {};
   program.attributeNames = [];
   program.attributeLocations = [];
 
-  for (var i = 0; i < len; ++i) {
-    var attrib = new _web_gl_attribute2.default(program, i);
+  for (let i = 0; i < len; ++i) {
+    const attrib = new _web_gl_attribute2.default(program, i);
     program.attributes[attrib.name] = attrib;
     program.attributeNames.push(attrib.name);
     program.attributeLocations.push(attrib.location);
@@ -19766,15 +18925,14 @@ function createAttributes(program) {
 
 /** @private */
 function createUniforms(program) {
-  var gl = program.glx.gl;
-
-  var len = gl.getProgramParameter(program.glProgram, gl.ACTIVE_UNIFORMS);
+  const { gl } = program.glx;
+  const len = gl.getProgramParameter(program.glProgram, gl.ACTIVE_UNIFORMS);
 
   program.uniforms = {};
   program.uniformNames = [];
 
-  for (var i = 0; i < len; ++i) {
-    var uniform = new _web_gl_uniform2.default(program, i);
+  for (let i = 0; i < len; ++i) {
+    const uniform = new _web_gl_uniform2.default(program, i);
     program.uniforms[uniform.name] = uniform;
     program.uniformNames.push(uniform.name);
   }
@@ -19784,9 +18942,8 @@ function createUniforms(program) {
 
 /** @private */
 function linkProgram(program, vertexShader, fragmentShader) {
-  var gl = program.glx.gl;
-  var glProgram = program.glProgram;
-
+  const { gl } = program.glx;
+  const { glProgram } = program;
 
   gl.attachShader(glProgram, vertexShader);
   gl.attachShader(glProgram, fragmentShader);
@@ -19794,7 +18951,7 @@ function linkProgram(program, vertexShader, fragmentShader) {
   gl.linkProgram(glProgram);
 
   if (!gl.getProgramParameter(glProgram, gl.LINK_STATUS)) {
-    var err = new Error('WebGlProgram link panic!');
+    const err = new Error('WebGlProgram link panic!');
     err.webGlProgram = program;
     throw err;
   }
@@ -19808,76 +18965,53 @@ function linkProgram(program, vertexShader, fragmentShader) {
 
 
 exports.__esModule = true;
+class WebGlUniform {
+  constructor(program, index) {
+    this.program = program;
+    this.glx = program.glx;
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+    const { gl } = program.glx;
+    const { glProgram } = program;
 
-var WebGlUniform = function WebGlUniform(program, index) {
-  _classCallCheck(this, WebGlUniform);
+    const { name, size, type } = gl.getActiveUniform(glProgram, index);
+    this.name = name;
+    this.size = size;
+    this.type = type;
 
-  this.program = program;
-  this.glx = program.glx;
+    this.location = gl.getUniformLocation(glProgram, name);
 
-  var gl = program.glx.gl;
-  var glProgram = program.glProgram;
+    this.setValue = uniformSetter(this);
 
-  var _gl$getActiveUniform = gl.getActiveUniform(glProgram, index),
-      name = _gl$getActiveUniform.name,
-      size = _gl$getActiveUniform.size,
-      type = _gl$getActiveUniform.type;
-
-  this.name = name;
-  this.size = size;
-  this.type = type;
-
-  this.location = gl.getUniformLocation(glProgram, name);
-
-  this.setValue = uniformSetter(this);
-
-  Object.freeze(this);
-};
+    Object.freeze(this);
+  }
+}
 
 exports.default = WebGlUniform;
-
-
 function uniformSetter(uniform) {
-  var type = uniform.type,
-      location = uniform.location;
-  var gl = uniform.glx.gl;
-
+  const { type, location } = uniform;
+  const { gl } = uniform.glx;
 
   switch (type) {
     case gl.FLOAT:
-      return function (value) {
-        return gl.uniform1f(location, value);
-      };
+      return value => gl.uniform1f(location, value);
 
     case gl.FLOAT_VEC2:
-      return function (value) {
-        return gl.uniform2f(location, value[0], value[1]);
-      };
+      return value => gl.uniform2f(location, value[0], value[1]);
 
     case gl.FLOAT_VEC3:
-      return function (value) {
-        return gl.uniform3f(location, value[0], value[1], value[2]);
-      };
+      return value => gl.uniform3f(location, value[0], value[1], value[2]);
 
     case gl.FLOAT_VEC4:
-      return function (value) {
-        return gl.uniform4f(location, value[0], value[1], value[2], value[3]);
-      };
+      return value => gl.uniform4f(location, value[0], value[1], value[2], value[3]);
 
     case gl.FLOAT_MAT4:
-      return function (value) {
-        return gl.uniformMatrix4fv(location, gl.FALSE, value.mat4);
-      };
+      return value => gl.uniformMatrix4fv(location, gl.FALSE, value.mat4);
 
     case gl.SAMPLER_2D:
-      return function (value) {
-        return gl.uniform1i(location, value);
-      };
+      return value => gl.uniform1i(location, value);
   }
 
-  var err = new Error("WebGlUniform unknown uniform type:" + type);
+  const err = new Error(`WebGlUniform unknown uniform type:${type}`);
   err.webGlUniform = uniform;
   throw err;
 }
@@ -19893,27 +19027,17 @@ exports.__esModule = true;
 
 var _typed_array_helpers = __webpack_require__(73);
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+const glType = (gl, type) => gl[_typed_array_helpers.GL_ITEM_TYPES[type]];
 
-var glType = function glType(gl, type) {
-  return gl[_typed_array_helpers.GL_ITEM_TYPES[type]];
-};
-
-var WebGlAttribute = function () {
-  function WebGlAttribute(program, index) {
-    _classCallCheck(this, WebGlAttribute);
-
+class WebGlAttribute {
+  constructor(program, index) {
     this.program = program;
     this.glx = program.glx;
 
-    var gl = program.glx.gl;
-    var glProgram = program.glProgram;
+    const { gl } = program.glx;
+    const { glProgram } = program;
 
-    var _gl$getActiveAttrib = gl.getActiveAttrib(glProgram, index),
-        name = _gl$getActiveAttrib.name,
-        size = _gl$getActiveAttrib.size,
-        type = _gl$getActiveAttrib.type;
-
+    const { name, size, type } = gl.getActiveAttrib(glProgram, index);
     this.name = name;
     this.size = size;
     this.type = type;
@@ -19926,19 +19050,13 @@ var WebGlAttribute = function () {
   /**
    * @param {VODescriptor} descriptor
    */
-
-
-  WebGlAttribute.prototype.vertexAttribPointer = function vertexAttribPointer(descriptor) {
-    var gl = this.glx.gl;
-
-    var attr = descriptor.attr[this.name];
-    var type = glType(gl, attr.type);
+  vertexAttribPointer(descriptor) {
+    const { gl } = this.glx;
+    const attr = descriptor.attr[this.name];
+    const type = glType(gl, attr.type);
     gl.vertexAttribPointer(this.location, attr.size, type, false, descriptor.bytesPerVertex, attr.byteOffset);
-  };
-
-  return WebGlAttribute;
-}();
-
+  }
+}
 exports.default = WebGlAttribute;
 
 /***/ }),
@@ -19949,10 +19067,7 @@ exports.default = WebGlAttribute;
 
 
 exports.__esModule = true;
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var WebGlTexture = function () {
+class WebGlTexture {
   /**
    * @param {WebGlContext} glx
    * @param {HTMLImageElement} imgEl
@@ -19961,14 +19076,7 @@ var WebGlTexture = function () {
    * @param {boolean} [premultiplyAlpha=false]
    * @param {boolean} [nearest=false]
    */
-  function WebGlTexture(glx, imgEl) {
-    var flipY = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var repeatable = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
-    var premultiplyAlpha = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
-    var nearest = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : false;
-
-    _classCallCheck(this, WebGlTexture);
-
+  constructor(glx, imgEl, flipY = false, repeatable = false, premultiplyAlpha = false, nearest = false) {
     this.glx = glx;
     this.imgEl = imgEl;
 
@@ -19982,11 +19090,11 @@ var WebGlTexture = function () {
     this.texUnit = -1;
   }
 
-  WebGlTexture.prototype.bind = function bind() {
+  bind() {
     return this.glx.textureManager.bindWebGlTexture(this);
-  };
+  }
 
-  WebGlTexture.prototype.uploadImageData = function uploadImageData() {
+  uploadImageData() {
     if (this.imgEl == null) return;
     if (!this.isInitialized) {
       initialize(this);
@@ -19995,31 +19103,25 @@ var WebGlTexture = function () {
 
     this.bind();
 
-    var gl = this.glx.gl;
-
+    const { gl } = this.glx;
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, this.imgEl);
-  };
-
-  return WebGlTexture;
-}();
+  }
+}
 
 exports.default = WebGlTexture;
-
-
 function initialize(tex) {
   tex.bind();
 
-  var gl = tex.glx.gl;
-
+  const { gl } = tex.glx;
 
   gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, tex.flipY);
   gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, tex.premultiplyAlpha);
 
-  var wrap = tex.repeatable ? gl.REPEAT : gl.CLAMP_TO_EDGE;
+  const wrap = tex.repeatable ? gl.REPEAT : gl.CLAMP_TO_EDGE;
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, wrap);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, wrap);
 
-  var filter = tex.nearest ? gl.NEAREST : gl.LINEAR;
+  const filter = tex.nearest ? gl.NEAREST : gl.LINEAR;
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, filter);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, filter);
 
@@ -20035,21 +19137,17 @@ function initialize(tex) {
 
 exports.__esModule = true;
 
-var _destroy2 = __webpack_require__(31);
+var _destroy = __webpack_require__(31);
 
-var _destroy3 = _interopRequireDefault(_destroy2);
+var _destroy2 = _interopRequireDefault(_destroy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var WebGlTextureManager = function () {
+class WebGlTextureManager {
   /**
    * @param {WebGlContext} glx
    */
-  function WebGlTextureManager(glx) {
-    _classCallCheck(this, WebGlTextureManager);
-
+  constructor(glx) {
     Object.defineProperty(this, 'glx', { value: glx });
 
     /**
@@ -20058,32 +19156,30 @@ var WebGlTextureManager = function () {
      */
     this.boundTextures = new Array(glx.MAX_TEXTURE_IMAGE_UNITS);
 
-    for (var i = 0; i < this.boundTextures.length; ++i) {
+    for (let i = 0; i < this.boundTextures.length; ++i) {
       this.boundTextures[i] = null;
     }
 
     this.lastBoundTexUnit = 0;
   }
 
-  WebGlTextureManager.prototype.destroy = function destroy() {
+  destroy() {
     this.boundTextures.length = 0;
-    (0, _destroy3.default)(this);
-  };
+    (0, _destroy2.default)(this);
+  }
 
   /**
    * Bind a *texture* to a *texture unit*.
    * @param {WebGlTexture} glTexture
    * @return {number} texture unit
    */
-
-
-  WebGlTextureManager.prototype.bindWebGlTexture = function bindWebGlTexture(glTexture) {
-    var texUnit = this.boundTextures.indexOf(glTexture);
+  bindWebGlTexture(glTexture) {
+    let texUnit = this.boundTextures.indexOf(glTexture);
 
     if (texUnit < 0) {
       // texture is unbound
       // find a free texture unit ..
-      for (var i = 0; i < this.boundTextures.length; ++i) {
+      for (let i = 0; i < this.boundTextures.length; ++i) {
         if (!this.boundTextures[i]) {
           texUnit = i;
           this.boundTextures[i] = glTexture;
@@ -20097,7 +19193,7 @@ var WebGlTextureManager = function () {
 
         texUnit = this.lastBoundTexUnit;
 
-        var prevGlTex = this.boundTextures[texUnit];
+        let prevGlTex = this.boundTextures[texUnit];
         if (prevGlTex) prevGlTex.texUnit = -1;
 
         this.lastBoundTexUnit = (this.lastBoundTexUnit + 1) % this.glx.MAX_TEXTURE_IMAGE_UNITS;
@@ -20110,11 +19206,8 @@ var WebGlTextureManager = function () {
     }
 
     return texUnit;
-  };
-
-  return WebGlTextureManager;
-}();
-
+  }
+}
 exports.default = WebGlTextureManager;
 
 /***/ }),
@@ -20130,20 +19223,17 @@ var _shader_context = __webpack_require__(168);
 
 var _shader_context2 = _interopRequireDefault(_shader_context);
 
-var _destroy2 = __webpack_require__(31);
+var _destroy = __webpack_require__(31);
 
-var _destroy3 = _interopRequireDefault(_destroy2);
+var _destroy2 = _interopRequireDefault(_destroy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+const eventize = __webpack_require__(30);
+const tinycolor = __webpack_require__(169);
 
-var eventize = __webpack_require__(30);
-var tinycolor = __webpack_require__(169);
-
-var autotouchBuffer = function autotouchBuffer(renderer, resourceRef) {
-  var resource = resourceRef.resource;
-
+const autotouchBuffer = (renderer, resourceRef) => {
+  const { resource } = resourceRef;
   if (resource.enableAutotouch) {
     if (!renderer.autotouchResources.has(resourceRef.id)) {
       renderer.autotouchResources.set(resourceRef.id, true);
@@ -20152,18 +19242,16 @@ var autotouchBuffer = function autotouchBuffer(renderer, resourceRef) {
   }
 };
 
-var applyBlendMode = function applyBlendMode(renderer) {
-  var blendMode = renderer.blendStack[renderer.blendStack.length - 1] || renderer.initialBlendMode;
+const applyBlendMode = renderer => {
+  const blendMode = renderer.blendStack[renderer.blendStack.length - 1] || renderer.initialBlendMode;
   if (blendMode && !blendMode.isEqual(renderer.currentBlendMode)) {
     renderer.glx.blend(blendMode);
     renderer.currentBlendMode = blendMode;
   }
 };
 
-var WebGlRenderer = function () {
-  function WebGlRenderer(glx) {
-    _classCallCheck(this, WebGlRenderer);
-
+class WebGlRenderer {
+  constructor(glx) {
     Object.defineProperty(this, 'glx', { value: glx });
 
     this.shaderContext = new _shader_context2.default();
@@ -20176,12 +19264,12 @@ var WebGlRenderer = function () {
     eventize(this);
   }
 
-  WebGlRenderer.prototype.destroy = function destroy() {
+  destroy() {
     this.shaderContext.destroy();
     this.autotouchResources.clear();
     this.blendStack.length = 0;
-    (0, _destroy3.default)(this);
-  };
+    (0, _destroy2.default)(this);
+  }
 
   /**
    * Set the framebuffer clear color.
@@ -20189,104 +19277,87 @@ var WebGlRenderer = function () {
    *
    * @param {String} col - css color definition
    */
-
-
-  WebGlRenderer.prototype.setClearColor = function setClearColor(col) {
+  setClearColor(col) {
     this.clearColor = tinycolor(col);
-  };
+  }
 
   /**
    * Set the initial blend mode.
    *
    * @param {BlendMode} blendMode
    */
-
-
-  WebGlRenderer.prototype.setInitialBlendMode = function setInitialBlendMode(blendMode) {
+  setInitialBlendMode(blendMode) {
     this.initialBlendMode = blendMode;
-  };
+  }
 
-  WebGlRenderer.prototype.renderFrame = function renderFrame(scene, app) {
+  renderFrame(scene, app) {
     this.shaderContext.clear();
     scene.emit('animateFrame', app);
     this.beginRenderFrame();
     scene.emit('renderFrame', this, app);
     this.endRenderFrame();
-  };
+  }
 
-  WebGlRenderer.prototype.beginRenderFrame = function beginRenderFrame() {
+  beginRenderFrame() {
     this.clearFrameBuffer();
-  };
+  }
 
-  WebGlRenderer.prototype.endRenderFrame = function endRenderFrame() {
+  endRenderFrame() {
     this.autotouchResources.clear();
-  };
+  }
 
-  WebGlRenderer.prototype.clearFrameBuffer = function clearFrameBuffer() {
-    var gl = this.glx.gl;
+  clearFrameBuffer() {
+    const { gl } = this.glx;
 
-
-    var clear = gl.COLOR_BUFFER_BIT;
+    let clear = gl.COLOR_BUFFER_BIT;
     if (this.glx.DEPTH_BITS > 0) clear = clear | gl.DEPTH_BUFFER_BIT;
 
     if (this.clearColor !== null) {
-      var col = this.clearColor.toRgb();
+      const col = this.clearColor.toRgb();
       gl.clearColor(col.r / 255, col.g / 255, col.b / 255, col.a);
     }
     gl.clear(clear);
-  };
+  }
 
   /**
    * Push a new blend mode to the stack.
    *
    * @param {BlendMode} blendMode
    */
-
-
-  WebGlRenderer.prototype.pushBlendMode = function pushBlendMode(blendMode) {
+  pushBlendMode(blendMode) {
     this.blendStack.push(blendMode);
-  };
+  }
 
   /**
    * Remove the current blend mode from internal stack.
    * The initial blend mode can't be removed.
    */
-
-
-  WebGlRenderer.prototype.popBlendMode = function popBlendMode() {
+  popBlendMode() {
     this.blendStack.pop();
-  };
+  }
 
   /**
    * @param {ShaderProgram} shaderProgram
    */
-
-
-  WebGlRenderer.prototype.useShaderProgram = function useShaderProgram(shaderProgram) {
-    var program = this.glx.resourceLibrary.loadProgram(shaderProgram);
-    var shaderContext = this.shaderContext;
-
+  useShaderProgram(shaderProgram) {
+    const program = this.glx.resourceLibrary.loadProgram(shaderProgram);
+    const { shaderContext } = this;
     program.use(shaderContext);
     program.loadUniforms(shaderContext, this);
     program.loadAttributes(shaderContext, this);
-  };
+  }
 
   /**
    * @param {string} primitive
    * @param {number} count
    * @param {number} [startIndex=0]
    */
-
-
-  WebGlRenderer.prototype.drawArrays = function drawArrays(primitive, count) {
-    var startIndex = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-
+  drawArrays(primitive, count, startIndex = 0) {
     applyBlendMode(this);
 
-    var gl = this.glx.gl;
-
+    const { gl } = this.glx;
     gl.drawArrays(gl[primitive], startIndex, count);
-  };
+  }
 
   /**
    * @param {string} primitive
@@ -20294,55 +19365,38 @@ var WebGlRenderer = function () {
    * @param {number} [count]
    * @param {number} [offset=0]
    */
-
-
-  WebGlRenderer.prototype.drawIndexed = function drawIndexed(primitive, elementIndexArray, count) {
-    var offset = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-
+  drawIndexed(primitive, elementIndexArray, count, offset = 0) {
     applyBlendMode(this);
     this.syncBuffer(elementIndexArray).bindBuffer();
 
-    var gl = this.glx.gl;
-
+    const { gl } = this.glx;
     gl.drawElements(gl[primitive], count || elementIndexArray.length, gl.UNSIGNED_SHORT, offset * elementIndexArray.array.BYTES_PER_ELEMENT);
-  };
+  }
 
   /**
    * @param {VOArray|ElementIndexArray} resource
    * @return {WebGlBuffer}
    */
-
-
-  WebGlRenderer.prototype.syncBuffer = function syncBuffer(resource) {
-    var resourceRef = resource.resourceRef;
-
+  syncBuffer(resource) {
+    const { resourceRef } = resource;
     autotouchBuffer(this, resourceRef);
 
-    var bufferRef = this.glx.resourceLibrary.loadBuffer(resourceRef);
-    bufferRef.sync(resourceRef, function (buffer) {
-      return buffer.bufferData(resourceRef.hints.typedArray);
-    });
+    const bufferRef = this.glx.resourceLibrary.loadBuffer(resourceRef);
+    bufferRef.sync(resourceRef, buffer => buffer.bufferData(resourceRef.hints.typedArray));
     return bufferRef.resource;
-  };
+  }
 
   /**
    * @param {Texture} texture
    * @return {WebGlTexture}
    */
-
-
-  WebGlRenderer.prototype.syncTexture = function syncTexture(texture) {
-    var texRef = texture.resourceRef;
-    var glTexRef = this.glx.resourceLibrary.loadTexture(texRef);
-    glTexRef.sync(texRef, function (tex) {
-      return tex.uploadImageData();
-    });
+  syncTexture(texture) {
+    const texRef = texture.resourceRef;
+    const glTexRef = this.glx.resourceLibrary.loadTexture(texRef);
+    glTexRef.sync(texRef, tex => tex.uploadImageData());
     return glTexRef.resource;
-  };
-
-  return WebGlRenderer;
-}();
-
+  }
+}
 exports.default = WebGlRenderer;
 
 /***/ }),
@@ -20378,16 +19432,14 @@ var _BlendModeComponent2 = _interopRequireDefault(_BlendModeComponent);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var createFactory = function createFactory(ComponentConstructor) {
-  return {
-    create: function create(entity, data) {
-      return new ComponentConstructor(entity, (0, _parseCssStyledProperties2.default)(data));
-    },
-    update: function update(component, data) {
-      component.update((0, _parseCssStyledProperties2.default)(data));
-    }
-  };
-};
+const createFactory = ComponentConstructor => ({
+  create(entity, data) {
+    return new ComponentConstructor(entity, (0, _parseCssStyledProperties2.default)(data));
+  },
+  update(component, data) {
+    component.update((0, _parseCssStyledProperties2.default)(data));
+  }
+});
 
 /***/ }),
 /* 429 */
@@ -20406,40 +19458,33 @@ var _constants = __webpack_require__(21);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var ProjectionComponent = function () {
-  function ProjectionComponent(entity, data) {
-    _classCallCheck(this, ProjectionComponent);
-
+class ProjectionComponent {
+  constructor(entity, data) {
     this.projection = new _projection2.default(data);
     entity.on('*', _constants.COMP_PRIO_PROJECTION, this);
   }
 
-  ProjectionComponent.prototype.animateFrame = function animateFrame(app) {
+  animateFrame(app) {
     this.projection.update(app.width, app.height);
-  };
+  }
 
-  ProjectionComponent.prototype.renderFrame = function renderFrame(renderer) {
+  renderFrame(renderer) {
     renderer.shaderContext.pushVar(this.projection.uniform);
-  };
+  }
 
-  ProjectionComponent.prototype.debug = function debug() {
+  debug() {
     console.dir(this.projection);
-  };
+  }
 
-  ProjectionComponent.prototype.update = function update(data) {
+  update(data) {
     console.log('TODO ProjectionComponent.update(', data, ')');
-  };
+  }
 
-  ProjectionComponent.prototype.disconnectedEntity = function disconnectedEntity(entity) {
+  disconnectedEntity(entity) {
     console.log('ProjectionComponent.disconnectedEntity(', entity, ')');
     entity.off(this);
-  };
-
-  return ProjectionComponent;
-}();
-
+  }
+}
 exports.default = ProjectionComponent;
 
 /***/ }),
@@ -24561,45 +23606,33 @@ exports.__esModule = true;
 
 var _constants = __webpack_require__(21);
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+const eventize = __webpack_require__(30);
 
-var eventize = __webpack_require__(30);
+const PRIO_BEFORE_CHILDREN = _constants.COMP_PRIO_CHILDREN + 1;
+const PRIO_AFTER_CHILDREN = _constants.COMP_PRIO_CHILDREN - 1;
 
-var PRIO_BEFORE_CHILDREN = _constants.COMP_PRIO_CHILDREN + 1;
-var PRIO_AFTER_CHILDREN = _constants.COMP_PRIO_CHILDREN - 1;
-
-var BeforeChildren = function () {
-  function BeforeChildren(entity) {
-    _classCallCheck(this, BeforeChildren);
-
+class BeforeChildren {
+  constructor(entity) {
     this.entity = entity;
   }
 
-  BeforeChildren.prototype.renderFrame = function renderFrame(renderer) {
+  renderFrame(renderer) {
     this.entity.emit('renderFrameBeforeChildren', renderer);
-  };
+  }
+}
 
-  return BeforeChildren;
-}();
-
-var AfterChildren = function () {
-  function AfterChildren(entity) {
-    _classCallCheck(this, AfterChildren);
-
+class AfterChildren {
+  constructor(entity) {
     this.entity = entity;
   }
 
-  AfterChildren.prototype.renderFrame = function renderFrame(renderer) {
+  renderFrame(renderer) {
     this.entity.emit('renderFrameAfterChildren', renderer);
-  };
+  }
+}
 
-  return AfterChildren;
-}();
-
-var ChildrenComponent = function () {
-  function ChildrenComponent(entity) {
-    _classCallCheck(this, ChildrenComponent);
-
+class ChildrenComponent {
+  constructor(entity) {
     eventize(this);
 
     this.beforeChildren = new BeforeChildren(entity);
@@ -24610,37 +23643,34 @@ var ChildrenComponent = function () {
     entity.on('*', PRIO_AFTER_CHILDREN, this.afterChildren);
   }
 
-  ChildrenComponent.prototype.renderFrameBeforeChildren = function renderFrameBeforeChildren() {
+  renderFrameBeforeChildren() {
     // do not inform children about this event!
-  };
+  }
 
-  ChildrenComponent.prototype.renderFrameAfterChildren = function renderFrameAfterChildren() {
+  renderFrameAfterChildren() {
     // do not inform children about this event!
-  };
+  }
 
-  ChildrenComponent.prototype.appendChild = function appendChild(entity) {
+  appendChild(entity) {
     if (entity.hasComponent('parentEntity')) {
       entity.destroyComponent('parentEntity');
     }
     entity.setComponent('parentEntity', this);
     this.on(entity);
-  };
+  }
 
-  ChildrenComponent.prototype.removeChild = function removeChild(entity) {
+  removeChild(entity) {
     this.off(entity);
     entity.destroyComponent('parentEntity');
-  };
+  }
 
-  ChildrenComponent.prototype.disconnectedEntity = function disconnectedEntity(entity) {
+  disconnectedEntity(entity) {
     console.log('ChildrenComponent.disconnectedEntity(', entity, ')');
     entity.off(this.afterChildren);
     entity.off(this.beforeChildren);
     entity.off(this);
-  };
-
-  return ChildrenComponent;
-}();
-
+  }
+}
 exports.default = ChildrenComponent;
 
 /***/ }),
@@ -24652,8 +23682,6 @@ exports.default = ChildrenComponent;
 
 exports.__esModule = true;
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 var _blend_mode = __webpack_require__(176);
 
 var _blend_mode2 = _interopRequireDefault(_blend_mode);
@@ -24662,51 +23690,31 @@ var _constants = __webpack_require__(21);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+const parseBlendModeData = data => ({
+  enable: typeof data === 'object' ? data.enable === undefined ? true : !!data.enable : false,
+  sfactor: typeof data === 'object' ? typeof data.sfactor === 'string' ? data.sfactor : '' : '',
+  dfactor: typeof data === 'object' ? typeof data.dfactor === 'string' ? data.dfactor : '' : ''
+});
 
-var parseBlendModeData = function parseBlendModeData(data) {
-  return {
-    enable: (typeof data === 'undefined' ? 'undefined' : _typeof(data)) === 'object' ? data.enable === undefined ? true : !!data.enable : false,
-    sfactor: (typeof data === 'undefined' ? 'undefined' : _typeof(data)) === 'object' ? typeof data.sfactor === 'string' ? data.sfactor : '' : '',
-    dfactor: (typeof data === 'undefined' ? 'undefined' : _typeof(data)) === 'object' ? typeof data.dfactor === 'string' ? data.dfactor : '' : ''
-  };
-};
-
-var BeforeChildren = function () {
-  function BeforeChildren(blendMode) {
-    _classCallCheck(this, BeforeChildren);
-
+class BeforeChildren {
+  constructor(blendMode) {
     this.blendMode = blendMode;
   }
 
-  BeforeChildren.prototype.renderFrame = function renderFrame(renderer) {
+  renderFrame(renderer) {
     renderer.pushBlendMode(this.blendMode);
-  };
-
-  return BeforeChildren;
-}();
-
-var AfterChildren = function () {
-  function AfterChildren() {
-    _classCallCheck(this, AfterChildren);
   }
+}
 
-  AfterChildren.prototype.renderFrame = function renderFrame(renderer) {
+class AfterChildren {
+  renderFrame(renderer) {
     renderer.popBlendMode();
-  };
+  }
+}
 
-  return AfterChildren;
-}();
-
-var BlendModeComponent = function () {
-  function BlendModeComponent(entity, data) {
-    _classCallCheck(this, BlendModeComponent);
-
-    var _parseBlendModeData = parseBlendModeData(data),
-        enable = _parseBlendModeData.enable,
-        sfactor = _parseBlendModeData.sfactor,
-        dfactor = _parseBlendModeData.dfactor;
-
+class BlendModeComponent {
+  constructor(entity, data) {
+    const { enable, sfactor, dfactor } = parseBlendModeData(data);
     this.blendMode = new _blend_mode2.default(enable, sfactor, dfactor);
     this.beforeChildren = new BeforeChildren(this.blendMode);
     this.afterChildren = new AfterChildren();
@@ -24715,31 +23723,24 @@ var BlendModeComponent = function () {
     entity.on('debug', this);
   }
 
-  BlendModeComponent.prototype.debug = function debug() {
+  debug() {
     console.dir(this.blendMode);
-  };
+  }
 
-  BlendModeComponent.prototype.update = function update(data) {
-    var _parseBlendModeData2 = parseBlendModeData(data),
-        enable = _parseBlendModeData2.enable,
-        sfactor = _parseBlendModeData2.sfactor,
-        dfactor = _parseBlendModeData2.dfactor;
-
+  update(data) {
+    const { enable, sfactor, dfactor } = parseBlendModeData(data);
     this.blendMode.enable = enable;
     this.blendMode.sfactor = sfactor;
     this.blendMode.dfactor = dfactor;
-  };
+  }
 
-  BlendModeComponent.prototype.disconnectedEntity = function disconnectedEntity(entity) {
+  disconnectedEntity(entity) {
     console.log('BlendModeComponent.disconnectedEntity(', entity, ')');
     entity.off(this.afterChildren);
     entity.off(this.beforeChildren);
     entity.off(this);
-  };
-
-  return BlendModeComponent;
-}();
-
+  }
+}
 exports.default = BlendModeComponent;
 
 /***/ }),
@@ -25314,16 +24315,14 @@ module.exports = unicodeWords;
 
 exports.__esModule = true;
 
-exports.default = function (voPool) {
-  var maxAllocSize = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+exports.default = function (voPool, maxAllocSize = 0) {
+  const max = voPool.capacity - voPool.usedCount - voPool.allocatedCount;
+  const len = voPool.allocatedCount + (maxAllocSize > 0 && maxAllocSize < max ? maxAllocSize : max);
 
-  var max = voPool.capacity - voPool.usedCount - voPool.allocatedCount;
-  var len = voPool.allocatedCount + (maxAllocSize > 0 && maxAllocSize < max ? maxAllocSize : max);
+  for (let i = voPool.allocatedCount; i < len; i++) {
+    let voArray = voPool.voArray.subarray(i);
 
-  for (var i = voPool.allocatedCount; i < len; i++) {
-    var voArray = voPool.voArray.subarray(i);
-
-    var vertexObject = voPool.descriptor.createVO(voArray);
+    let vertexObject = voPool.descriptor.createVO(voArray);
     vertexObject.free = voPool.free.bind(voPool, vertexObject);
 
     voPool.availableVOs.push(vertexObject);
@@ -27026,143 +26025,110 @@ module.exports = shortOut;
 
 exports.__esModule = true;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _aabb = __webpack_require__(179);
 
 var _aabb2 = _interopRequireDefault(_aabb);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Viewport = function (_AABB) {
-  _inherits(Viewport, _AABB);
-
+class Viewport extends _aabb2.default {
   /**
    * @param {number} x - x
    * @param {number} y - y
    * @param {number} width - width
    * @param {number} height - height
    */
-  function Viewport(x, y, width, height) {
-    _classCallCheck(this, Viewport);
+  constructor(x, y, width, height) {
+    const minX = parseInt(x, 10);
+    const minY = parseInt(y, 10);
 
-    var minX = parseInt(x, 10);
-    var minY = parseInt(y, 10);
-
-    return _possibleConstructorReturn(this, _AABB.call(this, minX, minX + parseInt(width, 10) - 1, minY, minY + parseInt(height, 10) - 1));
+    super(minX, minX + parseInt(width, 10) - 1, minY, minY + parseInt(height, 10) - 1);
   }
 
   /**
    * @type {number}
    */
+  get x() {
+    return this.minX;
+  }
 
-
-  _createClass(Viewport, [{
-    key: 'x',
-    get: function get() {
-      return this.minX;
-    }
-
-    /**
-     * @param {number} x
-     * @type {number}
-     */
-    ,
-    set: function set(x) {
-      var w = this.width;
-
-      /**
-       * @type {number}
-       */
-      this.minX = x;
-      /**
-       * @type {number}
-       */
-      this.maxX = x + w - 1;
-    }
+  /**
+   * @param {number} x
+   * @type {number}
+   */
+  set x(x) {
+    const w = this.width;
 
     /**
      * @type {number}
      */
-
-  }, {
-    key: 'y',
-    get: function get() {
-      return this.minY;
-    }
-
+    this.minX = x;
     /**
-     * @param {number} y
      * @type {number}
      */
-    ,
-    set: function set(y) {
-      var h = this.height;
+    this.maxX = x + w - 1;
+  }
 
-      /**
-       * @type {number}
-       */
-      this.minY = y;
-      /**
-       * @type {number}
-       */
-      this.maxY = y + h - 1;
-    }
+  /**
+   * @type {number}
+   */
+  get y() {
+    return this.minY;
+  }
+
+  /**
+   * @param {number} y
+   * @type {number}
+   */
+  set y(y) {
+    const h = this.height;
 
     /**
      * @type {number}
      */
-
-  }, {
-    key: 'width',
-    get: function get() {
-      return this.maxX - this.minX + 1;
-    }
-
-    /**
-     * @param {number} y
-     * @type {number}
-     */
-    ,
-    set: function set(w) {
-      /**
-       * @type {number}
-       */
-      this.maxX = this.minX + w - 1;
-    }
-
+    this.minY = y;
     /**
      * @type {number}
      */
+    this.maxY = y + h - 1;
+  }
 
-  }, {
-    key: 'height',
-    get: function get() {
-      return this.maxY - this.minY + 1;
-    }
+  /**
+   * @type {number}
+   */
+  get width() {
+    return this.maxX - this.minX + 1;
+  }
 
+  /**
+   * @param {number} y
+   * @type {number}
+   */
+  set width(w) {
     /**
-     * @param {number} y
      * @type {number}
      */
-    ,
-    set: function set(h) {
-      /**
-       * @type {number}
-       */
-      this.maxY = this.minY + h - 1;
-    }
-  }]);
+    this.maxX = this.minX + w - 1;
+  }
 
-  return Viewport;
-}(_aabb2.default);
+  /**
+   * @type {number}
+   */
+  get height() {
+    return this.maxY - this.minY + 1;
+  }
 
+  /**
+   * @param {number} y
+   * @type {number}
+   */
+  set height(h) {
+    /**
+     * @type {number}
+     */
+    this.maxY = this.minY + h - 1;
+  }
+}
 exports.default = Viewport;
 
 /***/ }),
@@ -27218,8 +26184,6 @@ function defineCustomElements() {
 
 exports.__esModule = true;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _app = __webpack_require__(156);
 
 var _app2 = _interopRequireDefault(_app);
@@ -27236,25 +26200,17 @@ var _constants = __webpack_require__(21);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+/* global HTMLElement */
+const eventize = __webpack_require__(30);
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* global HTMLElement */
-
-
-var eventize = __webpack_require__(30);
-
-var createContextAttributes = function createContextAttributes(el) {
-  return {
-    alpha: (0, _readBooleanAttribute2.default)(el, _constants.ATTR_ALPHA, false),
-    depth: (0, _readBooleanAttribute2.default)(el, _constants.ATTR_DEPTH, true), // ie 11 has no support for false
-    stencil: (0, _readBooleanAttribute2.default)(el, _constants.ATTR_STENCIL, false),
-    antialias: (0, _readBooleanAttribute2.default)(el, _constants.ATTR_ANTIALIAS, false),
-    premultipliedAlpha: (0, _readBooleanAttribute2.default)(el, _constants.ATTR_PREMULTIPLIED_ALPHA, false),
-    preserveDrawingBuffer: (0, _readBooleanAttribute2.default)(el, _constants.ATTR_PRESERVE_DRAW, false)
-  };
-};
+const createContextAttributes = el => ({
+  alpha: (0, _readBooleanAttribute2.default)(el, _constants.ATTR_ALPHA, false),
+  depth: (0, _readBooleanAttribute2.default)(el, _constants.ATTR_DEPTH, true), // ie 11 has no support for false
+  stencil: (0, _readBooleanAttribute2.default)(el, _constants.ATTR_STENCIL, false),
+  antialias: (0, _readBooleanAttribute2.default)(el, _constants.ATTR_ANTIALIAS, false),
+  premultipliedAlpha: (0, _readBooleanAttribute2.default)(el, _constants.ATTR_PREMULTIPLIED_ALPHA, false),
+  preserveDrawingBuffer: (0, _readBooleanAttribute2.default)(el, _constants.ATTR_PRESERVE_DRAW, false)
+});
 
 /**
  * The **custom HTML `<blitpunk-canvas></blitpunk-canvas>` element** represents the *webgl* canvas,
@@ -27294,25 +26250,73 @@ var createContextAttributes = function createContextAttributes(el) {
  *   </blitpunk-canvas>
  *   ...
  */
-
-var CanvasElement = function (_HTMLElement) {
-  _inherits(CanvasElement, _HTMLElement);
-
+class CanvasElement extends HTMLElement {
   /** @ignore */
-  function CanvasElement(_) {
-    var _this, _ret;
-
-    _classCallCheck(this, CanvasElement);
-
-    var self = (_this = _possibleConstructorReturn(this, _HTMLElement.call(this, _)), _this);
+  constructor(_) {
+    const self = super(_);
     eventize(self);
     self.blitpunk = new _app2.default();
     self.blitpunk.entity.on(self);
-    return _ret = self, _possibleConstructorReturn(_this, _ret);
+    return self;
+  }
+
+  get blitpunkApi() {
+    return _blitpunk2.default;
+  }
+  get blitpunkNodeName() {
+    return _constants.NODE_NAME_CANVAS;
+  }
+
+  get canvas() {
+    return this.blitpunk.canvas;
+  }
+  get width() {
+    return this.blitpunk.width;
+  }
+  get height() {
+    return this.blitpunk.height;
+  }
+
+  get glx() {
+    return this.blitpunk.glx;
+  }
+  get renderer() {
+    return this.blitpunk.renderer;
+  }
+  get time() {
+    return this.blitpunk.time;
+  }
+  get startTime() {
+    return this.blitpunk.startTime;
+  }
+  get frameNo() {
+    return this.blitpunk.frameNo;
+  }
+
+  get componentRegistry() {
+    return this.blitpunk.componentRegistry;
+  }
+  get entityManager() {
+    return this.blitpunk.entityManager;
+  }
+  get resourceLibrary() {
+    return this.blitpunk.resourceLibrary;
+  }
+  get textureLibrary() {
+    return this.blitpunk.textureLibrary;
+  }
+
+  get scene() {
+    return this.blitpunk.entity;
   }
 
   /** @private */
-  CanvasElement.prototype.onKeydown = function onKeydown(event) {
+  static get observedAttributes() {
+    return [_constants.ATTR_BLEND_MODE, _constants.ATTR_CLEAR_COLOR, _constants.ATTR_PROJECTION];
+  }
+
+  /** @private */
+  onKeydown(event) {
     if (event.ctrlKey && event.key === 'd') {
       console.group('<blitpunk/>', 'frameNo', this.frameNo);
       console.log(this);
@@ -27321,10 +26325,21 @@ var CanvasElement = function (_HTMLElement) {
       this.renderer.emit('debug', this.renderer);
       console.groupEnd();
     }
-  };
+  }
+
+  set clearColor(color) {
+    this.blitpunk.clearColor = color;
+  }
+
+  get clearColor() {
+    const col = this.blitpunk.clearColor;
+    if (col) {
+      return col.getAlpha() === 1 ? col.toHexString() : col.toRgbString();
+    }
+  }
 
   /** @private */
-  CanvasElement.prototype.connectedCallback = function connectedCallback() {
+  connectedCallback() {
     this.blitpunk.contextAttributes = Object.freeze(createContextAttributes(this));
 
     this.onKeydown = this.onKeydown.bind(this);
@@ -27341,21 +26356,17 @@ var CanvasElement = function (_HTMLElement) {
     // TODO check for .init() method?
     // })
     // }
-  };
+  }
 
   /** @private */
-
-
-  CanvasElement.prototype.disconnectedCallback = function disconnectedCallback() {
+  disconnectedCallback() {
     this.blitpunk.destroy();
 
     document.body.removeEventListener('keydown', this.onKeydown);
-  };
+  }
 
   /** @private */
-
-
-  CanvasElement.prototype.attributeChangedCallback = function attributeChangedCallback(attr, oldValue, newValue) {
+  attributeChangedCallback(attr, oldValue, newValue) {
     switch (attr) {
       case _constants.ATTR_CLEAR_COLOR:
         this.clearColor = newValue;
@@ -27364,107 +26375,8 @@ var CanvasElement = function (_HTMLElement) {
       case _constants.ATTR_PROJECTION:
         this.blitpunk.componentRegistry.createOrUpdateComponent(this.blitpunk.entity, attr, newValue);
     }
-  };
-
-  _createClass(CanvasElement, [{
-    key: 'blitpunkApi',
-    get: function get() {
-      return _blitpunk2.default;
-    }
-  }, {
-    key: 'blitpunkNodeName',
-    get: function get() {
-      return _constants.NODE_NAME_CANVAS;
-    }
-  }, {
-    key: 'canvas',
-    get: function get() {
-      return this.blitpunk.canvas;
-    }
-  }, {
-    key: 'width',
-    get: function get() {
-      return this.blitpunk.width;
-    }
-  }, {
-    key: 'height',
-    get: function get() {
-      return this.blitpunk.height;
-    }
-  }, {
-    key: 'glx',
-    get: function get() {
-      return this.blitpunk.glx;
-    }
-  }, {
-    key: 'renderer',
-    get: function get() {
-      return this.blitpunk.renderer;
-    }
-  }, {
-    key: 'time',
-    get: function get() {
-      return this.blitpunk.time;
-    }
-  }, {
-    key: 'startTime',
-    get: function get() {
-      return this.blitpunk.startTime;
-    }
-  }, {
-    key: 'frameNo',
-    get: function get() {
-      return this.blitpunk.frameNo;
-    }
-  }, {
-    key: 'componentRegistry',
-    get: function get() {
-      return this.blitpunk.componentRegistry;
-    }
-  }, {
-    key: 'entityManager',
-    get: function get() {
-      return this.blitpunk.entityManager;
-    }
-  }, {
-    key: 'resourceLibrary',
-    get: function get() {
-      return this.blitpunk.resourceLibrary;
-    }
-  }, {
-    key: 'textureLibrary',
-    get: function get() {
-      return this.blitpunk.textureLibrary;
-    }
-  }, {
-    key: 'scene',
-    get: function get() {
-      return this.blitpunk.entity;
-    }
-
-    /** @private */
-
-  }, {
-    key: 'clearColor',
-    set: function set(color) {
-      this.blitpunk.clearColor = color;
-    },
-    get: function get() {
-      var col = this.blitpunk.clearColor;
-      if (col) {
-        return col.getAlpha() === 1 ? col.toHexString() : col.toRgbString();
-      }
-    }
-  }], [{
-    key: 'observedAttributes',
-    get: function get() {
-      return [_constants.ATTR_BLEND_MODE, _constants.ATTR_CLEAR_COLOR, _constants.ATTR_PROJECTION];
-    }
-  }]);
-
-  return CanvasElement;
-}(HTMLElement);
-
+  }
+}
 exports.default = CanvasElement;
 
 /***/ }),
@@ -27476,8 +26388,6 @@ exports.default = CanvasElement;
 
 exports.__esModule = true;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _find_parent_element_by_name = __webpack_require__(193);
 
 var _find_parent_element_by_name2 = _interopRequireDefault(_find_parent_element_by_name);
@@ -27486,55 +26396,34 @@ var _constants = __webpack_require__(21);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+/* global HTMLElement */
+const eventize = __webpack_require__(30);
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* global HTMLElement */
-
-
-var eventize = __webpack_require__(30);
-
-var SceneElement = function (_HTMLElement) {
-  _inherits(SceneElement, _HTMLElement);
-
+class SceneElement extends HTMLElement {
   /** @ignore */
-  function SceneElement(_) {
-    var _this, _ret;
+  constructor(_) {
+    const self = super(_);
+    return eventize(self);
+  }
 
-    _classCallCheck(this, SceneElement);
+  get blitpunkNodeName() {
+    return _constants.NODE_NAME_SCENE;
+  }
 
-    var self = (_this = _possibleConstructorReturn(this, _HTMLElement.call(this, _)), _this);
-    return _ret = eventize(self), _possibleConstructorReturn(_this, _ret);
+  get blitpunk() {
+    return this.blitpunkCanvas.blitpunk;
   }
 
   /** @private */
-  SceneElement.prototype.connectedCallback = function connectedCallback() {
+  connectedCallback() {
     this.blitpunkCanvas = (0, _find_parent_element_by_name2.default)(this, _constants.NODE_NAME_CANVAS);
-  };
+  }
 
   /** @private */
-
-
-  SceneElement.prototype.disconnectedCallback = function disconnectedCallback() {
+  disconnectedCallback() {
     this.blitpunkCanvas = null;
-  };
-
-  _createClass(SceneElement, [{
-    key: 'blitpunkNodeName',
-    get: function get() {
-      return _constants.NODE_NAME_SCENE;
-    }
-  }, {
-    key: 'blitpunk',
-    get: function get() {
-      return this.blitpunkCanvas.blitpunk;
-    }
-  }]);
-
-  return SceneElement;
-}(HTMLElement);
-
+  }
+}
 exports.default = SceneElement;
 
 /***/ }),
@@ -27545,8 +26434,6 @@ exports.default = SceneElement;
 
 
 exports.__esModule = true;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _connectElementEntities = __webpack_require__(194);
 
@@ -27564,111 +26451,72 @@ var _constants = __webpack_require__(21);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+/* global HTMLElement */
+const eventize = __webpack_require__(30);
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+class TextureAtlasElement extends HTMLElement {
+  /** @private */
+  static get observedAttributes() {
+    return [_constants.ATTR_SRC];
+  }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* global HTMLElement */
-
-
-var eventize = __webpack_require__(30);
-
-var TextureAtlasElement = function (_HTMLElement) {
-  _inherits(TextureAtlasElement, _HTMLElement);
-
-  _createClass(TextureAtlasElement, null, [{
-    key: 'observedAttributes',
-
-    /** @private */
-    get: function get() {
-      return [_constants.ATTR_SRC];
-    }
-
-    /** @ignore */
-
-  }]);
-
-  function TextureAtlasElement(_) {
-    var _this, _ret;
-
-    _classCallCheck(this, TextureAtlasElement);
-
-    var self = (_this = _possibleConstructorReturn(this, _HTMLElement.call(this, _)), _this);
-    return _ret = eventize(self), _possibleConstructorReturn(_this, _ret);
+  /** @ignore */
+  constructor(_) {
+    const self = super(_);
+    return eventize(self);
   }
 
   /** @type {string} */
+  get blitpunkNodeName() {
+    return _constants.NODE_NAME_TEXTURE_ATLAS;
+  }
 
+  /** @type {string} */
+  get textureId() {
+    return this.entity && this.entity.id;
+  }
 
-  TextureAtlasElement.prototype.loadTextureAtlas = function loadTextureAtlas(src) {
-    var _this2 = this;
-
+  loadTextureAtlas(src) {
     if (src && this.entity) {
       if (this.prevUrl !== src) {
         this.prevUrl = src;
         this.textureHints = (0, _readTextureHints2.default)(this);
-        this.textureAtlasPromise = this.textureLibrary.loadTextureAtlas(this.textureId, src, this.textureHints).then(function (atlas) {
-          _this2.textureAtlas = atlas;
+        this.textureAtlasPromise = this.textureLibrary.loadTextureAtlas(this.textureId, src, this.textureHints).then(atlas => {
+          this.textureAtlas = atlas;
           return atlas;
         });
         return this.textureAtlasPromise;
       }
     }
-  };
+  }
 
   /** @private */
-
-
-  TextureAtlasElement.prototype.debug = function debug() {
+  debug() {
     console.log(this.textureAtlas);
-  };
+  }
 
   /** @private */
-
-
-  TextureAtlasElement.prototype.connectedCallback = function connectedCallback() {
+  connectedCallback() {
     (0, _connectElementEntities2.default)(this);
     this.textureLibrary = this.parentSceneElement.textureLibrary; // TODO for every element?
     this.loadTextureAtlas(this.getAttribute(_constants.ATTR_SRC));
-  };
+  }
 
   /** @private */
-
-
-  TextureAtlasElement.prototype.disconnectedCallback = function disconnectedCallback() {
+  disconnectedCallback() {
     // TODO disconnectedCallback <blitpunk-texture-atlas/>
     this.textureAtlas = null;
     this.textureLibrary = null;
     (0, _disconnectElementEntities2.default)(this);
-  };
+  }
 
   /** @private */
-
-
-  TextureAtlasElement.prototype.attributeChangedCallback = function attributeChangedCallback(attr, oldValue, newValue) {
+  attributeChangedCallback(attr, oldValue, newValue) {
     if (attr === _constants.ATTR_SRC) {
       this.loadTextureAtlas(newValue);
     }
-  };
-
-  _createClass(TextureAtlasElement, [{
-    key: 'blitpunkNodeName',
-    get: function get() {
-      return _constants.NODE_NAME_TEXTURE_ATLAS;
-    }
-
-    /** @type {string} */
-
-  }, {
-    key: 'textureId',
-    get: function get() {
-      return this.entity && this.entity.id;
-    }
-  }]);
-
-  return TextureAtlasElement;
-}(HTMLElement);
-
+  }
+}
 exports.default = TextureAtlasElement;
 
 /***/ }),
@@ -27701,13 +26549,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.__esModule = true;
 exports.default = findParentElementByProperty;
-var EXIT_NODES = ['BODY', 'HTML'];
+const EXIT_NODES = ['BODY', 'HTML'];
 
 function findParentElementByProperty(node, prop, value) {
-  var parent = node.parentElement;
+  const parent = node.parentElement;
   if (!parent || parent.nodeType !== 1) return;
-  var nodeName = parent.nodeName;
-
+  const { nodeName } = parent;
   if (EXIT_NODES.includes(nodeName)) return;
   if (value == null && parent[prop] || value != null && parent[prop] === value) return parent;
   return parent;
@@ -27749,11 +26596,6 @@ function readTextureHints(el) {
 
 exports.__esModule = true;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /* global HTMLElement */
-
-
 var _sprite_group = __webpack_require__(187);
 
 var _sprite_group2 = _interopRequireDefault(_sprite_group);
@@ -27790,53 +26632,35 @@ var _constants = __webpack_require__(21);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+const eventize = __webpack_require__(30); /* global HTMLElement */
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var eventize = __webpack_require__(30);
-
-var createConfig = function createConfig(_ref) {
-  var descriptor = _ref.descriptor,
-      capacity = _ref.capacity,
-      vertexShader = _ref.vertexShader,
-      fragmentShader = _ref.fragmentShader,
-      primitive = _ref.primitive,
-      voNew = _ref.voNew,
-      voZero = _ref.voZero;
-  return {
-    descriptor: descriptor,
-    vertexShader: vertexShader,
-    fragmentShader: fragmentShader,
-    primitive: primitive,
-    capacity: parseInt(capacity, 10),
-    voNew: (0, _createVoPropsSetter2.default)(voNew),
-    voZero: (0, _createVoPropsSetter2.default)(voZero)
-  };
-};
+const createConfig = ({ descriptor, capacity, vertexShader, fragmentShader, primitive, voNew, voZero }) => ({
+  descriptor,
+  vertexShader,
+  fragmentShader,
+  primitive,
+  capacity: parseInt(capacity, 10),
+  voNew: (0, _createVoPropsSetter2.default)(voNew),
+  voZero: (0, _createVoPropsSetter2.default)(voZero)
+});
 
 // TODO add support for all options from src/core/SpriteGroup
-var readConfigFromAttributes = function readConfigFromAttributes(el) {
-  return createConfig({
-    descriptor: el.getAttribute(_constants.ATTR_DESCRIPTOR),
-    vertexShader: el.getAttribute(_constants.ATTR_VERTEX_SHADER),
-    fragmentShader: el.getAttribute(_constants.ATTR_FRAGMENT_SHADER),
-    primitive: el.getAttribute(_constants.ATTR_PRIMITIVE),
-    capacity: el.getAttribute(_constants.ATTR_CAPACITY),
-    voNew: el.getAttribute(_constants.ATTR_VO_NEW),
-    voZero: el.getAttribute(_constants.ATTR_VO_ZERO)
-  });
-};
+const readConfigFromAttributes = el => createConfig({
+  descriptor: el.getAttribute(_constants.ATTR_DESCRIPTOR),
+  vertexShader: el.getAttribute(_constants.ATTR_VERTEX_SHADER),
+  fragmentShader: el.getAttribute(_constants.ATTR_FRAGMENT_SHADER),
+  primitive: el.getAttribute(_constants.ATTR_PRIMITIVE),
+  capacity: el.getAttribute(_constants.ATTR_CAPACITY),
+  voNew: el.getAttribute(_constants.ATTR_VO_NEW),
+  voZero: el.getAttribute(_constants.ATTR_VO_ZERO)
+});
 
-var isValidConfig = function isValidConfig(config) {
-  return (0, _isNonEmptyString2.default)(config.descriptor) && (0, _isNonEmptyString2.default)(config.vertexShader) && (0, _isNonEmptyString2.default)(config.fragmentShader) && (0, _isNonEmptyString2.default)(config.primitive) && (0, _isNumberGreaterThanZero2.default)(config.capacity);
-};
+const isValidConfig = config => (0, _isNonEmptyString2.default)(config.descriptor) && (0, _isNonEmptyString2.default)(config.vertexShader) && (0, _isNonEmptyString2.default)(config.fragmentShader) && (0, _isNonEmptyString2.default)(config.primitive) && (0, _isNumberGreaterThanZero2.default)(config.capacity);
 
-var createSpriteGroup = function createSpriteGroup(el) {
+const createSpriteGroup = el => {
   if (!el.parentScene) return; // TODO find a better way
-  var config = readConfigFromAttributes(el);
+  const config = readConfigFromAttributes(el);
   if (isValidConfig(config)) {
     el.spriteGroup = new _sprite_group2.default(el.resourceLibrary, el.textureLibrary, config);
     el._resolvePromise(el.spriteGroup);
@@ -27844,70 +26668,55 @@ var createSpriteGroup = function createSpriteGroup(el) {
   }
 };
 
-var syncTextureMap = function syncTextureMap(el, data) {
-  var spriteGroup = el.spriteGroup;
-
+const syncTextureMap = (el, data) => {
+  const { spriteGroup } = el;
   if (!spriteGroup) return;
-  var texMap = (0, _parseCssStyledProperties2.default)(data);
-  if (!texMap || (typeof texMap === 'undefined' ? 'undefined' : _typeof(texMap)) !== 'object') return;
+  const texMap = (0, _parseCssStyledProperties2.default)(data);
+  if (!texMap || typeof texMap !== 'object') return;
   el.textureMap = {};
-  Object.keys(texMap).forEach(function (key) {
-    var selector = texMap[key];
-    var texEl = el.blitpunkCanvas.querySelector(selector);
+  Object.keys(texMap).forEach(key => {
+    const selector = texMap[key];
+    const texEl = el.blitpunkCanvas.querySelector(selector);
     el.textureMap[key] = texEl.textureId;
     spriteGroup.setTexture(key, texEl.textureId);
   });
 };
 
-var SpriteGroupElement = function (_HTMLElement) {
-  _inherits(SpriteGroupElement, _HTMLElement);
+class SpriteGroupElement extends HTMLElement {
+  /** @private */
+  static get observedAttributes() {
+    return [_constants.ATTR_BLEND_MODE, _constants.ATTR_CAPACITY, _constants.ATTR_DESCRIPTOR, _constants.ATTR_FRAGMENT_SHADER, _constants.ATTR_PRIMITIVE, _constants.ATTR_TEXTURE_MAP, _constants.ATTR_VERTEX_SHADER];
+  }
 
-  _createClass(SpriteGroupElement, null, [{
-    key: 'observedAttributes',
-
-    /** @private */
-    get: function get() {
-      return [_constants.ATTR_BLEND_MODE, _constants.ATTR_CAPACITY, _constants.ATTR_DESCRIPTOR, _constants.ATTR_FRAGMENT_SHADER, _constants.ATTR_PRIMITIVE, _constants.ATTR_TEXTURE_MAP, _constants.ATTR_VERTEX_SHADER];
-    }
-
-    /** @ignore */
-
-  }]);
-
-  function SpriteGroupElement(_) {
-    var _this, _ret;
-
-    _classCallCheck(this, SpriteGroupElement);
-
-    var self = (_this = _possibleConstructorReturn(this, _HTMLElement.call(this, _)), _this);
-    self.spriteGroupPromise = new Promise(function (resolve) {
+  /** @ignore */
+  constructor(_) {
+    const self = super(_);
+    self.spriteGroupPromise = new Promise(resolve => {
       self._resolvePromise = resolve;
     });
-    return _ret = eventize(self), _possibleConstructorReturn(_this, _ret);
+    return eventize(self);
   }
 
   /** @type {string} */
-
+  get blitpunkNodeName() {
+    return _constants.NODE_NAME_SPRITE_GROUP;
+  }
 
   /** @private */
-  SpriteGroupElement.prototype.renderFrame = function renderFrame(renderer) {
+  renderFrame(renderer) {
     if (this.spriteGroup) {
       this.spriteGroup.renderFrame(renderer);
     }
-  };
+  }
 
   /** @private */
-
-
-  SpriteGroupElement.prototype.debug = function debug() {
+  debug() {
     console.log(this.spriteGroup);
     if (this.textureMap) console.log(_constants.ATTR_TEXTURE_MAP, this.textureMap);
-  };
+  }
 
   /** @private */
-
-
-  SpriteGroupElement.prototype.connectedCallback = function connectedCallback() {
+  connectedCallback() {
     (0, _connectElementEntities2.default)(this);
 
     this.textureLibrary = this.parentSceneElement.textureLibrary;
@@ -27916,24 +26725,20 @@ var SpriteGroupElement = function (_HTMLElement) {
     createSpriteGroup(this);
     syncTextureMap(this, this.getAttribute(_constants.ATTR_TEXTURE_MAP));
     (0, _syncComponent2.default)(this, _constants.ATTR_BLEND_MODE);
-  };
+  }
 
   /** @private */
-
-
-  SpriteGroupElement.prototype.disconnectedCallback = function disconnectedCallback() {
+  disconnectedCallback() {
     // TODO disconnectedCallback <blitpunk-sprite-group/>
     this.textureMap = null;
     this.spriteGroup = null;
     this.textureLibrary = null;
     this.resourceLibrary = null;
     (0, _disconnectElementEntities2.default)(this);
-  };
+  }
 
   /** @private */
-
-
-  SpriteGroupElement.prototype.attributeChangedCallback = function attributeChangedCallback(attr, oldValue, newValue) {
+  attributeChangedCallback(attr, oldValue, newValue) {
     switch (attr) {
       case _constants.ATTR_TEXTURE_MAP:
         syncTextureMap(this, newValue);
@@ -27946,18 +26751,8 @@ var SpriteGroupElement = function (_HTMLElement) {
           createSpriteGroup(this);
         }
     }
-  };
-
-  _createClass(SpriteGroupElement, [{
-    key: 'blitpunkNodeName',
-    get: function get() {
-      return _constants.NODE_NAME_SPRITE_GROUP;
-    }
-  }]);
-
-  return SpriteGroupElement;
-}(HTMLElement);
-
+  }
+}
 exports.default = SpriteGroupElement;
 
 /***/ }),
@@ -27968,9 +26763,6 @@ exports.default = SpriteGroupElement;
 
 
 exports.__esModule = true;
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 exports.default = createVoPropsSetter;
 
 var _parseCssStyledProperties = __webpack_require__(77);
@@ -27981,12 +26773,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function createVoPropsSetter(voData) {
   if (!voData) return;
-  var voProps = (0, _parseCssStyledProperties2.default)(voData);
-  if (!voProps || (typeof voProps === 'undefined' ? 'undefined' : _typeof(voProps)) !== 'object') return;
-  var attrKeys = Object.keys(voProps);
-  return function (vo) {
-    attrKeys.forEach(function (key) {
-      var attrDesc = vo.descriptor.attr[key];
+  const voProps = (0, _parseCssStyledProperties2.default)(voData);
+  if (!voProps || typeof voProps !== 'object') return;
+  const attrKeys = Object.keys(voProps);
+  return vo => {
+    attrKeys.forEach(key => {
+      const attrDesc = vo.descriptor.attr[key];
       if (attrDesc) {
         attrDesc.setValue(vo, voProps[key]);
       } else if (typeof vo[key] === 'function') {
@@ -28039,7 +26831,7 @@ function syncComponent(el, name) {
     name.forEach(syncComponent.bind(null, el));
     return;
   }
-  var data = el.getAttribute(name);
+  const data = el.getAttribute(name);
   if (data == null) return;
   el.blitpunk.componentRegistry.createOrUpdateComponent(el.entity, name, data);
 }

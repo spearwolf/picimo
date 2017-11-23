@@ -6,14 +6,7 @@ module.exports = config({
   preEntry: [
     'babel-polyfill'
   ],
-  presetEnvTargets: {
-    // https://caniuse.com/#feat=es6-module
-    edge: '16',
-    firefox: '57',
-    chrome: '61',
-    safari: '10.1',
-    ios_saf: '10.3'
-  },
+  presetEnvTargets: 'modern',
   output: {
     filename: 'dev/blitpunk-dev.mjs',
     libraryTarget: 'var'
