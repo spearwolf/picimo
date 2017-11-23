@@ -1,6 +1,6 @@
 /* eslint-env mocha */
 import assert from 'assert'
-import Serial from '../src/utils/serial'
+import Serial from 'blitpunk/utils/serial'
 
 describe('Serial', () => {
   it('default initial value is 1', () => {

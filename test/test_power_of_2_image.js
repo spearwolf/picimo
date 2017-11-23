@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 import assert from 'assert'
 import { assetUrl } from './utils'
-import PowerOf2Image from '../src/core/power_of_2_image'
+import PowerOf2Image from 'blitpunk/core/power_of_2_image'
 
 describe('PowerOf2Image', function () {
   describe('should load image from given url', function () {

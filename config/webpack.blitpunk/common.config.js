@@ -51,7 +51,7 @@ module.exports = ({
   presetEnvTargets = false,
   devtool = false,
   output,
-  entry = 'src/blitpunk.js',
+  entry = 'src/blitpunk/index.js',
   plugins = [],
   blitpunkEnv,
   variant = false,
@@ -87,7 +87,7 @@ module.exports = ({
   resolve: {
     extensions: ['.js'],
     modules: [
-      path.resolve(projectDir),
+      path.resolve(projectDir, 'src'),
       path.resolve(projectDir, 'node_modules'),
       getCacheDirectory(dev)
     ]

@@ -1,8 +1,8 @@
 /* global customElements */
-import defineCustomElements from './dom/defineCustomElements.js'
+import defineCustomElements from './dom/defineCustomElements'
 import * as publicApi from './api'
 import { DOM_ELEM_CANVAS } from './dom/constants'
-import log from './common/log.js'
+import log from '../common/log'
 
 if (customElements.get(DOM_ELEM_CANVAS)) {
   log('<blitpunk> custom elements have already been defined')

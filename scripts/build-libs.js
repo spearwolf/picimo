@@ -27,7 +27,7 @@ const OUTPUT = {
 
 const PROJECT_DIR = path.join(__dirname, '..')
 
-const API_MODULE_EXPORTS = path.join(PROJECT_DIR, 'src', 'api.mjs')
+const API_MODULE_EXPORTS = path.join(PROJECT_DIR, 'src', 'blitpunk', 'api.mjs')
 
 const WEBPACK = path.join(PROJECT_DIR, 'node_modules', '.bin', 'webpack')
 const UGLIFYJS = path.join(PROJECT_DIR, 'node_modules', '.bin', 'uglifyjs')

@@ -1,15 +1,15 @@
-import 'src/blitpunk'
+import 'blitpunk'
 
-import ShaderSource from 'src/core/shader_source'
-import ShaderProgram from 'src/core/shader_program'
-import ShaderUniformVariable from 'src/core/shader_uniform_variable'
-import ShaderVariableBufferGroup from 'src/core/shader_variable_buffer_group'
-import ShaderTextureGroup from 'src/core/shader_texture_group'
+import ShaderSource from 'blitpunk/core/shader_source'
+import ShaderProgram from 'blitpunk/core/shader_program'
+import ShaderUniformVariable from 'blitpunk/core/shader_uniform_variable'
+import ShaderVariableBufferGroup from 'blitpunk/core/shader_variable_buffer_group'
+import ShaderTextureGroup from 'blitpunk/core/shader_texture_group'
 
-import Projection from 'src/core/projection'
+import Projection from 'blitpunk/core/projection'
 
-import PowerOf2Image from 'src/core/power_of_2_image'
-import ElementIndexArray from 'src/core/element_index_array'
+import PowerOf2Image from 'blitpunk/core/power_of_2_image'
+import ElementIndexArray from 'blitpunk/core/element_index_array'
 
 import initSprites from './init_sprites'
 import initQuads from './init_quads'

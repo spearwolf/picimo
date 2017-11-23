@@ -1,10 +1,10 @@
 /* global HTMLElement */
-import SpriteGroup from 'src/core/sprite_group'
+import SpriteGroup from 'blitpunk/core/sprite_group'
 
-import parseCssStyledProperties from 'src/utils/parseCssStyledProperties.js'
-import createVoPropsSetter from 'src/utils/createVoPropsSetter.js'
-import isNonEmptyString from 'src/utils/isNonEmptyString.js'
-import isNumberGreaterThanZero from 'src/utils/isNumberGreaterThanZero.js'
+import parseCssStyledProperties from 'blitpunk/utils/parseCssStyledProperties.js'
+import createVoPropsSetter from 'blitpunk/utils/createVoPropsSetter.js'
+import isNonEmptyString from 'blitpunk/utils/isNonEmptyString.js'
+import isNumberGreaterThanZero from 'blitpunk/utils/isNumberGreaterThanZero.js'
 
 import connectElementEntities from '../lib/connectElementEntities.js'
 import disconnectElementEntities from '../lib/disconnectElementEntities.js'

@@ -2,8 +2,8 @@
 /* eslint no-unused-expressions: 0 */
 import { expect } from 'chai'
 import sinon from 'sinon'
-import EntityManager from 'src/ecs/entity_manager'
-import Entity from 'src/ecs/entity'
+import EntityManager from 'blitpunk/ecs/entity_manager'
+import Entity from 'blitpunk/ecs/entity'
 
 describe('EntityManager', () => {
   it('should be instanceable', () => {

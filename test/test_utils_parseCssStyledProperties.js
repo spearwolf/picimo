@@ -6,7 +6,7 @@ import parse, {
   splitIntoProps,
   indexOfNextNonWhitespace,
   indexOfNextSeperator
-} from 'src/utils/parseCssStyledProperties.js'
+} from 'blitpunk/utils/parseCssStyledProperties.js'
 
 describe('parseCssStyledProperties()', () => {
   describe('indexOfNextSeperator', () => {

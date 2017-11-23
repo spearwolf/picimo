@@ -2,7 +2,7 @@
 /* global BLITPUNK customElements */
 import { assert } from 'chai'
 
-import EntityElement from '../../src/dom/elements/EntityElement'
+import EntityElement from 'blitpunk/dom/elements/EntityElement'
 
 const bContainer = document.querySelector('.blitpunk')
 

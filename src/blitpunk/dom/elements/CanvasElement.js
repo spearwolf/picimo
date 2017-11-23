@@ -1,6 +1,6 @@
 /* global HTMLElement */
 import App from '../../app'
-import Blitpunk from '../../blitpunk.js'
+// import Blitpunk from '../../blitpunk.js'
 
 import readBooleanAttribute from '../lib/readBooleanAttribute.js'
 
@@ -76,7 +76,7 @@ export default class CanvasElement extends HTMLElement {
     return self
   }
 
-  get blitpunkApi () { return Blitpunk }
+  // get blitpunkApi () { return Blitpunk }
   get blitpunkNodeName () { return NODE_NAME_CANVAS }
 
   get canvas () { return this.blitpunk.canvas }

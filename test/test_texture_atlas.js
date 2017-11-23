@@ -1,8 +1,8 @@
 /* eslint-env mocha */
 import assert from 'assert'
 import { assetUrl } from './utils'
-import TextureAtlas from '../src/core/texture_atlas'
-import TextureAtlasSpec from '../src/core/texture_atlas_spec'
+import TextureAtlas from 'blitpunk/core/texture_atlas'
+import TextureAtlasSpec from 'blitpunk/core/texture_atlas_spec'
 
 describe('TextureAtlasSpec', function () {
   describe('new TextureAtlasSpec(jsonDef)', function () {

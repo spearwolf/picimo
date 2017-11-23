@@ -1,9 +1,9 @@
 /* eslint-env mocha */
 import assert from 'assert'
 import { assetUrl } from './utils'
-import Texture from '../src/core/texture'
-import ResourceRef from '../src/utils/resource_ref'
-import PowerOf2Image from '../src/core/power_of_2_image'
+import Texture from 'blitpunk/core/texture'
+import ResourceRef from 'blitpunk/utils/resource_ref'
+import PowerOf2Image from 'blitpunk/core/power_of_2_image'
 
 describe('Texture', function () {
   describe('new Texture(<img>)', function () {

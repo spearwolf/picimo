@@ -1,6 +1,6 @@
 /* eslint-env mocha */
 import assert from 'assert'
-import generateUUID from '../src/utils/generate_uuid'
+import generateUUID from 'blitpunk/utils/generate_uuid'
 
 describe('generateUUID()', () => {
   it('creates a string', () => {

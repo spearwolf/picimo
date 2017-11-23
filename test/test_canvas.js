@@ -1,15 +1,15 @@
 /* eslint-env mocha */
 /* global HTMLCanvasElement */
-import whenReady from 'src/blitpunk.js'
+import whenReady from 'blitpunk'
 
 import { assert } from 'chai'
 import sinon from 'sinon'
 
-import CanvasElement from 'src/dom/elements/CanvasElement'
-import WebGlContext from 'src/render/web_gl_context'
-import WebGlRenderer from 'src/render/web_gl_renderer'
+import CanvasElement from 'blitpunk/dom/elements/CanvasElement'
+import WebGlContext from 'blitpunk/render/web_gl_context'
+import WebGlRenderer from 'blitpunk/render/web_gl_renderer'
 
-import { DOM_ELEM_CANVAS } from 'src/dom/constants'
+import { DOM_ELEM_CANVAS } from 'blitpunk/dom/constants'
 
 describe(`<${DOM_ELEM_CANVAS} />`, () => {
   let blitpunkCanvas

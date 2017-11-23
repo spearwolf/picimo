@@ -15,7 +15,7 @@ module.exports = {
   resolve: {
     extensions: ['.js'],
     modules: [
-      path.resolve(BASE_DIR),
+      path.resolve(BASE_DIR, 'src'),
       path.resolve(BASE_DIR, 'node_modules')
     ]
   }

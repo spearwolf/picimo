@@ -1,6 +1,6 @@
 /* eslint-env mocha */
 import { expect } from 'chai'
-import Projection from 'src/core/projection'
+import Projection from 'blitpunk/core/projection'
 
 describe('Projection', () => {
   describe('fill', () => {

@@ -1,4 +1,4 @@
-import VOPool from '../../src/core/v_o_pool'
+import VOPool from 'blitpunk/core/v_o_pool'
 
 export default function (resourceLibrary) {
   const quads = new VOPool(resourceLibrary.findDescriptor('simple'), 10)

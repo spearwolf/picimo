@@ -1,14 +1,14 @@
 /* eslint-env mocha */
 import { assert } from 'chai'
 
-import 'src/blitpunk.js'
+import 'blitpunk'
 
 import {
   DOM_ELEM_CANVAS,
   NODE_NAME_CANVAS,
   DOM_ELEM_SCENE,
   NODE_NAME_SCENE
-} from 'src/dom/constants'
+} from 'blitpunk/dom/constants'
 
 describe(`<${DOM_ELEM_SCENE} />`, () => {
   let canvas

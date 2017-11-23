@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 import assert from 'assert'
-import VODescriptor from '../src/core/v_o_descriptor'
-import VOPool from '../src/core/v_o_pool'
+import VODescriptor from 'blitpunk/core/v_o_descriptor'
+import VOPool from 'blitpunk/core/v_o_pool'
 
 describe('VOPool', () => {
   const descriptor = new VODescriptor({
