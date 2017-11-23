@@ -1,7 +1,7 @@
 /* global BLITPUNK_ENV */
-import detectCustomElements from './bootstrap/detectCustomElements.js'
-import detectJavascriptVariant from './bootstrap/detectJavascriptVariant.js'
-import log from './log.js'
+import detectCustomElements from './detectCustomElements.js'
+import detectJavascriptVariant from './detectJavascriptVariant.js'
+import log from '../log.js'
 
 const javascriptVariant = detectJavascriptVariant()
 const needsCustomElementsPolyfill = !detectCustomElements()
@@ -20,9 +20,9 @@ const loadPolyfills = needsCustomElementsPolyfill
 const loadApi = () => {
   let mod
   if (BLITPUNK_ENV === 'development') {
-    mod = require('./bootstrap/importBlitpunkJsDev')
+    mod = require('./importBlitpunkJsDev')
   } else {
-    mod = require('./bootstrap/importBlitpunkJsProd')
+    mod = require('./importBlitpunkJsProd')
   }
   return mod.default(javascriptVariant, log).then(({ default: initialize }) => initialize()).then((api) => {
     const globalApi = global && global.BLITPUNK

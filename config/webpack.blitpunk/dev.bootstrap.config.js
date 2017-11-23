@@ -4,7 +4,7 @@ const config = require('./common.config')
 module.exports = config({
   dev: true,
   variant: 'bootstrap',
-  entry: 'src/bootstrap.js',
+  entry: 'src/bootstrap/index.js',
   preEntry: [
     'babel-polyfill'
   ],
