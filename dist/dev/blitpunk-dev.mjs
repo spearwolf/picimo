@@ -17548,16 +17548,18 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* global customElements */
-if (customElements.get(_constants.DOM_ELEM_CANVAS)) {
-  (0, _log2.default)('<blitpunk> custom elements have already been defined');
-} else {
-  (0, _log2.default)('<blitpunk> custom elements are now defined');
-  (0, _defineCustomElements2.default)();
-}
+const initialize = () => {
+  if (customElements.get(_constants.DOM_ELEM_CANVAS)) {
+    (0, _log2.default)('<blitpunk> custom elements have already been defined');
+  } else {
+    (0, _log2.default)('<blitpunk> custom elements are now defined');
+    (0, _defineCustomElements2.default)();
+  }
 
-const initialize = customElements.whenDefined(_constants.DOM_ELEM_CANVAS).then(() => publicApi);
+  return customElements.whenDefined(_constants.DOM_ELEM_CANVAS).then(() => publicApi);
+};
 
-exports.default = () => initialize;
+exports.default = initialize;
 
 /***/ }),
 /* 399 */

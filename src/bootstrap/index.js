@@ -27,7 +27,8 @@ const loadApi = () => require('./loadBlitpunk').default(javascriptVariant).then(
   return api
 })
 
-const initialize = () => loadPolyfills.then(loadApi)
+const preLoad = loadPolyfills.then(loadApi)
+const initialize = () => preLoad
 
 export {
   initialize

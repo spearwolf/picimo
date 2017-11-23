@@ -4,14 +4,16 @@ import * as publicApi from './api'
 import { DOM_ELEM_CANVAS } from './dom/constants'
 import log from '../common/log'
 
-if (customElements.get(DOM_ELEM_CANVAS)) {
-  log('<blitpunk> custom elements have already been defined')
-} else {
-  log('<blitpunk> custom elements are now defined')
-  defineCustomElements()
+const initialize = () => {
+  if (customElements.get(DOM_ELEM_CANVAS)) {
+    log('<blitpunk> custom elements have already been defined')
+  } else {
+    log('<blitpunk> custom elements are now defined')
+    defineCustomElements()
+  }
+
+  return customElements.whenDefined(DOM_ELEM_CANVAS).then(() => publicApi)
 }
 
-const initialize = customElements.whenDefined(DOM_ELEM_CANVAS).then(() => publicApi)
-
-export default () => initialize
+export default initialize
 export * from './api'
