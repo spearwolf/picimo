@@ -9,7 +9,7 @@ export default function randomCloudFrame (atlas) {
   }
   let frameName
   do {
-    frameName = BLITPUNK.sample(cloudFrameNames)
+    frameName = BLITPUNK.utils.sample(cloudFrameNames)
   } while (frameName === lastCloudFrame)
   lastCloudFrame = frameName
   return atlas.getFrame(frameName)
