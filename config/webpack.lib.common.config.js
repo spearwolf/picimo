@@ -3,33 +3,76 @@ const webpack = require('webpack')
 const outDir = path.resolve(__dirname, '../dist')
 const projectDir = path.resolve(__dirname, '..')
 
+const CACHE_DIR = '.build'
+
+const getCacheDirectory = (dev, variant = '') => {
+  const vari = variant ? `/${variant}` : ''
+  return path.resolve(projectDir, `${CACHE_DIR}/${dev ? 'dev' : 'prod'}${vari}`)
+}
+
+const getDevtoolOption = (devtool, dev) => {
+  if (devtool) return devtool
+  if (dev) return 'inline-source-map'
+}
+
+const getBabelOptions = (babelOptions, presetEnvTargets, dev) => {
+  if (!presetEnvTargets) return babelOptions
+  const options = babelOptions || {}
+  if (!options.presets) options.presets = []
+  options.presets.push(['env', {
+    debug: dev,
+    loose: true,
+    useBuiltIns: true,
+    targets: presetEnvTargets
+  }])
+  return options
+}
+
+const getOutputOptions = (output, variant, dev) => {
+  const options = Object.assign({
+    libraryTarget: 'umd',
+    library: 'BLITPUNK'
+  }, output)
+  if (options.filename && !options.path) {
+    options.path = outDir
+  } else if (!options.filename && !options.path) {
+    options.filename = `blitpunk-${variant}.js`
+    options.path = getCacheDirectory(dev)
+  }
+  return options
+}
+
 module.exports = ({
+  dev = false,
   preEntry = [],
   cacheDirectory,
   babelOptions,
+  presetEnvTargets = false,
   devtool = false,
   output,
   entry = 'src/blitpunk.js',
   plugins = [],
-  blitpunkEnv = 'development'
+  blitpunkEnv = 'development',
+  variant = false,
+  defines
 }) => ({
   plugins: [
-    new webpack.DefinePlugin({
+    new webpack.DefinePlugin(Object.assign({
       BLITPUNK_ENV: JSON.stringify(blitpunkEnv)
-    })
+    }, defines))
   ].concat(plugins),
-  devtool,
+  devtool: getDevtoolOption(devtool, dev),
   stats: 'normal',
   entry: preEntry.concat([path.join(projectDir, entry)]),
   module: {
     rules: [{
       test: /\.js$/,
-      loader: `babel-loader?cacheDirectory=${cacheDirectory}`,
+      loader: `babel-loader?cacheDirectory=${getCacheDirectory(dev, variant)}`,
       exclude: [
         /node_modules/,
-        /dist.variants/
+        /.build/
       ],
-      options: Object.assign({ babelrc: false }, babelOptions)
+      options: Object.assign({ babelrc: false }, getBabelOptions(babelOptions, presetEnvTargets, dev))
     }, {
       test: /\.scss$/,
       use: [
@@ -45,12 +88,9 @@ module.exports = ({
     modules: [
       path.resolve(projectDir),
       path.resolve(projectDir, 'node_modules'),
-      path.resolve(projectDir, 'dist/variants')
+      // path.resolve(projectDir, 'dist/variants')
+      getCacheDirectory(dev)
     ]
   },
-  output: Object.assign({
-    path: outDir,
-    libraryTarget: 'umd',
-    library: 'BLITPUNK'
-  }, output)
+  output: getOutputOptions(output, variant, dev)
 })

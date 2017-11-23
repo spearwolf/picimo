@@ -25,7 +25,7 @@ const loadApi = () => {
     mod = require('./bootstrap/importBlitpunkJsProd')
   }
   return mod.default(javascriptVariant, log).then(({ default: initialize }) => initialize()).then((api) => {
-    const globalApi = global.BLITPUNK
+    const globalApi = global && global.BLITPUNK
     if (globalApi) {
       Object.assign(globalApi, api)
       globalApi.initialize = () => Promise.resolve(globalApi)

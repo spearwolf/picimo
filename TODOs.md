@@ -55,7 +55,7 @@ Release
     - [x] specialized builds for (chrome, ff, ios, legacy(ie11), ..)
     - [x] polyfills for URL, fetch, ..
 - [x] multi-threaded builds (build-libs.js)
-- [ ] support native javascript modules
+- [x] support native javascript modules
 - [ ] webpack dev server examples + build library integration
 
 

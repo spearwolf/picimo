@@ -12,14 +12,23 @@ const VARIANTS = [
   'es6-module'
 ]
 const BOOTSTRAP = 'bootstrap'
+const ES6_MODULE = 'es6-module'
 
 VARIANTS.push(/* should be always the last --> */BOOTSTRAP)
 
 const OUTPUT = {
-  'es6-module': 'dist/blitpunk.mjs'
+  [ES6_MODULE]: 'dist/blitpunk.mjs',
+  [`${ES6_MODULE}-dev`]: 'dist/dev/blitpunk-dev.mjs',
+  modern: '.build/prod/blitpunk-modern.js',
+  safari: '.build/prod/blitpunk-safari.js',
+  legacy: '.build/prod/blitpunk-legacy.js',
+  bootstrap: 'dist/blitpunk.js'
 }
 
 const PROJECT_DIR = path.join(__dirname, '..')
+
+const API_MODULE_EXPORTS = path.join(PROJECT_DIR, 'src', 'api.mjs')
+
 const WEBPACK = path.join(PROJECT_DIR, 'node_modules', '.bin', 'webpack')
 const UGLIFYJS = path.join(PROJECT_DIR, 'node_modules', '.bin', 'uglifyjs')
 
@@ -61,34 +70,23 @@ function build (variant, dev, silent) {
       if (code) {
         if (silent) err(code, `build:${variant}`, stdout, stderr)
         reject(stderr)
-      } else if (!dev) {
-        resolve(minify(variant, dev, silent, OUTPUT[variant]))
-      } else {
-        resolve()
+        return
       }
+      let next = Promise.resolve()
+      if (variant === ES6_MODULE) {
+        next = appendModuleExports(path.join(PROJECT_DIR, OUTPUT[`${variant}${dev ? '-dev' : ''}`]), API_MODULE_EXPORTS, silent)
+      }
+      if (!dev) {
+        next = next.then(() => minify(variant, dev, silent, path.resolve(PROJECT_DIR, OUTPUT[variant])))
+      }
+      resolve(next)
     })
   })
 }
 
-function minify (variant, dev, silent, filepath) {
+function minify (variant, dev, silent, jsFile) {
   return new Promise((resolve, reject) => {
-    let jsFile
-
-    if (filepath) {
-      jsFile = filepath
-    } else {
-      let subDir
-      let subVariant
-      if (variant === BOOTSTRAP) {
-        return resolve()
-      } else {
-        subDir = 'dist/variants'
-        subVariant = `-${variant}`
-      }
-      jsFile = `${subDir}/blitpunk${dev ? '-dev' : ''}${subVariant}.js`
-    }
-
-    jsFile = path.join(PROJECT_DIR, jsFile)
+    if (!jsFile) return resolve()
 
     if (!silent) {
       console.log()
@@ -98,6 +96,23 @@ function minify (variant, dev, silent, filepath) {
     shelljs.exec(cmd, { silent }, (code, stdout, stderr) => {
       if (code) {
         if (silent) err(code, `minfiy:${variant}`, stderr)
+        return reject(stderr)
+      }
+      resolve()
+    })
+  })
+}
+
+function appendModuleExports (filepath, apiExportsFile, silent) {
+  return new Promise((resolve, reject) => {
+    if (!silent) {
+      console.log()
+      console.log(colors.bold.blue('Append ES6 module exports:'), apiExportsFile, '->', filepath)
+    }
+    const cmd = `cat ${apiExportsFile} >> ${filepath}`
+    shelljs.exec(cmd, { silent }, (code, stdout, stderr) => {
+      if (code) {
+        if (silent) err(code, `append-es6-module-exports`, stderr)
         return reject(stderr)
       }
       resolve()

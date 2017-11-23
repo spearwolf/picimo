@@ -1,7 +1,7 @@
 {
   "name": "@spearwolf/blitpunk",
   "description": "todo",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "author": "Wolfger Schramm",
   "license": "Apache-2.0",
   "repository": {
@@ -14,8 +14,9 @@
     "boilerplate:watch": "yarn run boilerplate:build --watch",
     "testrunner": "webpack-dev-server --hot --inline --watch --config config/webpack.testrunner.config.js",
     "testrunner:headless": "mocha-headless-chrome --file http://localhost:9090 --visible",
-    "build": "node scripts/build-libs.js",
-    "clean": "rm -fr dist/* examples/js",
+    "build:libs": "node scripts/build-libs.js",
+    "build": "run-p clean build:libs",
+    "clean": "rm -fr dist/*",
     "esdoc": "esdoc",
     "examples:build": "webpack --config config/webpack.examples.config.js",
     "examples": "webpack-dev-server --hot --inline --watch --config config/webpack.examples.config.js",
