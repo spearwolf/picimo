@@ -1,5 +1,5 @@
 /* global HTMLElement */
-import App from '../../app.js'
+import App from '../../app'
 import Blitpunk from '../../blitpunk.js'
 
 import readBooleanAttribute from '../lib/readBooleanAttribute.js'

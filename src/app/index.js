@@ -1,13 +1,13 @@
-import ComponentRegistry from './ecs/component_registry'
-import EntityManager from './ecs/entity_manager'
-import ResourceLibrary from './core/resource_library'
-import TextureLibrary from './core/texture_library'
-import WebGlContext from './render/web_gl_context'
-import WebGlRenderer from './render/web_gl_renderer'
+import ComponentRegistry from '../ecs/component_registry'
+import EntityManager from '../ecs/entity_manager'
+import ResourceLibrary from '../core/resource_library'
+import TextureLibrary from '../core/texture_library'
+import WebGlContext from '../render/web_gl_context'
+import WebGlRenderer from '../render/web_gl_renderer'
 
-import registerDefaultComponents from './dom/registerDefaultComponents'
-import destroy from './utils/destroy'
-import { error } from './common/log'
+import registerDefaultComponents from '../dom/registerDefaultComponents'
+import destroy from '../utils/destroy'
+import { error } from '../common/log'
 
 const eventize = require('@spearwolf/eventize')
 const tinycolor = require('tinycolor2')
