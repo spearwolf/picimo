@@ -1,13 +1,12 @@
-const path = require('path')
-const config = require('./webpack.lib.common.config')
+const config = require('./common.config')
 
 module.exports = config({
-  dev: true,
   variant: 'bootstrap',
   entry: 'src/bootstrap.js',
   preEntry: [
     'babel-polyfill'
   ],
+  blitpunkEnv: 'production',
   babelOptions: {
     plugins: [
       'syntax-dynamic-import'
@@ -16,9 +15,8 @@ module.exports = config({
   presetEnvTargets: 'legacy',
   output: {
     libraryTarget: 'window',
-    path: path.resolve(__dirname, '../dist/dev'),
-    filename: 'blitpunk-dev.js',
-    chunkFilename: 'blitpunk-dev.[name].[chunkhash].js',
-    publicPath: '/blitpunk/dev/'
+    filename: 'blitpunk.js',
+    chunkFilename: 'blitpunk.[chunkhash].js',
+    publicPath: '/blitpunk/'
   }
 })

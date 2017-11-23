@@ -64,7 +64,7 @@ function build (variant, dev, silent) {
     if (!silent) {
       banner('Building library variant:', colors.bold.red(variant), colors.bold(dev ? '(development)' : '(production)'))
     }
-    let cmd = `${WEBPACK} --config ${PROJECT_DIR}/config/webpack.lib.${dev ? 'dev' : 'prod'}.${variant}.config.js`
+    let cmd = `${WEBPACK} --config ${PROJECT_DIR}/config/webpack.blitpunk/${dev ? 'dev.' : ''}${variant}.config.js`
     if (silent) cmd += ' --display none'
     shelljs.exec(cmd, { silent }, (code, stdout, stderr) => {
       if (code) {

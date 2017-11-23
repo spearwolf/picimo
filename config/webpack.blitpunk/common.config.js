@@ -1,8 +1,8 @@
 const path = require('path')
 const webpack = require('webpack')
-const babelEnvTargets = require('./babel.env.targets')
-const outDir = path.resolve(__dirname, '../dist')
-const projectDir = path.resolve(__dirname, '..')
+const babelEnvTargets = require('../babel.env.targets')
+const outDir = path.resolve(__dirname, '../../dist')
+const projectDir = path.resolve(__dirname, '../..')
 
 const CACHE_DIR = '.build'
 
@@ -59,7 +59,7 @@ module.exports = ({
 }) => ({
   plugins: [
     new webpack.DefinePlugin(Object.assign({
-      BLITPUNK_ENV: JSON.stringify(blitpunkEnv ? blitpunkEnv : (dev ? 'development' : 'production'))
+      BLITPUNK_ENV: JSON.stringify(blitpunkEnv || (dev ? 'development' : 'production'))
     }, defines))
   ].concat(plugins),
   devtool: getDevtoolOption(devtool, dev),
@@ -89,7 +89,6 @@ module.exports = ({
     modules: [
       path.resolve(projectDir),
       path.resolve(projectDir, 'node_modules'),
-      // path.resolve(projectDir, 'dist/variants')
       getCacheDirectory(dev)
     ]
   },

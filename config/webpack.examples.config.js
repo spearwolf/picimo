@@ -1,9 +1,12 @@
 const _ = require('lodash')
-const colors = require('colors')
 const ejs = require('ejs')
 const fs = require('fs')
 const glob = require('glob')
 const path = require('path')
+
+const createDevServer = require('./lib/createDevServer')
+const scssRules = require('./lib/scssRules')
+const jsRules = require('./lib/jsRules')
 
 const BASE_DIR = path.resolve(__dirname, '..')
 const EXAMPLES_DIR = path.resolve(BASE_DIR, 'examples')
@@ -28,58 +31,16 @@ EXAMPLES.forEach(example => {
 
 module.exports = {
   entry,
-  devServer: {
-    port: 8080,
-    host: '0.0.0.0',
-    compress: true,
-    contentBase: EXAMPLES_DIR,
-    before: (app) => {
-      app.use((req, res, next) => {
-        const m = req.path.match(/\/blitpunk(-dev)?(\..+)?\.(m)?js$/)
-        if (m) {
-          const target = path.join(m[1] ? 'dist/dev' : 'dist', `blitpunk${m[1] || ''}${m[2] || ''}.${m[3] || ''}js`)
-          console.log('GET', colors.bold.blue(req.path), '->', colors.bold.yellow(target))
-          res.type('application/javascript')
-          res.status(200).sendFile(path.join(BASE_DIR, target))
-        } else {
-          next()
-        }
-      })
-    }
-  },
+  devServer: createDevServer({ port: 8080, contentBase: EXAMPLES_DIR }),
   output: {
     filename: '[name]/bundle.js',
     path: EXAMPLES_DIR
   },
   module: {
-    rules: [{
-      test: /\.js$/,
-      loader: 'babel-loader?cacheDirectory=.build-examples',
-      exclude: [
-        /node_modules/
-      ],
-      options: {
-        babelrc: false,
-        presets: [
-          ['env', {
-            debug: true,
-            loose: true,
-            targets: {
-              chrome: 60,
-              firefox: 55
-            }
-          }]
-        ]
-      }
-    }, {
-      test: /\.scss$/,
-      use: [
-        { loader: 'style-loader' },
-        { loader: 'css-loader' },
-        { loader: 'sass-loader', query: { sourceMaps: false } },
-        { loader: 'postcss-loader' }
-      ]
-    }]
+    rules: [
+      jsRules,
+      scssRules
+    ]
   },
   devtool: 'inline-source-map',
   resolve: {

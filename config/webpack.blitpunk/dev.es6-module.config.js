@@ -1,13 +1,14 @@
-const config = require('./webpack.lib.common.config')
+const config = require('./common.config')
 
 module.exports = config({
+  dev: true,
   variant: 'es6-module',
   preEntry: [
     'babel-polyfill'
   ],
-  presetEnvTargets: 'module',
+  presetEnvTargets: 'modern',
   output: {
-    filename: 'blitpunk.mjs',
+    filename: 'dev/blitpunk-dev.mjs',
     libraryTarget: 'var'
   }
 })

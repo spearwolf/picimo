@@ -1,11 +1,11 @@
 // Karma configuration
 const path = require('path')
-const baseDir = path.resolve(__dirname, '..')
+const BASE_DIR = path.resolve(__dirname, '..')
 
 module.exports = function (config) {
   config.set({
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: baseDir,
+    basePath: BASE_DIR,
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
@@ -63,10 +63,10 @@ module.exports = function (config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: true,
+    singleRun: true
 
     // Concurrency level
     // how many browser should be started simultaneous
-    //concurrency: Infinity
+    // concurrency: Infinity
   })
 }

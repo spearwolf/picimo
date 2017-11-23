@@ -1,29 +1,22 @@
 const path = require('path')
-const baseDir = path.resolve(__dirname, '..')
+
+const scssRules = require('./lib/scssRules')
+const jsRules = require('./lib/jsRules')
+
+const BASE_DIR = path.resolve(__dirname, '..')
 
 module.exports = {
   module: {
-    rules: [{
-      test: /\.js$/,
-      loader: 'babel-loader?cacheDirectory=.build/karma',
-      exclude: [
-        /node_modules/
-      ]
-    }, {
-      test: /\.scss$/,
-      use: [
-        { loader: 'style-loader' },
-        { loader: 'css-loader' },
-        { loader: 'sass-loader' },
-        { loader: 'postcss-loader' }
-      ]
-    }]
+    rules: [
+      jsRules,
+      scssRules
+    ]
   },
   resolve: {
     extensions: ['.js'],
     modules: [
-      path.resolve(baseDir),
-      path.resolve(baseDir, 'node_modules')
+      path.resolve(BASE_DIR),
+      path.resolve(BASE_DIR, 'node_modules')
     ]
   }
 }
