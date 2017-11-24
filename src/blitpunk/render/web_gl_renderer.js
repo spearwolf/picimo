@@ -1,7 +1,7 @@
-import ShaderContext from '../core/shader_context'
-import destroy from '../utils/destroy'
+import { Viewport, ShaderContext } from 'blitpunk/core'
+import destroy from 'blitpunk/utils/destroy'
 
-const eventize = require('@spearwolf/eventize')
+// const eventize = require('@spearwolf/eventize')
 const tinycolor = require('tinycolor2')
 
 const autotouchBuffer = (renderer, resourceRef) => {
@@ -32,8 +32,9 @@ export default class WebGlRenderer {
     this.blendStack = []
     this.initialBlendMode = null
     this.currentBlendMode = null
+    this.viewport = null
 
-    eventize(this)
+    // eventize(this)
   }
 
   destroy () {
@@ -43,6 +44,18 @@ export default class WebGlRenderer {
     destroy(this)
   }
 
+  updateViewport (x, y, width, height) {
+    let { viewport } = this
+    if (!viewport) {
+      this.viewport = new Viewport()
+      viewport = this.viewport
+    }
+    viewport.x = x
+    viewport.y = y
+    viewport.width = width
+    viewport.height = height
+  }
+
   /**
    * Set the framebuffer clear color.
    * Use the *tinycolor* library for css color conversion.
@@ -50,7 +63,7 @@ export default class WebGlRenderer {
    * @param {String} col - css color definition
    */
   setClearColor (col) {
-    this.clearColor = tinycolor(col)
+    this.clearColor = col ? tinycolor(col) : null
   }
 
   /**
@@ -62,15 +75,28 @@ export default class WebGlRenderer {
     this.initialBlendMode = blendMode
   }
 
-  renderFrame (scene, app) {
-    this.shaderContext.clear()
-    scene.emit('animateFrame', app)
+  // renderFrame (scene, app) {
+    // this.shaderContext.clear()
+    // scene.emit('animateFrame', app)
+    // this.beginRenderFrame()
+    // scene.emit('renderFrame', this, app)
+    // this.endRenderFrame()
+  // }
+
+  renderFrame (renderCallback) {
     this.beginRenderFrame()
-    scene.emit('renderFrame', this, app)
+    renderCallback()
     this.endRenderFrame()
   }
 
   beginRenderFrame () {
+    this.shaderContext.clear()
+    const { viewport } = this
+    if (viewport) {
+      this.glx.gl.viewport(viewport.x, viewport.y, viewport.width, viewport.height)
+    } else {
+      this.glx.gl.viewport(0, 0)
+    }
     this.clearFrameBuffer()
   }
 

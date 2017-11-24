@@ -8,6 +8,7 @@ import {
 import parseCssStyledProperties from './parseCssStyledProperties'
 import sample from './sample'
 import removeItem from './removeItem'
+import getDefaultOption from './getDefaultOption'
 
 export {
   Mat4,
@@ -17,5 +18,6 @@ export {
   maxOf,
   parseCssStyledProperties,
   sample,
-  removeItem
+  removeItem,
+  getDefaultOption
 }

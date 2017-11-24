@@ -1,10 +1,12 @@
 /* eslint no-multi-spaces: ["error", { exceptions: { "VariableDeclarator": true } }] */
 
+export const DOM_ELEM_ENTITY        = 'blitpunk-entity'
 export const DOM_ELEM_CANVAS        = 'blitpunk-canvas'
 export const DOM_ELEM_SCENE         = 'blitpunk-scene'
 export const DOM_ELEM_SPRITE_GROUP  = 'blitpunk-sprite-group'
 export const DOM_ELEM_TEXTURE_ATLAS = 'blitpunk-texture-atlas'
 
+export const NODE_NAME_ENTITY        = DOM_ELEM_ENTITY.toUpperCase()
 export const NODE_NAME_CANVAS        = DOM_ELEM_CANVAS.toUpperCase()
 export const NODE_NAME_SCENE         = DOM_ELEM_SCENE.toUpperCase()
 export const NODE_NAME_SPRITE_GROUP  = DOM_ELEM_SPRITE_GROUP.toUpperCase()

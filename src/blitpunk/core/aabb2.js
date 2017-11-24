@@ -1,3 +1,4 @@
+const posNum = num => num < 0 ? 0 : num
 
 /**
  * Represents a 2d axis aligned boundary box.
@@ -56,28 +57,28 @@ export default class AABB2 {
    * @type {number}
    */
   get width () {
-    return this.maxX - this.minX + 1
+    return posNum(this.maxX - this.minX + 1)
   }
 
   /**
    * @type {number}
    */
   get height () {
-    return this.maxY - this.minY + 1
+    return posNum(this.maxY - this.minY + 1)
   }
 
   /**
    * @type {number}
    */
   get centerX () {
-    return (this.maxX - this.minX) / 2
+    return posNum((this.maxX - this.minX) / 2)
   }
 
   /**
    * @type {number}
    */
   get centerY () {
-    return (this.maxY - this.minY) / 2
+    return posNum((this.maxY - this.minY) / 2)
   }
 
   /**

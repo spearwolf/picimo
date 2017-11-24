@@ -46,6 +46,7 @@ export default class EntityElement extends HTMLElement {
     return this._entity
   }
 
+  /** @private */
   updateEntity () {
     const attributeNames = this.getAttributeNames()
     const prevAttrNames = this.attributeNamesCache.slice(0)
