@@ -1,5 +1,5 @@
 import Entity from './entity'
-import destroy from '../utils/destroy'
+import destroy from 'blitpunk/utils/destroy'
 
 /**
  * The entity manager holds references to all entities.

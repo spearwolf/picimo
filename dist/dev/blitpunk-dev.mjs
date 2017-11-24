@@ -6362,13 +6362,6 @@ var _log = __webpack_require__(181);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const eventize = __webpack_require__(31);
-
-// import addCoreResources from '../core/resources'
-// import ComponentRegistry from '../ecs/component_registry'
-// import EntityManager from '../ecs/entity_manager'
-// import ResourceLibrary from '../core/resource_library'
-// import TextureLibrary from '../core/texture_library'
-
 const tinycolor = __webpack_require__(159);
 
 const now = () => window.performance.now() / 1000;
@@ -6380,22 +6373,12 @@ const defaultOption = (options, key, defaultValueFn) => {
   return typeof defaultValueFn === 'function' ? defaultValueFn() : defaultValueFn;
 };
 
-// const createResourceLibrary = () => {
-// const resourceLibrary = new ResourceLibrary()
-// addCoreResources(resourceLibrary)
-// return resourceLibrary
-// }
-
 class App {
   constructor(options) {
     eventize(this);
 
     const getOption = defaultOption.bind(null, options);
 
-    // this.componentRegistry = getOption('componentRegistry', () => new ComponentRegistry())
-    // this.entityManager = getOption('entityManager', () => new EntityManager())
-    // this.resourceLibrary = getOption('resourceLibrary', () => createResourceLibrary())
-    // this.textureLibrary = getOption('textureLibrary', () => new TextureLibrary())
     this.componentRegistry = _componentRegistry2.default;
     this.entityManager = _entityManager2.default;
     this.resourceLibrary = _resourceLibrary2.default;
@@ -8082,6 +8065,7 @@ class ComponentRegistry {
    * @param {object} componentFactory - the component factory interface
    * @param {function} componentFactory.create - create a new component instance
    * @param {function} componentFactory.update - update a component
+   * @param {function} componentFactory.destroy - remove a component
    */
   registerComponent(name, componentFactory) {
     this.registry.set(name, componentFactory);
@@ -8090,8 +8074,9 @@ class ComponentRegistry {
 
   createComponent(entity, name, data) {
     const factory = this.registry.get(name);
+    if (!factory) return this;
     const component = factory.create(entity, data);
-    entity.setComponent(name, component);
+    entity.setComponent(name, component, this);
     return this;
   }
 
@@ -8108,6 +8093,13 @@ class ComponentRegistry {
     } else {
       this.createComponent(entity, name, data);
     }
+    return this;
+  }
+
+  destroyComponent(entity, name) {
+    const component = entity[name];
+    const factory = this.registry.get(name);
+    factory.destroy(component);
     return this;
   }
 }
@@ -8211,7 +8203,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const eventize = __webpack_require__(31);
 
 const destroyAllComponents = entity => {
-  for (const name of entity.components.keys()) {
+  for (const name of entity.registries.keys()) {
     entity.destroyComponent(name);
   }
 };
@@ -8221,7 +8213,7 @@ const destroyAllComponents = entity => {
  */
 class Entity {
   constructor() {
-    this.components = new Map();
+    this.registries = new Map();
 
     /**
      * @type {string}
@@ -8232,14 +8224,14 @@ class Entity {
   }
 
   hasComponent(name) {
-    return this.components.has(name);
+    return this.registries.has(name);
   }
 
-  setComponent(name, component) {
+  setComponent(name, component, registry) {
     if (this[name]) {
       throw new Error(`Component name "${name}" is already assigned!`);
     }
-    this.components.set(name, component);
+    this.registries.set(name, registry);
     this[name] = component;
     if (component.connectedEntity) {
       component.connectedEntity(this);
@@ -8248,7 +8240,14 @@ class Entity {
   }
 
   destroyComponent(name) {
-    if (this.components.delete(name)) {
+    if (this.registries.has(name)) {
+      const registry = this.registries.get(name);
+      this.registries.delete(name);
+
+      if (registry) {
+        registry.destroyComponent(this, name);
+      }
+
       const component = this[name];
       delete this[name];
       if (component.disconnectedEntity) {
@@ -12310,11 +12309,11 @@ exports.default = function (el) {
   el.parentScene.children.appendChild(el.entity);
 };
 
-var _findBlitpunkCanvasElement = __webpack_require__(521);
+var _findBlitpunkCanvasElement = __webpack_require__(522);
 
 var _findBlitpunkCanvasElement2 = _interopRequireDefault(_findBlitpunkCanvasElement);
 
-var _findParentElementByProperty = __webpack_require__(522);
+var _findParentElementByProperty = __webpack_require__(523);
 
 var _findParentElementByProperty2 = _interopRequireDefault(_findParentElementByProperty);
 
@@ -17678,7 +17677,7 @@ Object.keys(_api).forEach(function (key) {
   });
 });
 
-var _initialize = __webpack_require__(516);
+var _initialize = __webpack_require__(517);
 
 var _initialize2 = _interopRequireDefault(_initialize);
 
@@ -26251,7 +26250,7 @@ exports.EntityManager = _entity_manager2.default;
 
 
 exports.__esModule = true;
-exports.sample = exports.parseCssStyledProperties = exports.maxOf = exports.isPowerOf2 = exports.generateUuid = exports.findNextPowerOf2 = exports.Mat4 = undefined;
+exports.removeItem = exports.sample = exports.parseCssStyledProperties = exports.maxOf = exports.isPowerOf2 = exports.generateUuid = exports.findNextPowerOf2 = exports.Mat4 = undefined;
 
 var _generate_uuid = __webpack_require__(50);
 
@@ -26271,6 +26270,10 @@ var _sample = __webpack_require__(173);
 
 var _sample2 = _interopRequireDefault(_sample);
 
+var _removeItem = __webpack_require__(516);
+
+var _removeItem2 = _interopRequireDefault(_removeItem);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.Mat4 = _mat2.default;
@@ -26280,6 +26283,7 @@ exports.isPowerOf2 = _math_helpers.isPowerOf2;
 exports.maxOf = _math_helpers.maxOf;
 exports.parseCssStyledProperties = _parseCssStyledProperties2.default;
 exports.sample = _sample2.default;
+exports.removeItem = _removeItem2.default;
 
 /***/ }),
 /* 516 */
@@ -26290,7 +26294,23 @@ exports.sample = _sample2.default;
 
 exports.__esModule = true;
 
-var _defineCustomElements = __webpack_require__(517);
+exports.default = (arr, item) => {
+  const idx = arr.indexOf(item);
+  if (idx > -1) {
+    arr.splice(idx, 1);
+  }
+};
+
+/***/ }),
+/* 517 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _defineCustomElements = __webpack_require__(518);
 
 var _defineCustomElements2 = _interopRequireDefault(_defineCustomElements);
 
@@ -26323,7 +26343,7 @@ const initialize = () => {
 exports.default = initialize;
 
 /***/ }),
-/* 517 */
+/* 518 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26332,25 +26352,25 @@ exports.default = initialize;
 exports.__esModule = true;
 exports.default = defineCustomElements;
 
-var _CanvasElement = __webpack_require__(518);
+var _CanvasElement = __webpack_require__(519);
 
 var _CanvasElement2 = _interopRequireDefault(_CanvasElement);
 
-var _SceneElement = __webpack_require__(519);
+var _SceneElement = __webpack_require__(520);
 
 var _SceneElement2 = _interopRequireDefault(_SceneElement);
 
-var _TextureAtlasElement = __webpack_require__(520);
+var _TextureAtlasElement = __webpack_require__(521);
 
 var _TextureAtlasElement2 = _interopRequireDefault(_TextureAtlasElement);
 
-var _SpriteGroupElement = __webpack_require__(524);
+var _SpriteGroupElement = __webpack_require__(525);
 
 var _SpriteGroupElement2 = _interopRequireDefault(_SpriteGroupElement);
 
 var _constants = __webpack_require__(21);
 
-__webpack_require__(529);
+__webpack_require__(530);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26367,7 +26387,7 @@ function defineCustomElements() {
 }
 
 /***/ }),
-/* 518 */
+/* 519 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26567,7 +26587,7 @@ class CanvasElement extends HTMLElement {
 exports.default = CanvasElement;
 
 /***/ }),
-/* 519 */
+/* 520 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26614,7 +26634,7 @@ class SceneElement extends HTMLElement {
 exports.default = SceneElement;
 
 /***/ }),
-/* 520 */
+/* 521 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26630,7 +26650,7 @@ var _disconnectElementEntities = __webpack_require__(199);
 
 var _disconnectElementEntities2 = _interopRequireDefault(_disconnectElementEntities);
 
-var _readTextureHints = __webpack_require__(523);
+var _readTextureHints = __webpack_require__(524);
 
 var _readTextureHints2 = _interopRequireDefault(_readTextureHints);
 
@@ -26707,7 +26727,7 @@ class TextureAtlasElement extends HTMLElement {
 exports.default = TextureAtlasElement;
 
 /***/ }),
-/* 521 */
+/* 522 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26728,7 +26748,7 @@ var _constants = __webpack_require__(21);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 522 */
+/* 523 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26748,7 +26768,7 @@ function findParentElementByProperty(node, prop, value) {
 }
 
 /***/ }),
-/* 523 */
+/* 524 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26775,7 +26795,7 @@ function readTextureHints(el) {
 }
 
 /***/ }),
-/* 524 */
+/* 525 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26791,15 +26811,15 @@ var _parseCssStyledProperties = __webpack_require__(77);
 
 var _parseCssStyledProperties2 = _interopRequireDefault(_parseCssStyledProperties);
 
-var _createVoPropsSetter = __webpack_require__(525);
+var _createVoPropsSetter = __webpack_require__(526);
 
 var _createVoPropsSetter2 = _interopRequireDefault(_createVoPropsSetter);
 
-var _isNonEmptyString = __webpack_require__(526);
+var _isNonEmptyString = __webpack_require__(527);
 
 var _isNonEmptyString2 = _interopRequireDefault(_isNonEmptyString);
 
-var _isNumberGreaterThanZero = __webpack_require__(527);
+var _isNumberGreaterThanZero = __webpack_require__(528);
 
 var _isNumberGreaterThanZero2 = _interopRequireDefault(_isNumberGreaterThanZero);
 
@@ -26811,7 +26831,7 @@ var _disconnectElementEntities = __webpack_require__(199);
 
 var _disconnectElementEntities2 = _interopRequireDefault(_disconnectElementEntities);
 
-var _syncComponent = __webpack_require__(528);
+var _syncComponent = __webpack_require__(529);
 
 var _syncComponent2 = _interopRequireDefault(_syncComponent);
 
@@ -26943,7 +26963,7 @@ class SpriteGroupElement extends HTMLElement {
 exports.default = SpriteGroupElement;
 
 /***/ }),
-/* 525 */
+/* 526 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26978,7 +26998,7 @@ function createVoPropsSetter(voData) {
 }
 
 /***/ }),
-/* 526 */
+/* 527 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26991,7 +27011,7 @@ function isNonEmptyString(str) {
 }
 
 /***/ }),
-/* 527 */
+/* 528 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27004,7 +27024,7 @@ function isNumberGreaterThanZero(num) {
 }
 
 /***/ }),
-/* 528 */
+/* 529 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27024,13 +27044,13 @@ function syncComponent(el, name) {
 }
 
 /***/ }),
-/* 529 */
+/* 530 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(530);
+var content = __webpack_require__(531);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -27038,7 +27058,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(532)(content, options);
+var update = __webpack_require__(533)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -27055,10 +27075,10 @@ if(false) {
 }
 
 /***/ }),
-/* 530 */
+/* 531 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(531)(undefined);
+exports = module.exports = __webpack_require__(532)(undefined);
 // imports
 
 
@@ -27069,7 +27089,7 @@ exports.push([module.i, "blitpunk-canvas {\n  display: inline-block;\n  font-siz
 
 
 /***/ }),
-/* 531 */
+/* 532 */
 /***/ (function(module, exports) {
 
 /*
@@ -27151,7 +27171,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 532 */
+/* 533 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -27207,7 +27227,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(533);
+var	fixUrls = __webpack_require__(534);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -27523,7 +27543,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 533 */
+/* 534 */
 /***/ (function(module, exports) {
 
 

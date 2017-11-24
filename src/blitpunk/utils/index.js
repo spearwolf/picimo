@@ -7,6 +7,7 @@ import {
 } from './math_helpers'
 import parseCssStyledProperties from './parseCssStyledProperties'
 import sample from './sample'
+import removeItem from './removeItem'
 
 export {
   Mat4,
@@ -15,5 +16,6 @@ export {
   isPowerOf2,
   maxOf,
   parseCssStyledProperties,
-  sample
+  sample,
+  removeItem
 }

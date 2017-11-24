@@ -3,7 +3,7 @@ import generateUUID from '../utils/generate_uuid'
 const eventize = require('@spearwolf/eventize')
 
 const destroyAllComponents = (entity) => {
-  for (const name of entity.components.keys()) {
+  for (const name of entity.registries.keys()) {
     entity.destroyComponent(name)
   }
 }
@@ -13,7 +13,7 @@ const destroyAllComponents = (entity) => {
  */
 export default class Entity {
   constructor () {
-    this.components = new Map()
+    this.registries = new Map()
 
     /**
      * @type {string}
@@ -24,14 +24,14 @@ export default class Entity {
   }
 
   hasComponent (name) {
-    return this.components.has(name)
+    return this.registries.has(name)
   }
 
-  setComponent (name, component) {
+  setComponent (name, component, registry) {
     if (this[name]) {
       throw new Error(`Component name "${name}" is already assigned!`)
     }
-    this.components.set(name, component)
+    this.registries.set(name, registry)
     this[name] = component
     if (component.connectedEntity) {
       component.connectedEntity(this)
@@ -40,7 +40,14 @@ export default class Entity {
   }
 
   destroyComponent (name) {
-    if (this.components.delete(name)) {
+    if (this.registries.has(name)) {
+      const registry = this.registries.get(name)
+      this.registries.delete(name)
+
+      if (registry) {
+        registry.destroyComponent(this, name)
+      }
+
       const component = this[name]
       delete this[name]
       if (component.disconnectedEntity) {

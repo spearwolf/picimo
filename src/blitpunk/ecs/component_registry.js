@@ -9,6 +9,7 @@ export default class ComponentRegistry {
    * @param {object} componentFactory - the component factory interface
    * @param {function} componentFactory.create - create a new component instance
    * @param {function} componentFactory.update - update a component
+   * @param {function} componentFactory.destroy - remove a component
    */
   registerComponent (name, componentFactory) {
     this.registry.set(name, componentFactory)
@@ -17,8 +18,9 @@ export default class ComponentRegistry {
 
   createComponent (entity, name, data) {
     const factory = this.registry.get(name)
+    if (!factory) return this
     const component = factory.create(entity, data)
-    entity.setComponent(name, component)
+    entity.setComponent(name, component, this)
     return this
   }
 
@@ -35,6 +37,13 @@ export default class ComponentRegistry {
     } else {
       this.createComponent(entity, name, data)
     }
+    return this
+  }
+
+  destroyComponent (entity, name) {
+    const component = entity[name]
+    const factory = this.registry.get(name)
+    factory.destroy(component)
     return this
   }
 }
