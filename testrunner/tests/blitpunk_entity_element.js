@@ -1,15 +1,19 @@
 /* eslint-env mocha */
-/* global BLITPUNK */
 import { assert } from 'chai'
 
-import { ComponentRegistry, EntityManager } from 'blitpunk/ecs'
+import initializeBlitpunk from 'blitpunk'
+import {
+  ComponentFactory,
+  ComponentRegistry,
+  EntityManager
+} from 'blitpunk/ecs'
 
 const bContainer = document.querySelector('.blitpunk')
 
 describe('<blitpunk-entity>', () => {
-  before(BLITPUNK.initialize)
+  before(initializeBlitpunk)
 
-  describe('after adding a new <blitpunk-entity> element to the dom', () => {
+  describe('append new <blitpunk-entity> element to html', () => {
     let el
 
     beforeEach(() => {
@@ -18,30 +22,49 @@ describe('<blitpunk-entity>', () => {
       el.entityManager = new EntityManager()
       bContainer.appendChild(el)
 
-      el.componentRegistry.registerComponent('foo', {
-        create (entity, data) {
-          return data
-        },
+      el.componentRegistry.registerComponent(
+        'foo',
+        ComponentFactory.createComponent(class {
+          constructor (entity, foo) {
+            this.value = parseInt(foo, 10)
+            console.log('[foo] created', entity, foo, this)
+          }
 
-        update (component, data) {
-          component.foo = data
-        },
+          update (foo) {
+            this.value = parseInt(foo, 10)
+            console.log('[foo] updated', foo, this)
+          }
 
-        destroy (/* component */) { }
-      })
+          connectedEntity (entity) {
+            console.log('[foo] connected', entity, this)
+          }
+
+          disconnectedEntity (entity) {
+            console.log('[foo] disconnected', entity, this)
+          }
+        }))
     })
 
     afterEach(() => {
       if (el) {
-        // bContainer.removeChild(el)
+        bContainer.removeChild(el)
       }
     })
 
-    it('should have .foo and .bar properties', () => {
+    it('create, update and remove foo= attribute (component)', () => {
       el.setAttribute('foo', 123)
-      el.setAttribute('bar', 456)
-      assert.equal(el.getAttribute('foo'), '123')
-      assert.equal(el.getAttribute('bar'), '456')
+      el.updateEntity()
+      assert.equal(el.entity.foo.value, 123)
+
+      const { foo } = el.entity
+      el.setAttribute('foo', 456)
+      el.updateEntity()
+      assert.equal(el.entity.foo.value, 456)
+      assert.equal(foo, el.entity.foo)
+
+      el.removeAttribute('foo')
+      el.updateEntity()
+      assert.isNotOk(el.entity.foo)
     })
   })
 })

@@ -3,6 +3,7 @@ const ejs = require('ejs')
 const fs = require('fs')
 const glob = require('glob')
 const path = require('path')
+const webpack = require('webpack')
 
 const createDevServer = require('./lib/createDevServer')
 const scssRules = require('./lib/scssRules')
@@ -36,6 +37,11 @@ module.exports = {
     filename: '[name]/bundle.js',
     path: EXAMPLES_DIR
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      BLITPUNK_ENV: JSON.stringify('development')
+    })
+  ],
   module: {
     rules: [
       jsRules,

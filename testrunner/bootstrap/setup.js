@@ -6,4 +6,5 @@ mocha.setup('bdd')
 require('./tests')
 
 mocha.checkLeaks()
+mocha.globals(['BLITPUNK'])
 mocha.run()

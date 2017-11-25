@@ -1,13 +1,15 @@
 /* eslint-env mocha */
-/* global BLITPUNK HTMLCanvasElement */
+/* global HTMLCanvasElement */
 import { assert } from 'chai'
+
+import initializeBlitpunk from 'blitpunk'
 
 const bContainer = document.querySelector('.blitpunk')
 
 describe('<blitpunk-canvas>', () => {
-  before(BLITPUNK.initialize)
+  before(initializeBlitpunk)
 
-  describe('after adding a new <blitpunk-canvas> element to the dom', () => {
+  describe('after adding a new <blitpunk-canvas> element to html', () => {
     let bCanvas
 
     beforeEach(() => {
@@ -21,7 +23,7 @@ describe('<blitpunk-canvas>', () => {
       }
     })
 
-    it('should have .canvas property', () => {
+    it('the element should have a .canvas property', () => {
       assert.isOk(bCanvas.canvas)
     })
 
