@@ -2,8 +2,6 @@ import EntityElement from '../EntityElement'
 import resize from './resize'
 import createWebGlRenderer from './createWebGlRenderer'
 
-const tinycolor = require('tinycolor2')
-
 export default class CanvasElement extends EntityElement {
   /** @ignore */
   constructor (_) {
@@ -36,14 +34,6 @@ export default class CanvasElement extends EntityElement {
     return webGlRenderer
   }
 
-  get clearColor () {
-    return this._clearColor || this.entity.queryComponent('clear-color', cc => cc.color)
-  }
-
-  set clearColor (color) {
-    this._clearColor = color ? tinycolor(color) : null
-  }
-
   startAnimation () {
     if (this.animationFrameRequestId) return
     this.animationFrameRequestIsStopped = false
@@ -54,8 +44,7 @@ export default class CanvasElement extends EntityElement {
         this.now = now / 1000.0 // seconds
         resize(this)
         const { webGlRenderer } = this
-        webGlRenderer.clearColor = this.clearColor
-        webGlRenderer.updateViewport(0, 0, this.width, this.height)
+        webGlRenderer.setViewport(0, 0, this.width, this.height)
         webGlRenderer.renderFrame(() => {
           this.renderFrame(this, webGlRenderer)
         })

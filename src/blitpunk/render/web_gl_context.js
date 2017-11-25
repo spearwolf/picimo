@@ -134,5 +134,6 @@ function initialize (glx) {
   const { gl } = glx
 
   glx.DEPTH_BITS = gl.getParameter(gl.DEPTH_BITS)
+  glx.STENCIL_BITS = gl.getParameter(gl.STENCIL_BITS)
   glx.MAX_TEXTURE_IMAGE_UNITS = gl.getParameter(gl.MAX_TEXTURE_IMAGE_UNITS)
 }

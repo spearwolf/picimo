@@ -73,6 +73,8 @@ export default class EntityElement extends HTMLElement {
   renderFrame (canvasEl, webGlRenderer, parentEl) {
     this.updateEntity()
 
+    this.entity.emit('renderFrame', webGlRenderer)
+
     const { children } = this
     for (let i = 0; i < children.length; i++) {
       const childEl = children[i]
