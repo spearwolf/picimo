@@ -1,16 +1,13 @@
 /* eslint-env mocha */
-/* global BLITPUNK customElements */
+/* global BLITPUNK */
 import { assert } from 'chai'
 
-import EntityElement from 'blitpunk/dom/elements/EntityElement'
 import { ComponentRegistry, EntityManager } from 'blitpunk/ecs'
 
 const bContainer = document.querySelector('.blitpunk')
 
 describe('<blitpunk-entity>', () => {
-  before(() => BLITPUNK.initialize().then(() => {
-    customElements.define('blitpunk-entity', EntityElement)
-  }))
+  before(BLITPUNK.initialize)
 
   describe('after adding a new <blitpunk-entity> element to the dom', () => {
     let el

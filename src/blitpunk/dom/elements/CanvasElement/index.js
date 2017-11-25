@@ -19,7 +19,8 @@ export default class CanvasElement extends EntityElement {
     })
 
     self.canvas = document.createElement('canvas')
-    self.appendChild(self.canvas)
+    // self.appendChild(self.canvas)
+    self.firstTimeConnected = true
     resize(self)
 
     return self
@@ -64,6 +65,10 @@ export default class CanvasElement extends EntityElement {
   connectedCallback () {
     console.log('[CanvasElement] connectedCallback()')
 
+    if (this.firstTimeConnected) {
+      this.firstTimeConnected = false
+      this.appendChild(this.canvas)
+    }
     resize(this)
     this.startAnimation()
   }
