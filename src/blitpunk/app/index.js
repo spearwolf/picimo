@@ -6,7 +6,7 @@ import entityManager from '../entityManager'
 import resourceLibrary from '../resourceLibrary'
 import textureLibrary from '../textureLibrary'
 
-import registerDefaultComponents from '../dom/registerDefaultComponents'
+import registerCoreComponents from '../dom/registerCoreComponents'
 import destroy from '../utils/destroy'
 import { error } from '../../common/log'
 
@@ -78,7 +78,7 @@ class App {
     this.createGlContext = getOption('createGlContext', () => () => createGlContext(this.canvas, this.contextAttributes))
 
     // TODO add global componentRegistry ?
-    registerDefaultComponents(this.componentRegistry)
+    registerCoreComponents(this.componentRegistry)
 
     this.entity = this.entityManager.createEntity()
     this.entity.setComponent('blitpunk', this)  // why?

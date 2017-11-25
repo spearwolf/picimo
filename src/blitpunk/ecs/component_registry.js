@@ -25,14 +25,15 @@ export default class ComponentRegistry {
   }
 
   updateComponent (entity, name, data) {
-    const component = entity[name]
     const factory = this.registry.get(name)
+    if (!factory) return this
+    const component = entity[name]
     factory.update(component, data)
     return this
   }
 
   createOrUpdateComponent (entity, name, data) {
-    if (entity[name] != null) {
+    if (entity.getComponentRegistry(name) === this) {
       this.updateComponent(entity, name, data)
     } else {
       this.createComponent(entity, name, data)
@@ -41,8 +42,9 @@ export default class ComponentRegistry {
   }
 
   destroyComponent (entity, name) {
-    const component = entity[name]
     const factory = this.registry.get(name)
+    if (!factory) return this
+    const component = entity[name]
     factory.destroy(component)
     return this
   }

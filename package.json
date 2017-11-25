@@ -75,6 +75,7 @@
     "@spearwolf/eventize": "github:spearwolf/eventize",
     "document-register-element": "^1.7.0",
     "gl-matrix": "^2.4.0",
+    "lodash": "^4.17.4",
     "tinycolor2": "^1.4.1",
     "uuid": "^3.1.0",
     "whatwg-fetch": "^2.0.3"

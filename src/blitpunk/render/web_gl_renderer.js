@@ -110,9 +110,12 @@ export default class WebGlRenderer {
     let clear = gl.COLOR_BUFFER_BIT
     if (this.glx.DEPTH_BITS > 0) clear = clear | gl.DEPTH_BUFFER_BIT
 
-    if (this.clearColor !== null) {
-      const col = this.clearColor.toRgb()
+    const { clearColor } = this
+    if (clearColor) {
+      const col = clearColor.toRgb()
       gl.clearColor(col.r / 255, col.g / 255, col.b / 255, col.a)
+    } else {
+      gl.clearColor(0, 0, 0, 0)
     }
     gl.clear(clear)
   }

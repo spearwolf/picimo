@@ -1,6 +1,5 @@
 import EntityElement from '../EntityElement'
 import resize from './resize'
-import update from './update'
 import createWebGlRenderer from './createWebGlRenderer'
 
 const tinycolor = require('tinycolor2')
@@ -38,14 +37,11 @@ export default class CanvasElement extends EntityElement {
   }
 
   get clearColor () {
-    return this._webGlRenderer ? this._webGlRenderer.clearColor : this._clearColor
+    return this._clearColor || this.entity.queryComponent('clear-color', cc => cc.color)
   }
 
   set clearColor (color) {
     this._clearColor = color ? tinycolor(color) : null
-    if (this._webGlRenderer) {
-      this._webGlRenderer.setClearColor(this._clearColor)
-    }
   }
 
   startAnimation () {
@@ -57,13 +53,12 @@ export default class CanvasElement extends EntityElement {
         this.startAnimation()
         this.now = now / 1000.0 // seconds
         resize(this)
-        // TODO handle clear-color attribute (as entity component)
-        // if (this.hasAttribute('clear-color')) {
-          // this.clearColor = this.getAttribute('clear-color')
-        // }
         const { webGlRenderer } = this
+        webGlRenderer.clearColor = this.clearColor
         webGlRenderer.updateViewport(0, 0, this.width, this.height)
-        webGlRenderer.renderFrame(() => update(this))
+        webGlRenderer.renderFrame(() => {
+          this.renderFrame(this, webGlRenderer)
+        })
       }
     })
   }

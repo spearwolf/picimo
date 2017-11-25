@@ -64,9 +64,22 @@ export default class EntityElement extends HTMLElement {
       }
     })
     prevAttrNames.forEach(attrName => {
-      console.log('[EntityElement] attributeRemoved:', attrName)
       this.entity.destroyComponent(attrName)
+      this.attributeValuesCache.delete(attrName)
+      console.log('[EntityElement] attributeRemoved:', attrName)
     })
+  }
+
+  renderFrame (canvasEl, webGlRenderer, parentEl) {
+    this.updateEntity()
+
+    const { children } = this
+    for (let i = 0; i < children.length; i++) {
+      const childEl = children[i]
+      if (childEl.renderFrame) {
+        childEl.renderFrame(canvasEl, webGlRenderer, this)
+      }
+    }
   }
 
   /** @private */

@@ -27,6 +27,10 @@ export default class Entity {
     return this.registries.has(name)
   }
 
+  getComponentRegistry (name) {
+    return this.registries.get(name)
+  }
+
   setComponent (name, component, registry) {
     if (this[name]) {
       throw new Error(`Component name "${name}" is already assigned!`)
@@ -37,6 +41,14 @@ export default class Entity {
       component.connectedEntity(this)
     }
     return this
+  }
+
+  queryComponent (name, filterCallback) {
+    const component = this[name]
+    if (component && filterCallback) {
+      return filterCallback(component)
+    }
+    return component
   }
 
   destroyComponent (name) {
