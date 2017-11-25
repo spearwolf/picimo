@@ -39,13 +39,11 @@ const parseConfig = (props) => {
 
 export default class ClearComponent {
   constructor (entity, config) {
-    Object.assign(this, parseConfig(config))
-    console.log('[ClearComponent] created', this)
+    this.update(config)
   }
 
   update (config) {
     Object.assign(this, parseConfig(config))
-    console.log('[ClearComponent] updated', this)
   }
 
   connectedEntity (entity) {
