@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 
 const scssRules = require('./lib/scssRules')
 const jsRules = require('./lib/jsRules')
@@ -15,6 +16,11 @@ module.exports = {
       scssRules
     ]
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      BLITPUNK_ENV: JSON.stringify('development')
+    })
+  ],
   resolve: {
     extensions: ['.js'],
     modules: [

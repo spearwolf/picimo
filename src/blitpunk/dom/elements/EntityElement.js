@@ -1,7 +1,9 @@
 /* global HTMLElement */
-import componentRegistry from 'blitpunk/componentRegistry'
+import rootComponentRegistry from 'blitpunk/componentRegistry'
+import { ComponentRegistry } from 'blitpunk/ecs'
 import entityManager from 'blitpunk/entityManager'
 import removeItem from 'blitpunk/utils/removeItem'
+import { debug } from 'common/log'
 
 export default class EntityElement extends HTMLElement {
   /** @ignore */
@@ -16,13 +18,16 @@ export default class EntityElement extends HTMLElement {
       _entity: { value: null, writable: true }
     })
 
-    console.log('[EntityElement] constructor, self=', self)
+    debug('[entity] constructor, self=', self)
 
     return self
   }
 
   get componentRegistry () {
-    return this._componentRegistry || componentRegistry
+    if (!this._componentRegistry) {
+      this._componentRegistry = new ComponentRegistry(rootComponentRegistry)
+    }
+    return this._componentRegistry
   }
 
   set componentRegistry (registry) {
@@ -59,15 +64,16 @@ export default class EntityElement extends HTMLElement {
       const value = this.getAttribute(attrName)
       if (oldValue !== value) {
         attributeValuesCache.set(attrName, value)
-        console.log('[EntityElement] attributeValueChanged:', attrName, 'value=', value, 'oldValue=', oldValue)
+        debug('[entity] attributeValueChanged:', attrName, 'value=', value, 'oldValue=', oldValue)
         this.componentRegistry.createOrUpdateComponent(this.entity, attrName, value)
       }
     })
     prevAttrNames.forEach(attrName => {
       this.entity.destroyComponent(attrName)
       this.attributeValuesCache.delete(attrName)
-      console.log('[EntityElement] attributeRemoved:', attrName)
+      debug('[entity] attributeRemoved:', attrName)
     })
+    this.entity.emit('updateEntity', this)
   }
 
   renderFrame (canvasEl, webGlRenderer, parentEl) {
@@ -86,12 +92,12 @@ export default class EntityElement extends HTMLElement {
 
   /** @private */
   connectedCallback () {
-    console.log('[EntityElement] connectedCallback()')
+    debug('[entity] connectedCallback()')
   }
 
   /** @private */
   disconnectedCallback () {
-    console.log('[EntityElement] disconnectedCallback()')
+    debug('[entity] disconnectedCallback()')
   }
 
   /** @private */
