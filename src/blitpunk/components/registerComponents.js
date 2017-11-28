@@ -1,6 +1,6 @@
-import ComponentFactory from '../ecs/component_factory'
+import ComponentFactory from 'blitpunk/ecs/component_factory'
 
-import ClearComponent from './components/ClearComponent'
+import ClearComponent from './ClearComponent'
 // import ProjectionComponent from './components/ProjectionComponent'
 // import ChildrenComponent from './components/ChildrenComponent'
 // import BlendModeComponent from './components/BlendModeComponent'

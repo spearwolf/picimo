@@ -1,10 +1,9 @@
 /* global HTMLElement */
-import { debug } from 'common/log'
 import { removeItem } from 'blitpunk/utils'
 import { ComponentRegistry } from 'blitpunk/ecs'
-
 import entityManager from 'blitpunk/entityManager'
 import rootComponentRegistry from 'blitpunk/componentRegistry'
+import { debug } from 'common/log'
 
 export default class EntityElement extends HTMLElement {
   /** @ignore */

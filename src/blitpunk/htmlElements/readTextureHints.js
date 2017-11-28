@@ -5,7 +5,7 @@ import {
   ATTR_REPEATABLE,
   ATTR_PREMULTIPLY_ALPHA,
   ATTR_NEAREST
-} from '../constants'
+} from './constants'
 
 export default (el) => ({
   flipY: readBooleanAttribute(el, ATTR_FLIP_Y, false),

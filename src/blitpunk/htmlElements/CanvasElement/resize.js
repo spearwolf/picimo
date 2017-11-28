@@ -30,7 +30,5 @@ export default (el) => {
      * @type {number}
      */
     el.height = h
-
-    // TODO el.glx.gl.viewport(0, 0, w, h)
   }
 }

@@ -1,7 +1,9 @@
-import EntityElement from '../EntityElement'
-import resize from './resize'
-import createWebGlRenderer from './createWebGlRenderer'
 import { debug } from 'common/log'
+
+import EntityElement from '../EntityElement'
+
+import createWebGlRenderer from './createWebGlRenderer'
+import resize from './resize'
 
 export default class CanvasElement extends EntityElement {
   /** @ignore */

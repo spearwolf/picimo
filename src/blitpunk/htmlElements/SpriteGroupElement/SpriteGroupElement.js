@@ -1,5 +1,6 @@
-import EntityElement from '../EntityElement'
 import { debug } from 'common/log'
+
+import EntityElement from '../EntityElement'
 
 export default class SpriteGroupElement extends EntityElement {
   /** @ignore */

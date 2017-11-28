@@ -6,7 +6,7 @@ import entityManager from '../entityManager'
 import resourceLibrary from '../resourceLibrary'
 import textureLibrary from '../textureLibrary'
 
-import registerCoreComponents from '../dom/registerCoreComponents'
+import registerCoreComponents from '../components/registerComponents'
 import destroy from '../utils/destroy'
 import { error } from '../../common/log'
 

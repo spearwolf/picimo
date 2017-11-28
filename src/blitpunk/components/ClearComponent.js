@@ -1,6 +1,7 @@
 import { getDefaultOption } from 'blitpunk/utils'
 import { debug } from 'common/log'
-import { COMP_PRIO_CLEAR } from '../constants'
+
+import { COMPONENT_PRIORITY_CLEAR } from './constants'
 
 const tinycolor = require('tinycolor2')
 
@@ -50,7 +51,7 @@ export default class ClearComponent {
   connectedEntity (entity) {
     debug('[clear] connected', this)
 
-    this._renderFrameId = entity.on('renderFrame', COMP_PRIO_CLEAR, this.renderFrame.bind(this))
+    this._renderFrameId = entity.on('renderFrame', COMPONENT_PRIORITY_CLEAR, this.renderFrame.bind(this))
   }
 
   disconnectedEntity (entity) {

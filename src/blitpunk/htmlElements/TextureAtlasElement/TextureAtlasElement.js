@@ -1,9 +1,10 @@
-import EntityElement from '../EntityElement'
 import textureLibrary from 'blitpunk/textureLibrary'
 import { debug } from 'common/log'
 
+import EntityElement from '../EntityElement'
+import { ATTR_SRC } from '../constants'
+
 import loadTextureAtlas from './loadTextureAtlas'
-import { ATTR_SRC } from '../../constants'
 
 export default class TextureAtlasElement extends EntityElement {
   /** @ignore */

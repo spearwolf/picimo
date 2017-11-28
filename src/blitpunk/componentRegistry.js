@@ -1,7 +1,7 @@
 import ComponentRegistry from './ecs/component_registry'
-import registerCoreComponents from './dom/registerCoreComponents'
+import registerComponents from './components/registerComponents'
 
 const componentRegistry = new ComponentRegistry()
-registerCoreComponents(componentRegistry)
+registerComponents(componentRegistry)
 
 export default componentRegistry

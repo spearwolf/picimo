@@ -12,7 +12,7 @@ import {
   ATTR_PREMULTIPLIED_ALPHA,
   ATTR_PRESERVE_DRAW,
   ATTR_STENCIL
-} from '../../constants'
+} from '../constants'
 
 const createCanvasContextAttributes = (el) => ({
   alpha: readBooleanAttribute(el, ATTR_ALPHA, false),
