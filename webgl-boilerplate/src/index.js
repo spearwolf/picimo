@@ -1,4 +1,7 @@
-import initializeBlitpunk from 'blitpunk'
+import initializeBlitpunk, {
+  resourceLibrary,
+  textureLibrary
+} from 'blitpunk'
 
 import ShaderSource from 'blitpunk/core/shader_source'
 import ShaderProgram from 'blitpunk/core/shader_program'
@@ -21,8 +24,6 @@ initializeBlitpunk()
 window.PowerOf2Image = PowerOf2Image
 
 const el = document.getElementById('blitpunkCanvas')
-
-const { resourceLibrary, textureLibrary } = el
 
 const timeUniform = new ShaderUniformVariable('time')
 const resolutionUniform = new ShaderUniformVariable('resolution')
@@ -51,10 +52,11 @@ const prgSimple = new ShaderProgram(
 
 // ------- animate frame ----------------------------- /// // ----
 
-el.on('animateFrame', function (app) {
-  projection.update(app.width, app.height)
-  timeUniform.value = app.time
-  resolutionUniform.value = [ app.width, app.height ]
+el.entity.on('renderFrame', function () {
+  const { width, height, now } = el
+  projection.update(width, height)
+  timeUniform.value = now
+  resolutionUniform.value = [ width, height ]
 })
 
 // ------- sync textures ---------------------------- /// // ----
@@ -70,7 +72,7 @@ const nobingerTextures = new ShaderTextureGroup(textureLibrary, { tex: 'nobinger
 
 // ------- render frame ----------------------------- /// // ----
 
-el.on('renderFrame', function (renderer) {
+el.entity.on('renderFrame', function (renderer) {
   const { shaderContext } = renderer
 
   //

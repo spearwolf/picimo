@@ -87,6 +87,8 @@ export default class EntityElement extends HTMLElement {
         childEl.renderFrame(canvasEl, webGlRenderer, this)
       }
     }
+
+    this.entity.emit('postRenderFrame', webGlRenderer)
   }
 
   /** @private */

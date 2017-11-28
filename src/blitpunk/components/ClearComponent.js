@@ -10,13 +10,22 @@ const DEFAULT_DEPTH = 1
 const DEFAULT_STENCIL = 0
 const DEFAULT_MASK = 'COLOR,DEPTH,STENCIL'
 
+const PROPERTY_CLEAR_COLOR = 'color'
+const PROPERTY_CLEAR_DEPTH = 'depth'
+const PROPERTY_CLEAR_STENCIL = 'stencil'
+const PROPERTY_MASK = 'mask'
+
+const COLOR = 'COLOR'
+const DEPTH = 'DEPTH'
+const STENCIL = 'STENCIL'
+
 const parseColor = colStr => colStr ? tinycolor(colStr) : null
 
 const parseMask = str => {
   return {
-    color: str.indexOf('COLOR') > -1,
-    depth: str.indexOf('DEPTH') > -1,
-    stencil: str.indexOf('STENCIL') > -1
+    color: str.indexOf(COLOR) > -1,
+    depth: str.indexOf(DEPTH) > -1,
+    stencil: str.indexOf(STENCIL) > -1
   }
 }
 
@@ -32,10 +41,10 @@ const parseConfig = (props) => {
 
   const option = getDefaultOption.bind(null, props)
   return {
-    clearColor: parseColor(option('color', DEFAULT_COLOR)),
-    clearDepth: option('depth', DEFAULT_DEPTH),
-    clearStencil: option('stencil', DEFAULT_STENCIL),
-    mask: parseMask(option('mask', DEFAULT_MASK))
+    clearColor: parseColor(option(PROPERTY_CLEAR_COLOR, DEFAULT_COLOR)),
+    clearDepth: option(PROPERTY_CLEAR_DEPTH, DEFAULT_DEPTH),
+    clearStencil: option(PROPERTY_CLEAR_STENCIL, DEFAULT_STENCIL),
+    mask: parseMask(option(PROPERTY_MASK, DEFAULT_MASK))
   }
 }
 
