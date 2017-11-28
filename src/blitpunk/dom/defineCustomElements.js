@@ -1,13 +1,15 @@
-import CanvasElement from './elements/CanvasElement'
-import EntityElement from './elements/EntityElement'
-import TextureAtlasElement from './elements/TextureAtlasElement'
-// import SpriteGroupElement from './elements/SpriteGroupElement'
+import {
+  CanvasElement,
+  EntityElement,
+  TextureAtlasElement,
+  SpriteGroupElement
+} from './elements'
 
 import {
   DOM_ELEM_CANVAS,
   DOM_ELEM_ENTITY,
-  DOM_ELEM_TEXTURE_ATLAS
-  // DOM_ELEM_SPRITE_GROUP
+  DOM_ELEM_TEXTURE_ATLAS,
+  DOM_ELEM_SPRITE_GROUP
 } from './constants'
 
 import './blitpunk.scss'
@@ -20,8 +22,8 @@ export default function defineCustomElements () {
   [
     [DOM_ELEM_CANVAS, CanvasElement],
     [DOM_ELEM_ENTITY, EntityElement],
-    [DOM_ELEM_TEXTURE_ATLAS, TextureAtlasElement]
-    // [DOM_ELEM_SPRITE_GROUP, SpriteGroupElement]
+    [DOM_ELEM_TEXTURE_ATLAS, TextureAtlasElement],
+    [DOM_ELEM_SPRITE_GROUP, SpriteGroupElement]
   ].forEach(
       ([tagName, elementConstructor]) => window.customElements.define(tagName, elementConstructor))
 }

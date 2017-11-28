@@ -25,6 +25,7 @@ export default class TextureAtlasElement extends EntityElement {
     /**
      * Der Promise wird resolved wenn der TextureAtlas
      * erfolgreich geladen wurde.
+     *
      * Die Resolve-Value ist der TextureAtlas.
      *
      * Das Laden des TextureAtlas wird allerdings nur mit

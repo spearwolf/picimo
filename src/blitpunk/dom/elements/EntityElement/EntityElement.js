@@ -1,9 +1,10 @@
 /* global HTMLElement */
-import rootComponentRegistry from 'blitpunk/componentRegistry'
-import { ComponentRegistry } from 'blitpunk/ecs'
-import entityManager from 'blitpunk/entityManager'
-import removeItem from 'blitpunk/utils/removeItem'
 import { debug } from 'common/log'
+import { removeItem } from 'blitpunk/utils'
+import { ComponentRegistry } from 'blitpunk/ecs'
+
+import entityManager from 'blitpunk/entityManager'
+import rootComponentRegistry from 'blitpunk/componentRegistry'
 
 export default class EntityElement extends HTMLElement {
   /** @ignore */
@@ -73,7 +74,6 @@ export default class EntityElement extends HTMLElement {
       this.attributeValuesCache.delete(attrName)
       debug('[entity] attributeRemoved:', attrName)
     })
-    this.entity.emit('updateEntity', this)
   }
 
   renderFrame (canvasEl, webGlRenderer, parentEl) {

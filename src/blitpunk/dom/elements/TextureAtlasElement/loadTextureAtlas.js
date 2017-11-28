@@ -1,4 +1,4 @@
-import readTextureHints from '../../lib/readTextureHints.js'
+import readTextureHints from '../readTextureHints'
 
 export default (el, src) => {
   if (el.previousSrc === src) return el.textureAtlasPromise

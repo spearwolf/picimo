@@ -3,7 +3,7 @@ import WebGlRenderer from 'blitpunk/render/web_gl_renderer'
 
 import { error } from 'common/log'
 
-import readBooleanAttribute from '../../lib/readBooleanAttribute.js'
+import readBooleanAttribute from '../readBooleanAttribute'
 
 import {
   ATTR_ALPHA,
