@@ -1,5 +1,3 @@
-import App from './app'
-
 import * as core from './core'
 import * as ecs from './ecs'
 import * as utils from './utils'
@@ -10,8 +8,6 @@ import resourceLibrary from './resourceLibrary'
 import textureLibrary from './textureLibrary'
 
 export {
-  App,
-
   core,
   ecs,
   utils,

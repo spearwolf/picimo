@@ -1,8 +1,6 @@
 /* eslint-disable */
 export const initialize = BLITPUNK.default;
 
-export const App = BLITPUNK.App;
-
 export const core = BLITPUNK.core;
 export const ecs = BLITPUNK.ecs;
 export const utils = BLITPUNK.utils;
