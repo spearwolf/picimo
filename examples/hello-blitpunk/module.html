@@ -24,14 +24,14 @@
     <script src="./document-register-element.js"></script>
 </head>
 <body>
-  <blitpunk-canvas id="blitpunkCanvas" clear-color="rgba(0, 0, 44, .5)" />
+  <blitpunk-canvas id="blitpunkCanvas" clear="rgba(22, 44, 88, .5)" />
   <script type="module">
     import('./blitpunk.mjs').then(module => {
       console.log('blitpunk.mjs', module)
       module.initialize().then(blitpunk => {
         console.log('initialize()', blitpunk)
         const el = document.querySelector('blitpunk-canvas')
-        el.setAttribute('clear-color', 'rgba(100, 0, 50, .5)')
+        el.setAttribute('clear', 'color: rgba(100, 0, 50, .5)')
         console.log('Press Ctrl-D for <blitpunk> debug output ..')
       })
     })

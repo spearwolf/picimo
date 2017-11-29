@@ -50,22 +50,20 @@ const parseConfig = (props) => {
 
 export default class ClearComponent {
   constructor (entity, config) {
-    this.update(config)
+    Object.assign(this, parseConfig(config))
+    debug('[clear] create', this)
   }
 
   update (config) {
     Object.assign(this, parseConfig(config))
+    debug('[clear] update', this)
   }
 
   connectedEntity (entity) {
-    debug('[clear] connected', this)
-
     this._renderFrameId = entity.on('renderFrame', COMPONENT_PRIORITY_CLEAR, this.renderFrame.bind(this))
   }
 
   disconnectedEntity (entity) {
-    debug('[clear] disconnected', this)
-
     if (this._renderFrameId) entity.off(this._renderFrameId)
   }
 

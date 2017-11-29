@@ -1,5 +1,3 @@
-import { debug } from 'common/log'
-
 import EntityElement from '../EntityElement'
 
 import createWebGlRenderer from './createWebGlRenderer'
@@ -9,8 +7,6 @@ export default class CanvasElement extends EntityElement {
   /** @ignore */
   constructor (_) {
     const self = super(_)
-
-    debug('[canvas] constructor, self=', self)
 
     self.now = 0
     self.animationFrameRequestId = 0
@@ -22,7 +18,6 @@ export default class CanvasElement extends EntityElement {
     })
 
     self.canvas = document.createElement('canvas')
-    // self.appendChild(self.canvas)
     self.firstTimeConnected = true
     resize(self)
 
@@ -66,8 +61,6 @@ export default class CanvasElement extends EntityElement {
 
   /** @private */
   connectedCallback () {
-    debug('[canvas] connectedCallback()')
-
     if (this.firstTimeConnected) {
       this.firstTimeConnected = false
       this.appendChild(this.canvas)
@@ -78,8 +71,6 @@ export default class CanvasElement extends EntityElement {
 
   /** @private */
   disconnectedCallback () {
-    debug('[canvas] disconnectedCallback()')
-
     this.stopAnimation()
   }
 }

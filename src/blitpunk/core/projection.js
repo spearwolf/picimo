@@ -8,27 +8,54 @@ const UNIFORM_NAME = 'viewMatrix'
  * @param {number} [options.desiredWidth] - desired width
  * @param {number} [options.desiredHeight] - desired height
  * @param {number} [options.pixelRatio] - pixel ratio
+ * @param {number} [options.perspective=0] - perspective distance (0 means no perspective)
  * @param {string} [options.sizeFit] - `cover`, `contain` or `fill`
  * @param {string} [options.uniformName='viewMatrix'] - name of the uniform value
  */
 export default class Projection {
-  constructor ({ desiredWidth, desiredHeight, pixelRatio, sizeFit, uniformName }) {
+  constructor ({ desiredWidth, desiredHeight, pixelRatio, sizeFit, uniformName, perspective }) {
     this.desiredWidth = desiredWidth
     this.desiredHeight = desiredHeight
     this.pixelRatio = pixelRatio
     this.sizeFit = sizeFit
-    this.uniform = new ShaderUniformVariable(uniformName || UNIFORM_NAME, new Mat4())
+    this.uniformName = uniformName
+    this.perspective = perspective
     this.width = 0
     this.height = 0
+  }
+
+  set uniformName (uniformName) {
+    const name = uniformName || UNIFORM_NAME
+    if (!this.uniform || this.uniform.name !== name) {
+      this.uniform = new ShaderUniformVariable(name, new Mat4())
+    }
+  }
+
+  get uniformName () {
+    return (this.uniform && this.uniform.name) || UNIFORM_NAME
+  }
+
+  set perspective (distance) {
+    if (typeof distance === 'number') {
+      this._perspective = Math.abs(distance)
+    } else {
+      this._perspective = 0
+    }
+  }
+
+  get perspective () {
+    return this._perspective
   }
 
   updateOrtho (width, height) {
     if (width !== this.width || height !== this.height) {
       this.width = width
       this.height = height
-      // this.uniform.value.ortho(width, height)
-      // TODO enable perspective with distance
-      this.uniform.value.perspective(width, height, 100)
+      if (this.perspective > 0) {
+        this.uniform.value.perspective(width, height, this.perspective) // clouds: 100
+      } else {
+        this.uniform.value.ortho(width, height)
+      }
       this.uniform.touch()
     }
   }

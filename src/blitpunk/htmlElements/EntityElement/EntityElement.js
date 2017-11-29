@@ -64,51 +64,40 @@ export default class EntityElement extends HTMLElement {
       const value = this.getAttribute(attrName)
       if (oldValue !== value) {
         attributeValuesCache.set(attrName, value)
-        debug('[entity] attributeValueChanged:', attrName, 'value=', value, 'oldValue=', oldValue)
+        // debug('[entity] attributeValueChanged:', attrName, 'value=', value, 'oldValue=', oldValue)
         this.componentRegistry.createOrUpdateComponent(this.entity, attrName, value)
       }
     })
     prevAttrNames.forEach(attrName => {
       this.entity.destroyComponent(attrName)
       this.attributeValuesCache.delete(attrName)
-      debug('[entity] attributeRemoved:', attrName)
+      // debug('[entity] attributeRemoved:', attrName)
     })
   }
 
-  renderFrame (canvasEl, webGlRenderer, parentEl) {
+  renderFrame (canvasEl, webGlRenderer) {
     this.updateEntity()
 
-    this.entity.emit('renderFrame', webGlRenderer)
+    this.entity.emit('renderFrame', webGlRenderer, canvasEl)
 
     const { children } = this
     for (let i = 0; i < children.length; i++) {
       const childEl = children[i]
       if (childEl.renderFrame) {
-        childEl.renderFrame(canvasEl, webGlRenderer, this)
+        childEl.renderFrame(canvasEl, webGlRenderer)
       }
     }
 
-    this.entity.emit('postRenderFrame', webGlRenderer)
+    this.entity.emit('postRenderFrame', webGlRenderer, canvasEl)
   }
 
   /** @private */
   connectedCallback () {
-    debug('[entity] connectedCallback()')
+    debug('[entity] connectedCallback()', this)
   }
 
   /** @private */
   disconnectedCallback () {
-    debug('[entity] disconnectedCallback()')
+    debug('[entity] disconnectedCallback()', this)
   }
-
-  /** @private */
-  // static get observedAttributes () {
-    // console.log('[EntityElement] observedAttributes() getter called')
-    // return [ ]
-  // }
-
-  /** @private */
-  // attributeChangedCallback (attr, oldValue, newValue) {
-    // console.log('[EntityElement] attributeChangedCallback(', attr, ',', oldValue, ',', newValue, ')')
-  // }
 }
