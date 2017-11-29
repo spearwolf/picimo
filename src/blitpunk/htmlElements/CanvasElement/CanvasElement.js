@@ -9,12 +9,14 @@ export default class CanvasElement extends EntityElement {
     const self = super(_)
 
     self.now = 0
+    self.frameNo = 0
     self.animationFrameRequestId = 0
     self.animationFrameRequestIsStopped = false
 
     Object.defineProperties(self, {
       _webGlRenderer: { value: null, writable: true },
-      _clearColor: { value: undefined, writable: true }
+      _clearColor: { value: undefined, writable: true },
+      _lastFrameTime: { value: 0, writable: true }
     })
 
     self.canvas = document.createElement('canvas')
@@ -40,7 +42,12 @@ export default class CanvasElement extends EntityElement {
       this.animationFrameRequestId = 0
       if (!this.animationFrameRequestIsStopped) {
         this.startAnimation()
+
+        ++this.frameNo
         this.now = now / 1000.0 // seconds
+        this.timeFrameOffset = this.now - this._lastFrameTime
+        this._lastFrameTime = this.now
+
         resize(this)
         const { webGlRenderer } = this
         webGlRenderer.setViewport(0, 0, this.width, this.height)

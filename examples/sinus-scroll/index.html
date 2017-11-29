@@ -23,13 +23,13 @@
     <script src="blitpunk-dev.js"></script>
   </head>
   <body>
-    <blitpunk-canvas alpha premultiplied-alpha
+    <blitpunk-texture-atlas id="atlas1" src="comic-font.json"></blitpunk-texture-atlas>
+    <blitpunk-canvas alpha premultiplied-alpha antialias
       id="blitpunk"
       clear="rgb(100, 0, 50, 0)"
       blend="sfactor: srcAlpha; dfactor: oneMinusSrcAlpha"
-      projection="sizeFit: contain; desiredWidth: 1200; desiredHeight: 1200"
+      projection="sizeFit: contain; desiredWidth: 600; desiredHeight: 600"
       >
-      <blitpunk-texture-atlas id="atlas1" src="comic-font.json" repeatable="true"></blitpunk-texture-atlas>
       <blitpunk-sprite-group
         id="mySprites"
         descriptor="simple"

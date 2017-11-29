@@ -1,5 +1,5 @@
 import textureLibrary from 'blitpunk/textureLibrary'
-import { debug } from 'common/log'
+// import { debug } from 'common/log'
 
 import EntityElement from '../EntityElement'
 import { ATTR_SRC } from '../constants'
@@ -10,8 +10,6 @@ export default class TextureAtlasElement extends EntityElement {
   /** @ignore */
   constructor (_) {
     const self = super(_)
-
-    debug('[texture-atlas] constructor, self=', self)
 
     Object.defineProperties(self, {
       previousSrc: { value: undefined, writable: true }
@@ -39,6 +37,8 @@ export default class TextureAtlasElement extends EntityElement {
       })
     })
 
+    // debug('[texture-atlas] constructor, self=', self)
+
     return self
   }
 
@@ -61,5 +61,15 @@ export default class TextureAtlasElement extends EntityElement {
       loadTextureAtlas(this, src)
     }
     return this.textureAtlasPromise
+  }
+
+  /**
+   * Lade die Texture.
+   * Wird zB. von <blitpunk-sprite-group> aufgerufen.
+   */
+  loadTexture () {
+    if (!this.textureAtlas) {
+      this.loadTextureAtlas()
+    }
   }
 }

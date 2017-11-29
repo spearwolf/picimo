@@ -64,9 +64,9 @@ export default class Clouds {
     return this.fadeOutMarginFactor * this.zRange
   }
 
-  animateFrame (app) {
+  renderFrame (renderer, el) {
     this.clouds.forEach((sprite) => {
-      sprite.z += app.timeFrameOffset * this.speed
+      sprite.z += el.timeFrameOffset * this.speed
       if (sprite.z > this.zMax) {
         makeCloud(sprite, this.atlas)
         sprite.z -= this.zRange

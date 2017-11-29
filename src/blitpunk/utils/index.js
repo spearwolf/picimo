@@ -9,6 +9,9 @@ import parseCssStyledProperties from './parseCssStyledProperties'
 import sample from './sample'
 import removeItem from './removeItem'
 import getDefaultOption from './getDefaultOption'
+import isNonEmptyString from './isNonEmptyString'
+import isNumberGreaterThanZero from './isNumberGreaterThanZero'
+import createVoPropsSetter from './createVoPropsSetter'
 
 export {
   Mat4,
@@ -19,5 +22,8 @@ export {
   parseCssStyledProperties,
   sample,
   removeItem,
-  getDefaultOption
+  getDefaultOption,
+  isNonEmptyString,
+  isNumberGreaterThanZero,
+  createVoPropsSetter
 }

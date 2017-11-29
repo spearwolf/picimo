@@ -18,7 +18,7 @@ export default class EntityElement extends HTMLElement {
       _entity: { value: null, writable: true }
     })
 
-    debug('[entity] constructor, self=', self)
+    // debug('[entity] constructor, self=', self)
 
     return self
   }

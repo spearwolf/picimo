@@ -1,3 +1,4 @@
+import { debug } from 'common/log'
 import readTextureHints from '../readTextureHints'
 
 export default (el, src) => {
@@ -10,6 +11,8 @@ export default (el, src) => {
     .then((atlas) => {
       el.textureAtlas = atlas
       el.textureHints = textureHints
+
+      debug('[texture-atlas] textureAtlas loaded', atlas)
 
       if (el.resolveTextureAtlasPromise) {
         el.resolveTextureAtlasPromise(atlas)

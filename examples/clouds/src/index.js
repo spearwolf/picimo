@@ -11,15 +11,15 @@ function createLogo (spriteGroup, atlas) {
 }
 
 async function init (el) {
-  const spriteGroup = await document.getElementById('cloudsSprites').spriteGroupPromise
+  const spriteGroup = await el.spriteGroupPromise
   const atlas = await document.getElementById('cloudsAtlas').textureAtlasPromise
 
   createLogo(spriteGroup, atlas)
 
   const clouds = new Clouds(spriteGroup, atlas)
-  el.on('animateFrame', clouds)
+  el.entity.on('renderFrame', clouds)
 }
 
 BLITPUNK.initialize().then(() => {
-  init(document.querySelector('#blitpunk'))
+  init(document.querySelector('#cloudsSprites'))
 })
