@@ -71,5 +71,6 @@ export default class TextureAtlasElement extends EntityElement {
     if (!this.textureAtlas) {
       this.loadTextureAtlas()
     }
+    return this.textureAtlasPromise
   }
 }

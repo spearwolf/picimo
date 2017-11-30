@@ -77,8 +77,8 @@ const syncTextureMap = (el, data) => {
   textureElements.forEach(texEl => texEl.loadTexture())
 }
 
-const renderFrame = (el, renderer) => {
-  let spriteGroup = el.spriteGroup
+const renderFrame = el => {
+  let { spriteGroup } = el
   if (!spriteGroup) {
     spriteGroup = createSpriteGroup(el)
     debug('[sprite-group] spriteGroup created', el.spriteGroup)

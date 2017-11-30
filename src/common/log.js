@@ -6,6 +6,8 @@ const log = typeof console !== 'undefined' ? (
   : (...args) => console.log(...args)
 ) : () => 1
 
+const info = typeof console !== 'undefined' ? (...args) => console.log(...args) : () => 1
+
 const error = typeof console !== 'undefined' ? (
   typeof console.error === 'function'
   ? (...args) => console.error(...args)
@@ -18,8 +20,21 @@ const debug = BLITPUNK_ENV === 'development' && typeof console !== 'undefined' ?
   : (...args) => console.log(...args)
 ) : () => 1
 
+const logOnceOnly = (logMethod = info) => {
+  let alreadyLogged = false
+  return (...args) => {
+    if (!alreadyLogged) {
+      alreadyLogged = true
+      logMethod(...args)
+    }
+  }
+}
+
 export default log
 export {
   debug,
-  error
+  error,
+  info,
+
+  logOnceOnly
 }

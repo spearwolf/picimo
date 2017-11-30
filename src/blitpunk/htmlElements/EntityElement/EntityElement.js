@@ -48,6 +48,7 @@ export default class EntityElement extends HTMLElement {
       return entity
     }
     this._entity = this.entityManager.createEntity()
+    this._entity.setComponent('el', this)
     return this._entity
   }
 

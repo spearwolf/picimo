@@ -1,29 +1,27 @@
-import generateUuid from './generate_uuid'
 import Mat4 from './mat4'
-import {
-  maxOf,
-  findNextPowerOf2,
-  isPowerOf2
-} from './math_helpers'
-import parseCssStyledProperties from './parseCssStyledProperties'
-import sample from './sample'
-import removeItem from './removeItem'
+import createVoPropsSetter from './createVoPropsSetter'
+import generateUuid from './generate_uuid'
 import getDefaultOption from './getDefaultOption'
+import isFunction from './isFunction'
 import isNonEmptyString from './isNonEmptyString'
 import isNumberGreaterThanZero from './isNumberGreaterThanZero'
-import createVoPropsSetter from './createVoPropsSetter'
+import parseCssStyledProperties from './parseCssStyledProperties'
+import removeItem from './removeItem'
+import sample from './sample'
+import { maxOf, findNextPowerOf2, isPowerOf2 } from './math_helpers'
 
 export {
   Mat4,
+  createVoPropsSetter,
   findNextPowerOf2,
   generateUuid,
+  getDefaultOption,
+  isFunction,
+  isNonEmptyString,
+  isNumberGreaterThanZero,
   isPowerOf2,
   maxOf,
   parseCssStyledProperties,
-  sample,
   removeItem,
-  getDefaultOption,
-  isNonEmptyString,
-  isNumberGreaterThanZero,
-  createVoPropsSetter
+  sample
 }

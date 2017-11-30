@@ -1,6 +1,6 @@
 /* global BLITPUNK */
 
-const init = async (el) => {
+const init = async () => {
   const spriteGroup = await document.getElementById('mySprites').spriteGroupPromise
   const atlas = await document.getElementById('atlas1').textureAtlasPromise
 
@@ -21,6 +21,4 @@ const init = async (el) => {
   spriteGroup.createSprite(atlas.getFrame('R')).setTranslate(-190, -25)
 }
 
-BLITPUNK.initialize().then(() => {
-  init(document.querySelector('#blitpunk'))
-})
+BLITPUNK.initialize().then(init)
