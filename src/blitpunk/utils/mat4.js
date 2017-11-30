@@ -29,7 +29,6 @@ export default class Mat4 {
     const halfHeight = height / 2.0
     const fovy = 2 * Math.atan(halfHeight / distance)
     mat4.perspective(this.mat4, fovy, aspect, near, far)
-    // TODO camera feature
     mat4.translate(this.mat4, this.mat4, [0, 0, -distance])
   }
 

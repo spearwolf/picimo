@@ -1,5 +1,9 @@
 import componentRegistry from './componentRegistry'
-import { parseCssStyledProperties, isFunction } from 'blitpunk/utils'
+import {
+  parseCssStyledProperties,
+  isFunction,
+  isString
+} from 'blitpunk/utils'
 import { debug } from 'common/log'
 
 const deferPropertyValue = (deferFuncName, getValuePromise) => {
@@ -26,7 +30,7 @@ const deferSpriteGroup = deferPropertyValue('spriteGroup', el => el.spriteGroupP
 
 const assignProperties = (component, props, verifyCreated) => {
   Object.entries(props).forEach(([key, value]) => {
-    if (typeof value === 'string') {
+    if (isString(value)) {
       if (deferTexture(component, key, value, verifyCreated) ||
         deferSpriteGroup(component, key, value, verifyCreated)) {
         return
@@ -37,40 +41,16 @@ const assignProperties = (component, props, verifyCreated) => {
   verifyCreated()
 }
 
-const createConnectedEntity = c => {
-  Object.defineProperty(c, '_connectedEntity', { value: c.connectedEntity })
+const createDisconnectedEntity = component => {
+  Object.defineProperty(component, '_disconnectedEntity', { value: component.disconnectedEntity })
 
-  c.connectedEntity = entity => {
-    Object.defineProperty(c, '_renderFrameId', {
-      value: entity.on('renderFrame', (...args) => {
-        if (c._isCreated && isFunction(c.renderFrame)) {
-          c.renderFrame(...args)
-        }
-      })
-    })
-    Object.defineProperty(c, '_postRenderFrameId', {
-      value: entity.on('postRenderFrame', (...args) => {
-        if (c._isCreated && isFunction(c.postRenderFrame)) {
-          c.postRenderFrame(...args)
-        }
-      })
-    })
-
-    if (isFunction(c._connectedEntity)) {
-      c._connectedEntity(entity)
+  component.disconnectedEntity = (entity) => {
+    if (component._entitySubscriberId) {
+      entity.off(component._entitySubscriberId)
     }
-  }
-}
 
-const createDisconnectedEntity = c => {
-  Object.defineProperty(c, '_disconnectedEntity', { value: c.disconnectedEntity })
-
-  c.disconnectedEntity = (entity) => {
-    entity.off('renderFrame', c._renderFrameId)
-    entity.off('postRenderFrame', c._postRenderFrameId)
-
-    if (c._disconnectedEntity) {
-      c._disconnectedEntity(entity)
+    if (component._disconnectedEntity) {
+      component._disconnectedEntity(entity)
     }
   }
 }
@@ -85,6 +65,10 @@ const verifyComponentCreated = (name, component) => () => {
     if (isFunction(component.create)) {
       component.create()
     }
+
+    Object.defineProperty(component, '_entitySubscriberId', {
+      value: component.entity.on('*', component)
+    })
   }
 }
 
@@ -104,10 +88,9 @@ export default (name, ComponentConstructor) => {
         }
       })
 
-      assignProperties(component, parseCssStyledProperties(data), verifyComponentCreated(name, component))
-
-      createConnectedEntity(component)
       createDisconnectedEntity(component)
+
+      assignProperties(component, parseCssStyledProperties(data), verifyComponentCreated(name, component))
 
       return component
     },

@@ -1,7 +1,7 @@
 # &lt;blitpunk/&gt; Backlog
 
-DOM Element API
----------------
+HTML Element API
+----------------
 
 - [ ] Render to texture ..
   - [ ] `<blitpunk-picture/>` acts as single sprite renderer, support boilerplate example (background)
@@ -10,27 +10,20 @@ DOM Element API
     - [ ] extract `SpriteGroupElement->syncTextureMap()` into a `TextureMapComponent`
   - [ ] `<blitpunk-texture/>` acts as single texture source (similary to texture-atlas)
   - [ ] `<blitpunk-render-to-texture/>` acts as texture source and scene
-- [ ] `<blitpunk-canvas/>` meaningful defaults for alpha/premultiplied-alpha ..
+- [ ] `<blitpunk-canvas/>` should have a default projection
 - [ ] projection= perspective support (distance, near, far), choose sensible defaults
   - [x] main work is done :smile:
-  - [ ] fix core/projection.js -> updateOrtho()
-  - [ ] utils/mat4.js -> perspective()
+  - [x] fix core/projection.js -> updateOrtho()
+  - [x] utils/mat4.js -> perspective()
+  - [x] distance
+  - [ ] near/far
   - [ ] pixelRatio support
 - [ ] transform= component .. camera?
-- [x] `<blitpunk-texture-atlas/>`
-  - [x] add hints (properties) for: premultiply-alpha, pixelate (nearest or linear), repeatable, flip-y
-  - [ ] use name= property instead of id= for texture-map refs
-- [ ] `<blitpunk-scene/>`
 - [ ] disconnectedCallback, free (glx) resources
-  - [ ] support moving (append followed by remove) of dom element
-  - [ ] `<blitpunk-canvas/>`
-  - [ ] `<blitpunk-scene/>`
-  - [ ] `<blitpunk-texture-atlas/>`
-  - [ ] `<blitpunk-sprite-group/>`
+  - [ ] support/verify html element insertions and deletions (appendChild, removeChild)
 - [x] `<blitpunk-sprite-group/>`
   - [ ] add support for all options from [src/core/SpriteGroup](src/core/sprite_group.js)
-- [x] rename all `blitp_xxx` classes to something without `blitp_` prefix
-
+- [ ] texture component (blitpunk-texture, render-to-texture, canvas, video...)
 
 Release
 -------
@@ -46,18 +39,19 @@ Release
   - [ ] examples
   - [ ] quickstart docs
   - [ ] quickstart jsfiddle?
-  - [ ] custom element docs
-  - [ ] esdoc
+  - [ ] documentation
+    - [ ] custom elements docs
+    - [ ] components docs
+    - [ ] esdoc
 - [ ] changelog
-- [ ] hierachical ResourceLibrary and TextureLibrary (for selective scene-graph-based cleanup)
+- [ ] npm package
 - [x] build library using ~~rollup~~ webpack (with full source maps support)
   - [x] add dynamic loader (~~systemjs~~ webpack) to support lazy-loading of
     - [x] specialized builds for (chrome, ff, ios, legacy(ie11), ..)
     - [x] polyfills for URL, fetch, ..
 - [x] multi-threaded builds (build-libs.js)
 - [x] support native javascript modules
-- [ ] webpack dev server examples + build library integration
-
+- [ ] upgrade to new eventize api (npm package)
 
 Next Release
 ------------
@@ -65,14 +59,12 @@ Next Release
 - [ ] tilemaps support `<blitpunk-tilemap .. />`
 - [ ] spine support `<blitpunk-spine-loader .. />`
 
-
 Think about
 -----------
 
 - [ ] "create an app" -> how to compile js,css,images,etc..to one single html (webpack?)
   - [ ] include js,assets updates from server..
 - [ ] quick boostrap tool `blitpunk-cli`
-
 
 Browser Support
 ---------------
@@ -86,21 +78,11 @@ Browser Support
 - [ ] ios support
 - [ ] android chrome support
 
-
 Other
 -----
 
 - [ ] fix karma/code *coverage* generation!
 - [x] remove *jab* reference?
-
-
-Scene Graph (obsolete)
-----------------------
-
-- [x] remove scene_graph, SGNode and friends
-- [x] remove dom/blitp_element
-- [x] think about an [entity-component-system](https://aframe.io/docs/0.6.0/introduction/entity-component-system.html)
-
 
 Usage Examples
 --------------

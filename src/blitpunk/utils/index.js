@@ -5,6 +5,7 @@ import getDefaultOption from './getDefaultOption'
 import isFunction from './isFunction'
 import isNonEmptyString from './isNonEmptyString'
 import isNumberGreaterThanZero from './isNumberGreaterThanZero'
+import isString from './isString'
 import parseCssStyledProperties from './parseCssStyledProperties'
 import removeItem from './removeItem'
 import sample from './sample'
@@ -20,6 +21,7 @@ export {
   isNonEmptyString,
   isNumberGreaterThanZero,
   isPowerOf2,
+  isString,
   maxOf,
   parseCssStyledProperties,
   removeItem,
