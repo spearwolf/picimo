@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const path = require('path')
+const fs = require('fs')
 const colors = require('colors')
 const shelljs = require('shelljs')
 const program = require('commander')
@@ -109,13 +110,25 @@ function appendModuleExports (filepath, apiExportsFile, silent) {
       console.log()
       console.log(colors.bold.blue('Append ES6 module exports:'), apiExportsFile, '->', filepath)
     }
-    const cmd = `cat ${apiExportsFile} >> ${filepath}`
-    shelljs.exec(cmd, { silent }, (code, stdout, stderr) => {
-      if (code) {
-        if (silent) err(code, `append-es6-module-exports`, stderr)
-        return reject(stderr)
+    const enc = { encoding: 'utf8' }
+    fs.readFile(filepath, enc, (err, a) => {
+      if (err) {
+        if (silent) err(err, `append-es6-module-exports: load source`)
+        return reject(new Error('could not load source file'))
       }
-      resolve()
+      fs.readFile(apiExportsFile, enc, (err, b) => {
+        if (err) {
+          if (silent) err(err, `append-es6-module-exports: load api-exports`)
+          return reject(new Error('could not load api-exports file'))
+        }
+        fs.writeFile(filepath, `${a}\n${b}`, enc, err => {
+          if (err) {
+            if (silent) err(err, `append-es6-module-exports: write source`)
+            return reject(new Error('could not write source file'))
+          }
+          resolve()
+        })
+      })
     })
   })
 }

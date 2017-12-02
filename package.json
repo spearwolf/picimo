@@ -16,7 +16,7 @@
     "testrunner:headless": "mocha-headless-chrome --file http://localhost:9090 --visible",
     "build:libs": "node scripts/build-libs.js",
     "build": "run-p clean build:libs",
-    "clean": "rm -fr dist/*",
+    "clean": "shx rm -fr dist/*",
     "esdoc": "esdoc",
     "examples:build": "webpack --config config/webpack.examples.config.js",
     "examples": "webpack-dev-server --hot --inline --watch --config config/webpack.examples.config.js",
@@ -76,6 +76,7 @@
     "document-register-element": "^1.7.0",
     "gl-matrix": "^2.4.0",
     "lodash": "^4.17.4",
+    "shx": "^0.2.2",
     "tinycolor2": "^1.4.1",
     "uuid": "^3.1.0",
     "whatwg-fetch": "^2.0.3"
