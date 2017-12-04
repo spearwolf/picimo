@@ -22,7 +22,7 @@
   <blitpunk-texture-atlas id="atlas0" src="lab-walls-tiles.json" nearest></blitpunk-texture-atlas>
 
   <blitpunk-canvas id="c0" alpha clear="color: rgba(0, 128, 64, .5)" projection="sizeFit: contain; desiredWidth: 300; desiredHeight: 200">
-    <blitpunk-sprite-group id="sprites0" descriptor="simple" capacity="100" vertex-shader="simple" fragment-shader="simple" primitive="TRIANGLES" texture-map="tex: #atlas0" vo-new="scale: 1; opacity: 1"></blitpunk-sprite-group>
+    <blitpunk-sprite-group id="sprites0" vo-descriptor="simple" vo-capacity="100" vertex-shader="simple" fragment-shader="simple" primitive-type="TRIANGLES" texture-map="tex: #atlas0" vo-new="scale: 1; opacity: 1"></blitpunk-sprite-group>
     <blitpunk-entity hello="atlas: texture(#atlas0); spriteGroup: spriteGroup(#sprites0)"></blitpunk-entity>
   </blitpunk-canvas>
 

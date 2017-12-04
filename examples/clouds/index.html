@@ -30,13 +30,13 @@
       <blitpunk-texture-atlas id="cloudsAtlas" src="clouds.json" nearest></blitpunk-texture-atlas>
       <blitpunk-sprite-group
         id="cloudsSprites"
-        descriptor="simple"
-        capacity="100"
+        vo-descriptor="simple"
+        vo-capacity="100"
+        vo-new="scale: 1; opacity: 1"
         vertex-shader="simple"
         fragment-shader="simple"
-        primitive="TRIANGLES"
+        primitive-type="TRIANGLES"
         texture-map="tex: #cloudsAtlas"
-        vo-new="scale: 1; opacity: 1"
         blend="sfactor: srcAlpha; dfactor: oneMinusSrcAlpha"
         ></blitpunk-sprite-group>
     </blitpunk-canvas>
