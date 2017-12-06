@@ -32,6 +32,10 @@ export default class TextureLibrary {
     return atlas
   }
 
+  getTexture (id) {
+    return this.states.get(id)
+  }
+
   getTextureAtlas (id) {
     return this.states.get(id).atlas
   }

@@ -3,7 +3,6 @@ import { removeItem } from 'blitpunk/utils'
 import { ComponentRegistry } from 'blitpunk/ecs'
 import entityManager from 'blitpunk/entityManager'
 import rootComponentRegistry from 'blitpunk/componentRegistry'
-import { debug } from 'common/log'
 
 export default class EntityElement extends HTMLElement {
   /** @ignore */
@@ -17,8 +16,6 @@ export default class EntityElement extends HTMLElement {
       _entityManager: { value: null, writable: true },
       _entity: { value: null, writable: true }
     })
-
-    // debug('[entity] constructor, self=', self)
 
     return self
   }
@@ -93,12 +90,12 @@ export default class EntityElement extends HTMLElement {
   }
 
   /** @private */
-  connectedCallback () {
-    debug('[entity] connectedCallback()', this)
-  }
+  // connectedCallback () {
+    // debug('[entity] connectedCallback()', this)
+  // }
 
   /** @private */
-  disconnectedCallback () {
-    debug('[entity] disconnectedCallback()', this)
-  }
+  // disconnectedCallback () {
+    // debug('[entity] disconnectedCallback()', this)
+  // }
 }

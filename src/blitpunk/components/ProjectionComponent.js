@@ -1,7 +1,6 @@
 import { Projection } from 'blitpunk/core'
+import { PRIO_RF_PROJECTION } from 'blitpunk/priorities'
 import { debug } from 'common/log'
-
-import { COMPONENT_PRIORITY_PROJECTION } from './constants'
 
 export default class ProjectionComponent {
   constructor (entity, data) {
@@ -19,7 +18,7 @@ export default class ProjectionComponent {
   }
 
   connectedEntity (entity) {
-    this._renderFrameId = entity.on('renderFrame', COMPONENT_PRIORITY_PROJECTION, this.renderFrame.bind(this))
+    this._renderFrameId = entity.on('renderFrame', PRIO_RF_PROJECTION, this.renderFrame.bind(this))
   }
 
   disconnectedEntity (entity) {

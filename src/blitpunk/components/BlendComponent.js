@@ -2,9 +2,9 @@ import { BlendMode } from 'blitpunk/core'
 import { debug } from 'common/log'
 
 import {
-  COMPONENT_PRIORITY_BLEND,
-  COMPONENT_PRIORITY_POST_BLEND
-} from './constants'
+  PRIO_RF_BLEND,
+  PRIO_PRF_BEND
+} from 'blitpunk/priorities'
 
 const getOnlyIfString = value => typeof value === 'string' ? value : undefined
 
@@ -30,8 +30,8 @@ export default class BlendComponent {
   }
 
   connectedEntity (entity) {
-    this._renderFrameId = entity.on('renderFrame', COMPONENT_PRIORITY_BLEND, this.renderFrame.bind(this))
-    this._postRenderFrameId = entity.on('postRenderFrame', COMPONENT_PRIORITY_POST_BLEND, this.postRenderFrame.bind(this))
+    this._renderFrameId = entity.on('renderFrame', PRIO_RF_BLEND, this.renderFrame.bind(this))
+    this._postRenderFrameId = entity.on('postRenderFrame', PRIO_PRF_BEND, this.postRenderFrame.bind(this))
   }
 
   disconnectedEntity (entity) {
