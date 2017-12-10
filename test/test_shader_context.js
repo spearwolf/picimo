@@ -1,15 +1,15 @@
 /* eslint-env mocha */
 import assert from 'assert'
-import ShaderContext from 'blitpunk/core/shader_context'
-import ShaderVariable from 'blitpunk/core/shader_variable'
-import ShaderVariableAlias from 'blitpunk/core/shader_variable_alias'
-import ShaderVariableGroup from 'blitpunk/core/shader_variable_group'
-import ShaderVariableBufferGroup from 'blitpunk/core/shader_variable_buffer_group'
-import ShaderUniformVariable from 'blitpunk/core/shader_uniform_variable'
-import ShaderAttribVariable from 'blitpunk/core/shader_attrib_variable'
-import ShaderTexture2dVariable from 'blitpunk/core/shader_texture_2d_variable'
-import VODescriptor from 'blitpunk/core/v_o_descriptor'
-import VOPool from 'blitpunk/core/v_o_pool'
+import ShaderContext from 'picimo/core/shader_context'
+import ShaderVariable from 'picimo/core/shader_variable'
+import ShaderVariableAlias from 'picimo/core/shader_variable_alias'
+import ShaderVariableGroup from 'picimo/core/shader_variable_group'
+import ShaderVariableBufferGroup from 'picimo/core/shader_variable_buffer_group'
+import ShaderUniformVariable from 'picimo/core/shader_uniform_variable'
+import ShaderAttribVariable from 'picimo/core/shader_attrib_variable'
+import ShaderTexture2dVariable from 'picimo/core/shader_texture_2d_variable'
+import VODescriptor from 'picimo/core/v_o_descriptor'
+import VOPool from 'picimo/core/v_o_pool'
 
 describe('ShaderContext', () => {
   describe('new ShaderContext', () => {

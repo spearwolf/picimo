@@ -1,2 +1,2 @@
-import './blitpunk_global_var'
-import './blitpunk_initialize'
+import './picimo_global_var'
+import './picimo_initialize'

@@ -1,4 +1,4 @@
-/* global BLITPUNK_ENV */
+/* global PICIMO_ENV */
 
 const log = typeof console !== 'undefined' ? (
   typeof console.debug === 'function'
@@ -14,7 +14,7 @@ const error = typeof console !== 'undefined' ? (
   : (...args) => console.log(...args)
 ) : () => 1
 
-const debug = BLITPUNK_ENV === 'development' && typeof console !== 'undefined' ? (
+const debug = PICIMO_ENV === 'development' && typeof console !== 'undefined' ? (
   typeof console.debug === 'function'
   ? (...args) => console.debug(...args)
   : (...args) => console.log(...args)

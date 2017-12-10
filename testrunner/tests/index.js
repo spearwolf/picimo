@@ -1,2 +1,2 @@
-import './blitpunk_canvas_element'
-import './blitpunk_entity_element'
+import './picimo_canvas_element'
+import './picimo_entity_element'

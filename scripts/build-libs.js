@@ -17,17 +17,17 @@ const ES6_MODULE = 'es6-module'
 VARIANTS.push(/* should be always the last --> */BOOTSTRAP)
 
 const OUTPUT = {
-  [ES6_MODULE]: 'dist/blitpunk.mjs',
-  [`${ES6_MODULE}-dev`]: 'dist/dev/blitpunk-dev.mjs',
-  modern: '.build/prod/blitpunk-modern.js',
-  safari: '.build/prod/blitpunk-safari.js',
-  legacy: '.build/prod/blitpunk-legacy.js',
-  bootstrap: 'dist/blitpunk.js'
+  [ES6_MODULE]: 'dist/picimo.mjs',
+  [`${ES6_MODULE}-dev`]: 'dist/dev/picimo-dev.mjs',
+  modern: '.build/prod/picimo-modern.js',
+  safari: '.build/prod/picimo-safari.js',
+  legacy: '.build/prod/picimo-legacy.js',
+  bootstrap: 'dist/picimo.js'
 }
 
 const PROJECT_DIR = path.join(__dirname, '..')
 
-const API_MODULE_EXPORTS = path.join(PROJECT_DIR, 'src', 'blitpunk', 'api.mjs')
+const API_MODULE_EXPORTS = path.join(PROJECT_DIR, 'src', 'picimo', 'api.mjs')
 
 const WEBPACK = path.join(PROJECT_DIR, 'node_modules', '.bin', 'webpack')
 const UGLIFYJS = path.join(PROJECT_DIR, 'node_modules', '.bin', 'uglifyjs')
@@ -64,7 +64,7 @@ function build (variant, dev, silent) {
     if (!silent) {
       banner('Building library variant:', colors.bold.red(variant), colors.bold(dev ? '(development)' : '(production)'))
     }
-    let cmd = `${WEBPACK} --config ${PROJECT_DIR}/config/webpack.blitpunk/${dev ? 'dev.' : ''}${variant}.config.js`
+    let cmd = `${WEBPACK} --config ${PROJECT_DIR}/config/webpack.picimo/${dev ? 'dev.' : ''}${variant}.config.js`
     if (silent) cmd += ' --display none'
     shelljs.exec(cmd, { silent }, (code, stdout, stderr) => {
       if (code) {

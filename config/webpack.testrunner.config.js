@@ -20,7 +20,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      BLITPUNK_ENV: JSON.stringify('development')
+      PICIMO_ENV: JSON.stringify('development')
     })
   ],
   devServer: createDevServer({ port: 9090, contentBase: TESTRUNNER_DIR }),

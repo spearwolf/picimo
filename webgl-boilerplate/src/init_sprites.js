@@ -1,5 +1,5 @@
-import VODescriptor from 'blitpunk/core/v_o_descriptor'
-import VOPool from 'blitpunk/core/v_o_pool'
+import VODescriptor from 'picimo/core/v_o_descriptor'
+import VOPool from 'picimo/core/v_o_pool'
 
 export default function () {
   const voDescriptor = new VODescriptor({

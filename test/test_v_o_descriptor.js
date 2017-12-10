@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 import assert from 'assert'
-import VODescriptor from 'blitpunk/core/v_o_descriptor'
-import VOArray from 'blitpunk/core/v_o_array'
+import VODescriptor from 'picimo/core/v_o_descriptor'
+import VOArray from 'picimo/core/v_o_array'
 import { assertProperties, assertVOAttrDescriptor } from './utils'
 
 describe('VODescriptor', () => {

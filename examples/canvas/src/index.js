@@ -1,4 +1,4 @@
-import initialize, { log, registerComponent } from 'blitpunk'
+import initialize, { log, registerComponent } from 'picimo'
 initialize()
 
 const logOnceOnly = log.logOnceOnly()

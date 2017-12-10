@@ -1,4 +1,4 @@
-/* global BLITPUNK */
+/* global PICIMO */
 let cloudFrameNames
 let lastCloudFrame
 
@@ -9,7 +9,7 @@ export default function randomCloudFrame (atlas) {
   }
   let frameName
   do {
-    frameName = BLITPUNK.utils.sample(cloudFrameNames)
+    frameName = PICIMO.utils.sample(cloudFrameNames)
   } while (frameName === lastCloudFrame)
   lastCloudFrame = frameName
   return atlas.getFrame(frameName)

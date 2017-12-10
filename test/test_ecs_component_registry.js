@@ -2,8 +2,8 @@
 /* eslint no-unused-expressions: 0 */
 import { expect } from 'chai'
 import sinon from 'sinon'
-import ComponentRegistry from 'blitpunk/ecs/component_registry'
-import EntityManager from 'blitpunk/ecs/entity_manager'
+import ComponentRegistry from 'picimo/ecs/component_registry'
+import EntityManager from 'picimo/ecs/entity_manager'
 
 describe('ComponentRegistry', () => {
   it('should be instanceable', () => {

@@ -18,7 +18,7 @@ const EXAMPLES = _.compact(glob.sync(path.resolve(EXAMPLES_DIR) + '/*/').map(dir
   }
 })).filter(name => name !== 'js')
 
-console.log(`Serving blitpunk examples {\n${EXAMPLES.map(example => `  ${example}`).join('\n')}\n}`)
+console.log(`Serving picimo examples {\n${EXAMPLES.map(example => `  ${example}`).join('\n')}\n}`)
 
 const template = fs.readFileSync(path.resolve(EXAMPLES_DIR, 'index.ejs.html'), 'utf8')
 const html = ejs.render(template, { examples: EXAMPLES })
@@ -39,7 +39,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      BLITPUNK_ENV: JSON.stringify('development')
+      PICIMO_ENV: JSON.stringify('development')
     })
   ],
   module: {

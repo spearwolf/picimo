@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 import { expect } from 'chai'
-import VODescriptor from 'blitpunk/core/v_o_descriptor'
-import createVoPropsSetter from 'blitpunk/utils/createVoPropsSetter.js'
+import VODescriptor from 'picimo/core/v_o_descriptor'
+import createVoPropsSetter from 'picimo/utils/createVoPropsSetter.js'
 
 describe('createVoPropsSetter()', () => {
   let descriptor

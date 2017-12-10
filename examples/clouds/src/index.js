@@ -1,4 +1,4 @@
-/* global BLITPUNK */
+/* global PICIMO */
 import Clouds from './Clouds.js'
 
 const LOGO_URL = 'spw-mini-logo.png'
@@ -20,6 +20,6 @@ async function init (el) {
   el.entity.on('renderFrame', clouds)
 }
 
-BLITPUNK.initialize().then(() => {
+PICIMO.initialize().then(() => {
   init(document.querySelector('#cloudsSprites'))
 })

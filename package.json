@@ -1,12 +1,12 @@
 {
-  "name": "@spearwolf/blitpunk",
+  "name": "@spearwolf/picimo",
   "description": "todo",
   "version": "0.0.9",
   "author": "Wolfger Schramm",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/spearwolf/blitpunk.git"
+    "url": "git+https://github.com/spearwolf/picimo.git"
   },
   "scripts": {
     "boilerplate:build": "webpack --config config/webpack.webgl-boilerplate.config.js",

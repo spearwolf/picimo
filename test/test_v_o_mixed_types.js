@@ -1,6 +1,6 @@
 /* eslint-env mocha */
 import assert from 'assert'
-import VODescriptor from 'blitpunk/core/v_o_descriptor'
+import VODescriptor from 'picimo/core/v_o_descriptor'
 
 describe('VODescriptor with mixed element types', () => {
   const descriptor = new VODescriptor({

@@ -1,4 +1,4 @@
-/* global BLITPUNK_ENV */
+/* global PICIMO_ENV */
 import detectCustomElements from './detectCustomElements'
 import detectJavascriptVariant from './detectJavascriptVariant'
 import log from '../common/log'
@@ -6,7 +6,7 @@ import log from '../common/log'
 const javascriptVariant = detectJavascriptVariant()
 const needsCustomElementsPolyfill = !detectCustomElements()
 
-log(`blitpunk bootstrap (${BLITPUNK_ENV})`, 'javascriptVariant=', javascriptVariant, 'needsCustomElementsPolyfill=', needsCustomElementsPolyfill)
+log(`picimo bootstrap (${PICIMO_ENV})`, 'javascriptVariant=', javascriptVariant, 'needsCustomElementsPolyfill=', needsCustomElementsPolyfill)
 
 const loadPolyfills = needsCustomElementsPolyfill
   ? import(
@@ -17,8 +17,8 @@ const loadPolyfills = needsCustomElementsPolyfill
     })
   : Promise.resolve()
 
-const loadApi = () => require('./loadBlitpunk').default(javascriptVariant).then(({ default: initialize }) => initialize()).then((api) => {
-  const globalApi = global && global.BLITPUNK
+const loadApi = () => require('./loadPicimo').default(javascriptVariant).then(({ default: initialize }) => initialize()).then((api) => {
+  const globalApi = global && global.PICIMO
   if (globalApi) {
     Object.assign(globalApi, api)
     globalApi.initialize = () => Promise.resolve(globalApi)

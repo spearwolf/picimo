@@ -3,7 +3,7 @@
 // import eventize from '@spearwolf/eventize'
 import { expect } from 'chai'
 import sinon from 'sinon'
-import Entity from 'blitpunk/ecs/entity'
+import Entity from 'picimo/ecs/entity'
 
 describe('Entity', () => {
   it('should be instanceable', () => {

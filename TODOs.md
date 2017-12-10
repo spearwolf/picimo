@@ -1,16 +1,16 @@
-# &lt;blitpunk/&gt; Backlog
+# &lt;picimo/&gt; Backlog
 
 HTML Element API
 ----------------
 
 - [ ] Render to texture ..
-  - [ ] `<blitpunk-picture/>` acts as single sprite renderer, support boilerplate example (background)
+  - [ ] `<pi-picture/>` acts as single sprite renderer, support boilerplate example (background)
     - [ ] support boilerplate example (background shader)
     - [ ] support free styles buffers .. single quads, mesh, ..
     - [ ] extract `SpriteGroupElement->syncTextureMap()` into a `TextureMapComponent`
-  - [ ] `<blitpunk-texture/>` acts as single texture source (similary to texture-atlas)
-  - [ ] `<blitpunk-render-to-texture/>` acts as texture source and scene
-- [ ] `<blitpunk-canvas/>` should have a default projection
+  - [ ] `<picimo-texture/>` acts as single texture source (similary to texture-atlas)
+  - [ ] `<picimo-render-to-texture/>` acts as texture source and scene
+- [ ] `<pi-canvas/>` should have a default projection
 - [ ] projection= perspective support (distance, near, far), choose sensible defaults
   - [x] main work is done :smile:
   - [x] fix core/projection.js -> updateOrtho()
@@ -21,9 +21,9 @@ HTML Element API
 - [ ] transform= component .. camera?
 - [ ] disconnectedCallback, free (glx) resources
   - [ ] support/verify html element insertions and deletions (appendChild, removeChild)
-- [x] `<blitpunk-sprite-group/>`
+- [x] `<pi-sprite-group/>`
   - [ ] add support for all options from [src/core/SpriteGroup](src/core/sprite_group.js)
-- [ ] texture component (blitpunk-texture, render-to-texture, canvas, video...)
+- [ ] texture component (picimo-texture, render-to-texture, canvas, video...)
 
 Release
 -------
@@ -34,7 +34,7 @@ Release
   - [ ] parallax endless (runner, scrolling)
   - [ ] dungeon-demo?
   - [ ] react integration (pong game?)
-- [ ] blitpunk website setup
+- [ ] picimo website setup
   - [ ] welcome page
   - [ ] examples
   - [ ] quickstart docs
@@ -56,15 +56,15 @@ Release
 Next Release
 ------------
 
-- [ ] tilemaps support `<blitpunk-tilemap .. />`
-- [ ] spine support `<blitpunk-spine-loader .. />`
+- [ ] tilemaps support `<picimo-tilemap .. />`
+- [ ] spine support `<picimo-spine-loader .. />`
 
 Think about
 -----------
 
 - [ ] "create an app" -> how to compile js,css,images,etc..to one single html (webpack?)
   - [ ] include js,assets updates from server..
-- [ ] quick boostrap tool `blitpunk-cli`
+- [ ] quick boostrap tool `picimo-cli`
 
 Browser Support
 ---------------
@@ -92,10 +92,10 @@ Usage Examples
 (example is _partially outdated_, please look into [examples/](examples/))
 
 ```html
-  <blitpunk-canvas>
-    <blitpunk-texture-atlas id="tex1" src="atlas-url"/>
-    <blitpunk-scene render-to-texture="my-texture">
-      <blitpunk-sprite-group
+  <pi-canvas>
+    <pi-texture-atlas id="tex1" src="atlas-url"/>
+    <picimo-scene render-to-texture="my-texture">
+      <pi-sprite-group
         id="my-sprites"
         descriptor="simple"
         capacity="100"
@@ -104,10 +104,10 @@ Usage Examples
         primitive="TRIANGLES"
         texture-map="tex: tex1"
         vo-new="scale: 1; opacity: 1" />
-    </blitpunk-scene>
-    <blitpunk-scene>
-      <blitpunk-picture texture="my-texture" size-fit="cover" />
-    </blitpunk-scene>
-  </blitpunk-canvas>
+    </picimo-scene>
+    <picimo-scene>
+      <pi-picture texture="my-texture" size-fit="cover" />
+    </picimo-scene>
+  </pi-canvas>
 ```
 

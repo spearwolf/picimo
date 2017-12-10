@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>blitpunk boilerplate</title>
+    <title>picimo boilerplate</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <style>
       html, body {
@@ -16,19 +16,19 @@
         justify-content: center;
         overflow: hidden;
       }
-      #blitpunk {
+      #picimo {
         width: 100vw;
         height: 100vh;
       }
     </style>
-    <script src="blitpunk.js"></script>
+    <script src="picimo.js"></script>
   </head>
   <body>
-    <blitpunk-canvas id="blitpunk" alpha premultiplied-alpha
+    <pi-canvas id="picimo" alpha premultiplied-alpha
       projection="sizeFit: contain; desiredWidth: 600; desiredHeight: 600; perspective: 100"
       >
-      <blitpunk-texture-atlas id="cloudsAtlas" src="clouds.json" nearest></blitpunk-texture-atlas>
-      <blitpunk-sprite-group
+      <pi-texture-atlas id="cloudsAtlas" src="clouds.json" nearest></pi-texture-atlas>
+      <pi-sprite-group
         id="cloudsSprites"
         vo-descriptor="simple"
         vo-capacity="100"
@@ -38,8 +38,8 @@
         primitive-type="TRIANGLES"
         texture-map="tex: #cloudsAtlas"
         blend="sfactor: srcAlpha; dfactor: oneMinusSrcAlpha"
-        ></blitpunk-sprite-group>
-    </blitpunk-canvas>
+        ></pi-sprite-group>
+    </pi-canvas>
     <script src="bundle.js"></script>
   </body>
 </html>

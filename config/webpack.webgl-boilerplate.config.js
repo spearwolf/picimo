@@ -18,7 +18,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      BLITPUNK_ENV: JSON.stringify('development')
+      PICIMO_ENV: JSON.stringify('development')
     })
   ],
   resolve: {

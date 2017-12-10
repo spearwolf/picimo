@@ -1,29 +1,29 @@
-import initializeBlitpunk, {
+import initializePicimo, {
   resourceLibrary,
   textureLibrary
-} from 'blitpunk'
+} from 'picimo'
 
-import ShaderSource from 'blitpunk/core/shader_source'
-import ShaderProgram from 'blitpunk/core/shader_program'
-import ShaderUniformVariable from 'blitpunk/core/shader_uniform_variable'
-import ShaderVariableBufferGroup from 'blitpunk/core/shader_variable_buffer_group'
-import ShaderTextureGroup from 'blitpunk/core/shader_texture_group'
+import ShaderSource from 'picimo/core/shader_source'
+import ShaderProgram from 'picimo/core/shader_program'
+import ShaderUniformVariable from 'picimo/core/shader_uniform_variable'
+import ShaderVariableBufferGroup from 'picimo/core/shader_variable_buffer_group'
+import ShaderTextureGroup from 'picimo/core/shader_texture_group'
 
-import Projection from 'blitpunk/core/projection'
+import Projection from 'picimo/core/projection'
 
-import PowerOf2Image from 'blitpunk/core/power_of_2_image'
-import ElementIndexArray from 'blitpunk/core/element_index_array'
+import PowerOf2Image from 'picimo/core/power_of_2_image'
+import ElementIndexArray from 'picimo/core/element_index_array'
 
 import initSprites from './init_sprites'
 import initQuads from './init_quads'
 
 // ----- init ---------
 
-initializeBlitpunk()
+initializePicimo()
 
 window.PowerOf2Image = PowerOf2Image
 
-const el = document.getElementById('blitpunkCanvas')
+const el = document.getElementById('picimoCanvas')
 
 const timeUniform = new ShaderUniformVariable('time')
 const resolutionUniform = new ShaderUniformVariable('resolution')

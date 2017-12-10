@@ -1,9 +1,9 @@
 /* eslint-env mocha */
 import assert from 'assert'
-import ShaderVariable from 'blitpunk/core/shader_variable'
-import ShaderUniformVariable from 'blitpunk/core/shader_uniform_variable'
-import ShaderAttribVariable from 'blitpunk/core/shader_attrib_variable'
-import ShaderTexture2dVariable from 'blitpunk/core/shader_texture_2d_variable'
+import ShaderVariable from 'picimo/core/shader_variable'
+import ShaderUniformVariable from 'picimo/core/shader_uniform_variable'
+import ShaderAttribVariable from 'picimo/core/shader_attrib_variable'
+import ShaderTexture2dVariable from 'picimo/core/shader_texture_2d_variable'
 
 describe('ShaderVariable', () => {
   it('new ShaderVariable() without value', () => {

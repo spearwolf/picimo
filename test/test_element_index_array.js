@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 import assert from 'assert'
-import ElementIndexArray from 'blitpunk/core/element_index_array'
-import ResourceRef from 'blitpunk/utils/resource_ref'
+import ElementIndexArray from 'picimo/core/element_index_array'
+import ResourceRef from 'picimo/utils/resource_ref'
 
 describe('ElementIndexArray', () => {
   it('Generate(10x quad indices)', () => {
