@@ -13,6 +13,6 @@
 
 *WORK IN PROGRESS*
 
-but your are welcome and don't hesitate if you want to be an early adopter :wink:
+> but your are welcome and don't hesitate if you want to be an early adopter and see all the magic of webgl based sprite and shader programming with custom elements :wink:
 
 see [examples/](examples/) to get an idea
