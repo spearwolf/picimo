@@ -4,7 +4,7 @@
 
 `blitpunk` is an upgrade to [spearwolf/picimo](https://github.com/spearwolf/picimo) that features a rewritten core to improve the overall developer experience including *custom elements* support.
 
-`blitpunk` is a _working title_ and may disappear again in favor of `picimo`.
+`blitpunk` is a _working title_ and may disappear again in favor of using `picimo` as name.
 
 
 ![picimo](assets/picimo-nobingers.png)
