@@ -18,11 +18,11 @@ export default class ProjectionComponent {
   }
 
   connectedEntity (entity) {
-    this._renderFrameId = entity.on('renderFrame', PRIO_RF_PROJECTION, this.renderFrame.bind(this))
+    entity.on('renderFrame', PRIO_RF_PROJECTION, this)
   }
 
   disconnectedEntity (entity) {
-    if (this._renderFrameId) entity.off(this._renderFrameId)
+    entity.off(this)
   }
 
   renderFrame (renderer, canvas) {

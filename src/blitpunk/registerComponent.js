@@ -45,9 +45,7 @@ const createDisconnectedEntity = component => {
   Object.defineProperty(component, '_disconnectedEntity', { value: component.disconnectedEntity })
 
   component.disconnectedEntity = (entity) => {
-    if (component._entitySubscriberId) {
-      entity.off(component._entitySubscriberId)
-    }
+    entity.off(component)
 
     if (component._disconnectedEntity) {
       component._disconnectedEntity(entity)
@@ -66,9 +64,7 @@ const verifyComponentCreated = (name, component) => () => {
       component.create()
     }
 
-    Object.defineProperty(component, '_entitySubscriberId', {
-      value: component.entity.on('*', component)
-    })
+    component.entity.on(component)  // TODO add configurable event-list filter?
   }
 }
 

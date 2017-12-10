@@ -28,10 +28,10 @@
     "test": "run-s lint:js karma"
   },
   "devDependencies": {
-    "autoprefixer": "^7.1.4",
+    "autoprefixer": "^7.2.1",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
-    "babel-eslint": "^8.0.0",
+    "babel-eslint": "^8.0.3",
     "babel-loader": "^7.1.2",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-polyfill": "^6.26.0",
@@ -40,7 +40,7 @@
     "bowser": "^1.7.3",
     "chai": "^4.1.2",
     "colors": "^1.1.2",
-    "commander": "^2.11.0",
+    "commander": "^2.12.2",
     "css-loader": "^0.28.7",
     "ejs": "^2.5.7",
     "esdoc": "^1.0.3",
@@ -59,7 +59,7 @@
     "node-sass": "^4.5.3",
     "npm-run-all": "^4.1.1",
     "postcss-import": "^11.0.0",
-    "postcss-loader": "^2.0.6",
+    "postcss-loader": "^2.0.9",
     "sass-loader": "^6.0.6",
     "serve": "^6.1.0",
     "shelljs": "^0.7.8",
@@ -67,12 +67,12 @@
     "standard": "^10.0.3",
     "style-loader": "^0.19.0",
     "terminal-kit": "^1.13.11",
-    "uglify-es": "^3.1.2",
-    "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.8.2"
+    "uglify-es": "^3.2.1",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.5"
   },
   "dependencies": {
-    "@spearwolf/eventize": "github:spearwolf/eventize",
+    "@spearwolf/eventize": "^0.6.2",
     "document-register-element": "^1.7.0",
     "gl-matrix": "^2.4.0",
     "lodash": "^4.17.4",

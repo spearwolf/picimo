@@ -3,7 +3,7 @@ import { debug } from 'common/log'
 
 import {
   PRIO_RF_BLEND,
-  PRIO_PRF_BEND
+  PRIO_PRF_BLEND
 } from 'blitpunk/priorities'
 
 const getOnlyIfString = value => typeof value === 'string' ? value : undefined
@@ -30,13 +30,12 @@ export default class BlendComponent {
   }
 
   connectedEntity (entity) {
-    this._renderFrameId = entity.on('renderFrame', PRIO_RF_BLEND, this.renderFrame.bind(this))
-    this._postRenderFrameId = entity.on('postRenderFrame', PRIO_PRF_BEND, this.postRenderFrame.bind(this))
+    entity.on('renderFrame', PRIO_RF_BLEND, this)
+    entity.on('postRenderFrame', PRIO_PRF_BLEND, this)
   }
 
   disconnectedEntity (entity) {
-    if (this._renderFrameId) entity.off(this._renderFrameId)
-    if (this._postRenderFrameId) entity.off(this._postRenderFrameId)
+    entity.off(this)
   }
 
   renderFrame (renderer) {

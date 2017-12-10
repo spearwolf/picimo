@@ -1,6 +1,5 @@
+import eventize from '@spearwolf/eventize'
 import generateUUID from '../utils/generate_uuid'
-
-const eventize = require('@spearwolf/eventize')
 
 const destroyAllComponents = (entity) => {
   for (const name of entity.registries.keys()) {

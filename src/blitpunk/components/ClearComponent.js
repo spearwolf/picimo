@@ -59,11 +59,11 @@ export default class ClearComponent {
   }
 
   connectedEntity (entity) {
-    this._renderFrameId = entity.on('renderFrame', PRIO_RF_CLEAR, this.renderFrame.bind(this))
+    entity.on('renderFrame', PRIO_RF_CLEAR, this)
   }
 
   disconnectedEntity (entity) {
-    if (this._renderFrameId) entity.off(this._renderFrameId)
+    entity.off(this)
   }
 
   renderFrame (renderer) {

@@ -51,7 +51,7 @@ Release
     - [x] polyfills for URL, fetch, ..
 - [x] multi-threaded builds (build-libs.js)
 - [x] support native javascript modules
-- [ ] upgrade to new eventize api (npm package)
+- [x] upgrade to new eventize api (npm package)
 
 Next Release
 ------------

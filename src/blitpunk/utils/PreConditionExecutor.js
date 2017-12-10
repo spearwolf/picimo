@@ -1,4 +1,4 @@
-const eventize = require('@spearwolf/eventize')
+import eventize from '@spearwolf/eventize'
 
 export default class PreConditionExecutor {
   constructor (client, observeAttributes) {
