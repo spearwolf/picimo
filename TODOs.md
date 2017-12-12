@@ -19,11 +19,14 @@ HTML Element API
   - [ ] near/far
   - [ ] pixelRatio support
 - [ ] transform= component .. camera?
-- [ ] disconnectedCallback, free (glx) resources
-  - [ ] support/verify html element insertions and deletions (appendChild, removeChild)
 - [x] `<pi-sprite-group/>`
   - [ ] add support for all options from [src/core/SpriteGroup](src/core/sprite_group.js)
 - [ ] texture component (picimo-texture, render-to-texture, canvas, video...)
+- [ ] destroy
+  - [ ] free gl resources
+  - [ ] auto-remove unused gl resources
+  - [ ] disconnectedCallback
+  - [ ] support/verify html element insertions and deletions (appendChild, removeChild)
 
 Release
 -------
