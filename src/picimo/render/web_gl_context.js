@@ -1,10 +1,11 @@
+import { definePublicPropertiesRO, destroy } from 'picimo/utils'
+
 import WebGlResourceLibrary from './web_gl_resource_library'
 import WebGlTextureManager from './web_gl_texture_manager'
-import destroy from '../utils/destroy'
 
 export default class WebGlContext {
   constructor (gl) {
-    Object.defineProperty(this, 'gl', { value: gl })
+    definePublicPropertiesRO(this, { gl })
 
     initialize(this)
 
@@ -26,7 +27,6 @@ export default class WebGlContext {
 
   destroy () {
     this.textureManager.destroy()
-    this.boundBuffers.clear()
     this.resourceLibrary.destroy()
     destroy(this)
   }

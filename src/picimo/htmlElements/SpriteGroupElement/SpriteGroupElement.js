@@ -1,8 +1,15 @@
 import { textureLibrary, resourceLibrary } from 'picimo'
-import { createVoPropsSetter, isNonEmptyString, isNumberGreaterThanZero, isString } from 'picimo/utils'
 import { PRIO_RF_SPRITE_GROUP, PRIO_PRF_SPRITE_GROUP } from 'picimo/priorities'
 import SpriteGroup from 'picimo/core/sprite_group'
 import { debug } from 'common/log'
+import {
+  createVoPropsSetter,
+  defineHiddenPropertyRW,
+  defineHiddenPropertiesRW,
+  isNonEmptyString,
+  isNumberGreaterThanZero,
+  isString
+} from 'picimo/utils'
 
 import EntityElement from '../EntityElement'
 
@@ -75,14 +82,13 @@ export default class SpriteGroupElement extends EntityElement {
 
     self.spriteGroup = null
     self.spriteGroupPromise = new Promise(resolve => {
-      Object.defineProperty(self, 'resolveSpriteGroupPromise', {
-        value: resolve,
-        writable: true
-      })
+      defineHiddenPropertyRW(self, 'resolveSpriteGroupPromise', resolve)
     })
 
-    Object.defineProperty(self, 'previousTextureMap', { value: null, writable: true })
-    Object.defineProperty(self, '_spriteGroupConfig', { value: null, writable: true })
+    defineHiddenPropertiesRW(self, {
+      previousTextureMap: null,
+      _spriteGroupConfig: null
+    })
 
     self.entity.on('renderFrame', PRIO_RF_SPRITE_GROUP, renderer => renderFrame(self, renderer))
     self.entity.on('postRenderFrame', PRIO_PRF_SPRITE_GROUP, renderer => postRenderFrame(self, renderer))

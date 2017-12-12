@@ -1,7 +1,7 @@
+import { destroy } from 'picimo/utils'
+
 import VODescriptor from './v_o_descriptor'
 import ShaderSource from './shader_source'
-
-import destroy from '../utils/destroy'
 
 export default class ResourceLibrary {
   constructor () {
@@ -11,9 +11,6 @@ export default class ResourceLibrary {
   }
 
   destroy () {
-    this.descriptors.clear()
-    this.vertexShaders.clear()
-    this.fragmentShaders.clear()
     destroy(this)
   }
 

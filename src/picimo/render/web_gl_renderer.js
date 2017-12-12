@@ -1,6 +1,7 @@
 import { Viewport, ShaderContext } from 'picimo/core'
+import { definePublicPropertiesRO, destroy } from 'picimo/utils'
+
 import ClearBuffer from './clear_buffer'
-import destroy from 'picimo/utils/destroy'
 
 const autotouchBuffer = (renderer, resourceRef) => {
   const { resource } = resourceRef
@@ -22,7 +23,7 @@ const applyBlendMode = (renderer) => {
 
 export default class WebGlRenderer {
   constructor (glx) {
-    Object.defineProperty(this, 'glx', { value: glx })
+    definePublicPropertiesRO(this, { glx })
 
     this.shaderContext = new ShaderContext()
     this.autotouchResources = new Map()
@@ -35,8 +36,6 @@ export default class WebGlRenderer {
 
   destroy () {
     this.shaderContext.destroy()
-    this.autotouchResources.clear()
-    this.blendStack.length = 0
     destroy(this)
   }
 

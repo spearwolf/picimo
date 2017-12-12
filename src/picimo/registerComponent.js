@@ -1,10 +1,15 @@
-import componentRegistry from './componentRegistry'
 import {
+  definePublicPropertiesRO,
+  defineHiddenPropertyRO,
+  defineHiddenPropertyRW,
   parseCssStyledProperties,
   isFunction,
   isString
 } from 'picimo/utils'
+
 import { debug } from 'common/log'
+
+import componentRegistry from './componentRegistry'
 
 const deferPropertyValue = (deferFuncName, getValuePromise) => {
   const regex = new RegExp(`${deferFuncName}\\((.*)\\)`)
@@ -42,7 +47,7 @@ const assignProperties = (component, props, verifyCreated) => {
 }
 
 const createDisconnectedEntity = component => {
-  Object.defineProperty(component, '_disconnectedEntity', { value: component.disconnectedEntity })
+  defineHiddenPropertyRO(component, '_disconnectedEntity', component.disconnectedEntity)
 
   component.disconnectedEntity = (entity) => {
     entity.off(component)
@@ -73,16 +78,11 @@ export default (name, ComponentConstructor) => {
     create (entity, data) {
       const component = new ComponentConstructor(entity)
 
-      Object.defineProperties(component, {
-        entity: { value: entity, enumerable: true },
-        el: { value: entity.el, enumerable: true },
-        _isCreated: { value: false, writable: true },
-        _preConditionAttributes: {
-          value: ((ComponentConstructor.preConditionAttributes &&
-            ComponentConstructor.preConditionAttributes()) || []
-          )
-        }
-      })
+      definePublicPropertiesRO(component, { entity, el: entity.el })
+      defineHiddenPropertyRW(component, '_isCreated', false)
+      defineHiddenPropertyRO(component, '_preConditionAttributes', (
+        (ComponentConstructor.preConditionAttributes && ComponentConstructor.preConditionAttributes()) || []
+      ))
 
       createDisconnectedEntity(component)
 

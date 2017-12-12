@@ -1,11 +1,11 @@
-import destroy from '../utils/destroy'
+import { definePublicPropertiesRO, destroy } from 'picimo/utils'
 
 export default class WebGlTextureManager {
   /**
    * @param {WebGlContext} glx
    */
   constructor (glx) {
-    Object.defineProperty(this, 'glx', { value: glx })
+    definePublicPropertiesRO(this, { glx })
 
     /**
      * texUnit -> WebGlTexture
@@ -21,7 +21,6 @@ export default class WebGlTextureManager {
   }
 
   destroy () {
-    this.boundTextures.length = 0
     destroy(this)
   }
 

@@ -1,10 +1,13 @@
-import ResourceRef from '../utils/resource_ref'
+import {
+  ResourceRef,
+  definePublicPropertiesRO,
+  destroy
+} from 'picimo/utils'
+
 import WebGlShader from './web_gl_shader'
 import WebGlProgram from './web_gl_program'
 import WebGlBuffer from './web_gl_buffer'
 import WebGlTexture from './web_gl_texture'
-
-import destroy from '../utils/destroy'
 
 const WEB_GL_BUFFER_USAGE = Object.freeze({
   static: WebGlBuffer.STATIC_DRAW,
@@ -13,7 +16,7 @@ const WEB_GL_BUFFER_USAGE = Object.freeze({
 
 export default class WebGlResourceLibrary {
   constructor (glx) {
-    Object.defineProperty(this, 'glx', { value: glx })
+    definePublicPropertiesRO(this, { glx })
 
     /** @private */
     this.vertexShader = new Map()
@@ -28,11 +31,7 @@ export default class WebGlResourceLibrary {
   }
 
   destroy () {
-    this.texture.clear()
-    this.buffer.clear()
-    this.shaderProgram.clear()
-    this.fragmentShader.clear()
-    this.vertexShader.clear()
+    // TODO free gl resources
     destroy(this)
   }
 

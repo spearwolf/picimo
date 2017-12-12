@@ -1,8 +1,9 @@
+import { destroy } from 'picimo/utils'
+
 import Texture from './texture'
 import TextureState from './texture_state'
 import TextureAtlas from './texture_atlas'
 import ShaderTexture2dVariable from './shader_texture_2d_variable'
-import destroy from '../utils/destroy'
 
 export default class TextureLibrary {
   constructor () {
@@ -11,8 +12,6 @@ export default class TextureLibrary {
   }
 
   destroy () {
-    this.states.clear()
-    this.shaderVars.clear()
     destroy(this)
   }
 
@@ -23,13 +22,13 @@ export default class TextureLibrary {
   }
 
   loadTextureAtlas (id, url = id, textureHints = undefined) {
-    const atlas = TextureAtlas.load(url, null, null, textureHints)
-    const state = new TextureState(atlas.then((atlas) => {
+    const textureAtlas = TextureAtlas.load(url, null, null, textureHints)
+    const state = new TextureState(textureAtlas.then(atlas => {
       state.atlas = atlas
       return atlas.rootTexture
     }))
     this.states.set(id, state)
-    return atlas
+    return textureAtlas
   }
 
   getTexture (id) {

@@ -1,5 +1,5 @@
 import textureLibrary from 'picimo/textureLibrary'
-// import { debug } from 'common/log'
+import { defineHiddenPropertyRW } from 'picimo/utils'
 
 import EntityElement from '../EntityElement'
 import { ATTR_SRC } from '../constants'
@@ -11,9 +11,7 @@ export default class TextureAtlasElement extends EntityElement {
   constructor (_) {
     const self = super(_)
 
-    Object.defineProperties(self, {
-      previousSrc: { value: undefined, writable: true }
-    })
+    defineHiddenPropertyRW(self, 'previousSrc')
 
     /**
      * Die textureHints werden nach dem Laden des TextureAtlas
@@ -31,10 +29,7 @@ export default class TextureAtlasElement extends EntityElement {
      * `loadTextureAtlas()` getriggered.
      */
     self.textureAtlasPromise = new Promise(resolve => {
-      Object.defineProperty(self, 'resolveTextureAtlasPromise', {
-        value: resolve,
-        writable: true
-      })
+      defineHiddenPropertyRW(self, 'resolveTextureAtlasPromise', resolve)
     })
 
     // debug('[texture-atlas] constructor, self=', self)
