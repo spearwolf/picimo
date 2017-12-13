@@ -2,6 +2,9 @@ import ResourceRef from '../utils/resource_ref'
 
 import { BYTES_PER_ELEMENT, TYPED_ARRAY_CONSTRUCTOR } from '../utils/typed_array_helpers'
 
+const STATIC = 'static'
+const DYNAMIC = 'dynamic'
+
 /**
  * Vertex Object Array
  *
@@ -20,7 +23,7 @@ import { BYTES_PER_ELEMENT, TYPED_ARRAY_CONSTRUCTOR } from '../utils/typed_array
  */
 
 export default class VOArray {
-  constructor (descriptor, capacity, data, usage = VOArray.USAGE.DYNAMIC, autotouch = undefined) {
+  constructor (descriptor, capacity, data, usage = DYNAMIC, autotouch = undefined) {
     /** @type {ResourceRef} */
     this.resourceRef = new ResourceRef(this, { usage })
 
@@ -109,7 +112,9 @@ export default class VOArray {
   }
 }
 
-VOArray.USAGE = Object.freeze({
-  STATIC: 'static',
-  DYNAMIC: 'dynamic'
-})
+VOArray.USAGE = Object.freeze({ STATIC, DYNAMIC })  // TODO remove me!
+
+export {
+  STATIC,
+  DYNAMIC
+}

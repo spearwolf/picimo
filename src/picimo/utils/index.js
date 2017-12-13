@@ -1,6 +1,7 @@
 import Mat4 from './mat4'
 import PreConditionExecutor from './PreConditionExecutor'
 import ResourceRef from './resource_ref'
+import StackedContext from './StackedContext'
 import createVoPropsSetter from './createVoPropsSetter'
 import destroy from './destroy'
 import generateUuid from './generate_uuid'
@@ -28,6 +29,7 @@ export {
   Mat4,
   PreConditionExecutor,
   ResourceRef,
+  StackedContext,
   createVoPropsSetter,
   defineHiddenPropertiesRO,
   defineHiddenPropertyRO,

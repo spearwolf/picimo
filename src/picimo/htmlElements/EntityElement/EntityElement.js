@@ -1,5 +1,10 @@
 /* global HTMLElement */
-import { removeItem } from 'picimo/utils'
+import {
+  defineHiddenPropertiesRO,
+  defineHiddenPropertiesRW,
+  removeItem
+} from 'picimo/utils'
+
 import { ComponentRegistry } from 'picimo/ecs'
 import entityManager from 'picimo/entityManager'
 import rootComponentRegistry from 'picimo/componentRegistry'
@@ -9,12 +14,14 @@ export default class EntityElement extends HTMLElement {
   constructor (_) {
     const self = super(_)
 
-    Object.defineProperties(self, {
-      attributeValuesCache: { value: new Map() },
-      attributeNamesCache: { value: [] },
-      _componentRegistry: { value: null, writable: true },
-      _entityManager: { value: null, writable: true },
-      _entity: { value: null, writable: true }
+    defineHiddenPropertiesRO(self, {
+      attributeValuesCache: new Map(),
+      attributeNamesCache: []
+    })
+    defineHiddenPropertiesRW(self, {
+      _componentRegistry: null,
+      _entityManager: null,
+      _entity: null
     })
 
     return self

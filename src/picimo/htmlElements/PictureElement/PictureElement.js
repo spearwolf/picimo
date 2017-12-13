@@ -1,4 +1,12 @@
-import { PreConditionExecutor } from 'picimo/utils'
+import {
+  PreConditionExecutor,
+  createVoPropsSetter,
+  defineHiddenPropertyRO,
+  definePublicPropertyRO
+} from 'picimo/utils'
+
+import { STATIC } from 'picimo/core/v_o_array'
+
 import { info } from 'common/log'
 
 import SpriteGroupElement from '../SpriteGroupElement'
@@ -12,51 +20,107 @@ const SPRITE_GROUP_CONFIG = {
   vertexShader: 'simple',
   fragmentShader: 'simple',
   primitive: 'TRIANGLES',
-  voNew: {
+  usage: STATIC,
+  voNew: createVoPropsSetter({
     scale: 1,
     opacity: 1
-  }
+  })
 }
+
+const MESH_WIDTH = 150 // TODO remove this - use current viewport/projection
+const MESH_HEIGHT = 100
 
 const TEXTURE_SHADER_KEY = 'tex'
 
-const createMesh = (el, { spriteGroup, textureId }) => {
+const PRE_CONDITION_ATTRS = [
+  'spriteGroup',
+  'textureId',
+  'texture'
+]
+
+const createMesh = (el, { spriteGroup, textureId, texture }) => {
   info(`[picture] create mesh(${el.meshCols}x${el.meshRows}), textureId=${textureId}, spriteGroup=`, spriteGroup, el)
 
-  updateTexture(spriteGroup, textureId)
+  const { meshRows, meshCols, sprites } = el
+
+  const sx = MESH_WIDTH / meshCols
+  const sy = MESH_HEIGHT / meshRows
+
+  // TODO set transform/size at every renderFrame
+
+  for (let y = 0; y < meshRows; ++y) {
+    for (let x = 0; x < meshCols; ++x) {
+      const s = spriteGroup.voPool.alloc(1) // we don't have a texture so we don't need to call .createSprite() here
+      sprites.push(s)
+
+      s.setSize(sx, sy)
+      s.setTranslate(-MESH_WIDTH / 2, -MESH_HEIGHT / 2)
+      s.setPos2d(
+        x * sx, (y + 1) * sy,
+        (x + 1) * sx, (y + 1) * sy,
+        (x + 1) * sx, y * sy,
+        x * sx, y * sy
+      )
+    }
+  }
+
+  updateTextureId(spriteGroup, textureId)
+  updateTexture(el, spriteGroup, texture)
 }
 
-const updateTexture = (spriteGroup, textureId) => {
-  info(`[picture] textureId=${textureId}`)
-
+const updateTextureId = (spriteGroup, textureId) => {
   spriteGroup.setTexture(TEXTURE_SHADER_KEY, textureId)
+}
+
+const updateTexture = ({ meshRows, meshCols, sprites }, spriteGroup, texture) => {
+  const { maxS, maxT, minS, minT } = texture
+  const tx = (maxS - minS) / meshCols
+  const ty = (maxT - minT) / meshRows
+
+  // TODO create vertex shader which transforms
+  //  all tex coords by uniform vector
+
+  for (let y = 0; y < meshRows; ++y) {
+    for (let x = 0; x < meshCols; ++x) {
+      const s = sprites[x + (y * meshCols)]
+
+      // TODO extract to another setTexCoords helper
+      const x0 = minS + (x * tx)
+      const y0 = maxT - ((y + 1) * ty)
+      const x1 = minS + ((x + 1) * tx)
+      const y1 = maxT - (y * ty)
+      s.setTexCoords(x0, y0, x1, y0, x1, y1, x0, y1)
+    }
+  }
+
+  spriteGroup.touchVertexBuffers()
 }
 
 export default class PictureElement extends SpriteGroupElement {
   /** @ignore */
   constructor (_) {
-    const self = super(_)
+    const me = super(_)
 
-    Object.defineProperties(self, {
-      _renderFrame: {
-        value: new PreConditionExecutor(self, ['spriteGroup', 'textureId'])
-      },
-      sprites: {
-        value: [],
-        enumerable: true
-      }
-    })
+    definePublicPropertyRO(me, 'sprites', [])
 
-    self.entity.on('renderFrame', self._renderFrame.execute)
-    self._renderFrame.on('initialize', attrs => createMesh(self, attrs))
-    self._renderFrame.on('attributeChanged:textureId', textureId => updateTexture(self.spriteGroup, textureId))
+    defineHiddenPropertyRO(me, '_renderFrame', new PreConditionExecutor(me, PRE_CONDITION_ATTRS))
+    me.entity.on('renderFrame', me._renderFrame.execute)
 
-    return self
+    me._renderFrame.on('initialize', attrs => createMesh(me, attrs))
+    me._renderFrame.on('attributeChanged:textureId', textureId => updateTextureId(me.spriteGroup, textureId))
+    me._renderFrame.on('attributeChanged:texture', texture => updateTexture(me, me.spriteGroup, texture))
+
+    return me
   }
 
   get textureId () {
-    const tex = this.entity.texture
-    return tex && tex.textureId
+    const { texture } = this.entity
+    return texture && texture.textureId
+  }
+
+  get texture () {
+    const { texture } = this.entity
+    return texture && texture.texture
   }
 
   readSpriteGroupConfig () {

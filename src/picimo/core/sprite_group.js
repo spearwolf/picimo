@@ -90,4 +90,13 @@ export default class SpriteGroup {
       renderer.drawIndexed(this.primitive, this.indices)
     })
   }
+
+  /**
+   * inform the internally used vertex buffers that content has changed
+   * and should be uploaded to gpu before next usage.
+   * you don't need to call this if you choosed `dynamic` as *usage* option.
+   */
+  touchVertexBuffers () {
+    this.voPool.voArray.touch()
+  }
 }

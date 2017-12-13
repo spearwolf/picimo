@@ -1,3 +1,9 @@
+import {
+  defineHiddenPropertiesRW
+  // defineHiddenPropertyRO,
+  // StackedContext
+} from 'picimo/utils'
+
 import EntityElement from '../EntityElement'
 
 import createWebGlRenderer from './createWebGlRenderer'
@@ -13,11 +19,12 @@ export default class CanvasElement extends EntityElement {
     self.animationFrameRequestId = 0
     self.animationFrameRequestIsStopped = false
 
-    Object.defineProperties(self, {
-      _webGlRenderer: { value: null, writable: true },
-      _clearColor: { value: undefined, writable: true },
-      _lastFrameTime: { value: 0, writable: true }
+    defineHiddenPropertiesRW(self, {
+      _webGlRenderer: null,
+      _clearColor: undefined,
+      _lastFrameTime: 0
     })
+    // defineHiddenPropertyRO(self, 'renderFrameContext', new StackedContext())
 
     self.canvas = document.createElement('canvas')
     self.firstTimeConnected = true

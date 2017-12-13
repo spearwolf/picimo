@@ -1,7 +1,7 @@
 # &lt;picimo/&gt; Backlog
 
-HTML Element API
-----------------
+HTML Element API And Other Issues
+---------------------------------
 
 - [ ] Render to texture ..
   - [ ] `<pi-picture/>` acts as single sprite renderer, support boilerplate example (background)
@@ -27,6 +27,7 @@ HTML Element API
   - [ ] auto-remove unused gl resources
   - [ ] disconnectedCallback
   - [ ] support/verify html element insertions and deletions (appendChild, removeChild)
+- [ ] use or remove StackedContext (maybe use a more dom orientated solution?)
 
 Release
 -------
@@ -56,30 +57,23 @@ Release
 - [x] support native javascript modules
 - [x] upgrade to new eventize api (npm package)
 
-Next Release
-------------
-
-- [ ] tilemaps support `<picimo-tilemap .. />`
-- [ ] spine support `<picimo-spine-loader .. />`
-
 Think about
 -----------
 
 - [ ] "create an app" -> how to compile js,css,images,etc..to one single html (webpack?)
   - [ ] include js,assets updates from server..
-- [ ] quick boostrap tool `picimo-cli`
 
 Browser Support
 ---------------
 
-- [ ] firefox windows support
-- [ ] edge windows support
-- [ ] ie11 support (needs polyfill for: URL, fetch, ..)
+- [x] ie11 support (needs polyfill for: URL, fetch, ..)
+- [x] edge windows support
+- [x] firefox windows support
 - [x] chrome/chromium linux support
 - [x] firefox linux support
-- [ ] safari mac support
-- [ ] ios support
-- [ ] android chrome support
+- [x] safari mac support
+- [x] ios support
+- [x] android chrome support
 
 Other
 -----

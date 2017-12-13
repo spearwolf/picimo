@@ -12,6 +12,16 @@ const queryTextureId = (component, selector) => {
     if (textureId) {
       component.textureId = textureId
       component.entity.emit('textureId', textureId)
+      if (el.textureAtlasPromise) {
+        el.textureAtlasPromise.then(atlas => {
+          // TODO frame selection support
+          component.texture = atlas.rootTexture
+        })
+      }
+      // TODO detect
+      // - <pi-texture />
+      // - <img>
+      // - <canvas>
     }
   }
 }
