@@ -3,9 +3,9 @@ const webpack = require('webpack')
 
 const scssRules = require('./lib/scssRules')
 const jsRules = require('./lib/jsRules')
+const { PROJECT_DIR, jsModulePaths } = require('./lib/dirs')
 
-const PROJECT_DIR = path.resolve(__dirname, '..')
-const BASE_DIR = path.resolve(__dirname, '../webgl-boilerplate')
+const BASE_DIR = path.resolve(PROJECT_DIR, 'webgl-boilerplate')
 
 module.exports = {
   entry: path.join(BASE_DIR, 'src/index.js'),
@@ -23,10 +23,7 @@ module.exports = {
   ],
   resolve: {
     extensions: ['.js'],
-    modules: [
-      path.resolve(PROJECT_DIR, 'src'),
-      path.resolve(PROJECT_DIR, 'node_modules')
-    ]
+    modules: jsModulePaths
   },
   output: {
     filename: 'bundle.js',

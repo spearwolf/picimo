@@ -8,9 +8,9 @@ const webpack = require('webpack')
 const createDevServer = require('./lib/createDevServer')
 const scssRules = require('./lib/scssRules')
 const jsRules = require('./lib/jsRules')
+const { PROJECT_DIR, jsModulePaths } = require('./lib/dirs')
 
-const BASE_DIR = path.resolve(__dirname, '..')
-const EXAMPLES_DIR = path.resolve(BASE_DIR, 'examples')
+const EXAMPLES_DIR = path.resolve(PROJECT_DIR, 'examples')
 
 const EXAMPLES = _.compact(glob.sync(path.resolve(EXAMPLES_DIR) + '/*/').map(dir => {
   if (fs.lstatSync(dir).isDirectory()) {
@@ -51,9 +51,6 @@ module.exports = {
   devtool: 'inline-source-map',
   resolve: {
     extensions: ['.js'],
-    modules: [
-      path.resolve(BASE_DIR, 'src'),
-      path.resolve(BASE_DIR, 'node_modules')
-    ]
+    modules: jsModulePaths
   }
 }

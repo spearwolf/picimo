@@ -1,11 +1,12 @@
 // Karma configuration
-const path = require('path')
-const BASE_DIR = path.resolve(__dirname, '..')
+const scssRules = require('./lib/scssRules')
+const jsRules = require('./lib/jsRules')
+const { PROJECT_DIR, jsModulePaths } = require('./lib/dirs')
 
 module.exports = function (config) {
   config.set({
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: BASE_DIR,
+    basePath: PROJECT_DIR,
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
@@ -18,16 +19,28 @@ module.exports = function (config) {
     ],
 
     // list of files to exclude
-    exclude: [
-    ],
+    exclude: [],
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'test/**/*.js': ['webpack']
+      'test/**/*.js': ['webpack', 'sourcemap']
     },
 
-    webpack: require('./webpack.test.config.js'),
+    webpack: {
+      devtool: 'inline-source-map',
+      module: {
+        rules: [
+          jsRules,
+          scssRules
+        ]
+      },
+      resolve: {
+        extensions: ['.js'],
+        modules: jsModulePaths
+      }
+    },
+
     webpackMiddleware: {
       stats: 'errors-only'
     },
@@ -54,6 +67,7 @@ module.exports = function (config) {
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     // browsers: ['Chrome'],
     browsers: ['MyChrome'],
+
     customLaunchers: {
       MyChrome: {
         base: 'Chrome',
@@ -63,7 +77,7 @@ module.exports = function (config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: true,
+    singleRun: true
 
     // Concurrency level
     // how many browser should be started simultaneous
