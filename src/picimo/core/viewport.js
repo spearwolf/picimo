@@ -58,26 +58,4 @@ export default class Viewport extends AABB2 {
      */
     this.maxY = y + h
   }
-
-  /**
-   * @param {number} y
-   * @type {number}
-   */
-  set width (w) {
-    /**
-     * @type {number}
-     */
-    this.maxX = this.minX + w
-  }
-
-  /**
-   * @param {number} y
-   * @type {number}
-   */
-  set height (h) {
-    /**
-     * @type {number}
-     */
-    this.maxY = this.minY + h
-  }
 }

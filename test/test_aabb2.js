@@ -24,13 +24,25 @@ describe('AABB2', () => {
     const aabb2 = new AABB2(-4, 9)
     expect(aabb2.maxX).to.equal(9)
   })
-  it('width', () => {
+  it('get width', () => {
     const aabb2 = new AABB2(2, 10)
     expect(aabb2.width).to.equal(8)
+  })
+  it('set width', () => {
+    const aabb2 = new AABB2(2, 10)
+    aabb2.width = 10
+    expect(aabb2.maxX).to.equal(12)
+    expect(aabb2.minX).to.equal(2)
   })
   it('height', () => {
     const aabb2 = new AABB2(2, 10, 3, -7)
     expect(aabb2.height).to.equal(10)
+  })
+  it('set height', () => {
+    const aabb2 = new AABB2(2, 10, 3, -7)
+    aabb2.height = 15
+    expect(aabb2.maxY).to.equal(8)
+    expect(aabb2.minY).to.equal(-7)
   })
   it('centerX', () => {
     const aabb2 = new AABB2(2, 10, -7, 3)

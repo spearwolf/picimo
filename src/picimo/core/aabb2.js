@@ -66,6 +66,28 @@ export default class AABB2 {
   }
 
   /**
+   * @param {number} y
+   * @type {number}
+   */
+  set width (w) {
+    /**
+     * @type {number}
+     */
+    this.maxX = this.minX + w
+  }
+
+  /**
+   * @param {number} y
+   * @type {number}
+   */
+  set height (h) {
+    /**
+     * @type {number}
+     */
+    this.maxY = this.minY + h
+  }
+
+  /**
    * @type {number}
    */
   get centerX () {

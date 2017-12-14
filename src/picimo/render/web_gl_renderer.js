@@ -40,15 +40,15 @@ export default class WebGlRenderer {
   }
 
   setViewport (x, y, width, height) {
-    let { viewport } = this
+    const { viewport } = this
     if (!viewport) {
-      this.viewport = new Viewport()
-      viewport = this.viewport
+      this.viewport = new Viewport(x, y, width, height)
+    } else {
+      viewport.x = x
+      viewport.y = y
+      viewport.width = width
+      viewport.height = height
     }
-    viewport.x = x
-    viewport.y = y
-    viewport.width = width
-    viewport.height = height
   }
 
   /**
