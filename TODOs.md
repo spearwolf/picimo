@@ -29,7 +29,6 @@ HTML Element API And Other Issues
   - [ ] support/verify html element insertions and deletions (appendChild, removeChild)
 - [ ] use or remove StackedContext (maybe use a more dom orientated solution?)
 
-
 Release
 -------
 
@@ -58,6 +57,11 @@ Release
 - [x] support native javascript modules
 - [x] upgrade to new eventize api (npm package)
 
+Think about
+-----------
+
+- [ ] "create an app" -> how to compile js,css,images,etc..to one single html (webpack?)
+  - [ ] include js,assets updates from server..
 
 Browser Support
 ---------------
@@ -71,13 +75,11 @@ Browser Support
 - [x] ios support
 - [x] android chrome support
 
+Other
+-----
 
-Think about features
---------------------
-
-- [ ] "create an app" -> how to compile js,css,images,etc..to one single html (webpack?)
-  - [ ] include js,assets updates from server..
-
+- [ ] fix karma/code *coverage* generation!
+- [x] remove *jab* reference?
 
 Usage Examples
 --------------

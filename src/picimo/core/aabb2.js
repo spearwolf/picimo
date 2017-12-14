@@ -1,3 +1,5 @@
+const posNum = num => num < 0 ? 0 : num
+
 /**
  * Represents a 2d axis aligned boundary box.
  *
@@ -55,28 +57,28 @@ export default class AABB2 {
    * @type {number}
    */
   get width () {
-    return this.maxX - this.minX
+    return posNum(this.maxX - this.minX + 1)
   }
 
   /**
    * @type {number}
    */
   get height () {
-    return this.maxY - this.minY
+    return posNum(this.maxY - this.minY + 1)
   }
 
   /**
    * @type {number}
    */
   get centerX () {
-    return this.minX + ((this.maxX - this.minX) / 2)
+    return posNum((this.maxX - this.minX) / 2)
   }
 
   /**
    * @type {number}
    */
   get centerY () {
-    return this.minY + ((this.maxY - this.minY) / 2)
+    return posNum((this.maxY - this.minY) / 2)
   }
 
   /**
@@ -107,7 +109,7 @@ export default class AABB2 {
    * @return {boolean} return true when point is inside the aabb
    */
   isInside (x, y) {
-    return x >= this.minX && x < this.maxX && y >= this.minY && y < this.maxY
+    return x >= this.minX && x <= this.maxX && y >= this.minY && y <= this.maxY
   }
 
   /**
@@ -118,10 +120,10 @@ export default class AABB2 {
    */
   isIntersection (aabb) {
     return !(
-      aabb.maxX <= this.minX ||
-      aabb.minX >= this.maxX ||
-      aabb.maxY <= this.minY ||
-      aabb.minY >= this.maxY
+      aabb.maxX < this.minX ||
+      aabb.minX > this.maxX ||
+      aabb.maxY < this.minY ||
+      aabb.minY > this.maxY
     )
   }
 }
