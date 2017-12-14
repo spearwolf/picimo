@@ -1,7 +1,5 @@
 import AABB2 from './aabb2'
 
-const posNum = num => num < 0 ? 0 : num
-
 export default class Viewport extends AABB2 {
   /**
    * @param {number} x - x
@@ -10,13 +8,7 @@ export default class Viewport extends AABB2 {
    * @param {number} height - height
    */
   constructor (x, y, width, height) {
-    const minX = parseInt(x, 10)
-    const minY = parseInt(y, 10)
-
-    super(
-      minX, posNum((minX + parseInt(width, 10) - 1)),
-      minY, posNum((minY + parseInt(height, 10) - 1))
-    )
+    super(x, (x + width), y, (y + height))
   }
 
   /**
@@ -40,7 +32,7 @@ export default class Viewport extends AABB2 {
     /**
      * @type {number}
      */
-    this.maxX = posNum(x + w - 1)
+    this.maxX = x + w
   }
 
   /**
@@ -64,14 +56,7 @@ export default class Viewport extends AABB2 {
     /**
      * @type {number}
      */
-    this.maxY = posNum(y + h - 1)
-  }
-
-  /**
-   * @type {number}
-   */
-  get width () {
-    return posNum(this.maxX - this.minX + 1)
+    this.maxY = y + h
   }
 
   /**
@@ -82,14 +67,7 @@ export default class Viewport extends AABB2 {
     /**
      * @type {number}
      */
-    this.maxX = posNum(this.minX + w - 1)
-  }
-
-  /**
-   * @type {number}
-   */
-  get height () {
-    return posNum(this.maxY - this.minY + 1)
+    this.maxX = this.minX + w
   }
 
   /**
@@ -100,6 +78,6 @@ export default class Viewport extends AABB2 {
     /**
      * @type {number}
      */
-    this.maxY = posNum(this.minY + h - 1)
+    this.maxY = this.minY + h
   }
 }
