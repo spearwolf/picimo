@@ -15,6 +15,7 @@ module.exports = function (config) {
     // list of files / patterns to load in the browser
     files: [
       'test/**/test_*.js',
+      'src/**/__specs__/*.test.js',
       { pattern: 'test/assets/**/*', included: false, served: true }
     ],
 
@@ -24,7 +25,8 @@ module.exports = function (config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'test/**/*.js': ['webpack', 'sourcemap']
+      'test/**/*.js': ['webpack', 'sourcemap'],
+      'src/**/__specs__/*.test.js': ['webpack', 'sourcemap']
     },
 
     webpack: {

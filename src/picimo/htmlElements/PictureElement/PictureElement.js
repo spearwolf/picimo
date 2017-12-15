@@ -2,7 +2,6 @@ import {
   PreConditionExecutor,
   createVoPropsSetter,
   defineHiddenPropertyRO,
-  defineHiddenPropertyRW,
   defineHiddenPropertiesRW,
   definePublicPropertyRO
 } from 'picimo/utils'
@@ -29,10 +28,7 @@ const SPRITE_GROUP_CONFIG = {
   })
 }
 
-const MESH_WIDTH = 150 // TODO remove this - use current viewport/projection
-const MESH_HEIGHT = 100
-
-const VIEW_FIT_CONTAIN = 'contain'
+// const VIEW_FIT_CONTAIN = 'contain'
 const VIEW_FIT_COVER = 'cover'
 const VIEW_FIT_FILL = 'fill'
 
@@ -112,12 +108,11 @@ const updateTexCoords = (el, spriteGroup, texture) => {
 }
 
 const updateViewFit = (el, webGlRenderer) => {
-  // TODO read current projection
-  //   and use viewport only as fallback
+  const projectionOrViewport = webGlRenderer.context.get('projection') || webGlRenderer.viewport
   const {
     width: viewWidth,
     height: viewHeight
-  } = webGlRenderer.viewport
+  } = projectionOrViewport
 
   if (el.lastViewWidth !== viewWidth || el.lastViewHeight !== viewHeight) {
     el.lastViewWidth = viewWidth
@@ -156,9 +151,9 @@ const updateViewFit = (el, webGlRenderer) => {
       }
     }
 
-    console.log('TODO picture target size:', viewFit, '->', targetWidth, 'x', targetHeight, 'view ->', viewWidth, viewHeight)
-
     updateVertices(el, targetWidth, targetHeight)
+
+    console.log('TODO picture target size:', viewFit, '->', targetWidth, 'x', targetHeight, 'view ->', viewWidth, viewHeight)
   }
 }
 

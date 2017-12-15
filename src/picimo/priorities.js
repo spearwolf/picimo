@@ -8,4 +8,5 @@ export const PRIO_RF_SPRITE_GROUP = 250
 
 // postRenderFrame
 export const PRIO_PRF_SPRITE_GROUP = 1000
-export const PRIO_PRF_BLEND        = -1000
+export const PRIO_PRF_PROJECTION   = -1000
+export const PRIO_PRF_BLEND        = -1100

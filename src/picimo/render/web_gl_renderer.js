@@ -1,5 +1,5 @@
 import { Viewport, ShaderContext } from 'picimo/core'
-import { definePublicPropertiesRO, destroy } from 'picimo/utils'
+import { definePublicPropertiesRO, StackedContext, destroy } from 'picimo/utils'
 
 import ClearBuffer from './clear_buffer'
 
@@ -25,6 +25,7 @@ export default class WebGlRenderer {
   constructor (glx) {
     definePublicPropertiesRO(this, { glx })
 
+    this.context = new StackedContext()
     this.shaderContext = new ShaderContext()
     this.autotouchResources = new Map()
     this.clearBuffer = new ClearBuffer(this.glx)
@@ -36,6 +37,7 @@ export default class WebGlRenderer {
 
   destroy () {
     this.shaderContext.destroy()
+    this.context.clear()
     destroy(this)
   }
 
@@ -68,6 +70,7 @@ export default class WebGlRenderer {
 
   beginRenderFrame () {
     this.shaderContext.clear()
+    this.context.clear()
     this.clearBuffer.reset()
     this.setGlViewport(this.viewport)
   }

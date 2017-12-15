@@ -21,8 +21,18 @@ export default class StackedContext {
     }
   }
 
+  get (name) {
+    let stack = this.context.get(name)
+    if (stack) {
+      const len = stack.length
+      if (len > 0) {
+        return stack[len - 1]
+      }
+    }
+  }
+
   clear () {
-    this.context.forEach(([, value]) => {
+    this.context.forEach(value => {
       value.length = 0
     })
   }

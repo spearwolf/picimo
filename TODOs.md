@@ -27,7 +27,6 @@ HTML Element API And Other Issues
   - [ ] auto-remove unused gl resources
   - [ ] disconnectedCallback
   - [ ] support/verify html element insertions and deletions (appendChild, removeChild)
-- [ ] use or remove StackedContext (maybe use a more dom orientated solution?)
 
 
 Release

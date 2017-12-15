@@ -1,6 +1,8 @@
 import { Projection } from 'picimo/core'
-import { PRIO_RF_PROJECTION } from 'picimo/priorities'
+import { PRIO_RF_PROJECTION, PRIO_PRF_PROJECTION } from 'picimo/priorities'
 import { debug } from 'common/log'
+
+const PROJECTION = 'projection'
 
 export default class ProjectionComponent {
   constructor (entity, data) {
@@ -19,6 +21,7 @@ export default class ProjectionComponent {
 
   connectedEntity (entity) {
     entity.on('renderFrame', PRIO_RF_PROJECTION, this)
+    entity.on('postRenderFrame', PRIO_PRF_PROJECTION, this)
   }
 
   disconnectedEntity (entity) {
@@ -26,7 +29,13 @@ export default class ProjectionComponent {
   }
 
   renderFrame (renderer, canvas) {
-    this.projection.update(canvas.width, canvas.height)
-    renderer.shaderContext.pushVar(this.projection.uniform)
+    const { projection } = this
+    projection.update(canvas.width, canvas.height)
+    renderer.context.push(PROJECTION, projection)
+    renderer.shaderContext.pushVar(projection.uniform)
+  }
+
+  postRenderFrame (renderer) {
+    renderer.context.pop(PROJECTION)
   }
 }
