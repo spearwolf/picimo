@@ -74,9 +74,9 @@ export default class VOPool {
    * @return {VertexObject|VertexObject[]}
    */
 
-  alloc (size = 1) {
+  alloc (size = 1, push2arr) {
     if (size > 1) {
-      const arr = []
+      const arr = push2arr || []
       for (let i = 0; i < size; ++i) {
         const vo = this.alloc(1)
         if (vo !== undefined) {
