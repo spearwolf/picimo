@@ -3,7 +3,7 @@ import WebGlRenderer from 'picimo/render/web_gl_renderer'
 
 import { error } from 'common/log'
 
-import readBooleanAttribute from '../readBooleanAttribute'
+import readBooleanAttribute from '../shared/readBooleanAttribute'
 
 import {
   ATTR_ALPHA,

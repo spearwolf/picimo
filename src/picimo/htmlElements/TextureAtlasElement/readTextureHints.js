@@ -1,11 +1,11 @@
-import readBooleanAttribute from './readBooleanAttribute.js'
+import readBooleanAttribute from '../shared/readBooleanAttribute'
 
 import {
   ATTR_FLIP_Y,
   ATTR_REPEATABLE,
   ATTR_PREMULTIPLY_ALPHA,
   ATTR_NEAREST
-} from './constants'
+} from '../constants'
 
 export default (el) => ({
   flipY: readBooleanAttribute(el, ATTR_FLIP_Y, false),

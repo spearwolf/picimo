@@ -11,7 +11,12 @@ import { STATIC } from 'picimo/core/v_o_array'
 import { info } from 'common/log'
 
 import SpriteGroupElement from '../SpriteGroupElement'
-import { ATTR_ROWS, ATTR_COLS, ATTR_VIEW_FIT } from '../constants'
+
+import {
+  ATTR_ROWS,
+  ATTR_COLS,
+  ATTR_VIEW_FIT
+} from '../constants'
 
 const DEFAULT_MESH_COLS = 10
 const DEFAULT_MESH_ROWS = 10
