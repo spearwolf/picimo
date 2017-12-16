@@ -24,6 +24,7 @@
     "karma:watch": "cross-env NODE_ENV=testing karma start config/karma.conf.js --no-single-run --auto-watch",
     "lint:js": "yarn run standard \"src/**/*.js\" \"test/**/*.js\" \"webgl-boilerplate/src/**/*.js\" \"examples/**/*.js\"",
     "standard": "standard",
+    "todos": "leasot --skip-unsupported src",
     "start": "run-p boilerplate:serve boilerplate:watch",
     "test": "run-s lint:js karma"
   },
@@ -56,6 +57,7 @@
     "karma-sinon": "^1.0.5",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.7",
+    "leasot": "^4.13.0",
     "mocha": "^4.0.1",
     "mocha-headless-chrome": "^1.7.1",
     "node-sass": "^4.5.3",

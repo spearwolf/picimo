@@ -30,6 +30,7 @@ const deferPropertyValue = (deferFuncName, getValuePromise) => {
   }
 }
 
+// TODO create registry for custom query selectors
 const deferTexture = deferPropertyValue('texture', el => el.loadTexture())
 const deferSpriteGroup = deferPropertyValue('spriteGroup', el => el.spriteGroupPromise)
 
