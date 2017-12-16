@@ -2,8 +2,7 @@ import ResourceRef from '../utils/resource_ref'
 
 import { BYTES_PER_ELEMENT, TYPED_ARRAY_CONSTRUCTOR } from '../utils/typed_array_helpers'
 
-const STATIC = 'static'
-const DYNAMIC = 'dynamic'
+import { VO_HINT_DYNAMIC } from './constants'
 
 /**
  * Vertex Object Array
@@ -13,7 +12,7 @@ const DYNAMIC = 'dynamic'
  * @param {VODescriptor} descriptor - *Vertex object* descriptor
  * @param {number} capacity - Maximum number of *vertex objects*
  * @param {?ArrayBuffer|DataView|Float32Array} data
- * @param {string} [usage=VOArray.USAGE.DYNAMIC] usage hint
+ * @param {string} [usage='dynamic'] usage hint (`dynamic` or `static`)
  * @param {boolean} [autotouch] autotouch
  *
  * @desc
@@ -23,7 +22,7 @@ const DYNAMIC = 'dynamic'
  */
 
 export default class VOArray {
-  constructor (descriptor, capacity, data, usage = DYNAMIC, autotouch = undefined) {
+  constructor (descriptor, capacity, data, usage = VO_HINT_DYNAMIC, autotouch = undefined) {
     /** @type {ResourceRef} */
     this.resourceRef = new ResourceRef(this, { usage })
 
@@ -51,7 +50,7 @@ export default class VOArray {
     })
 
     /** @type {boolean} */
-    this.enableAutotouch = typeof autotouch === 'boolean' ? autotouch : usage === VOArray.USAGE.DYNAMIC
+    this.enableAutotouch = typeof autotouch === 'boolean' ? autotouch : usage === VO_HINT_DYNAMIC
 
     Object.freeze(this)
   }
@@ -110,11 +109,4 @@ export default class VOArray {
         (this.bufferByteOffset + (begin * this.descriptor.bytesPerVO)),
         size * this.descriptor.bytesPerVO))
   }
-}
-
-VOArray.USAGE = Object.freeze({ STATIC, DYNAMIC })  // TODO remove me!
-
-export {
-  STATIC,
-  DYNAMIC
 }

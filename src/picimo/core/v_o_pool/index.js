@@ -1,6 +1,6 @@
 import createVertexObjects from './create_vertex_objects'
 import generateUUID from '../../utils/generate_uuid'
-import VOArray from '../v_o_array'
+import { VO_HINT_DYNAMIC } from '../constants'
 
 export default class VOPool {
   /**
@@ -11,7 +11,7 @@ export default class VOPool {
    * @param {VertexObject} [options.voZero] - *vertex object* **prototype**
    * @param {VertexObject} [options.voNew] - *vertex object* **prototype**
    * @param {VertexObject} [options.maxAllocVOSize] - never allocate more than *maxAllocVOSize* vertex objects at once
-   * @param {string} [options.usage=VOPool.USAGE.DYNAMIC] - vertex data usage hint
+   * @param {string} [options.usage='dynamic'] - vertex data usage hint (`dynamic` or `static`)
    */
 
   constructor (descriptor, options) {
@@ -21,7 +21,7 @@ export default class VOPool {
     this.capacity = (options && options.capacity) || this.descriptor.maxIndexedVOPoolSize
     this.maxAllocVOSize = (options && options.maxAllocVOSize) || 0
 
-    this.usage = (options && options.usage) || VOPool.USAGE.DYNAMIC
+    this.usage = (options && options.usage) || VO_HINT_DYNAMIC
 
     let voArray = options && options.voArray
     if (voArray) {
@@ -139,5 +139,3 @@ export default class VOPool {
     vo.voArray.copy(this.voZero.voArray)
   }
 }
-
-VOPool.USAGE = VOArray.USAGE

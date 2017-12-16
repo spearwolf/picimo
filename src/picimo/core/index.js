@@ -28,6 +28,11 @@ import VOArray from './v_o_array'
 import VOAttrDescriptor from './v_o_attr_descriptor'
 import Viewport from './Viewport'
 
+import {
+  VO_HINT_STATIC,
+  VO_HINT_DYNAMIC
+} from './constants'
+
 export {
   AABB2,
   BlendMode,
@@ -57,5 +62,7 @@ export {
   VOAttrDescriptor,
   VODescriptor,
   VOPool,
+  VO_HINT_DYNAMIC,
+  VO_HINT_STATIC,
   Viewport
 }

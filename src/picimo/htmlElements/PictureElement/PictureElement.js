@@ -6,7 +6,7 @@ import {
   definePublicPropertyRO
 } from 'picimo/utils'
 
-import { STATIC } from 'picimo/core/v_o_array'
+import { VO_HINT_STATIC } from 'picimo/core'
 
 import { info } from 'common/log'
 
@@ -26,7 +26,7 @@ const SPRITE_GROUP_CONFIG = {
   vertexShader: 'simple',
   fragmentShader: 'simple',
   primitive: 'TRIANGLES',
-  usage: STATIC,
+  usage: VO_HINT_STATIC,
   voNew: createVoPropsSetter({
     scale: 1,
     opacity: 1
