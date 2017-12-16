@@ -15,6 +15,8 @@ import {
 import './index.scss'
 
 /**
+ * @private
+ *
  * Define all `<picimo-*>` custom elements.
  * Should be called only once at startup.
  */

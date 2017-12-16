@@ -1,5 +1,7 @@
 
 /**
+ * @private
+ *
  * Resize the canvas element to the same size as the `<pi-canvas>.parentNode`
  */
 export default (el) => {

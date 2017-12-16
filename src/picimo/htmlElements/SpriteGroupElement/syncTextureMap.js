@@ -1,6 +1,7 @@
 import { parseCssStyledProperties } from 'picimo/utils'
 import { debug } from 'common/log'
 
+/** @private */
 export default (el, data) => {
   const { spriteGroup } = el
   const texMap = parseCssStyledProperties(data)

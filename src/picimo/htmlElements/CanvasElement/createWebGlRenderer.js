@@ -47,6 +47,7 @@ const createWebGlContext = (canvas, attributes) => {
   return gl
 }
 
+/** @private */
 export default (el) => {
   const canvasContextAttributes = Object.freeze(createCanvasContextAttributes(el))
   const glx = new WebGlContext(createWebGlContext(el.canvas, canvasContextAttributes))

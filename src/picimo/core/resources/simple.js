@@ -1,5 +1,6 @@
 import rotate from 'picimo/utils/shader_helpers/rotate'
 
+/** @private */
 export const vertexShader = [`
 
   attribute vec2 pos2d;
@@ -24,6 +25,7 @@ export const vertexShader = [`
   }
 `]
 
+/** @private */
 export const fragmentShader = `
 
   precision mediump float;
@@ -37,6 +39,7 @@ export const fragmentShader = `
 
 `
 
+/** @private */
 export const description = {
   vertexCount: 4,
 

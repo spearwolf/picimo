@@ -16,4 +16,5 @@ const initialize = () => {
   return customElements.whenDefined(HTML_ELEMENT_ENTITY).then(() => publicApi)
 }
 
+/** @private */
 export default initialize

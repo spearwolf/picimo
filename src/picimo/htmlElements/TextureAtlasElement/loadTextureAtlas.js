@@ -1,6 +1,7 @@
 import { debug } from 'common/log'
 import readTextureHints from './readTextureHints'
 
+/** @private */
 export default (el, src) => {
   if (el.previousSrc === src) return el.textureAtlasPromise
   el.previousSrc = src

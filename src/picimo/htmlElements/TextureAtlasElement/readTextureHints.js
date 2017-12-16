@@ -7,6 +7,7 @@ import {
   ATTR_NEAREST
 } from '../constants'
 
+/** @private */
 export default (el) => ({
   flipY: readBooleanAttribute(el, ATTR_FLIP_Y, false),
   repeatable: readBooleanAttribute(el, ATTR_REPEATABLE, false),

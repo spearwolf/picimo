@@ -5,6 +5,7 @@ import BlendComponent from './BlendComponent'
 import ProjectionComponent from './ProjectionComponent'
 import TextureComponent from './TextureComponent'
 
+/** @private */
 export default function (registry) {
   registry.registerComponent('clear', ComponentFactory.createCssStyledPropsComponent(ClearComponent))
   registry.registerComponent('blend', ComponentFactory.createCssStyledPropsComponent(BlendComponent))
