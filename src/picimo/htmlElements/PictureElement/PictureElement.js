@@ -1,43 +1,24 @@
 import {
   PreConditionExecutor,
-  createVoPropsSetter,
   defineHiddenPropertyRO,
   defineHiddenPropertiesRW,
   definePublicPropertyRO
 } from 'picimo/utils'
 
-import { VO_HINT_STATIC } from 'picimo/core'
+import { ShaderUniformVariable } from 'picimo/core'
 
 import { info } from 'common/log'
 
 import SpriteGroupElement from '../SpriteGroupElement'
 
-import {
-  ATTR_ROWS,
-  ATTR_COLS,
-  ATTR_VIEW_FIT
-} from '../constants'
+import { ATTR_ROWS, ATTR_COLS, ATTR_VIEW_FIT } from '../constants'
 
-const DEFAULT_MESH_COLS = 10
-const DEFAULT_MESH_ROWS = 10
+import createVertices from './createVertices'
+import updateViewFit from './updateViewFit'
+import updateTexCoords from './updateTexCoords'
+import spriteGroupConfig from './spriteGroupConfig'
 
-const SPRITE_GROUP_CONFIG = {
-  descriptor: 'simple',
-  vertexShader: 'simple',
-  fragmentShader: 'simple',
-  primitive: 'TRIANGLES',
-  usage: VO_HINT_STATIC,
-  voNew: createVoPropsSetter({
-    scale: 1,
-    opacity: 1
-  })
-}
-
-// const VIEW_FIT_CONTAIN = 'contain'
-const VIEW_FIT_COVER = 'cover'
-const VIEW_FIT_FILL = 'fill'
-
-const TEXTURE_SHADER_KEY = 'tex'
+import { DEFAULT_MESH_COLS, DEFAULT_MESH_ROWS, TEXTURE_SHADER_KEY } from './constants'
 
 const PRE_CONDITION_ATTRS = [
   'spriteGroup',
@@ -51,119 +32,20 @@ const createMesh = (el, { spriteGroup, textureId, texture }) => {
   const { meshRows, meshCols, sprites } = el
 
   spriteGroup.voPool.alloc(meshCols * meshRows, sprites)
+  createVertices(el, 1.0, 1.0)
+  el.transformUniform.value = [0, 0, 0]
 
   updateTextureId(spriteGroup, textureId)
-  updateTexCoords(el, spriteGroup, texture)
-}
-
-const updateVertices = (el, targetWidth, targetHeight) => {
-  const { meshRows, meshCols, sprites } = el
-
-  // TODO set transform/size uniform at every renderFrame
-
-  const sx = targetWidth / meshCols
-  const sy = targetHeight / meshRows
-  const ox = -targetWidth / 2
-  const oy = -targetHeight / 2
-
-  for (let y = 0; y < meshRows; ++y) {
-    for (let x = 0; x < meshCols; ++x) {
-      const s = sprites[x + (y * meshCols)]
-
-      s.setTranslate(0, 0)
-      s.setPos2d(
-        ox + (x * sx), oy + ((y + 1) * sy),
-        ox + ((x + 1) * sx), oy + ((y + 1) * sy),
-        ox + ((x + 1) * sx), oy + (y * sy),
-        ox + (x * sx), oy + (y * sy)
-      )
-    }
-  }
-
-  el.verticesUpdated = true
+  updateTexCoords(el, texture)
 }
 
 const updateTextureId = (spriteGroup, textureId) => {
   spriteGroup.setTexture(TEXTURE_SHADER_KEY, textureId)
 }
 
-const updateTexCoords = (el, spriteGroup, texture) => {
-  const { meshRows, meshCols, sprites } = el
-  const { maxS, maxT, minS, minT } = texture
-  const tx = (maxS - minS) / meshCols
-  const ty = (maxT - minT) / meshRows
-
-  // TODO create vertex shader which transforms
-  //  all tex coords by uniform vector
-
-  for (let y = 0; y < meshRows; ++y) {
-    for (let x = 0; x < meshCols; ++x) {
-      const s = sprites[x + (y * meshCols)]
-
-      // TODO extract to another setTexCoords helper
-      const x0 = minS + (x * tx)
-      const y0 = maxT - ((y + 1) * ty)
-      const x1 = minS + ((x + 1) * tx)
-      const y1 = maxT - (y * ty)
-      s.setTexCoords(x0, y0, x1, y0, x1, y1, x0, y1)
-    }
-  }
-
-  el.verticesUpdated = true
-}
-
-const updateViewFit = (el, webGlRenderer) => {
-  const projectionOrViewport = webGlRenderer.context.get('projection') || webGlRenderer.viewport
-  const {
-    width: viewWidth,
-    height: viewHeight
-  } = projectionOrViewport
-
-  if (el.lastViewWidth !== viewWidth || el.lastViewHeight !== viewHeight) {
-    el.lastViewWidth = viewWidth
-    el.lastViewHeight = viewHeight
-
-    const viewFit = el.getAttribute(ATTR_VIEW_FIT)
-
-    let targetWidth
-    let targetHeight
-
-    if (VIEW_FIT_FILL === viewFit) {
-      targetWidth = viewWidth
-      targetHeight = viewHeight
-    } else {
-      const { width: texWidth, height: texHeight } = el.texture
-      const viewRatio = viewHeight / viewWidth
-      const texRatio = texHeight / texWidth
-
-      if (texRatio === 1) {
-        if (VIEW_FIT_COVER === viewFit) {
-          targetHeight = targetWidth = viewRatio > 1 ? viewHeight : viewWidth
-        } else { // 'contain'
-          targetHeight = targetWidth = viewRatio < 1 ? viewHeight : viewWidth
-        }
-      } else {
-        let scale
-
-        if (VIEW_FIT_COVER === viewFit) {
-          scale = texRatio > viewRatio ? viewWidth / texWidth : viewHeight / texHeight
-        } else { // "contain"
-          scale = texRatio < viewRatio ? viewWidth / texWidth : viewHeight / texHeight
-        }
-
-        targetWidth = scale * texWidth
-        targetHeight = scale * texHeight
-      }
-    }
-
-    updateVertices(el, targetWidth, targetHeight)
-
-    console.log('TODO picture target size:', viewFit, '->', targetWidth, 'x', targetHeight, 'view ->', viewWidth, viewHeight)
-  }
-}
-
 const renderFrame = (el, webGlRenderer) => {
   if (el.hasAttribute(ATTR_VIEW_FIT)) {
+    // TODO default value for view fit
     updateViewFit(el, webGlRenderer)
   }
 
@@ -171,6 +53,13 @@ const renderFrame = (el, webGlRenderer) => {
     el.spriteGroup.touchVertexBuffers()
     el.verticesUpdated = false
   }
+
+  const { scaleUniform, transformUniform } = el
+  const { shaderContext } = webGlRenderer
+
+  shaderContext.pushVar(scaleUniform)
+  shaderContext.pushVar(transformUniform)
+  // TODO postRenderFrame -> popVars from shader contexts
 }
 
 export default class PictureElement extends SpriteGroupElement {
@@ -179,6 +68,8 @@ export default class PictureElement extends SpriteGroupElement {
     const me = super(_)
 
     definePublicPropertyRO(me, 'sprites', [])
+    definePublicPropertyRO(me, 'scaleUniform', new ShaderUniformVariable('scale'))
+    definePublicPropertyRO(me, 'transformUniform', new ShaderUniformVariable('transform'))
 
     defineHiddenPropertiesRW(me, {
       verticesUpdated: false,
@@ -191,8 +82,9 @@ export default class PictureElement extends SpriteGroupElement {
 
     me._renderFrame.on('initialize', attrs => createMesh(me, attrs))
     me._renderFrame.on('attributeChanged:textureId', textureId => updateTextureId(me.spriteGroup, textureId))
-    me._renderFrame.on('attributeChanged:texture', texture => updateTexCoords(me, me.spriteGroup, texture))
+    me._renderFrame.on('attributeChanged:texture', texture => updateTexCoords(me, texture))
     me._renderFrame.on('execute', webGlRenderer => renderFrame(me, webGlRenderer))
+    // TODO PreConditionExecutor -> execute('postRenderFrame', ...)
 
     return me
   }
@@ -211,7 +103,7 @@ export default class PictureElement extends SpriteGroupElement {
     const meshCols = parseInt(this.getAttribute(ATTR_COLS) || DEFAULT_MESH_COLS, 10)
     const meshRows = parseInt(this.getAttribute(ATTR_ROWS) || DEFAULT_MESH_ROWS, 10)
 
-    return Object.assign({}, SPRITE_GROUP_CONFIG, {
+    return Object.assign({}, spriteGroupConfig, {
       meshCols,
       meshRows,
       capacity: meshCols * meshRows
