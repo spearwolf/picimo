@@ -5,8 +5,8 @@ export default {
   // |0|1|2|3| |4|5|6|7|
   // +-+-+-+-+ +-+-+-+-+
   //
-  // |o-o|                   (3) position: x, y
-  //     |o-o|               (2) tex-coords: s, t
+  // |x|y|                   (3) pos: x, y  (position)
+  //     |s|t|               (2) uv: s, t   (texture coordinates)
   //
 
   attributes: [
