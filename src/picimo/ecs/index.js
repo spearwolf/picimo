@@ -1,4 +1,4 @@
-import ComponentFactory from './component_factory'
+import ComponentFactory from './ComponentFactory'
 import ComponentRegistry from './component_registry'
 import Entity from './entity'
 import EntityManager from './entity_manager'

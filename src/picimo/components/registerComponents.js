@@ -1,4 +1,4 @@
-import ComponentFactory from 'picimo/ecs/component_factory'
+import { ComponentFactory } from 'picimo/ecs'
 
 import ClearComponent from './ClearComponent'
 import BlendComponent from './BlendComponent'
