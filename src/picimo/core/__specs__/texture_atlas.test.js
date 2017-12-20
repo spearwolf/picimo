@@ -52,6 +52,26 @@ describe('TextureAtlasSpec', function () {
         assert.equal(tex.width, 55)
         assert.equal(tex.height, 61)
       })
+      it('add frame alias', () => {
+        atlas.addFrameAlias('blau', 'nobinger-blau.png')
+        assert.equal(atlas.getFrame('blau'), atlas.getFrame('nobinger-blau.png'))
+        assert.deepEqual(atlas.frameNames().sort(), [
+          'nobinger-blau.png',
+          'nobinger-gold.png',
+          'nobinger-grau.png',
+          'nobinger-gruen.png',
+          'nobinger-lila.png',
+          'nobinger-rot.png',
+          'blau'
+        ].sort())
+      })
+      it('frameNames sequence', () => {
+        assert.deepEqual(atlas.frameNames('(blau|gold)').sort(), [
+          'nobinger-blau.png',
+          'nobinger-gold.png',
+          'blau'
+        ].sort())
+      })
     })
   })
 

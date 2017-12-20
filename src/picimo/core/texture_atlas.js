@@ -42,6 +42,16 @@ export default class TextureAtlas {
   }
 
   /**
+   * @param {string} alias - new frame name
+   * @param {string} name - original frame name
+   */
+  addFrameAlias (alias, frame) {
+    if (this.frames.has(frame)) {
+      this.frames.set(alias, this.frames.get(frame))
+    }
+  }
+
+  /**
    * @param {string} name
    * @returns {Texture}
    */
@@ -64,10 +74,16 @@ export default class TextureAtlas {
   }
 
   /**
+   * @param {string} [match] - optionally regular expression to filter frame names
    * @returns {Array<string>}
    */
-  frameNames () {
-    return Array.from(this.frames.keys())
+  frameNames (match) {
+    const frames = Array.from(this.frames.keys())
+    if (match) {
+      const regex = new RegExp(match)
+      return frames.filter(name => regex.test(name))
+    }
+    return frames
   }
 
   /**
