@@ -1,8 +1,4 @@
-import {
-  defineHiddenPropertiesRW
-  // defineHiddenPropertyRO,
-  // StackedContext
-} from 'picimo/utils'
+import { defineHiddenPropertiesRW } from 'picimo/utils'
 
 import EntityElement from '../EntityElement'
 
@@ -24,7 +20,6 @@ export default class CanvasElement extends EntityElement {
       _clearColor: undefined,
       _lastFrameTime: 0
     })
-    // defineHiddenPropertyRO(self, 'renderFrameContext', new StackedContext())
 
     self.canvas = document.createElement('canvas')
     self.firstTimeConnected = true
