@@ -26,7 +26,7 @@ import TextureLibrary from './texture_library'
 import TextureState from './texture_state'
 import VOArray from './v_o_array'
 import VOAttrDescriptor from './v_o_attr_descriptor'
-import Viewport from './Viewport'
+import Viewport from './viewport'
 
 import {
   VO_HINT_STATIC,
