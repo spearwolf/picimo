@@ -6,9 +6,9 @@ const { execSync } = require('child_process')
 const _ = require('lodash')
 
 program
-  .version('0.2.3')
+  .version('0.2.4')
   .usage('[<options>...] [<search>]')
-  .option('--raw', 'Show raw import statements from all source files')
+  .option('--raw', 'Show raw import/export statements from all source files')
   .option('--zero', 'Show the full list of sources from all import statements')
   .option('--json', 'JSON output (include sourceFiles, sources and importedBy sections)')
   .option('--externals', 'Show only external npm package references')
@@ -85,12 +85,12 @@ filesList.forEach((filename) => {
   lines.forEach((line, idx) => {
     if (!isImport) {
       const tLine = line.trim()
-      if (tLine.startsWith('import')) {
-        const m = line.match(/import(\s+.+from)?\s+'([^']+)'[\s;]*$/)
+      if (tLine.startsWith('import') || tLine.startsWith('export')) {
+        const m = line.match(/(import|export)(\s+.+from)?\s+'([^']+)'[\s;]*$/)
         if (m) {
           if (SHOW_RAW) console.log(line)
           addImport(filename, m[m.length - 1], idx)
-        } else if (tLine.match(/import\s+[^{]*{\s*$/)) {
+        } else if (tLine.match(/(import|export)\s+[^{]*{\s*$/)) {
           if (SHOW_RAW) console.log(line)
           isImport = true
         }
