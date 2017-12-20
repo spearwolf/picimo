@@ -6,10 +6,11 @@ const { execSync } = require('child_process')
 const _ = require('lodash')
 
 program
-  .version('0.2.1')
+  .version('0.2.2')
   .usage('[<options>...] [<search>]')
   .option('--raw', 'Show raw import statements from all source files')
   .option('-0, --zero', 'Show the full list of sources referenced by all imports')
+  .option('-E, --externals', 'Show only external npm package references')
   .option('-N, --not-referenced', 'Show list of sources which are not referenced by imports')
   .option('-R, --references', 'Show for source files and their references, optionally filter source files by <search>')
   .option('-J, --json', 'Json output')
@@ -17,6 +18,7 @@ program
 
 const NOT_REFERENCED = program.notReferenced
 const REFERENCES = program.references
+const EXTERNALS_ONLY = program.externals
 const SEARCH = program.args[0]
 const SHOW_JSON = program.json
 const SHOW_RAW = program.raw
@@ -39,6 +41,8 @@ if (flagsUsedNo > 1 && !(flagsUsedNo === 2 && SEARCH && REFERENCES)) {
 const SHOW_DEFAULT_OUTPUT = flagsUsedNo === 0
 
 const filesList = execSync('./source-files.sh', { cwd: __dirname, encoding: 'utf-8' }).split('\n')
+
+const filterExternals = imports => imports.filter(im => !EXTERNALS_ONLY || im.isExternal)
 
 const jsonOut = {
   sourceFiles: [],
@@ -100,18 +104,23 @@ filesList.forEach((filename) => {
         if (SHOW_ZERO) {
           imports.forEach(im => console.log(im.importFile))
         } else {
-          console.log()
-          console.log(colors.bold(`${filename}:`))
-          console.log(imports.map(im => {
-            return im.isAbsolute ? `- ${im.lineNo}: ${im.fullImportFile}` : `- ${im.lineNo}: ${im.importFile} -> ${im.fullImportFile}`
-          }).join('\n'))
+          const showImports = filterExternals(imports)
+          if (showImports.length) {
+            console.log()
+            console.log(colors.bold(`${filename}:`))
+            console.log(showImports.map(im => {
+              const isExternal = im.isExternal ? '(external) ' : ''
+              return im.isExternal ? `- ${im.lineNo}: ${isExternal}${im.fullImportFile}` : `- ${im.lineNo}: ${isExternal}${im.importFile} -> ${im.fullImportFile}`
+            }).join('\n'))
+          }
         }
       } else {
         const found = []
-        imports.forEach(im => {
+        filterExternals(imports).forEach(im => {
           const idx = im.fullImportFile.indexOf(SEARCH)
           if (idx >= 0) {
-            found.push(`- ${im.lineNo}: ${im.isAbsolute ? '' : `${im.importFile} -> `}${im.fullImportFile.slice(0, idx)}${colors.bgYellow(SEARCH)}${im.fullImportFile.slice(idx + SEARCH.length, im.fullImportFile.length)}`)
+            const isExternal = im.isExternal ? '(external) ' : ''
+            found.push(`- ${im.lineNo}: ${isExternal}${im.isAbsolute ? '' : `${im.importFile} -> `}${im.fullImportFile.slice(0, idx)}${colors.bgYellow(SEARCH)}${im.fullImportFile.slice(idx + SEARCH.length, im.fullImportFile.length)}`)
           }
         })
         if (found.length) {
@@ -180,6 +189,13 @@ function parseImport (sourceFile, importFile, lineNo) {
       }
     }
   }
+  if (importFile.startsWith('picimo')) {
+    fullImportFile = importFile.replace('picimo', 'src/picimo')
+  } else if (importFile.startsWith('common')) {
+    fullImportFile = importFile.replace('common', 'src/common')
+  } else if (importFile.startsWith('bootstrap')) {
+    fullImportFile = importFile.replace('bootstrap', 'src/bootstrap')
+  }
   if (!fullImportFile.endsWith('.js')) {
     if (fs.existsSync(`${fullImportFile}.js`)) {
       fullImportFile = `${fullImportFile}.js`
@@ -187,7 +203,7 @@ function parseImport (sourceFile, importFile, lineNo) {
       fullImportFile = `${fullImportFile}/index.js`
     }
   }
-  const isExternal = isAbsolute && !fs.existsSync(importFile)
+  const isExternal = isAbsolute && (!fs.existsSync(importFile) && !fs.existsSync(fullImportFile))
   return {
     isExternal,
     isAbsolute,
