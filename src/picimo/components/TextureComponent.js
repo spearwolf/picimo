@@ -14,8 +14,11 @@ const queryTextureId = (component, selector) => {
       component.entity.emit('textureId', textureId)
       if (el.textureAtlasPromise) {
         el.textureAtlasPromise.then(atlas => {
-          // TODO frame selection support
-          component.texture = atlas.rootTexture
+          if (component.frame) {
+            component.texture = atlas.getFrame(component.frame)
+          } else {
+            component.texture = atlas.rootTexture
+          }
         })
       }
       // TODO detect
@@ -46,8 +49,10 @@ const parseConfig = (component, config) => {
     parseTextureSource(component, config)
   } else if (isValidObject(config)) {
     parseTextureSource(component, config.src)
+    if (config.frame) {
+      component.frame = config.frame
+    }
   }
-  // TODO how to select atlas-frame?
 }
 
 export default class TextureComponent {
