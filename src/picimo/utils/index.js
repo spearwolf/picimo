@@ -9,6 +9,7 @@ import getDefaultOption from './getDefaultOption'
 import isFunction from './isFunction'
 import isNonEmptyString from './isNonEmptyString'
 import isNumberGreaterThanZero from './isNumberGreaterThanZero'
+import isNumberGreaterOrEqualZero from './isNumberGreaterOrEqualZero'
 import isObject from './isObject'
 import isString from './isString'
 import isValidObject from './isValidObject'
@@ -43,6 +44,7 @@ export {
   getDefaultOption,
   isFunction,
   isNonEmptyString,
+  isNumberGreaterOrEqualZero,
   isNumberGreaterThanZero,
   isObject,
   isPowerOf2,
