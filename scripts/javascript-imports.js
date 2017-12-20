@@ -6,19 +6,21 @@ const { execSync } = require('child_process')
 const _ = require('lodash')
 
 program
-  .version('0.2.2')
+  .version('0.2.3')
   .usage('[<options>...] [<search>]')
   .option('--raw', 'Show raw import statements from all source files')
-  .option('-0, --zero', 'Show the full list of sources referenced by all imports')
-  .option('-E, --externals', 'Show only external npm package references')
-  .option('-N, --not-referenced', 'Show list of sources which are not referenced by imports')
-  .option('-R, --references', 'Show for source files and their references, optionally filter source files by <search>')
-  .option('-J, --json', 'Json output')
+  .option('--zero', 'Show the full list of sources from all import statements')
+  .option('--json', 'JSON output (include sourceFiles, sources and importedBy sections)')
+  .option('--externals', 'Show only external npm package references')
+  .option('--ignore-tests', 'Ignore sources from **/__specs__/ and test/')
+  .option('-N, --not-referenced', 'Show all sources which are not referenced by imports')
+  .option('-R, --references', 'Show for source files from where they are referenced; you can filter the source files by <search>')
   .parse(process.argv)
 
 const NOT_REFERENCED = program.notReferenced
 const REFERENCES = program.references
 const EXTERNALS_ONLY = program.externals
+const NO_SPECS = program.ignoreTests
 const SEARCH = program.args[0]
 const SHOW_JSON = program.json
 const SHOW_RAW = program.raw
@@ -47,11 +49,15 @@ const filterExternals = imports => imports.filter(im => !EXTERNALS_ONLY || im.is
 const jsonOut = {
   sourceFiles: [],
   sources: {},
-  imports: {}
+  importedBy: {}
 }
 
 filesList.forEach((filename) => {
   if (!filename) return
+
+  if (NO_SPECS && (filename.startsWith('test') || filename.indexOf('__specs__') >= 0)) {
+    return
+  }
 
   // step-0) load source file
 
@@ -64,11 +70,14 @@ filesList.forEach((filename) => {
   const addImport = (sourceFile, importFile, lineNo) => {
     const im = parseImport(sourceFile, importFile, lineNo)
     imports.push(im)
-    jsonOut.sources[sourceFile] = im
-    if (!jsonOut.imports[im.fullImportFile]) {
-      jsonOut.imports[im.fullImportFile] = []
+    if (!jsonOut.sources[sourceFile]) {
+      jsonOut.sources[sourceFile] = []
     }
-    jsonOut.imports[im.fullImportFile].push(sourceFile)
+    jsonOut.sources[sourceFile].push(`${im.isExternal ? 'external!' : ''}${im.fullImportFile || im.importFile}`)
+    if (!jsonOut.importedBy[im.fullImportFile]) {
+      jsonOut.importedBy[im.fullImportFile] = []
+    }
+    jsonOut.importedBy[im.fullImportFile].push(sourceFile)
   }
 
   // step-1) parse source file - extract all import statements
@@ -142,14 +151,14 @@ if (SHOW_JSON) {
 // step-2-c) show sources which are not referenced by imports
 
 if (NOT_REFERENCED) {
-  _.uniq(jsonOut.sourceFiles.filter(source => !jsonOut.imports[source])).sort().forEach(src => console.log(src))
+  _.uniq(jsonOut.sourceFiles.filter(source => !jsonOut.importedBy[source])).sort().forEach(src => console.log(src))
 }
 
 // step-2-d) show references
 
 if (REFERENCES) {
   jsonOut.sourceFiles.forEach(source => {
-    const hasReferences = !!jsonOut.imports[source]
+    const hasReferences = !!jsonOut.importedBy[source]
     if (hasReferences) {
       if (SEARCH) {
         const idx = source.indexOf(SEARCH)
@@ -160,7 +169,7 @@ if (REFERENCES) {
         console.log()
         console.log(colors.bold(`${source}:`))
       }
-      jsonOut.imports[source].forEach(src => console.log('-', src))
+      jsonOut.importedBy[source].forEach(src => console.log('-', src))
     }
   })
 }
