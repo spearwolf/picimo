@@ -2,7 +2,9 @@
 import assert from 'assert'
 import VODescriptor from 'picimo/core/v_o_descriptor'
 import VOArray from 'picimo/core/v_o_array'
-import { assertProperties, assertVOAttrDescriptor } from './utils'
+
+import assertPropertyTypes from 'test/assertPropertyTypes'
+import assertVOAttrDescriptor from 'test/assertVOAttrDescriptor'
 
 describe('VODescriptor', () => {
   const descriptor = new VODescriptor({
@@ -122,7 +124,7 @@ describe('VODescriptor', () => {
 
     it('properties: position', () => {
       const vo = descriptor.createVO()
-      assertProperties(vo, {
+      assertPropertyTypes(vo, {
         function: ['setPosition'],
         number: ['x0', 'y0', 'z0',
           'x1', 'y1', 'z1',
@@ -134,7 +136,7 @@ describe('VODescriptor', () => {
 
     it('properties: rotate', () => {
       const vo = descriptor.createVO()
-      assertProperties(vo, {
+      assertPropertyTypes(vo, {
         number: ['rotate'],
         undefined: ['setRotate', 'getRotate', 'rotate0', 'rotate1', 'rotate2', 'rotate3']
       })
@@ -142,7 +144,7 @@ describe('VODescriptor', () => {
 
     it('properties: texCoords', () => {
       const vo = descriptor.createVO()
-      assertProperties(vo, {
+      assertPropertyTypes(vo, {
         function: ['setTexCoords'],
         number: ['s0', 't0',
           's1', 't1',
@@ -158,7 +160,7 @@ describe('VODescriptor', () => {
 
     it('properties: translate', () => {
       const vo = descriptor.createVO()
-      assertProperties(vo, {
+      assertPropertyTypes(vo, {
         function: ['setTranslate', 'getTranslate'],
         number: ['tx', 'ty']
       })
@@ -166,7 +168,7 @@ describe('VODescriptor', () => {
 
     it('properties: scale', () => {
       const vo = descriptor.createVO()
-      assertProperties(vo, {
+      assertPropertyTypes(vo, {
         number: ['scale'],
         undefined: ['setScale', 'getScale']
       })
@@ -174,7 +176,7 @@ describe('VODescriptor', () => {
 
     it('properties: opacity', () => {
       const vo = descriptor.createVO()
-      assertProperties(vo, {
+      assertPropertyTypes(vo, {
         number: ['opacity'],
         undefined: ['setOpacity', 'getOpacity']
       })
@@ -182,14 +184,14 @@ describe('VODescriptor', () => {
 
     it('prototype: foo', () => {
       const vo = descriptor.createVO()
-      assertProperties(vo, {
+      assertPropertyTypes(vo, {
         function: ['foo']
       })
     })
 
     it('prototype: pos2d', () => {
       const vo = descriptor.createVO()
-      assertProperties(vo, {
+      assertPropertyTypes(vo, {
         function: ['setPos2d'],
         undefined: ['getPos2d'],
         number: [
@@ -202,7 +204,7 @@ describe('VODescriptor', () => {
 
     it('prototype: posZ', () => {
       const vo = descriptor.createVO()
-      assertProperties(vo, {
+      assertPropertyTypes(vo, {
         number: ['posZ'],
         undefined: ['setPosZ', 'getPosZ']
       })
@@ -210,14 +212,14 @@ describe('VODescriptor', () => {
 
     it('prototype: uv', () => {
       const vo = descriptor.createVO()
-      assertProperties(vo, {
+      assertPropertyTypes(vo, {
         undefined: ['setUv', 'getUv', 'uv', 'uv_00']
       })
     })
 
     it('prototype: r', () => {
       const vo = descriptor.createVO()
-      assertProperties(vo, {
+      assertPropertyTypes(vo, {
         number: ['r0', 'r1', 'r2', 'r3'],
         function: ['setR'],
         undefined: ['getR']

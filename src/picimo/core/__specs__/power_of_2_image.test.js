@@ -1,11 +1,11 @@
 /* eslint-env mocha */
 import assert from 'assert'
-import { assetUrl } from './utils'
+import testAssetUrl from 'test/testAssetUrl'
 import PowerOf2Image from 'picimo/core/power_of_2_image'
 
 describe('PowerOf2Image', function () {
   describe('should load image from given url', function () {
-    const p2img = new PowerOf2Image(assetUrl('nobinger.png'))
+    const p2img = new PowerOf2Image(testAssetUrl('nobinger.png'))
     let promiseResult
     before('after complete', function (done) {
       p2img.complete.then(function (img) {
@@ -45,7 +45,7 @@ describe('PowerOf2Image', function () {
   })
 
   describe('should convert non-power-of-2 image', function () {
-    const p2img = new PowerOf2Image(assetUrl('bird-chicken-penguin.png'))
+    const p2img = new PowerOf2Image(testAssetUrl('bird-chicken-penguin.png'))
     before('after complete', function (done) { p2img.complete.then(() => done()) })
 
     it('width', () => assert.equal(p2img.width, 1024))

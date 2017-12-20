@@ -1,6 +1,7 @@
 /* eslint-env mocha */
 import assert from 'assert'
-import { assetUrl } from './utils'
+import testAssetUrl from 'test/testAssetUrl'
+
 import Texture from 'picimo/core/texture'
 import ResourceRef from 'picimo/utils/resource_ref'
 import PowerOf2Image from 'picimo/core/power_of_2_image'
@@ -59,7 +60,7 @@ describe('Texture', function () {
   })
 
   describe('new Texture(PowerOf2Image)', function () {
-    let p2img = new PowerOf2Image(assetUrl('bird-chicken-penguin.png'))
+    let p2img = new PowerOf2Image(testAssetUrl('bird-chicken-penguin.png'))
     let tex
 
     describe('after complete', function () {
@@ -89,7 +90,7 @@ describe('Texture', function () {
   describe('Texture.load(url)', function () {
     let tex
     before(function (done) {
-      Texture.load(assetUrl('nobinger.png')).then(texture => {
+      Texture.load(testAssetUrl('nobinger.png')).then(texture => {
         tex = texture
         done()
       })

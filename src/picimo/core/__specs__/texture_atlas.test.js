@@ -1,6 +1,7 @@
 /* eslint-env mocha */
 import assert from 'assert'
-import { assetUrl } from './utils'
+import testAssetUrl from 'test/testAssetUrl'
+
 import TextureAtlas from 'picimo/core/texture_atlas'
 import TextureAtlasSpec from 'picimo/core/texture_atlas_spec'
 
@@ -9,7 +10,7 @@ describe('TextureAtlasSpec', function () {
     let atlasSpec
 
     before(function (done) {
-      window.fetch(assetUrl('nobinger.json'))
+      window.fetch(testAssetUrl('nobinger.json'))
         .then(response => response.json())
         .then(json => {
           atlasSpec = new TextureAtlasSpec(json)
@@ -32,7 +33,7 @@ describe('TextureAtlasSpec', function () {
     describe('createTextureAtlas', function () {
       let atlas
       before(function (done) {
-        atlasSpec.createTextureAtlas(assetUrl(atlasSpec.imageUrl)).then(function (textureAtlas) {
+        atlasSpec.createTextureAtlas(testAssetUrl(atlasSpec.imageUrl)).then(function (textureAtlas) {
           atlas = textureAtlas
           done()
         })
@@ -57,7 +58,7 @@ describe('TextureAtlasSpec', function () {
   describe('TextureAtlas.load', () => {
     let atlas
     before(function (done) {
-      TextureAtlas.load(assetUrl('nobinger.json'), null, (atlasSpec) => assetUrl(atlasSpec.meta.image)).then(textureAtlas => {
+      TextureAtlas.load(testAssetUrl('nobinger.json'), null, (atlasSpec) => testAssetUrl(atlasSpec.meta.image)).then(textureAtlas => {
         atlas = textureAtlas
         done()
       })

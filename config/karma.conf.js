@@ -1,7 +1,7 @@
 // Karma configuration
 const scssRules = require('./lib/scssRules')
 const jsRules = require('./lib/jsRules')
-const { PROJECT_DIR, jsModulePaths } = require('./lib/dirs')
+const { PROJECT_DIR, makeJsModulePaths } = require('./lib/dirs')
 
 module.exports = function (config) {
   config.set({
@@ -39,7 +39,7 @@ module.exports = function (config) {
       },
       resolve: {
         extensions: ['.js'],
-        modules: jsModulePaths
+        modules: makeJsModulePaths('.')
       }
     },
 
