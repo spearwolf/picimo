@@ -6,13 +6,15 @@ const { execSync } = require('child_process')
 const _ = require('lodash')
 
 program
-  .version('0.2.4')
+  .version('0.2.5')
   .usage('[<options>...] [<search>]')
   .option('--raw', 'Show raw import/export statements from all source files')
   .option('--zero', 'Show the full list of sources from all import statements')
   .option('--json', 'JSON output (include sourceFiles, sources and importedBy sections)')
   .option('--externals', 'Show only external npm package references')
   .option('--ignore-tests', 'Ignore sources from **/__specs__/ and test/')
+  .option('--ignore-examples', 'Ignore sources from examples/ and webgl-boilerplate/')
+  .option('--ignore-bootstrap', 'Ignore sources from src/bootstrap/')
   .option('-N, --not-referenced', 'Show all sources which are not referenced by imports')
   .option('-R, --references', 'Show for source files from where they are referenced; you can filter the source files by <search>')
   .parse(process.argv)
@@ -21,6 +23,8 @@ const NOT_REFERENCED = program.notReferenced
 const REFERENCES = program.references
 const EXTERNALS_ONLY = program.externals
 const NO_SPECS = program.ignoreTests
+const NO_EXAMPLES = program.ignoreExamples
+const NO_BOOTSTRAP = program.ignoreBootstrap
 const SEARCH = program.args[0]
 const SHOW_JSON = program.json
 const SHOW_RAW = program.raw
@@ -55,9 +59,9 @@ const jsonOut = {
 filesList.forEach((filename) => {
   if (!filename) return
 
-  if (NO_SPECS && (filename.startsWith('test') || filename.indexOf('__specs__') >= 0)) {
-    return
-  }
+  if (NO_SPECS && (filename.startsWith('test') || filename.indexOf('__specs__') >= 0)) return
+  if (NO_EXAMPLES && (filename.startsWith('examples') || filename.startsWith('webgl-boilerplate'))) return
+  if (NO_BOOTSTRAP && filename.startsWith('src/bootstrap')) return
 
   // step-0) load source file
 
