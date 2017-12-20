@@ -14,11 +14,8 @@ const queryTextureId = (component, selector) => {
       component.entity.emit('textureId', textureId)
       if (el.textureAtlasPromise) {
         el.textureAtlasPromise.then(atlas => {
-          if (component.frame) {
-            component.texture = atlas.getFrame(component.frame)
-          } else {
-            component.texture = atlas.rootTexture
-          }
+          const { frame } = component
+          component.texture = frame ? atlas.getFrame(frame) : atlas.rootTexture
         })
       }
       // TODO detect
@@ -48,10 +45,8 @@ const parseConfig = (component, config) => {
   if (isNonEmptyString(config)) {
     parseTextureSource(component, config)
   } else if (isValidObject(config)) {
+    component.frame = config.frame
     parseTextureSource(component, config.src)
-    if (config.frame) {
-      component.frame = config.frame
-    }
   }
 }
 

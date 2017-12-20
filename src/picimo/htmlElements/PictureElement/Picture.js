@@ -1,7 +1,5 @@
 import { info } from 'common/log'
 
-import { ATTR_VIEW_FIT } from '../constants'
-
 import createVertices from './createVertices'
 import updateViewFit from './updateViewFit'
 import updateTexCoords from './updateTexCoords'
@@ -33,15 +31,13 @@ export default class {
 
   textureChanged (texture) {
     updateTexCoords(this.el, texture)
+    this.el.viewFitNeedsUpdate = true
   }
 
   renderFrame (renderer) {
     const { el } = this
 
-    if (el.hasAttribute(ATTR_VIEW_FIT)) {
-      // TODO default value for view fit
-      updateViewFit(el, renderer)
-    }
+    updateViewFit(el, renderer)
 
     if (el.verticesUpdated) {
       el.spriteGroup.touchVertexBuffers()

@@ -8,11 +8,13 @@ export default (el, webGlRenderer) => {
     height: viewHeight
   } = projectionOrViewport
 
-  if (el.lastViewWidth !== viewWidth || el.lastViewHeight !== viewHeight) {
+  const viewFit = el.getAttribute(ATTR_VIEW_FIT) || VIEW_FIT_FILL
+
+  if (el.viewFitNeedsUpdate || el.lastViewFit !== viewFit || el.lastViewWidth !== viewWidth || el.lastViewHeight !== viewHeight) {
+    el.viewFitNeedsUpdate = false
+    el.lastViewFit = viewFit
     el.lastViewWidth = viewWidth
     el.lastViewHeight = viewHeight
-
-    const viewFit = el.getAttribute(ATTR_VIEW_FIT)
 
     let targetWidth
     let targetHeight

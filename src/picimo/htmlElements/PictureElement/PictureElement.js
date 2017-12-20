@@ -35,8 +35,10 @@ export default class PictureElement extends SpriteGroupElement {
 
     defineHiddenPropertiesRW(me, {
       verticesUpdated: false,
+      viewFitNeedsUpdate: true,
       lastViewWidth: -1,
-      lastViewHeight: -1
+      lastViewHeight: -1,
+      lastViewFit: ''
     })
 
     const executor = new PreConditionExecutor(me, PRE_CONDITION_ATTRS)
