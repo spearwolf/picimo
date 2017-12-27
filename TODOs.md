@@ -71,11 +71,19 @@ Browser Support
 - [x] android chrome support
 
 
-Think about features
---------------------
+Think about
+-----------
 
+- [ ] react-picimo
+- [ ] vue-picimo
+- [ ] create examples with ?
+  - [ ] https://github.com/popmotion/popmotion
+  - [ ] https://github.com/chenglou/react-motion
 - [ ] "create an app" -> how to compile js,css,images,etc..to one single html (webpack?)
   - [ ] include js,assets updates from server..
+  - [ ] codepen?
+  - [ ] jsbin/jsfiddle?
+  - [ ] boilerplate?
 
 
 Usage Examples
