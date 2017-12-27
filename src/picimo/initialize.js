@@ -9,7 +9,7 @@ const initialize = () => {
   if (customElements.get(HTML_ELEMENT_ENTITY)) {
     log('picimo\'s custom elements have already been defined')
   } else {
-    log('picimo\'s custom elements <pi-*/> have beed defined')
+    log('picimo\'s custom elements <pi-*/> have been defined')
     defineCustomElements()
   }
 

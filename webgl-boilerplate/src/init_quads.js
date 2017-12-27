@@ -1,4 +1,4 @@
-import VOPool from 'picimo/core/v_o_pool'
+import { VOPool } from 'picimo/core'
 
 export default function (resourceLibrary) {
   const quads = new VOPool(resourceLibrary.findDescriptor('simple'), 10)
