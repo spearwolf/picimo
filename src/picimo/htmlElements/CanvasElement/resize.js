@@ -32,5 +32,7 @@ export default (el) => {
      * @type {number}
      */
     el.height = h
+
+    el.resolutionUniform.value = [w, h, dpr]
   }
 }

@@ -1,6 +1,9 @@
 import { defineHiddenPropertiesRW } from 'picimo/utils'
+import { ShaderUniformVariable } from 'picimo/core'
 
 import EntityElement from '../EntityElement'
+
+import { UNIFORM_TIME, UNIFORM_RESOLUTION } from '../constants'
 
 import createWebGlRenderer from './createWebGlRenderer'
 import resize from './resize'
@@ -14,6 +17,9 @@ export default class CanvasElement extends EntityElement {
     self.frameNo = 0
     self.animationFrameRequestId = 0
     self.animationFrameRequestIsStopped = false
+
+    self.timeUniform = new ShaderUniformVariable(UNIFORM_TIME)
+    self.resolutionUniform = new ShaderUniformVariable(UNIFORM_RESOLUTION)
 
     defineHiddenPropertiesRW(self, {
       _webGlRenderer: null,
@@ -47,6 +53,7 @@ export default class CanvasElement extends EntityElement {
 
         ++this.frameNo
         this.now = now / 1000.0 // seconds
+        this.timeUniform.value = this.now
         this.timeFrameOffset = this.now - this._lastFrameTime
         this._lastFrameTime = this.now
 
@@ -54,6 +61,10 @@ export default class CanvasElement extends EntityElement {
         const { webGlRenderer } = this
         webGlRenderer.setViewport(0, 0, this.width, this.height)
         webGlRenderer.renderFrame(() => {
+          const { shaderContext } = webGlRenderer
+          shaderContext.pushVar(this.timeUniform)
+          shaderContext.pushVar(this.resolutionUniform)
+
           this.renderFrame(this, webGlRenderer)
         })
       }

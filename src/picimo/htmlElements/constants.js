@@ -1,5 +1,8 @@
 /* eslint no-multi-spaces: ["error", { exceptions: { "VariableDeclarator": true } }] */
 
+export const UNIFORM_TIME       = 'time'
+export const UNIFORM_RESOLUTION = 'resolution'
+
 export const HTML_ELEMENT_ENTITY        = 'pi-entity'
 export const HTML_ELEMENT_CANVAS        = 'pi-canvas'
 export const HTML_ELEMENT_SPRITE_GROUP  = 'pi-sprite-group'
