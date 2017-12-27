@@ -43,7 +43,7 @@ export default class TextureAtlas {
 
   /**
    * @param {string} alias - new frame name
-   * @param {string} name - original frame name
+   * @param {string} frame - original frame name
    */
   addFrameAlias (alias, frame) {
     if (this.frames.has(frame)) {
