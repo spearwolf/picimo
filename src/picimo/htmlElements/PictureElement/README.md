@@ -6,7 +6,7 @@
 
 ### `display-position`
 
-![picture display-position](../../doc/images/picture display-position.png)
+![picture display-position](../../../doc/images/picture display-position.png)
 
 ## Example
 
