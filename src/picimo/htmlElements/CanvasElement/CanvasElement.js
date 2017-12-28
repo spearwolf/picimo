@@ -61,9 +61,8 @@ export default class CanvasElement extends EntityElement {
         const { webGlRenderer } = this
         webGlRenderer.setViewport(0, 0, this.width, this.height)
         webGlRenderer.renderFrame(() => {
-          const { shaderContext } = webGlRenderer
-          shaderContext.pushVar(this.timeUniform)
-          shaderContext.pushVar(this.resolutionUniform)
+          webGlRenderer.pushCtxVar(this.timeUniform)
+          webGlRenderer.pushCtxVar(this.resolutionUniform)
 
           this.renderFrame(this, webGlRenderer)
         })

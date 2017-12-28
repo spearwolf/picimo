@@ -6,6 +6,9 @@ import createVoPropsSetter from './createVoPropsSetter'
 import destroy from './destroy'
 import generateUuid from './generate_uuid'
 import getDefaultOption from './getDefaultOption'
+import getNumber from './getNumber'
+import getString from './getString'
+import getUnitValue from './getUnitValue'
 import isFunction from './isFunction'
 import isNonEmptyString from './isNonEmptyString'
 import isNumberGreaterThanZero from './isNumberGreaterThanZero'
@@ -42,6 +45,9 @@ export {
   findNextPowerOf2,
   generateUuid,
   getDefaultOption,
+  getNumber,
+  getString,
+  getUnitValue,
   isFunction,
   isNonEmptyString,
   isNumberGreaterOrEqualZero,

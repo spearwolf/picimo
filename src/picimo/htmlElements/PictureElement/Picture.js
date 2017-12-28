@@ -1,3 +1,4 @@
+import { DISPLAY_POSITION } from 'picimo/components/DisplayPositionComponent'
 import { info } from 'common/log'
 
 import createVertices from './createVertices'
@@ -37,7 +38,14 @@ export default class {
   renderFrame (renderer) {
     const { el } = this
 
-    updateViewFit(el, renderer)
+    const displayPosition = el.entity[DISPLAY_POSITION]
+    if (displayPosition) {
+      const targetTransform = displayPosition.calculate(renderer, el.texture)
+      el.scaleUniform.value = [targetTransform.width, targetTransform.height, 0, 0]
+      el.transformUniform.value = [targetTransform.x, targetTransform.y, 0]
+    } else {
+      updateViewFit(el, renderer)
+    }
 
     if (el.verticesUpdated) {
       el.spriteGroup.touchVertexBuffers()

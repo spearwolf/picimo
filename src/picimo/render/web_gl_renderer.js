@@ -106,6 +106,26 @@ export default class WebGlRenderer {
   }
 
   /**
+   * Push uniform variable to WebGlRenderer#context and WebGlRenderer#shaderContext
+   *
+   * @see ShaderContext, StackedContext
+   */
+  pushCtxVar (shaderUniformVar) {
+    this.context.push(shaderUniformVar.name, shaderUniformVar.value)
+    this.shaderContext.pushVar(shaderUniformVar)
+  }
+
+  /**
+   * Pop uniform variable from WebGlRenderer#context and WebGlRenderer#shaderContext
+   *
+   * @see ShaderContext, StackedContext
+   */
+  popCtxVar (shaderUniformVar) {
+    this.shaderContext.popVar(shaderUniformVar)
+    this.context.pop(shaderUniformVar.name)
+  }
+
+  /**
    * @param {ShaderProgram} shaderProgram
    */
   useShaderProgram (shaderProgram) {
