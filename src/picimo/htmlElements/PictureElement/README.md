@@ -6,7 +6,7 @@
 
 ### `display-position`
 
-<img src="/spearwolf/blitpunk/raw/master/doc/images/picture%20display-position.png" srcset="/spearwolf/blitpunk/raw/master/doc/images/picture%20display-position.png 1x,/spearwolf/blitpunk/raw/master/doc/images/picture%20display-position%402x.png 2x" alt="picture display-position" style="max-width:100%;">
+<img src="https://raw.githubusercontent.com/spearwolf/blitpunk/master/doc/images/picture%20display-position.png" srcset="https://raw.githubusercontent.com/spearwolf/blitpunk/master/doc/images/picture%20display-position.png 1x,https://raw.githubusercontent.com/spearwolf/blitpunk/master/doc/images/picture%20display-position%402x.png 2x" alt="picture display-position" style="max-width:100%;">
 
 ## Example
 
