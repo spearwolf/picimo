@@ -12,8 +12,8 @@ const queryTextureId = (component, selector) => {
     if (textureId) {
       component.textureId = textureId
       component.entity.emit('textureId', textureId)
-      if (el.textureAtlasPromise) {
-        el.textureAtlasPromise.then(atlas => {
+      if (el.loadTextureAtlas) {
+        el.loadTextureAtlas().then(atlas => {
           const { frame } = component
           component.texture = frame ? atlas.getFrame(frame) : atlas.rootTexture
         })
