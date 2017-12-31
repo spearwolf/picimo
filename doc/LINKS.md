@@ -1,4 +1,14 @@
 
+WebGL Effects/ Tutorials
+------------------------
+
+### Billboards and Clouds
+
+- https://www.clicktorelease.com/blog/how-to-make-clouds-with-css-3d/
+  - https://www.clicktorelease.com/code/css3dclouds/
+- http://www.chinedufn.com/webgl-particle-effect-billboard-tutorial/
+
+
 Best Practices: WebGL Vertex Data
 ---------------------------------
 
