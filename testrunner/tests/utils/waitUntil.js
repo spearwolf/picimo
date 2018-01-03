@@ -1,7 +1,7 @@
 const TIMEOUT_MS = 4800
 const WAIT_MS = 16
 
-export default (expressionCallback, timeoutMs = TIMEOUT_MS, waitMs = WAIT_MS) => new Promise((resolve, reject) => {
+export const waitUntil = (expressionCallback, timeoutMs = TIMEOUT_MS, waitMs = WAIT_MS) => new Promise((resolve, reject) => {
   const start = Date.now()
   const watch = () => {
     try {
@@ -18,3 +18,15 @@ export default (expressionCallback, timeoutMs = TIMEOUT_MS, waitMs = WAIT_MS) =>
   }
   watch()
 })
+
+export const afterNextAF = () => new Promise(resolve => {
+  window.requestAnimationFrame(() => {
+    setTimeout(resolve, 1)
+  })
+})
+
+export const wait = (ms) => () => new Promise(resolve => {
+  setTimeout(resolve, ms)
+})
+
+export default waitUntil

@@ -1,26 +1,28 @@
+body { margin: 0; }
 
-.picimoOverlay {
-  /* position: fixed; */
-  /* top: 32px; */
-  /* left: 0; */
-  /* right: 0; */
-  /* pointer-events: none; */
+.visualRegressions {
+  background-color: #f0f0f0;
+  padding-top: 8px;
+  overflow-y: auto;
 }
 
-.picimo {
+.visualRegressions__row {
+  display: flex;
+}
+
+.picimo,
+.visualRegressions__canvasContainer {
   width: 300px;
   height: 150px;
-  /* margin-left: auto; */
-  /* margin-right: auto; */
-  margin: 8px 0 4px 24px;
+  margin: 0 0 16px 16px;
   background-color: #3ae;
   border: 1px solid #333;
-  /* border-bottom: none; */
 }
 
-.picimo pi-canvas {
-  width: 100%;
-  height: 100%;
+.picimo pi-canvas,
+.visualRegressions__canvas {
+  width: 300px;
+  height: 150px;
 }
 
 .menuOverlay {
@@ -49,10 +51,12 @@
 }
 
 .menuLink > a:hover {
-  color: #ff0066;
+  color: #f06;
   text-decoration: underline;
 }
 
+/*
 #mocha-stats {
-  /* top: 40px; */
+  top: 40px;
 }
+*/

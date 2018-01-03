@@ -1,3 +1,4 @@
+/* eslint-env browser */
 import { defineHiddenPropertiesRW } from 'picimo/utils'
 import { ShaderUniformVariable } from 'picimo/core'
 
@@ -76,6 +77,22 @@ export default class CanvasElement extends EntityElement {
       window.cancelAnimationFrame(this.animationFrameRequestId)
       this.animationFrameRequestId = 0
     }
+  }
+
+  readPixels (flipY = false) {
+    const { gl } = this.webGlRenderer.glx
+    const { drawingBufferWidth: width, drawingBufferHeight: height } = gl
+    const data = new Uint8Array(width * height * 4)
+    gl.readPixels(0, 0, width, height, gl.RGBA, gl.UNSIGNED_BYTE, data)
+
+    if (flipY) {
+      // https://stackoverflow.com/a/41971402
+      Array
+        .from({ length: height }, (val, i) => data.slice(i * width * 4, (i + 1) * width * 4))
+        .forEach((val, i) => data.set(val, (height - i - 1) * width * 4))
+    }
+
+    return new ImageData(Uint8ClampedArray.from(data), width, height)
   }
 
   /** @private */
