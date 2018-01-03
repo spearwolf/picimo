@@ -4,7 +4,6 @@ import { expect } from 'chai'
 
 import initializePicimo from 'picimo'
 
-// import waitUntil, { afterNextAF, wait } from './utils/waitUntil'
 import waitUntil, { afterNextAF } from './utils/waitUntil'
 import expectToMatchScreenshot from './utils/expectToMatchScreenshot'
 
@@ -24,7 +23,7 @@ describe('<pi-piPictureEl>', () => {
     before(() => {
       containerEl.innerHTML = `
         <pi-texture-atlas id="atlas0" src="/assets/nobinger.json" nearest></pi-texture-atlas>
-        <pi-canvas alpha premultiplied-alpha preserve-drawing-buffer
+        <pi-canvas alpha premultiplied-alpha preserve-drawing-buffer device-pixel-ratio="1"
           clear="color: #fff"
           projection="sizeFit: contain; desiredWidth: 300; desiredHeight: 150"
           >
@@ -65,7 +64,7 @@ describe('<pi-piPictureEl>', () => {
     before(() => {
       containerEl.innerHTML = `
         <pi-texture-atlas id="atlas0" src="/assets/nobinger.json" nearest></pi-texture-atlas>
-        <pi-canvas alpha premultiplied-alpha preserve-drawing-buffer
+        <pi-canvas alpha premultiplied-alpha preserve-drawing-buffer device-pixel-ratio="1"
           clear="color: #fff"
           projection="sizeFit: contain; desiredWidth: 300; desiredHeight: 150"
           >

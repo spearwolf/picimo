@@ -8,7 +8,9 @@ export default (el) => {
   const style = window.getComputedStyle(el, null)
   const { clientWidth: wPx, clientHeight: hPx } = style.display === 'inline' ? el.parentNode : el
   const { canvas } = el
-  const dpr = window.devicePixelRatio || 1
+
+  // const dpr = window.devicePixelRatio || 1
+  const dpr = el.devicePixelRatio
 
   canvas.style.width = wPx + 'px'
   canvas.style.height = hPx + 'px'

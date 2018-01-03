@@ -29,8 +29,10 @@ export default (screenshotUrl, piCanvas, outputContainer) => {
   rowEl.appendChild(diffCanvasContainer)
   outputContainer.appendChild(rowEl)
 
-  return loadImageIntoCanvas(screenshotUrl, screenshotCanvas).then(() => {
-    const { data: screenshotData, width, height } = readImageData(screenshotCanvas)
+  return loadImageIntoCanvas(screenshotUrl, screenshotCanvas, 2).then(() => {
+    const pixels = piCanvas.readPixels(true)
+    const { width, height } = pixels
+    const { data: screenshotData } = readImageData(screenshotCanvas)
 
     diffCanvas.width = width
     diffCanvas.height = height
@@ -40,12 +42,11 @@ export default (screenshotUrl, piCanvas, outputContainer) => {
     picimoCanvas.width = width
     picimoCanvas.height = height
     const picimoCtx = picimoCanvas.getContext('2d')
-    const pixels = piCanvas.readPixels(true)
     picimoCtx.putImageData(pixels, 0, 0)
     const picimoImageData = readImageData(picimoCanvas)
 
     const diffPixels = pixelmatch(picimoImageData.data, screenshotData, diffImageData.data, width, height, {
-      threshold: 0.1,
+      threshold: 0.33333,
       includeAA: false
     })
 

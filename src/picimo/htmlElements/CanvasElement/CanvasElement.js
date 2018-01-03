@@ -4,7 +4,7 @@ import { ShaderUniformVariable } from 'picimo/core'
 
 import EntityElement from '../EntityElement'
 
-import { UNIFORM_TIME, UNIFORM_RESOLUTION } from '../constants'
+import { UNIFORM_TIME, UNIFORM_RESOLUTION, ATTR_DEVICE_PIXEL_RATIO } from '../constants'
 
 import createWebGlRenderer from './createWebGlRenderer'
 import resize from './resize'
@@ -33,6 +33,14 @@ export default class CanvasElement extends EntityElement {
     resize(self)
 
     return self
+  }
+
+  get devicePixelRatio () {
+    // TODO read ATTR_DEVICE_PIXEL_RATIO via custom_elements attributeChanged callback
+    if (this.hasAttribute(ATTR_DEVICE_PIXEL_RATIO)) {
+      return parseFloat(this.getAttribute(ATTR_DEVICE_PIXEL_RATIO))
+    }
+    return window.devicePixelRatio || 1
   }
 
   get webGlRenderer () {
