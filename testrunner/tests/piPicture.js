@@ -5,23 +5,18 @@ import { expect } from 'chai'
 import initializePicimo from 'picimo'
 
 import waitUntil, { afterNextAF } from './utils/waitUntil'
-import expectToMatchScreenshot from './utils/expectToMatchScreenshot'
-
-const containerEl = document.querySelector('.picimo')
+import { createHtml, querySelector, matchScreenshot } from './utils/matchScreenshot'
 
 const hasSomeSprites = el => () => el.sprites && el.sprites.length
 
-describe('<pi-piPictureEl>', () => {
-  const visualRegressionsEl = document.querySelector('.visualRegressions__container')
-
+describe('<pi-picture>', () => {
   before(initializePicimo)
 
   describe('object-fit: contain', () => {
-    let piCanvasEl
     let piPictureEl
 
     before(() => {
-      containerEl.innerHTML = `
+      createHtml(`
         <pi-texture-atlas id="atlas0" src="/assets/nobinger.json" nearest></pi-texture-atlas>
         <pi-canvas alpha premultiplied-alpha preserve-drawing-buffer device-pixel-ratio="1"
           clear="color: #fff"
@@ -34,14 +29,12 @@ describe('<pi-piPictureEl>', () => {
             display-position="objectFit: contain"
           ></pi-picture>
         </pi-canvas>
-      `
-      piCanvasEl = containerEl.querySelector('pi-canvas')
-      piPictureEl = containerEl.querySelector('pi-picture')
+      `)
+
+      piPictureEl = querySelector('pi-picture')
 
       return waitUntil(hasSomeSprites(piPictureEl)).then(afterNextAF)
     })
-
-    // after(wait(500))
 
     it('.entity exists', () => {
       expect(piPictureEl).to.have.property('entity')
@@ -52,17 +45,12 @@ describe('<pi-piPictureEl>', () => {
       expect(piPictureEl.sprites).to.have.lengthOf(16 * 16)
     })
 
-    it('screenshot match', () => {
-      return expectToMatchScreenshot('/tests/screenshots/picture-atlas-frame-contain.png', piCanvasEl, visualRegressionsEl)
-    })
+    it('screenshot match', () => matchScreenshot('picture-atlas-frame-contain.png'))
   })
 
   describe('object-fit: cover', () => {
-    let piCanvasEl
-    let piPictureEl
-
     before(() => {
-      containerEl.innerHTML = `
+      createHtml(`
         <pi-texture-atlas id="atlas0" src="/assets/nobinger.json" nearest></pi-texture-atlas>
         <pi-canvas alpha premultiplied-alpha preserve-drawing-buffer device-pixel-ratio="1"
           clear="color: #fff"
@@ -75,17 +63,10 @@ describe('<pi-piPictureEl>', () => {
             display-position="objectFit: cover"
           ></pi-picture>
         </pi-canvas>
-      `
-      piCanvasEl = containerEl.querySelector('pi-canvas')
-      piPictureEl = containerEl.querySelector('pi-picture')
-
-      return waitUntil(hasSomeSprites(piPictureEl)).then(afterNextAF)
+      `)
+      return waitUntil(hasSomeSprites(querySelector('pi-picture'))).then(afterNextAF)
     })
 
-    // after(wait(500))
-
-    it('screenshot match', () => {
-      return expectToMatchScreenshot('/tests/screenshots/picture-atlas-frame-cover.png', piCanvasEl, visualRegressionsEl)
-    })
+    it('screenshot match', () => matchScreenshot('picture-atlas-frame-cover.png'))
   })
 })
