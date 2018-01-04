@@ -11,6 +11,8 @@ module.exports = (app) => {
       console.log('GET', colors.bold.blue(req.path), '->', colors.bold.yellow(target))
       res.type('application/javascript')
       res.status(200).sendFile(path.join(BASE_DIR, target))
+    } else if (req.path.match(/document-register-element\.js$/)) {
+      res.status(200).sendFile(path.join(BASE_DIR, 'node_modules/document-register-element/build/document-register-element.js'))
     } else {
       next()
     }
