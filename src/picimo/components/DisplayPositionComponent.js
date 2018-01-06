@@ -50,12 +50,24 @@ const convertUnit = ({ unit, value }, units, percent, devicePixelRatio) => {
 export default class DisplayPosition {
   constructor (entity, data) {
     updateAttributes(this, data)
-    debug(`[${DISPLAY_POSITION}] create`, this, data)
   }
 
   update (data) {
     updateAttributes(this, data)
-    debug(`[${DISPLAY_POSITION}] udpate`, this)
+  }
+
+  connectedEntity (entity) {
+    entity.on('updatePictureQuadTransformation', this)
+  }
+
+  disconnectedEntity (entity) {
+    entity.off(this)
+  }
+
+  updatePictureQuadTransformation (renderer, textureDimension, scaleUniform, transformUniform) {
+    const targetTransform = this.calculate(renderer, textureDimension)
+    scaleUniform.value = [targetTransform.width, targetTransform.height, 0, 0]
+    transformUniform.value = [targetTransform.x, targetTransform.y, 0]
   }
 
   calculate (renderer, { width: srcWidth, height: srcHeight }) {

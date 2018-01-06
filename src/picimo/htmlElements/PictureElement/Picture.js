@@ -1,8 +1,6 @@
-import { DISPLAY_POSITION } from 'picimo/components/DisplayPositionComponent'
 import { info } from 'common/log'
 
 import createVertices from './createVertices'
-import updateViewFit from './updateViewFit'
 import updateTexCoords from './updateTexCoords'
 
 import { TEXTURE_SHADER_KEY } from './constants'
@@ -39,22 +37,15 @@ export default class {
 
   renderFrame (renderer) {
     const { el } = this
+    const { scaleUniform, transformUniform } = el
 
-    const displayPosition = el.entity[DISPLAY_POSITION]
-    if (displayPosition) {
-      const targetTransform = displayPosition.calculate(renderer, el.texture)
-      el.scaleUniform.value = [targetTransform.width, targetTransform.height, 0, 0]
-      el.transformUniform.value = [targetTransform.x, targetTransform.y, 0]
-    } else {
-      updateViewFit(el, renderer)
-    }
+    el.entity.emit('updatePictureQuadTransformation', renderer, el.texture, scaleUniform, transformUniform)
 
     if (el.verticesUpdated) {
       el.spriteGroup.touchVertexBuffers()
       el.verticesUpdated = false
     }
 
-    const { scaleUniform, transformUniform } = el
     const { shaderContext } = renderer
 
     shaderContext.pushVar(scaleUniform)
