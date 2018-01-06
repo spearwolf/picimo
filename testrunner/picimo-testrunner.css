@@ -18,8 +18,10 @@ body { margin: 0; }
   width: 300px;
   height: 150px;
   margin: 0 0 16px 16px;
-  background-color: #bcd;
   border: 1px solid #333;
+  background-color: #bcd;
+  background-image: url("/canvas-background-pattern.png");
+  background-repeat: repeat;
 }
 
 .picimo pi-canvas,
