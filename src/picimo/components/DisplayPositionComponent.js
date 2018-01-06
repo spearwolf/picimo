@@ -76,11 +76,11 @@ export default class DisplayPosition {
         sh: srcHeight
       }
 
-      let targetWidth
-      let targetHeight
+      let targetWidth = viewWidth
+      let targetHeight = viewHeight
 
-      let containerWidth
-      let containerHeight
+      let containerWidth = viewWidth
+      let containerHeight = viewHeight
 
       let translateX = 0
       let translateY = 0
@@ -158,6 +158,9 @@ export default class DisplayPosition {
         translateX = -(viewWidth * 0.5) + convertUnit(left, units, viewWidth, dpr)
       }
 
+      let containerTranslateX = 0
+      let containerTranslateY = 0
+
       if (OBJECT_FIT_FILL === this.objectFit) {
         // ======= objectFit: fill ==========================
         //
@@ -187,13 +190,16 @@ export default class DisplayPosition {
           targetWidth = scale * srcWidth
           targetHeight = scale * srcHeight
         }
+
+        // containerTranslateX = (containerWidth * 0.5) - (targetWidth * 0.5)
+        // containerTranslateY = (-containerHeight * 0.5) - (-targetHeight * 0.5)
       }
 
       this.targetTransform = {
         width: targetWidth,
         height: targetHeight,
-        x: translateX - (targetWidth * pivotX) + (targetWidth * 0.5),
-        y: translateY - (targetHeight * pivotY) + (targetHeight * 0.5)
+        x: translateX - (targetWidth * pivotX) + (targetWidth * 0.5) + containerTranslateX,
+        y: translateY - (targetHeight * pivotY) + (targetHeight * 0.5) + containerTranslateY
         // TODO z?
       }
 

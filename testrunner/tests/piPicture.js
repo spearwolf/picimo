@@ -69,7 +69,30 @@ describe('<pi-picture>', () => {
     it('screenshot match', () => matchScreenshot('picture-atlas-frame-cover.png'))
   })
 
-  describe('object-fit: width(px)', () => {
+  describe('top,left,bottom,right and fill', () => {
+    before(() => {
+      createHtml(`
+        <pi-texture-atlas id="atlas0" src="/assets/picimo-atlas.json" nearest></pi-texture-atlas>
+        <pi-canvas alpha premultiplied-alpha preserve-drawing-buffer width="600" height="300"
+          clear="color: #fff"
+          projection="sizeFit: contain; desiredWidth: 300; desiredHeight: 150"
+          >
+          <pi-picture
+            mesh-rows="16"
+            mesh-cols="16"
+            texture="src: #atlas0; frame: picimo"
+            display-position="top: 20%; bottom: 20%; left: 5%; right: 5%; objectFit: fill"
+          ></pi-picture>
+        </pi-canvas>
+      `)
+
+      return pictureMeshCreated(querySelector('pi-picture')).then(afterNextAF)
+    })
+
+    it('screenshot match', () => matchScreenshot('picture-top-left-bottom-right-fill.png'))
+  })
+
+  describe('top,left,bottom,right and contain', () => {
     before(() => {
       createHtml(`
         <pi-texture-atlas id="atlas0" src="/assets/picimo-atlas.json" nearest></pi-texture-atlas>
@@ -89,6 +112,29 @@ describe('<pi-picture>', () => {
       return pictureMeshCreated(querySelector('pi-picture')).then(afterNextAF)
     })
 
-    it('screenshot match', () => matchScreenshot('picture-atlas-frame-width-px-contain.png'))
+    it('screenshot match', () => matchScreenshot('picture-top-left-bottom-right-contain.png'))
+  })
+
+  describe('top,left,bottom,right and cover', () => {
+    before(() => {
+      createHtml(`
+        <pi-texture-atlas id="atlas0" src="/assets/picimo-atlas.json" nearest></pi-texture-atlas>
+        <pi-canvas alpha premultiplied-alpha preserve-drawing-buffer width="600" height="300"
+          clear="color: #fff"
+          projection="sizeFit: contain; desiredWidth: 300; desiredHeight: 150"
+          >
+          <pi-picture
+            mesh-rows="16"
+            mesh-cols="16"
+            texture="src: #atlas0; frame: picimo"
+            display-position="top: 20%; bottom: 20%; left: 5%; right: 5%; objectFit: cover"
+          ></pi-picture>
+        </pi-canvas>
+      `)
+
+      return pictureMeshCreated(querySelector('pi-picture')).then(afterNextAF)
+    })
+
+    it('screenshot match', () => matchScreenshot('picture-top-left-bottom-right-cover.png'))
   })
 })

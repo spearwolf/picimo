@@ -1,3 +1,4 @@
+/* eslint-env browser */
 import Texture from './texture'
 import TextureAtlasSpec from './texture_atlas_spec.js'
 import sample from '../utils/sample.js'
@@ -90,11 +91,12 @@ export default class TextureAtlas {
    * Loads a TextureAtlas.
    * @param {string} url - should point to the *texture atlas json spec*
    * @param {object} [fetchOptions=undefined] - options for the `fetch()` call
-   * @param {string|function|PowerOf2Image|HTMLImageElement|HTMLCanvasElement} [image=null] - per default the image will be loaded from `meta.image` url from the *texture atlas spec*
+   * @param {string|function|PowerOf2Image|HTMLImageElement|HTMLCanvasElement} [image=null] - by default the image will be loaded from url specified by `meta.image` property from the *texture atlas spec*
    * @param {object} [textureHints=undefined] - texture hints
    * @returns {Promise<TextureAtlas>}
    */
   static load (url, fetchOptions = null, image = null, textureHints = undefined) {
-    return TextureAtlasSpec.load(url, fetchOptions || {}).then(atlasSpec => atlasSpec.createTextureAtlas(image || atlasSpec.imageUrl, textureHints))
+    const atlasUrl = new URL(url, window.location.href).href
+    return TextureAtlasSpec.load(atlasUrl, fetchOptions || {}).then(atlasSpec => atlasSpec.createTextureAtlas(image || new URL(atlasSpec.imageUrl, atlasUrl).href, textureHints))
   }
 }

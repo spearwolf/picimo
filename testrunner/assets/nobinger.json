@@ -57,7 +57,7 @@
 "meta": {
 	"app": "http://www.codeandweb.com/texturepacker",
 	"version": "1.0",
-	"image": "/assets/nobinger.png",
+	"image": "nobinger.png",
 	"format": "RGBA8888",
 	"size": {"w":128,"h":256},
 	"scale": "1",
