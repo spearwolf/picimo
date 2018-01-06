@@ -24,6 +24,8 @@ export default class {
 
     this.textureIdChanged(textureId)
     updateTexCoords(el, texture)
+
+    el.entity.emit('pictureMeshCreated', el)
   }
 
   textureIdChanged (textureId) {

@@ -4,10 +4,8 @@ import { expect } from 'chai'
 
 import initializePicimo from 'picimo'
 
-import waitUntil, { afterNextAF } from './utils/waitUntil'
+import { pictureMeshCreated, afterNextAF } from './utils/waitUntil'
 import { createHtml, querySelector, matchScreenshot } from './utils/matchScreenshot'
-
-const hasSomeSprites = el => () => el.sprites && el.sprites.length
 
 describe('<pi-picture>', () => {
   before(initializePicimo)
@@ -18,7 +16,7 @@ describe('<pi-picture>', () => {
     before(() => {
       createHtml(`
         <pi-texture-atlas id="atlas0" src="/assets/nobinger.json" nearest></pi-texture-atlas>
-        <pi-canvas alpha premultiplied-alpha preserve-drawing-buffer device-pixel-ratio="1"
+        <pi-canvas alpha premultiplied-alpha preserve-drawing-buffer width="600" height="300"
           clear="color: #fff"
           projection="sizeFit: contain; desiredWidth: 300; desiredHeight: 150"
           >
@@ -33,7 +31,7 @@ describe('<pi-picture>', () => {
 
       piPictureEl = querySelector('pi-picture')
 
-      return waitUntil(hasSomeSprites(piPictureEl)).then(afterNextAF)
+      return pictureMeshCreated(piPictureEl).then(afterNextAF)
     })
 
     it('.entity exists', () => {
@@ -52,21 +50,45 @@ describe('<pi-picture>', () => {
     before(() => {
       createHtml(`
         <pi-texture-atlas id="atlas0" src="/assets/nobinger.json" nearest></pi-texture-atlas>
-        <pi-canvas alpha premultiplied-alpha preserve-drawing-buffer device-pixel-ratio="1"
+        <pi-canvas alpha premultiplied-alpha preserve-drawing-buffer width="600" height="300"
           clear="color: #fff"
           projection="sizeFit: contain; desiredWidth: 300; desiredHeight: 150"
           >
           <pi-picture
             mesh-rows="16"
             mesh-cols="16"
-            texture="src: #atlas0; frame: nobinger-blau.png"
+            texture="src: #atlas0; frame: nobinger-gruen.png"
             display-position="objectFit: cover"
           ></pi-picture>
         </pi-canvas>
       `)
-      return waitUntil(hasSomeSprites(querySelector('pi-picture'))).then(afterNextAF)
+
+      return pictureMeshCreated(querySelector('pi-picture')).then(afterNextAF)
     })
 
     it('screenshot match', () => matchScreenshot('picture-atlas-frame-cover.png'))
+  })
+
+  describe('object-fit: width(px)', () => {
+    before(() => {
+      createHtml(`
+        <pi-texture-atlas id="atlas0" src="/assets/picimo-atlas.json" nearest></pi-texture-atlas>
+        <pi-canvas alpha premultiplied-alpha preserve-drawing-buffer width="600" height="300"
+          clear="color: #fff"
+          projection="sizeFit: contain; desiredWidth: 300; desiredHeight: 150"
+          >
+          <pi-picture
+            mesh-rows="16"
+            mesh-cols="16"
+            texture="src: #atlas0; frame: picimo"
+            display-position="top: 20%; bottom: 20%; left: 5%; right: 5%; objectFit: contain"
+          ></pi-picture>
+        </pi-canvas>
+      `)
+
+      return pictureMeshCreated(querySelector('pi-picture')).then(afterNextAF)
+    })
+
+    it('screenshot match', () => matchScreenshot('picture-atlas-frame-width-px-contain.png'))
   })
 })

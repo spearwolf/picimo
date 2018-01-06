@@ -1,7 +1,5 @@
 /* eslint-env browser */
 
-const DPR = 1 // window.devicePixelRatio || 1
-
 export default (url, canvas, imageDpr = 2) => {
   return new Promise(resolve => {
     fetch(url).then(response => response.blob()).then(blob => {
@@ -11,8 +9,8 @@ export default (url, canvas, imageDpr = 2) => {
         const ctx = canvas.getContext('2d')
         const { width, height } = img
 
-        canvas.width = (width / imageDpr) * DPR
-        canvas.height = (height / imageDpr) * DPR
+        canvas.width = width
+        canvas.height = height
 
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
         resolve(img)

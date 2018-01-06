@@ -41,6 +41,8 @@ export default class PictureElement extends SpriteGroupElement {
       lastViewFit: ''
     })
 
+    me.entity.retain('pictureMeshCreated')
+
     const executor = new PreConditionExecutor(me, PRE_CONDITION_ATTRS)
     defineHiddenPropertyRO(me, 'renderFrameExecutor', executor)
 

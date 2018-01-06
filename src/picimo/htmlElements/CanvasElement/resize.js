@@ -1,3 +1,4 @@
+import { logOnceOnly, debug } from 'common/log'
 
 /**
  * @private
@@ -7,13 +8,31 @@
 export default (el) => {
   const style = window.getComputedStyle(el, null)
   const { clientWidth: wPx, clientHeight: hPx } = style.display === 'inline' ? el.parentNode : el
-  const { canvas, devicePixelRatio: dpr } = el
+  const { canvas, fixedCanvasSize } = el
 
   canvas.style.width = wPx + 'px'
   canvas.style.height = hPx + 'px'
 
-  const w = Math.round(wPx * dpr)
-  const h = Math.round(hPx * dpr)
+  let w, h, dpr
+
+  if (fixedCanvasSize) {
+    w = fixedCanvasSize[0]
+    h = fixedCanvasSize[1]
+    dpr = w / wPx
+    el._devicePixelRatio = dpr
+  } else {
+    dpr = el.devicePixelRatio
+    w = Math.round(wPx * dpr)
+    h = Math.round(hPx * dpr)
+  }
+
+  // TODO remove debug output from CanvasElement#resize()
+  if (wPx > 0 && hPx > 0) {
+    if (el._logCanvasSize === undefined) {
+      el._logCanvasSize = logOnceOnly(debug)
+    }
+    el._logCanvasSize('[pi-canvas] wpx=', wPx, 'hPx=', hPx, 'w=', w, 'h=', h, 'dpr=', dpr)
+  }
 
   if (w !== canvas.width || h !== canvas.height) {
     canvas.width = w

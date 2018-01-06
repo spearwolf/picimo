@@ -4,7 +4,13 @@ import { ShaderUniformVariable } from 'picimo/core'
 
 import EntityElement from '../EntityElement'
 
-import { UNIFORM_TIME, UNIFORM_RESOLUTION, ATTR_DEVICE_PIXEL_RATIO } from '../constants'
+import {
+  UNIFORM_TIME,
+  UNIFORM_RESOLUTION,
+  ATTR_DEVICE_PIXEL_RATIO,
+  ATTR_WIDTH,
+  ATTR_HEIGHT
+} from '../constants'
 
 import createWebGlRenderer from './createWebGlRenderer'
 import resize from './resize'
@@ -23,9 +29,11 @@ export default class CanvasElement extends EntityElement {
     self.resolutionUniform = new ShaderUniformVariable(UNIFORM_RESOLUTION)
 
     defineHiddenPropertiesRW(self, {
-      _webGlRenderer: null,
       _clearColor: undefined,
-      _lastFrameTime: 0
+      _devicePixelRatio: 0,
+      _fixedCanvasSize: undefined,
+      _lastFrameTime: 0,
+      _webGlRenderer: null
     })
 
     self.canvas = document.createElement('canvas')
@@ -35,10 +43,31 @@ export default class CanvasElement extends EntityElement {
     return self
   }
 
+  hasWidthAndHeightAttributes () {
+    return this.hasAttribute(ATTR_WIDTH) && this.hasAttribute(ATTR_HEIGHT)
+  }
+
+  get fixedCanvasSize () {
+    if (this._fixedCanvasSize === undefined) {
+      if (this.hasWidthAndHeightAttributes()) {
+        this._fixedCanvasSize = [
+          parseFloat(this.getAttribute(ATTR_WIDTH)),
+          parseFloat(this.getAttribute(ATTR_HEIGHT))
+        ].map(Math.floor)
+      } else {
+        this._fixedCanvasSize = null
+      }
+    }
+    return this._fixedCanvasSize
+  }
+
   get devicePixelRatio () {
-    // TODO read ATTR_DEVICE_PIXEL_RATIO via custom_elements attributeChanged callback
+    if (this._devicePixelRatio > 0) {
+      return this._devicePixelRatio
+    }
     if (this.hasAttribute(ATTR_DEVICE_PIXEL_RATIO)) {
-      return parseFloat(this.getAttribute(ATTR_DEVICE_PIXEL_RATIO))
+      this._devicePixelRatio = parseFloat(this.getAttribute(ATTR_DEVICE_PIXEL_RATIO))
+      return this._devicePixelRatio
     }
     return window.devicePixelRatio || 1
   }
