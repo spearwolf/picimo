@@ -21,6 +21,8 @@ export const waitUntil = (expressionCallback, timeoutMs = TIMEOUT_MS, waitMs = W
 })
 
 export const waitFor = (eventizer, eventName, timeoutMs = TIMEOUT_MS) => new Promise((resolve, reject) => {
+  console.log('WAIT FOR: eventizer=', eventizer)
+
   const timeout = setTimeout(() => {
     reject(new Error(`timeout, >${timeoutMs / 1000} sec`))
   }, timeoutMs)
@@ -45,9 +47,11 @@ const PICTURE_MESH_CREATED = 'pictureMeshCreated'
 
 export const pictureMeshCreated = el => {
   if (el instanceof NodeList) {
-    return Promise.all(Array.from(el).map(elem => waitFor(elem.entity, PICTURE_MESH_CREATED)))
+    return Promise.all(Array.from(el).map(elem => {
+      return waitUntil(() => elem.entity).then(() => waitFor(elem.entity, PICTURE_MESH_CREATED))
+    }))
   }
-  return waitFor(el.entity, PICTURE_MESH_CREATED)
+  return waitUntil(() => el.entity).then(() => waitFor(el.entity, PICTURE_MESH_CREATED))
 }
 
 export default waitUntil

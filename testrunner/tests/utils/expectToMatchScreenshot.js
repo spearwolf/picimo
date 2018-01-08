@@ -52,7 +52,6 @@ export default (screenshotUrl, piCanvas, outputContainer) => {
 
     diffCtx.putImageData(diffImageData, 0, 0)
 
-    // expect(diffPixels, 'Ooops.. screenshots do not match!').to.equal(0)
     expect(diffPixels, 'Ooops.. screenshots do not match!').to.below(100)
   })
 }
