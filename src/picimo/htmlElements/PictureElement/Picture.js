@@ -1,5 +1,3 @@
-import { info } from 'common/log'
-
 import createVertices from './createVertices'
 import updateTexCoords from './updateTexCoords'
 
@@ -14,7 +12,7 @@ export default class {
     const { el } = this
     const { meshRows, meshCols, sprites } = el
 
-    info(`[picture] create mesh(${el.meshCols}x${el.meshRows}), textureId=${textureId}, spriteGroup=`, spriteGroup, el)
+    // info(`[picture] create mesh(${el.meshCols}x${el.meshRows}), textureId=${textureId}, spriteGroup=`, spriteGroup, el)
 
     spriteGroup.voPool.alloc(meshCols * meshRows, sprites)
     createVertices(el, 1.0, 1.0)

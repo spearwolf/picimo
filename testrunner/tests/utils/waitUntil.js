@@ -1,3 +1,4 @@
+/* eslint-env browser */
 const TIMEOUT_MS = 4800
 const WAIT_MS = 16
 
@@ -40,6 +41,13 @@ export const wait = (ms) => () => new Promise(resolve => {
   setTimeout(resolve, ms)
 })
 
-export const pictureMeshCreated = el => waitFor(el.entity, 'pictureMeshCreated')
+const PICTURE_MESH_CREATED = 'pictureMeshCreated'
+
+export const pictureMeshCreated = el => {
+  if (el instanceof NodeList) {
+    return Promise.all(Array.from(el).map(elem => waitFor(elem.entity, PICTURE_MESH_CREATED)))
+  }
+  return waitFor(el.entity, PICTURE_MESH_CREATED)
+}
 
 export default waitUntil

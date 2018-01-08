@@ -1,6 +1,6 @@
 import { UNIFORM_RESOLUTION } from 'picimo/htmlElements/constants'
-import { getNumber, getString, getUnitValue } from 'picimo/utils'
-import { debug } from 'common/log'
+import { getString, getUnitValue } from 'picimo/utils'
+// import { debug } from 'common/log'
 
 export const DISPLAY_POSITION = 'display-position'
 
@@ -17,8 +17,8 @@ const updateAttributes = (displayPosition, data) => {
   displayPosition.left = getUnitValue(data.left, DEFAULT_UNIT)
   displayPosition.right = getUnitValue(data.right, DEFAULT_UNIT)
   displayPosition.bottom = getUnitValue(data.bottom, DEFAULT_UNIT)
-  displayPosition.pivotX = getNumber(data.pivotX, 0.5)
-  displayPosition.pivotY = getNumber(data.pivotY, 0.5)
+  // displayPosition.pivotX = getNumber(data.pivotX, 0.5)
+  // displayPosition.pivotY = getNumber(data.pivotY, 0.5)
   displayPosition.width = getUnitValue(data.width, DEFAULT_UNIT)
   displayPosition.height = getUnitValue(data.height, DEFAULT_UNIT)
   displayPosition.objectFit = getString(data.objectFit, DEFAULT_OBJECT_FIT)
@@ -70,108 +70,94 @@ export default class DisplayPosition {
     transformUniform.value = [targetTransform.x, targetTransform.y, 0]
   }
 
-  calculate (renderer, { width: srcWidth, height: srcHeight }) {
+  calculate (renderer, { width: textureWidth, height: textureHeight }) {
     const [viewWidth, viewHeight] = getViewSize(renderer)
+    const devicePixelRatio = renderer.shaderContext.curUniform(UNIFORM_RESOLUTION).value[2]
 
-    if (this.needsUpdate || viewWidth !== this.lastViewWidth || viewHeight !== this.lastViewHeight || srcWidth !== this.lastSrcWidth || srcHeight !== this.lastSrcHeight) {
+    if (this.needsUpdate ||
+      viewWidth !== this.lastViewWidth || viewHeight !== this.lastViewHeight ||
+      textureWidth !== this.lastTextureWidth || textureHeight !== this.lastTextureHeight ||
+      devicePixelRatio !== this.lastDevicePixelRatio
+    ) {
       this.needsUpdate = false
       this.lastViewWidth = viewWidth
       this.lastViewHeight = viewHeight
-      this.lastSrcWidth = srcWidth
-      this.lastSrcHeight = srcHeight
+      this.lastTextureWidth = textureWidth
+      this.lastTextureHeight = textureHeight
+      this.lastDevicePixelRatio = devicePixelRatio
 
-      const dpr = renderer.shaderContext.curUniform(UNIFORM_RESOLUTION).value[2]
       const units = {
         vw: viewWidth,
         vh: viewHeight,
-        sw: srcWidth,
-        sh: srcHeight
+        sw: textureWidth,
+        sh: textureHeight
       }
 
-      let targetWidth = viewWidth
-      let targetHeight = viewHeight
+      let targetWidth = 0
+      let targetHeight = 0
 
-      let containerWidth = viewWidth
-      let containerHeight = viewHeight
+      let containerWidth = 0
+      let containerHeight = 0
 
-      let translateX = 0
-      let translateY = 0
+      let centerX = 0
+      let centerY = 0
 
-      let { pivotX, pivotY } = this
+      // let { pivotX, pivotY } = this
 
       const { top, left, right, bottom } = this
       const { width, height } = this
 
-      if (width || height) {
-        if (width) {
-          if (height) {
+      const hasTop = top !== null
+      const hasRight = right !== null
+      const hasBottom = bottom !== null
+      const hasLeft = left !== null
+
+      if (hasLeft && hasRight) {
+        const leftPx = convertUnit(left, units, viewWidth, devicePixelRatio)
+        const rightPx = convertUnit(right, units, viewWidth, devicePixelRatio)
+
+        centerX = (leftPx - rightPx) / 2.0
+        containerWidth = viewWidth - leftPx - rightPx
+      }
+
+      if (hasTop && hasBottom) {
+        const topPx = convertUnit(top, units, viewHeight, devicePixelRatio)
+        const bottomPx = convertUnit(bottom, units, viewHeight, devicePixelRatio)
+
+        centerY = (bottomPx - topPx) / 2.0
+        containerHeight = viewHeight - topPx - bottomPx
+      }
+
+      const hasWidth = width !== null
+      const hasHeight = height !== null
+
+      if (hasWidth || hasHeight) {
+        if (hasWidth) {
+          if (hasHeight) {
             // ======= width & height ==========================
             //
-            targetWidth = convertUnit(width, units, srcWidth, dpr)
-            targetHeight = convertUnit(height, units, srcHeight, dpr)
+            containerWidth = convertUnit(width, units, textureWidth, devicePixelRatio)
+            containerHeight = convertUnit(height, units, textureHeight, devicePixelRatio)
           } else {
             // ======= width ==========================
             //
-            targetWidth = convertUnit(width, units, srcWidth, dpr)
-            targetHeight = targetWidth * (srcWidth / srcHeight)
+            containerWidth = convertUnit(width, units, textureWidth, devicePixelRatio)
+            if (containerHeight === 0) {
+              containerHeight = containerWidth * (textureWidth / textureHeight)
+            }
           }
         } else {
           // ======= height ==========================
           //
-          targetHeight = convertUnit(height, units, srcHeight, dpr)
-          targetWidth = targetHeight * (srcHeight / srcWidth)
+          containerHeight = convertUnit(height, units, textureHeight, devicePixelRatio)
+          if (containerWidth === 0) {
+            containerWidth = containerHeight * (textureHeight / textureWidth)
+          }
         }
-
-        containerWidth = targetWidth
-        containerHeight = targetHeight
       }
 
-      if (top && bottom) {
-        const topPx = convertUnit(top, units, viewHeight, dpr)
-        const bottomPx = convertUnit(bottom, units, viewHeight, dpr)
-        const halfViewHeight = viewHeight * 0.5
-        translateY = halfViewHeight - topPx
-        containerHeight = translateY - ((-halfViewHeight) + bottomPx)
-        pivotY = 1
-        if (!containerWidth && !(left && right)) {
-          containerWidth = containerHeight * srcWidth / srcHeight
-        }
-      } else if (!containerHeight) {
-        containerHeight = viewHeight
-      }
-
-      if (left && right) {
-        const leftPx = convertUnit(left, units, viewWidth, dpr)
-        const rightPx = convertUnit(right, units, viewWidth, dpr)
-        const halfViewWidth = viewWidth * 0.5
-        translateX = -halfViewWidth + leftPx
-        containerWidth = halfViewWidth - rightPx - translateX
-        pivotX = 0
-        if (!containerHeight && !(top && bottom)) {
-          containerHeight = containerWidth * srcHeight / srcWidth
-        }
-      } else if (!containerWidth) {
-        containerWidth = viewWidth
-      }
-
-      if (bottom && !top) {
-        translateY = -(viewHeight * 0.5) + convertUnit(bottom, units, viewHeight, dpr)
-      }
-
-      if (top && !bottom) {
-        translateY = (viewHeight * 0.5) - convertUnit(top, units, viewHeight, dpr)
-      }
-
-      if (right && !left) {
-        translateX = (viewWidth * 0.5) - convertUnit(right, units, viewWidth, dpr)
-      }
-
-      if (left && !right) {
-        translateX = -(viewWidth * 0.5) + convertUnit(left, units, viewWidth, dpr)
-      }
-
-      let containerTranslateX = 0
-      let containerTranslateY = 0
+      if (containerWidth === 0) containerWidth = viewWidth
+      if (containerHeight === 0) containerHeight = viewHeight
 
       if (OBJECT_FIT_FILL === this.objectFit) {
         // ======= objectFit: fill ==========================
@@ -182,7 +168,7 @@ export default class DisplayPosition {
         // ======= objectFit: cover || contain ==========================
         //
         const containerRatio = containerHeight / containerWidth
-        const srcRatio = srcHeight / srcWidth
+        const srcRatio = textureHeight / textureWidth
 
         if (srcRatio === 1) {
           if (OBJECT_FIT_COVER === this.objectFit) {
@@ -194,28 +180,45 @@ export default class DisplayPosition {
           let scale
 
           if (OBJECT_FIT_COVER === this.objectFit) {
-            scale = srcRatio > containerRatio ? containerWidth / srcWidth : containerHeight / srcHeight
+            scale = srcRatio > containerRatio ? containerWidth / textureWidth : containerHeight / textureHeight
           } else { // "contain"
-            scale = srcRatio < containerRatio ? containerWidth / srcWidth : containerHeight / srcHeight
+            scale = srcRatio < containerRatio ? containerWidth / textureWidth : containerHeight / textureHeight
           }
 
-          targetWidth = scale * srcWidth
-          targetHeight = scale * srcHeight
+          targetWidth = scale * textureWidth
+          targetHeight = scale * textureHeight
         }
+      }
 
-        // containerTranslateX = (containerWidth * 0.5) - (targetWidth * 0.5)
-        // containerTranslateY = (-containerHeight * 0.5) - (-targetHeight * 0.5)
+      if (hasBottom) {
+        const bottomPx = convertUnit(bottom, units, viewHeight, devicePixelRatio)
+
+        centerY = -(viewHeight * 0.5) + bottomPx + (targetHeight * 0.5)
+      } else if (hasTop) {
+        const topPx = convertUnit(top, units, viewHeight, devicePixelRatio)
+
+        centerY = (viewHeight * 0.5) - topPx - (targetHeight * 0.5)
+      }
+
+      if (hasLeft) {
+        const leftPx = convertUnit(left, units, viewWidth, devicePixelRatio)
+
+        centerX = -(viewWidth * 0.5) + leftPx + (targetWidth * 0.5)
+      } else if (hasRight) {
+        const rightPx = convertUnit(right, units, viewWidth, devicePixelRatio)
+
+        centerX = (viewWidth * 0.5) - rightPx - (targetWidth * 0.5)
       }
 
       this.targetTransform = {
         width: targetWidth,
         height: targetHeight,
-        x: translateX - (targetWidth * pivotX) + (targetWidth * 0.5) + containerTranslateX,
-        y: translateY - (targetHeight * pivotY) + (targetHeight * 0.5) + containerTranslateY
+        x: centerX,
+        y: centerY
         // TODO z?
       }
 
-      debug(`[${DISPLAY_POSITION}] calculate`, this.targetTransform)
+      // debug(`[${DISPLAY_POSITION}] calculate`, this.targetTransform)
     }
 
     return this.targetTransform
