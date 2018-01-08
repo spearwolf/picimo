@@ -1,6 +1,5 @@
 import textureLibrary from 'picimo/textureLibrary'
 import { defineHiddenPropertyRW } from 'picimo/utils'
-import { debug } from 'common/log'
 
 import EntityElement from '../EntityElement'
 import { ATTR_SRC } from '../constants'
@@ -54,7 +53,7 @@ export default class TextureAtlasElement extends EntityElement {
   loadTextureAtlas () {
     const src = this.getAttribute(ATTR_SRC)
     if (src) {
-      debug('[texture-atlas] loadTextureAtlas, src=', src)
+      // debug('[texture-atlas] loadTextureAtlas, src=', src)
       loadTextureAtlas(this, src)
     }
     return this.textureAtlasPromise

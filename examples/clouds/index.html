@@ -24,10 +24,19 @@
     <script src="picimo.js"></script>
   </head>
   <body>
+    <pi-texture-atlas id="cloudsAtlas" src="clouds.json"></pi-texture-atlas>
+    <pi-texture-atlas id="logos" src="picimo-atlas.json" nearest></pi-texture-atlas>
+
     <pi-canvas id="picimo" alpha premultiplied-alpha
       projection="sizeFit: contain; desiredWidth: 600; desiredHeight: 600; perspective: 100"
+      blend="sfactor: srcAlpha; dfactor: oneMinusSrcAlpha"
       >
-      <pi-texture-atlas id="cloudsAtlas" src="clouds.json" nearest></pi-texture-atlas>
+      <pi-picture texture="src: #logos; frame: picimo-512"
+        display-position="top: 5%; width: 256px; objectFit: contain"
+        ></pi-picture>
+      <pi-picture texture="src: #logos; frame: spearwolf-logo-mini"
+        display-position="top: 19%; width: 80px; objectFit: contain"
+        ></pi-picture>
       <pi-sprite-group
         id="cloudsSprites"
         vo-descriptor="simple"
@@ -37,7 +46,6 @@
         fragment-shader="simple"
         primitive-type="TRIANGLES"
         texture-map="tex: #cloudsAtlas"
-        blend="sfactor: srcAlpha; dfactor: oneMinusSrcAlpha"
         ></pi-sprite-group>
     </pi-canvas>
     <script src="bundle.js"></script>

@@ -1,6 +1,5 @@
 import { getDefaultOption } from 'picimo/utils'
 import { PRIO_RF_CLEAR } from 'picimo/priorities'
-import { debug } from 'common/log'
 
 const tinycolor = require('tinycolor2')
 
@@ -50,12 +49,12 @@ const parseConfig = (props) => {
 export default class ClearComponent {
   constructor (entity, config) {
     Object.assign(this, parseConfig(config))
-    debug('[clear] create', this)
+    // debug('[clear] create', this)
   }
 
   update (config) {
     Object.assign(this, parseConfig(config))
-    debug('[clear] update', this)
+    // debug('[clear] update', this)
   }
 
   connectedEntity (entity) {

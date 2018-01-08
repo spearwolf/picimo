@@ -1,5 +1,4 @@
 import { parseCssStyledProperties } from 'picimo/utils'
-import { debug } from 'common/log'
 
 /** @private */
 export default (el, data) => {
@@ -15,6 +14,6 @@ export default (el, data) => {
     el.textureMap[key] = texEl.textureId
     spriteGroup.setTexture(key, texEl.textureId)
   })
-  debug(`[sprite-group/${el.entity.id}] use texture frames from`, textureElements)
+  // debug(`[sprite-group/${el.entity.id}] use texture frames from`, textureElements)
   textureElements.forEach(texEl => texEl.loadTexture())
 }

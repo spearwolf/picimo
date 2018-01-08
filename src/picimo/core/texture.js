@@ -1,3 +1,4 @@
+/* eslint-env browser */
 import PowerOf2Image from './power_of_2_image'
 import ResourceRef from '../utils/resource_ref'
 
@@ -206,6 +207,7 @@ export default class Texture {
     * @returns {Promise<Texture>}
     */
   static load (url, textureHints) {
-    return new PowerOf2Image(url).complete.then(p2img => new Texture(p2img, undefined, undefined, 0, 0, textureHints))
+    const absoluteUrl = new URL(url, window.location.href).href
+    return new PowerOf2Image(absoluteUrl).complete.then(p2img => new Texture(p2img, undefined, undefined, 0, 0, textureHints))
   }
 }

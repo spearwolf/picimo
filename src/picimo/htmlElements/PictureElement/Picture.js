@@ -1,3 +1,5 @@
+// import { info } from 'common/log'
+
 import createVertices from './createVertices'
 import updateTexCoords from './updateTexCoords'
 

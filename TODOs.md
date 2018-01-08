@@ -4,12 +4,12 @@ HTML Element API And Other Issues
 ---------------------------------
 
 - [ ] Render to texture ..
-  - [ ] `<pi-picture/>` acts as single sprite renderer, support boilerplate example (background)
+  - [x] `<pi-picture/>` acts as single sprite renderer, support boilerplate example (background)
     - [ ] support boilerplate example (background shader)
     - [ ] support free styles buffers .. single quads, mesh, ..
     - [ ] extract `SpriteGroupElement->syncTextureMap()` into a `TextureMapComponent`
-  - [ ] `<picimo-texture/>` acts as single texture source (similary to texture-atlas)
-  - [ ] `<picimo-render-to-texture/>` acts as texture source and scene
+  - [x] `<pi-texture/>` acts as single texture source (similary to texture-atlas)
+  - [ ] `<pi-render-to-texture/>` acts as texture source and scene
 - [ ] `<pi-canvas/>` should have a default projection
 - [ ] projection= perspective support (distance, near, far), choose sensible defaults
   - [x] main work is done :smile:
@@ -74,6 +74,8 @@ Browser Support
 Think about
 -----------
 
+- [ ] fullscreen support
+- [ ] interaction support
 - [ ] react-picimo
 - [ ] vue-picimo
 - [ ] create examples with ?

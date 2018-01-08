@@ -1,4 +1,4 @@
-import { logOnceOnly, debug } from 'common/log'
+// import { logOnceOnly, debug } from 'common/log'
 
 /**
  * @private
@@ -26,13 +26,12 @@ export default (el) => {
     h = Math.round(hPx * dpr)
   }
 
-  // TODO remove debug output from CanvasElement#resize()
-  if (wPx > 0 && hPx > 0) {
-    if (el._logCanvasSize === undefined) {
-      el._logCanvasSize = logOnceOnly(debug)
-    }
-    el._logCanvasSize('[pi-canvas] wpx=', wPx, 'hPx=', hPx, 'w=', w, 'h=', h, 'dpr=', dpr)
-  }
+  // if (wPx > 0 && hPx > 0) {
+    // if (el._logCanvasSize === undefined) {
+      // el._logCanvasSize = logOnceOnly(debug)
+    // }
+    // el._logCanvasSize('[pi-canvas] wpx=', wPx, 'hPx=', hPx, 'w=', w, 'h=', h, 'dpr=', dpr)
+  // }
 
   if (w !== canvas.width || h !== canvas.height) {
     canvas.width = w

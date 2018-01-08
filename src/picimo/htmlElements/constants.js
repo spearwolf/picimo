@@ -3,11 +3,12 @@
 export const UNIFORM_TIME       = 'time'
 export const UNIFORM_RESOLUTION = 'resolution'
 
-export const HTML_ELEMENT_ENTITY        = 'pi-entity'
 export const HTML_ELEMENT_CANVAS        = 'pi-canvas'
-export const HTML_ELEMENT_SPRITE_GROUP  = 'pi-sprite-group'
-export const HTML_ELEMENT_TEXTURE_ATLAS = 'pi-texture-atlas'
+export const HTML_ELEMENT_ENTITY        = 'pi-entity'
 export const HTML_ELEMENT_PICTURE       = 'pi-picture'
+export const HTML_ELEMENT_SPRITE_GROUP  = 'pi-sprite-group'
+export const HTML_ELEMENT_TEXTURE       = 'pi-texture'
+export const HTML_ELEMENT_TEXTURE_ATLAS = 'pi-texture-atlas'
 
 export const ATTR_ALPHA               = 'alpha'
 export const ATTR_ANTIALIAS           = 'antialias'

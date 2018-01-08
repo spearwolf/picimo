@@ -1,13 +1,12 @@
 import { Projection } from 'picimo/core'
 import { PRIO_RF_PROJECTION, PRIO_PRF_PROJECTION } from 'picimo/priorities'
-import { debug } from 'common/log'
 
 const PROJECTION = 'projection'
 
 export default class ProjectionComponent {
   constructor (entity, data) {
     this.projection = new Projection(data)
-    debug('[projection] create', this)
+    // debug('[projection] create', this)
   }
 
   update (data) {
@@ -16,7 +15,7 @@ export default class ProjectionComponent {
         this.projection[key] = value
       })
     }
-    debug('[projection] udpate', this)
+    // debug('[projection] udpate', this)
   }
 
   connectedEntity (entity) {

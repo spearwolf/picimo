@@ -1,7 +1,6 @@
 import { textureLibrary, resourceLibrary } from 'picimo'
 import { PRIO_RF_SPRITE_GROUP, PRIO_PRF_SPRITE_GROUP } from 'picimo/priorities'
 import SpriteGroup from 'picimo/core/sprite_group'
-import { debug } from 'common/log'
 import {
   createVoPropsSetter,
   defineHiddenPropertyRW,
@@ -45,7 +44,7 @@ const createSpriteGroup = el => {
   if (isValidConfig(config)) {
     el._spriteGroupConfig = config
     el.spriteGroup = new SpriteGroup(el.resourceLibrary, el.textureLibrary, config)
-    debug(`[sprite-group/${el.entity.id}] created`, el.spriteGroup)
+    // debug(`[sprite-group/${el.entity.id}] created`, el.spriteGroup)
     el.resolveSpriteGroupPromise(el.spriteGroup)
     el.resolveSpriteGroupPromise = null
     el.entity.emit('spriteGroupCreated', el.spriteGroup)
@@ -63,7 +62,7 @@ const renderFrame = el => {
     if (texMap && el.previousTextureMap !== texMap) {
       el.previousTextureMap = texMap
       syncTextureMap(el, texMap)
-      debug(`[sprite-group/${el.entity.id}] textureMap synced`, el.textureMap)
+      // debug(`[sprite-group/${el.entity.id}] textureMap synced`, el.textureMap)
     }
   }
 }

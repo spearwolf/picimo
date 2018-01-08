@@ -20,10 +20,12 @@
 </head>
 <body>
   <pi-texture-atlas id="atlas0" src="lab-walls-tiles.json" nearest></pi-texture-atlas>
+  <pi-texture id="texLogo" src="picimo-512.png" nearest></pi-texture>
 
   <pi-canvas id="c0" alpha
-    clear="color: rgba(90, 130, 160, .6)"
     projection="sizeFit: contain; desiredWidth: 300; desiredHeight: 200"
+    clear="color: rgba(90, 130, 160, .6)"
+    blend="sfactor: srcAlpha; dfactor: oneMinusSrcAlpha"
     >
     <pi-sprite-group id="sprites0"
       vo-descriptor="simple"
@@ -39,16 +41,18 @@
       hello="atlas: texture(#atlas0); spriteGroup: spriteGroup(#sprites0)"
       ></pi-entity>
 
+    <pi-picture texture="src: #texLogo" display-position="top: 0px; left: 0px; width: 30vw; objectFit: contain"></pi-picture>
+
     <pi-picture
       id="pi0"
       mesh-cols="128"
       mesh-rows="128"
-      texture="src: #atlas0; frame: numbers32_07"
+      texture="src: #atlas0; frame: numbers32_06"
       view-fit="contain"
       shader-uniform="scale: 1; transform: vec2(1.0, 1.0)"
       display-position-2="pivotX: 0.2; pivotY: 1.0; top: 50vh; left: 10px; width: 100vw; height: 100vh; objectFit: contain;"
       display-position-3="pivotX: 1.0; width: 200%;"
-      display-position="top: 10%; bottom: 10%"
+      display-position="width: 30vw; height: 30vh; objectFit: contain"
       ></pi-picture>
   </pi-canvas>
 

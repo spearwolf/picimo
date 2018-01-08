@@ -11,7 +11,7 @@ export default `
 
   void main(void)
   {
-    gl_Position = viewMatrix * vec4((pos.xy * scale.xy) + transform.xy, transform.y, 1.0);
+    gl_Position = viewMatrix * vec4((pos.xy * scale.xy) + transform.xy, transform.z, 1.0);
     vUvOpacity = vec4(uv.xy, 1.0, 0.0);
   }
 `

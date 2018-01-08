@@ -1,4 +1,4 @@
-import readBooleanAttribute from '../shared/readBooleanAttribute'
+import readBooleanAttribute from './readBooleanAttribute'
 
 import {
   ATTR_FLIP_Y,

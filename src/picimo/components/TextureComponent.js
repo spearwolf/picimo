@@ -17,9 +17,12 @@ const queryTextureId = (component, selector) => {
           const { frame } = component
           component.texture = frame ? atlas.getFrame(frame) : atlas.rootTexture
         })
+      } else if (el.loadTexture) {
+        el.loadTexture().then(texture => {
+          component.texture = texture
+        })
       }
       // TODO detect
-      // - <pi-texture />
       // - <img>
       // - <canvas>
     }
@@ -54,11 +57,11 @@ export default class TextureComponent {
   constructor (entity, config) {
     this.entity = entity
     parseConfig(this, config)
-    debug('[texture] create', this)
+    // debug('[texture] create', this)
   }
 
   update (config) {
     parseConfig(this, config)
-    debug('[texture] update', this)
+    // debug('[texture] update', this)
   }
 }
