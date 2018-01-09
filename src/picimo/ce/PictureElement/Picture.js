@@ -1,5 +1,3 @@
-// import { info } from 'common/log'
-
 import createVertices from './createVertices'
 import updateTexCoords from './updateTexCoords'
 
@@ -39,7 +37,10 @@ export default class {
     const { el } = this
     const { scaleUniform, transformUniform } = el
 
-    el.entity.emit('updatePictureQuadTransformation', renderer, el.texture, scaleUniform, transformUniform)
+    el.entity.emit('transformPicture', renderer, el.texture, ({ x, y, z, width, height }) => {
+      transformUniform.value = [x, y, z]
+      scaleUniform.value = [width, height, 0, 0]
+    })
 
     if (el.verticesUpdated) {
       el.spriteGroup.touchVertexBuffers()

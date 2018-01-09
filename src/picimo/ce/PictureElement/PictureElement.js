@@ -46,8 +46,9 @@ export default class PictureElement extends SpriteGroupElement {
     const executor = new PreConditionExecutor(me, PRE_CONDITION_ATTRS)
     defineHiddenPropertyRO(me, 'renderFrameExecutor', executor)
 
-    me.entity.on('renderFrame', executor.execute('renderFrame'))
-    me.entity.on('postRenderFrame', executor.execute('postRenderFrame'))
+    const { entity } = me
+    entity.on('renderFrame', executor.execute('renderFrame'))
+    entity.on('postRenderFrame', executor.execute('postRenderFrame'))
     executor.on(new Picture(this))
 
     return me

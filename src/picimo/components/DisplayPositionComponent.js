@@ -57,20 +57,18 @@ export default class DisplayPosition {
   }
 
   connectedEntity (entity) {
-    entity.on('updatePictureQuadTransformation', this)
+    entity.on('transformPicture', this)
   }
 
   disconnectedEntity (entity) {
     entity.off(this)
   }
 
-  updatePictureQuadTransformation (renderer, textureDimension, scaleUniform, transformUniform) {
-    const targetTransform = this.calculate(renderer, textureDimension)
-    scaleUniform.value = [targetTransform.width, targetTransform.height, 0, 0]
-    transformUniform.value = [targetTransform.x, targetTransform.y, 0]
+  transformPicture (renderer, textureDimension, transform) {
+    transform(this.calcTransform(renderer, textureDimension))
   }
 
-  calculate (renderer, { width: textureWidth, height: textureHeight }) {
+  calcTransform (renderer, { width: textureWidth, height: textureHeight }) {
     const [viewWidth, viewHeight] = getViewSize(renderer)
     const devicePixelRatio = renderer.shaderContext.curUniform(UNIFORM_RESOLUTION).value[2]
 
@@ -214,11 +212,11 @@ export default class DisplayPosition {
         width: targetWidth,
         height: targetHeight,
         x: centerX,
-        y: centerY
-        // TODO z?
+        y: centerY,
+        z: 0  // TODO picture: z-value
       }
 
-      // debug(`[${DISPLAY_POSITION}] calculate`, this.targetTransform)
+      // debug(`[${DISPLAY_POSITION}] calcTransform`, this.targetTransform)
     }
 
     return this.targetTransform
