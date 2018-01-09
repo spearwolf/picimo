@@ -5,12 +5,16 @@ HTML Element API And Other Issues
 
 - [ ] Render to texture ..
   - [x] `<pi-picture/>` acts as single sprite renderer, support boilerplate example (background)
+    - [ ] without texture (texture='none' ?)
+    - [ ] multi-texture support
+    - [ ] custom frag/vertex shader support
     - [ ] support boilerplate example (background shader)
     - [ ] support free styles buffers .. single quads, mesh, ..
     - [ ] extract `SpriteGroupElement->syncTextureMap()` into a `TextureMapComponent`
   - [x] `<pi-texture/>` acts as single texture source (similary to texture-atlas)
   - [ ] `<pi-render-to-texture/>` acts as texture source and scene
 - [ ] `<pi-canvas/>` should have a default projection
+- [ ] texture-map= (from <pi-sprite-group>) should be a component
 - [ ] projection= perspective support (distance, near, far), choose sensible defaults
   - [x] main work is done :smile:
   - [x] fix core/projection.js -> updateOrtho()
@@ -21,7 +25,13 @@ HTML Element API And Other Issues
 - [ ] transform= component .. camera?
 - [x] `<pi-sprite-group/>`
   - [ ] add support for all options from [src/core/SpriteGroup](src/core/sprite_group.js)
-- [ ] texture component (picimo-texture, render-to-texture, canvas, video...)
+  - [ ] billboard support
+- [ ] shader-uniform= component
+- [ ] texture= component
+  - [x] pi-texture
+  - [ ] render-to-texture
+  - [ ] canvas
+  - [ ] video
 - [ ] destroy
   - [ ] free gl resources
   - [ ] auto-remove unused gl resources
