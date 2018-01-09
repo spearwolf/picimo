@@ -89,8 +89,12 @@ export default class SpriteGroupElement extends EntityElement {
       _spriteGroupConfig: null
     })
 
-    self.entity.on('renderFrame', PRIO_RF_SPRITE_GROUP, renderer => renderFrame(self, renderer))
-    self.entity.on('postRenderFrame', PRIO_PRF_SPRITE_GROUP, renderer => postRenderFrame(self, renderer))
+    const { entity } = self
+
+    entity.on('renderFrame', PRIO_RF_SPRITE_GROUP, renderer => renderFrame(self, renderer))
+    entity.on('postRenderFrame', PRIO_PRF_SPRITE_GROUP, renderer => postRenderFrame(self, renderer))
+
+    entity.on('selectDeferred:spriteGroup', select => select(self.spriteGroupPromise))
 
     return self
   }

@@ -38,6 +38,9 @@ export default class TextureAtlasElement extends ResourceElement {
       })
     })
 
+    entity.on('selectDeferred:texture', select => select(self.loadResource().then(({ rootTexture }) => rootTexture)))
+    entity.on('selectDeferred:textureAtlas', select => select(self.loadResource()))
+
     return self
   }
 

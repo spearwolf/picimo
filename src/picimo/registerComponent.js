@@ -11,35 +11,34 @@ import { debug } from 'common/log'
 
 import componentRegistry from './componentRegistry'
 
-const deferPropertyValue = (deferFuncName, getValuePromise) => {
-  const regex = new RegExp(`${deferFuncName}\\((.*)\\)`)
-  return (component, key, value, verifyCreated) => {
-    const m = value.match(regex)
-    if (m) {
-      const el = document.querySelector(m[1])
-      if (el) {
-        Promise.resolve(getValuePromise(el)).then(resolved => {
-          if (resolved) {
-            component[key] = resolved
-            verifyCreated()
-          }
+const RESERVED_PROPERTY_NAMES = ['url', 'vec2', 'vec3', 'vec4']
+
+const deferredPropertySelectorRegex = RegExp(`([a-zA-Z][a-zA-Z0-9]*)\\((.*)\\)`)
+
+const selectDeferredProperty = (propertyName, selector, component, key, verifyCreated) => {
+  const el = document.querySelector(selector)
+  if (el) {
+    const { entity } = el
+    if (entity) {
+      entity.emit(`selectDeferred:${propertyName}`, propertyValue => {
+        Promise.resolve(propertyValue).then(value => {
+          component[key] = value
+          verifyCreated()
         })
-        return true
-      }
+      })
     }
   }
 }
 
-// TODO create registry for custom query selectors
-const deferTexture = deferPropertyValue('texture', el => el.loadResource())
-const deferSpriteGroup = deferPropertyValue('spriteGroup', el => el.spriteGroupPromise)
-
 const assignProperties = (component, props, verifyCreated) => {
   Object.entries(props).forEach(([key, value]) => {
     if (isString(value)) {
-      if (deferTexture(component, key, value, verifyCreated) ||
-        deferSpriteGroup(component, key, value, verifyCreated)) {
-        return
+      const m = value.match(deferredPropertySelectorRegex)
+      if (m) {
+        if (!RESERVED_PROPERTY_NAMES.includes(m[0])) {
+          selectDeferredProperty(m[1], m[2], component, key, verifyCreated)
+          return
+        }
       }
     }
     component[key] = value

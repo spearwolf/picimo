@@ -31,6 +31,8 @@ export default class TextureElement extends ResourceElement {
       entity.on('getTexture', (_, put) => put(texture))
     })
 
+    entity.on('selectDeferred:texture', select => select(self.loadResource()))
+
     return self
   }
 
