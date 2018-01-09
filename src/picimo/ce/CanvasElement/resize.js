@@ -1,4 +1,4 @@
-// import { logOnceOnly, debug } from 'common/log'
+// import { logOnlyOnce, debug } from 'common/log'
 
 /**
  * @private
@@ -28,7 +28,7 @@ export default (el) => {
 
   // if (wPx > 0 && hPx > 0) {
     // if (el._logCanvasSize === undefined) {
-      // el._logCanvasSize = logOnceOnly(debug)
+      // el._logCanvasSize = logOnlyOnce(debug)
     // }
     // el._logCanvasSize('[pi-canvas] wpx=', wPx, 'hPx=', hPx, 'w=', w, 'h=', h, 'dpr=', dpr)
   // }

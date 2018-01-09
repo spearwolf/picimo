@@ -1,7 +1,7 @@
 import initialize, { log, registerComponent } from 'picimo'
 initialize()
 
-const logOnceOnly = log.logOnceOnly()
+const logOnlyOnce = log.logOnlyOnce()
 
 registerComponent('hello',
   class {
@@ -24,6 +24,6 @@ registerComponent('hello',
     }
 
     renderFrame () {
-      logOnceOnly('[hello] renderFrame', this)
+      logOnlyOnce('[hello] renderFrame', this)
     }
   })

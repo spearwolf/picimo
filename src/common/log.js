@@ -20,7 +20,7 @@ const debug = PICIMO_ENV === 'development' && typeof console !== 'undefined' ? (
   : (...args) => console.log(...args)
 ) : () => 1
 
-const logOnceOnly = (logMethod = info) => {
+const logOnlyOnce = (logMethod = info) => {
   let alreadyLogged = false
   return (...args) => {
     if (!alreadyLogged) {
@@ -35,6 +35,5 @@ export {
   debug,
   error,
   info,
-
-  logOnceOnly
+  logOnlyOnce
 }
