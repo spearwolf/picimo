@@ -6,7 +6,6 @@ const PROJECTION = 'projection'
 export default class ProjectionComponent {
   constructor (entity, data) {
     this.projection = new Projection(data)
-    // debug('[projection] create', this)
   }
 
   update (data) {
@@ -15,7 +14,6 @@ export default class ProjectionComponent {
         this.projection[key] = value
       })
     }
-    // debug('[projection] udpate', this)
   }
 
   connectedEntity (entity) {
@@ -35,6 +33,7 @@ export default class ProjectionComponent {
   }
 
   postRenderFrame (renderer) {
+    renderer.shaderContext.popVar(this.projection.uniform)
     renderer.context.pop(PROJECTION)
   }
 }
