@@ -1,4 +1,4 @@
-// import { logOnlyOnce, debug } from 'common/log'
+import { debug, DEBUG } from 'common/log'
 
 /**
  * @private
@@ -26,12 +26,15 @@ export default (el) => {
     h = Math.round(hPx * dpr)
   }
 
-  // if (wPx > 0 && hPx > 0) {
-    // if (el._logCanvasSize === undefined) {
-      // el._logCanvasSize = logOnlyOnce(debug)
-    // }
-    // el._logCanvasSize('[pi-canvas] wpx=', wPx, 'hPx=', hPx, 'w=', w, 'h=', h, 'dpr=', dpr)
-  // }
+  if (DEBUG) {
+    if (wPx > 0 && hPx > 0) {
+      const msg = `<pi-canvas> wpx=${wPx} hPx=${hPx} w=${w} h=${h} dpr=${dpr}`
+      if (el._lastResizeLogMessage !== msg) {
+        el._lastResizeLogMessage = msg
+        debug(msg)
+      }
+    }
+  }
 
   if (w !== canvas.width || h !== canvas.height) {
     canvas.width = w

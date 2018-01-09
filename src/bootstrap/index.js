@@ -1,19 +1,19 @@
 /* global PICIMO_ENV */
+import { info, debug } from '../common/log'
 import detectCustomElements from './detectCustomElements'
 import detectJavascriptVariant from './detectJavascriptVariant'
-import log from '../common/log'
 
 const javascriptVariant = detectJavascriptVariant()
 const needsCustomElementsPolyfill = !detectCustomElements()
 
-log(`picimo bootstrap (${PICIMO_ENV})`, 'javascriptVariant=', javascriptVariant, 'needsCustomElementsPolyfill=', needsCustomElementsPolyfill)
+info(`picimo bootstrap (${PICIMO_ENV})`, 'javascriptVariant=', javascriptVariant, 'needsCustomElementsPolyfill=', needsCustomElementsPolyfill)
 
 const loadPolyfills = needsCustomElementsPolyfill
   ? import(
       /* webpackChunkName: "document-register-element" */
       'document-register-element/build/document-register-element.js'
     ).then(() => {
-      log('loaded polyfill: customElements')
+      debug('loaded polyfill: customElements')
     })
   : Promise.resolve()
 

@@ -1,24 +1,15 @@
 /* global PICIMO_ENV */
+const DEBUG = PICIMO_ENV === 'development'
 
-const log = typeof console !== 'undefined' ? (
-  typeof console.debug === 'function'
-  ? (...args) => console.debug(...args)
-  : (...args) => console.log(...args)
-) : () => 1
+const hasConsole = typeof console !== 'undefined'
 
-const info = typeof console !== 'undefined' ? (...args) => console.log(...args) : () => 1
+const info = hasConsole ? (...args) => console.log(...args) : () => undefined
 
-const error = typeof console !== 'undefined' ? (
+const error = hasConsole ? (
   typeof console.error === 'function'
   ? (...args) => console.error(...args)
   : (...args) => console.log(...args)
-) : () => 1
-
-const debug = PICIMO_ENV === 'development' && typeof console !== 'undefined' ? (
-  typeof console.debug === 'function'
-  ? (...args) => console.debug(...args)
-  : (...args) => console.log(...args)
-) : () => 1
+) : () => undefined
 
 const logOnlyOnce = (logMethod = info) => {
   let alreadyLogged = false
@@ -30,8 +21,22 @@ const logOnlyOnce = (logMethod = info) => {
   }
 }
 
-export default log
+let debug
+
+if (DEBUG) {
+  debug = hasConsole ? (
+    typeof console.debug === 'function'
+    ? (...args) => console.debug(...args)
+    : (...args) => console.log(...args)
+  ) : () => undefined
+} else {
+  debug = () => undefined
+}
+
+export default debug
 export {
+  DEBUG,
+  hasConsole,
   debug,
   error,
   info,
