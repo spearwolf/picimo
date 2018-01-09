@@ -1,8 +1,8 @@
 /* global customElements */
 import log from 'common/log'
 
-import defineCustomElements from './htmlElements/defineCustomElements'
-import { HTML_ELEMENT_ENTITY } from './htmlElements/constants'
+import defineCustomElements from './ce/defineCustomElements'
+import { HTML_ELEMENT_ENTITY } from './ce/constants'
 import * as publicApi from './api'
 
 const initialize = () => {

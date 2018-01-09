@@ -1,4 +1,4 @@
-import { UNIFORM_RESOLUTION } from 'picimo/htmlElements/constants'
+import { UNIFORM_RESOLUTION } from 'picimo/ce/constants'
 import { getString, getUnitValue } from 'picimo/utils'
 // import { debug } from 'common/log'
 
