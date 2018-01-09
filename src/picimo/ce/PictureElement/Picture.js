@@ -30,7 +30,6 @@ export default class {
 
   textureChanged (texture) {
     updateTexCoords(this.el, texture)
-    this.el.viewFitNeedsUpdate = true
   }
 
   renderFrame (renderer) {
