@@ -1,72 +1,47 @@
 import textureLibrary from 'picimo/textureLibrary'
 import { defineHiddenPropertyRW } from 'picimo/utils'
 
-import EntityElement from '../EntityElement'
-import { ATTR_SRC } from '../constants'
+import ResourceElement from '../ResourceElement'
+
+import {
+  ATTR_SRC,
+  EVENT_LOAD_RESOURCE,
+  EVENT_RESOURCE_LOADED
+} from '../constants'
 
 import loadTextureAtlas from './loadTextureAtlas'
 
-export default class TextureAtlasElement extends EntityElement {
+export default class TextureAtlasElement extends ResourceElement {
   /** @ignore */
   constructor (_) {
     const self = super(_)
 
-    defineHiddenPropertyRW(self, 'previousSrc')
+    defineHiddenPropertyRW(self, 'lastSrc')
 
     /**
-     * Die textureHints werden nach dem Laden des TextureAtlas
-     * gesetzt.
+     * The `textureHints` are set after loading the texture resource.
      */
     self.textureHints = undefined
 
-    /**
-     * Der Promise wird resolved wenn der TextureAtlas
-     * erfolgreich geladen wurde.
-     *
-     * Die Resolve-Value ist der TextureAtlas.
-     *
-     * Das Laden des TextureAtlas wird allerdings nur mit
-     * `loadTextureAtlas()` getriggered.
-     */
-    self.textureAtlasPromise = new Promise(resolve => {
-      defineHiddenPropertyRW(self, 'resolveTextureAtlasPromise', resolve)
-    })
+    const { entity } = self
 
-    // debug('[texture-atlas] constructor, self=', self)
+    entity.on(EVENT_LOAD_RESOURCE, loadTextureAtlas)
+
+    entity.once(EVENT_RESOURCE_LOADED, atlas => {
+      entity.on('getTexture', (opts, put) => {
+        const frame = opts && opts.frame
+        if (frame) {
+          put(atlas.getFrame(frame))
+        } else {
+          put(atlas.rootTexture)
+        }
+      })
+    })
 
     return self
   }
 
+  get src () { return this.getAttribute(ATTR_SRC) }
   get textureId () { return this.entity.id }
   get textureLibrary () { return textureLibrary }
-
-  /**
-   * Lade die TextureAtlas Resourcen (json + image).
-   * Die url der TextureAtlas Resource wird per `src` attribute gesetzt.
-   *
-   * Wenn das `src` Attribute leer ist, wird nichts geladen.
-   *
-   * Return value ist der Promise von `textureAtlasPromise`
-   *
-   * Die Promise-Resolve-Value ist der TextureAtlas.
-   */
-  loadTextureAtlas () {
-    const src = this.getAttribute(ATTR_SRC)
-    if (src) {
-      // debug('[texture-atlas] loadTextureAtlas, src=', src)
-      loadTextureAtlas(this, src)
-    }
-    return this.textureAtlasPromise
-  }
-
-  /**
-   * Lade die Texture.
-   * Wird zB. von <pi-sprite-group> aufgerufen.
-   */
-  loadTexture () {
-    if (!this.textureAtlas) {
-      this.loadTextureAtlas()
-    }
-    return this.textureAtlasPromise
-  }
 }

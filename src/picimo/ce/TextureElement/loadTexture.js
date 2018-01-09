@@ -1,26 +1,20 @@
 import readTextureHints from '../shared/readTextureHints'
 
 /** @private */
-export default (el, src) => {
-  if (el.previousSrc === src) return el.texturePromise
-  el.previousSrc = src
+export default (el, resolve) => {
+  const { src } = el
+  if (el.lastSrc === src) return
+  el.lastSrc = src
 
   const textureHints = readTextureHints(el)
 
-  el.texturePromise = el.textureLibrary
+  el.textureLibrary
     .loadTexture(el.textureId, src, textureHints)
-    .then((texture) => {
-      el.texture = texture
+    .then(texture => {
       el.textureHints = textureHints
 
       // debug('[texture] texture loaded', texture)
 
-      if (el.resolveTexturePromise) {
-        el.resolveTexturePromise(texture)
-        el.resolveTexturePromise = null
-      }
-      return texture
+      resolve(texture)
     })
-
-  return el.texturePromise
 }

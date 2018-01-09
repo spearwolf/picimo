@@ -1,62 +1,40 @@
 import textureLibrary from 'picimo/textureLibrary'
 import { defineHiddenPropertyRW } from 'picimo/utils'
 
-import EntityElement from '../EntityElement'
-import { ATTR_SRC } from '../constants'
+import ResourceElement from '../ResourceElement'
+
+import {
+  ATTR_SRC,
+  EVENT_LOAD_RESOURCE,
+  EVENT_RESOURCE_LOADED
+} from '../constants'
 
 import loadTexture from './loadTexture'
 
-export default class TextureElement extends EntityElement {
+export default class TextureElement extends ResourceElement {
   /** @ignore */
   constructor (_) {
     const self = super(_)
 
-    defineHiddenPropertyRW(self, 'previousSrc')
+    defineHiddenPropertyRW(self, 'lastSrc')
 
     /**
-     * Die textureHints werden nach dem Laden des TextureAtlas
-     * gesetzt.
+     * The `textureHints` are set after loading the texture resource.
      */
     self.textureHints = undefined
 
-    /**
-     * Der Promise wird resolved wenn die Texture erfolgreich geladen wurde.
-     *
-     * Die Resolve-Value ist die Texture.
-     *
-     * Das Laden der Texture wird mit `loadTexture()` getriggered.
-     */
-    self.texturePromise = new Promise(resolve => {
-      defineHiddenPropertyRW(self, 'resolveTexturePromise', resolve)
+    const { entity } = self
+
+    entity.on(EVENT_LOAD_RESOURCE, loadTexture)
+
+    entity.once(EVENT_RESOURCE_LOADED, texture => {
+      entity.on('getTexture', (_, put) => put(texture))
     })
 
     return self
   }
 
+  get src () { return this.getAttribute(ATTR_SRC) }
   get textureId () { return this.entity.id }
   get textureLibrary () { return textureLibrary }
-
-  /**
-   * Lade eine Texture Resource.
-   *
-   * Wird zB. von <pi-sprite-group> aufgerufen.
-   *
-   * Die url der Texture Resource wird per `src` attribute gesetzt.
-   *
-   * Wenn das `src` Attribute leer ist, wird nichts geladen.
-   *
-   * Return value ist der Promise `texturePromise`
-   *
-   * Die Promise-Resolve-Value ist die Texture.
-   */
-  loadTexture () {
-    if (!this.texture) {
-      const src = this.getAttribute(ATTR_SRC)
-      if (src) {
-        // debug('[texture] loadTexture, src=', src)
-        loadTexture(this, src)
-      }
-    }
-    return this.texturePromise
-  }
 }

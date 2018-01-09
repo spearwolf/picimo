@@ -15,5 +15,5 @@ export default (el, data) => {
     spriteGroup.setTexture(key, texEl.textureId)
   })
   // debug(`[sprite-group/${el.entity.id}] use texture frames from`, textureElements)
-  textureElements.forEach(texEl => texEl.loadTexture())
+  textureElements.forEach(texEl => texEl.loadResource())
 }

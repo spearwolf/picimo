@@ -5,27 +5,31 @@ const urlRegexp = new RegExp(/^url\((.*)\)$/)
 const httpRegexp = new RegExp(/^https?:\/\//)
 const imageExtRegexp = new RegExp(/\.(png|gif|jpg|webp)/)
 
-const queryTextureId = (component, selector) => {
-  const el = document.querySelector(selector)
-  if (el) {
-    const { textureId } = el
-    if (textureId) {
-      component.textureId = textureId
-      component.entity.emit('textureId', textureId)
-      if (el.loadTextureAtlas) {
-        el.loadTextureAtlas().then(atlas => {
-          const { frame } = component
-          component.texture = frame ? atlas.getFrame(frame) : atlas.rootTexture
-        })
-      } else if (el.loadTexture) {
-        el.loadTexture().then(texture => {
-          component.texture = texture
-        })
-      }
-      // TODO detect
-      // - <img>
-      // - <canvas>
+const makeReadTexture = (el, component) => () => {
+  const { frame } = component
+  el.entity.emit('getTexture', { frame }, texture => {
+    component.texture = texture
+    component.entity.emit('texture', texture)
+  })
+}
+
+const loadTexture = (component, el) => {
+  const { textureId } = el
+  if (textureId) {
+    component.textureId = textureId
+    component.entity.emit('textureId', textureId)
+
+    const readTexture = makeReadTexture(el, component)
+
+    if (el.loadResource) {
+      el.loadResource().then(readTexture)
+    } else {
+      readTexture()
     }
+    // TODO TextureComponent: support more texture sources
+    // - <img>
+    // - <canvas>
+    // - <pi-render-to-texture>
   }
 }
 
@@ -39,7 +43,10 @@ const parseTextureSource = (component, src) => {
       // TODO load texture/image from url
       debug('[texture] TODO load texture/image from url=', src)
     } else {
-      queryTextureId(component, src)
+      const el = document.querySelector(src)
+      if (el) {
+        loadTexture(component, el)
+      }
     }
   }
 }
@@ -56,12 +63,13 @@ const parseConfig = (component, config) => {
 export default class TextureComponent {
   constructor (entity, config) {
     this.entity = entity
+
+    entity.retain(['textureId', 'texture'])
+
     parseConfig(this, config)
-    // debug('[texture] create', this)
   }
 
   update (config) {
     parseConfig(this, config)
-    // debug('[texture] update', this)
   }
 }

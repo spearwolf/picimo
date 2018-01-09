@@ -10,6 +10,10 @@ export const HTML_ELEMENT_SPRITE_GROUP  = 'pi-sprite-group'
 export const HTML_ELEMENT_TEXTURE       = 'pi-texture'
 export const HTML_ELEMENT_TEXTURE_ATLAS = 'pi-texture-atlas'
 
+export const EVENT_LOAD_RESOURCE       = 'loadResource'
+export const EVENT_RESOURCE_PROMISE    = 'resourcePromise'
+export const EVENT_RESOURCE_LOADED     = 'resourceLoaded'
+
 export const ATTR_ALPHA               = 'alpha'
 export const ATTR_ANTIALIAS           = 'antialias'
 export const ATTR_BLEND_MODE          = 'blend-mode'
