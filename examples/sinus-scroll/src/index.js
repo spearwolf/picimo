@@ -2,7 +2,7 @@
 
 const init = async () => {
   const spriteGroup = await document.getElementById('mySprites').spriteGroupPromise
-  const atlas = await document.getElementById('atlas1').textureAtlasPromise
+  const atlas = await document.getElementById('atlas1').resourcePromise
 
   console.log('spriteGroup=', spriteGroup, 'textureAtlas=', atlas)
 

@@ -12,7 +12,7 @@ import Clouds from './Clouds.js'
 
 async function init (el) {
   const spriteGroup = await el.spriteGroupPromise
-  const atlas = await document.getElementById('cloudsAtlas').textureAtlasPromise
+  const atlas = await document.getElementById('cloudsAtlas').resourcePromise
 
   // createLogo(spriteGroup, atlas)
 
