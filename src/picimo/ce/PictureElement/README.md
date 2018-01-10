@@ -1,4 +1,4 @@
-# `<pi-picture>` Element
+# `<pi-picture>`
 
 ## Description
 
