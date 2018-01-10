@@ -14,7 +14,7 @@ With the optional attributes `mesh-cols` and `mesh-rows` the grid can be adjuste
 
 ### `mesh-cols`
 
-Set how many quads a column of the internal mesh grid should have.
+Sets how many quads a column of the internal mesh grid should have.
 
 A *static* attribute. Initially read out only once when the mesh is generated.
 
@@ -23,7 +23,7 @@ Default value is `16`
 
 ### `mesh-rows`
 
-Set how many quads a row of the internal mesh grid should have.
+Sets how many quads a row of the internal mesh grid should have.
 
 A *static* attribute. Initially read out only once when the mesh is generated.
 
