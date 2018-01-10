@@ -20,12 +20,10 @@ const createBlendMode = ({ enable, sfactor, dfactor }) => {
 export default class BlendComponent {
   constructor (entity, data) {
     this.blendMode = createBlendMode(parseBlendData(data))
-    // debug('[blend] create', this)
   }
 
   update (data) {
     Object.assign(this.blendMode, parseBlendData(data))
-    // debug('[blend] update', this)
   }
 
   connectedEntity (entity) {

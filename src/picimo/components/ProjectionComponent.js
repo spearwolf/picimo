@@ -1,7 +1,7 @@
 import { Projection } from 'picimo/core'
 import { PRIO_RF_PROJECTION, PRIO_PRF_PROJECTION } from 'picimo/priorities'
 
-const PROJECTION = 'projection'
+import { PROJECTION } from './constants'
 
 export default class ProjectionComponent {
   constructor (entity, data) {

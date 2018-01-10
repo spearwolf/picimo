@@ -1,8 +1,7 @@
 import { UNIFORM_RESOLUTION } from 'picimo/ce/constants'
-import { getString, getUnitValue } from 'picimo/utils'
-// import { debug } from 'common/log'
+import { getString, getUnitValue, getNumber } from 'picimo/utils'
 
-export const DISPLAY_POSITION = 'display-position'
+import { PROJECTION } from './constants'
 
 const OBJECT_FIT_FILL = 'fill'
 const OBJECT_FIT_COVER = 'cover'
@@ -22,12 +21,13 @@ const updateAttributes = (displayPosition, data) => {
   displayPosition.width = getUnitValue(data.width, DEFAULT_UNIT)
   displayPosition.height = getUnitValue(data.height, DEFAULT_UNIT)
   displayPosition.objectFit = getString(data.objectFit, DEFAULT_OBJECT_FIT)
+  displayPosition.z = getNumber(data.z, 0)
 
   displayPosition.needsUpdate = true
 }
 
 const getViewSize = webGlRenderer => {
-  const projectionOrViewport = webGlRenderer.context.get('projection') || webGlRenderer.viewport
+  const projectionOrViewport = webGlRenderer.context.get(PROJECTION) || webGlRenderer.viewport
   return [projectionOrViewport.width, projectionOrViewport.height]
 }
 
@@ -213,10 +213,8 @@ export default class DisplayPosition {
         height: targetHeight,
         x: centerX,
         y: centerY,
-        z: 0  // TODO picture: z-value
+        z: this.z
       }
-
-      // debug(`[${DISPLAY_POSITION}] calcTransform`, this.targetTransform)
     }
 
     return this.targetTransform

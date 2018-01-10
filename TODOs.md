@@ -22,7 +22,7 @@ HTML Element API And Other Issues
   - [x] distance
   - [ ] near/far
   - [ ] pixelRatio support
-- [ ] transform= component .. camera?
+- [x] transform= component .. camera?
 - [x] `<pi-sprite-group/>`
   - [ ] add support for all options from [src/core/SpriteGroup](src/core/sprite_group.js)
   - [ ] billboard support
