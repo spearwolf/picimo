@@ -39,7 +39,7 @@ A *dynamic* attribute. Is read out every time during the *renderFrame* event.
 | Attribute | Value | Description |
 |-----------|-------|-------------|
 | src | *css query selector* | Specifies the texture element which should be used for the image |
-| frame | *frame name* | *Optional.* Specifies the texture frame. Works only when the `src` selector references a `<pi-texture-atlas>` element. |
+| frame | *frame name* | *Optional.* Specifies the texture frame. Works only when the `src` selector references a *texture atlas*. |
 
 
 ### `display-position`
