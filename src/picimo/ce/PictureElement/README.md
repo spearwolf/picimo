@@ -45,7 +45,7 @@ Defines the *position (x, y, z)* and *size (width, height)* of the image.
 
 ![picture display-position](../../../../doc/images/picture%20display-position.png)
 
-#### Attributes
+#### Attributes for `display-position`
 
 | Attribute | Value | Units | Description |
 |-----------|-------|-------|-------------|
