@@ -26,7 +26,7 @@ Default is `16`
 
 ### `display-position`
 
-Define the *position (x, y, z)*, *width* and *height* of the picture.
+Define the *position (x, y, z)* and *size (width, height)* of the image.
 
 ![picture display-position](../../../../doc/images/picture%20display-position.png)
 
