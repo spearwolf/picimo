@@ -32,18 +32,20 @@ A *static* attribute. Initially read out only once when the mesh is generated.
 
 Sets a reference to the texture for the image.
 
+A *dynamic* attribute. Is read out every time during the *renderFrame* event.
+
 | Attribute | Value | Description |
 |-----------|-------|-------------|
 | src | *css query selector* | Specifies the texture element which should be used for the image |
 | frame | *frame name* | *Optional.* Specifies the texture frame. Works only when the `src` selector references a `<pi-texture-atlas>` element. |
-
-A *dynamic* attribute. Is read out every time during the *renderFrame* event.
 
 ### `display-position`
 
 Defines the *position (x, y, z)* and *size (width, height)* of the image.
 
 ![picture display-position](../../../../doc/images/picture%20display-position.png)
+
+A *dynamic* attribute. Is read out every time during the *renderFrame* event.
 
 #### Attributes for `display-position`
 
@@ -56,8 +58,6 @@ Defines the *position (x, y, z)* and *size (width, height)* of the image.
 | right | | `%`, `px`, `dpx`, `vw`, `vh` | Sets the right edge of the image contianer |
 | bottom | | `%`, `px`, `dpx`, `vw`, `vh` | Sets the bottom edge of the image container |
 | left | | `%`, `px`, `dpx`, `vw`, `vh` | Sets the left edge of the image container |
-
-`display-position` is a *dynamic* attribute. Is read out every time during the *renderFrame* event.
 
 ## Example
 
