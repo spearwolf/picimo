@@ -8,7 +8,7 @@ The image is rendered using a quad grid mesh.
 
 The `<pi-picture>` tag has two required attribute: `display-position` and `texture`.
 
-With the optional attributes `mesh-cols` and `mesh-rows` the grid can be adjusted.
+With the *optional* attributes `mesh-cols` and `mesh-rows` the grid can be adjusted.
 
 ## Attributes
 
@@ -38,8 +38,8 @@ A *dynamic* attribute. Is read out every time during the *renderFrame* event.
 
 | Attribute | Value | Description |
 |-----------|-------|-------------|
-| src | *css query selector* | Specifies the texture element which should be used for the image |
-| frame | *frame name* | *Optional.* Specifies the texture frame. Works only when the `src` selector references a *texture atlas*. |
+| __src__ | *css query selector* | Specifies the texture element which should be used for the image |
+| __frame__ | *frame name* | *Optional.* Specifies the texture frame. Works only when the `src` selector references a *texture atlas*. |
 
 
 ### `display-position`
@@ -54,13 +54,13 @@ A *dynamic* attribute. Is read out every time during the *renderFrame* event.
 
 | Attribute | Value | Units | Description |
 |-----------|-------|-------|-------------|
-| objectFit | `fill`, `contain`, `cover` | | Specifies how the image should be resized to fit its container box, which is defined by `top`, `left`, `bottom`, `right`, `width` and `height` or the *view* size |
-| width | `100vw` | `%`, `px`, `dpx`, `vw`, `vh` | Sets the width of the image container |
-| height | `100vh` | `%`, `px`, `dpx`, `vw`, `vh` | Sets the height of the image container |
-| top | | `%`, `px`, `dpx`, `vw`, `vh` | Sets the top edge of the image container |
-| right | | `%`, `px`, `dpx`, `vw`, `vh` | Sets the right edge of the image contianer |
-| bottom | | `%`, `px`, `dpx`, `vw`, `vh` | Sets the bottom edge of the image container |
-| left | | `%`, `px`, `dpx`, `vw`, `vh` | Sets the left edge of the image container |
+| __objectFit__ | `fill`, `contain`, `cover` | | Specifies how the image should be resized to fit its container box, which is defined by `top`, `left`, `bottom`, `right`, `width` and `height` or the *view* size |
+| __width__ | `100vw` | `%`, `px`, `dpx`, `vw`, `vh` | Sets the width of the image container |
+| __height__ | `100vh` | `%`, `px`, `dpx`, `vw`, `vh` | Sets the height of the image container |
+| __top__ | | `%`, `px`, `dpx`, `vw`, `vh` | Sets the top edge of the image container |
+| __right__ | | `%`, `px`, `dpx`, `vw`, `vh` | Sets the right edge of the image contianer |
+| __bottom__ | | `%`, `px`, `dpx`, `vw`, `vh` | Sets the bottom edge of the image container |
+| __left__ | | `%`, `px`, `dpx`, `vw`, `vh` | Sets the left edge of the image container |
 
 
 ## Example
