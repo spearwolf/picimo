@@ -16,17 +16,19 @@ With the optional attributes `mesh-cols` and `mesh-rows` the grid can be adjuste
 
 Set how many quads a column of the internal mesh grid should have.
 
-Default is `16`
-
 A *static* attribute. Initially read out only once when the mesh is generated.
+
+Default value is `16`
+
 
 ### `mesh-rows`
 
 Set how many quads a row of the internal mesh grid should have.
 
-Default is `16`
-
 A *static* attribute. Initially read out only once when the mesh is generated.
+
+Default value is `16`
+
 
 ### `texture`
 
@@ -38,6 +40,7 @@ A *dynamic* attribute. Is read out every time during the *renderFrame* event.
 |-----------|-------|-------------|
 | src | *css query selector* | Specifies the texture element which should be used for the image |
 | frame | *frame name* | *Optional.* Specifies the texture frame. Works only when the `src` selector references a `<pi-texture-atlas>` element. |
+
 
 ### `display-position`
 
@@ -58,6 +61,7 @@ A *dynamic* attribute. Is read out every time during the *renderFrame* event.
 | right | | `%`, `px`, `dpx`, `vw`, `vh` | Sets the right edge of the image contianer |
 | bottom | | `%`, `px`, `dpx`, `vw`, `vh` | Sets the bottom edge of the image container |
 | left | | `%`, `px`, `dpx`, `vw`, `vh` | Sets the left edge of the image container |
+
 
 ## Example
 
