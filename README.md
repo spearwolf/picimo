@@ -46,11 +46,11 @@ The special `dist/picimo.mjs` (uncompressed: `dist/dev/picimo-dev.mjs`) is a nat
 
 ### Run the tests
 
-There are multiple ways to test different aspects of the library:
+There are two ways to test the different aspects of the library:
 
 | command | description |
 |---------|-------------|
 | `yarn test` | runs all the tests from `src/**/__specs__/*.test.js` with [karma](https://karma-runner.github.io/2.0/index.html) using a locally installed *Chrome* browser |
-| `yarn run testrunner` | starts a local http server which serves the *bootstrap* and *visual screenshot* tests as html pages from `testrunner/` folder |
+| `yarn run testrunner` | starts a local http server which serves the *bootstrap* and *visual screenshot* test suites as html pages from `testrunner/` folder |
 
 
