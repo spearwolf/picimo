@@ -38,7 +38,7 @@ You can start a local http server which serves all the examples at localhost by 
 yarn run examples
 ```
 
-The special `dist/picimo.mjs` (uncompressed: `dist/dev/picimo-dev.mjs`) is a native es module and can loaded as standalone module in your browser with the script element or by using the `import` statement from inside your javascript.
+The special `dist/picimo.mjs` (uncompressed: `dist/dev/picimo-dev.mjs`) is a native ecmascript module and can be loaded as standalone module in your browser with the script element or by using the `import` statement from inside your javascript.
 
 ```html
 <script type="module" src="picimo.mjs"></script>
