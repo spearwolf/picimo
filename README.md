@@ -25,20 +25,20 @@ Before you start using *picimo* you'll first need to build the library.
 yarn run build
 ````
 
-This will internally run the script [scripts/build-libs.js](scripts/build-libs.js) and install the library artifacts into your local `dists/` folder.
+This will internally run the script [scripts/build-libs.js](scripts/build-libs.js) and install the library artifacts into your local `dist/` folder.
 
 The compiled and minified file is at `dist/picimo.js`, with `dist/dev/picimo-dev.js` being the uncompressed (with source maps included) library.
 The files `dist/picimo.*.js` (uncompressed: `dist/dev/picimo.*.js`) are also needed, they will be loaded on demand at runtime.
 
 See `examples/` for usage examples.
 
-You can start a local html server which serves all the examples at localhost by running the command:
+You can start a local http server which serves all the examples at localhost by running the command:
 
 ```sh
 yarn run examples
 ```
 
-The special `dist/picimo.mjs` (uncompressed: `dist/dev/picimo-dev.mjs`) is a native es module and can loaded as standalone module in your browser with the script element.
+The special `dist/picimo.mjs` (uncompressed: `dist/dev/picimo-dev.mjs`) is a native es module and can loaded as standalone module in your browser with the script element or by using the `import` statement from inside your javascript.
 
 ```html
 <script type="module" src="picimo.mjs"></script>
