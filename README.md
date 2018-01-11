@@ -6,7 +6,7 @@
 
 `picimo` is an upgrade to [spearwolf/picimo.old](https://github.com/spearwolf/picimo.old) that features a rewritten core to improve the overall developer experience including *custom elements* support.
 
-*WORK IN PROGRESS* .. *DOCUMENTATION COMES LATER* :wink:
+*WORK IN PROGRESS* .. *DEMO FIRST &mdash; DOCUMENTATION COMES LATER* :wink:
 
 > don't hesitate if you want to be an early adopter and see all the magic of webgl based sprite and shader programming with custom elements .. see [examples/](examples/) to get the idea
 
@@ -44,5 +44,12 @@ The special `dist/picimo.mjs` (uncompressed: `dist/dev/picimo-dev.mjs`) is a nat
 <script type="module" src="picimo.mjs"></script>
 ```
 
+### Run the tests
 
+There are multiple ways to test different aspects of the library:
+
+| command | description |
+|---------|-------------|
+| `yarn test` | runs all the tests from `src/**/__specs__/*.test.js` with [karma](https://karma-runner.github.io/2.0/index.html) using a locally installed *Chrome* browser |
+| `yarn run testrunner` | starts a local http server which serves the *bootstrap* and *visual screenshot* tests as html pages from `testrunner/` folder |
 
