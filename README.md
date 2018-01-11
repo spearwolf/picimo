@@ -1,4 +1,4 @@
-(https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 <img src="doc/logo/picimo-1024.png" alt="pictures in motion logo" width="256">
 
