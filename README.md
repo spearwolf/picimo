@@ -1,4 +1,4 @@
-[![bitHound Overall Score](https://www.bithound.io/github/spearwolf/picimo/badges/score.svg)](https://www.bithound.io/github/spearwolf/picimo) [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+(https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 <img src="doc/logo/picimo-1024.png" alt="pictures in motion logo" width="256">
 
@@ -8,7 +8,7 @@
 
 *WORK IN PROGRESS* .. *DEMO FIRST &mdash; DOCUMENTATION COMES LATER* :wink:
 
-> don't hesitate if you want to be an early adopter and see all the magic of webgl based sprite and shader programming with custom elements .. see [examples/](examples/) to get the idea
+> don't hesitate if you want to be an early adopter and see all the magic of webgl based sprite and shader programming with custom elements ..
 
 ## How to setup your local development environment
 
@@ -52,4 +52,5 @@ There are multiple ways to test different aspects of the library:
 |---------|-------------|
 | `yarn test` | runs all the tests from `src/**/__specs__/*.test.js` with [karma](https://karma-runner.github.io/2.0/index.html) using a locally installed *Chrome* browser |
 | `yarn run testrunner` | starts a local http server which serves the *bootstrap* and *visual screenshot* tests as html pages from `testrunner/` folder |
+
 
