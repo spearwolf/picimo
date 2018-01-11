@@ -2,7 +2,7 @@
 
 `picimo` is an upgrade to [spearwolf/picimo.old](https://github.com/spearwolf/picimo.old) that features a rewritten core to improve the overall developer experience including *custom elements* support.
 
-![picimo](doc/logo/picimo-1024.png)
+<img src="doc/logo/picimo-1024.png" alt="pictures in motion logo" width="256">
 
 > pictures in motion
 
