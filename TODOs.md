@@ -23,6 +23,7 @@ HTML Element API And Other Issues
   - [ ] near/far
   - [ ] pixelRatio support
 - [x] transform= component .. camera?
+  - [ ] support options similar to [css transform property](https://www.w3schools.com/cssref/css3_pr_transform.asp)
 - [x] `<pi-sprite-group/>`
   - [ ] add support for all options from [src/core/SpriteGroup](src/core/sprite_group.js)
   - [ ] billboard support
