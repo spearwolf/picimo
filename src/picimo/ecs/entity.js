@@ -35,10 +35,15 @@ export default class Entity {
       throw new Error(`Component name "${name}" is already assigned!`)
     }
     this.registries.set(name, registry)
+
     this[name] = component
+
     if (component.connectedEntity) {
       component.connectedEntity(this)
     }
+
+    this.emit(`componentConnected:${name}`, component, this)
+
     return this
   }
 
@@ -60,7 +65,10 @@ export default class Entity {
       }
 
       const component = this[name]
+
+      this.emit(`destroyComponent:${name}`, component, this)
       delete this[name]
+
       if (component.disconnectedEntity) {
         component.disconnectedEntity(this)
       }

@@ -1,3 +1,4 @@
+import camelCase from 'lodash/camelCase'
 import { ComponentFactory } from 'picimo/ecs'
 
 import {
@@ -18,10 +19,14 @@ import TransformComponent from './TransformComponent'
 
 /** @private */
 export default function (registry) {
-  registry.registerComponent(CLEAR, ComponentFactory.createCssStyledPropsComponent(ClearComponent))
-  registry.registerComponent(BLEND, ComponentFactory.createCssStyledPropsComponent(BlendComponent))
-  registry.registerComponent(PROJECTION, ComponentFactory.createCssStyledPropsComponent(ProjectionComponent))
-  registry.registerComponent(TEXTURE, ComponentFactory.createCssStyledPropsComponent(TextureComponent))
-  registry.registerComponent(DISPLAY_POSITION, ComponentFactory.createCssStyledPropsComponent(DisplayPositionComponent))
-  registry.registerComponent(TRANSFORM, ComponentFactory.createCssStyledPropsComponent(TransformComponent))
+  const register = (name, component) => {
+    registry.registerComponent(camelCase(name), ComponentFactory.createCssStyledPropsComponent(component))
+  }
+
+  register(CLEAR, ClearComponent)
+  register(BLEND, BlendComponent)
+  register(PROJECTION, ProjectionComponent)
+  register(TEXTURE, TextureComponent)
+  register(DISPLAY_POSITION, DisplayPositionComponent)
+  register(TRANSFORM, TransformComponent)
 }

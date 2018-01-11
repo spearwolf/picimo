@@ -2,6 +2,7 @@ import * as core from './core'
 import * as ecs from './ecs'
 import * as utils from './utils'
 import * as log from '../common/log'
+import queryEntity from '../common/queryEntity'
 
 import componentRegistry from './componentRegistry'
 import registerComponent from './registerComponent'
@@ -14,6 +15,7 @@ export {
   ecs,
   utils,
   log,
+  queryEntity,
 
   componentRegistry,
   registerComponent,

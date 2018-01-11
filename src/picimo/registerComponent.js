@@ -1,3 +1,5 @@
+import camelCase from 'lodash/camelCase'
+
 import {
   definePublicPropertiesRO,
   defineHiddenPropertyRO,
@@ -73,16 +75,26 @@ const verifyComponentCreated = (name, component) => () => {
   }
 }
 
-export default (name, ComponentConstructor) => {
+const getPreConditionAttributes = ({ preConditionAttributes: attrs }) => {
+  if (attrs) {
+    return typeof attrs === 'function' ? attrs() : attrs
+  }
+  return []
+}
+
+export default (rawName, ComponentConstructor) => {
+  const name = camelCase(rawName)
+
   componentRegistry.registerComponent(name, {
     create (entity, data) {
       const component = new ComponentConstructor(entity)
 
       definePublicPropertiesRO(component, { entity, el: entity.el })
       defineHiddenPropertyRW(component, '_isCreated', false)
-      defineHiddenPropertyRO(component, '_preConditionAttributes', (
-        (ComponentConstructor.preConditionAttributes && ComponentConstructor.preConditionAttributes()) || []
-      ))
+      defineHiddenPropertyRO(component, '_preConditionAttributes', getPreConditionAttributes(ComponentConstructor))
+      // defineHiddenPropertyRO(component, '_preConditionAttributes', (
+        // (ComponentConstructor.preConditionAttributes && ComponentConstructor.preConditionAttributes()) || []
+      // ))
 
       createDisconnectedEntity(component)
 

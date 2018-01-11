@@ -1,4 +1,6 @@
 /* global HTMLElement */
+import camelCase from 'lodash/camelCase'
+
 import {
   defineHiddenPropertiesRO,
   defineHiddenPropertiesRW,
@@ -70,11 +72,11 @@ export default class EntityElement extends HTMLElement {
       if (oldValue !== value) {
         attributeValuesCache.set(attrName, value)
         // debug('[entity] attributeValueChanged:', attrName, 'value=', value, 'oldValue=', oldValue)
-        this.componentRegistry.createOrUpdateComponent(this.entity, attrName, value)
+        this.componentRegistry.createOrUpdateComponent(this.entity, camelCase(attrName), value)
       }
     })
     prevAttrNames.forEach(attrName => {
-      this.entity.destroyComponent(attrName)
+      this.entity.destroyComponent(camelCase(attrName))
       this.attributeValuesCache.delete(attrName)
       // debug('[entity] attributeRemoved:', attrName)
     })
