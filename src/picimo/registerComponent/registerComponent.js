@@ -25,8 +25,8 @@ import {
   RENDER_FRAME
 } from './constants'
 
-export default (rawName, ComponentConstructor) => {
-  const name = camelCase(rawName)
+export default (kebabName, ComponentConstructor) => {
+  const name = camelCase(kebabName)
 
   componentRegistry.registerComponent(name, {
     create (entity, data) {
