@@ -1,3 +1,4 @@
 import './picimo_global_var'
-import './picimo_initialize'
 import './picimo_queryEntity'
+import './picimo_registerComponent'
+import './picimo_initialize'

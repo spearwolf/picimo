@@ -1,4 +1,4 @@
-import { UNIFORM_RESOLUTION } from 'picimo/ce/constants'
+import { UNIFORM_RESOLUTION } from 'picimo/tags/constants'
 import { getString, getUnitValue, getNumber } from 'picimo/utils'
 
 import { PROJECTION } from './constants'
