@@ -9,7 +9,7 @@ registerComponent('hello',
       return [ 'atlas', 'sprites' ]
     }
 
-    create () {
+    componentCreated () {
       const { atlas: a, sprites: s } = this
       s.createSprite(a.getFrame('numbers32_01')).setTranslate(-160, 0)
       s.createSprite(a.getFrame('numbers32_02')).setTranslate(-128, 0)

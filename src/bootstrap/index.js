@@ -3,6 +3,7 @@ import { info, debug } from '../common/log'
 import queryEntity from '../common/queryEntity'
 import detectCustomElements from './detectCustomElements'
 import detectJavascriptVariant from './detectJavascriptVariant'
+import makeRegisterComponent from './makeRegisterComponent'
 
 const javascriptVariant = detectJavascriptVariant()
 const needsCustomElementsPolyfill = !detectCustomElements()
@@ -30,8 +31,10 @@ const loadApi = () => require('./loadPicimo').default(javascriptVariant).then(({
 
 const preLoad = loadPolyfills.then(loadApi)
 const initialize = () => preLoad
+const registerComponent = makeRegisterComponent(initialize)
 
 export {
   initialize,
-  queryEntity
+  queryEntity,
+  registerComponent
 }

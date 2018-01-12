@@ -12,7 +12,7 @@ PICIMO.registerComponent('benchy',
 
     // TODO static defaultProps ()
 
-    create () {
+    constructor () {
       this.sprites = []
     }
 
