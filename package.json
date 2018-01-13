@@ -17,7 +17,7 @@
     "testrunner:headless": "mocha-headless-chrome --file http://localhost:9090 --visible",
     "build:libs": "node scripts/build-libs.js",
     "build": "run-p clean build:libs",
-    "clean": "rm -fr dist/*",
+    "clean": "rm -fr .build dist/*",
     "esdoc": "esdoc",
     "examples:build": "webpack --config config/webpack.examples.config.js",
     "examples": "webpack-dev-server --hot --inline --watch --config config/webpack.examples.config.js",
