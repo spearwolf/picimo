@@ -7,17 +7,21 @@ const HeaderContainer = styled.div`
   margin: 0;
   padding: 0;
   background: ${oc.gray[9]};
-  min-height: 50px;
+  height: 50px;
 `;
 
 const HeaderContent = styled.header`
   max-width: 960px;
+  height: 50px;
   margin: 0 auto;
-  padding: 1.45rem 1.0875rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
 `;
 
 const Title = styled.h1`
   margin: 0;
+  line-height: 1;
 `;
 
 const TitleLink = styled(Link)`

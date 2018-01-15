@@ -10,6 +10,7 @@
     "gatsby-plugin-react-helmet": "^2.0.3",
     "gatsby-plugin-react-next": "^1.0.7",
     "gatsby-plugin-styled-components": "^2.0.4",
+    "gatsby-plugin-typography": "^1.7.10",
     "open-color": "^1.6.2",
     "postcss-scss": "^1.0.3",
     "react-helmet": "^5.2.0",
@@ -42,12 +43,28 @@
     ],
     "rules": {
       "import/no-extraneous-dependencies": 0,
-      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+      "react/jsx-filename-extension": [
+        1,
+        {
+          "extensions": [
+            ".js",
+            ".jsx"
+          ]
+        }
+      ],
       "jsx-a11y/anchor-is-valid": [
-        "error", {
-          "components": [ ],
-          "specialLink": [ "hrefLeft", "hrefRight" ],
-          "aspects": [ "noHref", "invalidHref", "preferButton" ]
+        "error",
+        {
+          "components": [],
+          "specialLink": [
+            "hrefLeft",
+            "hrefRight"
+          ],
+          "aspects": [
+            "noHref",
+            "invalidHref",
+            "preferButton"
+          ]
         }
       ]
     }

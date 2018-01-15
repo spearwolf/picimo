@@ -21,5 +21,11 @@ module.exports = {
         exclude: '/global/',
       },
     },
+    {
+      resolve: 'gatsby-plugin-typography',
+      options: {
+        pathToConfigModule: 'src/styles/typography.js',
+      },
+    },
   ],
 };
