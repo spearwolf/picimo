@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'picimo',
+    title: 'site-title',
   },
   plugins: [
     'gatsby-plugin-react-helmet',

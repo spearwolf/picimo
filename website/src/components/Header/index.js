@@ -1,13 +1,20 @@
 import React from 'react';
 import Link from 'gatsby-link';
 import styled from 'styled-components';
-import oc from 'open-color/open-color.json';
+
+import siteConfig from '../../../site-config';
 
 const HeaderContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: ${siteConfig.header.height};
+
   margin: 0;
   padding: 0;
-  background: ${oc.gray[9]};
-  height: 50px;
+  background: rgba(250, 250, 250, 0.95);
+  box-shadow: 0 1px 0 rgba(12,13,14,0.1), 0 1px 3px rgba(12,13,14,0.1), 0 4px 20px rgba(12,13,14,0.035), 0 1px 1px rgba(12,13,14,0.025);
 `;
 
 const HeaderContent = styled.header`
@@ -25,7 +32,7 @@ const Title = styled.h1`
 `;
 
 const TitleLink = styled(Link)`
-  color: ${oc.gray[0]};
+  color: ${siteConfig.colors.text.normal};
   text-decoration: none;
 `;
 
