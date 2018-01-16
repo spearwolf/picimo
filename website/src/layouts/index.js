@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 
-import 'prismjs/themes/prism-okaidia.css';
+// import 'prismjs/themes/prism-okaidia.css';
+import 'prism-themes/themes/prism-xonokai.css';
 
 import siteConfig from '../../site-config';
 

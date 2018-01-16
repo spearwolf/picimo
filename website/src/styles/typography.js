@@ -1,40 +1,59 @@
 import Typography from 'typography';
 import CodePlugin from 'typography-plugin-code';
 import theme from 'typography-theme-parnassus';
-import oc from 'open-color/open-color.json';
+import { MOBILE_MEDIA_QUERY } from 'typography-breakpoint-constants';
 import merge from 'lodash/merge';
+
+import siteConfig from '../../site-config';
 
 theme.plugins = [
   new CodePlugin(),
 ];
 
-// overwrite font for headlines
+const headerFontFamily = 'Inconsolata';
+const headerFontWeight = 700;
+
+const bodyFontFamily = 'Inconsolata';
+
 theme.googleFonts[0] = {
-  name: 'Inconsolata',
-  styles: ['700'],
+  name: headerFontFamily,
+  styles: [`${headerFontWeight}`],
 };
-theme.googleFonts[1].name = 'Inconsolata';
+theme.googleFonts[1].name = bodyFontFamily;
 
 Object.assign(theme, {
   baseFontSize: '16px',
-  baseLineHeight: 1.5,
-  scaleRatio: 2.0,
+  baseLineHeight: 1.6,
+  scaleRatio: 1.6,
   paragraphSpacing: 1,
-  headerFontFamily: ['Inconsolata', 'sans-serif'],
-  bodyFontFamily: ['Inconsolata', 'serif'],
+  headerFontFamily: [headerFontFamily, 'sans-serif'],
+  headerWeight: headerFontWeight,
+  bodyFontFamily: [bodyFontFamily, 'serif'],
+  bodyColor: siteConfig.colors.text.normal,
+  headerColor: siteConfig.colors.text.header,
 });
 
 const origOverrideStyles = theme.overrideStyles;
 
 theme.overrideStyles = (...args) => merge(origOverrideStyles(...args), {
   a: {
+    color: siteConfig.colors.text.link,
     boxShadow: 'none',
   },
   'tt,code': {
-    backgroundColor: oc.gray[1],
+    backgroundColor: siteConfig.colors.text.preformattedBg,
   },
   pre: {
-    backgroundColor: oc.gray[1],
+    backgroundColor: siteConfig.colors.text.preformattedBg,
+  },
+  blockquote: {
+    color: siteConfig.colors.text.blockquote,
+    borderColor: siteConfig.colors.text.blockquoteBorder,
+  },
+  [MOBILE_MEDIA_QUERY]: {
+    blockquote: {
+      borderColor: siteConfig.colors.text.blockquoteBorder,
+    },
   },
 });
 

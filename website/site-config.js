@@ -9,8 +9,13 @@ export default {
   },
   colors: {
     text: {
-      normal: oc.gray[9],
+      normal: oc.gray[7],
+      link: oc.blue[9],
+      header: oc.gray[8],
       tagTitle: oc.pink[7],
+      preformattedBg: oc.gray[1],
+      blockquote: oc.gray[6],
+      blockquoteBorder: oc.gray[2],
     },
   },
   styles: {

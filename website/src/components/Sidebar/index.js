@@ -20,7 +20,7 @@ const SidebarContainer = styled.div`
 `;
 
 const SidebarContent = styled.header`
-  padding: 0 1rem;
+  padding: 1rem 1rem;
 `;
 
 const SidebarLink = ({ title, path }) => (
@@ -32,15 +32,21 @@ SidebarLink.propTypes = {
   path: PropTypes.string.isRequired,
 };
 
+const SectionTitle = styled.h4`
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+`;
+
 const Sidebar = ({ links }) => (
   <SidebarContainer>
     <SidebarContent>
-      <h4>GUIDES</h4>
-      <h4>TAGS</h4>
+      <SidebarLink title="Home" path="/" />
+      <SectionTitle>GUIDES</SectionTitle>
+      <SectionTitle>TAGS</SectionTitle>
       { links.map(({ id, title, path }) => (
         <SidebarLink key={id} title={title} path={path} />
       ))}
-      <h4>COMPONENTS</h4>
+      <SectionTitle>COMPONENTS</SectionTitle>
     </SidebarContent>
   </SidebarContainer>
 );

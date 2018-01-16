@@ -16,7 +16,7 @@ const HeaderContainer = styled.div`
   margin: 0;
   padding: 0;
   background: rgba(250, 250, 250, 0.95);
-  box-shadow: 0 1px 0 rgba(12,13,14,0.1), 0 1px 3px rgba(12,13,14,0.1), 0 4px 20px rgba(12,13,14,0.035), 0 1px 1px rgba(12,13,14,0.025);
+  box-shadow: 0 1px 0 rgba(12,13,16,0.1), 0 1px 3px rgba(12,13,16,0.1), 0 4px 20px rgba(12,13,16,0.035), 0 1px 1px rgba(12,13,16,0.025);
 `;
 
 const HeaderContent = styled.header`

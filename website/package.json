@@ -21,8 +21,10 @@
     "lodash": "^4.17.4",
     "open-color": "^1.6.2",
     "postcss-scss": "^1.0.3",
+    "prism-themes": "^1.0.0",
     "react-helmet": "^5.2.0",
     "styled-components": "^2.4.0",
+    "typography-breakpoint-constants": "^0.15.10",
     "typography-plugin-code": "^0.16.11",
     "typography-theme-parnassus": "^0.15.10",
     "typography-theme-wordpress-2016": "^0.15.10"
