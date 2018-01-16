@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 
+import 'prismjs/themes/prism.css';
+
 import siteConfig from '../../site-config';
 
 import Header from '../components/Header';
@@ -10,17 +12,19 @@ import Header from '../components/Header';
 const Content = styled.div`
   margin: 0 auto;
   max-width: 960px;
-  padding: 0 0 1.45rem;
-  padding-top: ${siteConfig.header.height};
+  padding: 0 ${siteConfig.styles.pageMarginH};
+  padding-top: calc(${siteConfig.styles.headerHeight} + 1.5rem);
+  padding-bottom: 8rem;
 `;
 
 const TemplateWrapper = ({ children }) => (
   <Fragment>
     <Helmet
-      title="Gatsby Default Starter"
+      title={siteConfig.page.htmlTitle}
       meta={[
-        { name: 'description', content: 'Sample' },
-        { name: 'keywords', content: 'sample, something' },
+        { name: 'description', content: siteConfig.page.description },
+        { name: 'keywords', content: siteConfig.page.keywords.join(', ') },
+        { name: 'author', content: siteConfig.page.author },
       ]}
     />
     <Header />

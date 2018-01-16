@@ -11,10 +11,21 @@
     "gatsby-plugin-react-next": "^1.0.7",
     "gatsby-plugin-styled-components": "^2.0.4",
     "gatsby-plugin-typography": "^1.7.10",
+    "gatsby-remark-emoji": "^0.0.1",
+    "gatsby-remark-external-links": "^0.0.4",
+    "gatsby-remark-images": "^1.5.36",
+    "gatsby-remark-prismjs": "^1.2.11",
+    "gatsby-remark-responsive-iframe": "^1.4.16",
+    "gatsby-source-filesystem": "^1.5.11",
+    "gatsby-transformer-remark": "^1.7.28",
+    "lodash": "^4.17.4",
     "open-color": "^1.6.2",
     "postcss-scss": "^1.0.3",
     "react-helmet": "^5.2.0",
-    "styled-components": "^2.4.0"
+    "styled-components": "^2.4.0",
+    "typography-plugin-code": "^0.16.11",
+    "typography-theme-parnassus": "^0.15.10",
+    "typography-theme-wordpress-2016": "^0.15.10"
   },
   "keywords": [
     "gatsby"
@@ -41,8 +52,13 @@
     "extends": [
       "airbnb"
     ],
+    "globals": {
+      "graphql": false
+    },
     "rules": {
+      "consistent-return": 0,
       "import/no-extraneous-dependencies": 0,
+      "react/no-danger": 0,
       "react/jsx-filename-extension": [
         1,
         {
