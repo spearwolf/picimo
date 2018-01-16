@@ -1,22 +1,21 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
+import styled from 'styled-components';
 
-const Template = ({ data }) => {
-  const { markdownRemark: post } = data; // data.markdownRemark holds our post data
-  return (
-    <div className="blog-post-container">
-      <Helmet title={`Your Blog Name - ${post.frontmatter.title}`} />
-      <div className="blog-post">
-        <h1>{post.frontmatter.title}</h1>
-        <div
-          className="blog-post-content"
-          dangerouslySetInnerHTML={{ __html: post.html }}
-        />
-      </div>
-    </div>
-  );
-};
+import siteConfig from '../../site-config';
+
+const DocTitle = styled.h1`
+  color: ${siteConfig.colors.text.tagTitle};
+`;
+
+const Template = ({ data: { markdownRemark: { frontmatter: { title }, html } } }) => (
+  <Fragment>
+    <Helmet title={title} />
+    <DocTitle>{ title }</DocTitle>
+    <div dangerouslySetInnerHTML={{ __html: html }} />
+  </Fragment>
+);
 
 Template.propTypes = {
   data: PropTypes.shape({
@@ -29,7 +28,6 @@ export const pageQuery = graphql`
     markdownRemark(frontmatter: { path: { eq: $path } }) {
       html
       frontmatter {
-        date(formatString: "MMMM DD, YYYY")
         path
         title
       }

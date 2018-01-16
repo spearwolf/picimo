@@ -20,7 +20,6 @@ const HeaderContainer = styled.div`
 `;
 
 const HeaderContent = styled.header`
-  max-width: 960px;
   height: ${siteConfig.styles.headerHeight};
   margin: 0 auto;
   padding: 0 ${siteConfig.styles.pageMarginH};
