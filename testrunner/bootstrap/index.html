@@ -8,13 +8,15 @@
   <link href="/picimo-testrunner.css" rel="stylesheet" />
 </head>
 <body>
-  <div class="picimoOverlay"><div class="picimo"></div></div>
-
   <div class="menuOverlay">
     <ul class="menuLinks">
-      <li class="menuLink"><a href="/">&larr; visual tests</a></li>
-      <li class="menuLink">bootstrap tests &darr;</li>
+      <li class="menuLink"><a href="/">visual tests</a></li>
+      <li class="menuLink menuLink--current">bootstrap tests</li>
     </ul>
+  </div>
+
+  <div class="visualRegressions">
+    <div class="picimoOverlay"><div class="picimo"></div></div>
   </div>
 
   <div id="mocha"></div>
