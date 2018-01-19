@@ -172,28 +172,28 @@ describe('<pi-picture>', () => {
             display-position="top: 1px; right: 1px; width: 25vh; objectFit: fill"
           ></pi-picture>
           <pi-picture texture="src: #atlas0; frame: numbers32_03"
-            display-position="bottom: 1px; left: 1px; height: 25vh; objectFit: fill"
+            display-position="bottom: 1px; right: 1px; height: 25vw; objectFit: fill"
           ></pi-picture>
           <pi-picture texture="src: #atlas0; frame: numbers32_04"
-            display-position="bottom: 1px; right: 1px; height: 25vw; objectFit: fill"
+            display-position="bottom: 1px; left: 1px; height: 25vh; objectFit: fill"
           ></pi-picture>
           <pi-picture texture="src: #atlas0; frame: numbers32_05"
             display-position="top: 2px; height: 71px; objectFit: contain"
           ></pi-picture>
-          <pi-picture texture="src: #atlas0; frame: numbers32_06"
+          <pi-picture texture="src: #atlas0; frame: numbers32_07"
             display-position="bottom: 2px; height: 71px; objectFit: contain"
           ></pi-picture>
-          <pi-picture texture="src: #atlas0; frame: numbers32_07"
+          <pi-picture texture="src: #atlas0; frame: numbers32_08"
             display-position="left: 12.5%; width: 12.5vw; objectFit: cover"
           ></pi-picture>
-          <pi-picture texture="src: #atlas0; frame: numbers32_08"
+          <pi-picture texture="src: #atlas0; frame: numbers32_06"
             display-position="right: 12.5%; width: 12.5vw; objectFit: cover"
           ></pi-picture>
           <pi-picture texture="src: #atlas0; frame: numbers32_09"
-            display-position="left: 37.5%; width: 12.5vw; height: 12.5vh; objectFit: cover"
+            display-position="left: 31.25%; width: 12.5vw; height: 12.5vh; objectFit: cover"
           ></pi-picture>
           <pi-picture texture="src: #atlas0; frame: numbers32_10"
-            display-position="right: 37.5%; width: 12.5vw; height: 12.5vh; objectFit: cover"
+            display-position="right: 31.25%; width: 12.5vw; height: 12.5vh; objectFit: cover"
           ></pi-picture>
         </pi-canvas>
       `)
