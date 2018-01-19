@@ -60,12 +60,12 @@ export default class DisplayPosition {
     entity.on('transformPicture', this)
   }
 
-  disconnectedEntity (entity) {
-    entity.off(this)
-  }
-
   transformPicture (renderer, textureDimension, transform) {
     transform(this.calcTransform(renderer, textureDimension))
+  }
+
+  disconnectedEntity (entity) {
+    entity.off(this)
   }
 
   calcTransform (renderer, { width: textureWidth, height: textureHeight }) {
@@ -188,21 +188,21 @@ export default class DisplayPosition {
         }
       }
 
-      if (hasBottom) {
+      if (hasBottom && !hasTop) {
         const bottomPx = convertUnit(bottom, units, viewHeight, devicePixelRatio)
 
         centerY = -(viewHeight * 0.5) + bottomPx + (targetHeight * 0.5)
-      } else if (hasTop) {
+      } else if (hasTop && !hasBottom) {
         const topPx = convertUnit(top, units, viewHeight, devicePixelRatio)
 
         centerY = (viewHeight * 0.5) - topPx - (targetHeight * 0.5)
       }
 
-      if (hasLeft) {
+      if (hasLeft && !hasRight) {
         const leftPx = convertUnit(left, units, viewWidth, devicePixelRatio)
 
         centerX = -(viewWidth * 0.5) + leftPx + (targetWidth * 0.5)
-      } else if (hasRight) {
+      } else if (hasRight && !hasLeft) {
         const rightPx = convertUnit(right, units, viewWidth, devicePixelRatio)
 
         centerX = (viewWidth * 0.5) - rightPx - (targetWidth * 0.5)

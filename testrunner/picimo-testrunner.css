@@ -1,7 +1,7 @@
 body { margin: 0; }
 
 .visualRegressions {
-  background-color: #f0f0f0;
+  background-color: #fafafa;
   padding-top: 8px;
   width: 100%;
   overflow-y: auto;
@@ -18,10 +18,12 @@ body { margin: 0; }
   width: 300px;
   height: 150px;
   margin: 0 0 16px 16px;
-  border: 1px solid #333;
   background-color: #bcd;
   background-image: url("/canvas-background-pattern.png");
   background-repeat: repeat;
+
+  /* border: 1px solid #333; */
+  box-shadow: 1px 1px 10px rgb(245, 250, 255), 1px 1px 20px rgb(230, 240, 250);
 }
 
 .picimo pi-canvas,

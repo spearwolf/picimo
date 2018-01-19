@@ -99,7 +99,7 @@ describe('<pi-picture>', () => {
             mesh-rows="16"
             mesh-cols="16"
             texture="src: #atlas0; frame: picimo"
-            display-position="top: 10px; bottom: 30%; left: 5%; right: 50%; objectFit: fill"
+            display-position="top: 2px; bottom: 25%; left: 2px; right: 25%; objectFit: fill"
           ></pi-picture>
         </pi-canvas>
       `)
@@ -122,7 +122,7 @@ describe('<pi-picture>', () => {
             mesh-rows="16"
             mesh-cols="16"
             texture="src: #atlas0; frame: picimo"
-            display-position="top: 20%; bottom: 20%; left: 5%; right: 5%; objectFit: contain"
+            display-position="top: 25%; bottom: 2px; left: 25%; right: 2px; objectFit: contain"
           ></pi-picture>
         </pi-canvas>
       `)
@@ -145,7 +145,7 @@ describe('<pi-picture>', () => {
             mesh-rows="16"
             mesh-cols="16"
             texture="src: #atlas0; frame: picimo"
-            display-position="top: 10%; bottom: 30%; left: 5%; right: 5%; objectFit: cover"
+            display-position="top: 25%; bottom: 2px; left: 25%; right: 2px; objectFit: cover"
           ></pi-picture>
         </pi-canvas>
       `)
@@ -159,23 +159,41 @@ describe('<pi-picture>', () => {
   describe('top,left,bottom,right and width,height', () => {
     before(() => {
       createHtml(`
-        <pi-texture-atlas id="atlas0" src="/assets/nobinger.json" nearest></pi-texture-atlas>
+        <pi-texture-atlas id="atlas0" src="/assets/lab-walls-tiles.json" nearest></pi-texture-atlas>
         <pi-canvas alpha premultiplied-alpha preserve-drawing-buffer width="600" height="300"
           projection="sizeFit: contain; desiredWidth: 300; desiredHeight: 150"
           blend="sfactor: srcAlpha; dfactor: oneMinusSrcAlpha"
           clear="color: #fff"
           >
-          <pi-picture texture="src: #atlas0; frame: nobinger-gruen.png"
-            display-position="top: 10px; left: 50%; width: 40vw; objectFit: contain"
+          <pi-picture texture="src: #atlas0; frame: numbers32_01"
+            display-position="top: 1px; left: 1px; width: 25vw; objectFit: fill"
           ></pi-picture>
-          <pi-picture texture="src: #atlas0; frame: nobinger-blau.png"
-            display-position="bottom: 50%; left: 10px; height: 50vh; objectFit: contain"
+          <pi-picture texture="src: #atlas0; frame: numbers32_02"
+            display-position="top: 1px; right: 1px; width: 25vh; objectFit: fill"
           ></pi-picture>
-          <pi-picture texture="src: #atlas0; frame: nobinger-gold.png"
-            display-position="top: 50%; right: 20px; height: 50vh; objectFit: contain"
+          <pi-picture texture="src: #atlas0; frame: numbers32_03"
+            display-position="bottom: 1px; left: 1px; height: 25vh; objectFit: fill"
           ></pi-picture>
-          <pi-picture texture="src: #atlas0; frame: nobinger-rot.png"
-            display-position="bottom: 20px; right: 50%; width: 45vw; objectFit: contain"
+          <pi-picture texture="src: #atlas0; frame: numbers32_04"
+            display-position="bottom: 1px; right: 1px; height: 25vw; objectFit: fill"
+          ></pi-picture>
+          <pi-picture texture="src: #atlas0; frame: numbers32_05"
+            display-position="top: 2px; height: 71px; objectFit: contain"
+          ></pi-picture>
+          <pi-picture texture="src: #atlas0; frame: numbers32_06"
+            display-position="bottom: 2px; height: 71px; objectFit: contain"
+          ></pi-picture>
+          <pi-picture texture="src: #atlas0; frame: numbers32_07"
+            display-position="left: 12.5%; width: 12.5vw; objectFit: cover"
+          ></pi-picture>
+          <pi-picture texture="src: #atlas0; frame: numbers32_08"
+            display-position="right: 12.5%; width: 12.5vw; objectFit: cover"
+          ></pi-picture>
+          <pi-picture texture="src: #atlas0; frame: numbers32_09"
+            display-position="left: 37.5%; width: 12.5vw; height: 12.5vh; objectFit: cover"
+          ></pi-picture>
+          <pi-picture texture="src: #atlas0; frame: numbers32_10"
+            display-position="right: 37.5%; width: 12.5vw; height: 12.5vh; objectFit: cover"
           ></pi-picture>
         </pi-canvas>
       `)
