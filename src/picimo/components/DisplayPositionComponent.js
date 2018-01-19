@@ -110,12 +110,18 @@ export default class DisplayPosition {
       const hasBottom = bottom !== null
       const hasLeft = left !== null
 
+      const hasWidth = width !== null
+      const hasHeight = height !== null
+
+      let hasGotASize = false
+
       if (hasLeft && hasRight) {
         const leftPx = convertUnit(left, units, viewWidth, devicePixelRatio)
         const rightPx = convertUnit(right, units, viewWidth, devicePixelRatio)
 
         centerX = (leftPx - rightPx) / 2.0
         containerWidth = viewWidth - leftPx - rightPx
+        hasGotASize = true
       }
 
       if (hasTop && hasBottom) {
@@ -124,10 +130,8 @@ export default class DisplayPosition {
 
         centerY = (bottomPx - topPx) / 2.0
         containerHeight = viewHeight - topPx - bottomPx
+        hasGotASize = true
       }
-
-      const hasWidth = width !== null
-      const hasHeight = height !== null
 
       if (hasWidth || hasHeight) {
         if (hasWidth) {
@@ -152,10 +156,21 @@ export default class DisplayPosition {
             containerWidth = containerHeight * (textureHeight / textureWidth)
           }
         }
+        hasGotASize = true
       }
 
-      if (containerWidth === 0) containerWidth = viewWidth
-      if (containerHeight === 0) containerHeight = viewHeight
+      if (!hasGotASize) {
+        if (hasLeft || hasRight || hasTop || hasBottom) {
+          containerWidth = textureWidth
+          containerHeight = textureHeight
+        } else {
+          containerWidth = viewWidth
+          containerHeight = viewHeight
+        }
+      }
+
+      // if (containerWidth === 0) containerWidth = viewWidth
+      // if (containerHeight === 0) containerHeight = viewHeight
 
       if (OBJECT_FIT_FILL === this.objectFit) {
         // ======= objectFit: fill ==========================

@@ -163,7 +163,7 @@ describe('<pi-picture>', () => {
         <pi-canvas alpha premultiplied-alpha preserve-drawing-buffer width="600" height="300"
           projection="sizeFit: contain; desiredWidth: 300; desiredHeight: 150"
           blend="sfactor: srcAlpha; dfactor: oneMinusSrcAlpha"
-          clear="color: #fff"
+          clear="color: #444"
           >
           <pi-picture texture="src: #atlas0; frame: numbers32_01"
             display-position="top: 1px; left: 1px; width: 25vw; objectFit: fill"
@@ -202,5 +202,38 @@ describe('<pi-picture>', () => {
     })
 
     it('screenshot match', () => matchScreenshot('picture-top-left-bottom-right-width-height.png'))
+  })
+
+  describe('top,left,bottom,right and default sizes', () => {
+    before(() => {
+      createHtml(`
+        <pi-texture-atlas id="atlas0" src="/assets/amigaballs.json" nearest></pi-texture-atlas>
+        <pi-canvas alpha premultiplied-alpha preserve-drawing-buffer width="600" height="300"
+          projection="sizeFit: contain; desiredWidth: 300; desiredHeight: 150"
+          blend="sfactor: srcAlpha; dfactor: oneMinusSrcAlpha"
+          clear="color: #444"
+          >
+          <pi-picture texture="src: #atlas0; frame: amigaball-dark"
+            display-position="width: 400%"
+          ></pi-picture>
+          <pi-picture texture="src: #atlas0; frame: amigakugeln_2"
+            display-position="left: 1px; width: 200%"
+          ></pi-picture>
+          <pi-picture texture="src: #atlas0; frame: amigakugeln_3"
+            display-position="top: 1px"
+          ></pi-picture>
+          <pi-picture texture="src: #atlas0; frame: amigakugeln_5"
+            display-position="right: 1px; height: 200%"
+          ></pi-picture>
+          <pi-picture texture="src: #atlas0; frame: amigakugeln_1"
+            display-position="bottom: 1px; objectFit: cover"
+          ></pi-picture>
+        </pi-canvas>
+      `)
+
+      return pictureMeshCreated(querySelectorAll('pi-picture')).then(afterNextAF)
+    })
+
+    it('screenshot match', () => matchScreenshot('picture-top-left-bottom-right-default-sizes.png'))
   })
 })
