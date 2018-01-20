@@ -19,8 +19,9 @@ export default {
     },
   },
   styles: {
+    mainContentMaxWidth: '1200px',
     pageMarginH: '0.66rem',
     headerHeight: '55px',
-    sidebarWidth: '16rem',
+    sidebarWidth: '12rem',
   },
 };

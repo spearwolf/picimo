@@ -4,7 +4,11 @@ import Helmet from 'react-helmet';
 import styled from 'styled-components';
 
 // import 'prismjs/themes/prism-okaidia.css';
-import 'prism-themes/themes/prism-xonokai.css';
+// import 'prism-themes/themes/prism-xonokai.css';
+// import 'prismjs/themes/prism.css';
+// import 'prism-themes/themes/prism-vs.css';
+import 'prism-themes/themes/prism-ghcolors.css';
+import './prism-overrides.css';
 
 import siteConfig from '../../site-config';
 
@@ -13,7 +17,7 @@ import Sidebar from '../components/Sidebar';
 
 const Content = styled.div`
   margin: 0 auto;
-  max-width: 960px;
+  max-width: ${siteConfig.styles.mainContentMaxWidth};
   padding-top: calc(${siteConfig.styles.headerHeight} + 1.5rem);
   padding-left: calc(${siteConfig.styles.sidebarWidth} + ${siteConfig.styles.pageMarginH});
   padding-right: ${siteConfig.styles.pageMarginH};

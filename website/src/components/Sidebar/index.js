@@ -15,12 +15,13 @@ const SidebarContainer = styled.div`
   z-index: 100;
   margin: 0;
   padding: 0;
-  border-right: 1px solid ${oc.gray[2]};
   background: ${oc.gray[0]};
+  border-right: 2px solid ${oc.gray[2]};
 `;
+  // border-right: 1px solid ${oc.gray[2]};
 
 const SidebarContent = styled.header`
-  padding: 1rem 1rem;
+  padding: 2.5rem 1rem;
 `;
 
 const SidebarLink = ({ title, path }) => (
