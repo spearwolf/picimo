@@ -4,6 +4,7 @@ path: "/doc/tags/pi-picture"
 date: "2017-07-12T17:12:33.962Z"
 title: "<pi-picture>"
 sidebarLinkTitle: "pi-picture"
+pageType: "tagDoc"
 ---
 
 ## Description

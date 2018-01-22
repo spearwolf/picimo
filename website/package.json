@@ -6,9 +6,9 @@
   "dependencies": {
     "gatsby": "^1.9.153",
     "gatsby-link": "^1.6.34",
-    "gatsby-plugin-react-css-modules": "^1.0.11",
     "gatsby-plugin-react-helmet": "^2.0.3",
     "gatsby-plugin-react-next": "^1.0.7",
+    "gatsby-plugin-sass": "^1.0.15",
     "gatsby-plugin-styled-components": "^2.0.4",
     "gatsby-plugin-typography": "^1.7.10",
     "gatsby-remark-emoji": "^0.0.1",
@@ -58,6 +58,7 @@
       "graphql": false
     },
     "rules": {
+      "no-plusplus": 0,
       "consistent-return": 0,
       "import/no-extraneous-dependencies": 0,
       "react/no-danger": 0,

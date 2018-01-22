@@ -7,18 +7,9 @@ module.exports = {
     'gatsby-plugin-react-next',
     'gatsby-plugin-styled-components',
     {
-      resolve: 'gatsby-plugin-react-css-modules',
+      resolve: 'gatsby-plugin-sass',
       options: {
-        // *.css files are included by default.
-        // To support another syntax (e.g. SCSS),
-        // add `postcss-scss` to your project's devDependencies
-        // and add the following option here:
-        filetypes: {
-          '.scss': { syntax: 'postcss-scss' },
-        },
-
-        // Exclude global styles from the plugin using a RegExp:
-        exclude: '/global/',
+        precision: 8,
       },
     },
     {
@@ -61,6 +52,9 @@ module.exports = {
             },
           },
           {
+            resolve: require.resolve('./plugins/remark-sections'),
+          },
+          {
             resolve: 'gatsby-remark-images',
             options: {
               // It's important to specify the maxWidth (in pixels) of
@@ -85,6 +79,12 @@ module.exports = {
               sizeByPixelDensity: true,
             },
           },
+          // {
+          // resolve: 'gatsby-plugin-nprogress',
+          // options: {
+          // color: '#6CAEDD',
+          // },
+          // },
         ],
       },
     },

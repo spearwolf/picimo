@@ -10,10 +10,10 @@ theme.plugins = [
   new CodePlugin(),
 ];
 
-const headerFontFamily = 'Inconsolata';
+const headerFontFamily = 'PT Sans Caption';
 const headerFontWeight = 700;
 
-const bodyFontFamily = 'Inconsolata';
+const bodyFontFamily = 'Merriweather';
 
 theme.googleFonts[0] = {
   name: headerFontFamily,

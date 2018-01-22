@@ -8,6 +8,9 @@ export default {
     author: 'Wolfger Schramm <wolfger@spearwolf.de>',
   },
   colors: {
+    page: {
+      background: oc.gray[0],
+    },
     text: {
       normal: oc.gray[7],
       link: oc.blue[9],
@@ -20,7 +23,7 @@ export default {
   },
   styles: {
     mainContentMaxWidth: '1200px',
-    pageMarginH: '0.66rem',
+    pageMarginH: '3rem',
     headerHeight: '55px',
     sidebarWidth: '12rem',
   },

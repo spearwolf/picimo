@@ -1,31 +1,35 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Link from 'gatsby-link';
-import oc from 'open-color/open-color.json';
+// import oc from 'open-color/open-color.json';
+import sortBy from 'lodash/sortBy';
+
+import Logo from '../Logo';
 
 import siteConfig from '../../../site-config';
 
 const SidebarContainer = styled.div`
   position: fixed;
-  top: ${siteConfig.styles.headerHeight};
+  top: 0;
   left: 0;
   bottom: 0;
   width: ${siteConfig.styles.sidebarWidth};
   z-index: 100;
   margin: 0;
   padding: 0;
-  background: ${oc.gray[0]};
-  border-right: 2px solid ${oc.gray[2]};
 `;
-  // border-right: 1px solid ${oc.gray[2]};
 
 const SidebarContent = styled.header`
-  padding: 2.5rem 1rem;
+  padding: 1rem 1rem 2.5rem;
+`;
+
+const StyledLink = styled(Link)`
+  display: block;
 `;
 
 const SidebarLink = ({ title, path }) => (
-  <Link to={path}>{ title }</Link>
+  <StyledLink to={path}>{ title }</StyledLink>
 );
 
 SidebarLink.propTypes = {
@@ -38,16 +42,34 @@ const SectionTitle = styled.h4`
   margin-bottom: 1rem;
 `;
 
+const SidebarSection = ({ sectionTitle, pageType, links }) => (
+  <Fragment>
+    <SectionTitle>{ sectionTitle }</SectionTitle>
+    { sortBy(links.filter(li => li.pageType === pageType), 'title').map(({ id, title, path }) => (
+      <SidebarLink key={id} title={title} path={path} />
+    ))}
+  </Fragment>
+);
+
+SidebarSection.propTypes = {
+  sectionTitle: PropTypes.string.isRequired,
+  pageType: PropTypes.string.isRequired,
+  links: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    title: PropTypes.string,
+    path: PropTypes.string,
+    pageType: PropTypes.string,
+  })).isRequired,
+};
+
 const Sidebar = ({ links }) => (
   <SidebarContainer>
     <SidebarContent>
+      <Logo />
       <SidebarLink title="Home" path="/" />
-      <SectionTitle>GUIDES</SectionTitle>
-      <SectionTitle>TAGS</SectionTitle>
-      { links.map(({ id, title, path }) => (
-        <SidebarLink key={id} title={title} path={path} />
-      ))}
-      <SectionTitle>COMPONENTS</SectionTitle>
+      <SidebarSection sectionTitle="GUDIES" pageType="guide" links={links} />
+      <SidebarSection sectionTitle="TAGS" pageType="tagDoc" links={links} />
+      <SidebarSection sectionTitle="COMPONENTS" pageType="componentDoc" links={links} />
     </SidebarContent>
   </SidebarContainer>
 );
@@ -57,6 +79,7 @@ Sidebar.propTypes = {
     id: PropTypes.string,
     title: PropTypes.string,
     path: PropTypes.string,
+    pageType: PropTypes.string,
   })).isRequired,
 };
 

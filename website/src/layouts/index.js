@@ -10,22 +10,30 @@ import styled from 'styled-components';
 import 'prism-themes/themes/prism-ghcolors.css';
 import './prism-overrides.css';
 
+import './index.scss';
+
 import siteConfig from '../../site-config';
 
-import Header from '../components/Header';
+// import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
+
+const Page = styled.div`
+  background-color: ${siteConfig.colors.page.background};
+`;
 
 const Content = styled.div`
   margin: 0 auto;
   max-width: ${siteConfig.styles.mainContentMaxWidth};
-  padding-top: calc(${siteConfig.styles.headerHeight} + 1.5rem);
+  padding-top: 0;
   padding-left: calc(${siteConfig.styles.sidebarWidth} + ${siteConfig.styles.pageMarginH});
   padding-right: ${siteConfig.styles.pageMarginH};
   padding-bottom: 8rem;
 `;
+  // padding-top: ${siteConfig.styles.headerHeight};
 
 const allPages = data => data.allMarkdownRemark.edges.map(({ node }) => ({
   id: node.id,
+  pageType: node.frontmatter.pageType,
   path: node.frontmatter.path,
   title: node.frontmatter.sidebarLinkTitle,
 }));
@@ -40,9 +48,10 @@ const TemplateWrapper = ({ data, children }) => (
         { name: 'author', content: siteConfig.page.author },
       ]}
     />
-    <Header />
-    <Sidebar links={allPages(data)} />
-    <Content>{ children() }</Content>
+    <Page>
+      <Sidebar links={allPages(data)} />
+      <Content>{ children() }</Content>
+    </Page>
   </Fragment>
 );
 
@@ -61,8 +70,9 @@ export const query = graphql`
         node {
           id
           frontmatter {
-            sidebarLinkTitle
+            pageType
             path
+            sidebarLinkTitle
           }
         }
       }
