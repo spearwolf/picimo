@@ -14,6 +14,8 @@ Defines the *position (x, y, z)* and *size (width, height)* of an image.
 
 A *dynamic* attribute. Is read out every time during the *renderFrame* event.
 
+The `display-position` component is used by the following tags: [`<pi-picture>`](/docs/tags/pi-picture)
+
 
 ## Example
 

@@ -15,7 +15,7 @@ export default {
       normal: '#d3d4d4',
       link: '#6dafdb',
       header: '#fff',
-      tagTitle: '#6dafdb',
+      tagTitle: '#f06', //'#6dafdb',
       preformattedBg: '#191c1d',
       blockquote: '#191c1d',
       blockquoteBorder: '#f06',

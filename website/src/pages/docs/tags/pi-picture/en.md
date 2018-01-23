@@ -12,7 +12,7 @@ The `<pi-picture>` tag defines a 2d image in a *picimo* canvas.
 
 The image is rendered using a quad grid mesh.
 
-The `<pi-picture>` tag has two required attribute: `display-position` and `texture`.
+The `<pi-picture>` tag has two required attributes: [`display-position`](/docs/components/display-position) and [`texture`](/docs/components/texture).
 
 With the *optional* attributes `mesh-cols` and `mesh-rows` the grid can be adjusted.
 
@@ -65,4 +65,4 @@ A *dynamic* attribute. Is read out every time during the *renderFrame* event.
 
 Defines the *position (x, y, z)* and *size (width, height)* of the image.
 
-See [display-position](/doc/components/display-position) for a detailed description.
+See [`[display-position]`](/docs/components/display-position) for a detailed description.
