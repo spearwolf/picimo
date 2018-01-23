@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Link from 'gatsby-link';
-// import oc from 'open-color/open-color.json';
 import sortBy from 'lodash/sortBy';
 
 import Logo from '../Logo';
@@ -32,6 +31,10 @@ const SidebarLink = ({ title, path }) => (
   <StyledLink to={path}>{ title }</StyledLink>
 );
 
+const SidebarCodeLink = ({ title, path }) => (
+  <StyledLink to={path}><code>{ title }</code></StyledLink>
+);
+
 SidebarLink.propTypes = {
   title: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
@@ -42,17 +45,20 @@ const SectionTitle = styled.h4`
   margin-bottom: 1rem;
 `;
 
-const SidebarSection = ({ sectionTitle, pageType, links }) => (
+const SidebarSection = ({ sectionTitle, sectionTitleIsCode, pageType, links }) => (
   <Fragment>
     <SectionTitle>{ sectionTitle }</SectionTitle>
     { sortBy(links.filter(li => li.pageType === pageType), 'title').map(({ id, title, path }) => (
-      <SidebarLink key={id} title={title} path={path} />
+      sectionTitleIsCode ?
+        <SidebarCodeLink key={id} title={title} path={path} />
+        : <SidebarLink key={id} title={title} path={path} />
     ))}
   </Fragment>
 );
 
 SidebarSection.propTypes = {
   sectionTitle: PropTypes.string.isRequired,
+  sectionTitleIsCode: PropTypes.bool.isRequired,
   pageType: PropTypes.string.isRequired,
   links: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
@@ -67,9 +73,9 @@ const Sidebar = ({ links }) => (
     <SidebarContent>
       <Logo />
       <SidebarLink title="Home" path="/" />
-      <SidebarSection sectionTitle="GUDIES" pageType="guide" links={links} />
-      <SidebarSection sectionTitle="TAGS" pageType="tagDoc" links={links} />
-      <SidebarSection sectionTitle="COMPONENTS" pageType="componentDoc" links={links} />
+      <SidebarSection sectionTitle="GUDIES" sectionTitleIsCode={false} pageType="guide" links={links} />
+      <SidebarSection sectionTitle="TAGS" sectionTitleIsCode pageType="tagDoc" links={links} />
+      <SidebarSection sectionTitle="COMPONENTS" sectionTitleIsCode pageType="componentDoc" links={links} />
     </SidebarContent>
   </SidebarContainer>
 );

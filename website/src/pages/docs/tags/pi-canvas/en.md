@@ -1,8 +1,8 @@
 ---
 id: "pi-canvas"
-path: "/doc/tags/pi-canvas"
+path: "/docs/tags/pi-canvas"
 title: "<pi-canvas>"
-sidebarLinkTitle: "pi-canvas"
+sidebarLinkTitle: "<pi-canvas>"
 pageType: "tagDoc"
 ---
 
@@ -27,7 +27,7 @@ The `<pi-canvas>` handles all of the WebGL boilerplate for us:
     clear="color: rgba(255, 255, 255)"
     blend="sfactor: srcAlpha; dfactor: oneMinusSrcAlpha"
     >
-  ...
+    ...
   </pi-canvas>
 ```
 

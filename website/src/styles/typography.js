@@ -10,8 +10,8 @@ theme.plugins = [
   new CodePlugin(),
 ];
 
-const headerFontFamily = 'PT Sans Caption';
-const headerFontWeight = 700;
+const headerFontFamily = 'Montserrat';
+const headerFontWeight = 400;
 
 const bodyFontFamily = 'Merriweather';
 
@@ -24,7 +24,7 @@ theme.googleFonts[1].name = bodyFontFamily;
 Object.assign(theme, {
   baseFontSize: '16px',
   baseLineHeight: 1.6,
-  scaleRatio: 1.6,
+  scaleRatio: 2.3,
   paragraphSpacing: 1,
   headerFontFamily: [headerFontFamily, 'sans-serif'],
   headerWeight: headerFontWeight,

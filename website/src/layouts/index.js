@@ -6,8 +6,9 @@ import styled from 'styled-components';
 // import 'prismjs/themes/prism-okaidia.css';
 // import 'prism-themes/themes/prism-xonokai.css';
 // import 'prismjs/themes/prism.css';
+import 'prismjs/themes/prism-twilight.css';
 // import 'prism-themes/themes/prism-vs.css';
-import 'prism-themes/themes/prism-ghcolors.css';
+// import 'prism-themes/themes/prism-ghcolors.css';
 import './prism-overrides.css';
 
 import './index.scss';
