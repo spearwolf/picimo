@@ -42,7 +42,7 @@ See documentation for [HTMLCanvasElement/getContext](https://developer.mozilla.o
 | WebGL Context Attribute | Default Value | Description |
 |-------------------------|---------------|-------------|
 | __alpha__ | `false` | Boolean that indicates that the canvas has an alpha channel. |
-| __depth__ | `true` | Boolean that indicates that the canvas has a depth buffer. <br>HINT: *IE11 doesn't support* `false` |
+| __depth__ | `true` | Boolean that indicates that the canvas has a depth buffer. <br>Hint: *ie11 doesn't support* `false` |
 | __stencil__ | `false` | Boolean that indicates that the canvas has a stencil buffer. |
 | __antialias__ | `false` | Boolean that indicates whether or not to perform anti-aliasing. |
 | __premultipliedAlpha__ | `false` | Boolean that indicates that the page compositor will assume the canvas contains colors with pre-multiplied alpha. |

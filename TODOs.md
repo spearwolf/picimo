@@ -86,6 +86,7 @@ Think about
 -----------
 
 - [ ] fullscreen support
+- [ ] intersection observer (pause when out-of-view)
 - [ ] interaction support
 - [ ] react-picimo
 - [ ] vue-picimo
