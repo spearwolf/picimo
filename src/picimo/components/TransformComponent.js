@@ -48,6 +48,7 @@ export default class TransformComponent {
   }
 
   renderFrame (renderer, canvas) {
+    // TODO check if parent projection changed
     if (this.needsUpdate) {
       const projection = renderer.context.get(PROJECTION)
 

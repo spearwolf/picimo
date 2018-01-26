@@ -13,7 +13,10 @@ HTML Element API And Other Issues
     - [ ] extract `SpriteGroupElement->syncTextureMap()` into a `TextureMapComponent`
   - [x] `<pi-texture/>` acts as single texture source (similary to texture-atlas)
   - [ ] `<pi-render-to-texture/>` acts as texture source and scene
-- [ ] `<pi-canvas/>` should have a default projection
+- [ ] `<pi-canvas/>`
+  - [ ] should have a default projection
+  - [ ] change attr: `depth` &rarr; `no-depth`
+  - [ ] rethink default values for webgl context attrs
 - [ ] texture-map= (from <pi-sprite-group>) should be a component
 - [ ] projection= perspective support (distance, near, far), choose sensible defaults
   - [x] main work is done :smile:
@@ -23,10 +26,11 @@ HTML Element API And Other Issues
   - [ ] near/far
   - [ ] pixelRatio support
 - [x] transform= component .. camera?
-  - [ ] support options similar to [css transform property](https://www.w3schools.com/cssref/css3_pr_transform.asp)
+  - [ ] update transform when parent projection changed
+  - [ ] should maybe support options similar to [css transform property](https://www.w3schools.com/cssref/css3_pr_transform.asp)
 - [x] `<pi-sprite-group/>`
   - [ ] add support for all options from [src/core/SpriteGroup](src/core/sprite_group.js)
-  - [ ] billboard support
+  - [ ] maybe billboard support?
 - [ ] shader-uniform= component
 - [ ] texture= component
   - [x] pi-texture
@@ -49,7 +53,7 @@ Release
   - [ ] parallax endless (runner, scrolling)
   - [ ] dungeon-demo?
   - [ ] react integration (pong game?)
-- [ ] picimo website setup
+- [x] picimo website setup
   - [ ] welcome page
   - [ ] examples
   - [ ] quickstart docs
