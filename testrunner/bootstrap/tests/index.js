@@ -1,2 +1,4 @@
-import './blitpunk_global_var'
-import './blitpunk_initialize'
+import './picimo_global_var'
+import './picimo_queryEntity'
+import './picimo_registerComponent'
+import './picimo_initialize'

@@ -1,8 +1,8 @@
-/* global BLITPUNK */
+/* global PICIMO */
 
 const init = async () => {
   const spriteGroup = await document.getElementById('mySprites').spriteGroupPromise
-  const atlas = await document.getElementById('atlas1').textureAtlasPromise
+  const atlas = await document.getElementById('atlas1').resourcePromise
 
   console.log('spriteGroup=', spriteGroup, 'textureAtlas=', atlas)
 
@@ -21,4 +21,4 @@ const init = async () => {
   spriteGroup.createSprite(atlas.getFrame('R')).setTranslate(-190, -25)
 }
 
-BLITPUNK.initialize().then(init)
+PICIMO.initialize().then(init)

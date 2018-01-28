@@ -3,28 +3,25 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>blitpunk testrunner</title>
+  <title>picimo testrunner</title>
   <link href="/mocha.css" rel="stylesheet" />
-  <style>
-    .blitpunkOverlay {
-      position: fixed;
-      top: 1px;
-      left: 0;
-      right: 0;
-    }
-    .blitpunk {
-      width: 300px;
-      height: 150px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-  </style>
+  <link href="/picimo-testrunner.css" rel="stylesheet" />
 </head>
 <body>
-  <div class="blitpunkOverlay"><div class="blitpunk"></div></div>
+  <div class="menuOverlay">
+    <ul class="menuLinks">
+      <li class="menuLink"><a href="/">visual tests</a></li>
+      <li class="menuLink menuLink--current">bootstrap tests</li>
+    </ul>
+  </div>
+
+  <div class="visualRegressions">
+    <div class="picimoOverlay"><div class="picimo"></div></div>
+  </div>
+
   <div id="mocha"></div>
 
-  <script src="blitpunk.js"></script>
+  <script src="picimo.js"></script>
   <script src="./setup.js"></script>
 </body>
 </html>

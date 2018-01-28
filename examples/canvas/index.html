@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>blitpunk example</title>
+    <title>picimo example</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <style>
         html, body { height: 100%; }
         body {
-            background-color: #333;
+            background-color: #f0f0f0;
             margin: 0;
             display: flex;
             align-items: center;
@@ -19,13 +19,42 @@
     </style>
 </head>
 <body>
-  <blitpunk-texture-atlas id="atlas0" src="lab-walls-tiles.json" nearest></blitpunk-texture-atlas>
+  <pi-texture-atlas id="atlas0" src="lab-walls-tiles.json" nearest></pi-texture-atlas>
+  <pi-texture id="texLogo" src="picimo-512.png" nearest></pi-texture>
 
-  <blitpunk-canvas id="c0" alpha clear="color: rgba(0, 128, 64, .5)" projection="sizeFit: contain; desiredWidth: 300; desiredHeight: 200">
-    <blitpunk-sprite-group id="sprites0" descriptor="simple" capacity="100" vertex-shader="simple" fragment-shader="simple" primitive="TRIANGLES" texture-map="tex: #atlas0" vo-new="scale: 1; opacity: 1"></blitpunk-sprite-group>
-    <blitpunk-entity hello="atlas: texture(#atlas0); spriteGroup: spriteGroup(#sprites0)"></blitpunk-entity>
-  </blitpunk-canvas>
+  <pi-canvas id="c0" alpha
+    projection="sizeFit: contain; desiredWidth: 300; desiredHeight: 200"
+    clear="color: rgba(90, 130, 160, .6)"
+    blend="sfactor: srcAlpha; dfactor: oneMinusSrcAlpha"
+    >
+    <pi-sprite-group id="sprites0"
+      vo-descriptor="simple"
+      vo-capacity="100"
+      vertex-shader="simple"
+      fragment-shader="simple"
+      primitive-type="TRIANGLES"
+      texture-map="tex: #atlas0"
+      vo-new="scale: 1; opacity: 1"
+      ></pi-sprite-group>
 
+    <pi-entity
+      hello="atlas: textureAtlas(#atlas0); sprites: spriteGroup(#sprites0)"
+      ></pi-entity>
+
+    <pi-picture texture="src: #texLogo" display-position="top: 0px; left: 0px; width: 30vw; objectFit: contain"></pi-picture>
+
+    <pi-picture
+      id="pi0"
+      mesh-cols="128"
+      mesh-rows="128"
+      texture="src: #atlas0; frame: numbers32_06"
+      shader-uniform="scale: 1; transform: vec2(1.0, 1.0)"
+      display-position="width: 30vw; height: 30vh; objectFit: contain"
+      transform="y: -50; rotateZ: 45"
+      ></pi-picture>
+  </pi-canvas>
+
+  <script src="document-register-element.js"></script>
   <script src="bundle.js"></script>
 </body>
 </html>

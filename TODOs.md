@@ -1,16 +1,23 @@
-# &lt;blitpunk/&gt; Backlog
+# &lt;picimo/&gt; Backlog
 
-HTML Element API
-----------------
+HTML Element API And Other Issues
+---------------------------------
 
 - [ ] Render to texture ..
-  - [ ] `<blitpunk-picture/>` acts as single sprite renderer, support boilerplate example (background)
+  - [x] `<pi-picture/>` acts as single sprite renderer, support boilerplate example (background)
+    - [ ] without texture (texture='none' ?)
+    - [ ] multi-texture support
+    - [ ] custom frag/vertex shader support
     - [ ] support boilerplate example (background shader)
     - [ ] support free styles buffers .. single quads, mesh, ..
     - [ ] extract `SpriteGroupElement->syncTextureMap()` into a `TextureMapComponent`
-  - [ ] `<blitpunk-texture/>` acts as single texture source (similary to texture-atlas)
-  - [ ] `<blitpunk-render-to-texture/>` acts as texture source and scene
-- [ ] `<blitpunk-canvas/>` should have a default projection
+  - [x] `<pi-texture/>` acts as single texture source (similary to texture-atlas)
+  - [ ] `<pi-render-to-texture/>` acts as texture source and scene
+- [ ] `<pi-canvas/>`
+  - [ ] should have a default projection
+  - [ ] change attr: `depth` &rarr; `no-depth`
+  - [ ] rethink default values for webgl context attrs
+- [ ] texture-map= (from <pi-sprite-group>) should be a component
 - [ ] projection= perspective support (distance, near, far), choose sensible defaults
   - [x] main work is done :smile:
   - [x] fix core/projection.js -> updateOrtho()
@@ -18,12 +25,24 @@ HTML Element API
   - [x] distance
   - [ ] near/far
   - [ ] pixelRatio support
-- [ ] transform= component .. camera?
-- [ ] disconnectedCallback, free (glx) resources
-  - [ ] support/verify html element insertions and deletions (appendChild, removeChild)
-- [x] `<blitpunk-sprite-group/>`
+- [x] transform= component .. camera?
+  - [ ] update transform when parent projection changed
+  - [ ] should maybe support options similar to [css transform property](https://www.w3schools.com/cssref/css3_pr_transform.asp)
+- [x] `<pi-sprite-group/>`
   - [ ] add support for all options from [src/core/SpriteGroup](src/core/sprite_group.js)
-- [ ] texture component (blitpunk-texture, render-to-texture, canvas, video...)
+  - [ ] maybe billboard support?
+- [ ] shader-uniform= component
+- [ ] texture= component
+  - [x] pi-texture
+  - [ ] render-to-texture
+  - [ ] canvas
+  - [ ] video
+- [ ] destroy
+  - [ ] free gl resources
+  - [ ] auto-remove unused gl resources
+  - [ ] disconnectedCallback
+  - [ ] support/verify html element insertions and deletions (appendChild, removeChild)
+
 
 Release
 -------
@@ -34,7 +53,7 @@ Release
   - [ ] parallax endless (runner, scrolling)
   - [ ] dungeon-demo?
   - [ ] react integration (pong game?)
-- [ ] blitpunk website setup
+- [x] picimo website setup
   - [ ] welcome page
   - [ ] examples
   - [ ] quickstart docs
@@ -51,38 +70,39 @@ Release
     - [x] polyfills for URL, fetch, ..
 - [x] multi-threaded builds (build-libs.js)
 - [x] support native javascript modules
-- [ ] upgrade to new eventize api (npm package)
+- [x] upgrade to new eventize api (npm package)
 
-Next Release
-------------
-
-- [ ] tilemaps support `<blitpunk-tilemap .. />`
-- [ ] spine support `<blitpunk-spine-loader .. />`
-
-Think about
------------
-
-- [ ] "create an app" -> how to compile js,css,images,etc..to one single html (webpack?)
-  - [ ] include js,assets updates from server..
-- [ ] quick boostrap tool `blitpunk-cli`
 
 Browser Support
 ---------------
 
-- [ ] firefox windows support
-- [ ] edge windows support
-- [ ] ie11 support (needs polyfill for: URL, fetch, ..)
+- [x] ie11 support (needs polyfill for: URL, fetch, ..)
+- [x] edge windows support
+- [x] firefox windows support
 - [x] chrome/chromium linux support
 - [x] firefox linux support
-- [ ] safari mac support
-- [ ] ios support
-- [ ] android chrome support
+- [x] safari mac support
+- [x] ios support
+- [x] android chrome support
 
-Other
------
 
-- [ ] fix karma/code *coverage* generation!
-- [x] remove *jab* reference?
+Think about
+-----------
+
+- [ ] fullscreen support
+- [ ] intersection observer (pause when out-of-view)
+- [ ] interaction support
+- [ ] react-picimo
+- [ ] vue-picimo
+- [ ] create examples with ?
+  - [ ] https://github.com/popmotion/popmotion
+  - [ ] https://github.com/chenglou/react-motion
+- [ ] "create an app" -> how to compile js,css,images,etc..to one single html (webpack?)
+  - [ ] include js,assets updates from server..
+  - [ ] codepen?
+  - [ ] jsbin/jsfiddle?
+  - [ ] boilerplate?
+
 
 Usage Examples
 --------------
@@ -92,10 +112,10 @@ Usage Examples
 (example is _partially outdated_, please look into [examples/](examples/))
 
 ```html
-  <blitpunk-canvas>
-    <blitpunk-texture-atlas id="tex1" src="atlas-url"/>
-    <blitpunk-scene render-to-texture="my-texture">
-      <blitpunk-sprite-group
+  <pi-canvas>
+    <pi-texture-atlas id="tex1" src="atlas-url"/>
+    <picimo-scene render-to-texture="my-texture">
+      <pi-sprite-group
         id="my-sprites"
         descriptor="simple"
         capacity="100"
@@ -104,10 +124,10 @@ Usage Examples
         primitive="TRIANGLES"
         texture-map="tex: tex1"
         vo-new="scale: 1; opacity: 1" />
-    </blitpunk-scene>
-    <blitpunk-scene>
-      <blitpunk-picture texture="my-texture" size-fit="cover" />
-    </blitpunk-scene>
-  </blitpunk-canvas>
+    </picimo-scene>
+    <picimo-scene>
+      <pi-picture texture="my-texture" size-fit="cover" />
+    </picimo-scene>
+  </pi-canvas>
 ```
 

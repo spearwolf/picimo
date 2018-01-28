@@ -1,7 +1,10 @@
 /* global mocha */
 require('mocha/mocha.js')
 
-mocha.setup('bdd')
+mocha.setup({
+  ui: 'bdd',
+  noHighlighting: true
+})
 
 require('./tests')
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>blitpunk boilerplate</title>
+    <title>picimo boilerplate</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <style>
       html, body {
@@ -16,30 +16,34 @@
         justify-content: center;
         overflow: hidden;
       }
-      #blitpunk {
+      #picimo {
         width: 100vw;
         height: 100vh;
       }
     </style>
-    <script src="blitpunk.js"></script>
+    <script src="picimo.js"></script>
   </head>
   <body>
-    <blitpunk-canvas id="blitpunk" alpha premultiplied-alpha
+    <pi-texture-atlas id="cloudsAtlas" src="clouds.json"></pi-texture-atlas>
+    <pi-texture-atlas id="logos" src="picimo-atlas.json" nearest></pi-texture-atlas>
+
+    <pi-canvas id="picimo" alpha premultiplied-alpha
       projection="sizeFit: contain; desiredWidth: 600; desiredHeight: 600; perspective: 100"
+      blend="sfactor: srcAlpha; dfactor: oneMinusSrcAlpha"
       >
-      <blitpunk-texture-atlas id="cloudsAtlas" src="clouds.json" nearest></blitpunk-texture-atlas>
-      <blitpunk-sprite-group
+      <pi-picture texture="src: #logos; frame: picimo-512" display-position="top: 5%; width: 256px; objectFit: contain"></pi-picture>
+      <pi-picture texture="src: #logos; frame: spearwolf-logo-mini" display-position="top: 19%; width: 80px; objectFit: contain"></pi-picture>
+      <pi-sprite-group
         id="cloudsSprites"
-        descriptor="simple"
-        capacity="100"
+        vo-descriptor="simple"
+        vo-capacity="100"
+        vo-new="scale: 1; opacity: 1"
         vertex-shader="simple"
         fragment-shader="simple"
-        primitive="TRIANGLES"
+        primitive-type="TRIANGLES"
         texture-map="tex: #cloudsAtlas"
-        vo-new="scale: 1; opacity: 1"
-        blend="sfactor: srcAlpha; dfactor: oneMinusSrcAlpha"
-        ></blitpunk-sprite-group>
-    </blitpunk-canvas>
+        ></pi-sprite-group>
+    </pi-canvas>
     <script src="bundle.js"></script>
   </body>
 </html>

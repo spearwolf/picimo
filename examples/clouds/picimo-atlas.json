@@ -1,0 +1,30 @@
+{"frames": {
+
+"picimo-512":
+{
+	"frame": {"x":0,"y":0,"w":512,"h":214},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":214},
+	"sourceSize": {"w":512,"h":214},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"spearwolf-logo-mini":
+{
+	"frame": {"x":0,"y":218,"w":74,"h":10},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":74,"h":10},
+	"sourceSize": {"w":74,"h":10},
+	"pivot": {"x":0.5,"y":0.5}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "picimo-atlas.png",
+	"format": "RGBA8888",
+	"size": {"w":512,"h":256},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:3f2cc0dba52a3f90d929259075b23608:ba39dc36b4d9fdb35b131598a19a97d9:9ee52844c65febe76caf6490de113cfc$"
+}
+}

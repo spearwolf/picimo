@@ -1,2 +1,3 @@
-import './blitpunk_canvas_element'
-import './blitpunk_entity_element'
+import './piCanvas'
+import './piEntity'
+import './piPicture'

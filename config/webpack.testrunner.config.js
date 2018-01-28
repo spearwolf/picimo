@@ -4,9 +4,9 @@ const webpack = require('webpack')
 const createDevServer = require('./lib/createDevServer')
 const scssRules = require('./lib/scssRules')
 const jsRules = require('./lib/jsRules')
+const { PROJECT_DIR, jsModulePaths } = require('./lib/dirs')
 
-const BASE_DIR = path.resolve(__dirname, '..')
-const TESTRUNNER_DIR = path.resolve(BASE_DIR, 'testrunner')
+const TESTRUNNER_DIR = path.resolve(PROJECT_DIR, 'testrunner')
 
 module.exports = {
   entry: {
@@ -20,7 +20,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      BLITPUNK_ENV: JSON.stringify('development')
+      PICIMO_ENV: JSON.stringify('development')
     })
   ],
   devServer: createDevServer({ port: 9090, contentBase: TESTRUNNER_DIR }),
@@ -33,9 +33,6 @@ module.exports = {
   devtool: 'inline-source-map',
   resolve: {
     extensions: ['.js'],
-    modules: [
-      path.resolve(BASE_DIR, 'src'),
-      path.resolve(BASE_DIR, 'node_modules')
-    ]
+    modules: jsModulePaths
   }
 }

@@ -1,5 +1,8 @@
-import VODescriptor from 'blitpunk/core/v_o_descriptor'
-import VOPool from 'blitpunk/core/v_o_pool'
+import {
+  VODescriptor,
+  VOPool,
+  VO_HINT_STATIC
+} from 'picimo/core'
 
 export default function () {
   const voDescriptor = new VODescriptor({
@@ -9,7 +12,7 @@ export default function () {
     ]
   })
 
-  const voPool = new VOPool(voDescriptor, { capacity: 4, usage: VOPool.USAGE.STATIC })
+  const voPool = new VOPool(voDescriptor, { capacity: 4, usage: VO_HINT_STATIC })
   window.trianglePool = voPool
 
   voPool.alloc().setPosition(-1.0, -1.0, 0.49, -1.0, -1.0, 1.0)

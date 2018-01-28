@@ -8,9 +8,9 @@ const webpack = require('webpack')
 const createDevServer = require('./lib/createDevServer')
 const scssRules = require('./lib/scssRules')
 const jsRules = require('./lib/jsRules')
+const { PROJECT_DIR, jsModulePaths } = require('./lib/dirs')
 
-const BASE_DIR = path.resolve(__dirname, '..')
-const EXAMPLES_DIR = path.resolve(BASE_DIR, 'examples')
+const EXAMPLES_DIR = path.resolve(PROJECT_DIR, 'examples')
 
 const EXAMPLES = _.compact(glob.sync(path.resolve(EXAMPLES_DIR) + '/*/').map(dir => {
   if (fs.lstatSync(dir).isDirectory()) {
@@ -18,7 +18,7 @@ const EXAMPLES = _.compact(glob.sync(path.resolve(EXAMPLES_DIR) + '/*/').map(dir
   }
 })).filter(name => name !== 'js')
 
-console.log(`Serving blitpunk examples {\n${EXAMPLES.map(example => `  ${example}`).join('\n')}\n}`)
+console.log(`Serving picimo examples {\n${EXAMPLES.map(example => `  ${example}`).join('\n')}\n}`)
 
 const template = fs.readFileSync(path.resolve(EXAMPLES_DIR, 'index.ejs.html'), 'utf8')
 const html = ejs.render(template, { examples: EXAMPLES })
@@ -39,7 +39,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      BLITPUNK_ENV: JSON.stringify('development')
+      PICIMO_ENV: JSON.stringify('development')
     })
   ],
   module: {
@@ -51,9 +51,6 @@ module.exports = {
   devtool: 'inline-source-map',
   resolve: {
     extensions: ['.js'],
-    modules: [
-      path.resolve(BASE_DIR, 'src'),
-      path.resolve(BASE_DIR, 'node_modules')
-    ]
+    modules: jsModulePaths
   }
 }

@@ -1,0 +1,28 @@
+
+.markupPage {
+  h2 {
+    margin-top: 1rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-shadow: 1px 1px 3px #000;
+  }
+
+  section {
+    border-radius: 3px;
+    background-color: #24282a;
+    padding: 1rem 1rem 3rem;
+    margin-bottom: 2rem;
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
+  }
+
+  td,
+  th {
+    border-bottom: 2px solid #191c1d;
+  }
+}
