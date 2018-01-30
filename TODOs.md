@@ -68,6 +68,11 @@ Release
   - [x] add dynamic loader (~~systemjs~~ webpack) to support lazy-loading of
     - [x] specialized builds for (chrome, ff, ios, legacy(ie11), ..)
     - [x] polyfills for URL, fetch, ..
+    - [ ] feature-detection and lazy-load polyfills for
+      - [ ] fetch
+      - [ ] URL
+      - [x] customElements
+    - [ ] try prepack optimizations for legacy build (es5)
 - [x] multi-threaded builds (build-libs.js)
 - [x] support native javascript modules
 - [x] upgrade to new eventize api (npm package)

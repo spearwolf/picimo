@@ -1,7 +1,6 @@
 import { getDefaultOption } from 'picimo/utils'
 import { PRIO_RF_CLEAR } from 'picimo/priorities'
-
-const tinycolor = require('tinycolor2')
+import tinycolor from 'tinycolor2'
 
 const DEFAULT_COLOR = 'rgba(0,0,0,0)'
 const DEFAULT_DEPTH = 1

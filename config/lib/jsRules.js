@@ -3,15 +3,15 @@ const babelEnv = require('../babel.env.targets')
 module.exports = (variant = 'legacy') => ({
   test: /\.js$/,
   loader: 'babel-loader?cacheDirectory=.build',
-  exclude: [
-    /node_modules/
-  ],
+  // exclude: [
+    // /node_modules/
+  // ],
   options: {
     babelrc: false,
     presets: [
       ['env', {
         targets: babelEnv[variant],
-        debug: true,
+        debug: false,
         loose: true
       }]
     ]

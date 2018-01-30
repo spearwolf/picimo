@@ -1,4 +1,4 @@
-const tinycolor = require('tinycolor2')
+import tinycolor from 'tinycolor2'
 
 const makeClearMask = (clearBuffer, color = false, depth = false, stencil = false) => {
   const { gl } = clearBuffer.glx
