@@ -1,6 +1,6 @@
 // Karma configuration
 const scssRules = require('./lib/scssRules')
-const jsRules = require('./lib/jsRules')
+const jsRules = require('./lib/jsRules')('modern')
 const { PROJECT_DIR, makeJsModulePaths } = require('./lib/dirs')
 
 module.exports = function (config) {

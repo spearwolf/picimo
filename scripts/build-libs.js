@@ -8,7 +8,6 @@ const uniq = require('lodash/uniq')
 
 const VARIANTS = [
   'legacy',
-  'safari',
   'modern',
   'es6-module'
 ]
@@ -21,7 +20,6 @@ const OUTPUT = {
   [ES6_MODULE]: 'dist/picimo.mjs',
   [`${ES6_MODULE}-dev`]: 'dist/dev/picimo-dev.mjs',
   modern: '.build/prod/picimo-modern.js',
-  safari: '.build/prod/picimo-safari.js',
   legacy: '.build/prod/picimo-legacy.js',
   bootstrap: 'dist/picimo.js'
 }
@@ -36,7 +34,7 @@ const UGLIFYJS = path.join(PROJECT_DIR, 'node_modules', '.bin', 'uglifyjs')
 const VALID_VARIANTS = `Valid variants are:${VARIANTS.map(v => `\n - ${colors.bold(v)}`).join('')}`
 
 program
-  .version('0.1.3')
+  .version('0.1.4')
   .usage('[<options>...]')
   .option('--variant <value>', 'Build library for a variant')
   .option('-l, --list', 'List all valid variants')

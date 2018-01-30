@@ -5,6 +5,7 @@ import StackedContext from './StackedContext'
 import createVoPropsSetter from './createVoPropsSetter'
 import destroy from './destroy'
 import generateUuid from './generate_uuid'
+import getAttributeNames from './getAttributeNames'
 import getDefaultOption from './getDefaultOption'
 import getNumber from './getNumber'
 import getString from './getString'
@@ -44,6 +45,7 @@ export {
   destroy,
   findNextPowerOf2,
   generateUuid,
+  getAttributeNames,
   getDefaultOption,
   getNumber,
   getString,

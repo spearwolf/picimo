@@ -8,12 +8,6 @@ export default (javascriptVariant) => {
         'picimo-modern.js'
       )
       break
-    case 'safari':
-      jsImport = import(
-        /* webpackChunkName: "safari" */
-        'picimo-safari.js'
-      )
-      break
     default:
       jsImport = import(
         /* webpackChunkName: "legacy" */

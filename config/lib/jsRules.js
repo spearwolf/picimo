@@ -1,6 +1,6 @@
-const targets = require('../babel.env.targets').modern
+const babelEnv = require('../babel.env.targets')
 
-module.exports = {
+module.exports = (variant = 'legacy') => ({
   test: /\.js$/,
   loader: 'babel-loader?cacheDirectory=.build',
   exclude: [
@@ -10,10 +10,10 @@ module.exports = {
     babelrc: false,
     presets: [
       ['env', {
-        targets,
+        targets: babelEnv[variant],
         debug: true,
         loose: true
       }]
     ]
   }
-}
+})

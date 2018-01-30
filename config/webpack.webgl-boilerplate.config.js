@@ -2,7 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 
 const scssRules = require('./lib/scssRules')
-const jsRules = require('./lib/jsRules')
+const jsRules = require('./lib/jsRules')('legacy')
 const { PROJECT_DIR, jsModulePaths } = require('./lib/dirs')
 
 const BASE_DIR = path.resolve(PROJECT_DIR, 'webgl-boilerplate')

@@ -7,7 +7,7 @@ const webpack = require('webpack')
 
 const createDevServer = require('./lib/createDevServer')
 const scssRules = require('./lib/scssRules')
-const jsRules = require('./lib/jsRules')
+const jsRules = require('./lib/jsRules')('legacy')
 const { PROJECT_DIR, jsModulePaths } = require('./lib/dirs')
 
 const EXAMPLES_DIR = path.resolve(PROJECT_DIR, 'examples')

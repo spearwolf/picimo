@@ -78,18 +78,20 @@ Browser Support
 
 - [x] ie11 support (needs polyfill for: URL, fetch, ..)
 - [x] edge windows support
+ - [ ] check why webgl is only shown after user click
 - [x] firefox windows support
 - [x] chrome/chromium linux support
 - [x] firefox linux support
 - [x] safari mac support
 - [x] ios support
+ - [ ] check old ios 10
 - [x] android chrome support
 
 
 Think about
 -----------
 
-- [ ] fullscreen support
+- [ ] fullscreen support (especially on android/landscape)
 - [ ] intersection observer (pause when out-of-view)
 - [ ] interaction support
 - [ ] react-picimo

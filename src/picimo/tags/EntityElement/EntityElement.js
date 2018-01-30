@@ -4,6 +4,7 @@ import camelCase from 'lodash/camelCase'
 import {
   defineHiddenPropertiesRO,
   defineHiddenPropertiesRW,
+  getAttributeNames,
   removeItem
 } from 'picimo/utils'
 
@@ -60,7 +61,8 @@ export default class EntityElement extends HTMLElement {
 
   /** @private */
   updateEntity () {
-    const attributeNames = this.getAttributeNames()
+    // const attributeNames = this.getAttributeNames()
+    const attributeNames = getAttributeNames(this)
     const prevAttrNames = this.attributeNamesCache.slice(0)
     this.attributeNamesCache.length = 0
     attributeNames.forEach(attrName => {
