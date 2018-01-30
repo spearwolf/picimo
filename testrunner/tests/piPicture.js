@@ -14,7 +14,7 @@ describe('<pi-picture>', () => {
     before(() => {
       createHtml(`
         <pi-texture-atlas id="atlas0" src="/assets/picimo-atlas.json" nearest></pi-texture-atlas>
-        <pi-canvas alpha premultiplied-alpha preserve-drawing-buffer width="600" height="300"
+        <pi-canvas alpha preserve-drawing-buffer width="600" height="300"
           clear="color: #fff"
           projection="sizeFit: contain; desiredWidth: 300; desiredHeight: 150"
           >
@@ -34,7 +34,7 @@ describe('<pi-picture>', () => {
     before(() => {
       createHtml(`
         <pi-texture-atlas id="atlas0" src="/assets/nobinger.json" nearest></pi-texture-atlas>
-        <pi-canvas alpha premultiplied-alpha preserve-drawing-buffer width="600" height="300"
+        <pi-canvas alpha preserve-drawing-buffer width="600" height="300"
           clear="color: #fff"
           projection="sizeFit: contain; desiredWidth: 300; desiredHeight: 150"
           >
@@ -68,7 +68,7 @@ describe('<pi-picture>', () => {
     before(() => {
       createHtml(`
         <pi-texture-atlas id="atlas0" src="/assets/nobinger.json" nearest></pi-texture-atlas>
-        <pi-canvas alpha premultiplied-alpha preserve-drawing-buffer width="600" height="300"
+        <pi-canvas alpha preserve-drawing-buffer width="600" height="300"
           clear="color: #fff"
           projection="sizeFit: contain; desiredWidth: 300; desiredHeight: 150"
           >
@@ -91,7 +91,7 @@ describe('<pi-picture>', () => {
     before(() => {
       createHtml(`
         <pi-texture-atlas id="atlas0" src="/assets/picimo-atlas.json" nearest></pi-texture-atlas>
-        <pi-canvas alpha premultiplied-alpha preserve-drawing-buffer width="600" height="300"
+        <pi-canvas alpha preserve-drawing-buffer width="600" height="300"
           clear="color: #fff"
           projection="sizeFit: contain; desiredWidth: 300; desiredHeight: 150"
           >
@@ -114,7 +114,7 @@ describe('<pi-picture>', () => {
     before(() => {
       createHtml(`
         <pi-texture-atlas id="atlas0" src="/assets/picimo-atlas.json" nearest></pi-texture-atlas>
-        <pi-canvas alpha premultiplied-alpha preserve-drawing-buffer width="600" height="300"
+        <pi-canvas alpha preserve-drawing-buffer width="600" height="300"
           clear="color: #fff"
           projection="sizeFit: contain; desiredWidth: 300; desiredHeight: 150"
           >
@@ -137,7 +137,7 @@ describe('<pi-picture>', () => {
     before(() => {
       createHtml(`
         <pi-texture-atlas id="atlas0" src="/assets/picimo-atlas.json" nearest></pi-texture-atlas>
-        <pi-canvas alpha premultiplied-alpha preserve-drawing-buffer width="600" height="300"
+        <pi-canvas alpha preserve-drawing-buffer width="600" height="300"
           clear="color: #fff"
           projection="sizeFit: contain; desiredWidth: 300; desiredHeight: 150"
           >
@@ -160,7 +160,7 @@ describe('<pi-picture>', () => {
     before(() => {
       createHtml(`
         <pi-texture-atlas id="atlas0" src="/assets/lab-walls-tiles.json" nearest></pi-texture-atlas>
-        <pi-canvas alpha premultiplied-alpha preserve-drawing-buffer width="600" height="300"
+        <pi-canvas alpha preserve-drawing-buffer width="600" height="300"
           projection="sizeFit: contain; desiredWidth: 300; desiredHeight: 150"
           blend="sfactor: srcAlpha; dfactor: oneMinusSrcAlpha"
           clear="color: #444"
@@ -208,7 +208,7 @@ describe('<pi-picture>', () => {
     before(() => {
       createHtml(`
         <pi-texture-atlas id="atlas0" src="/assets/amigaballs.json" nearest></pi-texture-atlas>
-        <pi-canvas alpha premultiplied-alpha preserve-drawing-buffer width="600" height="300"
+        <pi-canvas alpha preserve-drawing-buffer width="600" height="300"
           projection="sizeFit: contain; desiredWidth: 300; desiredHeight: 150"
           blend="sfactor: srcAlpha; dfactor: oneMinusSrcAlpha"
           clear="color: #444"

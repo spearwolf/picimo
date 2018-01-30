@@ -45,9 +45,9 @@ export default class ClearBuffer {
     const { clearColor } = this
     if (clearColor) {
       const col = clearColor.toRgb()
-      gl.clearColor(col.r / 255, col.g / 255, col.b / 255, col.a)
+      this.glx.clearColor(col.r / 255, col.g / 255, col.b / 255, col.a)
     } else {
-      gl.clearColor(0, 0, 0, 0)
+      this.glx.clearColor(0, 0, 0, 0)
     }
 
     if (this.hasDepthBits) gl.clearDepth(this.clearDepth)

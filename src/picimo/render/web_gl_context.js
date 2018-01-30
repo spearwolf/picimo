@@ -4,8 +4,8 @@ import WebGlResourceLibrary from './web_gl_resource_library'
 import WebGlTextureManager from './web_gl_texture_manager'
 
 export default class WebGlContext {
-  constructor (gl) {
-    definePublicPropertiesRO(this, { gl })
+  constructor (gl, premultipliedAlpha) {
+    definePublicPropertiesRO(this, { gl, premultipliedAlpha })
 
     initialize(this)
 
@@ -45,6 +45,14 @@ export default class WebGlContext {
     } else if (this.blendEnabled) {
       gl.disable(gl.BLEND)
       this.blendEnabled = false
+    }
+  }
+
+  clearColor (r, g, b, a) {
+    if (this.premultipliedAlpha) {
+      this.gl.clearColor(r * a, g * a, b * a, a)
+    } else {
+      this.gl.clearColor(r, g, b, a)
     }
   }
 

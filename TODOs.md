@@ -16,7 +16,7 @@ HTML Element API And Other Issues
 - [ ] `<pi-canvas/>`
   - [ ] should have a default projection
   - [ ] change attr: `depth` &rarr; `no-depth`
-  - [ ] rethink default values for webgl context attrs
+  - [x] rethink default values for webgl context attrs
 - [ ] texture-map= (from <pi-sprite-group>) should be a component
 - [ ] projection= perspective support (distance, near, far), choose sensible defaults
   - [x] main work is done :smile:

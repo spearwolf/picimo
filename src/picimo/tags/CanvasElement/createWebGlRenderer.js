@@ -8,19 +8,19 @@ import readBooleanAttribute from '../shared/readBooleanAttribute'
 import {
   ATTR_ALPHA,
   ATTR_ANTIALIAS,
-  ATTR_DEPTH,
-  ATTR_PREMULTIPLIED_ALPHA,
+  ATTR_NO_DEPTH,
+  ATTR_NO_PREMULTIPLIED_ALPHA,
   ATTR_PRESERVE_DRAW,
   ATTR_STENCIL
 } from '../constants'
 
 const createCanvasContextAttributes = (el) => ({
   alpha: readBooleanAttribute(el, ATTR_ALPHA, false),
+  depth: !readBooleanAttribute(el, ATTR_NO_DEPTH, false),
+  stencil: readBooleanAttribute(el, ATTR_STENCIL, false),
   antialias: readBooleanAttribute(el, ATTR_ANTIALIAS, false),
-  depth: readBooleanAttribute(el, ATTR_DEPTH, true),  // ie 11 has no support for false
-  premultipliedAlpha: readBooleanAttribute(el, ATTR_PREMULTIPLIED_ALPHA, false),
-  preserveDrawingBuffer: readBooleanAttribute(el, ATTR_PRESERVE_DRAW, false),
-  stencil: readBooleanAttribute(el, ATTR_STENCIL, false)
+  premultipliedAlpha: !readBooleanAttribute(el, ATTR_NO_PREMULTIPLIED_ALPHA, false),
+  preserveDrawingBuffer: readBooleanAttribute(el, ATTR_PRESERVE_DRAW, false)
 })
 
 const createWebGlContext = (canvas, attributes) => {
