@@ -24,6 +24,11 @@ const OUTPUT = {
   bootstrap: 'dist/picimo.js'
 }
 
+const COMPRESS_OPTIONS = {
+  legacy: 'ecma=5',
+  modern: 'ecma=7'
+}
+
 const PROJECT_DIR = path.join(__dirname, '..')
 
 const API_MODULE_EXPORTS = path.join(PROJECT_DIR, 'src', 'picimo', 'api.mjs')
@@ -91,7 +96,8 @@ function minify (variant, dev, silent, jsFile) {
       console.log()
       console.log(colors.bold.blue('Uglify:'), jsFile)
     }
-    const cmd = `${UGLIFYJS} --compress --mangle -o ${jsFile} ${jsFile}`
+    const opts = COMPRESS_OPTIONS[variant] || ''
+    const cmd = `${UGLIFYJS} --compress ${opts} --mangle -o ${jsFile} ${jsFile}`
     shelljs.exec(cmd, { silent }, (code, stdout, stderr) => {
       if (code) {
         if (silent) err(code, `minfiy:${variant}`, stderr)
