@@ -70,7 +70,7 @@ module.exports = ({
       test: /\.js$/,
       loader: `babel-loader?cacheDirectory=${getCacheDirectory(dev, variant)}`,
       exclude: [
-        // /node_modules/,
+        /node_modules\/(?!@spearwolf)/,
         /.build/
       ],
       options: Object.assign({ babelrc: false }, getBabelOptions(babelOptions, presetEnvTargets, dev))

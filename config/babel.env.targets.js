@@ -1,6 +1,5 @@
 module.exports = {
   legacy: /* bootstrap */ {
-    chrome: '61',
     edge: '15',
     firefox: '54',
     ie: '11',
