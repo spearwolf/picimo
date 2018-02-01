@@ -25,7 +25,7 @@ import {
   RENDER_FRAME
 } from './constants'
 
-export default (kebabName, ComponentConstructor) => {
+const registerComponent = ([kebabName, ComponentConstructor]) => {
   const name = camelCase(kebabName)
 
   componentRegistry.registerComponent(name, {
@@ -70,3 +70,5 @@ export default (kebabName, ComponentConstructor) => {
     }
   })
 }
+
+export default (kebabName, ComponentConstructor) => Promise.all([kebabName, ComponentConstructor]).then(registerComponent)
