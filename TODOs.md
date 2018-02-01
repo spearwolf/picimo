@@ -15,7 +15,7 @@ HTML Element API And Other Issues
   - [ ] `<pi-render-to-texture/>` acts as texture source and scene
 - [ ] `<pi-canvas/>`
   - [ ] should have a default projection
-  - [ ] change attr: `depth` &rarr; `no-depth`
+  - [x] change attr: `depth` &rarr; `no-depth`
   - [x] rethink default values for webgl context attrs
 - [ ] texture-map= (from <pi-sprite-group>) should be a component
 - [ ] projection= perspective support (distance, near, far), choose sensible defaults
@@ -26,7 +26,7 @@ HTML Element API And Other Issues
   - [ ] near/far
   - [ ] pixelRatio support
 - [x] transform= component .. camera?
-  - [ ] update transform when parent projection changed
+  - [x] update transform when parent projection changed
   - [ ] should maybe support options similar to [css transform property](https://www.w3schools.com/cssref/css3_pr_transform.asp)
 - [x] `<pi-sprite-group/>`
   - [ ] add support for all options from [src/core/SpriteGroup](src/core/sprite_group.js)

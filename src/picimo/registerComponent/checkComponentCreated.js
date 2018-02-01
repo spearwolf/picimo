@@ -6,7 +6,7 @@ import { COMPONENT_CREATED } from './constants'
 
 export default (name, component) => () => {
   if (component._isCreated) return
-  if (component._preConditionAttributes.every(attr => component[attr])) {
+  if (component._preConditionAttributes == null || component._preConditionAttributes.every(attr => component[attr])) {
     component._isCreated = true
 
     debug(`[${name}] create component`, component)

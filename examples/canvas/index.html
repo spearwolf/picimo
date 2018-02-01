@@ -41,17 +41,17 @@
       hello="atlas: textureAtlas(#atlas0); sprites: spriteGroup(#sprites0)"
       ></pi-entity>
 
-    <pi-picture texture="src: #texLogo" display-position="top: 0px; left: 0px; width: 30vw; objectFit: contain"></pi-picture>
-
-    <pi-picture
-      id="pi0"
-      mesh-cols="128"
-      mesh-rows="128"
-      texture="src: #atlas0; frame: numbers32_06"
-      shader-uniform="scale: 1; transform: vec2(1.0, 1.0)"
-      display-position="width: 30vw; height: 30vh; objectFit: contain"
-      transform="y: -50; rotateZ: 45"
-      ></pi-picture>
+    <pi-entity rotator="speed: 1.5">
+      <pi-picture
+        id="pi0"
+        mesh-cols="128"
+        mesh-rows="128"
+        texture="src: #atlas0; frame: numbers32_06"
+        shader-uniform1="scale: 1; transform: vec2(1.0, 1.0)"
+        display-position="width: 30vw; height: 30vh; objectFit: contain"
+        rotator="speed: -3; axis: x"
+        ></pi-picture>
+    </pi-entity>
   </pi-canvas>
 
   <script src="document-register-element.js"></script>

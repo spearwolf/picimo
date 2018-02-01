@@ -20,6 +20,7 @@ export default class Projection {
     this.sizeFit = sizeFit
     this.uniformName = uniformName
     this.perspective = perspective
+    this.lastPerspective = undefined
     this.width = 0
     this.height = 0
   }
@@ -39,6 +40,10 @@ export default class Projection {
     return this.uniform.value
   }
 
+  get serial () {
+    return this.uniform.serial
+  }
+
   get uniformName () {
     return (this.uniform && this.uniform.name) || UNIFORM_NAME
   }
@@ -56,11 +61,13 @@ export default class Projection {
   }
 
   updateOrtho (width, height) {
-    if (width !== this.width || height !== this.height) {
+    const { perspective } = this
+    if (width !== this.width || height !== this.height || perspective !== this.lastPerspective) {
       this.width = width
       this.height = height
-      if (this.perspective > 0) {
-        this.uniform.value.perspective(width, height, this.perspective) // clouds: 100
+      this.lastPerspective = perspective
+      if (perspective > 0) {
+        this.uniform.value.perspective(width, height, perspective) // clouds: 100
       } else {
         this.uniform.value.ortho(width, height)
       }

@@ -55,8 +55,8 @@
     to-fast-properties "^2.0.0"
 
 "@spearwolf/eventize@^0.6.2":
-  version "0.6.4"
-  resolved "https://registry.yarnpkg.com/@spearwolf/eventize/-/eventize-0.6.4.tgz#592a347bf722938512e64dadd7ef2db2aa62974d"
+  version "0.6.5"
+  resolved "https://registry.yarnpkg.com/@spearwolf/eventize/-/eventize-0.6.5.tgz#fa95e06fd7fb6c187d109aef8fd25f91024a9204"
 
 "@zeit/check-updates@1.0.5":
   version "1.0.5"
@@ -2606,8 +2606,8 @@ doctrine@^2.0.0:
     esutils "^2.0.2"
 
 document-register-element@^1.7.0:
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/document-register-element/-/document-register-element-1.7.1.tgz#b2e049857c37eda5e51148e13ab6c6c5d3ce16f0"
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/document-register-element/-/document-register-element-1.7.2.tgz#f864286516ab7e29c7051d6e1d00b89fa5f94175"
   dependencies:
     lightercollective "^0.0.0"
 
@@ -3694,8 +3694,8 @@ function-bind@^1.0.2, function-bind@^1.1.1:
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
 
 gatsby-cli@^1.1.28:
-  version "1.1.32"
-  resolved "https://registry.yarnpkg.com/gatsby-cli/-/gatsby-cli-1.1.32.tgz#5591b343a1ef4c4643a05c85ca711043dcd487c7"
+  version "1.1.33"
+  resolved "https://registry.yarnpkg.com/gatsby-cli/-/gatsby-cli-1.1.33.tgz#a79337d73f88ef1157aceefd245242ec0d463680"
   dependencies:
     babel-code-frame "^6.26.0"
     babel-runtime "^6.26.0"
@@ -6989,7 +6989,16 @@ raw-body@2, raw-body@2.3.2:
     iconv-lite "0.4.19"
     unpipe "1.0.0"
 
-rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
+rc@^1.0.1, rc@^1.1.6:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/rc/-/rc-1.2.5.tgz#275cd687f6e3b36cc756baa26dfee80a790301fd"
+  dependencies:
+    deep-extend "~0.4.0"
+    ini "~1.3.0"
+    minimist "^1.2.0"
+    strip-json-comments "~2.0.1"
+
+rc@^1.1.7:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/rc/-/rc-1.2.4.tgz#a0f606caae2a3b862bbd0ef85482c0125b315fa3"
   dependencies:

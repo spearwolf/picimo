@@ -36,7 +36,7 @@ export default (kebabName, ComponentConstructor) => {
       defineHiddenPropertyRW(component, '_isCreated', false)
 
       defineHiddenPropertyRO(component, '_preConditionAttributes',
-        readComponentAttribute(ComponentConstructor, PRE_CONDITION_ATTRIBUTES))
+        readComponentAttribute(ComponentConstructor, PRE_CONDITION_ATTRIBUTES), [])
 
       defineHiddenPropertyRO(component, '_eventSubscriptions',
         readComponentAttribute(ComponentConstructor, EVENT_SUBSCRIPTIONS, () => {
