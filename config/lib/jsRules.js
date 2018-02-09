@@ -8,6 +8,10 @@ module.exports = (variant = 'legacy') => ({
   ],
   options: {
     babelrc: false,
+    plugins: [
+      'transform-class-properties',
+      'transform-object-rest-spread'
+    ],
     presets: [
       ['env', {
         targets: babelEnv[variant],

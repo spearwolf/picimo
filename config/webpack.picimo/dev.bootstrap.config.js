@@ -10,7 +10,9 @@ module.exports = config({
   ],
   babelOptions: {
     plugins: [
-      'syntax-dynamic-import'
+      'syntax-dynamic-import',
+      'transform-class-properties',
+      'transform-object-rest-spread'
     ]
   },
   presetEnvTargets: 'legacy',

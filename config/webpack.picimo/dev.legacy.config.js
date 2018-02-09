@@ -7,5 +7,11 @@ module.exports = config({
     'url-polyfill',
     'whatwg-fetch'
   ],
+  babelOptions: {
+    plugins: [
+      'transform-class-properties',
+      'transform-object-rest-spread'
+    ]
+  },
   presetEnvTargets: 'legacy'
 })

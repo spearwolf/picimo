@@ -9,7 +9,9 @@ module.exports = config({
   picimoEnv: 'production',
   babelOptions: {
     plugins: [
-      'syntax-dynamic-import'
+      'syntax-dynamic-import',
+      'transform-class-properties',
+      'transform-object-rest-spread'
     ]
   },
   presetEnvTargets: 'legacy',

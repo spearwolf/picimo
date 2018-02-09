@@ -5,6 +5,12 @@ module.exports = config({
   preEntry: [
     'babel-polyfill'
   ],
+  babelOptions: {
+    plugins: [
+      'transform-class-properties',
+      'transform-object-rest-spread'
+    ]
+  },
   presetEnvTargets: 'module',
   output: {
     filename: 'picimo.mjs',
