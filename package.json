@@ -78,7 +78,7 @@
     "stylelint": "^8.4.0",
     "stylelint-config-standard": "^18.0.0",
     "terminal-kit": "^1.13.11",
-    "uglify-es": "^3.3.9",
+    "uglify-es": "3.3.9",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.10.1"
   },
