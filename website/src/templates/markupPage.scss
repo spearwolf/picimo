@@ -25,4 +25,12 @@
   th {
     border-bottom: 2px solid #191c1d;
   }
+
+  td code {
+    white-space: nowrap;
+  }
+
+  td strong > code {
+    color: #ffffd0;
+  }
 }

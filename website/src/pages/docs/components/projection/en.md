@@ -30,8 +30,8 @@ The `projection` component can be attached to all picimo tags.
 
 | Attribute | Value | Description |
 |-----------|-------|-------------|
-| `desiredWidth` | *pixels* | ...TODO... |
-| `desiredHeight` | *pixels* | ...TODO... |
-| `sizeFit` | `fill` `contain` `cover` | ...TODO... *Default value is `contain`* |
-| `perspective` | `true` `false` | ...TODO... |
+| **`desiredWidth`** | *pixels* | ...TODO... |
+| **`desiredHeight`** | *pixels* | ...TODO... |
+| **`sizeFit`** | `fill` `contain` `cover` | ...TODO... *Default value is `contain`* |
+| **`perspective`** | `true` `false` | ...TODO... |
 

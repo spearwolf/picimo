@@ -41,13 +41,22 @@ See documentation for [HTMLCanvasElement/getContext](https://developer.mozilla.o
 
 | WebGL Context Attribute | Default Value | Description |
 |-------------------------|---------------|-------------|
-| __alpha__ | `false` | Boolean that indicates that the canvas has an alpha channel. |
-| __no-depth__ | `false` | Boolean that indicates that the canvas has a depth buffer.<br>*Depth buffer is enabled by default.* |
-| __stencil__ | `false` | Boolean that indicates that the canvas has a stencil buffer. |
-| __antialias__ | `false` | Boolean that indicates whether or not to perform anti-aliasing. |
-| __no-premultiplied-alpha__ | `false` | Boolean that indicates that the page compositor will assume the canvas contains colors with pre-multiplied alpha.<br>*Premultiplied alpha is enabled by default.* |
-| __preserve-drawing-buffer__ | `false` | If the value is true the buffers will not be cleared and will preserve their values until cleared or overwritten by the author. |
+| **`alpha`** | `false` | Boolean that indicates that the canvas has an alpha channel. |
+| **`no-depth`** | `false` | Boolean that indicates that the canvas has a depth buffer.<br>*Depth buffer is enabled by default.* |
+| **`stencil`** | `false` | Boolean that indicates that the canvas has a stencil buffer. |
+| **`antialias`** | `false` | Boolean that indicates whether or not to perform anti-aliasing. |
+| **`no-premultiplied-alpha`** | `false` | Boolean that indicates that the page compositor will assume the canvas contains colors with pre-multiplied alpha.<br>*Premultiplied alpha is enabled by default.* |
+| **`preserve-drawing-buffer`** | `false` | If the value is true the buffers will not be cleared and will preserve their values until cleared or overwritten by the author. |
 
+
+With the *framebuffer attributes* you can control the size of the internal framebuffer.
+These attributes are normally only useful for debugging or testing.
+
+| Framebuffer Attribute | Default Value | Description |
+|-----------------------|---------------|-------------|
+| **`width`** | *dom element width* | Set the internal framebuffer to a fixed *width*. |
+| **`height`** | *dom element height* |  Set the internal framebuffer to a fixed *height*. |
+| **`device-pixel-ratio`** | `window.devicePixelRatio` | Force a fixed *devicePixelRatio*. Ignores the *real* device pixel ratio. |
 
 ## Methods
 

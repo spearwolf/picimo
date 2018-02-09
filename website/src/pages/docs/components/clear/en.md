@@ -28,8 +28,8 @@ A *dynamic* attribute. Is read out every time during the *renderFrame* event.
 
 | Attribute | Default | Value | Description |
 |-----------|---------|-------|-------------|
-| `color` | `rgba(0, 0, 0, 0)` | *css color definition* | ...TODO... |
-| `depth` | `1` | *float* |  ...TODO... |
-| `stencil` | `0` | *float* |  ...TODO... |
-| `mask` | `COLOR,DEPTH,STENCIL` | *comma separated value* | ...TODO... |
+| **`color`** | `rgba(0, 0, 0, 0)` | *css color definition* | ...TODO... |
+| **`depth`** | `1` | *float* |  ...TODO... |
+| **`stencil`** | `0` | *float* |  ...TODO... |
+| **`mask`** | `COLOR,DEPTH,STENCIL` | *comma separated value* | ...TODO... |
 

@@ -28,7 +28,7 @@ A *dynamic* attribute. Is read out every time during the *renderFrame* event.
 
 | Attribute | Value | Description |
 |-----------|-------|-------------|
-| `enable` | *boolean* | Enables the WebGL blending pixel arithmetic.<br>Default is `true` |
-| `sfactor` | *camelCase string* | see [WebGL/blendFunc()](https://developer.mozilla.org/de/docs/Web/API/WebGLRenderingContext/blendFunc) |
-| `dfactor` | *camelCase string* | see [WebGL/blendFunc()](https://developer.mozilla.org/de/docs/Web/API/WebGLRenderingContext/blendFunc) |
+| **`enable`** | *boolean* | Enables the WebGL blending pixel arithmetic.<br>Default is `true` |
+| **`sfactor`** | *camelCase string* | see [WebGL/blendFunc()](https://developer.mozilla.org/de/docs/Web/API/WebGLRenderingContext/blendFunc) |
+| **`dfactor`** | *camelCase string* | see [WebGL/blendFunc()](https://developer.mozilla.org/de/docs/Web/API/WebGLRenderingContext/blendFunc) |
 

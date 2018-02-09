@@ -32,6 +32,6 @@ The `texture` component is used by the following tags: [`<pi-picture>`](/docs/ta
 
 | Attribute | Value | Description |
 |-----------|-------|-------------|
-| `src` | *css query selector* | ...TODO... |
-| `frame` | *frame name* | *Optional*. ...TODO... |
+| **`src`** | *css query selector* | ...TODO... |
+| **`frame`** | *frame name* | *Optional*. ...TODO... |
 
