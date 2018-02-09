@@ -42,6 +42,8 @@ HTML Element API And Other Issues
   - [ ] auto-remove unused gl resources
   - [ ] disconnectedCallback
   - [ ] support/verify html element insertions and deletions (appendChild, removeChild)
+- [ ] javascript template strings for .. vertex-object-defs, shaders... ?
+- [ ] shader main() wrappers (see shadertoy for examples)
 
 
 Release
@@ -96,8 +98,10 @@ Browser Support
 Think about
 -----------
 
-- [ ] fullscreen support (especially on android/landscape)
 - [ ] intersection observer (pause when out-of-view)
+- [ ] fullscreen support (especially on android/landscape)
+- [ ] registerComponent API
+- [ ] queryEntity API
 - [ ] interaction support
 - [ ] react-picimo
 - [ ] vue-picimo
