@@ -51,6 +51,7 @@ See documentation for [HTMLCanvasElement/getContext](https://developer.mozilla.o
 
 With the *framebuffer attributes* you can control the size of the internal framebuffer.
 These attributes are normally only useful for debugging or testing.
+But they exist and can therefore also be used.
 
 | Framebuffer Attribute | Default Value | Description |
 |-----------------------|---------------|-------------|
