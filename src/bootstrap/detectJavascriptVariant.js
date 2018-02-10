@@ -4,8 +4,8 @@ const supportsES6 = () => {
     eval('(a = 0) => a') // eslint-disable-line 
     return true
   } catch (err) {
+    return false
   }
-  return false
 }
 
 export default () => {
