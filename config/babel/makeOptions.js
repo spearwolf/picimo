@@ -1,14 +1,14 @@
 const babelEnvTargets = require('./envTargets')
 const babelPlugins = require('./plugins')
+const minifyPlugins = require('./minifyPlugins')
 
-module.exports = (babelOptions, presetEnvTargets, dev) => {
+module.exports = (babelOptions, presetEnvTargets, isDevelopment) => {
   const options = Object.assign({ babelrc: false }, babelOptions)
 
-  if (!options.plugins) options.plugins = babelPlugins()
+  if (!options.plugins) options.plugins = babelPlugins(isDevelopment ? undefined : minifyPlugins)
+  if (!options.presets) options.presets = []
 
   if (presetEnvTargets) {
-    if (!options.presets) options.presets = []
-
     const targets = typeof presetEnvTargets === 'string'
       ? babelEnvTargets(presetEnvTargets)
       : presetEnvTargets
@@ -16,7 +16,7 @@ module.exports = (babelOptions, presetEnvTargets, dev) => {
     options.presets.push([
       'env', {
         targets,
-        debug: dev,
+        debug: isDevelopment,
         loose: true,
         useBuiltIns: true
       }
