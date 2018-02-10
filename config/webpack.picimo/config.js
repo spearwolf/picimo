@@ -1,6 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
-const babelEnvTargets = require('../babel.env.targets')
+const { babelExclude, makeBabelOptions } = require('../babel')
 const outDir = path.resolve(__dirname, '../../dist')
 const projectDir = path.resolve(__dirname, '../..')
 
@@ -14,20 +14,6 @@ const getCacheDirectory = (dev, variant = '') => {
 const getDevtoolOption = (devtool, dev) => {
   if (devtool) return devtool
   if (dev) return 'inline-source-map'
-}
-
-const getBabelOptions = (babelOptions, presetEnvTargets, dev) => {
-  if (!presetEnvTargets) return babelOptions
-  const options = babelOptions || {}
-  if (!options.presets) options.presets = []
-  const targets = typeof presetEnvTargets === 'string' ? babelEnvTargets[presetEnvTargets] : presetEnvTargets
-  options.presets.push(['env', {
-    targets,
-    debug: dev,
-    loose: true,
-    useBuiltIns: true
-  }])
-  return options
 }
 
 const getOutputOptions = (output, variant, dev) => {
@@ -48,7 +34,7 @@ module.exports = ({
   dev = false,
   preEntry = [],
   babelOptions,
-  presetEnvTargets = false,
+  babelPresetEnvTargets = false,
   devtool = false,
   output,
   entry = 'src/picimo/index.js',
@@ -69,11 +55,10 @@ module.exports = ({
     rules: [{
       test: /\.js$/,
       loader: `babel-loader?cacheDirectory=${getCacheDirectory(dev, variant)}`,
-      exclude: [
-        /node_modules\/(?!@spearwolf)/,
+      exclude: babelExclude([
         /.build/
-      ],
-      options: Object.assign({ babelrc: false }, getBabelOptions(babelOptions, presetEnvTargets, dev))
+      ]),
+      options: makeBabelOptions(babelOptions, babelPresetEnvTargets, dev)
     }, {
       test: /\.scss$/,
       use: [

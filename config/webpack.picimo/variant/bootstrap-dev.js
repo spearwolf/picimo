@@ -1,5 +1,5 @@
 const path = require('path')
-const config = require('./common.config')
+const config = require('../config')
 
 module.exports = config({
   dev: true,
@@ -8,17 +8,10 @@ module.exports = config({
   preEntry: [
     'babel-polyfill'
   ],
-  babelOptions: {
-    plugins: [
-      'syntax-dynamic-import',
-      'transform-class-properties',
-      'transform-object-rest-spread'
-    ]
-  },
-  presetEnvTargets: 'legacy',
+  babelPresetEnvTargets: 'legacy',
   output: {
     libraryTarget: 'window',
-    path: path.resolve(__dirname, '../../dist/dev'),
+    path: path.resolve(__dirname, '../../../dist/dev'),
     filename: 'picimo-dev.js',
     chunkFilename: 'picimo-dev.[name].[chunkhash].js',
     publicPath: '/picimo/dev/'

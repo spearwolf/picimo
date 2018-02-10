@@ -1,20 +1,18 @@
-const babelEnv = require('../babel.env.targets')
+const { babelEnvTargets, babelPlugins, babelExclude } = require('../babel')
+
+const exclude = babelExclude()
+const plugins = babelPlugins()
 
 module.exports = (variant = 'legacy') => ({
+  exclude,
   test: /\.js$/,
   loader: 'babel-loader?cacheDirectory=.build',
-  exclude: [
-    /node_modules\/(?!@spearwolf)/
-  ],
   options: {
+    plugins,
     babelrc: false,
-    plugins: [
-      'transform-class-properties',
-      'transform-object-rest-spread'
-    ],
     presets: [
       ['env', {
-        targets: babelEnv[variant],
+        targets: babelEnvTargets(variant),
         debug: false,
         loose: true
       }]

@@ -1,4 +1,4 @@
-const config = require('./common.config')
+const config = require('../config')
 
 module.exports = config({
   variant: 'bootstrap',
@@ -7,14 +7,7 @@ module.exports = config({
     'babel-polyfill'
   ],
   picimoEnv: 'production',
-  babelOptions: {
-    plugins: [
-      'syntax-dynamic-import',
-      'transform-class-properties',
-      'transform-object-rest-spread'
-    ]
-  },
-  presetEnvTargets: 'legacy',
+  babelPresetEnvTargets: 'legacy',
   output: {
     libraryTarget: 'window',
     filename: 'picimo.js',

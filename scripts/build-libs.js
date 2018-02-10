@@ -39,7 +39,7 @@ const UGLIFYJS = path.join(PROJECT_DIR, 'node_modules', '.bin', 'uglifyjs')
 const VALID_VARIANTS = `Valid variants are:${VARIANTS.map(v => `\n - ${colors.bold(v)}`).join('')}`
 
 program
-  .version('0.1.4')
+  .version('0.1.5')
   .usage('[<options>...]')
   .option('--variant <value>', 'Build library for a variant')
   .option('-l, --list', 'List all valid variants')
@@ -68,7 +68,7 @@ function build (variant, dev, silent) {
     if (!silent) {
       banner('Building library variant:', colors.bold.red(variant), colors.bold(dev ? '(development)' : '(production)'))
     }
-    let cmd = `${WEBPACK} --config ${PROJECT_DIR}/config/webpack.picimo/${dev ? 'dev.' : ''}${variant}.config.js`
+    let cmd = `${WEBPACK} --config ${PROJECT_DIR}/config/webpack.picimo/variant/${variant}${dev ? '-dev' : ''}.js`
     if (silent) cmd += ' --display none'
     shelljs.exec(cmd, { silent }, (code, stdout, stderr) => {
       if (code) {
