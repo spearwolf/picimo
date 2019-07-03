@@ -1,6 +1,0 @@
-export const BLEND = 'blend'
-export const CLEAR = 'clear'
-export const DISPLAY_POSITION = 'display-position'
-export const PROJECTION = 'projection'
-export const TEXTURE = 'texture'
-export const TRANSFORM = 'transform'
