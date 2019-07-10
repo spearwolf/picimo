@@ -1,0 +1,22 @@
+{
+  "name": "picimo",
+  "version": "0.0.1",
+  "description": "pictures in motion",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spearwolf/picimo.git"
+  },
+  "author": "Wolfger Schramm <wolfger@spearwolf.de>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/spearwolf/picimo/issues"
+  },
+  "homepage": "https://github.com/spearwolf/picimo#readme",
+  "devDependencies": {
+    "lerna": "^3.15.0"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
