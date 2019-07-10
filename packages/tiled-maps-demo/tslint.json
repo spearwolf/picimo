@@ -1,0 +1,25 @@
+{
+  "rulesDirectory": [
+    "tslint-microsoft-contrib"
+  ],
+  "extends": [
+    "tslint:recommended",
+    "tslint-sonarts"
+  ],
+  "rules": {
+    "max-line-length": [true, 160],
+    "max-union-size": [true, 4],
+    "member-access": [true, "no-public"],
+    "member-ordering": false,
+    "no-bitwise": false,
+    "no-console": false,
+    "no-commented-code": false,
+    "quotemark": [true, "single"],
+    "variable-name": false
+  },
+  "linterOptions": {
+    "exclude": [
+      "**/__tests__/*"
+    ]
+  }
+}
