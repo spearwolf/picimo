@@ -17,7 +17,7 @@
     ],
     "module": "commonjs",
     "noEmit": true,
-    "baseUrl": ".",
+    "baseUrl": "."
 
   },
   "include": [

@@ -20,10 +20,10 @@ const packageJson = require(path.join(root, 'package.json'))
 export default {
   input: 'src/index.ts',
   output: {
-    name: 'spearwolf',
-    file: path.join(root, 'dist', 'spearwolf.min.js'),
+    name: 'picimo',
+    file: path.join(root, 'dist', 'picimo.min.js'),
     sourcemap: true,
-    sourcemapFile: path.join(root, 'dist', 'spearwolf.min.js.map'),
+    sourcemapFile: path.join(root, 'dist', 'picimo.min.js.map'),
     format: 'umd',
     globals: {
       three: 'THREE',
