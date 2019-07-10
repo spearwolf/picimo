@@ -5,17 +5,17 @@ export class RecursiveBacktracker {
 
   constructor(grid) {
     this.grid = grid;
-    this.isFinished = false;
   }
 
   start() {
+    this.isFinished = false;
+    this.isHuntMode = false;
+
     this.grid.setAll(WALL);
     this.grid.setAllCells(UNVISITED);
 
     const cell = this.grid.randomCell();
     cell.value = FLOOR;
-
-    this.isHuntMode = false;
     this.visitedCells = [cell];
   }
 
@@ -51,7 +51,6 @@ export class RecursiveBacktracker {
     } else {
 
       const cell = sample(this.currentCell.filterNeighbors(UNVISITED));
-
       if (cell) {
 
         cell.value = FLOOR;

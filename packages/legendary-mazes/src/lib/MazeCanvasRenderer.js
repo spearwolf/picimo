@@ -16,13 +16,16 @@ export class MazeCanvasRenderer {
     this.colors = colors;
   }
 
-  setDistanceGrid(distances, floorValue, fromColor, toColor) {
+  setDistanceGrid(distances, fromColor, toColor) {
     this.distances = distances;
-    this.floorValue = floorValue;
+    this.floorValue = distances.floorValue;
     this.fromColor = fromColor;
     this.toColor = toColor;
 
+    if (!distances) return;
+
     this.distanceColors = [this.buildColor(fromColor)];
+
     const len = distances.maxDistance + 1;
 
     const color = { r: fromColor.r, g: fromColor.g, b: fromColor.b };
