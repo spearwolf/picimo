@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "generate legendary mazes (2d)",
   "module": "src/legendary-mazes.js",
+  "sideEffects": false,
   "scripts": {
     "start": "serve"
   },
