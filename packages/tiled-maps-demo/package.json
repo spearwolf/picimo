@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --open",
     "lint": "tslint --format verbose --project ./tsconfig.json",
-    "test": "jest"
+    "test": "jest --passWithNoTests"
   },
   "author": "Wolfger Schramm <wolfger@spearwolf.de>",
   "devDependencies": {
@@ -16,16 +16,15 @@
     "@babel/polyfill": "^7.2.5",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-typescript": "^7.1.0",
-    "@types/jest": "^23.3.13",
+    "@types/jest": "^24.0.15",
     "@types/lodash": "^4.14.120",
-    "@types/three": "^0.93.17",
     "babel-jest": "^24.0.0",
     "babel-loader": "^8.0.5",
     "jest": "^24.0.0",
     "npm-run-all": "^4.1.5",
-    "serve": "^10.0.1",
-    "ts-jest": "^23.10.3",
-    "ts-loader": "^5.3.3",
+    "serve": "^11.1.0",
+    "ts-jest": "^24.0.2",
+    "ts-loader": "^6.0.4",
     "tslib": "^1.9.3",
     "tslint": "^5.12.1",
     "tslint-microsoft-contrib": "^6.0.0",
