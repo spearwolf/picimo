@@ -7,4 +7,4 @@ import { appendTo } from './utils/appendTo.js';
 const println = appendTo('#output', '\n');
 
 println(`THREE REVISION ${THREE.REVISION}`);
-println(`spearwolf.VERSION ${VERSION}`);
+println(`picimo.VERSION ${VERSION}`);

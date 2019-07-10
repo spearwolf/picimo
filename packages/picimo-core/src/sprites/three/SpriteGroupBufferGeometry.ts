@@ -18,7 +18,7 @@ export class SpriteGroupBufferGeometry<T, U> extends THREE.BufferGeometry {
   constructor(spriteGroup: SpriteGroup<T, U>) {
     super();
 
-    this.type = 'spearwolf.SpriteGroupBufferGeometry';
+    this.type = 'picimo.SpriteGroupBufferGeometry';
 
     this.parameters = {
       spriteGroup,

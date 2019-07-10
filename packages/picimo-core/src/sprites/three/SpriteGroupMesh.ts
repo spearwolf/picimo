@@ -31,7 +31,7 @@ export class SpriteGroupMesh<T, U = {}, K = {}, I = {}> extends THREE.Mesh {
       material,
     );
 
-    if (spriteGroupGeometry.type === 'spearwolf.SpriteGroupGeometry') {
+    if (spriteGroupGeometry.type === 'picimo.SpriteGroupGeometry') {
 
       const { spriteGroup } = spriteGroupGeometry.parameters;
 
@@ -54,7 +54,7 @@ export class SpriteGroupMesh<T, U = {}, K = {}, I = {}> extends THREE.Mesh {
 
         };
 
-    } else if (spriteGroupGeometry.type === 'spearwolf.SpriteGroupInstancedBufferGeometry') {
+    } else if (spriteGroupGeometry.type === 'picimo.SpriteGroupInstancedBufferGeometry') {
 
       const {
         baseSpriteGroup,

@@ -20,7 +20,7 @@ export class SpriteGroupInstancedBufferGeometry<T, U, K, I> extends THREE.Instan
   constructor(base: SpriteGroup<K, I> | THREE.BufferGeometry, spriteGroup: SpriteGroup<T, U>) {
     super();
 
-    this.type = 'spearwolf.SpriteGroupInstancedBufferGeometry';
+    this.type = 'picimo.SpriteGroupInstancedBufferGeometry';
 
     this.parameters = { spriteGroup };
 
