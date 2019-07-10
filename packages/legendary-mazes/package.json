@@ -1,0 +1,14 @@
+{
+  "name": "legendary-mazes",
+  "version": "1.0.0",
+  "description": "generate legendary mazes (2d)",
+  "module": "src/legendary-mazes.js",
+  "scripts": {
+    "start": "serve"
+  },
+  "author": "Wolfger Schramm <wolfger@spearwolf.de>",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "serve": "^11.1.0"
+  }
+}
