@@ -1,0 +1,21 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+
+    "noUnusedLocals": false,
+
+    "baseUrl": ".",
+
+    "paths": {
+      "@picimo/core": ["../../src/index.ts"]
+    }
+
+  },
+  "files": [
+    "colors-test.ts",
+    "math-test.ts",
+    "sprites-test.ts",
+    "textures-test.ts",
+    "utils-test.ts"
+  ]
+}
