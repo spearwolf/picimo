@@ -1,8 +1,5 @@
 import {sample} from './utils.js';
-
-const WALL      = 0;
-const UNVISITED = 1;
-const FLOOR     = 2;
+import {WALL, UNVISITED, FLOOR} from './constants.js';
 
 export class RecursiveBacktracker {
 
@@ -10,7 +7,7 @@ export class RecursiveBacktracker {
     this.grid = grid;
     this.isFinished = false;
   }
-  r
+
   start() {
     this.grid.setAll(WALL);
     this.grid.setAllCells(UNVISITED);
@@ -34,10 +31,9 @@ export class RecursiveBacktracker {
 
   nextStep() {
 
-    let cell;
-
     if (this.isHuntMode) {
 
+      let cell;
       while ((cell = this.visitedCells.pop())) {
 
         const unvisited = cell.filterNeighbors(UNVISITED);
@@ -54,7 +50,7 @@ export class RecursiveBacktracker {
 
     } else {
 
-      cell = sample(this.currentCell.filterNeighbors(UNVISITED));
+      const cell = sample(this.currentCell.filterNeighbors(UNVISITED));
 
       if (cell) {
 

@@ -79,9 +79,9 @@ export class MazeCanvasRenderer {
     for (let y = 0; y < height; y++) {
       for (let x = 0; x < width; x++) {
 
-        const color = this.getColor(x, y);  //grid.get(x, y);
+        const color = this.getColor(x, y);
 
-        if (color !== last) ctx.fillStyle = color;  //this.colors[color];
+        if (color !== last) ctx.fillStyle = color;
         last = color;
 
         ctx.fillRect(x, y, 1, 1);

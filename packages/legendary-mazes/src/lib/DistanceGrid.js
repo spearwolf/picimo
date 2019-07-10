@@ -1,7 +1,8 @@
+import {FLOOR} from './constants.js';
 
 export class DistanceGrid {
 
-  constructor(grid, floorValue) {
+  constructor(grid, floorValue = FLOOR) {
     this.grid = grid;
     this.floorValue = floorValue;
     this.isFinished = false;
@@ -38,7 +39,6 @@ export class DistanceGrid {
   }
 
   nextStep() {
-
     //console.debug("distance:", this.currentDistance, "frontier", this.frontier);
 
     let nextTiles = [];
