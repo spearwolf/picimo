@@ -3,10 +3,12 @@
 const path = require("path");
 
 module.exports = {
-  entry: [
-    "@babel/polyfill",
-    "./src/main.js",
-  ],
+  entry: {
+    "bundle": [ "@babel/polyfill", "./src/main.js" ],
+  },
+  output: {
+    path: path.resolve(__dirname, "public"),
+  },
   mode: "development",
   devtool: "inline-source-map",
   devServer: {
@@ -38,9 +40,8 @@ module.exports = {
   },
   resolve: {
     extensions: [ ".ts", ".js", ".json" ],
-  },
-  output: {
-    filename: "bundle.js",
-    path: path.resolve(__dirname, "public"),
+    alias: {
+      '@picimo/core': path.join(__dirname, '../picimo-core/src'),
+    },
   },
 };

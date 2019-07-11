@@ -1,3 +1,5 @@
+import { Vector3, Box3 } from 'three';
+
 import { SpriteGroupMesh, SpriteGroupInstancedBufferGeometry } from '../../sprites';
 
 import { getTileQuadBaseGroup } from '../TileQuad/TileQuadBaseGroup';
@@ -7,6 +9,8 @@ import { TileQuadBaseMethodsType } from '../TileQuad/TileQuadBaseMethods';
 import { TileQuadGroup, ITileQuadGroupOptions } from '../TileQuad/TileQuadGroup';
 import { TileQuadMaterial } from './TileQuadMaterial';
 import { TileQuadMethodsType } from '../TileQuad/TileQuadMethods';
+
+import { Map2DViewTile } from '../Map2DViewTile';
 
 export interface ITileQuadMeshOptions extends ITileQuadGroupOptions {
 }
@@ -34,8 +38,30 @@ export class TileQuadMesh extends SpriteGroupMesh<TileQuadMethodsType, ITileQuad
     this.tiles = tiles;
     this.material = material;
 
-    this.type = 'TileQuadMesh';
+    this.type = 'picimo.TileQuadMesh';
+
+    this.frustumCulled = false;
 
   }
+
+  /*
+  updateBoundingSphere(viewTile: Map2DViewTile) {
+
+    const {
+      viewWidth,
+      viewHeight,
+      viewOffsetX,
+      viewOffsetY,
+    } = viewTile;
+
+    // const minX = viewOffsetX;
+    const minY = viewHeight + viewOffsetY;
+    const maxX = viewOffsetX + viewWidth;
+    const maxY = viewHeight - (-viewOffsetY + viewHeight);
+
+    this.geometry.boundingBox = new Box3(new Vector3(viewOffsetX, minY, 0), new Vector3(maxX, maxY, 0));
+
+  }
+  */
 
 }

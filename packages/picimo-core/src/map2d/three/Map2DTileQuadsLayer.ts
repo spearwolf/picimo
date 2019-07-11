@@ -137,6 +137,7 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
     }
 
     mesh.tiles.showTiles(viewTile, this.textureLibrary);
+    // mesh.updateBoundingSphere(viewTile);
 
     this[$tiles].set(viewTile.id, mesh);
     return mesh;

@@ -17,7 +17,7 @@ import {
 } from "@picimo/core";
 
 const VIEW_WIDTH = 320;
-const VIEW_ASPECT = 9 / 16;
+const VIEW_ASPECT = .5; //9 / 16;
 const calcViewHeight = (width = VIEW_WIDTH) => Math.round(width * VIEW_ASPECT);
 
 console.log("hej ho 🦄");
