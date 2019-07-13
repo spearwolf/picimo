@@ -16,6 +16,8 @@ const $destroyTile = Symbol('destroyTile');
 const $createTileMesh = Symbol('createTileMesh');
 
 /**
+ * @deprecated
+ * 
  * Represents a map2d layer.
  *
  * Each tile is rendered with the same material which is built by the layer

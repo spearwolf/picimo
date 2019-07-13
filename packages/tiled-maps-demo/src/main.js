@@ -216,6 +216,7 @@ Promise.all([
 
   // texLib.setDefaultTexture('empty.png');
   texLib.setDefaultTexture("sketch-dungeon-back-tile.png");
+  // texLib.setDefaultTexture("foo");
 
   console.log("TextureLibrary", texLib);
 
@@ -225,8 +226,8 @@ Promise.all([
   // @ts-ignore
   window.map2d = map2d;
 
-  const flat2dTiles = new Map2DFlat2DTilesLayer(texLib);
-  map2d.appendLayer(flat2dTiles);
+  // const flat2dTiles = new Map2DFlat2DTilesLayer(texLib);
+  // map2d.appendLayer(flat2dTiles);
 
   const backTileQuads = new Map2DTileQuadsLayer(texLib);
   map2d.appendLayer(backTileQuads);

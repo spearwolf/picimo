@@ -58,12 +58,13 @@ export class TileQuadGroup extends SpriteGroupTextured<TileQuadMethodsType, ITil
         if (tileId > 0) {
 
           const texture = textureLibrary.getTextureById(tileId);
-          const tile = this.voPool.alloc();
+          if (texture != null) {
+            const tile = this.voPool.alloc();
 
-          tile.setSize(tileWidth, tileHeight);
-          tile.setTexCoordsByTexture(texture);
-          tile.translate(x, z, 0);
-
+            tile.setSize(tileWidth, tileHeight);
+            tile.setTexCoordsByTexture(texture);
+            tile.translate(x, z, 0);
+          }
         }
 
         x += tileWidth;

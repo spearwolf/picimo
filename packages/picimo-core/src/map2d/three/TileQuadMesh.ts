@@ -1,5 +1,3 @@
-import { Vector3, Box3 } from 'three';
-
 import { SpriteGroupMesh, SpriteGroupInstancedBufferGeometry } from '../../sprites';
 
 import { getTileQuadBaseGroup } from '../TileQuad/TileQuadBaseGroup';
@@ -9,8 +7,6 @@ import { TileQuadBaseMethodsType } from '../TileQuad/TileQuadBaseMethods';
 import { TileQuadGroup, ITileQuadGroupOptions } from '../TileQuad/TileQuadGroup';
 import { TileQuadMaterial } from './TileQuadMaterial';
 import { TileQuadMethodsType } from '../TileQuad/TileQuadMethods';
-
-import { Map2DViewTile } from '../Map2DViewTile';
 
 export interface ITileQuadMeshOptions extends ITileQuadGroupOptions {
 }

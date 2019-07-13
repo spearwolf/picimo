@@ -54,7 +54,7 @@ export class Map2DViewFrame extends THREE.Object3D {
    * @param height the size along the z axis
    */
   updateView(x: number, z: number, width: number, height: number) {
-    this.position.set(x, 1,/*this.yOffset,*/ z);
+    this.position.set(x, this.yOffset, z);
     this.scale.set(width, 1, height);
     this.matrixWorldNeedsUpdate = true;
   }
