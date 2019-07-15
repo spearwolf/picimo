@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-import { TextureLibrary } from '../../textures';
+import { ImageSource, ITileSet } from '../../textures';
 
 import { Map2DViewTile } from '../Map2DViewTile';
 
@@ -17,7 +17,7 @@ const $destroyTile = Symbol('destroyTile');
 const $createTileMesh = Symbol('createTileMesh');
 const $meshCache = Symbol('meshCache');
 
-function makeTexture(htmlElement: HTMLImageElement) {
+function makeTexture(htmlElement: ImageSource) {
 
   const texture = new THREE.Texture(htmlElement);
 
@@ -42,7 +42,7 @@ const meshCacheKey = (uuid: string, capacity: number) => `${uuid}:${capacity}`;
 
 export class Map2DTileQuadsLayer implements IMap2DLayer {
 
-  readonly textureLibrary: TextureLibrary;
+  readonly tileset: ITileSet;
 
   private readonly [$obj3d]: THREE.Object3D = new THREE.Object3D();
 
@@ -53,11 +53,11 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
 
   private readonly [$meshCache]: Map<string, Array<TileQuadMesh>> = new Map();
 
-  constructor(textureLibrary: TextureLibrary) {
+  constructor(tileset: ITileSet) {
 
-    this.textureLibrary = textureLibrary;
+    this.tileset = tileset;
 
-    const texture = makeTexture(textureLibrary.atlas.baseTexture.imgEl as HTMLImageElement);
+    const texture = makeTexture(tileset.getImageSource());
     this[$texture] = texture;
     this[$material] = new TileQuadMaterial(texture);
 
@@ -136,7 +136,7 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
       mesh = new TileQuadMesh(material, { capacity });
     }
 
-    mesh.tiles.showTiles(viewTile, this.textureLibrary);
+    mesh.tiles.showTiles(viewTile, this.tileset);
     // mesh.updateBoundingSphere(viewTile);
 
     this[$tiles].set(viewTile.id, mesh);

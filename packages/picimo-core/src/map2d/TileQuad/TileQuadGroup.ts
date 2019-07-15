@@ -1,5 +1,5 @@
 import { SpriteGroupTextured, VOIndices, SpriteGroupTexturedOptions } from '../../sprites';
-import { Texture, TextureLibrary } from '../../textures';
+import { Texture, ITileSet } from '../../textures';
 
 import { Map2DViewTile } from '../Map2DViewTile';
 
@@ -26,7 +26,7 @@ export class TileQuadGroup extends SpriteGroupTextured<TileQuadMethodsType, ITil
     }, options));
   }
 
-  showTiles(viewTile: Map2DViewTile, textureLibrary: TextureLibrary) {
+  showTiles(viewTile: Map2DViewTile, tileset: ITileSet) {
 
     this.voPool.freeAll();
 
@@ -57,7 +57,7 @@ export class TileQuadGroup extends SpriteGroupTextured<TileQuadMethodsType, ITil
         const tileId = viewTile.getTileIdAt(col, tileRows - row - 1);
         if (tileId > 0) {
 
-          const texture = textureLibrary.getTextureById(tileId);
+          const texture = tileset.getTextureById(tileId);
           if (texture != null) {
             const tile = this.voPool.alloc();
 

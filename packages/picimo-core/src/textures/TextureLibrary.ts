@@ -1,7 +1,8 @@
 import { Texture } from './Texture';
 import { TextureAtlas } from './TextureAtlas';
+import { ITileSet } from './ITileSet';
 
-export class TextureLibrary {
+export class TextureLibrary implements ITileSet {
 
   static async load(path: string, basePath: string = './'): Promise<TextureLibrary> {
     return new TextureLibrary(await TextureAtlas.load(path, basePath));
@@ -16,8 +17,8 @@ export class TextureLibrary {
     this.atlas = atlas;
   }
 
-  get textureNames() {
-    return this.atlas.frameNames();
+  getImageSource() {
+    return this.atlas.baseTexture.imgEl;
   }
 
   getTextureById(id: number): Texture {
@@ -26,6 +27,10 @@ export class TextureLibrary {
       return this.atlas.frame(name) || null;
     }
     return null;
+  }
+
+  get textureNames() {
+    return this.atlas.frameNames();
   }
 
   getTextureByName(frame: string): Texture {
