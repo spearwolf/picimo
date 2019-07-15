@@ -3,9 +3,9 @@ import * as THREE from 'three';
 import { readOption } from '../utils';
 
 import { TextureAtlas } from './TextureAtlas';
-import { TextureLibrary } from './TextureLibrary';
 import { Texture } from './Texture';
 import { ImageSource } from './PowerOf2Image';
+import { ITileSet } from './ITileSet';
 
 const $maxAnisotrophy = Symbol('maxAnisotrophy');
 
@@ -32,7 +32,7 @@ export class TextureUtils {
   }
 
   makeTexture(
-    source: TextureAtlas | TextureLibrary | Texture,
+    source: ITileSet | TextureAtlas | Texture,
     options?: {
       filter?: THREE.TextureFilter,
       anisotropy?: number,
@@ -41,12 +41,12 @@ export class TextureUtils {
 
     let image: ImageSource;
 
-    if (source instanceof TextureLibrary) {
-      image = source.atlas.baseTexture.imgEl;
+    if (typeof (source as ITileSet).getImageSource === 'function') {
+      image = (source as ITileSet).getImageSource();
     } else if (source instanceof TextureAtlas) {
       image = source.baseTexture.imgEl;
-    } else { // is a Texture!
-      image = source.imgEl;
+    } else {
+      image = (source as Texture).imgEl;
     }
 
     const texture = new THREE.Texture(image);

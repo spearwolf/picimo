@@ -16,6 +16,7 @@ module.exports = {
     'instanced-geometry.bundle': [...corejs, './examples/src/instancedGeometry.js'],
     'bitmap-font.bundle': [...corejs, './examples/src/bitmapFont.js'],
     'simple-sprites.bundle': [...corejs, './examples/src/simpleSprites.js'],
+    'tilesets.bundle': [...corejs, './examples/src/tilesets.js'],
   },
   devServer: {
     port: 3000,
