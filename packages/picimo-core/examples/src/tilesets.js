@@ -7,6 +7,7 @@ makeExampleShell(
   document.getElementById('container'),
   {
     alpha: true,
+    antialias: true,
     autoRotate: false,
     showCube: false,
   },
