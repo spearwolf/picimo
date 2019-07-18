@@ -35,7 +35,7 @@ const meshCacheKey = (uuid: string, capacity: number) => `${uuid}:${capacity}`;
 /**
  * Represents a map2d layer.
  *
- * Each tile is rendered with the same material which is built upon the *base image* from the given [[TextureLibrary]].
+ * Each tile is rendered with the same material which is built upon the *base image* from the given [[ITileSet]].
  *
  * Internally a [[TileQuadMesh]] is used for the tiles.
  */

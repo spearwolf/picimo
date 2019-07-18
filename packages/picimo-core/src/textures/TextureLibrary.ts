@@ -21,6 +21,10 @@ export class TextureLibrary implements ITileSet {
     return this.atlas.baseTexture.imgEl;
   }
 
+  hasTextureId(id: number) {
+    return Boolean(this.texIdMap.get(id) || this.defaultTexName);
+  }
+
   getTextureById(id: number): Texture {
     const name = this.texIdMap.get(id) || this.defaultTexName;
     if (name) {

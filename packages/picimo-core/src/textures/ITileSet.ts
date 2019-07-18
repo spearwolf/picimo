@@ -5,6 +5,8 @@ export interface ITileSet {
 
   getImageSource(): ImageSource;
 
+  hasTextureId(id: number): boolean;
+
   getTextureById(id: number): Texture;
 
 }

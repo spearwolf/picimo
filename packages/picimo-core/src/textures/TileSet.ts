@@ -102,6 +102,10 @@ export class TileSet implements ITileSet {
   getImageSource() {
     return this.baseTexture.imgEl;
   }
+  
+  hasTextureId(id: number) {
+    return id >= this.firstId && id <= this.lastId;
+  }
 
   getTextureById(id: number): Texture {
     if (id >= this.firstId && id <= this.lastId) {

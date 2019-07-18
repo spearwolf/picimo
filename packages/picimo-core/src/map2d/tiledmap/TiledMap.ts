@@ -1,3 +1,5 @@
+import { TileSet } from '../../textures';
+
 import { ITiledMapData } from './ITiledMapData';
 import { ITiledMapLayerData } from './ITiledMapLayerData';
 import { TiledMapLayer } from './TiledMapLayer';
@@ -10,6 +12,8 @@ export class TiledMap {
   static async load(url: string): Promise<TiledMap> {
     return new TiledMap(await fetch(url).then((response) => response.json()));
   }
+
+  readonly tilesets: Array<TileSet> = [];
 
   private readonly [$data]: ITiledMapData;
 
@@ -43,5 +47,21 @@ export class TiledMap {
 
   getLayer(name: string) { return this[$layerMap].get(name); }
   getAllLayers(): TiledMapLayer[] { return Array.from(this[$layerMap].values()); }
+
+  async loadTileSets(basePath: string = './') {
+    const tilesets = await Promise.all(this[$data].tilesets.map(tilesetInfo => TileSet.load(tilesetInfo.image, {
+      basePath,
+      tileWidth: tilesetInfo.tilewidth,
+      tileHeight: tilesetInfo.tileheight,
+      margin: tilesetInfo.margin,
+      spacing: tilesetInfo.spacing,
+      // padding: 0
+      columns: tilesetInfo.columns,
+      firstId: tilesetInfo.firstgid,
+      tileCount: tilesetInfo.tilecount,
+    })));
+    this.tilesets.push(...tilesets.sort((a, b) => a.firstId - b.firstId));
+    return this.tilesets;
+  }
 
 }
