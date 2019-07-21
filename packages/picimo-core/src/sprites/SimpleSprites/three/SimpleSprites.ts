@@ -5,8 +5,8 @@ import { ISimpleSprite } from '../ISimpleSprite';
 import { ISimpleSpriteBase } from '../ISimpleSpriteBase';
 import { SimpleSpriteBaseMethodsType } from '../SimpleSpriteBaseMethods';
 import { SimpleSpriteGroup, ISimpleSpriteGroupOptions } from '../SimpleSpriteGroup';
-import { SimpleSpritesMaterial } from './SimpleSpritesMaterial';
 import { SimpleSpriteMethodsType } from '../SimpleSpriteMethods';
+import { Material } from 'three';
 
 export interface ISimpleSpritesOptions extends ISimpleSpriteGroupOptions {
 }
@@ -17,9 +17,8 @@ export interface ISimpleSpritesOptions extends ISimpleSpriteGroupOptions {
 export class SimpleSprites extends SpriteGroupMesh<SimpleSpriteMethodsType, ISimpleSprite, SimpleSpriteBaseMethodsType, ISimpleSpriteBase> {
 
   sprites: SimpleSpriteGroup;
-  material: SimpleSpritesMaterial;
 
-  constructor(material: SimpleSpritesMaterial, options?: ISimpleSpritesOptions) {
+  constructor(material: Material, options?: ISimpleSpritesOptions) {
 
     const sprites = new SimpleSpriteGroup(options);
     const geometry = new SpriteGroupInstancedBufferGeometry(getSimpleSpriteBaseGroup(), sprites);
@@ -27,7 +26,6 @@ export class SimpleSprites extends SpriteGroupMesh<SimpleSpriteMethodsType, ISim
     super(geometry, material);
 
     this.sprites = sprites;
-    this.material = material;
 
     this.type = 'SimpleSprites';
 
