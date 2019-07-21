@@ -1,17 +1,16 @@
 import * as THREE from 'three';
 
-import { readOption } from '../utils';
+import { readOption } from '../../utils';
 
-import { TextureAtlas } from './TextureAtlas';
-import { Texture } from './Texture';
-import { ImageSource } from './PowerOf2Image';
-import { ITileSet } from './ITileSet';
+import { TextureAtlas } from '../TextureAtlas';
+import { Texture } from '../Texture';
+import { ImageSource } from '../PowerOf2Image';
+import { ITileSet } from '../ITileSet';
 
 const $maxAnisotrophy = Symbol('maxAnisotrophy');
 
 export interface TextureUtilsOptions {
 
-  maxAnisotrophy: number;
   defaultAnisotrophy?: number;
 
   defaultFilter?: THREE.TextureFilter;
@@ -25,8 +24,8 @@ export class TextureUtils {
 
   private readonly [$maxAnisotrophy]: number;
 
-  constructor(options: TextureUtilsOptions) {
-    this[$maxAnisotrophy] = options.maxAnisotrophy;
+  constructor(renderer: THREE.WebGLRenderer, options: TextureUtilsOptions) {
+    this[$maxAnisotrophy] = renderer.capabilities.getMaxAnisotropy();
     this.DefaultAnisotrophy = options.defaultAnisotrophy || 0;
     this.DefaultFilter = options.defaultFilter || THREE.NearestFilter;
   }

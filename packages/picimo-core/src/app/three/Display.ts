@@ -145,8 +145,7 @@ export class Display extends THREE.EventDispatcher {
 
     this.renderer = new THREE.WebGLRenderer(rendererArgs);
 
-    this.texUtils = new TextureUtils({
-      maxAnisotrophy: this.renderer.capabilities.getMaxAnisotropy(),
+    this.texUtils = new TextureUtils(this.renderer, {
       defaultAnisotrophy: pixelate ? 0 : Infinity,
       defaultFilter: pixelate ? THREE.NearestFilter : THREE.LinearFilter,
     });
