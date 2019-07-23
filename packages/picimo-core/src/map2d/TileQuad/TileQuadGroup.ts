@@ -48,14 +48,15 @@ export class TileQuadGroup extends SpriteGroupTextured<TileQuadMethodsType, ITil
 
     for (let row = 0; row < tileRows; ++row) {
 
+      const z = viewHeight - y - tileHeight;
+      const row_ = tileRows - row - 1;
+
       let x = viewOffsetX;
 
       for (let col = 0; col < tileCols; ++col) {
 
-        const z = viewHeight - y - tileHeight;
-
-        const tileId = viewTile.getTileIdAt(col, tileRows - row - 1);
-        if (tileId > 0) {
+        const tileId = viewTile.getTileIdAt(col, row_);
+        if (tileset.hasTextureId(tileId)) {
 
           const texture = tileset.getTextureById(tileId);
           if (texture != null) {
