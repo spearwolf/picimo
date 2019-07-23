@@ -239,10 +239,10 @@ Promise.all([
 
   const meshCache = new TileQuadMeshCache();
 
-  const backTileQuads = new Map2DTileQuadsLayer(tileset, meshCache); // texLib);
+  const backTileQuads = new Map2DTileQuadsLayer(tiledMap.tilesets, meshCache); // texLib);
   map2d.appendLayer(backTileQuads);
 
-  const frontTileQuads = new Map2DTileQuadsLayer(tileset, meshCache); // texLib);
+  const frontTileQuads = new Map2DTileQuadsLayer(tiledMap.tilesets, meshCache); // texLib);
   frontTileQuads.getObject3D().position.add(new THREE.Vector3(0, 10, 0));
   map2d.appendLayer(frontTileQuads);
 
