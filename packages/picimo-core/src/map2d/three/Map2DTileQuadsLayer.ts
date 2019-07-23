@@ -70,7 +70,7 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
   }
 
   dispose() {
-    Array.from(this[$tiles].values()).forEach((tile) => tile.geometry.dispose());
+    Array.from(this[$tiles].values()).forEach(tile => this[$meshCache].pushBackToCache(tile));
     this[$tiles].clear();
 
     // TODO if meshCache is an externally created cache we shouldn't dispose here
