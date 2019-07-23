@@ -14,6 +14,7 @@ import {
   Map2DViewLayer,
   // TextureLibrary,
   TiledMap,
+  TileQuadMeshCache,
 } from '@picimo/core';
 
 const VIEW_WIDTH = 320;
@@ -236,10 +237,12 @@ Promise.all([
   // const flat2dTiles = new Map2DFlat2DTilesLayer(texLib);
   // map2d.appendLayer(flat2dTiles);
 
-  const backTileQuads = new Map2DTileQuadsLayer(tileset); // texLib);
+  const meshCache = new TileQuadMeshCache();
+
+  const backTileQuads = new Map2DTileQuadsLayer(tileset, meshCache); // texLib);
   map2d.appendLayer(backTileQuads);
 
-  const frontTileQuads = new Map2DTileQuadsLayer(tileset); // texLib);
+  const frontTileQuads = new Map2DTileQuadsLayer(tileset, meshCache); // texLib);
   frontTileQuads.getObject3D().position.add(new THREE.Vector3(0, 10, 0));
   map2d.appendLayer(frontTileQuads);
 

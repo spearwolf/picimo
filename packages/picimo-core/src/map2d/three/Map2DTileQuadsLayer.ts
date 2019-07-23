@@ -7,6 +7,7 @@ import { Map2DViewTile } from '../Map2DViewTile';
 import { IMap2DLayer } from './IMap2DLayer';
 import { TileQuadMaterial } from './TileQuadMaterial';
 import { TileQuadMesh } from './TileQuadMesh';
+import { TileQuadMeshCache } from './TileQuadMeshCache';
 
 const $obj3d = Symbol('obj3d');
 const $material = Symbol('material');
@@ -16,7 +17,6 @@ const $tiles = Symbol('tiles');
 const $destroyTile = Symbol('destroyTile');
 const $createTileMesh = Symbol('createTileMesh');
 const $meshCache = Symbol('meshCache');
-const $pushToCache = Symbol('pushToCache');
 
 function makeTexture(htmlElement: ImageSource) {
 
@@ -30,8 +30,6 @@ function makeTexture(htmlElement: ImageSource) {
   return texture;
 
 }
-
-const meshCacheKey = (uuid: string, capacity: number) => `${uuid}:${capacity}`;
 
 /**
  * Represents a map2d layer.
@@ -52,11 +50,12 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
 
   private readonly [$tiles]: Map<string, TileQuadMesh> = new Map();
 
-  private readonly [$meshCache]: Map<string, Array<TileQuadMesh>> = new Map();
+  private readonly [$meshCache]: TileQuadMeshCache;
 
-  constructor(tileset: ITileSet) {
+  constructor(tileset: ITileSet, meshCache: TileQuadMeshCache) {
 
     this.tileset = tileset;
+    this[$meshCache] = meshCache;
 
     const texture = makeTexture(tileset.getImageSource());
     this[$texture] = texture;
@@ -74,8 +73,8 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
     Array.from(this[$tiles].values()).forEach((tile) => tile.geometry.dispose());
     this[$tiles].clear();
 
-    Array.from(this[$meshCache].values()).forEach((meshCache) => meshCache.forEach(mesh => mesh.geometry.dispose()));
-    this[$meshCache].clear();
+    // TODO if meshCache is an externally created cache we shouldn't dispose here
+    // this[$meshCache].dispose(mesh => mesh.geometry.dispose());
 
     this[$texture].dispose();
     this[$material].dispose();
@@ -96,25 +95,13 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
       // remove mesh from map2d scene
       this[$obj3d].remove(mesh);
 
-      this[$pushToCache](mesh);
+      // add mesh to cache so we can reuse it later
+      this[$meshCache].pushBackToCache(mesh);
     }
   }
 
   renderViewTile(_tile: Map2DViewTile) {
     // animate tiles?
-  }
-
-  /**
-   * Add mesh to internal cache so it is ready for later reuse
-   */
-  private [$pushToCache](mesh: TileQuadMesh) {
-    const cacheKey = meshCacheKey(mesh.material.uuid, mesh.tiles.capacity);
-    const meshCache = this[$meshCache].get(cacheKey);
-    if (meshCache) {
-      meshCache.push(mesh);
-    } else {
-      this[$meshCache].set(cacheKey, [mesh]);
-    }
   }
 
   private [$destroyTile](id: string): TileQuadMesh {
@@ -129,24 +116,12 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
 
   private [$createTileMesh](viewTile: Map2DViewTile): TileQuadMesh {
 
-    let mesh: TileQuadMesh = null;
-
     const material = this[$material];
     const capacity = viewTile.width * viewTile.height;
-    const meshCache = this[$meshCache].get(meshCacheKey(material.uuid, capacity));
-
-    // reuse a mesh from cache ..
-    if (meshCache) {
-      mesh = meshCache.shift();
-    }
-
-    // .. or create a new
-    if (!mesh) {
-      mesh = new TileQuadMesh(material, { capacity });
-    }
+    const mesh = this[$meshCache].createMesh(material, capacity);
 
     mesh.tiles.showTiles(viewTile, this.tileset);
-    // mesh.updateBoundingSphere(viewTile);
+    // TODO mesh.updateBoundingSphere(viewTile);
 
     if (mesh.tiles.usedCount > 0) {
     
@@ -156,7 +131,7 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
     }
 
     // no tiles created, so we can push the mesh back to cache
-    this[$pushToCache](mesh);
+    this[$meshCache].pushBackToCache(mesh);
     return null;
   }
 }
