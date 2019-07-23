@@ -12,7 +12,7 @@ import {
   Map2DView,
   Map2DViewFrame,
   Map2DViewLayer,
-  TextureLibrary,
+  // TextureLibrary,
   TiledMap,
 } from '@picimo/core';
 
@@ -169,13 +169,16 @@ Promise.all([
   // TextureLibrary.load('sketch-tiles.json', './atlas/'),
 
   TiledMap.load('./maps/lab-wall-tiles-new-map.json'),
-  TextureLibrary.load('lab-wall-tiles-new.json', './atlas/'),
+  // TextureLibrary.load('lab-wall-tiles-new.json', './atlas/'),
 
-]).then(async ([tiledMap, texLib]) => {
+]).then(async ([tiledMap/*, texLib*/]) => {
 
-  console.log('auto-loaded tilesets:', await tiledMap.loadTileSets('./atlas/'));
+  const tileset = (await tiledMap.loadTileSets('./atlas/'))[0];
 
-  const { imgEl } = texLib.atlas.baseTexture;
+  console.log('auto-loaded tilesets:', tiledMap.tilesets);
+
+  // const { imgEl } = texLib.atlas.baseTexture;
+  const imgEl = tileset.getImageSource();
   const el = document.querySelector('.textureAtlas');
   el.appendChild(imgEl);
 
@@ -198,31 +201,31 @@ Promise.all([
   //   [16, 'wall-nw.png'],
   //   [17, 'wall-sw.png'],
   // ]);
-  texLib.setIdNameMap([
-    [1, 'lab-wall-tiles-00.png'],
-    [2, 'lab-wall-tiles-01.png'],
-    [3, 'lab-wall-tiles-02.png'],
-    [4, 'lab-wall-tiles-03.png'],
-    [5, 'lab-wall-tiles-04.png'],
-    [6, 'lab-wall-tiles-05.png'],
-    [7, 'lab-wall-tiles-06.png'],
-    [8, 'lab-wall-tiles-07.png'],
-    [9, 'lab-wall-tiles-08.png'],
-    [10, 'lab-wall-tiles-09.png'],
-    [11, 'lab-wall-tiles-10.png'],
-    [12, 'lab-wall-tiles-11.png'],
-    [13, 'lab-wall-tiles-12.png'],
-    [14, 'lab-wall-tiles-13.png'],
-    [15, 'lab-wall-tiles-14.png'],
-    [16, 'lab-wall-tiles-15.png'],
-    [17, 'lab-wall-tiles-16.png'],
-    [18, 'lab-wall-tiles-18.png'],
-  ]);
+
+  // texLib.setIdNameMap([
+  //   [1, 'lab-wall-tiles-00.png'],
+  //   [2, 'lab-wall-tiles-01.png'],
+  //   [3, 'lab-wall-tiles-02.png'],
+  //   [4, 'lab-wall-tiles-03.png'],
+  //   [5, 'lab-wall-tiles-04.png'],
+  //   [6, 'lab-wall-tiles-05.png'],
+  //   [7, 'lab-wall-tiles-06.png'],
+  //   [8, 'lab-wall-tiles-07.png'],
+  //   [9, 'lab-wall-tiles-08.png'],
+  //   [10, 'lab-wall-tiles-09.png'],
+  //   [11, 'lab-wall-tiles-10.png'],
+  //   [12, 'lab-wall-tiles-11.png'],
+  //   [13, 'lab-wall-tiles-12.png'],
+  //   [14, 'lab-wall-tiles-13.png'],
+  //   [15, 'lab-wall-tiles-14.png'],
+  //   [16, 'lab-wall-tiles-15.png'],
+  //   [17, 'lab-wall-tiles-16.png'],
+  //   [18, 'lab-wall-tiles-18.png'],
+  // ]);
 
   // texLib.setDefaultTexture('empty.png');
-  texLib.setDefaultTexture('sketch-dungeon-back-tile.png');
-
-  console.log('TextureLibrary', texLib);
+  // texLib.setDefaultTexture('sketch-dungeon-back-tile.png');
+  // console.log('TextureLibrary', texLib);
 
   const map2d = new Map2D();
   scene.add(map2d);
@@ -233,10 +236,10 @@ Promise.all([
   // const flat2dTiles = new Map2DFlat2DTilesLayer(texLib);
   // map2d.appendLayer(flat2dTiles);
 
-  const backTileQuads = new Map2DTileQuadsLayer(texLib);
+  const backTileQuads = new Map2DTileQuadsLayer(tileset); // texLib);
   map2d.appendLayer(backTileQuads);
 
-  const frontTileQuads = new Map2DTileQuadsLayer(texLib);
+  const frontTileQuads = new Map2DTileQuadsLayer(tileset); // texLib);
   frontTileQuads.getObject3D().position.add(new THREE.Vector3(0, 10, 0));
   map2d.appendLayer(frontTileQuads);
 
