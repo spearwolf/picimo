@@ -16,6 +16,7 @@ const $tiles = Symbol('tiles');
 const $destroyTile = Symbol('destroyTile');
 const $createTileMesh = Symbol('createTileMesh');
 const $meshCache = Symbol('meshCache');
+const $pushToCache = Symbol('pushToCache');
 
 function makeTexture(htmlElement: ImageSource) {
 
@@ -61,7 +62,7 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
     this[$texture] = texture;
     this[$material] = new TileQuadMaterial(texture);
 
-    // TODO allow multiple textures/materials per layer ..
+    // TODO allow multiple textures/materials per layer .. ?
 
   }
 
@@ -82,30 +83,38 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
 
   addViewTile(tile: Map2DViewTile) {
     const mesh = this[$createTileMesh](tile);
-    mesh.name = tile.id;
-    this[$obj3d].add(mesh);
+    if (mesh != null) {
+      mesh.name = tile.id;
+      this[$obj3d].add(mesh);
+    }
   }
 
   removeViewTile(tileId: string) {
     const mesh = this[$destroyTile](tileId);
-    if (mesh !== null) {
+    if (mesh != null) {
 
       // remove mesh from map2d scene
       this[$obj3d].remove(mesh);
 
-      // add mesh to internal cache so it is ready for later reuse
-      const cacheKey = meshCacheKey(mesh.material.uuid, mesh.tiles.capacity);
-      const meshCache = this[$meshCache].get(cacheKey);
-      if (meshCache) {
-        meshCache.push(mesh);
-      } else {
-        this[$meshCache].set(cacheKey, [mesh]);
-      }
+      this[$pushToCache](mesh);
     }
   }
 
   renderViewTile(_tile: Map2DViewTile) {
     // animate tiles?
+  }
+
+  /**
+   * Add mesh to internal cache so it is ready for later reuse
+   */
+  private [$pushToCache](mesh: TileQuadMesh) {
+    const cacheKey = meshCacheKey(mesh.material.uuid, mesh.tiles.capacity);
+    const meshCache = this[$meshCache].get(cacheKey);
+    if (meshCache) {
+      meshCache.push(mesh);
+    } else {
+      this[$meshCache].set(cacheKey, [mesh]);
+    }
   }
 
   private [$destroyTile](id: string): TileQuadMesh {
@@ -139,8 +148,15 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
     mesh.tiles.showTiles(viewTile, this.tileset);
     // mesh.updateBoundingSphere(viewTile);
 
-    this[$tiles].set(viewTile.id, mesh);
-    return mesh;
+    if (mesh.tiles.usedCount > 0) {
+    
+      this[$tiles].set(viewTile.id, mesh);
+      return mesh;
 
+    }
+
+    // no tiles created, so we can push the mesh back to cache
+    this[$pushToCache](mesh);
+    return null;
   }
 }
