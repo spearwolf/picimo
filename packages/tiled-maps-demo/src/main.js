@@ -174,7 +174,7 @@ Promise.all([
 
 ]).then(async ([tiledMap/*, texLib*/]) => {
 
-  const tileset = (await tiledMap.loadTileSets('./atlas/'))[0];
+  const tileset = (await tiledMap.loadTileSets('./maps/'))[0];
 
   console.log('auto-loaded tilesets:', tiledMap.tilesets);
 
@@ -240,7 +240,11 @@ Promise.all([
   const meshCache = new TileQuadMeshCache();
 
   const backTileQuads = new Map2DTileQuadsLayer(tiledMap.tilesets, meshCache); // texLib);
+  backTileQuads.getObject3D().position.add(new THREE.Vector3(0, -10, 0));
   map2d.appendLayer(backTileQuads);
+
+  const mainTileQuads = new Map2DTileQuadsLayer(tiledMap.tilesets, meshCache); // texLib);
+  map2d.appendLayer(mainTileQuads);
 
   const frontTileQuads = new Map2DTileQuadsLayer(tiledMap.tilesets, meshCache); // texLib);
   frontTileQuads.getObject3D().position.add(new THREE.Vector3(0, 10, 0));
@@ -250,8 +254,9 @@ Promise.all([
 
   // view.addLayer(new Map2DViewLayer(view, layerMain, tiledMap.getLayer('main')));
   // view.addLayer(new Map2DViewLayer(view, flat2dTiles, tiledMap.getLayer('Kachelebene 1')));
-  view.addLayer(new Map2DViewLayer(view, backTileQuads, tiledMap.getLayer('Kachelebene 1')));
-  view.addLayer(new Map2DViewLayer(view, frontTileQuads, tiledMap.getLayer('Kachelebene 2')));
+  view.addLayer(new Map2DViewLayer(view, backTileQuads, tiledMap.getLayer('background')));
+  view.addLayer(new Map2DViewLayer(view, mainTileQuads, tiledMap.getLayer('main')));
+  view.addLayer(new Map2DViewLayer(view, frontTileQuads, tiledMap.getLayer('foreground')));
   // view.update();
 
   viewFrame = new Map2DViewFrame(map2d, 0xff0000, 20);
