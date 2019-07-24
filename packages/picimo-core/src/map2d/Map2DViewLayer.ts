@@ -55,8 +55,9 @@ export class Map2DViewLayer {
     // I. create visible map tiles (and remove/dispose unvisible)
     // ---------------------------------------------------------------
 
-    const viewHalfWidth = this.view.width * 0.5;
-    const viewHalfHeight = this.view.height * 0.5;
+    const { viewCullingThresholdHorizontal, viewCullingThresholdVertical } = this.layerData;
+    const viewHalfWidth =  (this.view.width + viewCullingThresholdHorizontal) * 0.5;
+    const viewHalfHeight = (this.view.height + viewCullingThresholdVertical) * 0.5;
 
     const left = Math.floor((this.view.centerX - viewHalfWidth) / this.tileWidth);
     const top = Math.floor((this.view.centerY - viewHalfHeight) / this.tileHeight);

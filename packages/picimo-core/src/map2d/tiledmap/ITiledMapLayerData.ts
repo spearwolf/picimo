@@ -1,4 +1,5 @@
 import { ITiledMapLayerChunkData } from './ITiledMapLayerChunkData';
+import { ITiledMapCustomProperty } from './ITiledMapCustomProperty';
 
 export interface ITiledMapLayerData {
   chunks: ITiledMapLayerChunkData[];
@@ -12,4 +13,5 @@ export interface ITiledMapLayerData {
   width: number;
   x: number;
   y: number;
+  properties: ITiledMapCustomProperty[];
 }

@@ -113,6 +113,12 @@
          "id":3,
          "name":"background",
          "opacity":1,
+         "properties":[
+                {
+                 "name":"viewCullingThreshold",
+                 "type":"int",
+                 "value":256
+                }],
          "startx":-32,
          "starty":-16,
          "type":"tilelayer",
