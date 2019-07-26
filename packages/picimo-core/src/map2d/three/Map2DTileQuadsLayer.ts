@@ -54,6 +54,7 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
 
   private readonly [$tiles]: Map<string, TileQuadMesh[]> = new Map();
 
+  // TODO how to clear/remove meshCache?
   private readonly [$meshCache]: TileQuadMeshCache;
 
   constructor(tilesets: ITileSet[], meshCache: TileQuadMeshCache) {

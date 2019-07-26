@@ -240,6 +240,7 @@ Promise.all([
   // const flat2dTiles = new Map2DFlat2DTilesLayer(texLib);
   // map2d.appendLayer(flat2dTiles);
 
+  /*
   const meshCache = new TileQuadMeshCache();
 
   const backTileQuads = new Map2DTileQuadsLayer(tiledMap.tilesets, meshCache); // texLib);
@@ -252,17 +253,22 @@ Promise.all([
   const frontTileQuads = new Map2DTileQuadsLayer(tiledMap.tilesets, meshCache); // texLib);
   frontTileQuads.getObject3D().position.add(new THREE.Vector3(0, 10, 0));
   map2d.appendLayer(frontTileQuads);
+  */
 
   view = new Map2DView(map2d, 0, 0, VIEW_WIDTH, calcViewHeight(), 100, 100);
 
+  tiledMap.createLayers(map2d, view); // , ['background', 'main']);
+
   // view.addLayer(new Map2DViewLayer(view, layerMain, tiledMap.getLayer('main')));
   // view.addLayer(new Map2DViewLayer(view, flat2dTiles, tiledMap.getLayer('Kachelebene 1')));
+  /*
   view.addLayer(new Map2DViewLayer(view, backTileQuads, tiledMap.getLayer('background')));
   view.addLayer(new Map2DViewLayer(view, mainTileQuads, tiledMap.getLayer('main')));
   view.addLayer(new Map2DViewLayer(view, frontTileQuads, tiledMap.getLayer('foreground')));
+  */
   // view.update();
 
-  viewFrame = new Map2DViewFrame(map2d, 0xff0000, .5);
+  viewFrame = new Map2DViewFrame(map2d, 0x66ff00, .5);
   map2d.add(viewFrame);
 
   rendererShouldRender = true;

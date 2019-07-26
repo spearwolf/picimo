@@ -29,24 +29,30 @@ export class TiledMapLayer implements IMap2DLayerData {
     left: 0,
   };
 
+  yOffset: number; // optional
+
   private readonly [$tiledMap]: TiledMap;
   private readonly [$data]: ITiledMapLayerData;
   private readonly [$rootNode]: ChunkQuadTreeNode;
-  private readonly [$props]: TiledMapCustomProperties;
+  // private readonly [$props]: TiledMapCustomProperties;
 
   constructor(tiledMap: TiledMap, data: ITiledMapLayerData, autoSubdivide: boolean = true) {
 
     this[$tiledMap] = tiledMap;
     this[$data] = data;
-    this[$props] = new TiledMapCustomProperties(data.properties || []);
 
-    const vct = this[$props].valueAsCssShorthandInt4('viewCullingThreshold');
+    const props = new TiledMapCustomProperties(data.properties || []);
+    // this[$props] = props;
+
+    const vct = props.valueAsCssShorthandInt4('viewCullingThreshold');
     if (vct) {
       this.viewCullingThreshold.top = vct[0];
       this.viewCullingThreshold.right = vct[1];
       this.viewCullingThreshold.bottom = vct[2];
       this.viewCullingThreshold.left = vct[3];
     }
+
+    this.yOffset = parseInt(props.value('yOffset'), 10);
 
     const chunks: TiledMapLayerChunk[] = data.chunks.map((chunkData: ITiledMapLayerChunkData) => new TiledMapLayerChunk(chunkData));
     this[$rootNode] = new ChunkQuadTreeNode(chunks);
@@ -61,6 +67,10 @@ export class TiledMapLayer implements IMap2DLayerData {
 
   get tileWidth() { return this[$tiledMap].tilewidth; }
   get tileHeight() { return this[$tiledMap].tileheight; }
+
+  get visible() { return this[$data].visible; }
+
+  get type() { return this[$data].type; }
 
   subdivide(maxChunkPerNodes: number = 2) {
     this[$rootNode].subdivide(maxChunkPerNodes);

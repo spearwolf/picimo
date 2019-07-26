@@ -6,6 +6,7 @@ export interface ITiledMapLayerData {
   encoding: string;
   height: number;
   name: string;
+  type: string;
   opacity: number;
   startx: number;
   starty: number;

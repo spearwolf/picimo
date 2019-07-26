@@ -120,6 +120,11 @@
                  "name":"viewCullingThreshold",
                  "type":"string",
                  "value":"0 0 112 112"
+                }, 
+                {
+                 "name":"yOffset",
+                 "type":"int",
+                 "value":-10
                 }],
          "startx":-32,
          "starty":-16,
