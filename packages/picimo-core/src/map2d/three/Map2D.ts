@@ -1,12 +1,13 @@
 import * as THREE from 'three';
 
+import { ITileSet } from '../../textures';
+
 import { IMap2DRenderer } from '../IMap2DRenderer';
 import { Map2DView } from '../Map2DView';
 
 import { IMap2DLayer } from './IMap2DLayer';
 import { TileQuadMeshCache } from './TileQuadMeshCache';
 import { Map2DTileQuadsLayer } from './Map2DTileQuadsLayer';
-import { ITileSet } from 'src/textures';
 
 const $map2dLayers = Symbol('map2dLayers');
 const $dispatchEvent = Symbol('dispatchEvent');
