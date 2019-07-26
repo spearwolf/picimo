@@ -29,8 +29,6 @@ export class TiledMapLayer implements IMap2DLayerData {
     left: 0,
   };
 
-  viewCullingThresholdHorizontal: number = 0;
-
   private readonly [$tiledMap]: TiledMap;
   private readonly [$data]: ITiledMapLayerData;
   private readonly [$rootNode]: ChunkQuadTreeNode;
