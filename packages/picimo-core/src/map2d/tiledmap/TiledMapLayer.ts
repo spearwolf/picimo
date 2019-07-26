@@ -1,6 +1,6 @@
 import { AABB2 } from '../../math';
 
-import { IMap2DLayerData } from '../IMap2DLayerData';
+import { IMap2DLayerData, IViewCullingThreshold } from '../IMap2DLayerData';
 import { ChunkQuadTreeNode } from './ChunkQuadTreeNode';
 import { ITiledMapLayerChunkData } from './ITiledMapLayerChunkData';
 import { ITiledMapLayerData } from './ITiledMapLayerData';
@@ -11,7 +11,7 @@ import { TiledMapCustomProperties } from './TiledMapCustomProperties';
 const $tiledMap = Symbol('tiledMap');
 const $data = Symbol('data');
 const $rootNode = Symbol('rootNode');
-const $customProperties = Symbol('customProperties');
+const $props = Symbol('props');
 
 const findChunk = (chunks: TiledMapLayerChunk[], x: number, y: number): TiledMapLayerChunk => {
   return chunks.find((chunk: TiledMapLayerChunk) => chunk.containsTileIdAt(x, y));
@@ -22,31 +22,33 @@ const findChunk = (chunks: TiledMapLayerChunk[], x: number, y: number): TiledMap
  */
 export class TiledMapLayer implements IMap2DLayerData {
 
-  viewCullingThresholdVertical: number;
-  viewCullingThresholdHorizontal: number;
+  viewCullingThreshold: IViewCullingThreshold = {
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+  };
+
+  viewCullingThresholdHorizontal: number = 0;
 
   private readonly [$tiledMap]: TiledMap;
   private readonly [$data]: ITiledMapLayerData;
   private readonly [$rootNode]: ChunkQuadTreeNode;
-  private readonly [$customProperties]: TiledMapCustomProperties;
+  private readonly [$props]: TiledMapCustomProperties;
 
   constructor(tiledMap: TiledMap, data: ITiledMapLayerData, autoSubdivide: boolean = true) {
 
     this[$tiledMap] = tiledMap;
     this[$data] = data;
-    this[$customProperties] = new TiledMapCustomProperties(data.properties || []);
+    this[$props] = new TiledMapCustomProperties(data.properties || []);
 
-    const viewCullingThreshold = this[$customProperties].get("viewCullingThreshold");
-    const hasViewCullingThresholdValue = typeof viewCullingThreshold === 'number';
-    if (!hasViewCullingThresholdValue && viewCullingThreshold) {
-      console.warn('custom tiled layer property "viewCullingThreshold" should be a number, but is typeof', typeof viewCullingThreshold);
-    }
-    if (hasViewCullingThresholdValue) {
-      this.viewCullingThresholdVertical = viewCullingThreshold;
-      this.viewCullingThresholdHorizontal = viewCullingThreshold;
-    } else {
-      this.viewCullingThresholdVertical = tiledMap.tileheight;
-      this.viewCullingThresholdHorizontal = tiledMap.tilewidth;
+    const vct = this[$props].valueAsCssShorthandInt4('viewCullingThreshold');
+    if (vct) {
+      this.viewCullingThreshold.top = vct[0];
+      this.viewCullingThreshold.right = vct[1];
+      this.viewCullingThreshold.bottom = vct[2];
+      this.viewCullingThreshold.left = vct[3];
+      console.log('viewCullingThreshold', this.viewCullingThreshold);
     }
 
     const chunks: TiledMapLayerChunk[] = data.chunks.map((chunkData: ITiledMapLayerChunkData) => new TiledMapLayerChunk(chunkData));

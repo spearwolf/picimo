@@ -1,5 +1,16 @@
 
+export interface IViewCullingThreshold {
+  top: number,
+  right: number,
+  bottom: number,
+  left: number;
+}
+
 export interface IMap2DLayerData {
+
+  /**
+   * The layer name
+   */
   name: string;
 
   /**
@@ -13,19 +24,14 @@ export interface IMap2DLayerData {
   tileHeight: number;
 
   /**
-   * The horizontal view culling threshold.
-   * In the vast majority of cases the tile width should be sufficient here.
+   * The view culling threshold.
+   * In the vast majority of cases the value `{top:0, right: 0, bottom: 0, left: 0}` should be sufficient here.
    */
-  viewCullingThresholdHorizontal: number;
-
-  /**
-   * The vertical view culling threshold.
-   * In the vast majority of cases the tile height should be sufficient here.
-   */
-  viewCullingThresholdVertical: number;
+  viewCullingThreshold: IViewCullingThreshold;
 
   /**
    * Uses a right-handed coordinate system.
    */
   getTileIdsWithin(left: number, top: number, width: number, height: number, uint32arr?: Uint32Array): Uint32Array;
+
 }

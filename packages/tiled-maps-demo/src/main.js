@@ -174,14 +174,17 @@ Promise.all([
 
 ]).then(async ([tiledMap/*, texLib*/]) => {
 
-  const tileset = (await tiledMap.loadTileSets('./maps/'))[0];
+  await tiledMap.loadTileSets('./maps/');
 
   console.log('auto-loaded tilesets:', tiledMap.tilesets);
 
-  // const { imgEl } = texLib.atlas.baseTexture;
-  const imgEl = tileset.getImageSource();
-  const el = document.querySelector('.textureAtlas');
-  el.appendChild(imgEl);
+  /*
+  tiledMap.tilesets.forEach(tileset => {
+    const imgEl = tileset.getImageSource();
+    const el = document.querySelector('.textureAtlas');
+    el.appendChild(imgEl);
+  });
+  */
 
   // texLib.setIdNameMap([
   //   [1, 'empty.png'],
@@ -259,7 +262,7 @@ Promise.all([
   view.addLayer(new Map2DViewLayer(view, frontTileQuads, tiledMap.getLayer('foreground')));
   // view.update();
 
-  viewFrame = new Map2DViewFrame(map2d, 0xff0000, 20);
+  viewFrame = new Map2DViewFrame(map2d, 0xff0000, .5);
   map2d.add(viewFrame);
 
   rendererShouldRender = true;
