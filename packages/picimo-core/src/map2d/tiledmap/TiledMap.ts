@@ -58,7 +58,6 @@ export class TiledMap {
   }
 
   get orientation() { return this[$data].orientation; }
-  get renderorder() { return this[$data].renderorder; }
   get infinite() { return this[$data].infinite; }
 
   get tilewidth() { return this[$data].tilewidth; }
