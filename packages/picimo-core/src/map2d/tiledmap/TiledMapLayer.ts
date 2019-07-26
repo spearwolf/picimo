@@ -48,7 +48,6 @@ export class TiledMapLayer implements IMap2DLayerData {
       this.viewCullingThreshold.right = vct[1];
       this.viewCullingThreshold.bottom = vct[2];
       this.viewCullingThreshold.left = vct[3];
-      console.log('viewCullingThreshold', this.viewCullingThreshold);
     }
 
     const chunks: TiledMapLayerChunk[] = data.chunks.map((chunkData: ITiledMapLayerChunkData) => new TiledMapLayerChunk(chunkData));
