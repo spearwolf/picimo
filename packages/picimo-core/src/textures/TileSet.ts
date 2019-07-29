@@ -1,7 +1,7 @@
 import { ITileSet } from './ITileSet';
 import { PowerOf2Image } from './PowerOf2Image';
 import { Texture } from './Texture';
-import { readOption } from '../utils';
+import { readOption, generateUuid } from '../utils';
 
 export interface TileSetOptions {
 
@@ -16,6 +16,8 @@ export interface TileSetOptions {
 
   firstId?: number;
   tileCount?: number;
+
+  name?: string;
 
 }
 
@@ -35,6 +37,9 @@ export class TileSet implements ITileSet {
     return new TileSet(baseTexture, options);
   }
 
+  readonly uuid: string;
+  readonly name: string;
+
   readonly baseTexture: Texture;
 
   readonly tileWidth: number;
@@ -47,6 +52,9 @@ export class TileSet implements ITileSet {
   private readonly [$textures]: Map<number, Texture> = new Map();
 
   constructor(baseTexture: Texture, options?: TileSetOptions) {
+
+    this.uuid = generateUuid();
+    this.name = readOption(options, 'name') as string;
 
     this.baseTexture = baseTexture;
 

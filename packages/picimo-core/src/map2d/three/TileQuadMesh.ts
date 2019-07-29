@@ -39,7 +39,7 @@ export class TileQuadMesh extends SpriteGroupMesh<TileQuadMethodsType, ITileQuad
 
   }
 
-  /*
+  /* TODO create bounding box/sphere for view culing?
   updateBoundingSphere(viewTile: Map2DViewTile) {
 
     const {

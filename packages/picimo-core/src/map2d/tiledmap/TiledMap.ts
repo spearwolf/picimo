@@ -69,6 +69,7 @@ export class TiledMap {
   async loadTileSets(basePath: string = './') {
     const tilesets = await Promise.all(this[$data].tilesets.map(tilesetInfo => TileSet.load(tilesetInfo.image, {
       basePath,
+      name: tilesetInfo.name,
       tileWidth: tilesetInfo.tilewidth,
       tileHeight: tilesetInfo.tileheight,
       margin: tilesetInfo.margin,
@@ -91,6 +92,7 @@ export class TiledMap {
 
     layers.forEach(tiledMapLayer => {
       const hasYOffset = !isNaN(tiledMapLayer.yOffset);
+      const tilesets = tiledMapLayer.filterTilesets(this.tilesets);
 
       let map2dLayer: IMap2DLayer;
 
@@ -98,10 +100,12 @@ export class TiledMap {
         switch (tiledMapLayer.type) {
 
           case 'tilelayer':
-            map2dLayer = map2d.createTileQuadMeshLayer(
-              this.tilesets,
-              new Vector3(0, hasYOffset ? tiledMapLayer.yOffset : y, 0),
-            );
+            if (tilesets) {
+              map2dLayer = map2d.createTileQuadMeshLayer(
+                tilesets,
+                new Vector3(0, hasYOffset ? tiledMapLayer.yOffset : y, 0),
+              );
+            }
             break;
 
           default:

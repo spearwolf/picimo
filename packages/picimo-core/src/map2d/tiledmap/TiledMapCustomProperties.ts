@@ -1,4 +1,5 @@
 import { ITiledMapCustomProperty } from "./ITiledMapCustomProperty";
+import { Resolver } from "dns";
 
 const $props = Symbol('props');
 
@@ -48,6 +49,101 @@ export class TiledMapCustomProperties {
       }
     }
     return int4;
+  }
+
+  /**
+   * Return and parse the value as comma separated list of strings.
+   * Use the special char `\` to include the next char into the current string.
+   * Strings can be optionally quoted by `'` or `"` (the quotes will not be part
+   * of the string content).
+   */
+  valueAsCSLofStrings(name: string) {
+    const prop = this.get(name);
+    if (prop) {
+      const value: string = prop.value as string;
+      const len = value.length;
+      const strings: string[] = [];
+      const BACKSLASH = '\\';
+
+      const addToContentString = (c: string) => {
+        const l = strings.length - 1;
+        strings[l] = `${strings[l]}${c}`;
+      };
+
+      let pos = 0;
+      let mode = 0;
+      let quote: "'" | '"' | undefined = undefined;
+
+      while (pos < len) {
+        let c = value[pos++];
+        switch (mode) {
+          case 0:
+            // find first char of the next content string
+            if (c === BACKSLASH) {
+              strings.push('');
+              mode = 1;
+              break;
+            } else if (c === `'` || c === `"`) {
+              strings.push('');
+              mode = 2;
+              quote = c;
+            } else if (c !== ' ') {
+              strings.push('');
+              mode = 5;
+              addToContentString(c);
+            }
+            break;
+          case 1:
+            // next char is content
+            addToContentString(c);
+            mode = 5;
+            break;
+          case 2:
+            // next char is content (inside quote)
+            if (c === BACKSLASH) {
+              mode = 3;    
+              break;
+            } else if (c === quote) {
+              mode = 4;
+              break;
+            } else {
+              addToContentString(c);
+            }
+            break;
+          case 3:
+            addToContentString(c);
+            mode = 2;
+            break;
+          case 4: // find comma
+            while (pos < len && c !== ',') {
+              c = value[pos++];
+            }
+            if (c === ',') {
+              mode = 0;
+            }
+            break;
+          case 5:
+            // inside content strings (no quotes)
+            if (c === BACKSLASH) {
+              mode = 6;
+            } else if (c === ',') {
+              mode = 0;
+            } else {
+              addToContentString(c);
+            }
+            break;
+          case 6:
+            addToContentString(c);
+            mode = 5;
+            break;
+        }
+      }
+      const res = strings.map(s => s.trim()).filter(s => s.length);
+      if (res.length) {
+        return res;
+      }
+    }
+    return undefined;
   }
 
 }

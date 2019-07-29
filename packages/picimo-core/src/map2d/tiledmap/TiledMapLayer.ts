@@ -7,11 +7,12 @@ import { ITiledMapLayerData } from './ITiledMapLayerData';
 import { TiledMap } from './TiledMap';
 import { TiledMapLayerChunk } from './TiledMapLayerChunk';
 import { TiledMapCustomProperties } from './TiledMapCustomProperties';
+import { TileSet } from 'src/textures';
 
 const $tiledMap = Symbol('tiledMap');
 const $data = Symbol('data');
 const $rootNode = Symbol('rootNode');
-const $props = Symbol('props');
+// const $props = Symbol('props');
 
 const findChunk = (chunks: TiledMapLayerChunk[], x: number, y: number): TiledMapLayerChunk => {
   return chunks.find((chunk: TiledMapLayerChunk) => chunk.containsTileIdAt(x, y));
@@ -30,6 +31,8 @@ export class TiledMapLayer implements IMap2DLayerData {
   };
 
   yOffset: number; // optional
+
+  includeTilesets: string[]; // optional
 
   private readonly [$tiledMap]: TiledMap;
   private readonly [$data]: ITiledMapLayerData;
@@ -54,6 +57,8 @@ export class TiledMapLayer implements IMap2DLayerData {
 
     this.yOffset = parseInt(props.value('yOffset'), 10);
 
+    this.includeTilesets = props.valueAsCSLofStrings('includeTilesets');
+
     const chunks: TiledMapLayerChunk[] = data.chunks.map((chunkData: ITiledMapLayerChunkData) => new TiledMapLayerChunk(chunkData));
     this[$rootNode] = new ChunkQuadTreeNode(chunks);
 
@@ -61,6 +66,28 @@ export class TiledMapLayer implements IMap2DLayerData {
       this.subdivide();
     }
 
+  }
+
+  filterTilesets(tilesets: TileSet[]): TileSet[] {
+    if (!this.includeTilesets || this.includeTilesets.length === 0) {
+      return tilesets;
+    }
+    const res = tilesets.filter(tileset => {
+      if (tileset.name) {
+        let found = false;
+        for (let i = 0; i < this.includeTilesets.length; i++) {
+          if (new RegExp(this.includeTilesets[i]).exec(tileset.name)) {
+            found = true;
+            break;
+          }
+        }
+        return found;
+      }
+      return true;
+    });
+    if (res.length) {
+      return res;
+    }
   }
 
   get name() { return this[$data].name; }
