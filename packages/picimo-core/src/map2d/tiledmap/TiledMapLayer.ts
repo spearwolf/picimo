@@ -68,6 +68,16 @@ export class TiledMapLayer implements IMap2DLayerData {
 
   }
 
+  /**
+   * Filter the list of tilesets based on the `.includeTilesets` property.
+   * If the property has been defined, all items in it are interpreted
+   * as regular expression and matched against the tileset name.
+   * If the tileset has no name, it still will be considered a hit
+   * regardless of what is defined in the `.includeTilesets` property.
+   * If the property is not defined, the list of tilesets is returned unfiltered.
+   * 
+   * @returns list of tilesets or `undefined` if there is no match
+   */
   filterTilesets(tilesets: TileSet[]): TileSet[] {
     if (!this.includeTilesets || this.includeTilesets.length === 0) {
       return tilesets;
