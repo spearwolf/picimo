@@ -1,5 +1,4 @@
 import { ITiledMapCustomProperty } from "./ITiledMapCustomProperty";
-import { Resolver } from "dns";
 
 const $props = Symbol('props');
 
