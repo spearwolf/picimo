@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-import { ITileSet } from '../../textures';
+import { ITileSet, MaterialCache } from '../../textures';
 
 import { IMap2DRenderer } from '../IMap2DRenderer';
 import { Map2DView } from '../Map2DView';
@@ -9,7 +9,6 @@ import { IMap2DLayer } from './IMap2DLayer';
 import { TileQuadMeshCache } from './TileQuadMeshCache';
 import { Map2DTileQuadsLayer } from './Map2DTileQuadsLayer';
 
-const $map2dLayers = Symbol('map2dLayers');
 const $dispatchEvent = Symbol('dispatchEvent');
 const $tileQuadMeshCache = Symbol('tileQuadMeshCache');
 const $getTileQuadMeshCache = Symbol('getTileQuadMeshCache');
@@ -28,12 +27,19 @@ export class Map2D extends THREE.Object3D implements IMap2DRenderer {
   static get BeginRenderEvent() { return 'map2dbeginrender'; }
   static get EndRenderEvent() { return 'map2dendrender'; }
 
-  private readonly [$map2dLayers] = new Set<IMap2DLayer>();
+  readonly map2dLayers = new Set<IMap2DLayer>();
+
+  readonly materialCache: MaterialCache<THREE.Texture, THREE.Material>;
 
   private [$tileQuadMeshCache]: TileQuadMeshCache = null;
 
+  constructor(materialCache: MaterialCache<THREE.Texture, THREE.Material> = new MaterialCache<THREE.Texture, THREE.Material>()) {
+    super();
+    this.materialCache = materialCache;
+  }
+
   createTileQuadMeshLayer(tilesets: ITileSet[], position?: THREE.Vector3) {
-    const layer = new Map2DTileQuadsLayer(tilesets, this[$getTileQuadMeshCache]());
+    const layer = new Map2DTileQuadsLayer(tilesets, this[$getTileQuadMeshCache](), this.materialCache);
     if (position) {
       layer.getObject3D().position.copy(position);
     }
@@ -42,7 +48,7 @@ export class Map2D extends THREE.Object3D implements IMap2DRenderer {
   }
 
   appendLayer(layer: IMap2DLayer) {
-    const layers = this[$map2dLayers];
+    const layers = this.map2dLayers;
     if (!layers.has(layer)) {
       layers.add(layer);
       this.add(layer.getObject3D());
@@ -50,7 +56,7 @@ export class Map2D extends THREE.Object3D implements IMap2DRenderer {
   }
 
   removeLayer(layer: IMap2DLayer) {
-    const layers = this[$map2dLayers];
+    const layers = this.map2dLayers;
     if (layers.has(layer)) {
       layers.delete(layer);
       this.remove(layer.getObject3D());

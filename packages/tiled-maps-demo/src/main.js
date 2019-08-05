@@ -7,14 +7,9 @@ import Stats from 'stats.js';
 
 import {
   Map2D,
-  // Map2DFlat2DTilesLayer,
-  Map2DTileQuadsLayer,
   Map2DView,
   Map2DViewFrame,
-  Map2DViewLayer,
-  // TextureLibrary,
   TiledMap,
-  TileQuadMeshCache,
 } from '@picimo/core';
 
 const VIEW_WIDTH = 320;
@@ -26,7 +21,7 @@ console.log('hej ho 🦄');
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x203040);
 
-const camera3d = new THREE.PerspectiveCamera(75, 1, 1, 1000);
+const camera3d = new THREE.PerspectiveCamera(75, 1, 1, 10000);
 camera3d.position.set(0, 200, 350);
 camera3d.lookAt(0, 0, 0);
 camera3d.up.set(0, 1, 0);
@@ -66,6 +61,11 @@ const PIXELATE = 'pixelate';
 const urlParams = new URLSearchParams(window.location.search);
 
 let lastSizeInfo = null;
+let materialCache = null;
+
+let map2d = null;
+let view = null;
+let viewFrame = null;
 
 function resize() {
   let pixelate = Number(urlParams.get(PIXELATE));
@@ -85,9 +85,29 @@ function resize() {
     ?${PIXELATE}=${pixelate}
   `;
 
-  infoDisplayElement.innerHTML = view
+  let info = view
     ? `${newSizeInfo.trim()}<br>x=${Math.round(view.centerX)} y=${Math.round(view.centerY)} [${Math.round(view.width)}x${Math.round(view.height)}]`
     : newSizeInfo;
+
+  if (materialCache) {
+    info = `${info}<br><br>
+      Materials:<br>
+      ${materialCache.listRefCounts().map(({ id, refCount }) => `${id}: ${refCount}`).join('<br>')}
+  `;
+  }
+
+  if (map2d) {
+    const tiles = [];
+    Array.from(map2d.map2dLayers.values()).forEach(layer => {
+      tiles.push(...layer.getObject3D().children.map(obj => obj.name));
+    });
+    info = `${info.trim()}<br><br>
+      Tiles: ${tiles.length}<br>
+      ${tiles.join('<br>')}
+  `;
+  }
+
+  infoDisplayElement.innerHTML = info;
 
   if (lastSizeInfo !== newSizeInfo) {
     lastSizeInfo = newSizeInfo;
@@ -110,9 +130,6 @@ document.body.appendChild(stats.dom);
 let rendererShouldRender = true;
 
 const SPEED = 130; // pixels per second
-
-let view = null;
-let viewFrame = null;
 
 let speedNorth = 0;
 let speedEast = 0;
@@ -231,8 +248,12 @@ Promise.all([
   // texLib.setDefaultTexture('sketch-dungeon-back-tile.png');
   // console.log('TextureLibrary', texLib);
 
-  const map2d = new Map2D();
+  map2d = new Map2D();
   scene.add(map2d);
+
+  console.log('map2d', map2d);
+
+  materialCache = map2d.materialCache;
 
   // @ts-ignore
   window.map2d = map2d;

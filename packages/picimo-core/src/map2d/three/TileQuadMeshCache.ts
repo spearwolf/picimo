@@ -12,7 +12,7 @@ export class TileQuadMeshCache {
 
   private readonly [$cache]: Map<string, Array<TileQuadMesh>> = new Map();
 
-  createMesh(material: Material, capacity: number) {
+  createMesh(material: Material, capacity: number, externalMaterialId: string) {
     const cacheKey = constructCacheKey(material, capacity);
     const meshCache = this[$cache].get(cacheKey);
 
@@ -26,6 +26,7 @@ export class TileQuadMeshCache {
     // .. or create a new mesh!
     if (!mesh) {
       mesh = new TileQuadMesh(material, { capacity });
+      mesh.userData.externalMaterialId = externalMaterialId;
     }
 
     return mesh;
