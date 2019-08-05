@@ -1,6 +1,8 @@
 
 export interface ITextureMaterial<T, M> {
 
+  id: string;
+
   texture: T;
 
   material: M;
@@ -16,7 +18,7 @@ export class MaterialCache<T, M> {
   private [$texMats] = new Map<string, ITextureMaterial<T, M>>();
 
   set(id: string, texture: T, material: M, refCount: number = 1) {
-    this[$texMats].set(id, { texture, material, refCount });
+    this[$texMats].set(id, { id, texture, material, refCount });
   }
 
   has(id: string): boolean {
@@ -57,7 +59,16 @@ export class MaterialCache<T, M> {
     }
   }
 
+  all() {
+    return Array.from(this[$texMats].values());
+  }
+
+  clear() {
+    return this[$texMats].clear();
+  }
+
   listRefCounts() {
     return Array.from(this[$texMats].keys()).map(id => ({ id, refCount: this[$texMats].get(id).refCount}))
   }
+
 }

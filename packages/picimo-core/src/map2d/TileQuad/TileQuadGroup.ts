@@ -28,7 +28,7 @@ export class TileQuadGroup extends SpriteGroupTextured<TileQuadMethodsType, ITil
 
   clearTiles() {
     this.voPool.freeAll();
-    this.touchVertexBuffers(); // increase serial
+    this.touchVertexBuffers(); // increase voPool->voArray serial
   }
 
   showTiles(viewTile: Map2DViewTile, tileset: ITileSet) {

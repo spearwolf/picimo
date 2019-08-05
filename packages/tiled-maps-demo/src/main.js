@@ -91,20 +91,26 @@ function resize() {
 
   if (materialCache) {
     info = `${info}<br><br>
-      Materials:<br>
+      Material/Refs:<br>
       ${materialCache.listRefCounts().map(({ id, refCount }) => `${id}: ${refCount}`).join('<br>')}
   `;
   }
 
   if (map2d) {
     const tiles = [];
+    let quadsCount = 0;
     Array.from(map2d.map2dLayers.values()).forEach(layer => {
-      tiles.push(...layer.getObject3D().children.map(obj => obj.name));
+      const meshs = layer.getObject3D().children;
+      tiles.push(...meshs.map(obj => {
+        quadsCount += obj.tiles.usedCount;
+        return obj.name;
+      }));
     });
     info = `${info.trim()}<br><br>
       Tiles: ${tiles.length}<br>
-      ${tiles.join('<br>')}
-  `;
+      Quads: ${quadsCount}<br>
+    `;
+    // ${tiles.join('<br>')}
   }
 
   infoDisplayElement.innerHTML = info;

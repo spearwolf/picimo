@@ -52,10 +52,9 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
 
   private readonly [$tiles]: Map<string, TileQuadMesh[]> = new Map();
 
-  // TODO how to clear/remove meshCache?
   private readonly [$meshCache]: TileQuadMeshCache;
 
-  private readonly [$materials]: string[] = [];
+  private readonly [$materials]: string[];
   private readonly [$materialCache]: MaterialCache<THREE.Texture, THREE.Material>;
 
   constructor(tilesets: ITileSet[], meshCache: TileQuadMeshCache, materialCache: MaterialCache<THREE.Texture, THREE.Material>) {
@@ -64,13 +63,13 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
     this[$meshCache] = meshCache;
     this[$materialCache] = materialCache;
 
-    tilesets.forEach(tileset => {
+    this[$materials] = tilesets.map(tileset => {
       const texSrc = tileset.getTextureSource();
       if (!materialCache.has(texSrc.uuid)) {
         const tex = makeTexture(texSrc);
         materialCache.set(texSrc.uuid, tex, new TileQuadMaterial(tex), 0);
       }
-      this[$materials].push(texSrc.uuid);
+      return texSrc.uuid;
     });
 
   }
@@ -80,12 +79,8 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
   }
 
   dispose() {
-    // TODO material refCount!!
-    Array.from(this[$tiles].values()).forEach(meshs => meshs.forEach(mesh => this[$meshCache].pushBackToCache(mesh)));
+    Array.from(this[$tiles].values()).forEach(meshs => meshs.forEach(mesh => this[$freeMesh](mesh)));
     this[$tiles].clear();
-
-    // TODO if meshCache is an externally created cache we shouldn't dispose here
-    // this[$meshCache].dispose(mesh => mesh.geometry.dispose());
   }
 
   addViewTile(tile: Map2DViewTile) {
@@ -131,17 +126,17 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
   }
 
   private [$createTileMesh](viewTile: Map2DViewTile): TileQuadMesh[] {
-
     const materials = this[$materials];
     const materialCache = this[$materialCache];
+    const meshCache = this[$meshCache];
     const capacity = viewTile.width * viewTile.height;
+
     const meshs: TileQuadMesh[] = [];
 
     materials.forEach((matId, idx) => {
-      const mesh = this[$meshCache].createMesh(materialCache.getMaterial(matId), capacity, matId);
+      const mesh = meshCache.createMesh(materialCache.getMaterial(matId), capacity, matId);
 
       mesh.tiles.showTiles(viewTile, this.tilesets[idx]);
-      // TODO mesh.updateBoundingSphere(viewTile);
 
       if (mesh.tiles.usedCount > 0) {
         meshs.push(mesh);
@@ -157,6 +152,7 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
       return meshs;
     }
 
+    this[$tiles].delete(viewTile.id);
     return null;
   }
 }

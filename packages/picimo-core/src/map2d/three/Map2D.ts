@@ -30,12 +30,19 @@ export class Map2D extends THREE.Object3D implements IMap2DRenderer {
   readonly map2dLayers = new Set<IMap2DLayer>();
 
   readonly materialCache: MaterialCache<THREE.Texture, THREE.Material>;
+  readonly isExternalMaterialCache: boolean;
 
   private [$tileQuadMeshCache]: TileQuadMeshCache = null;
 
-  constructor(materialCache: MaterialCache<THREE.Texture, THREE.Material> = new MaterialCache<THREE.Texture, THREE.Material>()) {
+  constructor(materialCache?: MaterialCache<THREE.Texture, THREE.Material>) {
     super();
-    this.materialCache = materialCache;
+    if (materialCache) {
+      this.materialCache = materialCache;
+      this.isExternalMaterialCache = true;
+    } else {
+      this.materialCache = new MaterialCache<THREE.Texture, THREE.Material>();
+      this.isExternalMaterialCache = false;
+    }
   }
 
   createTileQuadMeshLayer(tilesets: ITileSet[], position?: THREE.Vector3) {
@@ -69,6 +76,19 @@ export class Map2D extends THREE.Object3D implements IMap2DRenderer {
 
   endRender(view: Map2DView) {
     this[$dispatchEvent](Map2D.EndRenderEvent, { view });
+  }
+
+  dispose() {
+    const tileQuadMeshCache = this[$tileQuadMeshCache];
+    if (tileQuadMeshCache) {
+      tileQuadMeshCache.dispose(mesh => mesh.geometry.dispose());
+    }
+    if (!this.isExternalMaterialCache) {
+      this.materialCache.all().forEach(({ texture, material }) => {
+        material.dispose();
+        texture.dispose();
+      });
+    }
   }
 
   private [$getTileQuadMeshCache]() {
