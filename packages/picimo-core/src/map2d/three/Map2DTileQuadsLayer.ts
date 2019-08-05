@@ -110,6 +110,8 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
   }
 
   private [$freeMesh](mesh: TileQuadMesh) {
+    // reset sprites
+    mesh.tiles.clearTiles();
     // remove mesh from map2d scene
     this[$obj3d].remove(mesh);
     // add mesh to cache so we can reuse it later

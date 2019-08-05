@@ -26,9 +26,14 @@ export class TileQuadGroup extends SpriteGroupTextured<TileQuadMethodsType, ITil
     }, options));
   }
 
+  clearTiles() {
+    this.voPool.freeAll();
+    this.touchVertexBuffers(); // increase serial
+  }
+
   showTiles(viewTile: Map2DViewTile, tileset: ITileSet) {
 
-    this.voPool.freeAll();
+    this.clearTiles();
 
     const {
       viewWidth,
@@ -73,8 +78,6 @@ export class TileQuadGroup extends SpriteGroupTextured<TileQuadMethodsType, ITil
       }
       y += tileHeight;
     }
-
-    this.touchVertexBuffers();
 
   }
 
