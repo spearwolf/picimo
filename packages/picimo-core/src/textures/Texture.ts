@@ -1,3 +1,4 @@
+import { generateUuid } from '../utils';
 import { ImageSource, PowerOf2Image } from './PowerOf2Image';
 
 export type TextureImage = PowerOf2Image | ImageSource;
@@ -18,6 +19,8 @@ export class Texture {
   private _width = 0;
   private _height = 0;
 
+  private _uuid: string = null;
+
   private _features: Map<string, unknown> = null;
 
   constructor(source: TextureSource, width? :number, height?: number, x = 0, y = 0) {
@@ -25,9 +28,16 @@ export class Texture {
     let h = height;
 
     if (source instanceof Texture) {
+      //
+      // === Create Sub-Texture ===
+      //
       this.parent = source;
       this.image = null;
     } else if (typeof source === 'object' && 'width' in source && 'height' in source) {
+      //
+      // === Create Texture from Image ===
+      //
+      this._uuid = generateUuid();
       this.image = source;
       this.parent = null;
       if ('origWidth' in source && 'origHeight' in source) {
@@ -54,6 +64,13 @@ export class Texture {
       this._features = new Map();
     }
     this._features.set(name, value);
+  }
+
+  /**
+   * @returns Uuid of the underlying image object. Sub-textures returns the uuid from their parents.
+   */
+  get uuid(): string {
+    return this._uuid || this.parent.uuid;
   }
 
   get root(): Texture {

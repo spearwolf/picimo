@@ -2,6 +2,7 @@ import { sample, unpick } from '../utils';
 
 import { PowerOf2Image } from './PowerOf2Image';
 import { Texture } from './Texture';
+import { ITexturable } from './ITexturable';
 
 interface Features {
 
@@ -47,7 +48,7 @@ export interface TextureAtlasDescription {
 
 const filterFrameFeatures = unpick(['frame']) as any;
 
-export class TextureAtlas {
+export class TextureAtlas implements ITexturable {
 
   /**
    * Load a texture atlas from json defintion
@@ -85,6 +86,10 @@ export class TextureAtlas {
       });
     }
 
+  }
+
+  getTextureSource() {
+    return this.baseTexture;
   }
 
   addFrame(name: string, width: number, height: number, x: number, y: number, features: Features = null) {

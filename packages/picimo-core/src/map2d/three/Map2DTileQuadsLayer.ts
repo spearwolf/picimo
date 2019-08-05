@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-import { ImageSource, ITileSet } from '../../textures';
+import { ITileSet, Texture } from '../../textures';
 
 import { Map2DViewTile } from '../Map2DViewTile';
 
@@ -18,9 +18,9 @@ const $destroyTile = Symbol('destroyTile');
 const $createTileMesh = Symbol('createTileMesh');
 const $meshCache = Symbol('meshCache');
 
-function makeTexture(htmlElement: ImageSource) {
+function makeTexture(textureSource: Texture) {
 
-  const texture = new THREE.Texture(htmlElement);
+  const texture = new THREE.Texture(textureSource.imgEl);
 
   texture.flipY = false;
   texture.minFilter = THREE.NearestFilter;
@@ -65,7 +65,7 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
     // TODO use an external material(<- tileset) cache!
 
     tilesets.forEach(tileset => {
-      const tex = makeTexture(tileset.getImageSource());
+      const tex = makeTexture(tileset.getTextureSource());
       this[$textures].push(tex);
       this[$materials].push(new TileQuadMaterial(tex));
     });

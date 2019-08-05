@@ -1,4 +1,5 @@
 import { AABB2 } from '../../math';
+import { TileSet } from '../../textures';
 
 import { IMap2DLayerData, IViewCullingThreshold } from '../IMap2DLayerData';
 import { ChunkQuadTreeNode } from './ChunkQuadTreeNode';
@@ -7,7 +8,6 @@ import { ITiledMapLayerData } from './ITiledMapLayerData';
 import { TiledMap } from './TiledMap';
 import { TiledMapLayerChunk } from './TiledMapLayerChunk';
 import { TiledMapCustomProperties } from './TiledMapCustomProperties';
-import { TileSet } from 'src/textures';
 
 const $tiledMap = Symbol('tiledMap');
 const $data = Symbol('data');

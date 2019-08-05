@@ -1,11 +1,7 @@
 import { Texture } from './Texture';
-import { ImageSource } from './PowerOf2Image';
+import { ITexturable } from './ITexturable';
 
-export interface ITileSet {
-
-  uuid: string;
-
-  getImageSource(): ImageSource;
+export interface ITileSet extends ITexturable {
 
   hasTextureId(id: number): boolean;
 

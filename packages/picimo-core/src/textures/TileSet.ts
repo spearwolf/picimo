@@ -1,7 +1,7 @@
 import { ITileSet } from './ITileSet';
 import { PowerOf2Image } from './PowerOf2Image';
 import { Texture } from './Texture';
-import { readOption, generateUuid } from '../utils';
+import { readOption } from '../utils';
 
 export interface TileSetOptions {
 
@@ -37,7 +37,6 @@ export class TileSet implements ITileSet {
     return new TileSet(baseTexture, options);
   }
 
-  readonly uuid: string;
   readonly name: string;
 
   readonly baseTexture: Texture;
@@ -53,7 +52,6 @@ export class TileSet implements ITileSet {
 
   constructor(baseTexture: Texture, options?: TileSetOptions) {
 
-    this.uuid = generateUuid();
     this.name = readOption(options, 'name') as string;
 
     this.baseTexture = baseTexture;
@@ -79,7 +77,7 @@ export class TileSet implements ITileSet {
     let y = margin;
     let curId = this.firstId;
     let tileCount = 0;
-    
+
     while (1) {
       textures.set(curId, new Texture(baseTexture, this.tileWidth, this.tileHeight, x + padding, y + padding));
       ++tileCount;
@@ -107,10 +105,10 @@ export class TileSet implements ITileSet {
     this.lastId = curId;
   }
 
-  getImageSource() {
-    return this.baseTexture.imgEl;
+  getTextureSource() {
+    return this.baseTexture;
   }
-  
+
   hasTextureId(id: number) {
     return id >= this.firstId && id <= this.lastId;
   }

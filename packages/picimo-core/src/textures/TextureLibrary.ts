@@ -17,8 +17,8 @@ export class TextureLibrary implements ITileSet {
     this.atlas = atlas;
   }
 
-  getImageSource() {
-    return this.atlas.baseTexture.imgEl;
+  getTextureSource() {
+    return this.atlas.baseTexture;
   }
 
   hasTextureId(id: number) {

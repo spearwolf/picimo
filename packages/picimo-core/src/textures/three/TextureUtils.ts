@@ -2,10 +2,9 @@ import * as THREE from 'three';
 
 import { readOption } from '../../utils';
 
-import { TextureAtlas } from '../TextureAtlas';
-import { Texture } from '../Texture';
 import { ImageSource } from '../PowerOf2Image';
-import { ITileSet } from '../ITileSet';
+import { ITexturable } from '../ITexturable';
+import { Texture } from '../Texture';
 
 const $maxAnisotrophy = Symbol('maxAnisotrophy');
 
@@ -31,7 +30,7 @@ export class TextureUtils {
   }
 
   makeTexture(
-    source: ITileSet | TextureAtlas | Texture,
+    source: ITexturable | Texture,
     options?: {
       filter?: THREE.TextureFilter,
       anisotropy?: number,
@@ -40,10 +39,8 @@ export class TextureUtils {
 
     let image: ImageSource;
 
-    if (typeof (source as ITileSet).getImageSource === 'function') {
-      image = (source as ITileSet).getImageSource();
-    } else if (source instanceof TextureAtlas) {
-      image = source.baseTexture.imgEl;
+    if (typeof (source as ITexturable).getTextureSource === 'function') {
+      image = (source as ITexturable).getTextureSource().imgEl;
     } else {
       image = (source as Texture).imgEl;
     }
