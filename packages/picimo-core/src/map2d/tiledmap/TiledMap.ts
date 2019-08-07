@@ -88,6 +88,9 @@ export class TiledMap {
     const layers = (layerNames && layerNames.map(name => this.getLayer(name)) || this.getAllLayers());
     const yOffset = readOption(options, 'yOffset', Y_OFFSET) as number;
 
+    console.log('layerNames', layerNames);
+    console.log('layers', layers);
+
     let y = readOption(options, 'yStart', Y_START) as number;
 
     layers.forEach(tiledMapLayer => {

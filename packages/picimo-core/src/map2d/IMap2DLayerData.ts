@@ -9,7 +9,9 @@ export interface IViewCullingThreshold {
 export interface IMap2DLayerData {
 
   /**
-   * The layer name
+   * The layer name.
+   * Does not need to be uniq.
+   * The name is used to construct the `id` of a [[Map2DViewTile]].
    */
   name: string;
 

@@ -10,6 +10,10 @@ import {
   Map2DView,
   Map2DViewFrame,
   TiledMap,
+  TileSet,
+  RepeatingPatternLayer,
+  Map2DViewLayer,
+  Map2DTileQuadsLayer,
 } from '@picimo/core';
 
 const VIEW_WIDTH = 320;
@@ -284,7 +288,8 @@ Promise.all([
 
   view = new Map2DView(map2d, 0, 0, VIEW_WIDTH, calcViewHeight(), 100, 100);
 
-  tiledMap.createLayers(map2d, view); // , ['background', 'main']);
+  // tiledMap.createLayers(map2d, view);
+  tiledMap.createLayers(map2d, view, { layers: ['main', 'foreground'] });
 
   // view.addLayer(new Map2DViewLayer(view, layerMain, tiledMap.getLayer('main')));
   // view.addLayer(new Map2DViewLayer(view, flat2dTiles, tiledMap.getLayer('Kachelebene 1')));
@@ -293,6 +298,14 @@ Promise.all([
   view.addLayer(new Map2DViewLayer(view, mainTileQuads, tiledMap.getLayer('main')));
   view.addLayer(new Map2DViewLayer(view, frontTileQuads, tiledMap.getLayer('foreground')));
   */
+
+  const ball = await TileSet.load('ball-pattern-rot.png', { basePath: '/maps/' });
+  view.addLayer(
+    new Map2DViewLayer(view,
+      map2d.createTileQuadMeshLayer([ball], new THREE.Vector3(0, -100, 0)),
+      RepeatingPatternLayer.fromTile(ball, 1),
+    ));
+
   // view.update();
 
   viewFrame = new Map2DViewFrame(map2d, 0x66ff00, .5);

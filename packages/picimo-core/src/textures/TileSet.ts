@@ -52,12 +52,12 @@ export class TileSet implements ITileSet {
 
   constructor(baseTexture: Texture, options?: TileSetOptions) {
 
-    this.name = readOption(options, 'name') as string;
+    this.name = readOption(options, 'name', 'TileSet') as string;
 
     this.baseTexture = baseTexture;
 
-    this.tileWidth = readOption(options, 'tileWidth', 16) as number;
-    this.tileHeight = readOption(options, 'tileHeight', 16) as number;
+    this.tileWidth = readOption(options, 'tileWidth', baseTexture.width) as number;
+    this.tileHeight = readOption(options, 'tileHeight', baseTexture.height) as number;
 
     this.firstId = readOption(options, 'firstId', 1) as number;
 

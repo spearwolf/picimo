@@ -6,10 +6,14 @@ import { TileSet } from '..';
 
 describe('TileSet', () => {
   describe('TileSet.load', () => {
+    let tileset0;
     let tileset;
     let tileset2;
 
     before(async () => {
+      tileset0 = await TileSet.load('nobinger.png', {
+        basePath: '/assets/',
+      });
       tileset = await TileSet.load('nobinger.png', {
         basePath: '/assets/',
         firstId: 4,
@@ -31,62 +35,92 @@ describe('TileSet', () => {
       });
     });
 
-    it('tileset: baseTexture', () => {
-      const baseTex = tileset.baseTexture;
-      assert.ok(baseTex);
-      assert.equal(baseTex.root, baseTex);
-      assert.equal(baseTex.width, 128);
-      assert.equal(baseTex.height, 256);
+    describe('tileset0', () => {
+
+      it('tileWidth', () => assert.equal(tileset0.tileWidth, tileset0.baseTexture.width));
+      it('tileHeight', () => assert.equal(tileset0.tileHeight, tileset0.baseTexture.height));
+
+      it('tileCount', () => assert.equal(tileset0.tileCount, 1));
+      it('firstId', () => assert.equal(tileset0.firstId, 1));
+      it('lastId', () => assert.equal(tileset0.lastId, 1));
+
+      it('frame: 0', () => assert.equal(tileset0.getTextureById(0), null));
+
+      it('frame: 1', () => {
+        const tex = tileset0.getTextureById(1);
+        assert.ok(tex);
+        assert.equal(tex.x, 0);
+        assert.equal(tex.y, 0);
+        assert.equal(tex.width, tileset0.tileWidth);
+        assert.equal(tex.height, tileset0.tileHeight);
+      });
+
     });
 
-    it('tileset: tileWidth', () => assert.equal(tileset.tileWidth, 55));
-    it('tileset: tileHeight', () => assert.equal(tileset.tileHeight, 61));
+    describe('tileset', () => {
 
-    it('tileset: tileCount', () => assert.equal(tileset.tileCount, 6));
-    it('tileset: firstId', () => assert.equal(tileset.firstId, 4));
-    it('tileset: lastId', () => assert.equal(tileset.lastId, 9));
+      it('baseTexture', () => {
+        const baseTex = tileset.baseTexture;
+        assert.ok(baseTex);
+        assert.equal(baseTex.root, baseTex);
+        assert.equal(baseTex.width, 128);
+        assert.equal(baseTex.height, 256);
+      });
 
-    it('tileset: frame: 0', () => assert.equal(tileset.getTextureById(0), null));
-    it('tileset: frame: 1', () => assert.equal(tileset.getTextureById(1), null));
-    it('tileset: frame: 10', () => assert.equal(tileset.getTextureById(10), null));
+      it('tileWidth', () => assert.equal(tileset.tileWidth, 55));
+      it('tileHeight', () => assert.equal(tileset.tileHeight, 61));
 
-    it('tileset: frame: 4', () => {
-      const tex = tileset.getTextureById(4);
-      assert.ok(tex);
-      assert(tex.root !== tex);
-      assert.equal(tex.x, 2);
-      assert.equal(tex.y, 2);
-      assert.equal(tex.width, 55);
-      assert.equal(tex.height, 61);
+      it('tileCount', () => assert.equal(tileset.tileCount, 6));
+      it('firstId', () => assert.equal(tileset.firstId, 4));
+      it('lastId', () => assert.equal(tileset.lastId, 9));
+
+      it('frame: 0', () => assert.equal(tileset.getTextureById(0), null));
+      it('frame: 1', () => assert.equal(tileset.getTextureById(1), null));
+      it('frame: 10', () => assert.equal(tileset.getTextureById(10), null));
+
+      it('frame: 4', () => {
+        const tex = tileset.getTextureById(4);
+        assert.ok(tex);
+        assert(tex.root !== tex);
+        assert.equal(tex.x, 2);
+        assert.equal(tex.y, 2);
+        assert.equal(tex.width, 55);
+        assert.equal(tex.height, 61);
+      });
+
+      it('frame: 5', () => {
+        const tex = tileset.getTextureById(5);
+        assert.ok(tex);
+        assert(tex.root !== tex);
+        assert.equal(tex.x, 59);
+        assert.equal(tex.y, 2);
+        assert.equal(tex.width, 55);
+        assert.equal(tex.height, 61);
+      });
+
+      it('frame: 8', () => {
+        const tex = tileset.getTextureById(8);
+        assert.ok(tex);
+        assert(tex.root !== tex);
+        assert.equal(tex.x, 2);
+        assert.equal(tex.y, 128);
+        assert.equal(tex.width, 55);
+        assert.equal(tex.height, 61);
+      });
+
     });
 
-    it('tileset: frame: 5', () => {
-      const tex = tileset.getTextureById(5);
-      assert.ok(tex);
-      assert(tex.root !== tex);
-      assert.equal(tex.x, 59);
-      assert.equal(tex.y, 2);
-      assert.equal(tex.width, 55);
-      assert.equal(tex.height, 61);
+    describe('tileset2', () => {
+
+      it('tileWidth', () => assert.equal(tileset2.tileWidth, 16));
+      it('tileHeight', () => assert.equal(tileset2.tileHeight, 16));
+
+      it('tileCount', () => assert.equal(tileset2.tileCount, 19));
+      it('firstId', () => assert.equal(tileset2.firstId, 1));
+      it('lastId', () => assert.equal(tileset2.lastId, 19));
+
+      it('frame: 0', () => assert.equal(tileset2.getTextureById(0), null));
+
     });
-
-    it('tileset: frame: 8', () => {
-      const tex = tileset.getTextureById(8);
-      assert.ok(tex);
-      assert(tex.root !== tex);
-      assert.equal(tex.x, 2);
-      assert.equal(tex.y, 128);
-      assert.equal(tex.width, 55);
-      assert.equal(tex.height, 61);
-    });
-
-    it('tileset2: tileWidth', () => assert.equal(tileset2.tileWidth, 16));
-    it('tileset2: tileHeight', () => assert.equal(tileset2.tileHeight, 16));
-
-    it('tileset2: tileCount', () => assert.equal(tileset2.tileCount, 19));
-    it('tileset2: firstId', () => assert.equal(tileset2.firstId, 1));
-    it('tileset2: lastId', () => assert.equal(tileset2.lastId, 19));
-
-    it('tileset2: frame: 0', () => assert.equal(tileset2.getTextureById(0), null));
   });
 });
