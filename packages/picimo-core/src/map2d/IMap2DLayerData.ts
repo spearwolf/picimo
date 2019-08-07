@@ -24,7 +24,7 @@ export interface IMap2DLayerData {
   tileHeight: number;
 
   /**
-   * The view culling threshold.
+   * *Optional* view culling threshold.
    * In the vast majority of cases the value `{top:0, right: 0, bottom: 0, left: 0}` should be sufficient here.
    */
   viewCullingThreshold: IViewCullingThreshold;

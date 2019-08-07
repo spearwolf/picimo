@@ -75,7 +75,7 @@ export class TiledMapLayer implements IMap2DLayerData {
    * If the tileset has no name, it still will be considered a hit
    * regardless of what is defined in the `.includeTilesets` property.
    * If the property is not defined, the list of tilesets is returned unfiltered.
-   * 
+   *
    * @returns list of tilesets or `undefined` if there is no match
    */
   filterTilesets(tilesets: TileSet[]): TileSet[] {
