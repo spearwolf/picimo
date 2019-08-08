@@ -42,8 +42,12 @@ const init = async ({ display, scene }) => {
         this.z3 += z;
       },
 
-      setTexCoordsByTexture({ minS, minT, maxS, maxT }) {
-        this.setUv(minS, minT, maxS, minT, maxS, maxT, minS, maxT);
+      setTexCoordsByTexture({ minS, minT, maxS, maxT }, flipXY = false) {
+        if (flipXY) {
+          this.setUv(minS, maxT, minS, minT, maxS, minT, maxS, maxT);
+        } else {
+          this.setUv(minS, minT, maxS, minT, maxS, maxT, minS, maxT);
+        }
       },
 
       setSize(w, h) {
@@ -76,7 +80,7 @@ const init = async ({ display, scene }) => {
     dynamic: false,
 
     setSize: (sprite, w, h) => sprite.setSize(w, h),
-    setTexCoordsByTexture: (sprite, texture) => sprite.setTexCoordsByTexture(texture),
+    setTexCoordsByTexture: (sprite, texture) => sprite.setTexCoordsByTexture(texture, Math.random() < 0.5),
 
   });
 
