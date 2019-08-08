@@ -102,6 +102,13 @@ const init = async ({ display, scene }) => {
 
   const atlas = await TextureAtlas.load('nobinger.json', '/assets/');
 
+  atlas.frameNames().forEach(name => {
+    const tex = atlas.frame(name);
+    atlas.addTexture(`${name}--horizontal`, tex.clone().flipHorizontal());
+    atlas.addTexture(`${name}--vertical`, tex.clone().flipVertical());
+    atlas.addTexture(`${name}--horizontal-vertical`, tex.clone().flipHorizontal().flipVertical());
+  });
+
   // ----------------------------------------------------------------------------------
   //
   // create some sprites

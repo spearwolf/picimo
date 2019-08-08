@@ -20,6 +20,9 @@ describe('Texture', () => {
     it('minT', () => assert.equal(tex.minT, 0));
     it('maxS', () => assert.equal(tex.maxS, 1));
     it('maxT', () => assert.equal(tex.maxT, 1));
+
+    it('flipH', () => assert.equal(tex.flipH, false));
+    it('flipV', () => assert.equal(tex.flipV, false));
   });
 
   describe('new Texture(<img>, w, h)', () => {
@@ -134,5 +137,91 @@ describe('Texture', () => {
     it('minT', () => assert.equal(tex.minT, (6 + 10) / 160));
     it('maxS', () => assert.equal(tex.maxS, (4 + 20 + 100) / 320));
     it('maxT', () => assert.equal(tex.maxT, (6 + 10 + 50) / 160));
+  });
+
+  describe('clone()', () => {
+    const img = new Image(320, 160);
+    const tex = new Texture(img, 200, 120, 4, 6);
+    const tex2 = tex.clone();
+
+    it('tex != tex2', () => assert.notEqual(tex, tex2));
+
+    it('uuid is ok', () => assert.ok(tex2.uuid));
+    it('uuid is not the same', () => assert.notEqual(tex2.uuid, tex.uuid));
+
+    it('image', () => assert.equal(tex2.image, img));
+    it('parent is null', () => assert.equal(tex2.parent, null));
+    it('root', () => assert.equal(tex2.root, tex2));
+
+    it('width', () => assert.equal(tex2.width, tex.width));
+    it('height', () => assert.equal(tex2.height, tex.height));
+    it('x', () => assert.equal(tex2.x, tex.x));
+    it('y', () => assert.equal(tex2.y, tex.y));
+    it('minS', () => assert.equal(tex2.minS, tex.minS));
+    it('minT', () => assert.equal(tex2.minT, tex.minT));
+    it('maxS', () => assert.equal(tex2.maxS, tex.maxS));
+    it('maxT', () => assert.equal(tex2.maxT, tex.maxT));
+  });
+
+  describe('clone(tex-with-parent)', () => {
+    const img = new Image(320, 160);
+    const parent = new Texture(img, 200, 120, 4, 6);
+    const tex = new Texture(parent, 100, 50, 20, 10);
+    const tex2 = tex.clone();
+
+    it('tex != tex2', () => assert.notEqual(tex, tex2));
+
+    it('uuid is the same as from the parent', () => assert.equal(tex2.uuid, parent.uuid));
+
+    it('image is null', () => assert.equal(tex2.image, null));
+    it('parent', () => assert.equal(tex2.parent, parent));
+    it('root', () => assert.equal(tex2.root, parent));
+
+    it('width', () => assert.equal(tex2.width, tex.width));
+    it('height', () => assert.equal(tex2.height, tex.height));
+    it('x', () => assert.equal(tex2.x, tex.x));
+    it('y', () => assert.equal(tex2.y, tex.y));
+    it('minS', () => assert.equal(tex2.minS, tex.minS));
+    it('minT', () => assert.equal(tex2.minT, tex.minT));
+    it('maxS', () => assert.equal(tex2.maxS, tex.maxS));
+    it('maxT', () => assert.equal(tex2.maxT, tex.maxT));
+  });
+
+  describe('flipHorizontal()', () => {
+    const img = new Image(320, 160);
+    const parent = new Texture(img, 200, 120, 4, 6);
+    const tex = new Texture(parent, 100, 50, 20, 10);
+    const tex2 = tex.clone();
+
+    it('flipHorizontal() returns this', () => assert.equal(tex2.flipHorizontal(), tex2));
+
+    it('width', () => assert.equal(tex2.width, tex.width));
+    it('height', () => assert.equal(tex2.height, tex.height));
+    it('x', () => assert.equal(tex2.x, tex.x));
+    it('y', () => assert.equal(tex2.y, tex.y));
+
+    it('minS', () => assert.equal(tex2.minS, tex.maxS));
+    it('minT', () => assert.equal(tex2.minT, tex.minT));
+    it('maxS', () => assert.equal(tex2.maxS, tex.minS));
+    it('maxT', () => assert.equal(tex2.maxT, tex.maxT));
+  });
+
+  describe('flipVertical()', () => {
+    const img = new Image(320, 160);
+    const parent = new Texture(img, 200, 120, 4, 6);
+    const tex = new Texture(parent, 100, 50, 20, 10);
+    const tex2 = tex.clone();
+
+    it('flipVertical() returns this', () => assert.equal(tex2.flipVertical(), tex2));
+
+    it('width', () => assert.equal(tex2.width, tex.width));
+    it('height', () => assert.equal(tex2.height, tex.height));
+    it('x', () => assert.equal(tex2.x, tex.x));
+    it('y', () => assert.equal(tex2.y, tex.y));
+
+    it('minS', () => assert.equal(tex2.minS, tex.minS));
+    it('minT', () => assert.equal(tex2.minT, tex.maxT));
+    it('maxS', () => assert.equal(tex2.maxS, tex.maxS));
+    it('maxT', () => assert.equal(tex2.maxT, tex.minT));
   });
 });

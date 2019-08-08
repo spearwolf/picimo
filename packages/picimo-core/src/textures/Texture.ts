@@ -4,6 +4,50 @@ import { ImageSource, PowerOf2Image } from './PowerOf2Image';
 export type TextureImage = PowerOf2Image | ImageSource;
 export type TextureSource = Texture | TextureImage;
 
+function minS(t: Texture) {
+  let { x } = t;
+  let texture: Texture = t;
+
+  while ((texture = texture.parent) != null) {
+    x += texture.x;
+  }
+
+  return x / t.root.image.width;
+}
+
+function minT(t: Texture) {
+  let { y } = t;
+  let texture: Texture = t;
+
+  while ((texture = texture.parent) != null) {
+    y += texture.y;
+  }
+
+  return y / t.root.image.height;
+}
+
+function maxS(t: Texture) {
+  let x = t.x + t.width;
+  let texture: Texture = t;
+
+  while ((texture = texture.parent) != null) {
+    x += texture.x;
+  }
+
+  return x / t.root.image.width;
+}
+
+function maxT(t: Texture) {
+  let y = t.y + t.height;
+  let texture: Texture = t;
+
+  while ((texture = texture.parent) != null) {
+    y += texture.y;
+  }
+
+  return y / t.root.image.height;
+}
+
 export class Texture {
 
   static async load(url: string) {
@@ -15,6 +59,9 @@ export class Texture {
 
   x = 0;
   y = 0;
+
+  flipH = false;
+  flipV = false;
 
   private _width = 0;
   private _height = 0;
@@ -44,6 +91,8 @@ export class Texture {
         w = source.origWidth;
         h = source.origHeight;
       }
+    } else if (source === undefined) {
+      return; // do nothing here
     } else {
       throw new Error(`Texture() constructor panic: unexpected parameter {source: ${source}}`);
     }
@@ -53,6 +102,36 @@ export class Texture {
 
     this.x = x;
     this.y = y;
+  }
+
+  clone() {
+    const t = new Texture(undefined);
+    t.image = this.image;
+    t.parent = this.parent;
+    t.x = this.x;
+    t.y = this.y;
+    t.flipH = this.flipH;
+    t.flipV = this.flipV;
+    t._width = this._width;
+    t._height = this._height;
+    if (t.parent == null) {
+      t._uuid = generateUuid();
+    }
+    if (this._features) {
+      t._features = new Map();
+      Array.from(this._features.entries()).forEach(([key, val]) => t._features.set(key, val));
+    }
+    return t;
+  }
+
+  flipHorizontal() {
+    this.flipH = !this.flipH;
+    return this;
+  }
+
+  flipVertical() {
+    this.flipV = !this.flipV;
+    return this;
   }
 
   getFeature(name: string) {
@@ -120,46 +199,18 @@ export class Texture {
   }
 
   get minS() {
-    let { x } = this;
-    let texture: Texture = this;
-
-    while ((texture = texture.parent) != null) {
-      x += texture.x;
-    }
-
-    return x / this.root.image.width;
+    return this.flipH ? maxS(this) : minS(this);
   }
 
   get minT() {
-    let { y } = this;
-    let texture: Texture = this;
-
-    while ((texture = texture.parent) != null) {
-      y += texture.y;
-    }
-
-    return y / this.root.image.height;
+    return this.flipV ? maxT(this) : minT(this);
   }
 
   get maxS() {
-    let x = this.x + this.width;
-    let texture: Texture = this;
-
-    while ((texture = texture.parent) != null) {
-      x += texture.x;
-    }
-
-    return x / this.root.image.width;
+    return this.flipH ? minS(this) : maxS(this);
   }
 
   get maxT() {
-    let y = this.y + this.height;
-    let texture: Texture = this;
-
-    while ((texture = texture.parent) != null) {
-      y += texture.y;
-    }
-
-    return y / this.root.image.height;
+    return this.flipV ? minT(this) : maxT(this);
   }
 }

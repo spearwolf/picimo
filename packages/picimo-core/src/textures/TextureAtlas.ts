@@ -85,23 +85,26 @@ export class TextureAtlas implements ITexturable {
         this.setFeature(name, meta[name]);
       });
     }
-
   }
 
   getTextureSource() {
     return this.baseTexture;
   }
 
-  addFrame(name: string, width: number, height: number, x: number, y: number, features: Features = null) {
-    const tex = new Texture(this.baseTexture, width, height, x, y);
+  addTexture(name: string, texture: Texture, features: Features = null) {
     this._allFrameNames.push(name);
-    this._allFrames.push(tex);
-    this._frames.set(name, tex);
+    this._allFrames.push(texture);
+    this._frames.set(name, texture);
     if (features != null) {
       Object.keys(features).forEach((name) => {
-        tex.setFeature(name, features[name]);
+        texture.setFeature(name, features[name]);
       });
     }
+  }
+
+  addFrame(name: string, width: number, height: number, x: number, y: number, features: Features = null) {
+    const tex = new Texture(this.baseTexture, width, height, x, y);
+    this.addTexture(name, tex, features);
   }
 
   frame(name: string): Texture {
