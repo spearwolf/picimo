@@ -61,13 +61,17 @@ export class TileQuadGroup extends SpriteGroupTextured<TileQuadMethodsType, ITil
       for (let col = 0; col < tileCols; ++col) {
 
         const tileId = viewTile.getTileIdAt(col, row_);
+
+        // TODO support tile flipping flags
+        // see https://doc.mapeditor.org/en/stable/reference/tmx-map-format/#tile-flipping
+
         if (tileset.hasTextureId(tileId)) {
 
           const texture = tileset.getTextureById(tileId);
           if (texture != null) {
             const tile = this.voPool.alloc();
 
-            tile.setTexCoordsByTexture(texture);
+            tile.setTexCoordsByTexture(texture/*, flipping-flags */);
             const { width: texWidth, height: texHeight } = texture;
             tile.setSize(texWidth, texHeight);
             tile.translate(x, z - texHeight + tileHeight, 0);
