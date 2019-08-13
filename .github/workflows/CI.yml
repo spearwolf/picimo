@@ -4,12 +4,18 @@ on: [push]
 
 jobs:
   build:
-
+    name: Build
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@master
     - name: Install node package dependencies
       run: yarn install
-    - name: Run tests
-      run: yarn test
+
+  run_tests:
+    name: Run tests
+    runs-on: ubuntu-latest
+
+    steps:
+    - run: yarn test
+
