@@ -7,6 +7,9 @@
     "type": "git",
     "url": "git+https://github.com/spearwolf/picimo.git"
   },
+  "scripts": {
+    "test": "lerna run test"
+  },
   "author": "Wolfger Schramm <wolfger@spearwolf.de>",
   "license": "Apache-2.0",
   "bugs": {

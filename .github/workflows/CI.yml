@@ -9,12 +9,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@master
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
-        pwd
-        echo ${GITHUB_WORKPLACE}
-        ls -alF
-        yarn --version
-        node --version
+    - name: Install node package dependencies
+      run: yarn install
+    - name: Run tests
+      run: yarn test
