@@ -3,20 +3,14 @@ name: CI
 on: [push]
 
 jobs:
-  build:
-    name: Build
+  run_tests:
+    name: Run tests
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@master
     - name: Install node package dependencies
       run: yarn install
-
-  run_tests:
-    name: Run tests
-    runs-on: ubuntu-latest
-    needs: [build]
-
-    steps:
-    - run: yarn test
+    - name: Run tests
+      run: yarn test
 
