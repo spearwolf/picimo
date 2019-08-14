@@ -22,7 +22,7 @@ export class TileQuadGroup extends SpriteGroupTextured<TileQuadMethodsType, ITil
       autotouch: false,
 
       setSize: (sprite: TileQuadVertexObject, w: number, h: number) => sprite.setSize(w, h),
-      setTexCoordsByTexture: (sprite: TileQuadVertexObject, texture: Texture) => sprite.setTexCoordsByTexture(texture),
+      setTexCoordsByTexture: (sprite: TileQuadVertexObject, texture: Texture) => sprite.setTexCoordsByTexture(texture, 0),
 
     }, options));
   }
