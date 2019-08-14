@@ -6,6 +6,7 @@ import { Map2DViewTile } from '../Map2DViewTile';
 import { ITileQuad } from './ITileQuad';
 import { TileQuadMethodsType } from './TileQuadMethods';
 import { getTileQuadDescriptor, TileQuadVertexObject } from './TileQuadDescriptor';
+import { TileFlipFlags } from './TileFlipFlags';
 
 export interface ITileQuadGroupOptions extends SpriteGroupTexturedOptions<TileQuadMethodsType, ITileQuad> {
 }
@@ -60,10 +61,9 @@ export class TileQuadGroup extends SpriteGroupTextured<TileQuadMethodsType, ITil
 
       for (let col = 0; col < tileCols; ++col) {
 
-        const tileId = viewTile.getTileIdAt(col, row_);
-
-        // TODO support tile flipping flags
-        // see https://doc.mapeditor.org/en/stable/reference/tmx-map-format/#tile-flipping
+        let tileId = viewTile.getTileIdAt(col, row_);
+        const flipFlags: number = tileId & TileFlipFlags.ALL;
+        tileId = tileId & TileFlipFlags.ALL_INVERTED;
 
         if (tileset.hasTextureId(tileId)) {
 
@@ -71,7 +71,7 @@ export class TileQuadGroup extends SpriteGroupTextured<TileQuadMethodsType, ITil
           if (texture != null) {
             const tile = this.voPool.alloc();
 
-            tile.setTexCoordsByTexture(texture/*, flipping-flags */);
+            tile.setTexCoordsByTexture(texture, flipFlags);
             const { width: texWidth, height: texHeight } = texture;
             tile.setSize(texWidth, texHeight);
             tile.translate(x, z - texHeight + tileHeight, 0);

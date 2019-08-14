@@ -17,6 +17,6 @@ export interface ITileQuad {
   maxS: number;
   maxT: number;
 
-  setTex: (oiginS: number, originT: number, maxS: number, maxT: number) => void;
+  setTex: (originS: number, originT: number, maxS: number, maxT: number) => void;
 
 }
