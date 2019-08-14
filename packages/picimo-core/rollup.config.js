@@ -21,9 +21,9 @@ export default {
   input: 'src/index.ts',
   output: {
     name: 'picimo',
-    file: path.join(root, 'dist', 'picimo.min.js'),
+    file: path.join(root, 'dist', 'picimo-core.min.js'),
     sourcemap: true,
-    sourcemapFile: path.join(root, 'dist', 'picimo.min.js.map'),
+    sourcemapFile: path.join(root, 'dist', 'picimo-core.min.js.map'),
     format: 'umd',
     globals: {
       three: 'THREE',

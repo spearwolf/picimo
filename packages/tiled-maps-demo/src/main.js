@@ -2,7 +2,7 @@
 /* tslint:disable:no-console */
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { MapControls } from 'three/examples/jsm/controls/MapControls';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import Stats from 'stats.js';
 
 import {
@@ -13,7 +13,6 @@ import {
   TileSet,
   RepeatingPatternLayer,
   Map2DViewLayer,
-  Map2DTileQuadsLayer,
 } from '@picimo/core';
 
 const VIEW_WIDTH = 320;
@@ -58,7 +57,7 @@ const infoDisplayElement = document.createElement('div');
 infoDisplayElement.setAttribute('class', 'infoDisplay infoText');
 threeContainerElement.appendChild(infoDisplayElement);
 
-const controls = new MapControls(camera3d);
+const controls = new OrbitControls(camera3d);
 
 const PIXELATE = 'pixelate';
 
