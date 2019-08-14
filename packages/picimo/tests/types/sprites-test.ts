@@ -1,6 +1,6 @@
 import {
   VODescriptor, SpriteGroup, SpriteGroupBufferGeometry,
-} from '@picimo/core';
+} from 'picimo';
 
 interface Triangle {
 

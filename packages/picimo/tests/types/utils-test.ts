@@ -3,7 +3,7 @@ import {
   pick,
   sample,
   generateUuid,
-} from '@picimo/core';
+} from 'picimo';
 
 let x: number;
 let y: boolean;

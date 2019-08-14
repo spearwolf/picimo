@@ -1,6 +1,6 @@
-[![npm version](https://badge.fury.io/js/@picimo/core.svg)](https://badge.fury.io/js/@picimo/core)
+[![npm version](https://badge.fury.io/js/picimo.svg)](https://badge.fury.io/js/picimo)
 
-# @picimo/core
+# picimo
 
 A typescript library for my personal 2.5d browser game dev experiments based on [three.js](https://threejs.org/)
 
@@ -34,6 +34,6 @@ $ yarn start
   <script nomodule src="https://unpkg.com/whatwg-fetch@latest"></script>
 
   <script src="https://unpkg.com/three@latest"></script>
-  <script src="https://unpkg.com/@picimo/core@latest"></script>
+  <script src="https://unpkg.com/picimo@latest"></script>
 
 ```

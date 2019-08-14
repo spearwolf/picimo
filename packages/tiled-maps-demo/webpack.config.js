@@ -26,7 +26,7 @@ module.exports = {
         test: /\.m?[jt]s$/,
         include: [
           path.resolve('src'),
-          /picimo.core/,
+          /picimo/,
         ],
         // exclude: /node_modules/,
         use: {
@@ -41,7 +41,7 @@ module.exports = {
   resolve: {
     extensions: [ ".ts", ".js", ".json" ],
     alias: {
-      '@picimo/core': path.join(__dirname, '../picimo-core/src'),
+      picimo: path.join(__dirname, '../picimo/src'),
     },
   },
 };

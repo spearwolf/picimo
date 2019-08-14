@@ -23,7 +23,7 @@ module.exports = {
     contentBase: [
       './examples',
       './dist',
-      './node_modules',
+      '../../node_modules',
     ],
     watchContentBase: true,
     compress: true,

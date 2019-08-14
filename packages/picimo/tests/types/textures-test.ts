@@ -1,7 +1,7 @@
 import {
   ImageSource,
   PowerOf2Image,
-} from '@picimo/core';
+} from 'picimo';
 
 let p2 = new PowerOf2Image('foo.png');
 p2 = new PowerOf2Image(new Image());

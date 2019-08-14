@@ -4,7 +4,7 @@ import {
   isPowerOf2,
   makeCircleCoords,
   maxOf,
-} from '@picimo/core';
+} from 'picimo';
 
 let aabb2: AABB2 = new AABB2(1, 1, 1, 1);
 

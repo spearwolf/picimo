@@ -7,7 +7,7 @@
     "baseUrl": ".",
 
     "paths": {
-      "@picimo/core": ["../../src/index.ts"]
+      "picimo": ["../../src/index.ts"]
     }
 
   },

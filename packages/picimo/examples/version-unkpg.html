@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>@picimo/core: examples/umd</title>
+  <title>picimo: examples/unkpg</title>
   <style>
     body {
       color: #333;
@@ -25,13 +25,22 @@
       font-size: 130%;
       background-color: #eee;
     }
+    pre {
+      border: 1px solid red;
+      border-radius: .25em;
+      background-color: #fafaf5;
+      font-size: 80%;
+      overflow: auto;
+      padding: 1em;
+      margin: 2em;
+    }
   </style>
 </head>
 <body>
   <dl>
-    <dt>/three/build/three.min.js &rarr; REVISION</dt>
+    <dt>https://unpkg.com/three@latest &rarr; REVISION</dt>
     <dd id=threeRevision></dd>
-    <dt>/picimo.min.js &rarr; VERSION</dt>
+    <dt>https://unpkg.com/picimo@latest &rarr; VERSION</dt>
     <dd id=picimoVersion></dd>
   </dl>
   <script>
@@ -39,17 +48,21 @@
     console.log('hej ho ♥');
 
   </script>
-  <script src="/three/build/three.min.js"></script>
+  <script src="https://unpkg.com/three@latest"></script>
   <script>
 
     document.getElementById('threeRevision').textContent = THREE.REVISION;
 
   </script>
-  <script src="/picimo.min.js"></script>
+  <script src="https://unpkg.com/picimo@latest"></script>
   <script>
 
     document.getElementById('picimoVersion').textContent = picimo.VERSION;
 
   </script>
+
+  <pre>&lt;script src="https://unpkg.com/three@latest"&gt;&lt;script&gt;
+&lt;script src="https://unpkg.com/picimo@latest"&gt;&lt;script&gt;</pre>
+
 </body>
 </html>

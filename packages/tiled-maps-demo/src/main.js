@@ -13,7 +13,7 @@ import {
   TileSet,
   RepeatingPatternLayer,
   Map2DViewLayer,
-} from '@picimo/core';
+} from 'picimo';
 
 const VIEW_WIDTH = 320;
 const VIEW_ASPECT = .5; //9 / 16;

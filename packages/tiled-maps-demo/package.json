@@ -1,7 +1,7 @@
 {
   "name": "tiled-maps-demo",
   "version": "0.0.1",
-  "description": "tiled-maps is a @picimo/core demo",
+  "description": "tiled-maps is a picimo demo",
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --open",
@@ -35,8 +35,8 @@
     "webpack-dev-server": "^3.8.0"
   },
   "dependencies": {
-    "@picimo/core": "^0.0.11",
     "lodash": "^4.17.15",
+    "picimo": "^0.0.11",
     "stats.js": "^0.17.0",
     "three": "^0.107.0"
   }

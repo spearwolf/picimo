@@ -2,7 +2,7 @@ import {
   hexCol2rgb,
   hexCol2rgba,
   toFloatColors,
-} from '@picimo/core';
+} from 'picimo';
 
 let r: number, g: number, b: number, a: number;
 
