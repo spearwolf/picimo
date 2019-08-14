@@ -6,24 +6,24 @@ A typescript library for my personal 2.5d browser game dev experiments based on 
 
 ## Development Setup
 
-You will need [Node.js](https://nodejs.org/) **version v10+**.
+You will need [Node.js](https://nodejs.org/) **version v10+** and [yarn](https://yarnpkg.com/).
 
 After cloning the repo, run:
 
 ```sh
-$ npm install
+$ yarn install
 ```
 
 To run all tests:
 
 ```sh
-$ npm test
+$ yarn test
 ```
 
 To start the examples, run:
 
 ```sh
-$ npm start
+$ yarn start
 ```
 
 ## How to use in your project using unkpg.com CDN
