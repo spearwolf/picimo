@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/spearwolf/picimo#readme",
   "devDependencies": {
-    "lerna": "^3.15.0"
+    "lerna": "^3.16.4"
   },
   "workspaces": [
     "packages/*"
