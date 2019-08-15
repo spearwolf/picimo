@@ -16,7 +16,6 @@
     "build": "run-p build:*",
     "prepublishOnly": "npm-run-all --serial clean --parallel build:*",
     "clean": "rimraf build coverage dist",
-    "start": "webpack-dev-server",
     "test:eslint": "eslint .",
     "test:karma": "cross-env NODE_ENV=test karma start --single-run",
     "watch:test": "cross-env NODE_ENV=test karma start",
