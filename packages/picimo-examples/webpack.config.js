@@ -2,6 +2,9 @@
 // tslint:disable:object-literal-sort-keys
 const path = require("path");
 
+const webpack = require('webpack');
+const picimoPackageJson = require('../picimo/package.json');
+
 const polyfills = ['core-js/stable', 'regenerator-runtime/runtime'];
 
 const examplesJson = require('./examples.json');
@@ -37,6 +40,11 @@ module.exports = {
     useLocalIp: true,
     disableHostCheck: true,
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      PACKAGE_VERSION: JSON.stringify(`${picimoPackageJson.version}-dev`),
+    }),
+  ],
   module: {
     rules: [
       {
