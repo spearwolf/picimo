@@ -1,0 +1,66 @@
+[{
+  "section": "Core Features",
+  "demos": [{
+    "id": "BitmapFont",
+    "title": "BitmapFont",
+    "entry": "./src/BitmapFont.js",
+    "url": "/BitmapFont/",
+    "sourceUrl": "https://github.com/spearwolf/picimo/blob/master/packages/picimo-examples/src/BitmapFont.js"
+  }, {
+    "id": "SimpleSprites",
+    "title": "SimpleSprites",
+    "entry": "./src/SimpleSprites.js",
+    "url": "/SimpleSprites/",
+    "sourceUrl": "https://github.com/spearwolf/picimo/blob/master/packages/picimo-examples/src/SimpleSprites.js"
+  }, {
+    "id": "InstancedGeometry",
+    "title": "InstancedGeometry",
+    "entry": "./src/InstancedGeometry.js",
+    "url": "/InstancedGeometry/",
+    "sourceUrl": "https://github.com/spearwolf/picimo/blob/master/packages/picimo-examples/src/InstancedGeometry.js"
+  }, {
+    "id": "InstancedSprites",
+    "title": "InstancedSprites",
+    "entry": "./src/InstancedSprites.js",
+    "url": "/InstancedSprites/",
+    "sourceUrl": "https://github.com/spearwolf/picimo/blob/master/packages/picimo-examples/src/InstancedSprites.js"
+  }, {
+    "id": "TexturedSprites",
+    "title": "TexturedSprites",
+    "entry": "./src/TexturedSprites.js",
+    "url": "/TexturedSprites/",
+    "sourceUrl": "https://github.com/spearwolf/picimo/blob/master/packages/picimo-examples/src/TexturedSprites.js"
+  }, {
+    "id": "Tilesets",
+    "title": "Tilesets",
+    "entry": "./src/Tilesets.js",
+    "url": "/Tilesets/",
+    "sourceUrl": "https://github.com/spearwolf/picimo/blob/master/packages/picimo-examples/src/Tilesets.js"
+  }]
+}, {
+  "section": "Advanced Features",
+  "demos": [{
+    "id": "SpriteGroupBufferGeometry",
+    "title": "SpriteGroupBufferGeometry",
+    "entry": "./src/SpriteGroupBufferGeometry.js",
+    "url": "/SpriteGroupBufferGeometry/",
+    "sourceUrl": "https://github.com/spearwolf/picimo/blob/master/packages/picimo-examples/src/SpriteGroupBufferGeometry.js"
+  }]
+}, {
+  "section": "Version Checks",
+  "demos": [{
+    "id": "Version",
+    "title": "source",
+    "entry": "./src/Version.js",
+    "url": "/Version/",
+    "sourceUrl": "https://github.com/spearwolf/picimo/blob/master/packages/picimo-examples/src/Version.js"
+  }, {
+    "title": "umd",
+    "url": "/Version/umd.html",
+    "sourceUrl": "https://github.com/spearwolf/picimo/blob/master/packages/picimo-examples/public/Version/umd.html"
+  }, {
+    "title": "unpkg",
+    "url": "/Version/unpkg.html",
+    "sourceUrl": "https://github.com/spearwolf/picimo/blob/master/packages/picimo-examples/public/Version/unpkg.html"
+  }]
+}]

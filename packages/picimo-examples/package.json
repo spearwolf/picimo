@@ -4,7 +4,7 @@
   "description": "Examples for the picimo library",
   "private": true,
   "scripts": {
-    "start": "webpack-dev-server --open"
+    "start": "webpack-dev-server"
   },
   "repository": {
     "type": "git",

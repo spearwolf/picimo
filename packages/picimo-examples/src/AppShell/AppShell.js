@@ -15,7 +15,7 @@ import SideNavHamburger from './SideNavHamburger';
 import SideNavShadow from './SideNavShadow';
 import Title from './Title';
 
-import DEMOS from './demos';
+import DEMOS from '../../examples.json';
 
 import { BREAKPOINT_SHOW_HAMBURGER } from './constants';
 

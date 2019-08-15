@@ -4,8 +4,19 @@ const path = require("path");
 
 const polyfills = ['core-js/stable', 'regenerator-runtime/runtime'];
 
+const examplesJson = require('./examples.json');
+const entries = {};
+examplesJson.forEach(section => {
+  section.demos.forEach(demo => {
+    if (demo.id && demo.entry) {
+      entries[demo.id] = [ ...polyfills, demo.entry ];
+    }
+  });
+});
+
 module.exports = {
   entry: {
+    ...entries,
     "picimo-examples": [ ...polyfills, "./src/main.js" ],
   },
   output: {
@@ -17,7 +28,7 @@ module.exports = {
     port: 3000,
     contentBase: [
       "./public",
-      "./assets",
+      '../picimo/dist',
       "../../node_modules",
     ],
     watchContentBase: true,

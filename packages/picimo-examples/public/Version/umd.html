@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Version/umd • picimo</title>
+  <style>
+    body {
+      color: #333;
+      background-color: #aaa;
+      padding: 1em 4em;
+      font-family: monospace;
+      font-size: 16px;
+    }
+    dl {
+      margin: 1em;
+      padding: 1em;
+    }
+    dt {
+      margin-top: .66em;
+      margin-bottom: .1em;
+    }
+    dd {
+      display: inline;
+      font-size: 130%;
+      background-color: #eee;
+    }
+  </style>
+</head>
+<body>
+  <dl>
+    <dt>/three/build/three.min.js &rarr; REVISION</dt>
+    <dd id=threeRevision></dd>
+    <dt>/picimo.min.js &rarr; VERSION</dt>
+    <dd id=picimoVersion></dd>
+  </dl>
+  <script>
+
+    console.log('hej ho ♥');
+
+  </script>
+  <script src="/three/build/three.min.js"></script>
+  <script>
+
+    document.getElementById('threeRevision').textContent = THREE.REVISION;
+
+  </script>
+  <script src="/picimo.min.js"></script>
+  <script>
+
+    document.getElementById('picimoVersion').textContent = picimo.VERSION;
+
+  </script>
+</body>
+</html>
