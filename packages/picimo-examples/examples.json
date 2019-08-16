@@ -38,7 +38,16 @@
     "sourceUrl": "https://github.com/spearwolf/picimo/blob/master/packages/picimo-examples/src/Tilesets.js"
   }]
 }, {
-  "section": "Advanced Features",
+  "section": "Map2D",
+  "demos": [{
+    "id": "TiledMap",
+    "title": "Load TiledMap",
+    "entry": "./src/TiledMap.js",
+    "url": "/TiledMap/",
+    "sourceUrl": "https://github.com/spearwolf/picimo/blob/master/packages/picimo-examples/src/TiledMap.js"
+  }]
+}, {
+  "section": "Vertex Object Descriptors",
   "demos": [{
     "id": "SpriteGroupBufferGeometry",
     "title": "SpriteGroupBufferGeometry",
