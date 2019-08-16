@@ -200,12 +200,12 @@ Promise.all([
   // TiledMap.load('./maps/180917-a-first-map.json'),
   // TextureLibrary.load('sketch-tiles.json', './atlas/'),
 
-  TiledMap.load('./maps/lab-wall-tiles-new-map.json'),
+  TiledMap.load('./assets/exports/maps/lab-wall-tiles-new-map.json'),
   // TextureLibrary.load('lab-wall-tiles-new.json', './atlas/'),
 
 ]).then(async ([tiledMap/*, texLib*/]) => {
 
-  await tiledMap.loadTileSets('./maps/');
+  await tiledMap.loadTileSets('./assets/exports/maps/');
 
   console.log('auto-loaded tilesets:', tiledMap.tilesets);
 
@@ -303,7 +303,7 @@ Promise.all([
   view.addLayer(new Map2DViewLayer(view, frontTileQuads, tiledMap.getLayer('foreground')));
   */
 
-  const ball = await TileSet.load('ball-pattern-rot.png', { basePath: './maps/' });
+  const ball = await TileSet.load('ball-pattern-rot.png', { basePath: './assets/exports/maps/' });
   view.addLayer(
     new Map2DViewLayer(view,
       map2d.createTileQuadMeshLayer([ball], new THREE.Vector3(0, -100, 0)),
@@ -392,6 +392,6 @@ Promise.all([
 
 // ===== load gtlf =/=/============////==================================-------
 
-new GLTFLoader().load('gltf/lab-walls-tiles.glb', (gltf) => {
-  console.log('loaded gltf:', gltf);
-});
+// new GLTFLoader().load('gltf/lab-walls-tiles.glb', (gltf) => {
+//   console.log('loaded gltf:', gltf);
+// });
