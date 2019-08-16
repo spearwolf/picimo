@@ -7,6 +7,6 @@ loosely based on realtime 2d &and; 3d sprite rendering concepts and techniques u
 
 | packages | what's inside? |
 |-----------|-------------|
-| [`picimo`](packages/picimo/) | the core sprite rendering library (includes [examples](packages/picimo/examples/)) |
+| [`picimo`](packages/picimo/) | the core sprite rendering library |
+| [`picimo-examples`](packages/picimo-exampes/) | examples are documentation! |
 | [`legendary-mazes`](packages/legendary-mazes/) | a maze generation library |
-| [`tiled-maps-demo`](packages/tiled-maps-demo/) | an experimental tiled-maps demo (renders 2d maps exported by [tiled](https://www.mapeditor.org/)) |
