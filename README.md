@@ -8,5 +8,5 @@ loosely based on realtime 2d &and; 3d sprite rendering concepts and techniques u
 | packages | what's inside? |
 |-----------|-------------|
 | [`picimo`](packages/picimo/) | the core sprite rendering library |
-| [`picimo-examples`](packages/picimo-exampes/) | examples are documentation! |
+| [`picimo-examples`](packages/picimo-examples/) | examples are documentation! |
 | [`legendary-mazes`](packages/legendary-mazes/) | a maze generation library |
