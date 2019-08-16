@@ -10,9 +10,9 @@ const polyfills = ['core-js/stable', 'regenerator-runtime/runtime'];
 const examplesJson = require('./examples.json');
 const entries = {};
 examplesJson.forEach(section => {
-  section.demos.forEach(demo => {
-    if (demo.id && demo.entry) {
-      entries[demo.id] = [ ...polyfills, demo.entry ];
+  section.demos.forEach(({ id, entry }) => {
+    if (id && entry) {
+      entries[id] = [ ...polyfills, entry ];
     }
   });
 });
