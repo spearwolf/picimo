@@ -36,6 +36,12 @@
     "entry": "./src/Tilesets.js",
     "url": "/Tilesets/",
     "sourceUrl": "https://github.com/spearwolf/picimo/blob/master/packages/picimo-examples/src/Tilesets.js"
+  }, {
+    "id": "OrthographicCamera2D",
+    "title": "OrthographicCamera2D",
+    "entry": "./src/OrthographicCamera2D.js",
+    "url": "/OrthographicCamera2D/",
+    "sourceUrl": "https://github.com/spearwolf/picimo/blob/master/packages/picimo-examples/src/OrthographicCamera2D.js"
   }]
 }, {
   "section": "Map2D",
