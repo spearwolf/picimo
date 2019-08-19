@@ -1,4 +1,5 @@
 export * from './app';
+export * from './cameras';
 export * from './colors';
 export * from './map2d';
 export * from './math';

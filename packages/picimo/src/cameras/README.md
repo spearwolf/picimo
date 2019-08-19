@@ -1,10 +1,8 @@
-# Camera2D
-
-
+# Projection
 
 ## Configuration
 
-A `Camera2D` is configured with list of **rules** similar to _css styles and media queries_.
+A `Projection` is configured with list of **rules** similar to _css styles and media queries_.
 
 A rule may have one or more **constraints**. The first rule applies where constraints fit.
 
@@ -60,12 +58,12 @@ width: number
 height: number
 ```
 
-The desired size. But the final sizes may be different, depending on the `viewFit` option and the viewport size.
+The desired size. But the final sizes may be different, depending on the `fit` option and the viewport size.
 
 #### View Fit
 
 ```typescript
-viewFit: 'contain' | 'cover' | 'fit'
+fit: 'contain' | 'cover' | 'fill'
 ```
 
 see [https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit) for details
@@ -81,13 +79,4 @@ With this _exclusive_ option the size of the camera view frustum is defined by t
 If this option is used all other specs have no effect.
 
 i.e., if set to `2` while the canvas size is `320x240` then the view size is `160x120` pixels.
-
-
-
-
-
-
-
-
-
 
