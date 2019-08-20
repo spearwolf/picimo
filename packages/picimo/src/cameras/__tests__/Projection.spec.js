@@ -1,11 +1,11 @@
 /* eslint-env mocha */
 import assert from 'assert';
 
-import { Projection } from '../Projection';
+import { ProjectionRules } from '../ProjectionRules';
 
-describe('Projection', () => {
+describe('ProjectionRules', () => {
   it('new without args', () => {
-    const cam = new Projection();
+    const cam = new ProjectionRules();
     assert.ok(cam);
   });
 
@@ -13,38 +13,31 @@ describe('Projection', () => {
     let cam;
 
     before(() => {
-      cam = new Projection({
-        rules: [ 
-          {
-            id: 1, // id is not needed - used for testing only
-            constraints: {
-              minWidth: 1000,
-              minHeight: 1000,
-            },
-          },
-          {
-            id: 2,
-            constraints: {
-              orientation: 'portrait',
-              maxWidth: 500,
-            },
-          },
-          {
-            id: 3,
-            constraints: {
-              orientation: 'landscape',
-              maxHeight: 500,
-            },
-          },
-          {
-            id: 4,
-          }
-        ]
-      });
+      cam = new ProjectionRules([{
+        id: 1, // id is not needed - used for testing only
+        constraints: {
+          minWidth: 1000,
+          minHeight: 1000,
+        },
+      }, {
+        id: 2,
+        constraints: {
+          orientation: 'portrait',
+          maxWidth: 500,
+        },
+      }, {
+        id: 3,
+        constraints: {
+          orientation: 'landscape',
+          maxHeight: 500,
+        },
+      }, {
+        id: 4,
+      }]);
     })
 
     it('config without rules', () => {
-      assert.strictEqual(new Projection().findMatchingRule(320, 240), undefined);
+      assert.strictEqual(new ProjectionRules().findMatchingRule(320, 240), undefined);
     });
 
     it('orientation: portrait', () => {

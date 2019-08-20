@@ -9,11 +9,15 @@ import {
   Map2DView,
   Map2DViewFrame,
   Map2DViewLayer,
+  OrthographicProjection,
   RepeatingPatternLayer,
   TileSet,
 } from 'picimo';
 
-const display = new Display(document.getElementById('three-container'), { clearColor: 0x0043ff });
+const display = new Display(document.getElementById('three-container'), {
+  clearColor: 0x0043ff,
+  pixelate: true,
+});
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x203040);
@@ -22,13 +26,10 @@ const camera3d = new THREE.PerspectiveCamera(75, 1, 1, 10000);
 camera3d.position.set(0, 200, 350);
 camera3d.up.set(0, 1, 0);
 
-const min = (a, b) => a > b ? b : a;
+const projection = new OrthographicProjection({ pixelZoom: 3, near: .1, far: 1000, distance: 100 });
+projection.update(display.width, display.height);
 
-const [halfWidth, halfHeight] = [display.width / 2, display.height / 2];
-console.log(`halfWidth=${halfWidth}, halfHeight=${halfHeight}`);
-const cam2dZ = 100;
-const camera2d = new THREE.OrthographicCamera(-halfWidth, halfWidth, halfHeight, -halfHeight, 1, 1000 );
-camera2d.applyQuaternion(new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), Math.PI * -0.5));
+const camera2d = projection.camera;
 
 let curCamera = camera3d;
 
@@ -44,20 +45,12 @@ let speedSouth = 0;
 let speedWest = 0;
 
 display.addEventListener('resize', ({width, height}) => {
-  if (view) {
-    view.width = width;
-    view.height = height;
-  }
 
-  const [halfWidth, halfHeight] = [width / 2, height / 2];
-  camera2d.left = -halfWidth;
-  camera2d.right = halfWidth;
-  camera2d.top = halfHeight;
-  camera2d.bottom = -halfHeight;
-  camera2d.updateProjectionMatrix();
+  projection.update(width, height);
 
   camera3d.aspect = width / height;
   camera3d.updateProjectionMatrix();
+
 });
 
 display.addEventListener('frame', ({deltaTime: t, display: {renderer}}) => {
@@ -69,11 +62,15 @@ display.addEventListener('frame', ({deltaTime: t, display: {renderer}}) => {
     view.centerY += speedSouth * t;
     view.centerX += speedEast * t;
     view.centerX -= speedWest * t;
+
+    view.width = projection.width;
+    view.height = projection.height;
+
     view.update();
   }
 
   if (curCamera === camera2d) {
-    camera2d.position.set(view.centerX, cam2dZ, view.centerY);
+    projection.setCenterPosition(view.centerX, view.centerY);
   }
 
   renderer.render(scene, curCamera);
@@ -91,7 +88,7 @@ async function init() {
 
   const ball = await TileSet.load('ball-pattern-rot.png', { basePath: '../assets/' });
 
-  view = new Map2DView(map2d, 0, 0, display.width, display.height, 256, 256);
+  view = new Map2DView(map2d, 0, 0, projection.width, projection.height, 256, 256);
 
   view.addLayer(
     new Map2DViewLayer(view,
