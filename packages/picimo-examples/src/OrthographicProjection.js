@@ -27,9 +27,9 @@ camera3d.position.set(0, 200, 350);
 camera3d.up.set(0, 1, 0);
 
 const projection = new OrthographicProjection({ pixelZoom: 3, near: .1, far: 1000, distance: 100 });
-projection.update(display.width, display.height);
 
-const camera2d = projection.camera;
+projection.update(display.width, display.height); // we only need this initial to create the camera ..
+const camera2d = projection.camera; // .. so we can use it here
 
 let curCamera = camera3d;
 
@@ -70,7 +70,7 @@ display.addEventListener('frame', ({deltaTime: t, display: {renderer}}) => {
   }
 
   if (curCamera === camera2d) {
-    projection.setCenterPosition(view.centerX, view.centerY);
+    projection.origin.set(view.centerX, view.centerY);
   }
 
   renderer.render(scene, curCamera);

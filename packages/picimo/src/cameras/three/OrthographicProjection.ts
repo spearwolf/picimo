@@ -1,5 +1,7 @@
 import { OrthographicCamera, Quaternion, Vector3 } from "three";
 
+import { Vector2Proxy } from "../../math";
+
 import { calcViewSize } from "../calcViewSize";
 import { IProjectionRule } from "../IProjectionRule";
 import { IProjectionSpecs } from "../IProjectionSpecs";
@@ -21,6 +23,8 @@ export interface IProjectionOrthographicRule extends IProjectionRule {
 
 const DEFAULT_DISTANCE = 1000;
 
+const $origin = Symbol('origin');
+
 export class OrthographicProjection implements IProjection {
 
   rules: ProjectionRules<IProjectionOrthographicRule>;
@@ -29,6 +33,8 @@ export class OrthographicProjection implements IProjection {
   height: number = 0;
 
   camera: OrthographicCamera;
+
+  private [$origin]: Vector2Proxy;
 
   constructor(rules: IProjectionOrthographicSpecs | IProjectionOrthographicRule[]) {
     this.rules = new ProjectionRules(Array.isArray(rules) ? rules : [{ specs: rules }]);
@@ -74,15 +80,16 @@ export class OrthographicProjection implements IProjection {
 
   }
 
-  get centerX() { return this.camera.position.x; }
-  get centerY() { return this.camera.position.z; }
-
-  set centerX(x: number) { this.camera.position.x = x; }
-  set centerY(y: number) { this.camera.position.z = y; }
-
-  setCenterPosition(x: number, y: number) {
-    this.camera.position.x = x;
-    this.camera.position.z = y;
+  get origin() {
+    let v = this[$origin];
+    if (!v) {
+      const { camera } = this;
+      if (camera) {
+        v = new Vector2Proxy(camera.position, 'x', 'z');
+        this[$origin] = v;
+      }
+    }
+    return v;
   }
 
 }
