@@ -91,6 +91,9 @@ async function init() {
       viewFrame.visible = true;
       controls.enabled = true;
       break;
+    case 67: // c
+      controls.target.set(view.centerX, 0, view.centerY);
+      break;
     case 107: // numPad: add
     case 187: // +
       // changeViewSize(curCamera === camera3d ? 1.1 : 0.9);
