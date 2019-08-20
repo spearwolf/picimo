@@ -2,13 +2,14 @@
 
 ## Configuration
 
-A `Projection` is configured with list of **rules** similar to _css styles and media queries_.
+A `Projection` is configured by a set of **rules** similar to _css styles and media queries_.
 
 A rule may have one or more **constraints**. The first rule applies where constraints fit.
 
 If a rule has no constraints it always fits.
 
 A rule has a **specs** section in which the camera is configured by one or more options.
+
 
 ## Syntax
 
@@ -18,7 +19,7 @@ A rule has a **specs** section in which the camera is configured by one or more 
 const rules = [
     {
         constraints: [  # constraints are optional
-            # ... constraints            
+            # ... constraints
         ],
         specs: [
             # ... options
@@ -27,6 +28,7 @@ const rules = [
     # ... more rules
 ]
 ```
+
 
 ### Constraints
 
@@ -40,6 +42,7 @@ orientation = 'portait' | 'landscape'
 
 `landscape`: the width is greater than the height
 
+
 #### Viewport Size
 
 ```typescript
@@ -48,6 +51,7 @@ maxWidth: number
 minHeight: number
 maxHeight: number
 ```
+
 
 ### Specs
 
@@ -60,6 +64,7 @@ height: number
 
 The desired size. But the final sizes may be different, depending on the `fit` option and the viewport size.
 
+
 #### View Fit
 
 ```typescript
@@ -67,6 +72,7 @@ fit: 'contain' | 'cover' | 'fill'
 ```
 
 see [https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit) for details
+
 
 #### Pixel Size
 
