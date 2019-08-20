@@ -6,6 +6,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import {
   Display,
   Map2D,
+  Map2DPanControl,
   Map2DView,
   Map2DViewFrame,
   Map2DViewLayer,
@@ -26,23 +27,11 @@ const camera3d = new THREE.PerspectiveCamera(75, 1, 1, 10000);
 camera3d.position.set(0, 200, 350);
 camera3d.up.set(0, 1, 0);
 
-const projection = new OrthographicProjection({ pixelZoom: 3, near: .1, far: 1000, distance: 100 });
-
-projection.update(display.width, display.height); // we only need this initial to create the camera ..
-const camera2d = projection.camera; // .. so we can use it here
-
 let curCamera = camera3d;
 
+const projection = new OrthographicProjection({ pixelZoom: 3, near: .1, far: 1000, distance: 100 });
+
 const controls = new OrbitControls(camera3d);
-
-let view = null;
-
-const SPEED = 200; // pixels per second
-
-let speedNorth = 0;
-let speedEast = 0;
-let speedSouth = 0;
-let speedWest = 0;
 
 display.addEventListener('resize', ({width, height}) => {
 
@@ -53,42 +42,16 @@ display.addEventListener('resize', ({width, height}) => {
 
 });
 
-display.addEventListener('frame', ({deltaTime: t, display: {renderer}}) => {
-
-  controls.update();
-
-  if (view) {
-    view.centerY -= speedNorth * t;
-    view.centerY += speedSouth * t;
-    view.centerX += speedEast * t;
-    view.centerX -= speedWest * t;
-
-    view.width = projection.width;
-    view.height = projection.height;
-
-    view.update();
-  }
-
-  if (curCamera === camera2d) {
-    projection.origin.set(view.centerX, view.centerY);
-  }
-
-  renderer.render(scene, curCamera);
-
-});
-
 // ////////////////////////////////////////////////////
 
 async function init() {
 
   const map2d = new Map2D();
-  console.log('map2d', map2d);
-
   scene.add(map2d);
 
   const ball = await TileSet.load('ball-pattern-rot.png', { basePath: '../assets/' });
 
-  view = new Map2DView(map2d, 0, 0, projection.width, projection.height, 256, 256);
+  const view = new Map2DView(map2d, 0, 0, projection.width, projection.height, 256, 256);
 
   view.addLayer(
     new Map2DViewLayer(view,
@@ -99,23 +62,7 @@ async function init() {
   const viewFrame = new Map2DViewFrame(map2d, 0x66ff00, .5);
   map2d.add(viewFrame);
 
-  document.addEventListener('keydown', (event) => {
-    const { keyCode } = event;
-    switch (keyCode) {
-    case 87: // W
-      speedNorth = SPEED;
-      break;
-    case 83: // S
-      speedSouth = SPEED;
-      break;
-    case 65: // A
-      speedWest = SPEED;
-      break;
-    case 68: // D
-      speedEast = SPEED;
-      break;
-    }
-  });
+  const panControl = new Map2DPanControl(view, projection, 200);
 
   // const changeViewSize = (multiplyByScalar) => {
   //   if (view) {
@@ -133,21 +80,9 @@ async function init() {
   document.addEventListener('keyup', (event) => {
     const { keyCode } = event;
     switch (keyCode) {
-    case 87: // W
-      speedNorth = 0;
-      break;
-    case 83: // A
-      speedSouth = 0;
-      break;
-    case 65: // S
-      speedWest = 0;
-      break;
-    case 68: // D
-      speedEast = 0;
-      break;
     case 49: // 1
       // @ts-ignore
-      curCamera = camera2d;
+      curCamera = projection.camera;
       viewFrame.visible = false;
       controls.enabled = false;
       break;
@@ -167,6 +102,18 @@ async function init() {
       break;
     }
   });
+
+  display.addEventListener('frame', ({deltaTime: t, display: {renderer}}) => {
+
+    controls.update();
+
+    panControl.update(t);
+    view.update();
+
+    renderer.render(scene, curCamera);
+
+  });
+
 };
 
 init();

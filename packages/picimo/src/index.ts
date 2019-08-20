@@ -1,6 +1,7 @@
 export * from './app';
 export * from './cameras';
 export * from './colors';
+export * from './controls';
 export * from './map2d';
 export * from './math';
 export * from './shaders';

@@ -6,7 +6,7 @@ import { calcViewSize } from "../calcViewSize";
 import { IProjectionRule } from "../IProjectionRule";
 import { IProjectionSpecs } from "../IProjectionSpecs";
 import { ProjectionRules } from "../ProjectionRules";
-import { IProjection } from "../IProjection";
+import { IProjection } from "./IProjection";
 
 export type IProjectionOrthographicSpecs = IProjectionSpecs & {
 
