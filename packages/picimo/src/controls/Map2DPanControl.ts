@@ -1,10 +1,8 @@
 import { Map2DView } from "../map2d";
 import { IProjection } from "../cameras";
+import { InputControl } from "./InputControl";
 
-const $unregister = Symbol('unregister');
-const $subscribe = Symbol('subscribe');
-
-export class Map2DPanControl {
+export class Map2DPanControl extends InputControl {
 
   map2dView: Map2DView;
 
@@ -17,19 +15,17 @@ export class Map2DPanControl {
   speedSouth = 0;
   speedWest = 0;
 
-  private readonly [$unregister]: ([EventTarget, string, any])[] = [];
- 
   /**
    * @param speed pixels per seconds
    */
   constructor(map2dView: Map2DView, projection: IProjection, speed: number = 100) {
+    super();
 
     this.map2dView = map2dView;
     this.projection = projection;
     this.pixelsPerSecond = speed;
 
-    this.registerListeners();
-
+    this.start();
   }
 
   /**
@@ -49,18 +45,13 @@ export class Map2DPanControl {
     view.height = projection.height;
   }
 
-  registerListeners() {
+  start() {
 
-    const subscribe = this[$subscribe];
+    const {subscribe} = this;
 
     subscribe(document, 'keydown', this.onKeyDown);
     subscribe(document, 'keyup', this.onKeyUp);
 
-  }
-
-  private [$subscribe] = (host: EventTarget, eventName: string, callback: any) => {
-    host.addEventListener(eventName, callback, { passive: true });
-    this[$unregister].push([host, eventName, callback]);
   }
 
   onKeyDown = ({keyCode}: KeyboardEvent) => {
