@@ -73,7 +73,7 @@ export class OrthographicProjection implements IProjection {
       camera.far = far;
 
       camera.position.y = distance;
-      
+
       camera.updateProjectionMatrix();
 
     }
