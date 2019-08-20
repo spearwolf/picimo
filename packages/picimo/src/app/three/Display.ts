@@ -3,6 +3,13 @@ import * as THREE from 'three';
 import { readOption, pick, generateUuid } from '../../utils';
 import { TextureUtils } from '../../textures';
 
+const CSS_CLASS_PICIMO = `picimo-${generateUuid()}`;
+const CSS_PICIMO = `
+  .${CSS_CLASS_PICIMO} {
+    touch-action: none;
+  }
+`;
+
 const CSS_CLASS_PIXELATE = `pixelate-${generateUuid()}`;
 const CSS_PIXELATE = `
   .${CSS_CLASS_PIXELATE} {
@@ -144,6 +151,9 @@ export class Display extends THREE.EventDispatcher {
     });
 
     this.renderer = new THREE.WebGLRenderer(rendererArgs);
+
+    installGlobalScriptNode(CSS_CLASS_PICIMO, CSS_PICIMO);
+    this.renderer.domElement.classList.add(CSS_CLASS_PICIMO);
 
     this.texUtils = new TextureUtils(this.renderer, {
       defaultAnisotrophy: pixelate ? 0 : Infinity,
