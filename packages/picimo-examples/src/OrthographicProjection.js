@@ -27,15 +27,36 @@ const camera3d = new THREE.PerspectiveCamera(75, 1, 1, 10000);
 camera3d.position.set(0, 200, 350);
 camera3d.up.set(0, 1, 0);
 
-let curCamera = camera3d;
+let curCamera = null; // camera3d;
 
 const projection = new OrthographicProjection({ pixelZoom: 3, near: .1, far: 1000, distance: 100 });
 
 const controls = new OrbitControls(camera3d);
 
+let viewFrame;
+
+const switchCamera = camera => {
+  curCamera = camera;
+  if (camera === camera3d) {
+    if (viewFrame) {
+      viewFrame.visible = true;
+    }
+    controls.enabled = true;
+  } else {
+    if (viewFrame) {
+      viewFrame.visible = false;
+    }
+    controls.enabled = false;
+  }
+};
+
 display.addEventListener('resize', ({width, height}) => {
 
   projection.update(width, height);
+
+  if (curCamera === null) {
+    switchCamera(projection.camera);
+  }
 
   camera3d.aspect = width / height;
   camera3d.updateProjectionMatrix();
@@ -59,8 +80,12 @@ async function init() {
       RepeatingPatternLayer.fromTile(ball, 1),
     ));
 
-  const viewFrame = new Map2DViewFrame(map2d, 0x66ff00, .5);
+  viewFrame = new Map2DViewFrame(map2d, 0x66ff00, .5);
   map2d.add(viewFrame);
+
+  if (curCamera === projection.camera) {
+    viewFrame.visible = false;
+  }
 
   const panControl = new Map2DPanControl(view, projection, 200);
 
@@ -82,14 +107,10 @@ async function init() {
     switch (keyCode) {
     case 49: // 1
       // @ts-ignore
-      curCamera = projection.camera;
-      viewFrame.visible = false;
-      controls.enabled = false;
+      switchCamera(projection.camera);
       break;
     case 50: // 2
-      curCamera = camera3d;
-      viewFrame.visible = true;
-      controls.enabled = true;
+      switchCamera(camera3d);
       break;
     case 67: // c
       controls.target.set(view.centerX, 0, view.centerY);

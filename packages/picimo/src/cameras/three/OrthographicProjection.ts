@@ -32,6 +32,8 @@ export class OrthographicProjection implements IProjection {
   width: number = 0;
   height: number = 0;
 
+  pixelRatio: number = 1;
+
   camera: OrthographicCamera;
 
   private [$origin]: Vector2Proxy;
@@ -43,7 +45,8 @@ export class OrthographicProjection implements IProjection {
   update(currentWidth: number, currentHeight: number) {
     const rule = this.rules.findMatchingRule(currentWidth, currentHeight);
     if (rule && rule.specs) {
-      const [width, height] = calcViewSize(currentWidth, currentHeight, rule.specs);
+      const [width, height, pixelRatio] = calcViewSize(currentWidth, currentHeight, rule.specs);
+      this.pixelRatio = pixelRatio;
       const { near, far, distance } = rule.specs;
       this.updateOrtho(width, height, near, far, distance || DEFAULT_DISTANCE);
     }
