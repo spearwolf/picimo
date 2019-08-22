@@ -89,35 +89,51 @@ export class Map2DPanControl extends InputControl {
     subscribe(document, 'pointermove', this.onPointerMove);
   }
 
+  private isPanPointer(event: PointerEvent) {
+    if (event.isPrimary) {
+      if (event.pointerType === 'mouse') {
+        return event.buttons === 1;
+      }
+      return true;
+    }
+    return false;
+  }
+
   onPointerDown = (event: PointerEvent) => {
-    const pointersDown = this[$pointersDown];
-    if (!pointersDown.has(event.pointerId)) {
-      const {x:lastX, y:lastY} = this.toRelativeCoords(event);
-      pointersDown.set(event.pointerId, {
+    if (this.isPanPointer(event)) {
+      const pointersDown = this[$pointersDown];
+      if (!pointersDown.has(event.pointerId)) {
+        const {x:lastX, y:lastY} = this.toRelativeCoords(event);
+        pointersDown.set(event.pointerId, {
 
-        lastX,
-        lastY,
+          lastX,
+          lastY,
 
-        panX: 0,
-        panY: 0,
+          panX: 0,
+          panY: 0,
 
-      });
+        });
+      }
     }
   }
 
   onPointerUp = (event: PointerEvent) => {
-    const pointersDown = this[$pointersDown];
-    const state = pointersDown.get(event.pointerId);
-    if (state) {
-      this.updatePanState(event, state);
+    if (this.isPanPointer(event)) {
+      const pointersDown = this[$pointersDown];
+      const state = pointersDown.get(event.pointerId);
+      if (state) {
+        this.updatePanState(event, state);
+      }
+      pointersDown.delete(event.pointerId);
     }
-    pointersDown.delete(event.pointerId);
   }
 
   onPointerMove = (event: PointerEvent) => {
-    const state = this[$pointersDown].get(event.pointerId);
-    if (state) {
-      this.updatePanState(event, state);
+    if (this.isPanPointer(event)) {
+      const state = this[$pointersDown].get(event.pointerId);
+      if (state) {
+        this.updatePanState(event, state);
+      }
     }
   }
 
