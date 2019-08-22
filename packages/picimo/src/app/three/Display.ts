@@ -55,8 +55,9 @@ export interface DisplayOptions extends THREE.WebGLRendererParameters {
   resizeStrategy?: DisplayResizeStrategy;
 
   /**
-   * Restrict the *device pixel ratio* to 1 and activate pixel art mode
-   * (set the `image-rendering` css prop for the `<canvas>` element)
+   * Activate pixel art mode.
+   * Restrict the *device pixel ratio* to 1.
+   * Set the `image-rendering` css style for the `<canvas>` element.
    */
   pixelate?: boolean;
 
