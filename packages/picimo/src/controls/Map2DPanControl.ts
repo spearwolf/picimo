@@ -1,6 +1,7 @@
-import {Map2DView} from "../map2d";
-import {IProjection} from "../cameras";
-import {InputControl} from "./InputControl";
+import { Map2DView } from "../map2d";
+import { IProjection } from "../cameras";
+import { InputControl } from "./InputControl";
+import { readOption } from "../utils";
 
 interface PanState {
 
@@ -31,6 +32,42 @@ const mergePan = (states: PanState[]) => states.reduce(({panX, panY}, state) => 
 
 const MOUSE = 'mouse';
 
+export interface Map2DPanControlOptions {
+
+  /** Default css cursor style. Default is '' */
+  cursorDefaultStyle: string;
+
+  /** Cursor css style while panning. Default is 'none' (hide cursor) */
+  cursorPanStyle: string;
+
+  /** Scroll speed while using the keys. Pixels per seconds. Default is 100. */
+  speed: number;
+
+  /**
+   * Mouse button for panning. Default is 1.
+   * - `1` left button
+   * - `2` right button
+   * - `4` middle button
+   * - `8` 4th button, typical 'back'
+   * - `16` 5th button, typical 'back'
+   *
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/buttons
+   */
+  mouseButton: number;
+
+  /**
+   * Key codes in this order:
+   * 1. top
+   * 2. bottom
+   * 3. left
+   * 4. right
+   *
+   * Default is [87, 83, 65, 68] which is the well known _WASD_ layout.
+   */
+  keyCodes: [number, number, number, number];
+
+}
+
 export class Map2DPanControl extends InputControl {
 
   map2dView: Map2DView;
@@ -46,18 +83,28 @@ export class Map2DPanControl extends InputControl {
 
   private [$pointersDown]: Map<number, PanState> = new Map();
 
-  cursorStyle: string;
+  cursorDefaultStyle: string;
+  cursorPanStyle: string;
+
+  mouseButton: number;
+  keyCodes: [number, number, number, number];
 
   /**
    * @param speed pixels per seconds
    */
-  constructor(map2dView: Map2DView, projection: IProjection, speed: number = 100, cursorStyle = '') {
+  constructor(map2dView: Map2DView, projection: IProjection, options?: Map2DPanControlOptions) {
     super();
 
     this.map2dView = map2dView;
     this.projection = projection;
-    this.pixelsPerSecond = speed;
-    this.cursorStyle = cursorStyle;
+
+    this.pixelsPerSecond = readOption(options, 'speed', 100) as number;
+
+    this.cursorDefaultStyle = readOption(options, 'cursorDefaultStyle', '') as string;
+    this.cursorPanStyle = readOption(options, 'cursorPanStyle', 'none') as string;
+
+    this.mouseButton = readOption(options, 'mouseButton', 1) as number;
+    this.keyCodes = readOption(options, 'keyCodes', [87, 83, 65, 68]) as [number, number, number, number];
 
     this.start();
   }
@@ -99,7 +146,7 @@ export class Map2DPanControl extends InputControl {
   private isPanPointer(event: PointerEvent) {
     if (event.isPrimary) {
       if (event.type !== 'pointerup' && event.pointerType === MOUSE) {
-        return event.buttons & 1;
+        return event.buttons & this.mouseButton;
       }
       return true;
     }
@@ -123,7 +170,7 @@ export class Map2DPanControl extends InputControl {
 
         });
       }
-      if (event.pointerType === 'mouse') {
+      if (event.pointerType === MOUSE) {
         this.hideCursor(event);
       }
     }
@@ -131,7 +178,7 @@ export class Map2DPanControl extends InputControl {
 
   private hideCursor(event: PointerEvent) {
     const el = (event.target as HTMLElement);
-    el.style.cursor = 'none';
+    el.style.cursor = this.cursorPanStyle;
   }
 
   onPointerUp = (event: PointerEvent) => {
@@ -152,9 +199,9 @@ export class Map2DPanControl extends InputControl {
 
   private restoreCursorStyle(event: PointerEvent) {
     const el = (event.target as HTMLElement);
-    const {cursorStyle} = this;
-    if (el.style.cursor !== cursorStyle) {
-      el.style.cursor = cursorStyle;
+    const {cursorDefaultStyle} = this;
+    if (el.style.cursor !== cursorDefaultStyle) {
+      el.style.cursor = cursorDefaultStyle;
     }
   }
 
@@ -194,16 +241,16 @@ export class Map2DPanControl extends InputControl {
     const { pixelsPerSecond } = this;
 
     switch (keyCode) {
-    case 87: // W
+    case this.keyCodes[0]: // 87: // W
       this.speedNorth = pixelsPerSecond;
       break;
-    case 83: // S
+    case this.keyCodes[1]: // 83: // S
       this.speedSouth = pixelsPerSecond;
       break;
-    case 65: // A
+    case this.keyCodes[2]: // 65: // A
       this.speedWest = pixelsPerSecond;
       break;
-    case 68: // D
+    case this.keyCodes[3]: // 68: // D
       this.speedEast = pixelsPerSecond;
       break;
     }
@@ -211,16 +258,16 @@ export class Map2DPanControl extends InputControl {
 
   onKeyUp = ({keyCode}: KeyboardEvent) => {
     switch (keyCode) {
-    case 87: // W
+    case this.keyCodes[0]: // 87: // W
       this.speedNorth = 0;
       break;
-    case 83: // S
+    case this.keyCodes[1]: // 83: // S
       this.speedSouth = 0;
       break;
-    case 65: // A
+    case this.keyCodes[2]: // 65: // A
       this.speedWest = 0;
       break;
-    case 68: // D
+    case this.keyCodes[3]: // 68: // D
       this.speedEast = 0;
       break;
     }

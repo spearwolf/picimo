@@ -87,7 +87,7 @@ async function init() {
     viewFrame.visible = false;
   }
 
-  const panControl = new Map2DPanControl(view, projection, 200);
+  const panControl = new Map2DPanControl(view, projection, {speed: 200});
 
   // const changeViewSize = (multiplyByScalar) => {
   //   if (view) {
