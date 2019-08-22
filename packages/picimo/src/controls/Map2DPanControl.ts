@@ -4,6 +4,8 @@ import {InputControl} from "./InputControl";
 
 interface PanState {
 
+  pointerType: string,
+
   panX: number;
   panY: number;
 
@@ -41,6 +43,8 @@ export class Map2DPanControl extends InputControl {
   speedWest = 0;
 
   private [$pointersDown]: Map<number, PanState> = new Map();
+
+  private prevCursorStyle = '';
 
   /**
    * @param speed pixels per seconds
@@ -91,8 +95,8 @@ export class Map2DPanControl extends InputControl {
 
   private isPanPointer(event: PointerEvent) {
     if (event.isPrimary) {
-      if (event.pointerType === 'mouse') {
-        return event.buttons === 1;
+      if (event.type !== 'pointerup' && event.pointerType === 'mouse') {
+        return event.buttons & 1;
       }
       return true;
     }
@@ -106,6 +110,8 @@ export class Map2DPanControl extends InputControl {
         const {x:lastX, y:lastY} = this.toRelativeCoords(event);
         pointersDown.set(event.pointerId, {
 
+          pointerType: event.pointerType,
+
           lastX,
           lastY,
 
@@ -114,17 +120,26 @@ export class Map2DPanControl extends InputControl {
 
         });
       }
+      if (event.pointerType === 'mouse') {
+        const el = (event.target as HTMLElement);
+        this.prevCursorStyle = el.style.cursor;
+        el.style.cursor = 'none';
+      }
     }
   }
 
   onPointerUp = (event: PointerEvent) => {
+    const pointersDown = this[$pointersDown];
     if (this.isPanPointer(event)) {
-      const pointersDown = this[$pointersDown];
       const state = pointersDown.get(event.pointerId);
       if (state) {
         this.updatePanState(event, state);
+        pointersDown.delete(event.pointerId);
       }
-      pointersDown.delete(event.pointerId);
+    }
+    if (!Array.from(pointersDown.values()).find(state => state.pointerType === 'mouse')) {
+      const el = (event.target as HTMLElement);
+      el.style.cursor = this.prevCursorStyle;
     }
   }
 

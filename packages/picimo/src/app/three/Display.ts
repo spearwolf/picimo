@@ -153,7 +153,9 @@ export class Display extends THREE.EventDispatcher {
     this.renderer = new THREE.WebGLRenderer(rendererArgs);
 
     installGlobalScriptNode(CSS_CLASS_PICIMO, CSS_PICIMO);
-    this.renderer.domElement.classList.add(CSS_CLASS_PICIMO);
+    const {domElement} = this.renderer;
+    domElement.classList.add(CSS_CLASS_PICIMO);
+    domElement.setAttribute('touch-action', 'none'); // => PEP polyfill
 
     this.texUtils = new TextureUtils(this.renderer, {
       defaultAnisotrophy: pixelate ? 0 : Infinity,
