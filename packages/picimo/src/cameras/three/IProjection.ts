@@ -9,7 +9,8 @@ export interface IProjection {
   width: number;
   height: number;
 
-  pixelRatio: number;
+  pixelRatioH: number;
+  pixelRatioV: number;
 
   origin: Vector2;
 

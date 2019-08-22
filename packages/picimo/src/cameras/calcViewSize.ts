@@ -8,7 +8,6 @@ export function calcViewSize(currentWidth: number, currentHeight: number, specs:
 
   let width;
   let height;
-  let pixelRatio = 1;
 
   if (typeof (specs as IProjectionSpecsPixelZoom).pixelZoom === 'number') {
 
@@ -16,7 +15,6 @@ export function calcViewSize(currentWidth: number, currentHeight: number, specs:
 
     width = currentWidth / pixelZoom;
     height = currentHeight / pixelZoom;
-    pixelRatio = pixelZoom;
 
   } else {
 
@@ -26,8 +24,6 @@ export function calcViewSize(currentWidth: number, currentHeight: number, specs:
 
       width = desiredWidth;
       height = desiredHeight;
-
-      // TODO calculate pixelRatio
 
     } else { // cover || contain
 
@@ -57,10 +53,8 @@ export function calcViewSize(currentWidth: number, currentHeight: number, specs:
         }
 
       }
-
-      // TODO calculate pixelRatio
     }
   }
 
-  return [width, height, pixelRatio];
+  return [width, height];
 }

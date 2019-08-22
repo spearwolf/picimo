@@ -68,10 +68,10 @@ export class Map2DPanControl extends InputControl {
     view.centerX -= this.speedWest * t;
 
     const { panX, panY } = mergePan(Array.from(this[$pointersDown].values()));
-    const { pixelRatio } = projection;
+    const { pixelRatioH, pixelRatioV } = projection;
 
-    view.centerX -= panX / pixelRatio;
-    view.centerY -= panY / pixelRatio;
+    view.centerX -= panX / pixelRatioH;
+    view.centerY -= panY / pixelRatioV;
 
     projection.origin.set(view.centerX, view.centerY);
 
@@ -80,7 +80,6 @@ export class Map2DPanControl extends InputControl {
   }
 
   start() {
-
     const {subscribe} = this;
 
     subscribe(document, 'keydown', this.onKeyDown);
@@ -88,19 +87,19 @@ export class Map2DPanControl extends InputControl {
     subscribe(document, 'pointerdown', this.onPointerDown);
     subscribe(document, 'pointerup', this.onPointerUp);
     subscribe(document, 'pointermove', this.onPointerMove);
-
   }
 
   onPointerDown = (event: PointerEvent) => {
     const pointersDown = this[$pointersDown];
     if (!pointersDown.has(event.pointerId)) {
+      const {x:lastX, y:lastY} = this.toRelativeCoords(event);
       pointersDown.set(event.pointerId, {
+
+        lastX,
+        lastY,
 
         panX: 0,
         panY: 0,
-
-        lastX: event.clientX,
-        lastY: event.clientY,
 
       });
     }
@@ -123,23 +122,26 @@ export class Map2DPanControl extends InputControl {
   }
 
   private updatePanState(event: PointerEvent, state: PanState) {
+    const {x, y} = this.toRelativeCoords(event);
 
+    state.panX += x - state.lastX;
+    state.panY += y - state.lastY;
+
+    state.lastX = x;
+    state.lastY = y;
+  }
+
+  private toRelativeCoords(event: PointerEvent) {
     const { clientX, clientY } = event;
     const { left, top } = (event.target as HTMLElement).getBoundingClientRect();
 
-    const localX = clientX - left;
-    const localY = clientY - top;
-
-    state.panX += localX - state.lastX;
-    state.panY += localY - state.lastY;
-
-    state.lastX = localX;
-    state.lastY = localY;
-
+    return {
+      x: clientX - left,
+      y: clientY - top,
+    };
   }
 
   onKeyDown = ({keyCode}: KeyboardEvent) => {
-
     const { pixelsPerSecond } = this;
 
     switch (keyCode) {
@@ -159,7 +161,6 @@ export class Map2DPanControl extends InputControl {
   }
 
   onKeyUp = ({keyCode}: KeyboardEvent) => {
-
     switch (keyCode) {
     case 87: // W
       this.speedNorth = 0;
