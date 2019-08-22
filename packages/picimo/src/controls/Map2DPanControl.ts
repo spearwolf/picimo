@@ -29,6 +29,8 @@ const mergePan = (states: PanState[]) => states.reduce(({panX, panY}, state) => 
   panY: 0,
 });
 
+const MOUSE = 'mouse';
+
 export class Map2DPanControl extends InputControl {
 
   map2dView: Map2DView;
@@ -44,17 +46,18 @@ export class Map2DPanControl extends InputControl {
 
   private [$pointersDown]: Map<number, PanState> = new Map();
 
-  private prevCursorStyle = '';
+  cursorStyle: string;
 
   /**
    * @param speed pixels per seconds
    */
-  constructor(map2dView: Map2DView, projection: IProjection, speed: number = 100) {
+  constructor(map2dView: Map2DView, projection: IProjection, speed: number = 100, cursorStyle = '') {
     super();
 
     this.map2dView = map2dView;
     this.projection = projection;
     this.pixelsPerSecond = speed;
+    this.cursorStyle = cursorStyle;
 
     this.start();
   }
@@ -95,7 +98,7 @@ export class Map2DPanControl extends InputControl {
 
   private isPanPointer(event: PointerEvent) {
     if (event.isPrimary) {
-      if (event.type !== 'pointerup' && event.pointerType === 'mouse') {
+      if (event.type !== 'pointerup' && event.pointerType === MOUSE) {
         return event.buttons & 1;
       }
       return true;
@@ -121,11 +124,14 @@ export class Map2DPanControl extends InputControl {
         });
       }
       if (event.pointerType === 'mouse') {
-        const el = (event.target as HTMLElement);
-        this.prevCursorStyle = el.style.cursor;
-        el.style.cursor = 'none';
+        this.hideCursor(event);
       }
     }
+  }
+
+  private hideCursor(event: PointerEvent) {
+    const el = (event.target as HTMLElement);
+    el.style.cursor = 'none';
   }
 
   onPointerUp = (event: PointerEvent) => {
@@ -137,9 +143,18 @@ export class Map2DPanControl extends InputControl {
         pointersDown.delete(event.pointerId);
       }
     }
-    if (!Array.from(pointersDown.values()).find(state => state.pointerType === 'mouse')) {
-      const el = (event.target as HTMLElement);
-      el.style.cursor = this.prevCursorStyle;
+    if (event.pointerType === 'mouse') {
+      if (!Array.from(pointersDown.values()).find(state => state.pointerType === MOUSE)) {
+        this.restoreCursorStyle(event);
+      }
+    }
+  }
+
+  private restoreCursorStyle(event: PointerEvent) {
+    const el = (event.target as HTMLElement);
+    const {cursorStyle} = this;
+    if (el.style.cursor !== cursorStyle) {
+      el.style.cursor = cursorStyle;
     }
   }
 
@@ -149,6 +164,9 @@ export class Map2DPanControl extends InputControl {
       if (state) {
         this.updatePanState(event, state);
       }
+    }
+    if (event.pointerType === MOUSE && event.buttons === 0) {
+      this.restoreCursorStyle(event);
     }
   }
 
