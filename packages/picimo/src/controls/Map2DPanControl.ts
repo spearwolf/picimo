@@ -1,8 +1,8 @@
-import { Map2DView } from "../map2d";
-import { IProjection } from "../cameras";
-import { InputControl } from "./InputControl";
+import {Map2DView} from "../map2d";
+import {IProjection} from "../cameras";
+import {InputControl} from "./InputControl";
 
-interface PointerPanInfo {
+interface PanState {
 
   panX: number;
   panY: number;
@@ -11,6 +11,21 @@ interface PointerPanInfo {
   lastY: number;
 
 }
+
+const $pointersDown = Symbol('pointersDown');
+
+const mergePan = (states: PanState[]) => states.reduce(({panX, panY}, state) => {
+  panX += state.panX;
+  panY += state.panY;
+
+  state.panX = 0;
+  state.panY = 0;
+
+  return { panX, panY };
+}, {
+  panX: 0,
+  panY: 0,
+});
 
 export class Map2DPanControl extends InputControl {
 
@@ -25,7 +40,7 @@ export class Map2DPanControl extends InputControl {
   speedSouth = 0;
   speedWest = 0;
 
-  private pointersDown: Map<number, PointerPanInfo> = new Map();
+  private [$pointersDown]: Map<number, PanState> = new Map();
 
   /**
    * @param speed pixels per seconds
@@ -41,17 +56,18 @@ export class Map2DPanControl extends InputControl {
   }
 
   /**
-   * @param t delta time in seconds
+   * @param t delta time since last `update()` call in seconds
    */
   update(t: number) {
     const { map2dView: view, projection } = this;
 
     view.centerY -= this.speedNorth * t;
     view.centerY += this.speedSouth * t;
+
     view.centerX += this.speedEast * t;
     view.centerX -= this.speedWest * t;
 
-    const { panX, panY } = this.mergePan();
+    const { panX, panY } = mergePan(Array.from(this[$pointersDown].values()));
     const { pixelRatio } = projection;
 
     view.centerX -= panX / pixelRatio;
@@ -61,16 +77,6 @@ export class Map2DPanControl extends InputControl {
 
     view.width = projection.width;
     view.height = projection.height;
-  }
-
-  private mergePan() {
-    return Array.from(this.pointersDown.values()).reduce(({panX, panY}, info) => {
-      panX += info.panX;
-      panY += info.panY;
-      info.panX = 0;
-      info.panY = 0;
-      return { panX, panY };
-    }, { panX: 0, panY: 0 });
   }
 
   start() {
@@ -86,40 +92,50 @@ export class Map2DPanControl extends InputControl {
   }
 
   onPointerDown = (event: PointerEvent) => {
-    if (!this.pointersDown.has(event.pointerId)) {
-      this.pointersDown.set(event.pointerId, {
+    const pointersDown = this[$pointersDown];
+    if (!pointersDown.has(event.pointerId)) {
+      pointersDown.set(event.pointerId, {
+
         panX: 0,
         panY: 0,
+
         lastX: event.clientX,
         lastY: event.clientY,
+
       });
     }
   }
 
   onPointerUp = (event: PointerEvent) => {
-    const info = this.pointersDown.get(event.pointerId);
-    if (info) {
-      this.updatePanInfo(event, info);
+    const pointersDown = this[$pointersDown];
+    const state = pointersDown.get(event.pointerId);
+    if (state) {
+      this.updatePanState(event, state);
     }
-    this.pointersDown.delete(event.pointerId);
+    pointersDown.delete(event.pointerId);
   }
 
   onPointerMove = (event: PointerEvent) => {
-    const info = this.pointersDown.get(event.pointerId);
-    if (info) {
-      this.updatePanInfo(event, info);
+    const state = this[$pointersDown].get(event.pointerId);
+    if (state) {
+      this.updatePanState(event, state);
     }
   }
 
-  private updatePanInfo(event: PointerEvent, info: PointerPanInfo) {
+  private updatePanState(event: PointerEvent, state: PanState) {
+
     const { clientX, clientY } = event;
     const { left, top } = (event.target as HTMLElement).getBoundingClientRect();
+
     const localX = clientX - left;
     const localY = clientY - top;
-    info.panX += localX - info.lastX;
-    info.panY += localY - info.lastY;
-    info.lastX = localX;
-    info.lastY = localY;
+
+    state.panX += localX - state.lastX;
+    state.panY += localY - state.lastY;
+
+    state.lastX = localX;
+    state.lastY = localY;
+
   }
 
   onKeyDown = ({keyCode}: KeyboardEvent) => {
