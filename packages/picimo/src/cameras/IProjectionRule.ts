@@ -17,10 +17,10 @@ export interface IProjectionConstraints {
 
 }
 
-export interface IProjectionRule {
+export interface IProjectionRule<Specs extends IProjectionSpecs = IProjectionSpecs> {
 
   constraints?: IProjectionConstraints;
 
-  specs: IProjectionSpecs;
+  specs: Specs;
 
 }

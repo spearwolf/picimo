@@ -1,12 +1,8 @@
 import { OrthographicCamera, Quaternion, Vector3 } from "three";
-
-import { Vector2Proxy } from "../../math";
-
-import { calcViewSize } from "../calcViewSize";
-import { IProjectionRule } from "../IProjectionRule";
 import { IProjectionSpecs } from "../IProjectionSpecs";
-import { ProjectionRules } from "../ProjectionRules";
-import { IProjection } from "./IProjection";
+import { Projection } from "./Projection";
+
+const DEFAULT_DISTANCE = 1000;
 
 export type IProjectionOrthographicSpecs = IProjectionSpecs & {
 
@@ -17,47 +13,15 @@ export type IProjectionOrthographicSpecs = IProjectionSpecs & {
 
 };
 
-export interface IProjectionOrthographicRule extends IProjectionRule {
-  specs: IProjectionOrthographicSpecs;
-}
+export class OrthographicProjection extends Projection<IProjectionOrthographicSpecs, OrthographicCamera> {
 
-const DEFAULT_DISTANCE = 1000;
-
-const $origin = Symbol('origin');
-
-export class OrthographicProjection implements IProjection {
-
-  rules: ProjectionRules<IProjectionOrthographicRule>;
-
-  width: number = 0;
-  height: number = 0;
-
-  pixelRatioH: number = 1;
-  pixelRatioV: number = 1;
-
-  camera: OrthographicCamera;
-
-  private [$origin]: Vector2Proxy;
-
-  constructor(rules: IProjectionOrthographicSpecs | IProjectionOrthographicRule[]) {
-    this.rules = new ProjectionRules(Array.isArray(rules) ? rules : [{ specs: rules }]);
-  }
-
-  update(currentWidth: number, currentHeight: number) {
-    const rule = this.rules.findMatchingRule(currentWidth, currentHeight);
-    if (rule && rule.specs) {
-      const [width, height] = calcViewSize(currentWidth, currentHeight, rule.specs);
-      this.pixelRatioH = currentWidth / width;
-      this.pixelRatioV = currentHeight / height;
-      const { near, far, distance } = rule.specs;
-      this.updateOrtho(width, height, near, far, distance || DEFAULT_DISTANCE);
-    }
-  }
-
-  updateOrtho(width: number, height: number, near: number, far: number, distance: number) {
+  updateOrtho(width: number, height: number, specs: IProjectionOrthographicSpecs) {
 
     this.width = width;
     this.height = height;
+
+    const { near, far } = specs;
+    const distance = specs.distance || DEFAULT_DISTANCE;
 
     const [halfWidth, halfHeight] = [width / 2, height / 2];
 
@@ -82,19 +46,5 @@ export class OrthographicProjection implements IProjection {
       camera.updateProjectionMatrix();
 
     }
-
   }
-
-  get origin() {
-    let v = this[$origin];
-    if (!v) {
-      const { camera } = this;
-      if (camera) {
-        v = new Vector2Proxy(camera.position, 'x', 'z');
-        this[$origin] = v;
-      }
-    }
-    return v;
-  }
-
 }

@@ -10,7 +10,7 @@ import {
   Map2DView,
   Map2DViewFrame,
   Map2DViewLayer,
-  OrthographicProjection,
+  PerspectiveProjection,
   RepeatingPatternLayer,
   TileSet,
 } from 'picimo';
@@ -30,7 +30,7 @@ camera3d.up.set(0, 1, 0);
 
 let curCamera = null; // camera3d;
 
-const projection = new OrthographicProjection({ pixelZoom: 3, near: .1, far: 1000, distance: 100 });
+const projection = new PerspectiveProjection({ pixelZoom: 3, near: .1, far: 1000, distance: 100 });
 
 const controls = new OrbitControls(camera3d);
 
@@ -76,8 +76,15 @@ async function init() {
   const ball = await TileSet.load('ball-pattern-rot.png', { basePath: '../assets/' });
   view.addLayer(
     new Map2DViewLayer(view,
-      map2d.createTileQuadMeshLayer([ball]),
+      map2d.createTileQuadMeshLayer([ball], new Vector3(0, -50, 0)),
       RepeatingPatternLayer.fromTile(ball, 1),
+    ));
+
+  const frame = await TileSet.load('frame.png', { basePath: '../assets/frame/' });
+  view.addLayer(
+    new Map2DViewLayer(view,
+      map2d.createTileQuadMeshLayer([frame]),
+      RepeatingPatternLayer.fromTile(frame, 1),
     ));
 
   viewFrame = new Map2DViewFrame(map2d, 0x66ff00, 1);

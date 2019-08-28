@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>PerspectiveProjection • picimo</title>
+  <style>
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: #111;
+      text-align: center;
+    }
+    .no-user-action {
+      user-select: none;
+      touch-action: none;
+      pointer-events: none;
+    }
+    #three-container {
+      position: relative;
+      height: 100vh;
+      width: 100vw;
+      touch-action: none;
+    }
+    .pixelate {
+      -moz-image-rendering: pixelated;
+      -webkit-image-rendering: pixelated;
+      image-rendering: pixelated;
+    }
+    .infoText {
+      padding: 2px 4px;
+      font-family: monospace;
+      font-size: 10px;
+      color: #eee;
+      text-shadow: 1px 1px #000;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    .infoDisplay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      text-align: right;
+    }
+    .statusBar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+    }
+  </style>
+  <script src="https://code.jquery.com/pep/0.4.3/pep.js"></script>
+</head>
+<body>
+  <div id="three-container"></div>
+  <div class="statusBar infoText no-user-action">
+    press keys [1] &rarr; orthographic 2d view [2] &rarr; perspective 3d view [w][a][s][d] &rarr; move view frame [+][-] &rarr; scale view
+  </div>
+  <div class="infoDisplay infoText no-user-action"></div>
+  <script src="/PerspectiveProjection.js"></script>
+</body>
+</html>
