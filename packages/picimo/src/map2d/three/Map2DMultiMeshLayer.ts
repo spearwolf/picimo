@@ -23,6 +23,10 @@ export class Map2DFlat2DTilesLayer implements IMap2DLayer {
     return this.obj3d;
   }
 
+  getDistanceToProjectionPlane() {
+    return this.obj3d.position.y;
+  }
+
   dispose() {
     Array.from(this.tiles.values()).forEach((tile) => {
       tile.geometry.dispose(); // TODO check!

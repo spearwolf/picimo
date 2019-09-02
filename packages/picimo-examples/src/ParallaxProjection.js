@@ -145,6 +145,7 @@ async function init() {
 
   });
 
+  console.log(projection.camera);
 };
 
 init();

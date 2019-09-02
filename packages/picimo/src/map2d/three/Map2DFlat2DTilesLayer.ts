@@ -59,6 +59,10 @@ export class Map2DFlat2DTilesLayer implements IMap2DLayer {
     return this[$obj3d];
   }
 
+  getDistanceToProjectionPlane() {
+    return this[$obj3d].position.y;
+  }
+
   dispose() {
     const tiles = this[$tiles];
     Array.from(tiles.values()).forEach((tile) => {
