@@ -1,5 +1,5 @@
 
-export interface IProjectionSpecsPixelZoom {
+export interface IProjectionPixelZoomSpecs {
 
   /**
    * With this _exclusive_ option the size of the camera view frustum is defined by the _css pixel size_ of the html canvas and a _multiplier_.
@@ -12,7 +12,7 @@ export interface IProjectionSpecsPixelZoom {
 
 }
 
-export interface IProjectionSpecsViewFrustumSize {
+export interface IProjectionViewFrustumSizeSpecs {
 
   /**
    * The desired width.
@@ -33,4 +33,4 @@ export interface IProjectionSpecsViewFrustumSize {
 
 }
 
-export type IProjectionSpecs = IProjectionSpecsPixelZoom | IProjectionSpecsViewFrustumSize;
+export type IProjectionSpecs = IProjectionPixelZoomSpecs | IProjectionViewFrustumSizeSpecs;

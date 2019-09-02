@@ -2,25 +2,38 @@ import { OrthographicCamera, Quaternion, Vector3 } from "three";
 import { IProjectionSpecs } from "../IProjectionSpecs";
 import { Projection } from "./Projection";
 
-const DEFAULT_DISTANCE = 1000;
+const DEFAULT_DISTANCE = 100;
+const DEFAULT_NEAR = 0.0001;
+const DEFAULT_FAR = 1000;
 
-export type IProjectionOrthographicSpecs = IProjectionSpecs & {
+export type IOrthographicProjectionSpecs = IProjectionSpecs & {
 
+  /**
+   * Should be between zero and the `distance`. Default is 0.00001
+   */
   near: number;
+
+  /**
+   * Should be larger than the `distance` and large enough to include all releavant objects in your scene. Default is 1000.
+   */
   far: number;
 
+  /**
+   * The distance from the camera to the projection plane. Default is 100.
+   */
   distance: number;
 
 };
 
-export class OrthographicProjection extends Projection<IProjectionOrthographicSpecs, OrthographicCamera> {
+export class OrthographicProjection extends Projection<IOrthographicProjectionSpecs, OrthographicCamera> {
 
-  updateOrtho(width: number, height: number, specs: IProjectionOrthographicSpecs) {
+  updateOrtho(width: number, height: number, specs: IOrthographicProjectionSpecs) {
 
     this.width = width;
     this.height = height;
 
-    const { near, far } = specs;
+    const near = specs.near || DEFAULT_NEAR;
+    const far = specs.far || DEFAULT_FAR;
     const distance = specs.distance || DEFAULT_DISTANCE;
 
     const [halfWidth, halfHeight] = [width / 2, height / 2];

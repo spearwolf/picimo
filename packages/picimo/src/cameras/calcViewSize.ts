@@ -1,7 +1,7 @@
 import {
   IProjectionSpecs,
-  IProjectionSpecsPixelZoom,
-  IProjectionSpecsViewFrustumSize,
+  IProjectionPixelZoomSpecs,
+  IProjectionViewFrustumSizeSpecs,
 } from "./IProjectionSpecs";
 
 export function calcViewSize(currentWidth: number, currentHeight: number, specs: IProjectionSpecs) {
@@ -9,16 +9,16 @@ export function calcViewSize(currentWidth: number, currentHeight: number, specs:
   let width;
   let height;
 
-  if (typeof (specs as IProjectionSpecsPixelZoom).pixelZoom === 'number') {
+  if (typeof (specs as IProjectionPixelZoomSpecs).pixelZoom === 'number') {
 
-    const { pixelZoom } = specs as IProjectionSpecsPixelZoom;
+    const { pixelZoom } = specs as IProjectionPixelZoomSpecs;
 
     width = currentWidth / pixelZoom;
     height = currentHeight / pixelZoom;
 
   } else {
 
-    const { fit, width: desiredWidth, height: desiredHeight, } = specs as IProjectionSpecsViewFrustumSize;
+    const { fit, width: desiredWidth, height: desiredHeight, } = specs as IProjectionViewFrustumSizeSpecs;
 
     if (fit === 'fill') {
 

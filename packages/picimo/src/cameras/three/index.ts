@@ -1,4 +1,4 @@
 
 export * from './IProjection';
 export * from './OrthographicProjection';
-export * from './PerspectiveProjection';
+export * from './ParallaxProjection';

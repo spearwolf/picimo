@@ -6,7 +6,7 @@ const DEFAULT_DISTANCE = 100;
 const DEFAULT_NEAR = 0.0001;
 const DEFAULT_FAR = 1000;
 
-export type IProjectionPerspectiveSpecs = IProjectionSpecs & {
+export type IParallaxProjectionSpecs = IProjectionSpecs & {
 
   /**
    * Should be between zero and the `distance`. Default is 0.00001
@@ -25,12 +25,12 @@ export type IProjectionPerspectiveSpecs = IProjectionSpecs & {
 
 };
 
-export class PerspectiveProjection extends Projection<IProjectionPerspectiveSpecs, PerspectiveCamera> {
+export class ParallaxProjection extends Projection<IParallaxProjectionSpecs, PerspectiveCamera> {
 
   distance: number;
   fovy: number;
 
-  updateOrtho(width: number, height: number, specs: IProjectionPerspectiveSpecs) {
+  updateOrtho(width: number, height: number, specs: IParallaxProjectionSpecs) {
 
     this.width = width;
     this.height = height;

@@ -43,11 +43,11 @@
     "url": "/OrthographicProjection/",
     "sourceUrl": "https://github.com/spearwolf/picimo/blob/master/packages/picimo-examples/src/OrthographicProjection.js"
   }, {
-    "id": "PerspectiveProjection",
-    "title": "PerspectiveProjection",
-    "entry": "./src/PerspectiveProjection.js",
-    "url": "/PerspectiveProjection/",
-    "sourceUrl": "https://github.com/spearwolf/picimo/blob/master/packages/picimo-examples/src/PerspectiveProjection.js"
+    "id": "ParallaxProjection",
+    "title": "ParallaxProjection",
+    "entry": "./src/ParallaxProjection.js",
+    "url": "/ParallaxProjection/",
+    "sourceUrl": "https://github.com/spearwolf/picimo/blob/master/packages/picimo-examples/src/ParallaxProjection.js"
   }]
 }, {
   "section": "Map2D",
