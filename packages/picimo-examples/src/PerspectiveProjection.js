@@ -30,7 +30,7 @@ camera3d.up.set(0, 1, 0);
 
 let curCamera = null; // camera3d;
 
-const projection = new PerspectiveProjection({ pixelZoom: 3, near: .1, far: 1000, distance: 100 });
+const projection = new PerspectiveProjection({ pixelZoom: 3, distance: 100 });
 
 const controls = new OrbitControls(camera3d);
 
