@@ -1,3 +1,5 @@
+import { IProjection } from '../projection';
+
 import { IMap2DRenderer } from './IMap2DRenderer';
 import { Map2DViewLayer } from './Map2DViewLayer';
 
@@ -19,6 +21,8 @@ export class Map2DView {
   width: number;
   height: number;
 
+  readonly projection: IProjection;
+
   readonly layerTileWidth: number;
   readonly layerTileHeight: number;
 
@@ -34,6 +38,7 @@ export class Map2DView {
    */
   constructor(
     renderer: IMap2DRenderer,
+    projection: IProjection,
     centerX: number,
     centerY: number,
     width: number,
@@ -42,6 +47,7 @@ export class Map2DView {
     layerTileHeight: number,
   ) {
     this[$renderer] = renderer;
+    this.projection = projection;
     this.centerX = centerX;
     this.centerY = centerY;
     this.width = width;

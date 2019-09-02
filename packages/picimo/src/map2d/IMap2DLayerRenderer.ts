@@ -6,4 +6,6 @@ export interface IMap2DLayerRenderer {
   renderViewTile(tile: Map2DViewTile): void;
   removeViewTile(tileId: string): void;
 
+  getDistanceToProjectionPlane(): number;
+
 }

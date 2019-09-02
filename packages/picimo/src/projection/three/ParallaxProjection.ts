@@ -64,4 +64,10 @@ export class ParallaxProjection extends Projection<IParallaxProjectionSpecs, Per
 
     }
   }
+
+  getZoom(distanceToProjectionPlane: number) {
+    const d = this.distance - distanceToProjectionPlane;
+    const x = Math.tan(this.fovy / 2 * Math.PI / 180) * d;
+    return [x, x] as [number, number];
+  }
 }

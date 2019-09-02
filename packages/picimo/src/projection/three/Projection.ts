@@ -10,6 +10,8 @@ import { IProjection } from "./IProjection";
 
 const $origin = Symbol('origin');
 
+const NO_ZOOM: [number, number] = [1, 1];
+
 export abstract class Projection<Specs extends IProjectionSpecs, Cam extends Camera> implements IProjection {
 
   rules: ProjectionRules<IProjectionRule<Specs>>;
@@ -52,5 +54,9 @@ export abstract class Projection<Specs extends IProjectionSpecs, Cam extends Cam
       }
     }
     return v;
+  }
+
+  getZoom(_distanceToPojectionPlane: number) {
+    return NO_ZOOM;
   }
 }

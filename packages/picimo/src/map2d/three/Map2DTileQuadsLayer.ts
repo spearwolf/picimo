@@ -78,6 +78,10 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
     return this[$obj3d];
   }
 
+  getDistanceToProjectionPlane() {
+    return this[$obj3d].position.y;
+  }
+
   dispose() {
     Array.from(this[$tiles].values()).forEach(meshs => meshs.forEach(mesh => this[$freeMesh](mesh)));
     this[$tiles].clear();
