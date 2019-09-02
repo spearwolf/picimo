@@ -1,5 +1,5 @@
 import { Map2DView } from "../map2d";
-import { IProjection } from "../cameras";
+import { IProjection } from "../projection";
 import { InputControl } from "./InputControl";
 import { readOption } from "../utils";
 
