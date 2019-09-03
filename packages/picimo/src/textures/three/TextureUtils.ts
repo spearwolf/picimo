@@ -54,10 +54,10 @@ export class TextureUtils {
     texture.magFilter = filter;
     texture.minFilter = filter;
 
-    const anisotropy = readOption(options, 'anisotrophy', this.DefaultAnisotrophy) as number;
+    const anisotrophy = readOption(options, 'anisotrophy', this.DefaultAnisotrophy) as number;
     const maxAnisotrophy = this[$maxAnisotrophy];
 
-    texture.anisotropy = anisotropy === Infinity || anisotropy > maxAnisotrophy ? maxAnisotrophy : anisotropy;
+    texture.anisotropy = anisotrophy === Infinity || anisotrophy > maxAnisotrophy ? maxAnisotrophy : anisotrophy;
 
     texture.needsUpdate = true;
 
