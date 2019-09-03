@@ -30,10 +30,10 @@ function makeTexture(htmlElement: HTMLImageElement) {
 
 }
 
-const pickShaderHooks = pick(['vertexShaderPreHook', 'vertexShaderTransformHook']);
-
 export interface BitmapText2DOptions extends BitmapCharGroupOptions, BitmapFontShaderHooks {
 }
+
+const pickShaderHooks = pick<BitmapFontShaderHooks>(['vertexShaderPreHook', 'vertexShaderTransformHook']);
 
 export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapChar, BitmapCharBaseMethodsType, BitmapCharBase> {
 

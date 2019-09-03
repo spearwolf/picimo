@@ -27,7 +27,7 @@ function installGlobalScriptNode(id: string, css: string) {
   }
 }
 
-const getWebGLRendererParameters = pick([
+const getWebGLRendererParameters = pick<THREE.WebGLRendererParameters>([
   'alpha',
   'antialias',
   'depth',
