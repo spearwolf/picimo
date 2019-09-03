@@ -71,7 +71,7 @@ async function init() {
   const map2d = new Map2D();
   scene.add(map2d);
 
-  const view = new Map2DView(map2d, 0, 0, projection.width, projection.height, 512, 512);
+  const view = new Map2DView(map2d, projection, 0, 0, projection.width, projection.height, 512, 512);
 
   const ball = await TileSet.load('ball-pattern-rot.png', { basePath: '../assets/' });
   view.addLayer(
