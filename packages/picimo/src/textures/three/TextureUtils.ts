@@ -33,7 +33,7 @@ export class TextureUtils {
     source: ITexturable | Texture,
     options?: {
       filter?: THREE.TextureFilter,
-      anisotropy?: number,
+      anisotrophy?: number,
       flipy?: boolean,
     }) {
 
