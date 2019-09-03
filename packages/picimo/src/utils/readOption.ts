@@ -1,5 +1,5 @@
 
-export const readOption = (options: any, propName: string, defValue?: any, funcArgs?: any): unknown => {
+export const readOption = <T>(options: T, propName: keyof T, defValue?: any, funcArgs?: any): unknown => {
   if (options != null) {
     const val = options[propName];
     if (val !== undefined) return val;
