@@ -14,10 +14,9 @@ export interface IProjection {
 
   origin: Vector2;
 
-
   /**
-   * Return horizontal and vertical zoom factors
+   * Return zoom factor (in relation to the projection plane)
    */
-  getZoom(distanceToProjectionPlane: number): [number, number];
+  getZoom(distanceToProjectionPlane: number): number;
 
 }

@@ -6,3 +6,4 @@ export * from './pick';
 export * from './readOption';
 export * from './sample';
 export * from './unpick';
+export * from './Logger';

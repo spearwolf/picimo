@@ -30,7 +30,7 @@ camera3d.up.set(0, 1, 0);
 
 let curCamera = null; // camera3d;
 
-const projection = new ParallaxProjection({ pixelZoom: 3, distance: 100 });
+const projection = new ParallaxProjection({ pixelZoom: 3, distance: 300 });
 
 const controls = new OrbitControls(camera3d);
 
@@ -144,8 +144,6 @@ async function init() {
     renderer.render(scene, curCamera);
 
   });
-
-  console.log(projection.camera);
 };
 
 init();

@@ -57,8 +57,8 @@ export class Map2DViewLayer {
 
     const { view } = this;
     const zoom = view.projection.getZoom(this.layerRenderer.getDistanceToProjectionPlane());
-    const viewHalfWidth =  view.width * 0.5 * zoom[0];
-    const viewHalfHeight = view.height * 0.5 * zoom[1];
+    const viewHalfWidth =  view.width * 0.5 * zoom;
+    const viewHalfHeight = view.height * 0.5 * zoom;
 
     const { viewCullingThreshold } = this.layerData;
 
