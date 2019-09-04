@@ -26,7 +26,7 @@ module.exports = {
     path: path.resolve(__dirname, "public"),
   },
   mode: "development",
-  devtool: "inline-source-map",
+  devtool: "eval",
   devServer: {
     port: 3000,
     contentBase: [
