@@ -14,7 +14,6 @@ import {
   RepeatingPatternLayer,
   TileSet,
 } from 'picimo';
-import { Vector3 } from 'three';
 
 const display = new Display(document.getElementById('three-container'), {
   clearColor: 0x0043ff,
@@ -76,7 +75,7 @@ async function init() {
   const ball = await TileSet.load('ball-pattern-rot.png', { basePath: '../assets/' });
   view.addLayer(
     new Map2DViewLayer(view,
-      map2d.createTileQuadMeshLayer([ball], new Vector3(0, -50, 0)),
+      map2d.createTileQuadMeshLayer([ball], -50),
       RepeatingPatternLayer.fromTile(ball, 1),
     ));
 

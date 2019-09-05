@@ -45,10 +45,13 @@ export class Map2D extends THREE.Object3D implements IMap2DRenderer {
     }
   }
 
-  createTileQuadMeshLayer(tilesets: ITileSet[], position?: THREE.Vector3) {
+  /**
+   * @param distanceToProjectionPlane use negative numbers to move the plane further away from the camera and positive numbers to move the plane closer to the camera
+   */
+  createTileQuadMeshLayer(tilesets: ITileSet[], distanceToProjectionPlane: number = 0) {
     const layer = new Map2DTileQuadsLayer(tilesets, this[$getTileQuadMeshCache](), this.materialCache);
-    if (position) {
-      layer.getObject3D().position.copy(position);
+    if (distanceToProjectionPlane !== 0) {
+      layer.getObject3D().position.set(0, distanceToProjectionPlane, 0);
     }
     this.appendLayer(layer);
     return layer;

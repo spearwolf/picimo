@@ -105,7 +105,7 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
   }
 
   renderViewTile(_tile: Map2DViewTile) {
-    // animate tiles?
+    // TODO animate tiles?
   }
 
   private [$freeMesh](mesh: TileQuadMesh) {

@@ -106,7 +106,7 @@ export class TiledMap {
             if (tilesets) {
               map2dLayer = map2d.createTileQuadMeshLayer(
                 tilesets,
-                new Vector3(0, hasYOffset ? tiledMapLayer.yOffset : y, 0),
+                hasYOffset && tiledMapLayer.yOffset || y,
               );
             }
             break;

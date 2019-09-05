@@ -9,10 +9,11 @@ import {
   Map2D,
   Map2DView,
   Map2DViewFrame,
+  Map2DViewLayer,
+  ParallaxProjection,
+  RepeatingPatternLayer,
   TiledMap,
   TileSet,
-  RepeatingPatternLayer,
-  Map2DViewLayer,
 } from 'picimo';
 
 const VIEW_WIDTH = 320;
@@ -30,10 +31,7 @@ camera3d.up.set(0, 1, 0);
 
 const min = (a, b) => a > b ? b : a;
 
-const halfSize = min(VIEW_WIDTH, calcViewHeight()) / 2;
-const cam2dZ = 100;
-const camera2d = new THREE.OrthographicCamera(-halfSize, halfSize, halfSize, -halfSize, 1, 1000 );
-camera2d.applyQuaternion(new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), Math.PI * -0.5));
+const projection = new ParallaxProjection({ pixelZoom: 3, distance: 300 });
 
 let curCamera = camera3d;
 
@@ -79,6 +77,12 @@ function resize() {
   const { clientWidth, clientHeight } = renderer.domElement.parentNode;
   const minSize = min(clientWidth, clientHeight);
   const size = Math.floor(pixelate > 0 ? (minSize / pixelate) : (minSize * DPR));
+
+  projection.update(size, size);
+  if (view) {
+    view.width = projection.width;
+    view.height = projection.height;
+  }
 
   const newSizeInfo = `
     container: ${clientWidth}x${clientHeight}<br>
@@ -177,7 +181,7 @@ function render(time) {
       view.centerX -= speedWest * t;
       view.update();
 
-      camera2d.position.set(view.centerX, cam2dZ, view.centerY);
+      projection.origin.set(view.centerX, view.centerY);
     }
     renderer.render(scene, curCamera);
     rendererShouldRender = false;
@@ -290,7 +294,7 @@ Promise.all([
   map2d.appendLayer(frontTileQuads);
   */
 
-  view = new Map2DView(map2d, 0, 0, VIEW_WIDTH, calcViewHeight(), 100, 100);
+  view = new Map2DView(map2d, projection, 0, 0, projection.width, projection.height, 100, 100);
 
   // tiledMap.createLayers(map2d, view);
   tiledMap.createLayers(map2d, view, { layers: ['main', 'foreground'] });
@@ -306,7 +310,7 @@ Promise.all([
   const ball = await TileSet.load('ball-pattern-rot.png', { basePath: './assets/exports/maps/' });
   view.addLayer(
     new Map2DViewLayer(view,
-      map2d.createTileQuadMeshLayer([ball], new THREE.Vector3(0, -100, 0)),
+      map2d.createTileQuadMeshLayer([ball], -100),
       RepeatingPatternLayer.fromTile(ball, 1),
     ));
 
@@ -339,12 +343,7 @@ Promise.all([
     if (view) {
       view.width *= multiplyByScalar;
       view.height = calcViewHeight(view.width);
-      const half = min(view.width, view.height) / 2;
-      camera2d.left = -half;
-      camera2d.right = half;
-      camera2d.top = half;
-      camera2d.bottom = -half;
-      camera2d.updateProjectionMatrix();
+      projection.update(view.width, view.height);
       rendererShouldRender = true;
     }
   };
@@ -366,7 +365,7 @@ Promise.all([
       break;
     case 49: // 1
       // @ts-ignore
-      curCamera = camera2d;
+      curCamera = projection.camera;
       viewFrame.visible = false;
       controls.enabled = false;
       rendererShouldRender = true;
@@ -384,7 +383,7 @@ Promise.all([
     case 109: // numPad: sub
     case 189: // -
       // @ts-ignore
-      changeViewSize(curCamera === camera2d ? 1.1 : 0.9);
+      changeViewSize(curCamera === projection.camera ? 1.1 : 0.9);
       break;
     }
   });
