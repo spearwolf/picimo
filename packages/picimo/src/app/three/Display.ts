@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-import { readOption, pick, generateUuid } from '../../utils';
+import { readOption, generateUuid, unpick } from '../../utils';
 import { TextureUtils } from '../../textures';
 
 const CSS_CLASS_PICIMO = `picimo-${generateUuid()}`;
@@ -27,18 +27,6 @@ function installGlobalScriptNode(id: string, css: string) {
   }
 }
 
-const getWebGLRendererParameters = pick<THREE.WebGLRendererParameters>([
-  'alpha',
-  'antialias',
-  'depth',
-  'logarithmicDepthBuffer',
-  'powerPreference',
-  'precision',
-  'premultipliedAlpha',
-  'preserveDrawingBuffer',
-  'stencil',
-]);
-
 const $dispatchResizeEvent = Symbol('dispatchResizeEvent');
 const $dispatchFrameEvent = Symbol('dispatchFrameEvent');
 const $lockPixelRatio = Symbol('lockPixelRatio');
@@ -48,9 +36,10 @@ const $rafID = Symbol('rafID');
 const RESIZE = 'resize';
 const FRAME = 'frame';
 
-export type DisplayResizeStrategy = 'canvas' | 'container';
+export type DisplayGetSizeFn = (display: Display) => { width: number, height: number };
+export type DisplayResizeStrategy = HTMLElement | DisplayGetSizeFn;
 
-export interface DisplayOptions extends THREE.WebGLRendererParameters {
+export interface DisplayOptions {
 
   resizeStrategy?: DisplayResizeStrategy;
 
@@ -69,6 +58,13 @@ export interface DisplayOptions extends THREE.WebGLRendererParameters {
   clearColor?: string | THREE.Color;
 
 }
+
+const extractWebGLRendererParameters = unpick<THREE.WebGLRendererParameters>([
+  'resizeStrategy',
+  'pixelate',
+  'clearColor',
+  'canvas',
+]);
 
 export class Display extends THREE.EventDispatcher {
 
@@ -117,23 +113,24 @@ export class Display extends THREE.EventDispatcher {
 
   private [$rafID] = 0;
 
-  constructor(el: HTMLElement, options?: DisplayOptions) {
+  constructor(el: HTMLElement, options?: DisplayOptions & THREE.WebGLRendererParameters) {
     super();
 
-    let defaultResizeStrategy = 'canvas';
+    let resizeRefEl: HTMLElement;
 
     if (el && el.tagName === 'CANVAS') {
       this.canvas = el as HTMLCanvasElement;
+      resizeRefEl = el;
     } else {
       this.canvas = document.createElement('canvas');
-      if (el) {
+      if (el instanceof HTMLElement) {
         el.appendChild(this.canvas);
-        defaultResizeStrategy = 'container';
+        resizeRefEl = el;
       }
     }
 
-    const pixelate = Boolean(readOption(options, 'pixelate', false));
-    let pixelRatio = Number(readOption(options, 'pixelRatio', 0));
+    const pixelate = Boolean(readOption<DisplayOptions>(options, 'pixelate', false));
+    let pixelRatio = Number(readOption<DisplayOptions>(options, 'pixelRatio', 0));
 
     if (pixelate) {
       installGlobalScriptNode(CSS_CLASS_PIXELATE, CSS_PIXELATE);
@@ -143,11 +140,11 @@ export class Display extends THREE.EventDispatcher {
 
     this[$lockPixelRatio] = pixelRatio;
 
-    this.resizeStrategy = readOption(options, 'resizeStrategy', defaultResizeStrategy) as DisplayResizeStrategy;
+    this.resizeStrategy = readOption<DisplayOptions>(options, 'resizeStrategy', resizeRefEl) as DisplayResizeStrategy;
 
     const rendererArgs = Object.assign({
       precision: 'mediump',
-    }, getWebGLRendererParameters(options), {
+    }, extractWebGLRendererParameters(options), {
       canvas: this.canvas,
     });
 
@@ -171,6 +168,22 @@ export class Display extends THREE.EventDispatcher {
     );
 
     this.resize();
+
+    // on-rotate-go-fullscreen (experimental)
+    const { screen } = window;
+    if (typeof screen !== 'undefined' && typeof screen.orientation !== 'undefined') {
+      screen.orientation.onchange = () => {
+        if (screen.orientation.type.indexOf('landscape') !== -1) {
+          if (typeof document.body.requestFullscreen === 'function') {
+            document.body.requestFullscreen();
+          }
+        } else if (screen.orientation.type.indexOf('portrait') !== -1) {
+          if (typeof document.exitFullscreen === 'function') {
+            document.exitFullscreen();
+          }
+        }
+      };
+    }
   }
 
   get pixelRatio() {
@@ -178,12 +191,22 @@ export class Display extends THREE.EventDispatcher {
   }
 
   resize() {
-    const { canvas, pixelRatio } = this;
+    const { resizeStrategy } = this;
 
-    const {
-      clientWidth: wPx,
-      clientHeight: hPx,
-    } = this.resizeStrategy === 'container' ? canvas.parentNode as HTMLElement : canvas;
+    let wPx: number = 320;
+    let hPx: number = 200;
+
+    if (resizeStrategy instanceof HTMLElement) {
+      const { width, height } = resizeStrategy.getBoundingClientRect();
+      wPx = Math.floor(width);
+      hPx = Math.floor(height);
+    } else if (typeof resizeStrategy === 'function') {
+      const { width, height } = resizeStrategy(this);
+      wPx = Math.floor(width);
+      hPx = Math.floor(height);
+    }
+
+    const { pixelRatio } = this;
 
     if (pixelRatio !== this[$lastPixelRatio] || wPx !== this.width || hPx !== this.height) {
 
@@ -195,7 +218,7 @@ export class Display extends THREE.EventDispatcher {
       this.renderer.setSize(wPx, hPx);
 
       if (this.frameNo > 0) {
-        this[$dispatchResizeEvent]();
+        this[$dispatchResizeEvent](); // no need to emit this inside construction phase
       }
     }
   }
@@ -242,7 +265,7 @@ export class Display extends THREE.EventDispatcher {
     this.resize();
 
     if (this.frameNo === 0) {
-      this[$dispatchResizeEvent]();
+      this[$dispatchResizeEvent](); // always call resize before render the first frame!
     }
 
     this.renderer.clear();
