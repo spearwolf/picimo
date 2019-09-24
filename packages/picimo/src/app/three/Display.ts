@@ -1,31 +1,8 @@
 import * as THREE from 'three';
 
-import { readOption, generateUuid, unpick } from '../../utils';
+import { readOption, unpick } from '../../utils';
 import { TextureUtils } from '../../textures';
-
-const CSS_CLASS_PICIMO = `picimo-${generateUuid()}`;
-const CSS_PICIMO = `
-  .${CSS_CLASS_PICIMO} {
-    touch-action: none;
-  }
-`;
-
-const CSS_CLASS_PIXELATE = `pixelate-${generateUuid()}`;
-const CSS_PIXELATE = `
-  .${CSS_CLASS_PIXELATE} {
-    image-rendering: crisp-edges;
-    image-rendering: pixelated;
-  }
-`;
-
-function installGlobalScriptNode(id: string, css: string) {
-  if (!document.getElementById(id)) {
-    const styleEl = document.createElement('style');
-    styleEl.innerHTML = css;
-    styleEl.setAttribute('id', id);
-    document.head.appendChild(styleEl);
-  }
-}
+import {Stylesheets} from '../../utils/Stylesheets';
 
 const $dispatchResizeEvent = Symbol('dispatchResizeEvent');
 const $dispatchFrameEvent = Symbol('dispatchFrameEvent');
@@ -133,8 +110,10 @@ export class Display extends THREE.EventDispatcher {
     let pixelRatio = Number(readOption<DisplayOptions>(options, 'pixelRatio', 0));
 
     if (pixelate) {
-      installGlobalScriptNode(CSS_CLASS_PIXELATE, CSS_PIXELATE);
-      this.canvas.classList.add(CSS_CLASS_PIXELATE);
+      this.canvas.classList.add(Stylesheets.install('picimo-pixelate', `
+        image-rendering: crisp-edges;
+        image-rendering: pixelated;
+      `));
       pixelRatio = 1;
     }
 
@@ -150,9 +129,10 @@ export class Display extends THREE.EventDispatcher {
 
     this.renderer = new THREE.WebGLRenderer(rendererArgs);
 
-    installGlobalScriptNode(CSS_CLASS_PICIMO, CSS_PICIMO);
     const {domElement} = this.renderer;
-    domElement.classList.add(CSS_CLASS_PICIMO);
+    domElement.classList.add(Stylesheets.install('picimo', `
+      touch-action: none;
+    `));
     domElement.setAttribute('touch-action', 'none'); // => PEP polyfill
 
     this.texUtils = new TextureUtils(this.renderer, {
