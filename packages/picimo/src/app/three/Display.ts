@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
-import { readOption, unpick } from '../../utils';
-import { TextureUtils } from '../../textures';
+import {readOption, unpick} from '../../utils';
+import {TextureUtils} from '../../textures';
 import {Stylesheets} from '../../utils/Stylesheets';
 
 const $dispatchResizeEvent = Symbol('dispatchResizeEvent');
@@ -110,10 +110,10 @@ export class Display extends THREE.EventDispatcher {
     let pixelRatio = Number(readOption<DisplayOptions>(options, 'pixelRatio', 0));
 
     if (pixelate) {
-      this.canvas.classList.add(Stylesheets.install('picimo-pixelate', `
+      Stylesheets.addRule(this.canvas, 'picimo-pixelate', `
         image-rendering: crisp-edges;
         image-rendering: pixelated;
-      `));
+      `);
       pixelRatio = 1;
     }
 
@@ -130,9 +130,7 @@ export class Display extends THREE.EventDispatcher {
     this.renderer = new THREE.WebGLRenderer(rendererArgs);
 
     const {domElement} = this.renderer;
-    domElement.classList.add(Stylesheets.install('picimo', `
-      touch-action: none;
-    `));
+    Stylesheets.addRule(domElement, 'picimo', `touch-action: none;`);
     domElement.setAttribute('touch-action', 'none'); // => PEP polyfill
 
     this.texUtils = new TextureUtils(this.renderer, {
@@ -140,7 +138,7 @@ export class Display extends THREE.EventDispatcher {
       defaultFilter: pixelate ? THREE.NearestFilter : THREE.LinearFilter,
     });
 
-    const clearColor = readOption(options, 'clearColor', new THREE.Color()) as THREE.Color | string;
+    const clearColor = readOption<DisplayOptions>(options, 'clearColor', new THREE.Color()) as THREE.Color | string;
 
     this.renderer.setClearColor(
       clearColor instanceof THREE.Color ? clearColor : new THREE.Color(clearColor),
