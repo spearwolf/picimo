@@ -6,7 +6,6 @@ import { TextureAtlas, SimpleSprites, SimpleSpritesMaterial } from 'picimo';
 makeExampleShell(
   document.getElementById('container'),
   {
-    alpha: true,
     autoRotate: true,
     showCube: false,
   },

@@ -10,11 +10,7 @@ import { Display, readOption } from 'picimo';
 
 export const makeExampleShell = async (el, options, initializer) => {
 
-  const display = new Display(el, {
-    ...options,
-    pixelate: true,
-  });
-
+  const display = new Display(el, { ...options });
   debug('display', display);
 
   const camera = new THREE.PerspectiveCamera(75, display.width / display.height, 0.1, 10000);

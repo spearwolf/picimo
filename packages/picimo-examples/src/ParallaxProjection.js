@@ -17,7 +17,8 @@ import {
 
 const display = new Display(document.getElementById('three-container'), {
   clearColor: 0x0043ff,
-  pixelate: true,
+  mode: 'pixelated',
+  alpha: false,
 });
 
 const scene = new THREE.Scene();

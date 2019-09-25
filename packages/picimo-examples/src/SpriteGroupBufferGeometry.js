@@ -8,6 +8,7 @@ import { debug } from './utils/debug';
 import { Display, VODescriptor, VOIndices, SpriteGroup, SpriteGroupBufferGeometry, SpriteGroupMesh } from 'picimo';
 
 const display = new Display(document.getElementById('container'), {
+  mode: 'antialias-quality',
   alpha: false,
   clearColor: 'skyblue',
 });

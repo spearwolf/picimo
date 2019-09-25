@@ -193,7 +193,7 @@ const init = async ({ display, scene }) => {
 makeExampleShell(
   document.getElementById('container'),
   {
-    alpha: true,
+    mode: 'antialias-quality',
   },
   init,
 );

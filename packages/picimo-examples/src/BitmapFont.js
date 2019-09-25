@@ -77,7 +77,7 @@ const init = async ({ display, scene, camera }) => {
 makeExampleShell(
   document.getElementById('container'),
   {
-    alpha: true,
+    mode: 'pixelated',
     autoRotate: false,
     showCube: false,
   },

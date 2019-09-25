@@ -18,7 +18,8 @@ import { Vector3 } from 'three';
 
 const display = new Display(document.getElementById('three-container'), {
   clearColor: 0x0043ff,
-  pixelate: true,
+  alpha: false,
+  mode: 'pixelated',
 });
 
 const scene = new THREE.Scene();

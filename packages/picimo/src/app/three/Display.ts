@@ -1,8 +1,11 @@
-import {WebGLRendererParameters, EventDispatcher, WebGLRenderer, NearestFilter, LinearFilter, Color} from 'three';
+import {WebGLRendererParameters, EventDispatcher, WebGLRenderer, Color} from 'three';
 
 import {readOption, unpick} from '../../utils';
 import {TextureUtils} from '../../textures';
 import {Stylesheets} from '../../utils/Stylesheets';
+import {IConfigurator} from './Configurator';
+import {PixelatedConfigurator} from './PixelatedConfigurator';
+import {HighQualityAAConfigurator} from './HighQualityAAConfigurator';
 
 const $dispatchResizeEvent = Symbol('dispatchResizeEvent');
 const $dispatchFrameEvent = Symbol('dispatchFrameEvent');
@@ -20,15 +23,16 @@ export interface DisplayOptions {
 
   resizeStrategy?: DisplayResizeStrategy;
 
-  /**
-   * Activate pixel art mode.
-   * Restrict the *device pixel ratio* to 1.
-   * Set the `image-rendering` css style for the `<canvas>` element.
-   */
-  pixelate?: boolean;
+  mode?: 'pixelated' | 'antialias-quality';
 
   /**
-   * Set a fixed device pixel ratio. Otherwise DPR is read from `window.devicePixelRatio`
+   * Set a custom [[IConfigurator]]. Will override the configurator from the `mode` option.
+   */
+  configurator?: IConfigurator;
+
+  /**
+   * Set a fixed device pixel ratio.
+   * Otherwise DPR is read from [[IConfigurator]] or `window.devicePixelRatio`
    */
   pixelRatio?: number;
 
@@ -107,33 +111,27 @@ export class Display extends EventDispatcher {
       }
     }
 
-    const pixelate = Boolean(readOption<DisplayOptions>(options, 'pixelate', false));
-    let pixelRatio = Number(readOption<DisplayOptions>(options, 'pixelRatio', 0));
+    const createDefaultConfigurator = () => {
+      const mode = readOption<DisplayOptions>(options, 'mode') as string;
+      switch (mode) {
+        case 'antialias-quality':
+          return new HighQualityAAConfigurator();
+        case 'pixelated':
+        default:
+          return new PixelatedConfigurator();
+      }
+    };
+    const configurator = readOption<DisplayOptions>(options, 'configurator', createDefaultConfigurator) as IConfigurator;
 
-    if (pixelate) {
-      Stylesheets.addRule(this.canvas, 'picimo-pixelate', `
-        image-rendering: crisp-edges;
-        image-rendering: pixelated;
-      `);
-      pixelRatio = 1;
-    }
-
-    this[$lockPixelRatio] = pixelRatio;
+    const pixelRatio = Number(readOption<DisplayOptions>(options, 'pixelRatio', 0));
+    this[$lockPixelRatio] = isNaN(pixelRatio) || pixelRatio < 1 ? configurator.getPixelRatio() : pixelRatio;
 
     this.resizeStrategy = readOption<DisplayOptions>(options, 'resizeStrategy', resizeRefEl) as DisplayResizeStrategy;
 
-    const renderParams = Object.assign(
-      <WebGLRendererParameters>{
-        precision: 'highp',
-        preserveDrawingBuffer: false,
-        stencil: false,
-        powerPreference: 'high-performance',
-      },
-      filterWebGLRendererParameters(options),
-      <WebGLRendererParameters>{
-        canvas: this.canvas,
-      },
-    );
+    const renderParams = <WebGLRendererParameters>{
+      ...configurator.getWebGlRendererParameters(filterWebGLRendererParameters(options)),
+      canvas: this.canvas,
+    };
 
     this.renderer = new WebGLRenderer(renderParams);
 
@@ -141,17 +139,16 @@ export class Display extends EventDispatcher {
     Stylesheets.addRule(domElement, 'picimo', `touch-action: none;`);
     domElement.setAttribute('touch-action', 'none'); // => PEP polyfill
 
-    this.texUtils = new TextureUtils(this.renderer, {
-      defaultAnisotrophy: pixelate ? 0 : Infinity,
-      defaultFilter: pixelate ? NearestFilter : LinearFilter,
-    });
+    this.texUtils = new TextureUtils(this.renderer, configurator.getTextureUtilsOptions());
 
     const clearColor = readOption<DisplayOptions>(options, 'clearColor', new Color()) as Color | string;
 
     this.renderer.setClearColor(
       clearColor instanceof Color ? clearColor : new Color(clearColor),
-      options.alpha ? 0 : 1,
+      renderParams.alpha ? 0 : 1,
     );
+
+    configurator.postSetup(this);
 
     this.resize();
 
