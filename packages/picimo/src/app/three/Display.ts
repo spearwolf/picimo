@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+import {WebGLRendererParameters, EventDispatcher, WebGLRenderer, NearestFilter, LinearFilter, Color} from 'three';
 
 import {readOption, unpick} from '../../utils';
 import {TextureUtils} from '../../textures';
@@ -36,16 +36,17 @@ export interface DisplayOptions {
 
 }
 
-const extractWebGLRendererParameters = unpick<THREE.WebGLRendererParameters>([
+const filterWebGLRendererParameters = unpick<WebGLRendererParameters>([
   'resizeStrategy',
   'pixelate',
   'clearColor',
+  'scene',
   'canvas',
 ]);
 
-export class Display extends THREE.EventDispatcher {
+export class Display extends EventDispatcher {
 
-  readonly renderer: THREE.WebGLRenderer;
+  readonly renderer: WebGLRenderer;
 
   readonly canvas: HTMLCanvasElement;
 
@@ -90,7 +91,7 @@ export class Display extends THREE.EventDispatcher {
 
   private [$rafID] = 0;
 
-  constructor(el: HTMLElement, options?: DisplayOptions & THREE.WebGLRendererParameters) {
+  constructor(el: HTMLElement, options?: DisplayOptions & WebGLRendererParameters) {
     super();
 
     let resizeRefEl: HTMLElement;
@@ -121,13 +122,20 @@ export class Display extends THREE.EventDispatcher {
 
     this.resizeStrategy = readOption<DisplayOptions>(options, 'resizeStrategy', resizeRefEl) as DisplayResizeStrategy;
 
-    const rendererArgs = Object.assign({
-      precision: 'mediump',
-    }, extractWebGLRendererParameters(options), {
-      canvas: this.canvas,
-    });
+    const renderParams = Object.assign(
+      <WebGLRendererParameters>{
+        precision: 'highp',
+        preserveDrawingBuffer: false,
+        stencil: false,
+        powerPreference: 'high-performance',
+      },
+      filterWebGLRendererParameters(options),
+      <WebGLRendererParameters>{
+        canvas: this.canvas,
+      },
+    );
 
-    this.renderer = new THREE.WebGLRenderer(rendererArgs);
+    this.renderer = new WebGLRenderer(renderParams);
 
     const {domElement} = this.renderer;
     Stylesheets.addRule(domElement, 'picimo', `touch-action: none;`);
@@ -135,13 +143,13 @@ export class Display extends THREE.EventDispatcher {
 
     this.texUtils = new TextureUtils(this.renderer, {
       defaultAnisotrophy: pixelate ? 0 : Infinity,
-      defaultFilter: pixelate ? THREE.NearestFilter : THREE.LinearFilter,
+      defaultFilter: pixelate ? NearestFilter : LinearFilter,
     });
 
-    const clearColor = readOption<DisplayOptions>(options, 'clearColor', new THREE.Color()) as THREE.Color | string;
+    const clearColor = readOption<DisplayOptions>(options, 'clearColor', new Color()) as Color | string;
 
     this.renderer.setClearColor(
-      clearColor instanceof THREE.Color ? clearColor : new THREE.Color(clearColor),
+      clearColor instanceof Color ? clearColor : new Color(clearColor),
       options.alpha ? 0 : 1,
     );
 
@@ -246,7 +254,7 @@ export class Display extends THREE.EventDispatcher {
       this[$dispatchResizeEvent](); // always call resize before render the first frame!
     }
 
-    this.renderer.clear();
+    this.renderer.clear(); // TODO add autoClear option?
 
     this[$dispatchFrameEvent]();
 
