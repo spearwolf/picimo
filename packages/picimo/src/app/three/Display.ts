@@ -3,9 +3,10 @@ import {WebGLRendererParameters, EventDispatcher, WebGLRenderer, Color} from 'th
 import {readOption, unpick} from '../../utils';
 import {TextureUtils} from '../../textures';
 import {Stylesheets} from '../../utils/Stylesheets';
-import {IConfigurator} from './Configurator';
+import {IConfigurator} from './IConfigurator';
 import {PixelatedConfigurator} from './PixelatedConfigurator';
-import {HighQualityAAConfigurator} from './HighQualityAAConfigurator';
+import {AAQualityConfigurator} from './AAQualityConfigurator';
+import {AAPerformanceConfigurator} from './AAPerformanceConfigurator';
 
 const $dispatchResizeEvent = Symbol('dispatchResizeEvent');
 const $dispatchFrameEvent = Symbol('dispatchFrameEvent');
@@ -19,11 +20,17 @@ const FRAME = 'frame';
 export type DisplayGetSizeFn = (display: Display) => { width: number, height: number };
 export type DisplayResizeStrategy = HTMLElement | DisplayGetSizeFn;
 
+export enum DisplayMode {
+  Pixelated = 'pixelated',
+  AAQuality = 'antialias-quality',
+  AAPerformance = 'antialias-performance',
+}
+
 export interface DisplayOptions {
 
   resizeStrategy?: DisplayResizeStrategy;
 
-  mode?: 'pixelated' | 'antialias-quality';
+  mode?: DisplayMode;
 
   /**
    * Set a custom [[IConfigurator]]. Will override the configurator from the `mode` option.
@@ -47,6 +54,18 @@ const filterWebGLRendererParameters = unpick<WebGLRendererParameters>([
   'scene',
   'canvas',
 ]);
+
+const createConfigurator = (mode: DisplayMode) => {
+  switch (mode) {
+    case DisplayMode.AAQuality:
+      return new AAQualityConfigurator();
+    case DisplayMode.AAPerformance:
+      return new AAPerformanceConfigurator();
+    case DisplayMode.Pixelated:
+    default:
+      return new PixelatedConfigurator();
+  }
+};
 
 export class Display extends EventDispatcher {
 
@@ -111,19 +130,12 @@ export class Display extends EventDispatcher {
       }
     }
 
-    const createDefaultConfigurator = () => {
-      const mode = readOption<DisplayOptions>(options, 'mode') as string;
-      switch (mode) {
-        case 'antialias-quality':
-          return new HighQualityAAConfigurator();
-        case 'pixelated':
-        default:
-          return new PixelatedConfigurator();
-      }
-    };
-    const configurator = readOption<DisplayOptions>(options, 'configurator', createDefaultConfigurator) as IConfigurator;
+    const configurator = readOption<DisplayOptions>(options, 'configurator', () => {
+      return createConfigurator(readOption<DisplayOptions>(options, 'mode') as DisplayMode);
+    }) as IConfigurator;
 
     const pixelRatio = Number(readOption<DisplayOptions>(options, 'pixelRatio', 0));
+
     this[$lockPixelRatio] = isNaN(pixelRatio) || pixelRatio < 1 ? configurator.getPixelRatio() : pixelRatio;
 
     this.resizeStrategy = readOption<DisplayOptions>(options, 'resizeStrategy', resizeRefEl) as DisplayResizeStrategy;

@@ -1,4 +1,4 @@
-import {IConfigurator} from './Configurator';
+import {IConfigurator} from './IConfigurator';
 import {WebGLRendererParameters, NearestFilter} from 'three';
 import {TextureUtilsOptions} from '../../textures';
 import {Display} from './Display';

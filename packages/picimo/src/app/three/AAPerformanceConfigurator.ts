@@ -1,9 +1,9 @@
-import {IConfigurator} from './Configurator';
+import {IConfigurator} from './IConfigurator';
 import {WebGLRendererParameters, LinearFilter} from 'three';
 import {TextureUtilsOptions} from '../../textures';
 import {Display} from './Display';
 
-export class HighQualityAAConfigurator implements IConfigurator {
+export class AAPerformanceConfigurator implements IConfigurator {
 
   getWebGlRendererParameters(userParams?: WebGLRendererParameters) {
     return {
@@ -21,13 +21,13 @@ export class HighQualityAAConfigurator implements IConfigurator {
 
   getTextureUtilsOptions() {
     return <TextureUtilsOptions>{
-      defaultAnisotrophy: Infinity,
+      defaultAnisotrophy: 0,
       defaultFilter: LinearFilter,
     };
   }
 
   getPixelRatio() {
-    return 0; // => use native pixel ratio from window.devicePixelRatio
+    return 1;
   }
 
   postSetup(_display: Display) { }
