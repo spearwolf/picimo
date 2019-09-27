@@ -18,7 +18,7 @@ const RESIZE = 'resize';
 const FRAME = 'frame';
 
 export type DisplayGetSizeFn = (display: Display) => { width: number, height: number };
-export type DisplayResizeStrategy = HTMLElement | DisplayGetSizeFn;
+export type DisplayResizeStrategy = HTMLElement | DisplayGetSizeFn | 'fullscreen';
 
 export enum DisplayMode {
   Pixelated = 'pixelated',
@@ -151,6 +151,19 @@ export class Display extends EventDispatcher {
     Stylesheets.addRule(domElement, 'picimo', `touch-action: none;`);
     domElement.setAttribute('touch-action', 'none'); // => PEP polyfill
 
+    const containerOrCanvasEl = resizeRefEl || domElement;
+
+    if (this.resizeStrategy === 'fullscreen') {
+      Stylesheets.addRule(containerOrCanvasEl, 'picimo-fullscreen', `
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      `);
+    }
+
     this.texUtils = new TextureUtils(this.renderer, configurator.getTextureUtilsOptions());
 
     const clearColor = readOption<DisplayOptions>(options, 'clearColor', new Color()) as Color | string;
@@ -165,19 +178,21 @@ export class Display extends EventDispatcher {
     this.resize();
 
     // on-rotate-go-fullscreen (experimental)
-    const { screen } = window;
-    if (typeof screen !== 'undefined' && typeof screen.orientation !== 'undefined') {
-      screen.orientation.onchange = () => {
-        if (screen.orientation.type.indexOf('landscape') !== -1) {
-          if (typeof document.body.requestFullscreen === 'function') {
-            document.body.requestFullscreen();
+    if (this.resizeStrategy === 'fullscreen') {
+      const { screen } = window;
+      if (typeof screen !== 'undefined' && typeof screen.orientation !== 'undefined') {
+        screen.orientation.onchange = () => {
+          if (screen.orientation.type.indexOf('landscape') !== -1) {
+            if (typeof containerOrCanvasEl.requestFullscreen === 'function') {
+              containerOrCanvasEl.requestFullscreen();
+            }
+          } else if (screen.orientation.type.indexOf('portrait') !== -1) {
+            if (typeof document.exitFullscreen === 'function') {
+              document.exitFullscreen();
+            }
           }
-        } else if (screen.orientation.type.indexOf('portrait') !== -1) {
-          if (typeof document.exitFullscreen === 'function') {
-            document.exitFullscreen();
-          }
-        }
-      };
+        };
+      }
     }
   }
 
@@ -191,12 +206,15 @@ export class Display extends EventDispatcher {
     let wPx: number = 320;
     let hPx: number = 200;
 
-    if (resizeStrategy instanceof HTMLElement) {
-      const { width, height } = resizeStrategy.getBoundingClientRect();
-      wPx = Math.floor(width);
-      hPx = Math.floor(height);
+    if (resizeStrategy === 'fullscreen') {
+      wPx = window.innerWidth;
+      hPx = window.innerHeight;
     } else if (typeof resizeStrategy === 'function') {
       const { width, height } = resizeStrategy(this);
+      wPx = Math.floor(width);
+      hPx = Math.floor(height);
+    } else if (resizeStrategy instanceof HTMLElement) {
+      const { width, height } = resizeStrategy.getBoundingClientRect();
       wPx = Math.floor(width);
       hPx = Math.floor(height);
     }
