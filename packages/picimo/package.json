@@ -1,6 +1,6 @@
 {
   "name": "picimo",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "A typescript library for my personal visual gfx and game dev experiments based on three.js",
   "main": "dist/picimo.min.js",
   "module": "build/index.js",
@@ -46,8 +46,8 @@
     "babel-loader": "^8.0.6",
     "babel-plugin-istanbul": "^5.2.0",
     "core-js": "^3.2.1",
-    "cross-env": "^6.0.0",
-    "eslint": "^6.4.0",
+    "cross-env": "^6.0.3",
+    "eslint": "^6.5.1",
     "eslint-config-problems": "^3.0.1",
     "karma": "^4.3.0",
     "karma-chrome-launcher": "^3.1.0",
@@ -57,24 +57,24 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^4.0.2",
     "lerna": "^3.16.4",
-    "mocha": "^6.2.0",
+    "mocha": "^6.2.1",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.0",
-    "rollup": "^1.21.4",
+    "rollup": "^1.23.0",
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.0.1",
     "rollup-plugin-replace": "^2.2.0",
     "rollup-plugin-size-snapshot": "^0.10.0",
     "rollup-plugin-terser": "^5.1.2",
-    "three": "^0.108.0",
+    "three": "^0.109.0",
     "typescript": "^3.6.3",
     "webpack": "^4.41.0",
     "webpack-cli": "^3.3.9",
-    "webpack-dev-server": "^3.8.1"
+    "webpack-dev-server": "^3.8.2"
   },
   "peerDependencies": {
-    "three": "^0.107.0"
+    "three": "^0.109.0"
   },
   "dependencies": {
     "@babel/runtime-corejs3": "^7.6.2"
