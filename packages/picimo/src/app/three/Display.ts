@@ -151,18 +151,23 @@ export class Display extends EventDispatcher {
     Stylesheets.addRule(domElement, 'picimo', `touch-action: none;`);
     domElement.setAttribute('touch-action', 'none'); // => PEP polyfill
 
+    if (resizeRefEl && resizeRefEl.tagName !== 'CANVAS') {
+      Stylesheets.addRule(resizeRefEl, 'picimo-container', `
+        font-size: 0;
+      `);
+    }
+
     const containerOrCanvasEl = resizeRefEl || domElement;
 
+    /*
     if (this.resizeStrategy === 'fullscreen') {
       Stylesheets.addRule(containerOrCanvasEl, 'picimo-fullscreen', `
         position: fixed;
-        bottom: 0;
+        top: 0;
         left: 0;
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
       `);
     }
+    */
 
     this.texUtils = new TextureUtils(this.renderer, configurator.getTextureUtilsOptions());
 
