@@ -12,17 +12,17 @@ export type IParallaxProjectionSpecs = IProjectionSpecs & {
   /**
    * Should be between zero and the `distance`. Default is 0.00001
    */
-  near: number;
+  near?: number;
 
   /**
    * Should be larger than the `distance` and large enough to include all releavant objects in your scene. Default is 1000.
    */
-  far: number;
+  far?: number;
 
   /**
    * The distance from the camera to the projection plane. Default is 300.
    */
-  distance: number;
+  distance?: number;
 
 };
 
