@@ -1,4 +1,4 @@
-import { Quaternion, Vector3, PerspectiveCamera } from "three";
+import { PerspectiveCamera } from "three";
 import { IProjectionSpecs } from "../IProjectionSpecs";
 import { Projection } from "./Projection";
 // import { Logger } from "../../utils";
@@ -54,15 +54,16 @@ export class ParallaxProjection extends Projection<IParallaxProjectionSpecs, Per
     if (!camera) {
 
       this.camera = new PerspectiveCamera(fovy, aspect, near, far);
-      this.camera.applyQuaternion(new Quaternion().setFromAxisAngle(new Vector3(1, 0, 0), Math.PI * -0.5));
-      this.camera.position.y = distance;
+      this.applyPlaneRotation();
+      this.applyCameraDistance(distance);
 
     } else {
 
       camera.fov = fovy;
       camera.aspect = aspect;
 
-      camera.position.y = distance;
+      // camera.position.y = distance;
+      this.applyCameraDistance(distance);
 
       camera.updateProjectionMatrix();
 

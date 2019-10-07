@@ -13,8 +13,8 @@ import {
   OrthographicProjection,
   RepeatingPatternLayer,
   TileSet,
+  Plane,
 } from 'picimo';
-import { Vector3 } from 'three';
 
 const display = new Display(document.getElementById('three-container'), {
   clearColor: 0x0043ff,
@@ -31,7 +31,7 @@ camera3d.up.set(0, 1, 0);
 
 let curCamera = null; // camera3d;
 
-const projection = new OrthographicProjection({ pixelZoom: 3, near: .1, far: 1000, distance: 100 });
+const projection = new OrthographicProjection(Plane.XZ, { pixelZoom: 3, near: .1, far: 1000, distance: 100 });
 
 const controls = new OrbitControls(camera3d);
 

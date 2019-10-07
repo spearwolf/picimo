@@ -14,6 +14,7 @@ import {
   RepeatingPatternLayer,
   TiledMap,
   TileSet,
+  Plane,
 } from 'picimo';
 
 const VIEW_WIDTH = 320;
@@ -31,7 +32,7 @@ camera3d.up.set(0, 1, 0);
 
 const min = (a, b) => a > b ? b : a;
 
-const projection = new ParallaxProjection({ pixelZoom: 3, distance: 300 });
+const projection = new ParallaxProjection(Plane.XZ, { pixelZoom: 3, distance: 300 });
 
 let curCamera = camera3d;
 

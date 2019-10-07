@@ -11,6 +11,7 @@ import {
   Map2DViewFrame,
   Map2DViewLayer,
   ParallaxProjection,
+  Plane,
   RepeatingPatternLayer,
   TileSet,
 } from 'picimo';
@@ -30,7 +31,7 @@ camera3d.up.set(0, 1, 0);
 
 let curCamera = null; // camera3d;
 
-const projection = new ParallaxProjection({ pixelZoom: 3, distance: 300 });
+const projection = new ParallaxProjection(Plane.XZ, { pixelZoom: 3, distance: 300 });
 
 const controls = new OrbitControls(camera3d);
 

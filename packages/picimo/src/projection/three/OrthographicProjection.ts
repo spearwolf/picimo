@@ -1,4 +1,4 @@
-import { OrthographicCamera, Quaternion, Vector3 } from "three";
+import { OrthographicCamera } from "three";
 import { IProjectionSpecs } from "../IProjectionSpecs";
 import { Projection } from "./Projection";
 
@@ -42,8 +42,10 @@ export class OrthographicProjection extends Projection<IOrthographicProjectionSp
     if (!camera) {
 
       this.camera = new OrthographicCamera(-halfWidth, halfWidth, halfHeight, -halfHeight, near, far);
-      this.camera.applyQuaternion(new Quaternion().setFromAxisAngle(new Vector3(1, 0, 0), Math.PI * -0.5));
-      this.camera.position.y = distance;
+      // this.camera.applyQuaternion(new Quaternion().setFromAxisAngle(new Vector3(1, 0, 0), Math.PI * -0.5));
+      // this.camera.position.y = distance;
+      this.applyPlaneRotation();
+      this.applyCameraDistance(distance);
 
     } else {
 
@@ -54,7 +56,8 @@ export class OrthographicProjection extends Projection<IOrthographicProjectionSp
       camera.near = near;
       camera.far = far;
 
-      camera.position.y = distance;
+      // camera.position.y = distance;
+      this.applyCameraDistance(distance);
 
       camera.updateProjectionMatrix();
 

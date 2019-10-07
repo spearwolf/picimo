@@ -1,6 +1,6 @@
-import { Camera } from "three";
+import { Camera, Quaternion, Vector3 } from "three";
 
-import { Vector2Proxy } from "../../math";
+import { Plane, Vector2Proxy } from "../../math";
 
 import { calcViewSize } from "../calcViewSize";
 import { IProjectionRule } from "../IProjectionRule";
@@ -9,8 +9,11 @@ import { ProjectionRules } from "../ProjectionRules";
 import { IProjection } from "./IProjection";
 
 const $origin = Symbol('origin');
+const $distanceProp = Symbol('distanceProp');
 
 export abstract class Projection<Specs extends IProjectionSpecs, Cam extends Camera> implements IProjection {
+
+  readonly plane: Plane;
 
   rules: ProjectionRules<IProjectionRule<Specs>>;
 
@@ -23,8 +26,10 @@ export abstract class Projection<Specs extends IProjectionSpecs, Cam extends Cam
   camera: Cam;
 
   private [$origin]: Vector2Proxy;
+  private [$distanceProp]: 'x' | 'y' | 'z';
 
-  constructor(rules: Specs | IProjectionRule<Specs>[]) {
+  constructor(plane: Plane, rules: Specs | IProjectionRule<Specs>[]) {
+    this.plane = plane;
     this.rules = new ProjectionRules(Array.isArray(rules) ? rules : [{ specs: rules }]);
   }
 
@@ -47,7 +52,8 @@ export abstract class Projection<Specs extends IProjectionSpecs, Cam extends Cam
     if (!v) {
       const { camera } = this;
       if (camera) {
-        v = new Vector2Proxy(camera.position, 'x', 'z');
+        const { plane } = this;
+        v = new Vector2Proxy(camera.position, plane.type[0] as 'x', plane.type[1] as 'y' | 'z');
         this[$origin] = v;
       }
     }
@@ -56,5 +62,22 @@ export abstract class Projection<Specs extends IProjectionSpecs, Cam extends Cam
 
   getZoom(_distanceToPojectionPlane: number) {
     return 1;
+  }
+
+  protected applyPlaneRotation() {
+    switch (this.plane.type) {
+      case 'xz':
+        this.camera.applyQuaternion(new Quaternion().setFromAxisAngle(new Vector3(1, 0, 0), Math.PI * -0.5));
+        this[$distanceProp] = 'y';
+        break;
+
+      case 'xy':
+      default:
+        this[$distanceProp] = 'z';
+    }
+  }
+
+  protected applyCameraDistance(distance: number) {
+    this.camera.position[this[$distanceProp]] = distance;
   }
 }
