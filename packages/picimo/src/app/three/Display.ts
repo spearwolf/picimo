@@ -43,7 +43,7 @@ export interface DisplayOptions {
    */
   pixelRatio?: number;
 
-  clearColor?: string | THREE.Color;
+  clearColor?: number | string | THREE.Color;
 
 }
 
