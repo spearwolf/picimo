@@ -7572,13 +7572,6 @@ performance-now@^2.1.0:
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
   integrity sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=
 
-picimo@^0.0.13:
-  version "0.0.13"
-  resolved "https://registry.yarnpkg.com/picimo/-/picimo-0.0.13.tgz#5c542b6a543e421e7ed81cd5ea572d82c787bc73"
-  integrity sha512-gy/RQufCssx5T5shg5UCkRL5WG6EV0zy+hI6ORCJp0l5vJJ47tvhKfKlsZiO2ubhc+iVfbzaBgyw3niikSo4aA==
-  dependencies:
-    "@babel/runtime-corejs3" "^7.6.2"
-
 picomatch@^2.0.4:
   version "2.0.7"
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.0.7.tgz#514169d8c7cd0bdbeecc8a2609e34a7163de69f6"
