@@ -1,7 +1,5 @@
-import { BitmapText2D } from './three/BitmapText2D';
-
+import { BitmapText2D, TextAlignH, TextAlignV } from './three/BitmapText2D';
 import { BitmapCharVertexObject } from './BitmapCharDescriptor';
-import { BitmapText2DAlignment } from './BitmapText2DAlignment';
 
 export class BitmapText2DBlock {
 
@@ -18,9 +16,10 @@ export class BitmapText2DBlock {
 
   private _maxWidth: number;
 
-  private _align: BitmapText2DAlignment;
+  private _hAlign: TextAlignH;
+  private _vAlign: TextAlignV;
 
-  constructor(bitmapText2D: BitmapText2D, x: number, y: number, z: number, maxWidth: number = 0, align: BitmapText2DAlignment = BitmapText2DAlignment.Left) {
+  constructor(bitmapText2D: BitmapText2D, x: number, y: number, z: number, maxWidth: number = 0, hAlign: TextAlignH = 'left', vAlign: TextAlignV = 'baseline') {
 
     this.bitmapText2D = bitmapText2D;
 
@@ -30,7 +29,8 @@ export class BitmapText2DBlock {
 
     this.maxWidth = maxWidth;
 
-    this.align = align;
+    this.hAlign = hAlign;
+    this.vAlign = vAlign;
 
     this.text = undefined;
     this.sprites = null;
@@ -43,7 +43,8 @@ export class BitmapText2DBlock {
 
   get maxWidth() { return this._maxWidth; }
 
-  get align() { return this._align; }
+  get hAlign() { return this._hAlign; }
+  get vAlign() { return this._vAlign; }
 
   set x(x: number) {
     if (this._x !== x) {
@@ -73,9 +74,16 @@ export class BitmapText2DBlock {
     }
   }
 
-  set align(align: BitmapText2DAlignment) {
-    if (this._align !== align) {
-      this._align = align;
+  set hAlign(align: TextAlignH) {
+    if (this._hAlign !== align) {
+      this._hAlign = align;
+      this.needsUpdate = true;
+    }
+  }
+
+  set vAlign(align: TextAlignV) {
+    if (this._vAlign !== align) {
+      this._vAlign = align;
       this.needsUpdate = true;
     }
   }
@@ -91,7 +99,7 @@ export class BitmapText2DBlock {
 
       if (typeof text === 'string' && text.length > 0) {
 
-        this.sprites = bitmapText2D.drawText(text, this.x, this.y, this.z, this.maxWidth, this.align, prevSprites);
+        this.sprites = bitmapText2D.drawText(text, this.x, this.y, this.z, this.maxWidth, this.hAlign, this.vAlign, prevSprites);
 
       } else {
 

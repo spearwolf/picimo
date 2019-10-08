@@ -10,12 +10,14 @@ import { getBitmapCharBaseGroup } from '../BitmapCharBaseGroup';
 import { BitmapCharBaseMethodsType } from '../BitmapCharBaseMethods';
 import { BitmapCharGroup, BitmapCharGroupOptions } from '../BitmapCharGroup';
 import { BitmapCharMethodsType } from '../BitmapCharMethods';
-import { BitmapText2DAlignment } from '../BitmapText2DAlignment';
 import { BitmapText2DLine } from '../BitmapText2DLine';
 import { BitmapText2DMeasurement } from '../BitmapText2DMeasurement';
 import { BitmapCharVertexObject } from '../BitmapCharDescriptor';
 
 import { BitmapFontMaterial, BitmapFontShaderHooks } from './BitmapFontMaterial';
+
+export type TextAlignH = 'left' | 'center' | 'right';
+export type TextAlignV = 'top' | 'baseline' | 'center' | 'bottom';
 
 function makeTexture(htmlElement: HTMLImageElement) {
 
@@ -79,11 +81,28 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
 
   }
 
-  drawText(text: string, x: number, y: number, z: number, maxWidth = 0.0, align: BitmapText2DAlignment = BitmapText2DAlignment.Left, spriteCache: BitmapCharVertexObject[] = null) {
-    return this.createText(this.measureText(text, maxWidth), x, y, z, align, spriteCache);
+  drawText(
+    text: string,
+    x: number,
+    y: number,
+    z: number,
+    maxWidth = 0.0,
+    hAlign: TextAlignH = 'left',
+    vAlign: TextAlignV = 'baseline',
+    spriteCache: BitmapCharVertexObject[] = null,
+  ) {
+    return this.createText(this.measureText(text, maxWidth), x, y, z, hAlign, vAlign, spriteCache);
   }
 
-  createText(measure: BitmapText2DMeasurement, x: number, y: number, z: number, align: BitmapText2DAlignment, spriteCache: BitmapCharVertexObject[] = null): BitmapCharVertexObject[] {
+  createText(
+    measure: BitmapText2DMeasurement,
+    x: number,
+    y: number,
+    z: number,
+    hAlign: TextAlignH,
+    vAlign: TextAlignV,
+    spriteCache: BitmapCharVertexObject[] = null,
+  ): BitmapCharVertexObject[] {
 
     const sprites: BitmapCharVertexObject[] = [];
 
@@ -98,15 +117,18 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
 
     }
 
+    const isAlignCenter = hAlign === 'center';
+    const isAlignRight = hAlign === 'right';
+
     for (let i = 0; i < measure.lines.length; i++) {
 
       const line = measure.lines[i];
 
       let lineX = x;
 
-      if (align === BitmapText2DAlignment.Center) {
+      if (isAlignCenter) {
         lineX -= line.lineWidth / 2.0;
-      } else if (align === BitmapText2DAlignment.Right) {
+      } else if (isAlignRight) {
         lineX -= line.lineWidth;
       }
 
@@ -123,8 +145,24 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
 
         sprite.baselineOffset = char.bo;
 
-        // sprite.translate(lineX + char.x, y + measure.height - char.y, z);
-        sprite.translate(lineX + char.x, y + char.y, z);
+        const tx = lineX + char.x;
+        let ty = y + char.y;
+
+        switch (vAlign) {
+          case 'top':
+            ty = ty - this.lineHeight;
+            break;
+          case 'bottom':
+            ty = ty - this.lineHeight + measure.height;
+            break;
+          case 'center':
+            ty = ty - this.lineHeight + (measure.height / 2);
+            break;
+          case 'baseline':
+          default:
+        }
+
+        sprite.translate(tx, ty, z);
 
         sprites.push(sprite);
 
@@ -136,7 +174,7 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
 
   }
 
-  measureText(text: string, maxWidth = 0.0): BitmapText2DMeasurement {
+  measureText(text: string, maxWidth = 0): BitmapText2DMeasurement {
 
     const len = text.length;
 

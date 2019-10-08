@@ -1,45 +1,35 @@
-import {Scene, Vector3, BoxBufferGeometry, LineSegments, EdgesGeometry, LineBasicMaterial, Plane} from 'three';
-import {Display, TextureAtlas, DisplayMode, ParallaxProjection, BitmapText2D} from 'picimo';
+import {Scene} from 'three';
+import {Display, TextureAtlas, DisplayMode, ParallaxProjection, BitmapText2D, Plane} from 'picimo';
 
 const display = new Display(
   document.getElementById('picimo'), {
     mode: DisplayMode.AAQuality,
     resizeStrategy: 'fullscreen',
     alpha: true,
-    // clearColor: 0x407090,
   });
 
 async function init() {
-  const projection = new ParallaxProjection({
-    width: 3200,
-    height: 2400,
+  const projection = new ParallaxProjection(Plane.XY, {
+    width: 2000,
+    height: 2000,
     fit: 'contain',
   });
 
   const scene = new Scene();
 
-  const box = new LineSegments(
-    new EdgesGeometry(new BoxBufferGeometry(100, 100, 100)),
-    new LineBasicMaterial({ color: 0xffffff }),
-  );
+  const text = new BitmapText2D(
+    await TextureAtlas.load('comic-schrift.json', '/assets/'),
+    {
+      capacity: 1000,
+    });
 
-  scene.add(box);
+  const MESSAGE = 'WELC0ME\nTO\nPICIMO!';
 
-  const fontAtlas = await TextureAtlas.load('comic-schrift.json', '/assets/');
-  const text = new BitmapText2D(fontAtlas, {
-    capacity: 1000,
-  });
+  text.drawText(MESSAGE, 0, 0, 0, 0, 'center', 'center');
 
-  text.rotateOnWorldAxis(new Vector3(1, 0, 0), -Math.PI / 2);
-  // text.rotateOnWorldAxis(new Vector3(1, 0, 0), -.15);
-
-  const TXT = 'WELCOME\nTO\nPICIMO!';
-
-  text.drawText(TXT, 0, 0, 0, 0, 1);
-
-  // const c = text.bitmapChars.createSpriteFromTexture(text.fontAtlas.frame('W'));
-  // c.originX = -100;
-  // c.originY = -400;
+  // const c = text.bitmapChars.createSpriteFromTexture(text.fontAtlas.frame('@'));
+  // c.originX = 0;
+  // c.originY = 0;
 
   scene.add(text);
 
@@ -55,9 +45,7 @@ async function init() {
   console.log('display', display);
   console.log('projection', projection);
   console.log('scene', scene);
-  console.log('fontAtlas', fontAtlas);
-  console.log('text', text.measureText(TXT), text);
-
+  console.log('text', text.measureText(MESSAGE), text);
 }
 
 init();
