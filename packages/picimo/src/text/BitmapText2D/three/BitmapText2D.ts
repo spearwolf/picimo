@@ -67,6 +67,16 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
     this.hSpacing = fontAtlas.getFeature('hSpacing') as number || 1;
     this.whiteSpaceWidth = fontAtlas.getFeature('whiteSpaceWidth') as number;
 
+    if (isNaN(this.lineHeight) || this.lineHeight <= 0) {
+      throw new Error(`[BitmapText2D] invalid meta.lineHeight: ${this.lineHeight}`);
+    }
+    if (isNaN(this.hSpacing)) {
+      throw new Error(`[BitmapText2D] invalid meta.hSpacing: ${this.hSpacing}`);
+    }
+    if (isNaN(this.whiteSpaceWidth) || this.whiteSpaceWidth < 0) {
+      throw new Error(`[BitmapText2D] invalid meta.whiteSpaceWidth:, ${this.whiteSpaceWidth}`);
+    }
+
   }
 
   drawText(text: string, x: number, y: number, z: number, maxWidth = 0.0, align: BitmapText2DAlignment = BitmapText2DAlignment.Left, spriteCache: BitmapCharVertexObject[] = null) {
@@ -113,7 +123,8 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
 
         sprite.baselineOffset = char.bo;
 
-        sprite.translate(lineX + char.x, y + measure.height - char.y, z);
+        // sprite.translate(lineX + char.x, y + measure.height - char.y, z);
+        sprite.translate(lineX + char.x, y + char.y, z);
 
         sprites.push(sprite);
 
@@ -142,7 +153,7 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
     const makeNewLine = () => {
 
       cursor.x = 0;
-      cursor.y += this.lineHeight;
+      cursor.y -= this.lineHeight;
 
       chars.lineWidth = lineWidth;
 

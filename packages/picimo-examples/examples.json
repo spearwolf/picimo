@@ -7,6 +7,12 @@
     "url": "/BitmapFont/",
     "sourceUrl": "https://github.com/spearwolf/picimo/blob/master/packages/picimo-examples/src/BitmapFont.js"
   }, {
+    "id": "ComicFont",
+    "title": "ComicFont",
+    "entry": "./src/ComicFont.ts",
+    "url": "/ComicFont/",
+    "sourceUrl": "https://github.com/spearwolf/picimo/blob/master/packages/picimo-examples/src/ComicFont.ts"
+  }, {
     "id": "SimpleSprites",
     "title": "SimpleSprites",
     "entry": "./src/SimpleSprites.js",
