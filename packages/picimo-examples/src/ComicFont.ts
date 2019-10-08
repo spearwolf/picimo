@@ -5,8 +5,8 @@ const display = new Display(
   document.getElementById('picimo'), {
     mode: DisplayMode.AAQuality,
     resizeStrategy: 'fullscreen',
-    alpha: false,
-    clearColor: 0x407090,
+    alpha: true,
+    // clearColor: 0x407090,
   });
 
 async function init() {
