@@ -77,7 +77,7 @@ scene.add(cube);
 
 const yAxis = new THREE.Vector3(0, 1, 0);
 
-display.addEventListener('frame', ({ display, width, height, deltaTime }) => {
+display.on('frame', ({ display, width, height, deltaTime }) => {
 
   camera.aspect = width / height;
   camera.updateProjectionMatrix();

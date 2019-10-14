@@ -1,21 +1,19 @@
-import {Scene} from 'three';
-import {Display, TextureAtlas, DisplayMode, ParallaxProjection, BitmapText2D, Plane} from 'picimo';
+import {Display, TextureAtlas, DisplayMode, ParallaxProjection, BitmapText2D, Plane, DisplayOnInitOptions, Stage} from 'picimo';
 
 const display = new Display(
   document.getElementById('picimo'), {
     mode: DisplayMode.AAQuality,
     resizeStrategy: 'fullscreen',
     alpha: true,
+    stage: new Stage(
+      new ParallaxProjection(Plane.XY, {
+        width: 2000,
+        height: 2000,
+        fit: 'contain',
+      })),
   });
 
-async function init() {
-  const projection = new ParallaxProjection(Plane.XY, {
-    width: 2000,
-    height: 2000,
-    fit: 'contain',
-  });
-
-  const scene = new Scene();
+display.on('init', async ({stage}: DisplayOnInitOptions) => {
 
   const text = new BitmapText2D(
     await TextureAtlas.load('comic-schrift.json', '/assets/'),
@@ -31,22 +29,12 @@ async function init() {
   // c.originX = 0;
   // c.originY = 0;
 
-  scene.add(text);
-
-  display.addEventListener('frame', () => {
-
-    const {renderer} = display;
-
-    projection.update(display.width, display.height);
-    renderer.render(scene, projection.camera);
-
-  });
+  stage.scene.add(text);
 
   console.log('display', display);
-  console.log('projection', projection);
-  console.log('scene', scene);
+  console.log('projection', stage.projection);
+  console.log('scene', stage.scene);
   console.log('text', text.measureText(MESSAGE), text);
-}
+});
 
-init();
 display.start();

@@ -39,7 +39,7 @@ export const makeExampleShell = async (el, options, initializer) => {
 
   await initializer({ display, camera, scene, orbit });
 
-  display.addEventListener('frame', ({ display, width, height }) => {
+  display.on('frame', ({ display, width, height }) => {
 
     camera.aspect = width / height;
     camera.updateProjectionMatrix();

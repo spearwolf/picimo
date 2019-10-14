@@ -39,16 +39,16 @@ const init = async ({ display, scene, camera }) => {
 
   for (let z = -0.5 * COUNT * STEP_Z, j = 0; j < COUNT; j++, z+= STEP_Z) {
 
-    text2d.drawText(txt, 0, 0, z, 0, 1);
+    text2d.drawText(txt, 0, 0, z, 0, 'center');
 
     const c = txt.substr(0, 8);
     txt = `${txt.substr(8)}${c}`;
 
   }
 
-  const timeDisplay = new BitmapText2DBlock(text2d, 0, 0, 150, 0, 1);
+  const timeDisplay = new BitmapText2DBlock(text2d, 0, 0, 150, 0, 'center');
 
-  display.addEventListener('frame', ({ now }) => {
+  display.on('frame', ({ now }) => {
 
     text2d.material.uniforms.time.value = 0.125 * now % Math.PI * 2;
 

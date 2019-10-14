@@ -25,7 +25,7 @@ makeExampleShell(
 
     const sprites = mesh.sprites.createSpritesFromTextures(atlas.randomFrames(CAPACITY));
 
-    display.addEventListener('frame', ({ now }) => {
+    display.on('frame', ({ now }) => {
 
       for (let i = 0, t = now * .5; i < sprites.length; i++, t+= .046) {
 

@@ -1721,6 +1721,10 @@
     universal-user-agent "^3.0.0"
     url-template "^2.0.8"
 
+"@spearwolf/eventize@spearwolf/eventize":
+  version "0.6.10"
+  resolved "https://codeload.github.com/spearwolf/eventize/tar.gz/2c5c62e3c50e3a2407efbd7edb406f91bb75667b"
+
 "@types/estree@*", "@types/estree@0.0.39":
   version "0.0.39"
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"

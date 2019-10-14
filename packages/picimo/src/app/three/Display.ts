@@ -1,4 +1,5 @@
-import {WebGLRendererParameters, EventDispatcher, WebGLRenderer, Color} from 'three';
+import {WebGLRendererParameters, WebGLRenderer, Color} from 'three';
+import {Eventize} from '@spearwolf/eventize';
 
 import {readOption, unpick} from '../../utils';
 import {TextureUtils} from '../../textures';
@@ -7,15 +8,20 @@ import {IConfigurator} from './IConfigurator';
 import {PixelatedConfigurator} from './PixelatedConfigurator';
 import {AAQualityConfigurator} from './AAQualityConfigurator';
 import {AAPerformanceConfigurator} from './AAPerformanceConfigurator';
+import {Stage} from './Stage';
 
-const $dispatchResizeEvent = Symbol('dispatchResizeEvent');
-const $dispatchFrameEvent = Symbol('dispatchFrameEvent');
+const $emitResize = Symbol('emitResize');
+const $emitFrame = Symbol('emitFrame');
+const $emitInit = Symbol('emitInit');
 const $lockPixelRatio = Symbol('lockPixelRatio');
 const $lastPixelRatio = Symbol('lastPixelRatio');
 const $rafID = Symbol('rafID');
+const $stage = Symbol('stage');
+const $getEventOptions = Symbol('getEventOptions');
 
-const RESIZE = 'resize';
+const INIT = 'init';
 const FRAME = 'frame';
+const RESIZE = 'resize';
 
 export type DisplayGetSizeFn = (display: Display) => { width: number, height: number };
 export type DisplayResizeStrategy = HTMLElement | DisplayGetSizeFn | 'fullscreen';
@@ -45,6 +51,8 @@ export interface DisplayOptions {
 
   clearColor?: number | string | THREE.Color;
 
+  stage?: Stage;
+
 }
 
 const filterWebGLRendererParameters = unpick<WebGLRendererParameters>([
@@ -53,6 +61,7 @@ const filterWebGLRendererParameters = unpick<WebGLRendererParameters>([
   'clearColor',
   'scene',
   'canvas',
+  'stage',
 ]);
 
 const createConfigurator = (mode: DisplayMode) => {
@@ -67,7 +76,25 @@ const createConfigurator = (mode: DisplayMode) => {
   }
 };
 
-export class Display extends EventDispatcher {
+export interface DisplayEventOptions {
+  display: Display;
+
+  width: number;
+  height: number;
+
+  stage: Stage;
+};
+
+export interface DisplayOnInitOptions extends DisplayEventOptions { };
+export interface DisplayOnResizeOptions extends DisplayEventOptions { };
+
+export interface DisplayOnFrameOptions extends DisplayEventOptions {
+  now: number;
+  deltaTime: number;
+  frameNo: number;
+};
+
+export class Display extends Eventize {
 
   readonly renderer: WebGLRenderer;
 
@@ -113,6 +140,8 @@ export class Display extends EventDispatcher {
   private [$lastPixelRatio] = 0;
 
   private [$rafID] = 0;
+
+  private [$stage]: Stage;
 
   constructor(el: HTMLElement, options?: DisplayOptions & WebGLRendererParameters) {
     super();
@@ -180,6 +209,8 @@ export class Display extends EventDispatcher {
 
     configurator.postSetup(this);
 
+    this.stage = readOption<DisplayOptions>(options, 'stage') as Stage;
+
     this.resize();
 
     // on-rotate-go-fullscreen (experimental)
@@ -198,6 +229,21 @@ export class Display extends EventDispatcher {
           }
         };
       }
+    }
+  }
+
+  get stage() {
+    return this[$stage];
+  }
+
+  set stage(stage: Stage) {
+    const curStage = this[$stage];
+    if (curStage) {
+      this.off(curStage);
+    }
+    this[$stage] = stage;
+    if (stage) {
+      this.on(stage);
     }
   }
 
@@ -236,39 +282,9 @@ export class Display extends EventDispatcher {
       this.renderer.setSize(wPx, hPx);
 
       if (this.frameNo > 0) {
-        this[$dispatchResizeEvent](); // no need to emit this inside construction phase
+        this[$emitResize](); // no need to emit this inside construction phase
       }
     }
-  }
-
-  private [$dispatchResizeEvent]() {
-    this.dispatchEvent({
-
-      type: RESIZE,
-
-      display: this,
-
-      width: this.width,
-      height: this.height,
-
-    });
-  }
-
-  private [$dispatchFrameEvent]() {
-    this.dispatchEvent({
-
-      type: FRAME,
-
-      display: this,
-
-      width: this.width,
-      height: this.height,
-
-      now: this.now,
-      deltaTime: this.deltaTime,
-      frameNo: this.frameNo,
-
-    });
   }
 
   renderFrame(now = window.performance.now()) {
@@ -283,30 +299,66 @@ export class Display extends EventDispatcher {
     this.resize();
 
     if (this.frameNo === 0) {
-      this[$dispatchResizeEvent](); // always call resize before render the first frame!
+      this[$emitResize](); // always call resize before render the first frame!
     }
 
     this.renderer.clear(); // TODO add autoClear option?
 
-    this[$dispatchFrameEvent]();
+    this[$emitFrame]();
 
     ++this.frameNo;
 
   }
 
   start() {
+    this.pause = false;
+    this[$emitInit]();
+
     const renderFrame = (now: number) => {
       if (!this.pause) {
         this.renderFrame(now);
       }
       this[$rafID] = window.requestAnimationFrame(renderFrame);
     }
+
     this[$rafID] = window.requestAnimationFrame(renderFrame);
-    this.pause = false;
   }
 
   stop() {
     window.cancelAnimationFrame(this[$rafID]);
+  }
+
+  private [$emitInit]() {
+    this.emit(INIT, <DisplayOnInitOptions>{
+      ...this[$getEventOptions](),
+    });
+  }
+
+  private [$emitResize]() {
+    this.emit(RESIZE, <DisplayOnResizeOptions>{
+      ...this[$getEventOptions](),
+    });
+  }
+
+  private [$emitFrame]() {
+    this.emit(FRAME, <DisplayOnFrameOptions>{
+      ...this[$getEventOptions](),
+
+      now: this.now,
+      deltaTime: this.deltaTime,
+      frameNo: this.frameNo,
+    });
+  }
+
+  private [$getEventOptions]() {
+    return <DisplayEventOptions>{
+      display: this,
+
+      width: this.width,
+      height: this.height,
+
+      stage: this.stage,
+    };
   }
 
 }

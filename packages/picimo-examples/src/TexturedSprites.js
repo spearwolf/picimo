@@ -92,7 +92,7 @@ const init = async ({ display, scene }) => {
 
   const timeUniform = { value: 0.0 };
 
-  display.addEventListener('frame', ({ now }) => {
+  display.on('frame', ({ now }) => {
 
     timeUniform.value = 0.5 * now % Math.PI * 2;
 

@@ -52,7 +52,7 @@ const switchCamera = camera => {
   }
 };
 
-display.addEventListener('resize', ({width, height}) => {
+display.on('resize', ({width, height}) => {
 
   projection.update(width, height);
 
@@ -128,7 +128,7 @@ async function init() {
     }
   });
 
-  display.addEventListener('frame', ({deltaTime: t, display: {renderer}}) => {
+  display.on('frame', ({deltaTime: t, display: {renderer}}) => {
 
     controls.update();
 

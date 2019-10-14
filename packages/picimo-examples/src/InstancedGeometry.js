@@ -107,7 +107,7 @@ const init = async ({ display, scene }) => {
 
   const timeUniform = { value: 0.0 };
 
-  display.addEventListener('frame', ({ now }) => {
+  display.on('frame', ({ now }) => {
 
     timeUniform.value = (now * 0.5) % Math.PI * 2;
 
@@ -173,7 +173,7 @@ const init = async ({ display, scene }) => {
 
   scene.add(mesh);
 
-  display.addEventListener('frame', ({ deltaTime }) => {
+  display.on('frame', ({ deltaTime }) => {
 
     mesh.rotateOnAxis(new THREE.Vector3(0, 0, 1), deltaTime);
 
