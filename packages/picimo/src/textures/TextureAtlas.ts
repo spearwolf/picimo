@@ -135,8 +135,8 @@ export class TextureAtlas implements ITexturable {
     return sample(this._allFrameNames);
   }
 
-  getFeature(name: string): unknown {
-    return this._features !== null ? this._features.get(name) : undefined;
+  getFeature(name: string, defaultValue: unknown = undefined): unknown {
+    return this._features && this._features.has(name) ? this._features.get(name) : defaultValue;
   }
 
   setFeature(name: string, value: unknown) {

@@ -15,13 +15,14 @@ const init = async ({ display, scene, camera }) => {
   camera.position.z = 300;
   camera.lookAt(0, 0, 0);
 
-  const text2d = new BitmapText2D(
-    await TextureAtlas.load('rbmfs.json', '/assets/rbmfs/'), {
+  const text2d = new BitmapText2D({
       capacity: 1000,
       vertexShaderTransformHook: `
         p.y += 125.0 * sin((2.0 * time) + (p.x / 300.0) + (p.z / 100.0));
       `,
     });
+
+  text2d.fontAtlas = await TextureAtlas.load('rbmfs.json', '/assets/rbmfs/');
 
   const measure = text2d.measureText('Rokko!\nClaudia...\n(Wolfger)', 0);
   debug('measureText', measure);

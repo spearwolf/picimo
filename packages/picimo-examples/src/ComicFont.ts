@@ -15,11 +15,8 @@ const display = new Display(
 
 display.on('init', async ({stage}: DisplayOnInitOptions) => {
 
-  const text = new BitmapText2D(
-    await TextureAtlas.load('comic-schrift.json', '/assets/'),
-    {
-      capacity: 1000,
-    });
+  const text = new BitmapText2D({ capacity: 1000 });
+  text.fontAtlas = await TextureAtlas.load('comic-schrift.json', '/assets/');
 
   const MESSAGE = 'WELC0ME\nTO\nPICIMO!';
 

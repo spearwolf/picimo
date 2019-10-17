@@ -37,9 +37,12 @@ export interface BitmapText2DOptions extends BitmapCharGroupOptions, BitmapFontS
 
 const pickShaderHooks = pick<BitmapFontShaderHooks>(['vertexShaderPreHook', 'vertexShaderTransformHook']);
 
+const $fontAtlas = Symbol('fontAtlas');
+const $shaderHooks = Symbol('shaderHooks');
+const $readFontFeatures = Symbol('readFontFeatures');
+
 export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapChar, BitmapCharBaseMethodsType, BitmapCharBase> {
 
-  fontAtlas: TextureAtlas;
   bitmapChars: BitmapCharGroup;
   material: BitmapFontMaterial;
 
@@ -47,27 +50,32 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
   hSpacing: number;
   whiteSpaceWidth: number;
 
-  constructor(fontAtlas: TextureAtlas, options?: BitmapText2DOptions) {
+  private [$fontAtlas]: TextureAtlas;
+  private [$shaderHooks]: BitmapFontShaderHooks;
+
+  constructor(options?: BitmapText2DOptions) {
 
     const bitmapCharGroup = new BitmapCharGroup(options);
     const baseChars = getBitmapCharBaseGroup();
     const geometry = new SpriteGroupInstancedBufferGeometry(baseChars, bitmapCharGroup);
-    const material = new BitmapFontMaterial(
-      makeTexture(fontAtlas.baseTexture.imgEl as HTMLImageElement),
-      pickShaderHooks(options),
-    );
 
-    super(geometry, material);
+    super(geometry, undefined);
 
-    this.fontAtlas = fontAtlas;
     this.bitmapChars = bitmapCharGroup;
-    this.material = material;
 
-    this.type = 'BitmapText2D';
+    this.hSpacing = 1;
 
-    this.lineHeight = fontAtlas.getFeature('lineHeight') as number;
-    this.hSpacing = fontAtlas.getFeature('hSpacing') as number || 1;
-    this.whiteSpaceWidth = fontAtlas.getFeature('whiteSpaceWidth') as number;
+    this[$shaderHooks] = pickShaderHooks(options);
+
+  }
+
+  private [$readFontFeatures]() {
+
+    const fontAtlas = this[$fontAtlas];
+
+    this.lineHeight = fontAtlas.getFeature('lineHeight', this.lineHeight) as number;
+    this.hSpacing = fontAtlas.getFeature('hSpacing', this.hSpacing) as number;
+    this.whiteSpaceWidth = fontAtlas.getFeature('whiteSpaceWidth', this.whiteSpaceWidth) as number;
 
     if (isNaN(this.lineHeight) || this.lineHeight <= 0) {
       throw new Error(`[BitmapText2D] invalid meta.lineHeight: ${this.lineHeight}`);
@@ -79,6 +87,22 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
       throw new Error(`[BitmapText2D] invalid meta.whiteSpaceWidth:, ${this.whiteSpaceWidth}`);
     }
 
+  }
+
+  get fontAtlas() { return this[$fontAtlas]; }
+
+  set fontAtlas(fontAtlas: TextureAtlas) {
+    const prevAtlas = this[$fontAtlas];
+    // TODO cleanup/destroy previous fontAtlas?
+    this[$fontAtlas] = fontAtlas;
+    if (fontAtlas && prevAtlas !== fontAtlas) {
+      this[$readFontFeatures]();
+      // TODO cleanup previous material?
+      this.material = new BitmapFontMaterial(
+        makeTexture(fontAtlas.baseTexture.imgEl as HTMLImageElement),
+        this[$shaderHooks],
+      );
+    }
   }
 
   drawText(
