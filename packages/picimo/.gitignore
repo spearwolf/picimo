@@ -5,3 +5,4 @@ dist
 node_modules
 .size-snapshot.json
 dist/esm
+package-lock.json

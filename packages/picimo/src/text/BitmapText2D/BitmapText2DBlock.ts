@@ -116,4 +116,9 @@ export class BitmapText2DBlock {
     }
 
   }
+
+  clear() {
+    this.update('');
+  }
+
 }

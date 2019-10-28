@@ -50,6 +50,8 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
   hSpacing: number;
   whiteSpaceWidth: number;
 
+  onFontAtlasUpdate: (bitmapText2D: BitmapText2D) => void;
+
   private [$fontAtlas]: TextureAtlas;
   private [$shaderHooks]: BitmapFontShaderHooks;
 
@@ -102,6 +104,10 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
         makeTexture(fontAtlas.baseTexture.imgEl as HTMLImageElement),
         this[$shaderHooks],
       );
+      const {onFontAtlasUpdate} = this;
+      if (onFontAtlasUpdate) {
+        onFontAtlasUpdate(this);
+      }
     }
   }
 
