@@ -1,3 +1,3 @@
 
 export * from './Display';
-export * from './Stage';
+export * from './Stage2D';

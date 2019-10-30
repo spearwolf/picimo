@@ -8,7 +8,7 @@ import {IConfigurator} from './IConfigurator';
 import {PixelatedConfigurator} from './PixelatedConfigurator';
 import {AAQualityConfigurator} from './AAQualityConfigurator';
 import {AAPerformanceConfigurator} from './AAPerformanceConfigurator';
-import {Stage} from './Stage';
+import {Stage2D} from './Stage2D';
 
 const $emitResize = Symbol('emitResize');
 const $emitFrame = Symbol('emitFrame');
@@ -51,7 +51,7 @@ export interface DisplayOptions {
 
   clearColor?: number | string | THREE.Color;
 
-  stage?: Stage;
+  stage?: Stage2D;
 
 }
 
@@ -82,7 +82,7 @@ export interface DisplayEventOptions {
   width: number;
   height: number;
 
-  stage: Stage;
+  stage: Stage2D;
 };
 
 export interface DisplayOnInitOptions extends DisplayEventOptions { };
@@ -141,7 +141,7 @@ export class Display extends Eventize {
 
   private [$rafID] = 0;
 
-  private [$stage]: Stage;
+  private [$stage]: Stage2D;
 
   constructor(el: HTMLElement, options?: DisplayOptions & WebGLRendererParameters) {
     super();
@@ -209,7 +209,7 @@ export class Display extends Eventize {
 
     configurator.postSetup(this);
 
-    this.stage = readOption<DisplayOptions>(options, 'stage') as Stage;
+    this.stage = readOption<DisplayOptions>(options, 'stage') as Stage2D;
 
     this.resize();
 
@@ -236,7 +236,7 @@ export class Display extends Eventize {
     return this[$stage];
   }
 
-  set stage(stage: Stage) {
+  set stage(stage: Stage2D) {
     const curStage = this[$stage];
     if (curStage) {
       this.off(curStage);
@@ -334,12 +334,24 @@ export class Display extends Eventize {
     });
   }
 
+  /**
+   * 1. emit 'resize' event
+   * 2. resize stage projection
+   */
   private [$emitResize]() {
     this.emit(RESIZE, <DisplayOnResizeOptions>{
       ...this[$getEventOptions](),
     });
+    const stage = this[$stage];
+    if (stage) {
+      stage.resize(this.width, this.height);
+    }
   }
 
+  /**
+   * 1. emit 'frame' event
+   * 2. render stage (if exists)
+   */
   private [$emitFrame]() {
     this.emit(FRAME, <DisplayOnFrameOptions>{
       ...this[$getEventOptions](),
@@ -348,6 +360,13 @@ export class Display extends Eventize {
       deltaTime: this.deltaTime,
       frameNo: this.frameNo,
     });
+    const stage = this[$stage];
+    if (stage) {
+      const {camera} = stage;
+      if (camera) {
+        this.renderer.render(stage, camera);
+      }
+    }
   }
 
   private [$getEventOptions]() {

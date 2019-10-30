@@ -1,11 +1,11 @@
-import {Display, TextureAtlas, DisplayMode, ParallaxProjection, BitmapText2D, Plane, DisplayOnInitOptions, Stage} from 'picimo';
+import {Display, TextureAtlas, DisplayMode, ParallaxProjection, BitmapText2D, Plane, DisplayOnInitOptions, Stage2D} from 'picimo';
 
 const display = new Display(
   document.getElementById('picimo'), {
     mode: DisplayMode.AAQuality,
     resizeStrategy: 'fullscreen',
     alpha: true,
-    stage: new Stage(
+    stage: new Stage2D(
       new ParallaxProjection(Plane.XY, {
         width: 2000,
         height: 2000,
@@ -26,11 +26,10 @@ display.on('init', async ({stage}: DisplayOnInitOptions) => {
   // c.originX = 0;
   // c.originY = 0;
 
-  stage.scene.add(text);
+  stage.add(text);
 
   console.log('display', display);
   console.log('projection', stage.projection);
-  console.log('scene', stage.scene);
   console.log('text', text.measureText(MESSAGE), text);
 });
 
