@@ -2,7 +2,6 @@ export * from './display';
 export * from './controls';
 export * from './map2d';
 export * from './projection';
-export * from './shaders';
 export * from './sprites';
 export * from './text';
 export * from './textures';

@@ -1,6 +1,7 @@
 
 export * from './colors';
 export * from './math';
+export * from './shaders';
 
 export * from './base64toUint32Arr';
 export * from './generateUuid';
