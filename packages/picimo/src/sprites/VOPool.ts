@@ -1,5 +1,4 @@
-import { maxOf } from '../math';
-import { readOption, generateUuid } from '../utils';
+import { maxOf, readOption, generateUuid } from '../utils';
 
 import { VOArray } from './VOArray';
 import { VODescriptor, VertexObject } from './VODescriptor';

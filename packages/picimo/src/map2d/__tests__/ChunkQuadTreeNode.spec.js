@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 import assert from 'assert';
 
-import { AABB2 } from '../../math';
+import { AABB2 } from '../../utils';
 
 import { ChunkQuadTreeNode } from '../tiledmap/ChunkQuadTreeNode';
 import { TiledMapLayerChunk } from '../tiledmap/TiledMapLayerChunk';

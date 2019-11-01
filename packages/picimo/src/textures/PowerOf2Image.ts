@@ -1,5 +1,5 @@
 /* eslint-env browser */
-import { findNextPowerOf2, isPowerOf2 } from '../math';
+import { findNextPowerOf2, isPowerOf2 } from '../utils';
 
 export type ImageSource = HTMLImageElement | HTMLCanvasElement | HTMLVideoElement;
 

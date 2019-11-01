@@ -1,6 +1,4 @@
-import { AABB2 } from '../../math';
-
-import { base64toUint32Arr } from '../../utils';
+import { AABB2, base64toUint32Arr } from '../../utils';
 
 import { ITiledMapLayerChunkData } from './ITiledMapLayerChunkData';
 

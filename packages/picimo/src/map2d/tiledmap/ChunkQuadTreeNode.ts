@@ -1,4 +1,4 @@
-import { AABB2 } from '../../math';
+import { AABB2 } from '../../utils';
 
 import { TiledMapLayerChunk } from './TiledMapLayerChunk';
 

@@ -1,6 +1,6 @@
 import { Camera, Quaternion, Vector3 } from "three";
 
-import { Plane, Vector2Proxy } from "../../math";
+import { Plane, Vector2Proxy } from "../../utils";
 
 import { calcViewSize } from "../calcViewSize";
 import { IProjectionRule } from "../IProjectionRule";
