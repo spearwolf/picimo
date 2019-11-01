@@ -8,7 +8,7 @@ import {IConfigurator} from './IConfigurator';
 import {PixelatedConfigurator} from './PixelatedConfigurator';
 import {AAQualityConfigurator} from './AAQualityConfigurator';
 import {AAPerformanceConfigurator} from './AAPerformanceConfigurator';
-import {Stage2D} from './Stage2D';
+import {Stage2D} from '../../projection';
 
 const $emitResize = Symbol('emitResize');
 const $emitFrame = Symbol('emitFrame');
