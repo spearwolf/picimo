@@ -1,4 +1,6 @@
 
+export * from './colors';
+
 export * from './base64toUint32Arr';
 export * from './generateUuid';
 export * from './get';
