@@ -45,6 +45,7 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
 
   bitmapChars: BitmapCharGroup;
   material: BitmapFontMaterial;
+  texture: THREE.Texture;
 
   lineHeight: number;
   hSpacing: number;
@@ -95,15 +96,14 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
 
   set fontAtlas(fontAtlas: TextureAtlas) {
     const prevAtlas = this[$fontAtlas];
-    // TODO cleanup/destroy previous fontAtlas?
     this[$fontAtlas] = fontAtlas;
-    if (fontAtlas && prevAtlas !== fontAtlas) {
-      this[$readFontFeatures]();
-      // TODO cleanup previous material?
-      this.material = new BitmapFontMaterial(
-        makeTexture(fontAtlas.baseTexture.imgEl as HTMLImageElement),
-        this[$shaderHooks],
-      );
+    if (prevAtlas != fontAtlas) {
+      if (fontAtlas) {
+        this[$readFontFeatures]();
+        this.disposeMaterial();
+        this.texture = makeTexture(fontAtlas.baseTexture.imgEl as HTMLImageElement);
+        this.material = new BitmapFontMaterial(this.texture, this[$shaderHooks]);
+      }
       const {onFontAtlasUpdate} = this;
       if (onFontAtlasUpdate) {
         onFontAtlasUpdate(this);
@@ -294,6 +294,17 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
 
     };
 
+  }
+
+  disposeMaterial() {
+    if (this.material) {
+      this.material.dispose();
+    }
+    if (this.texture) {
+      this.texture.dispose();
+    }
+    this.material = undefined;
+    this.texture = undefined;
   }
 
 }
