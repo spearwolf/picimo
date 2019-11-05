@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import eventize, {Eventize} from '@spearwolf/eventize';
 
 import { SpriteGroupMesh, SpriteGroupInstancedBufferGeometry } from '../../../sprites';
 import { TextureAtlas } from '../../../textures';
@@ -41,6 +42,8 @@ const $fontAtlas = Symbol('fontAtlas');
 const $shaderHooks = Symbol('shaderHooks');
 const $readFontFeatures = Symbol('readFontFeatures');
 
+export interface BitmapText2D extends Eventize {};
+
 export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapChar, BitmapCharBaseMethodsType, BitmapCharBase> {
 
   bitmapChars: BitmapCharGroup;
@@ -50,8 +53,6 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
   lineHeight: number;
   hSpacing: number;
   whiteSpaceWidth: number;
-
-  onFontAtlasUpdate: (bitmapText2D: BitmapText2D) => void;
 
   private [$fontAtlas]: TextureAtlas;
   private [$shaderHooks]: BitmapFontShaderHooks;
@@ -69,6 +70,8 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
     this.hSpacing = 1;
 
     this[$shaderHooks] = pickShaderHooks(options);
+
+    eventize(this);
 
   }
 
@@ -97,17 +100,18 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
   set fontAtlas(fontAtlas: TextureAtlas) {
     const prevAtlas = this[$fontAtlas];
     this[$fontAtlas] = fontAtlas;
-    if (prevAtlas != fontAtlas) {
-      if (fontAtlas) {
+    if (fontAtlas) {
+      if (prevAtlas !== fontAtlas) {
         this[$readFontFeatures]();
+      }
+      if (fontAtlas.baseTexture !== (prevAtlas && prevAtlas.baseTexture)) {
         this.disposeMaterial();
         this.texture = makeTexture(fontAtlas.baseTexture.imgEl as HTMLImageElement);
         this.material = new BitmapFontMaterial(this.texture, this[$shaderHooks]);
       }
-      const {onFontAtlasUpdate} = this;
-      if (onFontAtlasUpdate) {
-        onFontAtlasUpdate(this);
-      }
+    }
+    if (prevAtlas != fontAtlas) {
+      this.emit('fontAtlasUpdate', this);
     }
   }
 

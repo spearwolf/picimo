@@ -47,7 +47,7 @@ const init = async ({ display, scene, camera }) => {
 
   }
 
-  const timeDisplay = new BitmapText2DBlock(text2d, 0, 0, 150, 0, 'center');
+  const timeDisplay = new BitmapText2DBlock(text2d, [0, 0, 150], 0, 'center');
 
   display.on('frame', ({ now }) => {
 

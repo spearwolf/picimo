@@ -19,14 +19,11 @@ export class BitmapText2DBlock {
   private _hAlign: TextAlignH;
   private _vAlign: TextAlignV;
 
-  constructor(bitmapText2D: BitmapText2D, x: number, y: number, z: number, maxWidth: number = 0, hAlign: TextAlignH = 'left', vAlign: TextAlignV = 'baseline') {
+  constructor(bitmapText2D: BitmapText2D, position: [number, number, number], maxWidth: number = 0, hAlign: TextAlignH = 'left', vAlign: TextAlignV = 'baseline') {
 
     this.bitmapText2D = bitmapText2D;
 
-    this.x = x;
-    this.y = y;
-    this.z = z;
-
+    this.position = position;
     this.maxWidth = maxWidth;
 
     this.hAlign = hAlign;
@@ -40,6 +37,8 @@ export class BitmapText2DBlock {
   get x() { return this._x; }
   get y() { return this._y; }
   get z() { return this._z; }
+
+  get position() { return [this._x, this._y, this._z]; }
 
   get maxWidth() { return this._maxWidth; }
 
@@ -62,6 +61,15 @@ export class BitmapText2DBlock {
 
   set z(z: number) {
     if (this._z !== z) {
+      this._z = z;
+      this.needsUpdate = true;
+    }
+  }
+
+  set position([x, y, z]: [number, number, number]) {
+    if (this._x !== x || this._y !== y || this._z !== z) {
+      this._x = x;
+      this._y = y;
       this._z = z;
       this.needsUpdate = true;
     }
