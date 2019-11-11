@@ -54,6 +54,12 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
   hSpacing: number;
   whiteSpaceWidth: number;
 
+  get fontHeight() {return this.fontSize || this.lineHeight;}
+  get fontZoom() {return this.fontHeight / this.lineHeight;}
+
+  fontSize: number;
+  lineGap: number;
+
   private [$fontAtlas]: TextureAtlas;
   private [$shaderHooks]: BitmapFontShaderHooks;
 
@@ -68,6 +74,8 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
     this.bitmapChars = bitmapCharGroup;
 
     this.hSpacing = 1;
+    this.fontSize = 0;
+    this.lineGap = 0;
 
     this[$shaderHooks] = pickShaderHooks(options);
 
@@ -154,6 +162,8 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
     const isAlignCenter = hAlign === 'center';
     const isAlignRight = hAlign === 'right';
 
+    const {fontZoom} = this;
+
     for (let i = 0; i < measure.lines.length; i++) {
 
       const line = measure.lines[i];
@@ -174,7 +184,10 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
 
         const { tex } = char;
 
-        bitmapChars.setSpriteSize(sprite, tex.width, tex.height, descriptor);
+        const w = Math.ceil(tex.width * fontZoom);
+        const h = Math.ceil(tex.height * fontZoom);
+
+        bitmapChars.setSpriteSize(sprite, w, h, descriptor);
         bitmapChars.setTexCoordsByTexture(sprite, tex, descriptor);
 
         sprite.baselineOffset = char.bo;
@@ -222,10 +235,14 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
     let maxLineWidth = 0;
     let lineWidth = 0;
 
+    const {fontHeight, fontZoom} = this;
+    const lineHeight = Math.ceil(fontHeight + this.lineGap);
+    const hSpacing = Math.ceil(this.hSpacing * fontZoom) || 1;
+
     const makeNewLine = () => {
 
       cursor.x = 0;
-      cursor.y -= this.lineHeight;
+      cursor.y -= lineHeight;
 
       chars.lineWidth = lineWidth;
 
@@ -262,8 +279,8 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
 
         if (tex !== undefined) {
 
-          const { width } = tex;
-          const baselineOffset = tex.getFeature('baselineOffset') as number || 0;
+          const width = Math.ceil(tex.width * fontZoom);
+          const baselineOffset = Math.ceil(fontZoom * (tex.getFeature('baselineOffset') as number || 0));
 
           if (maxWidth > 0  && (cursor.x + width) >= maxWidth) {
             makeNewLine();
@@ -274,7 +291,7 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
 
           lineWidth = cursor.x + width;
 
-          cursor.x += width + this.hSpacing;
+          cursor.x += width + hSpacing;
 
         }
 
@@ -294,7 +311,7 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
       maxLineWidth,
       charCount,
 
-      height: lines.length * this.lineHeight,
+      height: lines.length * fontHeight + ((lines.length - 1) * this.lineGap),
 
     };
 
