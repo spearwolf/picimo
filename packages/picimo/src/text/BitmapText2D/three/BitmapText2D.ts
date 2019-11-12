@@ -54,8 +54,8 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
   hSpacing: number;
   whiteSpaceWidth: number;
 
-  get fontHeight() {return this.fontSize || this.lineHeight;}
-  get fontZoom() {return this.fontHeight / this.lineHeight;}
+  // get fontHeight() {return this.fontSize || this.lineHeight;}
+  // get fontZoom() {return this.fontHeight / this.lineHeight;}
 
   fontSize: number;
   lineGap: number;
@@ -123,17 +123,27 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
     }
   }
 
+  private getFontHeight(fontSize: number = 0) {
+    return fontSize || this.fontSize || this.lineHeight;
+  }
+
+  private getFontZoom(fontHeight: number) {
+    return fontHeight / this.lineHeight;
+  }
+
   drawText(
     text: string,
     x: number,
     y: number,
     z: number,
     maxWidth = 0.0,
+    fontSize = 0,
+    lineGap = 0,
     hAlign: TextAlignH = 'left',
     vAlign: TextAlignV = 'baseline',
     spriteCache: BitmapCharVertexObject[] = null,
   ) {
-    return this.createText(this.measureText(text, maxWidth), x, y, z, hAlign, vAlign, spriteCache);
+    return this.createText(this.measureText(text, maxWidth, fontSize, lineGap), x, y, z, fontSize, hAlign, vAlign, spriteCache);
   }
 
   createText(
@@ -141,6 +151,7 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
     x: number,
     y: number,
     z: number,
+    fontSize = 0,
     hAlign: TextAlignH,
     vAlign: TextAlignV,
     spriteCache: BitmapCharVertexObject[] = null,
@@ -162,7 +173,7 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
     const isAlignCenter = hAlign === 'center';
     const isAlignRight = hAlign === 'right';
 
-    const {fontZoom} = this;
+    const fontZoom = this.getFontZoom(this.getFontHeight(fontSize));
 
     for (let i = 0; i < measure.lines.length; i++) {
 
@@ -193,17 +204,18 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
         sprite.baselineOffset = char.bo;
 
         const tx = lineX + char.x;
+        const lineHeight = Math.ceil(this.lineHeight * fontZoom);
         let ty = y + char.y;
 
         switch (vAlign) {
           case 'top':
-            ty = ty - this.lineHeight;
+            ty = ty - lineHeight;
             break;
           case 'bottom':
-            ty = ty - this.lineHeight + measure.height;
+            ty = ty - lineHeight + measure.height;
             break;
           case 'center':
-            ty = ty - this.lineHeight + (measure.height / 2);
+            ty = ty - lineHeight + (measure.height / 2);
             break;
           case 'baseline':
           default:
@@ -221,7 +233,7 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
 
   }
 
-  measureText(text: string, maxWidth = 0): BitmapText2DMeasurement {
+  measureText(text: string, maxWidth = 0, fontSize = 0, lineGap = 0): BitmapText2DMeasurement {
 
     const len = text.length;
 
@@ -235,7 +247,8 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
     let maxLineWidth = 0;
     let lineWidth = 0;
 
-    const {fontHeight, fontZoom} = this;
+    const fontHeight = this.getFontHeight(fontSize);
+    const fontZoom = this.getFontZoom(fontHeight);
     const lineHeight = Math.ceil(fontHeight + this.lineGap);
     const hSpacing = Math.ceil(this.hSpacing * fontZoom) || 1;
 
@@ -311,7 +324,7 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
       maxLineWidth,
       charCount,
 
-      height: lines.length * fontHeight + ((lines.length - 1) * this.lineGap),
+      height: lines.length * fontHeight + ((lines.length - 1) * lineGap),
 
     };
 

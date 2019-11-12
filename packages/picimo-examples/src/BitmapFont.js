@@ -24,7 +24,7 @@ const init = async ({ display, scene, camera }) => {
 
   text2d.fontAtlas = await TextureAtlas.load('rbmfs.json', '/assets/rbmfs/');
 
-  const measure = text2d.measureText('Rokko!\nClaudia...\n(Wolfger)', 0);
+  const measure = text2d.measureText('Rokko!\nClaudia...\n(Wolfger)');
   debug('measureText', measure);
 
   // ----------------------------------------------------------------------------------
@@ -40,14 +40,14 @@ const init = async ({ display, scene, camera }) => {
 
   for (let z = -0.5 * COUNT * STEP_Z, j = 0; j < COUNT; j++, z+= STEP_Z) {
 
-    text2d.drawText(txt, 0, 0, z, 0, 'center');
+    text2d.drawText(txt, 0, 0, z, 0, 0, 0, 'center');
 
     const c = txt.substr(0, 8);
     txt = `${txt.substr(8)}${c}`;
 
   }
 
-  const timeDisplay = new BitmapText2DBlock(text2d, [0, 0, 150], 0, 'center');
+  const timeDisplay = new BitmapText2DBlock(text2d, [0, 0, 150], 0, 32, 0, 'center');
 
   display.on('frame', ({ now }) => {
 

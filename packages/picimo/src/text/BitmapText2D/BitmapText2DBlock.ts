@@ -16,15 +16,21 @@ export class BitmapText2DBlock {
 
   private _maxWidth: number;
 
+  private _fontSize: number;
+  private _lineGap: number;
+
   private _hAlign: TextAlignH;
   private _vAlign: TextAlignV;
 
-  constructor(bitmapText2D: BitmapText2D, position: [number, number, number], maxWidth: number = 0, hAlign: TextAlignH = 'left', vAlign: TextAlignV = 'baseline') {
+  constructor(bitmapText2D: BitmapText2D, position: [number, number, number], maxWidth = 0, fontSize = 0, lineGap = 0, hAlign: TextAlignH = 'left', vAlign: TextAlignV = 'baseline') {
 
     this.bitmapText2D = bitmapText2D;
 
     this.position = position;
     this.maxWidth = maxWidth;
+
+    this._fontSize = fontSize;
+    this._lineGap = lineGap;
 
     this.hAlign = hAlign;
     this.vAlign = vAlign;
@@ -41,6 +47,9 @@ export class BitmapText2DBlock {
   get position() { return [this._x, this._y, this._z]; }
 
   get maxWidth() { return this._maxWidth; }
+
+  get fontSize() { return this._fontSize; }
+  get lineGap() { return this._lineGap; }
 
   get hAlign() { return this._hAlign; }
   get vAlign() { return this._vAlign; }
@@ -71,6 +80,20 @@ export class BitmapText2DBlock {
       this._x = x;
       this._y = y;
       this._z = z;
+      this.needsUpdate = true;
+    }
+  }
+
+  set fontSize(fontSize: number) {
+    if (this._fontSize !== fontSize) {
+      this._fontSize = fontSize;
+      this.needsUpdate = true;
+    }
+  }
+
+  set lineGap(lineGap: number) {
+    if (this._lineGap !== lineGap) {
+      this._lineGap = lineGap;
       this.needsUpdate = true;
     }
   }
@@ -107,7 +130,7 @@ export class BitmapText2DBlock {
 
       if (typeof text === 'string' && text.length > 0) {
 
-        this.sprites = bitmapText2D.drawText(text, this.x, this.y, this.z, this.maxWidth, this.hAlign, this.vAlign, prevSprites);
+        this.sprites = bitmapText2D.drawText(text, this.x, this.y, this.z, this.maxWidth, this.fontSize, this.lineGap, this.hAlign, this.vAlign, prevSprites);
 
       } else {
 

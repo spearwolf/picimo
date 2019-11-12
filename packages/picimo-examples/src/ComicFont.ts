@@ -23,7 +23,7 @@ display.on('init', async ({stage}: DisplayOnInitOptions) => {
   // text.fontSize = 150;
   text.lineGap = 50;
 
-  text.drawText(MESSAGE, 0, 0, 0, 0, 'center', 'center');
+  text.drawText(MESSAGE, 0, 0, 0, 0, 0, 0, 'center', 'center');
 
   // const c = text.bitmapChars.createSpriteFromTexture(text.fontAtlas.frame('@'));
   // c.originX = 0;
