@@ -54,9 +54,6 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
   hSpacing: number;
   whiteSpaceWidth: number;
 
-  // get fontHeight() {return this.fontSize || this.lineHeight;}
-  // get fontZoom() {return this.fontHeight / this.lineHeight;}
-
   fontSize: number;
   lineGap: number;
 
@@ -251,6 +248,7 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
     const fontZoom = this.getFontZoom(fontHeight);
     const lineHeight = Math.ceil(fontHeight + this.lineGap);
     const hSpacing = Math.ceil(this.hSpacing * fontZoom) || 1;
+    const whiteSpaceWidth = Math.ceil(this.whiteSpaceWidth * fontZoom);
 
     const makeNewLine = () => {
 
@@ -276,7 +274,7 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
 
       if (c === ' ') {
 
-        cursor.x += this.whiteSpaceWidth;
+        cursor.x += whiteSpaceWidth;
 
         if (maxWidth > 0 && cursor.x >= maxWidth) {
           makeNewLine();
