@@ -29,9 +29,8 @@ export function createBufferAttributes<T, U, K = THREE.InterleavedBuffer> (
       const typedArray = voArray.getTypedArray(attr.type);
       const stride = descriptor.bytesPerVertex / typedArray.BYTES_PER_ELEMENT;
 
-      // buffer = new THREE.InterleavedBuffer(typedArray, stride);
       buffer = createBuffer(typedArray, stride);
-      (buffer as any).setDynamic(dynamic);
+      (buffer as any).setUsage(dynamic ? THREE.DynamicDrawUsage : THREE.StaticDrawUsage);
 
       bufCollection.push(buffer);
       bufMap.set(attr.type, buffer);
@@ -39,7 +38,7 @@ export function createBufferAttributes<T, U, K = THREE.InterleavedBuffer> (
     }
 
     const bufferAttr = new THREE.InterleavedBufferAttribute(buffer as any, attr.size, attr.offset);
-    bufferGeometry.addAttribute(attrName, bufferAttr);
+    bufferGeometry.setAttribute(attrName, bufferAttr);
 
   });
 
