@@ -55,7 +55,7 @@ const infoDisplayElement = document.createElement('div');
 infoDisplayElement.setAttribute('class', 'infoDisplay infoText');
 threeContainerElement.appendChild(infoDisplayElement);
 
-const controls = new OrbitControls(camera3d);
+const controls = new OrbitControls(camera3d, renderer.domElement);
 
 const PIXELATE = 'pixelate';
 

@@ -33,7 +33,7 @@ let curCamera = null; // camera3d;
 
 const projection = new OrthographicProjection(Plane.XZ, { pixelZoom: 3, near: .1, far: 1000, distance: 100 });
 
-const controls = new OrbitControls(camera3d);
+const controls = new OrbitControls(camera3d, display.canvas);
 
 let viewFrame;
 

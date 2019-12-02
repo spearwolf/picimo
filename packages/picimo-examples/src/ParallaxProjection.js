@@ -33,7 +33,7 @@ let curCamera = null; // camera3d;
 
 const projection = new ParallaxProjection(Plane.XZ, { pixelZoom: 3, distance: 300 });
 
-const controls = new OrbitControls(camera3d);
+const controls = new OrbitControls(camera3d, display.canvas);
 
 let viewFrame;
 
