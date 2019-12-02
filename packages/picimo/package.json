@@ -67,14 +67,14 @@
     "rollup-plugin-replace": "^2.2.0",
     "rollup-plugin-size-snapshot": "^0.10.0",
     "rollup-plugin-terser": "^5.1.2",
-    "three": "^0.110.0",
+    "three": "0.109.0",
     "typescript": "^3.6.4",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0"
   },
   "peerDependencies": {
-    "three": "^0.110.0"
+    "three": "0.109.0"
   },
   "dependencies": {
     "@babel/runtime-corejs3": "^7.6.3",
