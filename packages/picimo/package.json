@@ -45,7 +45,7 @@
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "babel-plugin-istanbul": "^5.2.0",
-    "core-js": "^3.4.5",
+    "core-js": "^3.4.7",
     "cross-env": "^6.0.3",
     "eslint": "^6.7.2",
     "eslint-config-problems": "^3.0.1",
@@ -74,7 +74,7 @@
     "webpack-dev-server": "^3.9.0"
   },
   "peerDependencies": {
-    "three": "0.109.0"
+    "three": "0.111.0"
   },
   "dependencies": {
     "@babel/runtime-corejs3": "^7.7.4",
