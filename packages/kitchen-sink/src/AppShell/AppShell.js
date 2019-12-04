@@ -61,7 +61,7 @@ class AppShell extends React.Component {
         <SideNav collapsed={this.state.isSideNavCollapsed}>
           <Header>
             <Logo src="/images/picimo-logo-original.png" alt="picimo" />
-            <Title>/ examples</Title>
+            <Title>kitchen sink</Title>
           </Header>
           <SideNavContent>
             {DEMOS.map(({ section, demos }) => (

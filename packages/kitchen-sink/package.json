@@ -1,7 +1,7 @@
 {
-  "name": "picimo-examples",
+  "name": "kitchen-sink",
   "version": "0.0.1",
-  "description": "Examples for the picimo library",
+  "description": "A SPA with examples for almost all features of the picimo library",
   "private": true,
   "scripts": {
     "start": "webpack-dev-server"
