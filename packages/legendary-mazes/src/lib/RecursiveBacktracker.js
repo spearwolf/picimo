@@ -14,7 +14,7 @@ export class RecursiveBacktracker {
     this.grid.setAll(WALL);
     this.grid.setAllCells(UNVISITED);
 
-    const cell = this.grid.randomCell();
+    const cell = this.grid.randomCellAtBorder();
     cell.value = FLOOR;
     this.visitedCells = [cell];
   }

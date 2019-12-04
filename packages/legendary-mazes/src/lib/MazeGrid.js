@@ -30,6 +30,16 @@ export class MazeGrid {
     return this.cells[(Math.random() * this.cells.length) | 0];
   }
 
+  randomCellAtBorder() {
+    let cell;
+    if (Math.random() > 0.5) {
+      cell = this.cell(0, Math.floor(Math.random() * this.columns));
+    } else {
+      cell = this.cell(Math.floor(Math.random() * this.rows), 0);
+    }
+    return cell;
+  }
+
   get centralCell() {
     return this.cell(this.rows >> 1, this.columns >> 1);
   }

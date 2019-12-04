@@ -21,7 +21,7 @@ function build(showDistances = true) {
 
   }
 
-  console.log(`generated an ${maze.width}x${maze.height} maze`);
+  console.log(`generated an ${maze.width}x${maze.height} pixels maze`);
 }
 
 build();
