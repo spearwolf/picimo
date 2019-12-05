@@ -9,4 +9,3 @@ loosely based on realtime 2d &and; 3d sprite rendering concepts and techniques u
 |-----------|-------------|
 | [`picimo`](packages/picimo/) | the core sprite rendering library |
 | [`kitchen-sink`](packages/kitchen-sink/) | a SPA with examples for almost all features of the picimo library |
-| [`legendary-mazes`](packages/legendary-mazes/) | a maze generation library |
