@@ -1,4 +1,4 @@
-# picimo
+# ![picimo](./picimo.png)
 
 P I C T U R E S &nbsp; I N &nbsp; M O T I O N
 
