@@ -28,11 +28,13 @@ export default {
     globals: {
       three: 'THREE',
       picimo: 'picimo',
+      react: 'React',
     },
   },
   external: [
     'three',
     'picimo',
+    'react',
   ],
   plugins: [
     bannerPlugin(packageJson), // eslint-disable-line
