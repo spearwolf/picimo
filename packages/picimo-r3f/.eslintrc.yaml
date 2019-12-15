@@ -1,0 +1,6 @@
+extends: problems
+parser: babel-eslint
+parserOptions:
+  sourceType: module
+env:
+  amd: true
