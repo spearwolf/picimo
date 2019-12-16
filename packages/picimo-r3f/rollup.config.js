@@ -66,7 +66,7 @@ export default {
       },
     }),
     replace({
-      NODE_ENV: JSON.stringify('production'),
+      'process.env.NODE_ENV': JSON.stringify('production'),
       PACKAGE_VERSION: JSON.stringify(packageJson.version),
     }),
     sizeSnapshot(),
