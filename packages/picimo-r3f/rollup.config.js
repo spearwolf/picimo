@@ -11,7 +11,9 @@ import bannerPlugin from './scripts/bannerPlugin';
 
 const extensions = [
   '.js',
+  '.jsx',
   '.ts',
+  '.jsx',
 ];
 
 const root = path.resolve(__dirname, '.');
@@ -29,12 +31,16 @@ export default {
       three: 'THREE',
       picimo: 'picimo',
       react: 'React',
+      'react-dom': 'ReactDOM',
+      'prop-types': 'PropTypes',
     },
   },
   external: [
     'three',
     'picimo',
     'react',
+    'react-dom',
+    'prop-types',
   ],
   plugins: [
     bannerPlugin(packageJson), // eslint-disable-line
