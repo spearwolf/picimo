@@ -3,7 +3,7 @@ import {extend} from 'react-three-fiber';
 import {BitmapText2DBlock as PicimoBitmapText2DBlock, Logger} from 'picimo';
 import {oneOf, arrayOf, number, string} from 'prop-types';
 import {BitmapText2DContext} from './BitmapText2D';
-import {useLifecycledRef} from '../hooks';
+import {useLifecycleRef} from '../hooks';
 
 extend({PicimoBitmapText2DBlock});
 
@@ -13,7 +13,7 @@ export const BitmapText2DBlock = ({text, position, maxWidth, fontSize, lineGap, 
 
   const bitmapText2D = useContext(BitmapText2DContext);
 
-  const [ref] = useLifecycledRef({
+  const [ref] = useLifecycleRef({
     onCreate(textBlock) {
       log.log('create', text, position, maxWidth, fontSize, lineGap, hAlign, vAlign, textBlock);
       textBlock.update(text);
