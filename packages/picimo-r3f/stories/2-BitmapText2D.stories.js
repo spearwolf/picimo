@@ -1,3 +1,4 @@
+/* eslint-env browser */
 import React from 'react';
 import {Canvas} from 'react-three-fiber';
 import {Stage2D, BitmapText2D, BitmapText2DBlock, TextureAtlas} from 'picimo-r3f';
@@ -9,8 +10,8 @@ export default {
 };
 
 const PROJECTION = {
-  width: 480,
-  height: 240,
+  width: 640,
+  height: 400,
   fit: 'contain',
   distance: 1000,
   far: 10000,
@@ -21,7 +22,7 @@ STORYBOOK!`;
 
 export const demo = () => (
   <div style={{backgroundColor: '#d0e9f0'}}>
-    <Canvas>
+    <Canvas gl2 pixelRatio={window.devicePixelRatio} style={{minHeight: '400px'}}>
       <Stage2D plane="xy" type="parallax" projection={PROJECTION}>
 
         <BitmapText2D position={[0, 0, 1]}>
