@@ -13,7 +13,10 @@
     "lint": "eslint .",
     "karma": "cross-env NODE_ENV=test karma start --single-run",
     "karma:watch": "cross-env NODE_ENV=test karma start",
-    "test": "run-s lint karma"
+    "test": "run-s lint karma",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "start": "run-s storybook"
   },
   "repository": {
     "type": "git",
@@ -35,6 +38,11 @@
     "@babel/preset-env": "^7.7.6",
     "@babel/preset-react": "^7.7.4",
     "@babel/preset-typescript": "^7.7.4",
+    "@storybook/addon-actions": "^5.2.8",
+    "@storybook/addon-knobs": "^5.2.8",
+    "@storybook/addon-links": "^5.2.8",
+    "@storybook/addons": "^5.2.8",
+    "@storybook/react": "^5.2.8",
     "@types/react": "^16.9.16",
     "@types/react-dom": "^16.9.4",
     "assert": "^2.0.0",
