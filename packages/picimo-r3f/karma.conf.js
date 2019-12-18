@@ -15,9 +15,9 @@ module.exports = (config) => {
     // list of files / patterns to load in the browser
     files: [
       'src/**/*.spec.js',
-      {
-        pattern: 'tests/assets/**/*', watched: false, included: false, served: true, nocache: false,
-      },
+      // {
+      //   pattern: 'tests/assets/**/*', watched: false, included: false, served: true, nocache: false,
+      // },
     ],
 
     proxies: {
@@ -120,10 +120,10 @@ module.exports = (config) => {
         emitWarning: true, // set to `true` to not fail the test command when thresholds are not met
         // thresholds for all files
         global: {
-          statements: 100,
-          lines: 100,
-          branches: 100,
-          functions: 100,
+          statements: 20,
+          lines: 80,
+          branches: 20,
+          functions: 80,
         },
         // thresholds per file
         // each: {
