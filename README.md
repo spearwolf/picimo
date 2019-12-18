@@ -8,4 +8,5 @@ loosely based on realtime 2d &and; 3d [sprite](https://en.wikipedia.org/wiki/Spr
 | packages | what's inside? |
 |-----------|-------------|
 | [`picimo`](packages/picimo/) | the core library |
+| [`picimo-r3f`](packages/picimo-r3f/) | react components based on the fabulous react-three-fiber |
 | [`kitchen-sink`](packages/kitchen-sink/) | a SPA with examples for almost all features of the picimo core library |
