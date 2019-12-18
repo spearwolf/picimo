@@ -4,7 +4,5 @@ export interface BitmapText2DMeasurement {
   height: number;
   maxLineWidth: number;
   charCount: number;
-
   lines: BitmapText2DLine[];
-
 }

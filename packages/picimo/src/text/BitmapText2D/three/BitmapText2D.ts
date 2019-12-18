@@ -246,7 +246,7 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
 
     const fontHeight = this.getFontHeight(fontSize);
     const fontZoom = this.getFontZoom(fontHeight);
-    const lineHeight = Math.ceil(fontHeight + this.lineGap);
+    const lineHeight = Math.ceil(fontHeight + lineGap);
     const hSpacing = Math.ceil(this.hSpacing * fontZoom) || 1;
     const whiteSpaceWidth = Math.ceil(this.whiteSpaceWidth * fontZoom);
 
