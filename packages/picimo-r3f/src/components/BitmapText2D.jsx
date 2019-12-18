@@ -2,7 +2,7 @@ import React, {Suspense, useState} from 'react';
 import {extend} from 'react-three-fiber';
 import {BitmapText2D as PicimoBitmapText2D, Logger} from 'picimo';
 import {node, number} from 'prop-types';
-import {useLifecycledRef} from '../hooks';
+import {useLifecycleRef} from '../hooks';
 
 extend({PicimoBitmapText2D});
 
@@ -21,7 +21,7 @@ export const BitmapText2D = ({children, capacity, fallback, ...props}) => {
     }
   };
 
-  const [ref] = useLifecycledRef({
+  const [ref] = useLifecycleRef({
     onCreate(bitmapText2d) {
       log.log('create, fontAtlas=', bitmapText2d.fontAtlas, bitmapText2d);
       if (bitmapText2d.fontAtlas) {
