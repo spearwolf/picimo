@@ -25,15 +25,18 @@ export const demo = () => (
     <Canvas gl2 pixelRatio={window.devicePixelRatio} style={{minHeight: '400px'}}>
       <Stage2D plane="xy" type="parallax" projection={PROJECTION}>
 
-        <BitmapText2D position={[0, 0, 1]}>
-          <TextureAtlas attach="fontAtlas" src="comic-schrift.json" />
+        <BitmapText2D>
+          <TextureAtlas
+            attach="fontAtlas"
+            src={select('texture-atlas', ['comic-schrift.json', 'rbmfs.json'], 'comic-schrift.json')}
+          />
           <BitmapText2DBlock
             fontSize={number('fontSize', 100)}
-            lineGap={number('lineGap', 0)}
+            lineGap={number('lineGap', 10)}
+            maxWidth={number('maxWidth', 0)}
             text={text('text', HELLO)}
             hAlign={select('hAlign', ['center', 'left', 'right'], 'center')}
             vAlign={select('vAlign', ['top', 'baseline', 'center', 'bottom'], 'center')}
-            position={[0, 0, 0]}
           />
         </BitmapText2D>
 
