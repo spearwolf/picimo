@@ -25,23 +25,25 @@ export const demo = () => (
     <Canvas gl2 pixelRatio={window.devicePixelRatio} style={{minHeight: '400px'}}>
       <Stage2D plane="xy" type="parallax" projection={PROJECTION}>
 
-        <BitmapText2D>
-          <TextureAtlas
-            attach="fontAtlas"
-            src={select('texture-atlas', ['comic-schrift.json', 'rbmfs.json'], 'comic-schrift.json')}
-          />
-
-          { !boolean('hide BitmapText2DBlock', false) && (
-            <BitmapText2DBlock
-              fontSize={number('fontSize', 100)}
-              lineGap={number('lineGap', 10)}
-              maxWidth={number('maxWidth', 0)}
-              text={text('text', HELLO)}
-              hAlign={select('hAlign', ['center', 'left', 'right'], 'center')}
-              vAlign={select('vAlign', ['top', 'baseline', 'center', 'bottom'], 'center')}
+        { !boolean('hide <BitmapText2DB>', false) && (
+          <BitmapText2D>
+            <TextureAtlas
+              attach="fontAtlas"
+              src={select('texture-atlas', ['comic-schrift.json', 'rbmfs.json'], 'comic-schrift.json')}
             />
-          )}
-        </BitmapText2D>
+
+            { !boolean('hide <BitmapText2DBlock>', false) && (
+              <BitmapText2DBlock
+                fontSize={number('fontSize', 100)}
+                lineGap={number('lineGap', 10)}
+                maxWidth={number('maxWidth', 0)}
+                text={text('text', HELLO)}
+                hAlign={select('hAlign', ['center', 'left', 'right'], 'center')}
+                vAlign={select('vAlign', ['top', 'baseline', 'center', 'bottom'], 'center')}
+              />
+            )}
+          </BitmapText2D>
+        )}
 
       </Stage2D>
     </Canvas>

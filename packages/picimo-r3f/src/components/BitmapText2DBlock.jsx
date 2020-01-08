@@ -26,7 +26,7 @@ export const BitmapText2DBlock = ({text, position, maxWidth, fontSize, lineGap, 
       log.log('update', text, position, maxWidth, fontSize, lineGap, hAlign, vAlign, textBlock);
       textBlock.update(text);
     }
-  }, [text, position, maxWidth, fontSize, lineGap, hAlign, vAlign]);
+  }, [bitmapText2D, text, position, maxWidth, fontSize, lineGap, hAlign, vAlign]);
 
   useEffect(() => {
     if (block && fontAtlas) {

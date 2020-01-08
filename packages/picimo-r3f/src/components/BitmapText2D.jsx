@@ -25,7 +25,7 @@ export const BitmapText2D = ({children, capacity, fallback, ...props}) => {
     onCreate(bitmapText2d) {
       log.log('create, fontAtlas=', bitmapText2d.fontAtlas, bitmapText2d);
       if (bitmapText2d.fontAtlas) {
-        setBitmapText2DContext(bitmapText2d);
+        setBitmapText2DContext([bitmapText2d, bitmapText2d.fontAtlas]);
       }
       bitmapText2d.on('fontAtlasUpdate', onFontAtlasUpdate);
     },
