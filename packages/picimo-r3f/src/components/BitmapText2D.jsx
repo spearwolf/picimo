@@ -35,6 +35,11 @@ export const BitmapText2D = ({children, capacity, fallback, ...props}) => {
     },
   });
 
+  if (props.ref) {
+    console.log('set ref->', ref);
+    props.ref(ref);
+  }
+
   return (
     <Suspense fallback={fallback}>
       <picimoBitmapText2D args={[{capacity}]} ref={ref} {...props}>

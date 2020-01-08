@@ -1,9 +1,13 @@
 import * as THREE from 'three';
 
+import { Logger } from '../../utils';
+
 import { SpriteGroup } from '../SpriteGroup';
 
 import { SpriteGroupBufferGeometry } from './SpriteGroupBufferGeometry';
 import { SpriteGroupInstancedBufferGeometry } from './SpriteGroupInstancedBufferGeometry';
+
+const log = new Logger('picimo/SpriteGroupMesh', 0, Infinity);
 
 function updateBuffers<T, U> (spriteGroup: SpriteGroup<T, U>, getBufferVersion: () => number, geometryUpdateBuffers: () => void) {
 
@@ -19,8 +23,6 @@ function updateBuffers<T, U> (spriteGroup: SpriteGroup<T, U>, getBufferVersion: 
 }
 
 export class SpriteGroupMesh<T, U = {}, K = {}, I = {}> extends THREE.Mesh {
-
-  // TODO override .dispose() so that we can free up the vertex object buffers
 
   constructor(
     spriteGroupGeometry: SpriteGroupBufferGeometry<T, U> | SpriteGroupInstancedBufferGeometry<T, U, K, I>,
@@ -94,6 +96,19 @@ export class SpriteGroupMesh<T, U = {}, K = {}, I = {}> extends THREE.Mesh {
 
     }
 
+  }
+
+  dispose() {
+    log.log('dispose', this);
+    const {geometry, material} = this;
+    geometry?.dispose();
+    this.geometry = null;
+    if (Array.isArray(material)) {
+      material.forEach((mat: THREE.Material) => mat.dispose());
+    } else {
+      material?.dispose();
+    }
+    this.material = null;
   }
 
 }

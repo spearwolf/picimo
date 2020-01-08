@@ -25,14 +25,14 @@ export const demo = () => (
     <Canvas gl2 pixelRatio={window.devicePixelRatio} style={{minHeight: '400px'}}>
       <Stage2D plane="xy" type="parallax" projection={PROJECTION}>
 
-        { !boolean('hide <BitmapText2DB>', false) && (
+        { boolean('show <BitmapText2DB>', true) && (
           <BitmapText2D>
             <TextureAtlas
               attach="fontAtlas"
               src={select('texture-atlas', ['comic-schrift.json', 'rbmfs.json'], 'comic-schrift.json')}
             />
 
-            { !boolean('hide <BitmapText2DBlock>', false) && (
+            { boolean('show <BitmapText2DBlock>', true) && (
               <BitmapText2DBlock
                 fontSize={number('fontSize', 100)}
                 lineGap={number('lineGap', 10)}
