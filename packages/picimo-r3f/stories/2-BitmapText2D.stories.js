@@ -2,7 +2,7 @@
 import React from 'react';
 import {Canvas} from 'react-three-fiber';
 import {Stage2D, BitmapText2D, BitmapText2DBlock, TextureAtlas} from 'picimo-r3f';
-import {number, withKnobs, text, select} from '@storybook/addon-knobs';
+import {number, withKnobs, text, select, boolean} from '@storybook/addon-knobs';
 
 export default {
   title: 'BitmapText2D',
@@ -30,14 +30,17 @@ export const demo = () => (
             attach="fontAtlas"
             src={select('texture-atlas', ['comic-schrift.json', 'rbmfs.json'], 'comic-schrift.json')}
           />
-          <BitmapText2DBlock
-            fontSize={number('fontSize', 100)}
-            lineGap={number('lineGap', 10)}
-            maxWidth={number('maxWidth', 0)}
-            text={text('text', HELLO)}
-            hAlign={select('hAlign', ['center', 'left', 'right'], 'center')}
-            vAlign={select('vAlign', ['top', 'baseline', 'center', 'bottom'], 'center')}
-          />
+
+          { !boolean('hide BitmapText2DBlock', false) && (
+            <BitmapText2DBlock
+              fontSize={number('fontSize', 100)}
+              lineGap={number('lineGap', 10)}
+              maxWidth={number('maxWidth', 0)}
+              text={text('text', HELLO)}
+              hAlign={select('hAlign', ['center', 'left', 'right'], 'center')}
+              vAlign={select('vAlign', ['top', 'baseline', 'center', 'bottom'], 'center')}
+            />
+          )}
         </BitmapText2D>
 
       </Stage2D>

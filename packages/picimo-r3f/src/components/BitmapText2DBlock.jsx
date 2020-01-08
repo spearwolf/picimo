@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {extend} from 'react-three-fiber';
 import {BitmapText2DBlock as PicimoBitmapText2DBlock, Logger} from 'picimo';
 import {oneOf, arrayOf, number, string} from 'prop-types';
@@ -11,9 +11,9 @@ const log = new Logger('BitmapText2DBlock', 0, Infinity);
 
 export const BitmapText2DBlock = ({text, position, maxWidth, fontSize, lineGap, hAlign, vAlign}) => {
 
-  const bitmapText2D = useContext(BitmapText2DContext);
+  const [bitmapText2D, fontAtlas] = useContext(BitmapText2DContext);
 
-  const [ref] = useLifecycleRef({
+  const [ref, block] = useLifecycleRef({
     onCreate(textBlock) {
       log.log('create', text, position, maxWidth, fontSize, lineGap, hAlign, vAlign, textBlock);
       textBlock.update(text);
@@ -27,6 +27,13 @@ export const BitmapText2DBlock = ({text, position, maxWidth, fontSize, lineGap, 
       textBlock.update(text);
     }
   }, [text, position, maxWidth, fontSize, lineGap, hAlign, vAlign]);
+
+  useEffect(() => {
+    if (block && fontAtlas) {
+      block.needsUpdate = true;
+      block.update(text);
+    }
+  }, [block, fontAtlas, text]);
 
   if (!bitmapText2D) return null;
 

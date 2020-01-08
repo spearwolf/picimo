@@ -12,12 +12,12 @@ export const BitmapText2DContext = React.createContext();
 
 export const BitmapText2D = ({children, capacity, fallback, ...props}) => {
 
-  const [bitmapText2DContext, setBitmapText2DContext] = useState(undefined);
+  const [bitmapText2DContext, setBitmapText2DContext] = useState([]);
 
   const onFontAtlasUpdate = bt2d => {
     log.log('onFontAtlasUpdate, fontAtlas=', bt2d.fontAtlas, bt2d);
-    if (bt2d.fontAtlas != null && bt2d !== bitmapText2DContext) {
-      setBitmapText2DContext(bt2d);
+    if (bt2d.fontAtlas != null && (bt2d !== bitmapText2DContext[0] || bt2d.fontAtlas !== bitmapText2DContext[1])) {
+      setBitmapText2DContext([bt2d, bt2d.fontAtlas]);
     }
   };
 

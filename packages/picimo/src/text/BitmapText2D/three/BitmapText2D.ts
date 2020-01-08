@@ -3,7 +3,7 @@ import eventize, {Eventize} from '@spearwolf/eventize';
 
 import { SpriteGroupMesh, SpriteGroupInstancedBufferGeometry } from '../../../sprites';
 import { TextureAtlas } from '../../../textures';
-import { pick } from '../../../utils';
+import { pick, Logger } from '../../../utils';
 
 import { BitmapChar } from '../BitmapChar';
 import { BitmapCharBase } from '../BitmapCharBase';
@@ -42,6 +42,8 @@ const $fontAtlas = Symbol('fontAtlas');
 const $shaderHooks = Symbol('shaderHooks');
 const $readFontFeatures = Symbol('readFontFeatures');
 
+const log = new Logger('picimo/BitmapText2DBlock', 0, Infinity);
+
 export interface BitmapText2D extends Eventize {};
 
 export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapChar, BitmapCharBaseMethodsType, BitmapCharBase> {
@@ -78,6 +80,11 @@ export class BitmapText2D extends SpriteGroupMesh<BitmapCharMethodsType, BitmapC
 
     eventize(this);
 
+    log.log('created', this);
+  }
+
+  dispose() {
+    log.log('dispose', this);
   }
 
   private [$readFontFeatures]() {
