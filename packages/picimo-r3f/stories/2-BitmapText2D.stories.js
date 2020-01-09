@@ -20,7 +20,7 @@ const PROJECTION = {
 const HELLO = `HELLO
 STORYBOOK!`;
 
-export const demo = () => {
+const Story = () => {
   const [usedCount, setUsedCount] = useState(0);
   return (
     <section>
@@ -56,5 +56,7 @@ export const demo = () => {
         <p>char count: {usedCount}</p>
       </div>
     </section>
-  );
+  )
 };
+
+export const demo = Story;
