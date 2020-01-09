@@ -1,7 +1,7 @@
 import React, {Suspense, useState} from 'react';
-import {extend} from 'react-three-fiber';
+import {extend, useFrame} from 'react-three-fiber';
 import {BitmapText2D as PicimoBitmapText2D, Logger} from 'picimo';
-import {node, number} from 'prop-types';
+import {node, number, func} from 'prop-types';
 import {useLifecycleRef} from '../hooks';
 
 extend({PicimoBitmapText2D});
@@ -10,7 +10,7 @@ const log = new Logger('BitmapText2D', 0, Infinity);
 
 export const BitmapText2DContext = React.createContext();
 
-export const BitmapText2D = ({children, capacity, fallback, ...props}) => {
+export const BitmapText2D = ({children, capacity, fallback, onFrame, ...props}) => {
 
   const [bitmapText2DContext, setBitmapText2DContext] = useState([]);
 
@@ -21,7 +21,7 @@ export const BitmapText2D = ({children, capacity, fallback, ...props}) => {
     }
   };
 
-  const [ref] = useLifecycleRef({
+  const [ref, bitmapText2D] = useLifecycleRef({
     onCreate(bitmapText2d) {
       log.log('create, fontAtlas=', bitmapText2d.fontAtlas, bitmapText2d);
       if (bitmapText2d.fontAtlas) {
@@ -35,10 +35,11 @@ export const BitmapText2D = ({children, capacity, fallback, ...props}) => {
     },
   });
 
-  if (props.ref) {
-    console.log('set ref->', ref);
-    props.ref(ref);
-  }
+  useFrame(() => {
+    if (bitmapText2D && onFrame) {
+      onFrame(bitmapText2D);
+    }
+  });
 
   return (
     <Suspense fallback={fallback}>
@@ -57,6 +58,7 @@ BitmapText2D.propTypes = {
   fallback: node,
   fontSize: number,
   lineGap: number,
+  onFrame: func,
 }
 
 BitmapText2D.defaultProps = {
@@ -64,4 +66,5 @@ BitmapText2D.defaultProps = {
   fallback: null,
   fontSize: 0,
   lineGap: 0,
+  onFrame: undefined,
 }
