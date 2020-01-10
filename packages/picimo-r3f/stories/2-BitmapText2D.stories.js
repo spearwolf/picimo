@@ -6,6 +6,7 @@ import {number, withKnobs, text, select, boolean} from '@storybook/addon-knobs';
 
 export default {
   title: 'BitmapText2D',
+  component: BitmapText2D,
   decorators: [withKnobs],
 };
 
@@ -22,7 +23,7 @@ STORYBOOK!`;
 
 const makeCharCountUpdater = setCharCount => bt2d => setCharCount(bt2d.bitmapChars.usedCount);
 
-const Story = () => {
+export const Hello = () => {
   const [charCount, setCharCount] = useState(0);
   const updateCharCount = useMemo(() => makeCharCountUpdater(setCharCount), [setCharCount]);
   return (
@@ -61,5 +62,3 @@ const Story = () => {
     </section>
   )
 };
-
-export const demo = Story;
