@@ -1,12 +1,11 @@
 /* eslint-env browser */
-import React, {useState, useMemo} from 'react';
+import React, {useState} from 'react';
 import {Canvas} from 'react-three-fiber';
 import {Stage2D, BitmapText2D, BitmapText2DBlock, TextureAtlas} from 'picimo-r3f';
 import {number, withKnobs, text, select, boolean} from '@storybook/addon-knobs';
 
 export default {
-  title: 'BitmapText2D',
-  component: BitmapText2D,
+  title: 'SpriteGroup',
   decorators: [withKnobs],
 };
 
@@ -18,14 +17,13 @@ const PROJECTION = {
   far: 10000,
 };
 
-const HELLO = `HELLO
-STORYBOOK!`;
+const HELLO = `TODO:
+CREATE A
+SPRITEGROUP
+EXAMPLE`;
 
-const makeCharCountUpdater = setCharCount => bt2d => setCharCount(bt2d.bitmapChars.usedCount);
-
-export const KitchenSink = () => {
-  const [charCount, setCharCount] = useState(0);
-  const updateCharCount = useMemo(() => makeCharCountUpdater(setCharCount), [setCharCount]);
+export const SimpleSprites = () => {
+  const [usedCount, setUsedCount] = useState(0);
   return (
     <section>
       <div style={{backgroundColor: '#d0e9f0'}}>
@@ -33,7 +31,7 @@ export const KitchenSink = () => {
           <Stage2D plane="xy" type="parallax" projection={PROJECTION}>
 
             { boolean('show <BitmapText2DB>', true) && (
-              <BitmapText2D onFrame={updateCharCount}>
+              <BitmapText2D onFrame={bt2d => setUsedCount(bt2d.bitmapChars.usedCount)}>
                 <TextureAtlas
                   attach="fontAtlas"
                   src={select('texture-atlas', ['comic-schrift.json', 'rbmfs.json'], 'comic-schrift.json')}
@@ -41,12 +39,9 @@ export const KitchenSink = () => {
 
                 { boolean('show <BitmapText2DBlock>', true) && (
                   <BitmapText2DBlock
-                    fontSize={number('fontSize', 100)}
-                    lineGap={number('lineGap', 10)}
-                    maxWidth={number('maxWidth', 0)}
+                    fontSize={number('fontSize', 50)}
+                    lineGap={number('lineGap', 5)}
                     text={text('text', HELLO)}
-                    hAlign={select('hAlign', ['center', 'left', 'right'], 'center')}
-                    vAlign={select('vAlign', ['top', 'baseline', 'center', 'bottom'], 'center')}
                   />
                 )}
               </BitmapText2D>
@@ -57,7 +52,7 @@ export const KitchenSink = () => {
       </div>
 
       <div>
-        <p>char count: {charCount}</p>
+        <p>sprite count: {usedCount}</p>
       </div>
     </section>
   )
