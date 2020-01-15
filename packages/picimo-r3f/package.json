@@ -89,6 +89,6 @@
   "dependencies": {
     "@babel/runtime-corejs3": "^7.7.7",
     "react-promise-suspense": "^0.3.2",
-    "react-three-fiber": "^3.0.17"
+    "react-three-fiber": "^4.0.7"
   }
 }
