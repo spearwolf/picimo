@@ -35,88 +35,26 @@ export class SpriteGroupMesh<T, U = {}, K = {}, I = {}> extends THREE.Mesh {
       material,
     );
 
-    this.geometry = spriteGroupGeometry;
+    this.geometry = spriteGroupGeometry || new THREE.BufferGeometry as any;
 
     log.log('created', this);
-
-    // if (spriteGroupGeometry.type === 'picimo.SpriteGroupGeometry') {
-
-    //   const { spriteGroup } = spriteGroupGeometry.parameters;
-
-    //   this.onBeforeRender = /**
-    //   * @param {THREE.WebGLRenderer} renderer
-    //   * @param {THREE.Scene} scene
-    //   * @param {THREE.Camera} camera
-    //   * @param {SpriteGroupBufferGeometry} geometry
-    //   */
-    //     (_renderer, _scene, _camera, geometry: THREE.Geometry | THREE.BufferGeometry, _material, _group) => {
-
-    //       updateBuffers(
-    //         spriteGroup,
-    //         () => (geometry as SpriteGroupBufferGeometry<T, U>).bufferVersion,
-    //         () => (geometry as SpriteGroupBufferGeometry<T, U>).updateBuffers(),
-    //       );
-
-    //       const { usedCount, indices } = spriteGroup;
-    //       (geometry as THREE.BufferGeometry).setDrawRange(0, usedCount * indices.itemCount);
-
-    //     };
-
-    // } else if (spriteGroupGeometry.type === 'picimo.SpriteGroupInstancedBufferGeometry') {
-
-    //   const {
-    //     baseSpriteGroup,
-    //     spriteGroup,
-    //   } = (spriteGroupGeometry as SpriteGroupInstancedBufferGeometry<T, U, K, I>).parameters;
-
-    //   this.onBeforeRender = /**
-    //   * @param {THREE.WebGLRenderer} renderer
-    //   * @param {THREE.Scene} scene
-    //   * @param {THREE.Camera} camera
-    //   * @param {SpriteGroupInstancedBufferGeometry} geometry
-    //   */
-    //     (_renderer, _scene, _camera, geometry: THREE.Geometry | THREE.BufferGeometry, _material, _group) => {
-
-    //       if (baseSpriteGroup) {
-
-    //         updateBuffers(
-    //           baseSpriteGroup,
-    //           () => (geometry as SpriteGroupBufferGeometry<T, U>).bufferVersion,
-    //           () => (geometry as SpriteGroupBufferGeometry<T, U>).updateBuffers(),
-    //         );
-
-    //         const { usedCount, indices } = baseSpriteGroup;
-    //         (geometry as THREE.BufferGeometry).setDrawRange(0, usedCount * indices.itemCount);
-
-    //       }
-
-    //       updateBuffers(
-    //         spriteGroup,
-    //         () => (geometry as SpriteGroupInstancedBufferGeometry<T, U, K, I>).instancedBufferVersion,
-    //         () => (geometry as SpriteGroupInstancedBufferGeometry<T, U, K, I>).updateInstancedBuffers(),
-    //       );
-
-    //       // geometry.maxInstancedCount = spriteGroup.usedCount;
-
-    //     };
-
-    // }
   }
 
   onBeforeRender = (
+    /*
     _renderer: any,
     _scene: any,
     _camera: any,
-    geometry: THREE.Geometry | THREE.BufferGeometry,
+    _geometry: THREE.Geometry | THREE.BufferGeometry,
     _material: any,
     _group: any,
+    */
   ) => {
-    if (this.geometry) {
-      if (geometry.type === 'picimo.SpriteGroupGeometry') {
-        this.onBeforeRenderSpriteGroup();
-      } else if (geometry.type === 'picimo.SpriteGroupInstancedBufferGeometry') {
-        this.onBeforeRenderSpriteGroupInstanced();
-      }
+    const {picimoType} = this.geometry;;
+    if (picimoType === 'SpriteGroupGeometry') {
+      this.onBeforeRenderSpriteGroup();
+    } else if (picimoType === 'SpriteGroupInstancedBufferGeometry') {
+      this.onBeforeRenderSpriteGroupInstanced();
     }
   }
 

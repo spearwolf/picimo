@@ -25,7 +25,25 @@ export const SimpleSprites = () => {
           <Stage2D plane="xy" type="parallax" projection={PROJECTION}>
 
             { boolean('show <SpriteGroupMesh>', true) && (
-              <SpriteGroupMesh />
+              <SpriteGroupMesh>
+                {/*
+
+                <SimpleSpritesBufferGeometry attach="geometry" />
+
+                <SimpleSpritesMaterial attach="material">
+
+                  <TextureAtlas attach="uniforms.texture" src="..">
+                    {(atlas) => (
+
+                        <Sprites />
+
+                    )}
+                  </TextureAtlas>
+
+                </SimpleSpritesMaterial>
+
+                */}
+              </SpriteGroupMesh>
             )}
 
           </Stage2D>

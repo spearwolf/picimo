@@ -6,6 +6,8 @@ import { createBufferAttributes } from './createBufferAttributes';
 
 export class SpriteGroupBufferGeometry<T, U> extends THREE.BufferGeometry {
 
+  readonly picimoType: string = 'SpriteGroupBufferGeometry';
+
   /**
    * Initial parameters at creation time
    */
@@ -17,8 +19,6 @@ export class SpriteGroupBufferGeometry<T, U> extends THREE.BufferGeometry {
 
   constructor(spriteGroup: SpriteGroup<T, U>) {
     super();
-
-    this.type = 'picimo.SpriteGroupBufferGeometry';
 
     this.parameters = {
       spriteGroup,

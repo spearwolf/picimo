@@ -14,6 +14,8 @@ export interface ITileQuadMeshOptions extends ITileQuadGroupOptions {
 
 export class TileQuadMesh extends SpriteGroupMesh<TileQuadMethodsType, ITileQuad, TileQuadBaseMethodsType, ITileQuadBase> {
 
+  readonly picimoType: string;
+
   tiles: TileQuadGroup;
 
   constructor(material: Material, options?: ITileQuadMeshOptions) {
@@ -33,9 +35,9 @@ export class TileQuadMesh extends SpriteGroupMesh<TileQuadMethodsType, ITileQuad
 
     this.tiles = tiles;
 
-    this.type = 'picimo.TileQuadMesh';
-
     this.frustumCulled = false;
+
+    this.picimoType = 'TileQuadMesh';
 
   }
 

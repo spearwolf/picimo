@@ -27,8 +27,6 @@ export class SimpleSprites extends SpriteGroupMesh<SimpleSpriteMethodsType, ISim
 
     this.sprites = sprites;
 
-    this.type = 'SimpleSprites';
-
   }
 
 }
