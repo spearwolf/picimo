@@ -1,10 +1,10 @@
-import * as THREE from 'three';
+import {InterleavedBuffer, InstancedInterleavedBuffer, BufferGeometry, InstancedBufferGeometry} from 'three';
 
-import { SpriteGroup } from '../SpriteGroup';
+import {SpriteGroup} from '../SpriteGroup';
 
-import { createBufferAttributes } from './createBufferAttributes';
+import {createBufferAttributes} from './createBufferAttributes';
 
-export class SpriteGroupInstancedBufferGeometry<T, U, K, I> extends THREE.InstancedBufferGeometry {
+export class SpriteGroupInstancedBufferGeometry<T, U, K, I> extends InstancedBufferGeometry {
 
   readonly picimoType = 'SpriteGroupInstancedBufferGeometry';
 
@@ -16,10 +16,10 @@ export class SpriteGroupInstancedBufferGeometry<T, U, K, I> extends THREE.Instan
     baseSpriteGroup?: SpriteGroup<K, I>;
   };
 
-  private readonly _buffers: THREE.InterleavedBuffer[];
-  private readonly _instancedBuffers: THREE.InstancedInterleavedBuffer[];
+  private readonly _buffers: InterleavedBuffer[];
+  private readonly _instancedBuffers: InstancedInterleavedBuffer[];
 
-  constructor(base: SpriteGroup<K, I> | THREE.BufferGeometry, spriteGroup: SpriteGroup<T, U>) {
+  constructor(base: SpriteGroup<K, I> | BufferGeometry, spriteGroup: SpriteGroup<T, U>) {
     super();
 
     this.parameters = { spriteGroup };
@@ -32,17 +32,17 @@ export class SpriteGroupInstancedBufferGeometry<T, U, K, I> extends THREE.Instan
 
       this.setIndex(baseSpriteGroup.indices.indices);
 
-      this._buffers = createBufferAttributes(baseSpriteGroup, this, (typedArray, stride) => new THREE.InterleavedBuffer(typedArray, stride));
+      this._buffers = createBufferAttributes(baseSpriteGroup, this, (typedArray, stride) => new InterleavedBuffer(typedArray, stride));
 
       baseSpriteGroup.voPool.voArray.serial = this.bufferVersion;
 
     } else if ((base as any).isBufferGeometry) {
 
-      this.copy(base as THREE.BufferGeometry);
+      this.copy(base as BufferGeometry);
 
     }
 
-    this._instancedBuffers = createBufferAttributes(spriteGroup, this, (typedArray, stride) => new THREE.InstancedInterleavedBuffer(typedArray, stride, 1));
+    this._instancedBuffers = createBufferAttributes(spriteGroup, this, (typedArray, stride) => new InstancedInterleavedBuffer(typedArray, stride, 1));
 
     spriteGroup.voPool.voArray.serial = this.instancedBufferVersion;
   }

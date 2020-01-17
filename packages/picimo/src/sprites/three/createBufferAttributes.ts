@@ -1,12 +1,12 @@
-import * as THREE from 'three';
+import {DynamicDrawUsage, StaticDrawUsage, InterleavedBufferAttribute, InterleavedBuffer, BufferGeometry} from 'three';
 
-import { SpriteGroup } from '../SpriteGroup';
+import {SpriteGroup} from '../SpriteGroup';
 
 type CreateBufferFn<K> = (typedArray: any, stride: number) => K;
 
-export function createBufferAttributes<T, U, K = THREE.InterleavedBuffer> (
+export function createBufferAttributes<T, U, K = InterleavedBuffer> (
   spriteGroup: SpriteGroup<T, U>,
-  bufferGeometry: THREE.BufferGeometry,
+  bufferGeometry: BufferGeometry,
   createBuffer: CreateBufferFn<K>,
 ) {
 
@@ -30,14 +30,14 @@ export function createBufferAttributes<T, U, K = THREE.InterleavedBuffer> (
       const stride = descriptor.bytesPerVertex / typedArray.BYTES_PER_ELEMENT;
 
       buffer = createBuffer(typedArray, stride);
-      (buffer as any).setUsage(dynamic ? THREE.DynamicDrawUsage : THREE.StaticDrawUsage);
+      (buffer as any).setUsage(dynamic ? DynamicDrawUsage : StaticDrawUsage);
 
       bufCollection.push(buffer);
       bufMap.set(attr.type, buffer);
 
     }
 
-    const bufferAttr = new THREE.InterleavedBufferAttribute(buffer as any, attr.size, attr.offset);
+    const bufferAttr = new InterleavedBufferAttribute(buffer as any, attr.size, attr.offset);
     bufferGeometry.setAttribute(attrName, bufferAttr);
 
   });

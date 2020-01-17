@@ -1,10 +1,10 @@
-import * as THREE from 'three';
+import {BufferGeometry, InterleavedBuffer} from 'three';
 
-import { SpriteGroup } from '../SpriteGroup';
+import {SpriteGroup} from '../SpriteGroup';
 
-import { createBufferAttributes } from './createBufferAttributes';
+import {createBufferAttributes} from './createBufferAttributes';
 
-export class SpriteGroupBufferGeometry<T, U> extends THREE.BufferGeometry {
+export class SpriteGroupBufferGeometry<T, U> extends BufferGeometry {
 
   readonly picimoType: string = 'SpriteGroupBufferGeometry';
 
@@ -26,7 +26,7 @@ export class SpriteGroupBufferGeometry<T, U> extends THREE.BufferGeometry {
 
     this.setIndex(spriteGroup.indices.indices);
 
-    this._buffers = createBufferAttributes(spriteGroup, this, (typedArray, stride) => new THREE.InterleavedBuffer(typedArray, stride));
+    this._buffers = createBufferAttributes(spriteGroup, this, (typedArray, stride) => new InterleavedBuffer(typedArray, stride));
 
     spriteGroup.voPool.voArray.serial = this.bufferVersion;
   }

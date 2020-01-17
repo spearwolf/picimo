@@ -1,11 +1,11 @@
-import * as THREE from 'three';
+import {Mesh, Material, BufferGeometry} from 'three';
 
-import { Logger } from '../../utils';
+import {Logger} from '../../utils';
 
-import { SpriteGroup } from '../SpriteGroup';
+import {SpriteGroup} from '../SpriteGroup';
 
-import { SpriteGroupBufferGeometry } from './SpriteGroupBufferGeometry';
-import { SpriteGroupInstancedBufferGeometry } from './SpriteGroupInstancedBufferGeometry';
+import {SpriteGroupBufferGeometry} from './SpriteGroupBufferGeometry';
+import {SpriteGroupInstancedBufferGeometry} from './SpriteGroupInstancedBufferGeometry';
 
 const log = new Logger('picimo/SpriteGroupMesh', 0, Infinity);
 
@@ -22,20 +22,20 @@ function updateBuffers<T, U> (spriteGroup: SpriteGroup<T, U>, getBufferVersion: 
 
 }
 
-export class SpriteGroupMesh<T, U = {}, K = {}, I = {}> extends THREE.Mesh {
+export class SpriteGroupMesh<T, U = {}, K = {}, I = {}> extends Mesh {
 
   geometry: SpriteGroupBufferGeometry<T, U> | SpriteGroupInstancedBufferGeometry<T, U, K, I>;
 
   constructor(
     spriteGroupGeometry: SpriteGroupBufferGeometry<T, U> | SpriteGroupInstancedBufferGeometry<T, U, K, I>,
-    material: THREE.Material,
+    material: Material,
   ) {
     super(
       spriteGroupGeometry,
       material,
     );
 
-    this.geometry = spriteGroupGeometry || new THREE.BufferGeometry as any;
+    this.geometry = spriteGroupGeometry || new BufferGeometry as any;
 
     log.log('created', this);
   }
@@ -45,7 +45,7 @@ export class SpriteGroupMesh<T, U = {}, K = {}, I = {}> extends THREE.Mesh {
     _renderer: any,
     _scene: any,
     _camera: any,
-    _geometry: THREE.Geometry | THREE.BufferGeometry,
+    _geometry: Geometry | BufferGeometry,
     _material: any,
     _group: any,
     */
@@ -64,7 +64,7 @@ export class SpriteGroupMesh<T, U = {}, K = {}, I = {}> extends THREE.Mesh {
     geometry?.dispose();
     this.geometry = null;
     if (Array.isArray(material)) {
-      material.forEach((mat: THREE.Material) => mat.dispose());
+      material.forEach((mat: Material) => mat.dispose());
     } else {
       material?.dispose();
     }
