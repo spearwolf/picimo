@@ -3,6 +3,7 @@ import React from 'react';
 import {Canvas} from 'react-three-fiber';
 import {Stage2D, SpriteGroupMesh} from 'picimo-r3f';
 import {withKnobs, boolean} from '@storybook/addon-knobs';
+import { SimpleSpritesBufferGeometry } from '../src/components/SimpleSpritesBufferGeometry';
 
 export default {
   title: 'SpriteGroup',
@@ -26,10 +27,9 @@ export const SimpleSprites = () => {
 
             { boolean('show <SpriteGroupMesh>', true) && (
               <SpriteGroupMesh>
-                {/*
 
                 <SimpleSpritesBufferGeometry attach="geometry" />
-
+                {/*
                 <SimpleSpritesMaterial attach="material">
 
                   <TextureAtlas attach="uniforms.texture" src="..">

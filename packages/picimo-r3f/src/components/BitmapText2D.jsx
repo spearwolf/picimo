@@ -6,7 +6,7 @@ import {useLifecycleRef} from '../hooks';
 
 extend({PicimoBitmapText2D});
 
-const log = new Logger('BitmapText2D', 0, Infinity);
+const log = new Logger('<BitmapText2D>', 0, Infinity);
 
 export const BitmapText2DContext = React.createContext();
 

@@ -41,4 +41,3 @@ SpriteGroupInstancedBufferGeometry.defaultProps = {
   // dynamic: false,
   // autotouch: false,
 }
-
