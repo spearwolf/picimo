@@ -23,7 +23,7 @@ export const SimpleSpritesBufferGeometry = forwardRef(({
     capacity,
     maxAllocVOSize,
     dynamic,
-    autotouch,
+    autotouch, // TODO no need to re-create sprite-group after change
   ]);
 
   return <SpriteGroupInstancedBufferGeometry
@@ -44,7 +44,7 @@ SimpleSpritesBufferGeometry.propTypes = {
   maxAllocVOSize: number,
   dynamic: bool,
   autotouch: bool,
-  // setSize: oneOfType([string, func]),
+  // TODO setSize: oneOfType([string, func]),
   // ...?
 }
 
