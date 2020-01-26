@@ -24,6 +24,7 @@ SpriteGroupInstancedBufferGeometry.displayName = 'SpriteGroupInstancedBufferGeom
 SpriteGroupInstancedBufferGeometry.propTypes = {
   baseGeometry: object.isRequired,
   spriteGroup: object.isRequired,
+
   attach: string,
 
   // see picimo->SpriteGroup(Textured)Options

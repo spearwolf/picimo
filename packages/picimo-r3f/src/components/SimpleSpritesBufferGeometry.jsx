@@ -1,5 +1,5 @@
 import React, {forwardRef, useMemo} from 'react';
-import {string, number, bool} from 'prop-types';
+import {string, number, bool, arrayOf} from 'prop-types';
 import {getSimpleSpriteBaseGroup, SimpleSpriteGroup, Logger} from 'picimo';
 import {SpriteGroupInstancedBufferGeometry} from './SpriteGroupInstancedBufferGeometry';
 
@@ -37,7 +37,10 @@ export const SimpleSpritesBufferGeometry = forwardRef(({
 SimpleSpritesBufferGeometry.displayName = 'SimpleSpritesBufferGeometry';
 
 SimpleSpritesBufferGeometry.propTypes = {
+  // see https://github.com/react-spring/react-three-fiber#shortcuts-and-non-object3d-stow-away
   attach: string,
+  attachArray: string,
+  attachObject: arrayOf(string),
 
   // see picimo->SpriteGroup(Textured)Options
   capacity: number,
@@ -49,7 +52,6 @@ SimpleSpritesBufferGeometry.propTypes = {
 }
 
 SimpleSpritesBufferGeometry.defaultProps = {
-  attach: 'geometry',
   capacity: 1024,
   maxAllocVOSize: 256,
   dynamic: true,

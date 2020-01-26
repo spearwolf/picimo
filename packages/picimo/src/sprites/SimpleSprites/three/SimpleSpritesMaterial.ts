@@ -1,4 +1,5 @@
-import * as THREE from 'three';
+import {Texture, NearestFilter, ShaderMaterial, DoubleSide} from 'three';
+import {TextureAtlas} from '../../../textures';
 
 const vertexShader = `
 
@@ -40,9 +41,24 @@ const fragmentShader = `
 
 `;
 
-export class SimpleSpritesMaterial extends THREE.ShaderMaterial {
+function makeTexture(htmlElement: HTMLImageElement) {
 
-  constructor(texture: THREE.Texture) {
+  const texture = new Texture(htmlElement);
+
+  texture.flipY = false;
+  texture.minFilter = NearestFilter;
+  texture.magFilter = NearestFilter;
+  texture.needsUpdate = true;
+
+  return texture;
+
+}
+
+export class SimpleSpritesMaterial extends ShaderMaterial {
+
+  private _textureAtlas: TextureAtlas;
+
+  constructor(texture?: THREE.Texture) {
     super({
 
       vertexShader,
@@ -56,11 +72,32 @@ export class SimpleSpritesMaterial extends THREE.ShaderMaterial {
 
       },
 
-      side: THREE.DoubleSide,
+      side: DoubleSide,
       transparent: true,
       depthWrite: true,
 
     });
+  }
+
+  get texture(): Texture {
+    return this.uniforms.texture.value;
+  }
+
+  set texture(tex: Texture) {
+    this.uniforms.texture.value = tex;
+  }
+
+  get textureAtlas() {
+    return this._textureAtlas;
+  }
+
+  set textureAtlas(ta: TextureAtlas) {
+    this._textureAtlas = ta;
+    if (ta) {
+      const {texture: prevTexture} = this;
+      prevTexture?.dispose();
+      this.texture = makeTexture(ta.baseTexture.imgEl as HTMLImageElement);
+    }
   }
 
 }
