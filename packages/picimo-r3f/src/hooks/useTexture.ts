@@ -125,38 +125,42 @@ export const useTextureContext = () => {
 
   const [state, setState] = useState(initialState);
 
-  const dispatch = (action: ITextureAction) => {
-    const nextState = reducer(state, action);
-    if (nextState !== state) {
-      log.log('next state', nextState);
-      setState(nextState);
+  const dispatch = useMemo(
+    () => (name: string, isTextureAtlas: boolean) => (tex: Promise<PicimoTexture|TextureAtlas>|PicimoTexture|TextureAtlas) => {
+
+    const dispatchAction = (action: ITextureAction) => {
+      const nextState = reducer(state, action);
+      if (nextState !== state) {
+        log.log('next state', nextState);
+        setState(nextState);
+      }
+    };
+
+    let action: ITextureAction;
+
+    if (tex instanceof PicimoTexture) {
+      action = <ITextureAction>{ type: 'setTexture', payload: {name, texture: tex }};
+    } else if (tex instanceof TextureAtlas) {
+      action = <ITextureAction>{ type: 'setTextureAtlas', payload: { name, textureAtlas: tex }};
+    } else if (tex instanceof Promise) {
+      if (isTextureAtlas) {
+        action = <ITextureAction>{ type: 'loadTextureAtlas', payload: { dispatch: dispatchAction, name, loading: tex }};
+      } else {
+        action = <ITextureAction>{ type: 'loadTexture', payload: { dispatch: dispatchAction, name, loading: tex }};
+      }
     }
-  };
+
+    if (action) {
+      log.log('dispatch', action);
+      dispatchAction(action);
+    }
+
+    return tex;
+  }, [state, setState]);
 
   return {
     state,
-    dispatch: (name: string, isTextureAtlas: boolean) => (t: Promise<PicimoTexture|TextureAtlas>|PicimoTexture|TextureAtlas) => {
-      let action: ITextureAction;
-
-      if (t instanceof PicimoTexture) {
-        action = <ITextureAction>{ type: 'setTexture', payload: {name, texture: t }};
-      } else if (t instanceof TextureAtlas) {
-        action = <ITextureAction>{ type: 'setTextureAtlas', payload: { name, textureAtlas: t }};
-      } else if (t instanceof Promise) {
-        if (isTextureAtlas) {
-          action = <ITextureAction>{ type: 'loadTextureAtlas', payload: { dispatch, name, loading: t }};
-        } else {
-          action = <ITextureAction>{ type: 'loadTexture', payload: { dispatch, name, loading: t }};
-        }
-      }
-
-      if (action) {
-        log.log('dispatch', action);
-        dispatch(action);
-      }
-
-      return t;
-    }
+    dispatch,
   };
 }
 
