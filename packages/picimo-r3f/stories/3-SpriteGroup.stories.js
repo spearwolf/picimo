@@ -27,8 +27,7 @@ export const SimpleSprites = () => {
             { boolean('show <SpriteGroupMesh>', true) && (
               <SpriteGroupMesh>
 
-                <SimpleSpritesBufferGeometry attach="geometry" />
-                <SimpleSpritesMaterial texture="nobinger" attach="material" />
+                <SimpleSpritesBufferGeometry attach="geometry" capacity={512} autotouch={true} />
 
                 <TextureAtlas name="nobinger" src="nobinger.json">
                 {/*
@@ -39,6 +38,8 @@ export const SimpleSprites = () => {
                   )}
                 */}
                 </TextureAtlas>
+
+                <SimpleSpritesMaterial texture="nobinger" attach="material" />
 
               </SpriteGroupMesh>
             )}
