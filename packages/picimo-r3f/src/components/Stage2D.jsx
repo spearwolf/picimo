@@ -2,6 +2,7 @@ import React, {useRef, useMemo, useEffect} from 'react';
 import {extend, useThree, useFrame} from 'react-three-fiber';
 import {Stage2D as PicimoStage2D, ParallaxProjection, Plane, Logger, OrthographicProjection} from 'picimo';
 import {node, oneOf, object} from 'prop-types';
+import {TextureContext, useTextureContext} from '../hooks/useTexture';
 
 extend({PicimoStage2D});
 
@@ -12,6 +13,8 @@ export const Stage2D = ({children, type, plane, projection: projectionOptions}) 
   const ref = useRef();
 
   const {setDefaultCamera, size: {width, height}} = useThree();
+
+  const texCtx = useTextureContext();
 
   const projection = useMemo(() => {
     const proj = new (type === 'parallax' ? ParallaxProjection : OrthographicProjection)(
@@ -36,9 +39,11 @@ export const Stage2D = ({children, type, plane, projection: projectionOptions}) 
   });
 
   return (
-    <picimoStage2D ref={ref} projection={projection}>
-      {children}
-    </picimoStage2D>
+    <TextureContext.Provider value={texCtx}>
+      <picimoStage2D ref={ref} projection={projection}>
+        {children}
+      </picimoStage2D>
+    </TextureContext.Provider>
   );
 }
 

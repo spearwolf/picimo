@@ -1,7 +1,7 @@
 /* eslint-env browser */
 import React from 'react';
 import {Canvas} from 'react-three-fiber';
-import {Stage2D, SpriteGroupMesh, SimpleSpritesBufferGeometry, SimpleSpritesMaterial} from 'picimo-r3f';
+import {Stage2D, SpriteGroupMesh, SimpleSpritesBufferGeometry, SimpleSpritesMaterial, TextureAtlas} from 'picimo-r3f';
 import {withKnobs, boolean} from '@storybook/addon-knobs';
 
 export default {
@@ -28,19 +28,18 @@ export const SimpleSprites = () => {
               <SpriteGroupMesh>
 
                 <SimpleSpritesBufferGeometry attach="geometry" />
-                <SimpleSpritesMaterial attach="material">
+                <SimpleSpritesMaterial texture="nobinger" attach="material" />
 
-                  {/*
-                  <TextureAtlas attach="uniforms.texture" src="..">
-                    {(atlas) => (
+                <TextureAtlas name="nobinger" src="nobinger.json">
+                {/*
+                  {(atlas) => (
 
-                        <Sprites />
+                      <Sprites />
 
-                    )}
-                  </TextureAtlas>
+                  )}
                 */}
+                </TextureAtlas>
 
-                </SimpleSpritesMaterial>
               </SpriteGroupMesh>
             )}
 

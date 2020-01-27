@@ -1,5 +1,4 @@
-import {Texture, NearestFilter, ShaderMaterial, DoubleSide} from 'three';
-import {TextureAtlas} from '../../../textures';
+import {ShaderMaterial, DoubleSide, Texture} from 'three';
 
 const vertexShader = `
 
@@ -27,12 +26,12 @@ const vertexShader = `
 
 const fragmentShader = `
 
-  uniform sampler2D texture;
+  uniform sampler2D texMap;
 
   varying vec2 vTexCoords;
 
   void main(void) {
-    gl_FragColor = texture2D(texture, vec2(vTexCoords.s, vTexCoords.t));
+    gl_FragColor = texture2D(texMap, vec2(vTexCoords.s, vTexCoords.t));
 
     if (gl_FragColor.a == 0.0) {
       discard;
@@ -41,24 +40,9 @@ const fragmentShader = `
 
 `;
 
-function makeTexture(htmlElement: HTMLImageElement) {
-
-  const texture = new Texture(htmlElement);
-
-  texture.flipY = false;
-  texture.minFilter = NearestFilter;
-  texture.magFilter = NearestFilter;
-  texture.needsUpdate = true;
-
-  return texture;
-
-}
-
 export class SimpleSpritesMaterial extends ShaderMaterial {
 
-  private _textureAtlas: TextureAtlas;
-
-  constructor(texture?: THREE.Texture) {
+  constructor(texture: Texture) {
     super({
 
       vertexShader,
@@ -66,7 +50,7 @@ export class SimpleSpritesMaterial extends ShaderMaterial {
 
       uniforms: {
 
-        texture: {
+        texMap: {
           value: texture,
         },
 
@@ -77,27 +61,6 @@ export class SimpleSpritesMaterial extends ShaderMaterial {
       depthWrite: true,
 
     });
-  }
-
-  get texture(): Texture {
-    return this.uniforms.texture.value;
-  }
-
-  set texture(tex: Texture) {
-    this.uniforms.texture.value = tex;
-  }
-
-  get textureAtlas() {
-    return this._textureAtlas;
-  }
-
-  set textureAtlas(ta: TextureAtlas) {
-    this._textureAtlas = ta;
-    if (ta) {
-      const {texture: prevTexture} = this;
-      prevTexture?.dispose();
-      this.texture = makeTexture(ta.baseTexture.imgEl as HTMLImageElement);
-    }
   }
 
 }
