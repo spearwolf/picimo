@@ -14,9 +14,9 @@ export const TextureAtlas = ({src, basePath, name, ...props}) => {
   );
 
   return <primitive object={textureAtlas} {...props}></primitive>;
-
 }
 
+// TODO add texture->webgl options (linear, nearest, flipY...)
 TextureAtlas.propTypes = {
   src: string.isRequired,
   basePath: string,

@@ -1,4 +1,4 @@
-import {createContext, useState, useContext} from 'react';
+import {createContext, useState, useContext, useMemo} from 'react';
 import {Texture as PicimoTexture, TextureAtlas, Logger} from 'picimo';
 import {Texture as ThreeTexture, NearestFilter} from 'three';
 
@@ -28,9 +28,11 @@ const initialState: ITextureState = {
   loading: Object.create(null),
 }
 
+type TextureSetterType = (texture: Promise<PicimoTexture|TextureAtlas>|PicimoTexture|TextureAtlas) => void;
+
 interface ITextureContext {
   state: ITextureState;
-  dispatch: (action: ITextureAction) => void;
+  dispatch: (name: string, isTextureAtlas: boolean) => TextureSetterType;
 }
 
 export const TextureContext = createContext<ITextureContext>({ state: initialState, dispatch: undefined });
@@ -133,22 +135,7 @@ export const useTextureContext = () => {
 
   return {
     state,
-    dispatch,
-  };
-}
-
-export const useTexture = (name: string = 'default', option?: { textureAtlas: boolean }) => {
-
-  // TODO what about parent context?
-  const { state, dispatch } = useContext(TextureContext);
-
-  log.log(name, option, state);
-
-  return [
-    option?.textureAtlas ? state.textureAtlas[name] : state.texture[name],
-
-    // TODO change setter signature <=> name
-    (t: Promise<PicimoTexture|TextureAtlas>|PicimoTexture|TextureAtlas) => {
+    dispatch: (name: string, isTextureAtlas: boolean) => (t: Promise<PicimoTexture|TextureAtlas>|PicimoTexture|TextureAtlas) => {
       let action: ITextureAction;
 
       if (t instanceof PicimoTexture) {
@@ -156,7 +143,7 @@ export const useTexture = (name: string = 'default', option?: { textureAtlas: bo
       } else if (t instanceof TextureAtlas) {
         action = <ITextureAction>{ type: 'setTextureAtlas', payload: { name, textureAtlas: t }};
       } else if (t instanceof Promise) {
-        if (option?.textureAtlas) {
+        if (isTextureAtlas) {
           action = <ITextureAction>{ type: 'loadTextureAtlas', payload: { dispatch, name, loading: t }};
         } else {
           action = <ITextureAction>{ type: 'loadTexture', payload: { dispatch, name, loading: t }};
@@ -170,6 +157,25 @@ export const useTexture = (name: string = 'default', option?: { textureAtlas: bo
 
       return t;
     }
+  };
+}
+
+export const useTexture = (name: string = 'default', option?: { textureAtlas: boolean }) => {
+
+  // TODO what about parent context?
+  const { state, dispatch } = useContext(TextureContext);
+
+  const isTextureAtlas = Boolean(option?.textureAtlas);
+  const textureSetter = useMemo(
+    () => dispatch(name, isTextureAtlas),
+    [dispatch, name, isTextureAtlas]
+  );
+
+  log.log(name, option, state);
+
+  return [
+    option?.textureAtlas ? state.textureAtlas[name] : state.texture[name],
+    textureSetter,
   ];
 }
 
