@@ -44,17 +44,17 @@
     "@storybook/addon-links": "^5.2.8",
     "@storybook/addons": "^5.2.8",
     "@storybook/react": "^5.2.8",
-    "@types/react": "^16.9.17",
-    "@types/react-dom": "^16.9.4",
+    "@types/react": "^16.9.19",
+    "@types/react-dom": "^16.9.5",
     "assert": "^2.0.0",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "babel-plugin-istanbul": "^6.0.0",
     "core-js": "^3.6.4",
-    "cross-env": "^6.0.3",
+    "cross-env": "^7.0.0",
     "eslint": "^6.8.0",
     "eslint-config-problems": "^3.1.0",
-    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-react": "^7.18.0",
     "eslint-plugin-react-hooks": "^2.3.0",
     "karma": "^4.4.1",
     "karma-chrome-launcher": "^3.1.0",
@@ -64,7 +64,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^4.0.2",
     "lerna": "^3.20.2",
-    "mocha": "^7.0.0",
+    "mocha": "^7.0.1",
     "npm-run-all": "^4.1.5",
     "picimo": "*",
     "prop-types": "^15.7.2",
@@ -72,7 +72,7 @@
     "react-dom": "^16.12.0",
     "rimraf": "^3.0.0",
     "three": "^0.112.1",
-    "typescript": "^3.7.4",
+    "typescript": "^3.7.5",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.10.1"
@@ -87,6 +87,6 @@
   "dependencies": {
     "@babel/runtime-corejs3": "^7.8.3",
     "react-promise-suspense": "^0.3.2",
-    "react-three-fiber": "^4.0.7"
+    "react-three-fiber": "^4.0.12"
   }
 }
