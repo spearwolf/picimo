@@ -17,11 +17,10 @@ makeExampleShell(
 
     const CAPACITY = 256;
 
-    // const material = new SimpleSpritesMaterial(display.texUtils.makeTexture(atlas));
-    const material = new SimpleSpritesMaterial();
-
+    // const material = new SimpleSpritesMaterial();
     const atlas = await TextureAtlas.load('amigaballs.json', '/assets/');
-    material.texture = display.texUtils.makeTexture(atlas);
+    const material = new SimpleSpritesMaterial(display.texUtils.makeTexture(atlas));
+    // material.texture = display.texUtils.makeTexture(atlas);
 
     const mesh = new SimpleSprites(material, { capacity: CAPACITY, dynamic: true, autotouch: true });
 
