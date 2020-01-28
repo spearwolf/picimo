@@ -62,6 +62,8 @@ const makeThreeTexture = (picimoTexture: PicimoTexture) => {
   return texture;
 }
 
+// TODO delete/dispose textures
+
 const reducer = (state: ITextureState, action: ITextureAction) => {
   const { payload } = action;
   switch (action.type) {
@@ -174,8 +176,6 @@ export const useTexture = (name: string = 'default', option?: { textureAtlas: bo
     () => dispatch(name, isTextureAtlas),
     [dispatch, name, isTextureAtlas]
   );
-
-  log.log(name, option, state);
 
   return [
     option?.textureAtlas ? state.textureAtlas[name] : state.texture[name],

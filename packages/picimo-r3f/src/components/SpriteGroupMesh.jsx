@@ -2,10 +2,18 @@ import React, {forwardRef, Suspense} from 'react';
 import {extend} from 'react-three-fiber';
 import {SpriteGroupMesh as PicimoSpriteGroupMesh} from 'picimo';
 import {node, any} from 'prop-types';
-import {TextureContext, useTextureContext} from '../hooks';
+// import {TextureContext, useTextureContext} from '../hooks';
 
 extend({PicimoSpriteGroupMesh});
 
+export const SpriteGroupMesh = forwardRef(({ children, fallback, ...props }, ref) => (
+  <Suspense fallback={fallback}>
+    <picimoSpriteGroupMesh ref={ref} {...props}>
+      {children}
+    </picimoSpriteGroupMesh>
+  </Suspense>
+));
+/*
 export const SpriteGroupMesh = forwardRef(({ children, fallback, ...props }, ref) => {
   const textureCtx = useTextureContext();
   return (
@@ -18,6 +26,7 @@ export const SpriteGroupMesh = forwardRef(({ children, fallback, ...props }, ref
     </Suspense>
   )
 });
+*/
 
 SpriteGroupMesh.displayName = 'SpriteGroupMesh';
 
