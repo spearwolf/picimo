@@ -1,7 +1,9 @@
-import React, {forwardRef, useMemo} from 'react';
-import {string, number, bool, arrayOf} from 'prop-types';
+import React, {createContext, forwardRef, useMemo, useState} from 'react';
+import {string, number, bool, arrayOf, node} from 'prop-types';
 import {getSimpleSpriteBaseGroup, SimpleSpriteGroup, Logger} from 'picimo';
 import {SpriteGroupInstancedBufferGeometry} from './SpriteGroupInstancedBufferGeometry';
+
+export const SpriteGroupContext = createContext(null);
 
 const log = new Logger('<SimpleSpritesBufferGeometry>', 0, Infinity);
 
@@ -11,27 +13,38 @@ export const SimpleSpritesBufferGeometry = forwardRef(({
   maxAllocVOSize,
   dynamic,
   autotouch,
+  children,
 }, ref) => {
+
+  const [spritesCtx, setSpritesCtx] = useState(null);
 
   const baseGeometry = useMemo(getSimpleSpriteBaseGroup, []);
 
   const spriteGroup = useMemo(() => {
     const sprites = new SimpleSpriteGroup({capacity, maxAllocVOSize, dynamic, autotouch});
-    log.log('create', sprites);
+    log.log('create', [sprites, baseGeometry]);
+    setSpritesCtx([sprites, baseGeometry]);
     return sprites;
   }, [
+    baseGeometry,
     capacity,
     maxAllocVOSize,
     dynamic,
     autotouch, // TODO no need to re-create sprite-group after change
   ]);
 
-  return <SpriteGroupInstancedBufferGeometry
-    baseGeometry={baseGeometry}
-    spriteGroup={spriteGroup}
-    attach={attach}
-    ref={ref}
-  />;
+  return (
+    <SpriteGroupContext.Provider value={spritesCtx}>
+      <SpriteGroupInstancedBufferGeometry
+        baseGeometry={baseGeometry}
+        spriteGroup={spriteGroup}
+        attach={attach}
+        ref={ref}
+      >
+        {children}
+      </SpriteGroupInstancedBufferGeometry>
+    </SpriteGroupContext.Provider>
+  );
 });
 
 SimpleSpritesBufferGeometry.displayName = 'SimpleSpritesBufferGeometry';
@@ -49,6 +62,7 @@ SimpleSpritesBufferGeometry.propTypes = {
   autotouch: bool,
   // TODO setSize: oneOfType([string, func]),
   // ...?
+  children: node,
 }
 
 SimpleSpritesBufferGeometry.defaultProps = {
@@ -56,4 +70,5 @@ SimpleSpritesBufferGeometry.defaultProps = {
   maxAllocVOSize: 256,
   dynamic: true,
   autotouch: false,
+  children: undefined,
 }

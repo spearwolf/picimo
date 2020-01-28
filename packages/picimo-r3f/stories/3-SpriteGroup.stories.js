@@ -1,7 +1,7 @@
 /* eslint-env browser */
 import React from 'react';
 import {Canvas} from 'react-three-fiber';
-import {Stage2D, SpriteGroupMesh, SimpleSpritesBufferGeometry, SimpleSpritesMaterial, TextureAtlas} from 'picimo-r3f';
+import {Stage2D, SpriteGroupMesh, SimpleSpritesBufferGeometry, SimpleSpritesMaterial, TextureAtlas, Sprites} from 'picimo-r3f';
 import {withKnobs, boolean} from '@storybook/addon-knobs';
 
 export default {
@@ -27,19 +27,19 @@ export const SimpleSprites = () => {
             { boolean('show <SpriteGroupMesh>', true) && (
               <SpriteGroupMesh>
 
-                <SimpleSpritesBufferGeometry attach="geometry" capacity={512} autotouch={true} />
+                <SimpleSpritesBufferGeometry
+                  attach="geometry"
+                  capacity={512}
+                  autotouch={true}
+                >
+                  <Sprites
+                    textureAtas="nobinger"
+                    onCreate={args => console.log('SPRITES!', args)}
+                  />
+                </SimpleSpritesBufferGeometry>
 
-                <TextureAtlas name="nobinger" src="nobinger.json">
-                {/*
-                  {(atlas) => (
-
-                      <Sprites />
-
-                  )}
-                */}
-                </TextureAtlas>
-
-                <SimpleSpritesMaterial texture="nobinger" attach="material" />
+                <SimpleSpritesMaterial attach="material" texture="nobinger" />
+                <TextureAtlas name="nobinger" src="nobinger.json" />
 
               </SpriteGroupMesh>
             )}

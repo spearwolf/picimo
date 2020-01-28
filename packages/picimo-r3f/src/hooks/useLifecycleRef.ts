@@ -1,5 +1,5 @@
 // inspired by https://medium.com/@teh_builder/ref-objects-inside-useeffect-hooks-eb7c15198780
-import {useCallback, useRef, useEffect, DependencyList} from "react";
+import {useCallback, useRef, useEffect, DependencyList, MutableRefObject} from "react";
 
 export const useLifecycleRef = (
   {
@@ -11,9 +11,11 @@ export const useLifecycleRef = (
     onDestroy: (node: any) => void;
     onUpdate: (node: any) => void;
   },
-  updateDependents: DependencyList = []
+  updateDependents: DependencyList = [],
+  forwardRef?: MutableRefObject<any>,
 ) => {
-  const ref = useRef(null);
+  const localRef = useRef(null);
+  const ref = forwardRef || localRef;
 
   let onCreateCalled = false;
 

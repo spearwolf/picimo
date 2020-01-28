@@ -5,3 +5,4 @@ export * from './BitmapText2DBlock';
 export * from './SpriteGroupMesh';
 export * from './SimpleSpritesBufferGeometry';
 export * from './SimpleSpritesMaterial';
+export * from './Sprites';
