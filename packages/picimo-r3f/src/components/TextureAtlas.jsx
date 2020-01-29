@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import usePromise from 'react-promise-suspense';
 import {TextureAtlas as PicimoTextureAtlas} from 'picimo';
 import {string} from 'prop-types';
@@ -6,11 +6,19 @@ import {useTextureAtlas} from '../hooks';
 
 export const TextureAtlas = ({src, basePath, name, ...props}) => {
 
-  const [ , setTextureAtlas ] = useTextureAtlas(name);
+  const [, setTextureAtlas] = useTextureAtlas(name);
 
   const textureAtlas = usePromise(
-    () => setTextureAtlas(PicimoTextureAtlas.load(src, basePath)),
+    () => PicimoTextureAtlas.load(src, basePath),
     [src, basePath, name],
+  );
+
+  useEffect(
+    () => {
+      // the usePromise hook caches the promise response - so we need to call setTextureAtlas here
+      setTextureAtlas(textureAtlas)
+    },
+    [textureAtlas, setTextureAtlas],
   );
 
   return <primitive object={textureAtlas} {...props}></primitive>;

@@ -3,7 +3,7 @@
 import React from 'react';
 import {Canvas} from 'react-three-fiber';
 import {Stage2D, SpriteGroupMesh, SimpleSpritesBufferGeometry, SimpleSpritesMaterial, TextureAtlas, Sprites} from 'picimo-r3f';
-import {withKnobs, boolean} from '@storybook/addon-knobs';
+import {withKnobs, boolean, select} from '@storybook/addon-knobs';
 
 export default {
   title: 'SpriteGroup',
@@ -44,12 +44,17 @@ export const SimpleSprites = () => {
         <Canvas gl2 pixelRatio={window.devicePixelRatio} style={{minHeight: '400px'}}>
           <Stage2D plane="xz" type="parallax" projection={PROJECTION}>
 
-            <TextureAtlas name="nobinger" src="nobinger.json" />
+            { boolean('render <TextureAtlas>', true) && (
+              <TextureAtlas
+                name="spritesAtlas"
+                src={select('texture-atlas', ['nobinger.json', 'amigaballs.json'], 'nobinger.json')}
+              />
+            )}
 
             { boolean('show <SpriteGroupMesh>', true) && (
               <SpriteGroupMesh>
 
-                <SimpleSpritesMaterial attach="material" texture="nobinger" />
+                <SimpleSpritesMaterial attach="material" texture="spritesAtlas" />
 
                 <SimpleSpritesBufferGeometry
                   attach="geometry"
@@ -58,7 +63,7 @@ export const SimpleSprites = () => {
                   autotouch={true}
                 >
                   { boolean('show <Sprites>', true) && (
-                    <Sprites textureAtlas="nobinger" onCreate={onCreate} />
+                    <Sprites textureAtlas="spritesAtlas" onCreate={onCreate} />
                   )}
                 </SimpleSpritesBufferGeometry>
 

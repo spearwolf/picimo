@@ -10,7 +10,7 @@ export class Logger {
   private sleeping = false;
   private logCount: number = 0;
 
-  constructor(name: string, throttleTimeoutMs: number = 0, stopAfterNLogs: number = 3) {
+  constructor(name: string, throttleTimeoutMs: number = 0, stopAfterNLogs: number = Infinity) {
     this.name = name;
     this.throttleTimeoutMs = throttleTimeoutMs;
     this.stopAfterNLogs = stopAfterNLogs;

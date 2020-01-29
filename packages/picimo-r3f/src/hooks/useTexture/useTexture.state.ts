@@ -2,7 +2,10 @@ import {Texture as PicimoTexture, TextureAtlas} from 'picimo';
 import {Texture as ThreeTexture} from 'three';
 
 export interface ITextureMap {
-  [index: string]: ThreeTexture;
+  [index: string]: {
+    three: ThreeTexture;
+    picimo: PicimoTexture;
+  }
 }
 
 export interface ITextureAtlasMap {
@@ -20,10 +23,11 @@ export interface ITextureState {
 }
 
 export const createInitialState = () => (<ITextureState>{
-  texture: Object.create(null),
-  textureAtlas: Object.create(null),
-  loading: Object.create(null),
+  texture: {},
+  textureAtlas: {},
+  loading: {},
 });
 
-export const getThreeTexture = (state: ITextureState, name: string) => state.texture[name];
+export const getThreeTexture = (state: ITextureState, name: string) => state.texture[name]?.three;
+export const getPicimoTexture = (state: ITextureState, name: string) => state.texture[name]?.picimo;
 export const getTextureAtlas = (state: ITextureState, name: string) => state.textureAtlas[name];
