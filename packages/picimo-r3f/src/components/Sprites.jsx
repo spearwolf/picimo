@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useContext, useState, useEffect, useRef} from 'react';
 import {func, string} from 'prop-types';
 import {Logger} from 'picimo';
@@ -39,7 +40,7 @@ export const Sprites = ({onCreate, onTextureAtlasChange, textureAtlas: textureAt
         setState(createState(sprites, instanceRef));
       }
     }
-  }, [isInitialized, textureAtlasName, textureAtlas, onCreate, sprites, baseGeometry]);
+  }, [isInitialized, textureAtlasName, textureAtlas, onCreate]);
 
   useEffect(() => {
     if (isInitialized && onTextureAtlasChange && textureAtlas) {
@@ -49,8 +50,7 @@ export const Sprites = ({onCreate, onTextureAtlasChange, textureAtlas: textureAt
         instanceRef.current = nextInstanceValue;
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [textureAtlas, onTextureAtlasChange]);
+  }, [textureAtlas]);
 
   return instance ? <primitive object={instance} /> : null;
 }
