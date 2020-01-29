@@ -20,7 +20,7 @@ const PROJECTION = {
 
 // TODO useProjection() hook?
 
-const onCreate = ({spriteGroup, textureAtlas}) => {
+const createSprites = ({spriteGroup, textureAtlas}) => {
 
   const sprites = spriteGroup.createSpritesFromTextures(textureAtlas.randomFrames(24));
 
@@ -32,9 +32,19 @@ const onCreate = ({spriteGroup, textureAtlas}) => {
     sprite.translate(x, y, 0);
   });
 
-  console.log('CREATE SPRITES', spriteGroup, textureAtlas, sprites);
-
   return sprites;
+}
+
+const onCreate = ctx => {
+  const sprites = createSprites(ctx);
+  console.log('[story] CREATE SPRITES', ctx, sprites);
+  return sprites;
+}
+
+const onTextureAtlasChange = (ctx, sprites) => {
+  console.log('[story] TEXTURE-ATLAS CHANGE', ctx, sprites);
+  ctx.spriteGroup.voPool.free(sprites);
+  return onCreate(ctx);
 }
 
 export const SimpleSprites = () => {
@@ -63,7 +73,11 @@ export const SimpleSprites = () => {
                   autotouch={true}
                 >
                   { boolean('show <Sprites>', true) && (
-                    <Sprites textureAtlas="spritesAtlas" onCreate={onCreate} />
+                    <Sprites
+                      textureAtlas="spritesAtlas"
+                      onCreate={onCreate}
+                      onTextureAtlasChange={onTextureAtlasChange}
+                    />
                   )}
                 </SimpleSpritesBufferGeometry>
 
