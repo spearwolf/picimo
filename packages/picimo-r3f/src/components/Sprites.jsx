@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect} from 'react';
+import React, {useContext, useState, useEffect, useRef} from 'react';
 import {func, string} from 'prop-types';
 import {Logger} from 'picimo';
 import {useTextureAtlas} from '../hooks';
@@ -6,51 +6,47 @@ import {SpriteGroupContext} from './SimpleSpritesBufferGeometry';
 
 const log = new Logger('<Sprites>');
 
-const createState = (isInitialized = false, instanceValue = undefined, spriteGroup = undefined) => {
-  if (isInitialized) {
-    return {
-      isInitialized,
-      instanceValue,
-      instance: {
-        dispose() { // react-three-fiber -> dispose callback
-          if (spriteGroup && Array.isArray(this.instanceValue)) {
-            log.log('dispose->free', spriteGroup, this.instanceValue);
-            spriteGroup.voPool.free(this.instanceValue);
-          } else if (typeof this.instanceValue?.dispose === 'function') {
-            this.instanceValue.dispose();
-          }
-        }
+const createState = (spriteGroup, instanceRef) => ({
+  isInitialized: true,
+  instance: {
+    dispose() { // react-three-fiber -> dispose callback
+      if (spriteGroup && Array.isArray(instanceRef.current)) {
+        log.log('dispose->free', spriteGroup, instanceRef.current);
+        spriteGroup.voPool.free(instanceRef.current);
+      } else if (typeof instanceRef.current?.dispose === 'function') {
+        instanceRef.current.dispose();
       }
     }
   }
-  return {isInitialized};
-}
+});
 
 export const Sprites = ({onCreate, onTextureAtlasChange, textureAtlas: textureAtlasName}) => {
 
-  const [state, setState] = useState(createState());
-  const {isInitialized, instance, instanceValue} = state;
+  const [{isInitialized, instance}, setState] = useState({isInitialized: false});
   const [textureAtlas] = useTextureAtlas(textureAtlasName);
   const [sprites, baseGeometry] = useContext(SpriteGroupContext);
+  const instanceRef = useRef(null);
 
   useEffect(() => {
     if (!isInitialized && onCreate) {
       if (textureAtlasName) {
         if (textureAtlas) {
-          setState(createState(true, onCreate({spriteGroup: sprites, baseGeometry, textureAtlas}), sprites));
+          instanceRef.current = onCreate({spriteGroup: sprites, baseGeometry, textureAtlas});
+          setState(createState(sprites, instanceRef));
         }
       } else {
-        setState(createState(true, onCreate({spriteGroup: sprites, baseGeometry}), sprites));
+        instanceRef.current = onCreate({spriteGroup: sprites, baseGeometry});
+        setState(createState(sprites, instanceRef));
       }
     }
-  }, [isInitialized, textureAtlasName, textureAtlas, onCreate, sprites, baseGeometry, setState]);
+  }, [isInitialized, textureAtlasName, textureAtlas, onCreate, sprites, baseGeometry]);
 
   useEffect(() => {
     if (isInitialized && onTextureAtlasChange && textureAtlas) {
-      const nextInstanceValue = onTextureAtlasChange({spriteGroup: sprites, baseGeometry, textureAtlas}, instanceValue);
-      if (nextInstanceValue !== undefined) {
-        log.log('next instanceValue=');
-        setState({ ...state, instanceValue });
+      const nextInstanceValue = onTextureAtlasChange({spriteGroup: sprites, baseGeometry, textureAtlas}, instanceRef.current);
+      if (nextInstanceValue !== undefined && nextInstanceValue !== instanceRef.current) {
+        log.log('next instance-value', nextInstanceValue);
+        instanceRef.current = nextInstanceValue;
       }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

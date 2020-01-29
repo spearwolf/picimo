@@ -6,7 +6,8 @@ import {useTextureAtlas} from '../hooks';
 
 export const TextureAtlas = ({src, basePath, name, ...props}) => {
 
-  const [, setTextureAtlas] = useTextureAtlas(name);
+  const alias = name ? name : (basePath === './' ? src : `${basePath}${src}`);
+  const [, setTextureAtlas] = useTextureAtlas(alias);
 
   const textureAtlas = usePromise(
     () => PicimoTextureAtlas.load(src, basePath),
@@ -18,7 +19,8 @@ export const TextureAtlas = ({src, basePath, name, ...props}) => {
       // the usePromise hook caches the promise response - so we need to call setTextureAtlas here
       setTextureAtlas(textureAtlas)
     },
-    [textureAtlas, setTextureAtlas],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [textureAtlas],
   );
 
   return <primitive object={textureAtlas} {...props}></primitive>;
@@ -32,6 +34,5 @@ TextureAtlas.propTypes = {
 }
 
 TextureAtlas.defaultProps = {
-  basePath: './',
-  name: 'default'
+  basePath: './'
 }

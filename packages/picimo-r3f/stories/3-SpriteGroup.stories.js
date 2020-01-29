@@ -36,15 +36,14 @@ const createSprites = ({spriteGroup, textureAtlas}) => {
 }
 
 const onCreate = ctx => {
-  const sprites = createSprites(ctx);
-  console.log('[story] CREATE SPRITES', ctx, sprites);
-  return sprites;
+  console.log('[story] CREATE SPRITES', ctx);
+  return createSprites(ctx);
 }
 
 const onTextureAtlasChange = (ctx, sprites) => {
   console.log('[story] TEXTURE-ATLAS CHANGE', ctx, sprites);
   ctx.spriteGroup.voPool.free(sprites);
-  return onCreate(ctx);
+  return createSprites(ctx);
 }
 
 export const SimpleSprites = () => {

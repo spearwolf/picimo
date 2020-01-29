@@ -2,7 +2,7 @@ import {useContext, useMemo} from 'react';
 import {TextureContext} from './useTexture.context';
 import {getTextureAtlas, getThreeTexture} from './useTexture.state';
 
-export const useTexture = (name: string = 'default', option?: { textureAtlas: boolean }) => {
+export const useTexture = (name: string, option?: { textureAtlas: boolean }) => {
 
   // TODO what about parent context?
   const {state, dispatch} = useContext(TextureContext);
