@@ -24,3 +24,6 @@ export const createInitialState = () => (<ITextureState>{
   textureAtlas: Object.create(null),
   loading: Object.create(null),
 });
+
+export const getThreeTexture = (state: ITextureState, name: string) => state.texture[name];
+export const getTextureAtlas = (state: ITextureState, name: string) => state.textureAtlas[name];

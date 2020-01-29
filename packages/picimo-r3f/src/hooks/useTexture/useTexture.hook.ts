@@ -1,5 +1,6 @@
 import {useContext, useMemo} from 'react';
 import {TextureContext} from './useTexture.context';
+import {getTextureAtlas, getThreeTexture} from './useTexture.state';
 
 export const useTexture = (name: string = 'default', option?: { textureAtlas: boolean }) => {
 
@@ -9,7 +10,7 @@ export const useTexture = (name: string = 'default', option?: { textureAtlas: bo
   const isTextureAtlas = Boolean(option?.textureAtlas);
 
   const texture = useMemo(
-    () => (isTextureAtlas ? state.textureAtlas[name] : state.texture[name]),
+    () => (isTextureAtlas ? getTextureAtlas(state, name) : getThreeTexture(state, name)),
     [state, name, isTextureAtlas]
   );
 

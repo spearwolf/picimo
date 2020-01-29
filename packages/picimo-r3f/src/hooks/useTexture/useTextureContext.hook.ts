@@ -8,6 +8,7 @@ const log = new Logger('useTextureContext', 0, Infinity);
 
 export const useTextureContext = () => {
 
+  // TODO what about parent context?
   const [state, setState] = useState(createInitialState());
 
   const dispatch = useMemo(
