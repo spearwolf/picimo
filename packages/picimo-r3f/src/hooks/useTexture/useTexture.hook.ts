@@ -7,13 +7,19 @@ export const useTexture = (name: string = 'default', option?: { textureAtlas: bo
   const {state, dispatch} = useContext(TextureContext);
 
   const isTextureAtlas = Boolean(option?.textureAtlas);
+
+  const texture = useMemo(
+    () => (isTextureAtlas ? state.textureAtlas[name] : state.texture[name]),
+    [state, name, isTextureAtlas]
+  );
+
   const textureSetter = useMemo(
     () => dispatch(name, isTextureAtlas),
     [dispatch, name, isTextureAtlas]
   );
 
   return [
-    isTextureAtlas ? state.textureAtlas[name] : state.texture[name],
+    texture,
     textureSetter,
   ];
 }
