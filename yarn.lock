@@ -2869,9 +2869,10 @@
     react-lifecycles-compat "^3.0.4"
     warning "^3.0.0"
 
-"@spearwolf/eventize@spearwolf/eventize":
+"@spearwolf/eventize@^0.6.11":
   version "0.6.11"
-  resolved "https://codeload.github.com/spearwolf/eventize/tar.gz/82314e7981c2a6743c7f3046c137935c8d3ae02f"
+  resolved "https://npm.pkg.github.com/download/@spearwolf/eventize/0.6.11/beba051438984995f927078dad19bf10bbf18bbbdc2603e9d8a454cfcb36fe98#7a4e143f1bbe90b47c872f4ffe97b53c9cc73fe7"
+  integrity sha512-x7MPiXyGHmDhaNLMpqX4uv6hLQG0lOtEMU7fO65mgH3A6ya9vi8696WIQ8uHaJd9JuE3VG917e3AQBr1+49SdQ==
 
 "@storybook/addon-actions@^5.2.8":
   version "5.2.8"

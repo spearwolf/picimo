@@ -79,6 +79,6 @@
   },
   "dependencies": {
     "@babel/runtime-corejs3": "^7.8.4",
-    "@spearwolf/eventize": "spearwolf/eventize"
+    "@spearwolf/eventize": "^0.6.11"
   }
 }
