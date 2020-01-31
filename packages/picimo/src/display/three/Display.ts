@@ -1,5 +1,5 @@
 import {WebGLRendererParameters, WebGLRenderer, Color} from 'three';
-import {Eventize} from '@spearwolf/eventize';
+import {Eventize} from 'eventize-js';
 
 import {readOption, unpick} from '../../utils';
 import {TextureUtils} from '../../textures';

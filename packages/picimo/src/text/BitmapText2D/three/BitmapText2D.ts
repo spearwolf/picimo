@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import eventize, {Eventize} from '@spearwolf/eventize';
+import eventize, {Eventize} from 'eventize-js';
 
 import { SpriteGroupMesh, SpriteGroupInstancedBufferGeometry } from '../../../sprites';
 import { TextureAtlas } from '../../../textures';

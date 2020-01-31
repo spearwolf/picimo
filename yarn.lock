@@ -2869,11 +2869,6 @@
     react-lifecycles-compat "^3.0.4"
     warning "^3.0.0"
 
-"@spearwolf/eventize@^0.6.11":
-  version "0.6.11"
-  resolved "https://npm.pkg.github.com/download/@spearwolf/eventize/0.6.11/beba051438984995f927078dad19bf10bbf18bbbdc2603e9d8a454cfcb36fe98#7a4e143f1bbe90b47c872f4ffe97b53c9cc73fe7"
-  integrity sha512-x7MPiXyGHmDhaNLMpqX4uv6hLQG0lOtEMU7fO65mgH3A6ya9vi8696WIQ8uHaJd9JuE3VG917e3AQBr1+49SdQ==
-
 "@storybook/addon-actions@^5.2.8":
   version "5.2.8"
   resolved "https://registry.yarnpkg.com/@storybook/addon-actions/-/addon-actions-5.2.8.tgz#f63c6e1afb59e94ca1ebc776b7cad9b815e7419e"
@@ -6742,6 +6737,11 @@ eventemitter3@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-4.0.0.tgz#d65176163887ee59f386d64c82610b696a4a74eb"
   integrity sha512-qerSRB0p+UDEssxTtm6EDKcE7W4OaoisfIMl4CngyEhjpYglocpNg6UEqCvemdGhosAsg4sO2dXJOdyBifPGCg==
+
+eventize-js@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/eventize-js/-/eventize-js-1.0.0.tgz#f0817e58adc6e1ba284b86e19f9d0671f5a2a730"
+  integrity sha512-Z8h2dp0Zmd//13G4aomG++bDnK3pXIjiEMBpkgpGqFpPKXSvVQVzL7I/dA9l1Yk+CUA3pnmq6o1PdZ296a3Diw==
 
 events@^3.0.0:
   version "3.0.0"
