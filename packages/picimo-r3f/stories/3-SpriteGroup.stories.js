@@ -2,9 +2,9 @@
 /* eslint-disable no-console */
 import React from 'react';
 import {Canvas} from 'react-three-fiber';
-import {Stage2D, SpriteGroupMesh, SimpleSpritesBufferGeometry, SimpleSpritesMaterial, TextureAtlas, Sprites} from 'picimo-r3f';
 import {withKnobs, boolean, select} from '@storybook/addon-knobs';
-import { Logger } from 'picimo';
+import {Stage2D, SpriteGroupMesh, SimpleSpritesBufferGeometry, SimpleSpritesMaterial, TextureAtlas, Sprites, useProjection} from 'picimo-r3f';
+import {Logger} from 'picimo';
 
 export default {
   title: 'SpriteGroup',
@@ -31,11 +31,9 @@ const TEXTURE_ATLAS_SRC = [
 
 const SPRITES = 32;
 
-// TODO useProjection() hook?
-
 const log = new Logger('story');
 
-const createSprites = ({spriteGroup, textureAtlas}) => {
+const createSprites = ({spriteGroup, textureAtlas, projection}) => {
 
   const sprites = spriteGroup.createSpritesFromTextures(textureAtlas.randomFrames(SPRITES));
 
@@ -47,10 +45,10 @@ const createSprites = ({spriteGroup, textureAtlas}) => {
 
   sprites.forEach(sprite => {
     const [x, y] = [
-      (Math.random() * PROJECTION.width) - (PROJECTION.width * 0.5),
-      (Math.random() * PROJECTION.height) - (PROJECTION.height * 0.5),
+      (Math.random() * projection.width) - (projection.width * 0.5),
+      (Math.random() * projection.height) - (projection.height * 0.5),
     ];
-    sprite.translate(x, y, 0);
+    sprite.translate(x - (sprite.width / 2), y, 0);
 
     if (scale) {
       sprite.width *= scale;
@@ -72,46 +70,53 @@ const onTextureAtlasChange = (ctx, sprites) => {
   return createSprites(ctx);
 }
 
-export const SimpleSprites = () => {
+const forwardProjection = (fn, projection) => (ctx, sprites) => fn({...ctx, projection}, sprites);
+
+const ShowSomeSprites = () => {
+  const projection = useProjection();
   return (
-    <section>
-      <div style={{backgroundColor: '#d0e9f0'}}>
-        <Canvas gl2 pixelRatio={window.devicePixelRatio} style={{minHeight: '480px'}}>
-          <Stage2D plane="xz" type="parallax" projection={PROJECTION}>
+    <Sprites
+      textureAtlas="spritesAtlas"
+      onCreate={forwardProjection(onCreate, projection)}
+      onTextureAtlasChange={forwardProjection(onTextureAtlasChange, projection)}
+    />
+  );
+}
 
-            { boolean('render <TextureAtlas>', true) && (
-              <TextureAtlas
-                name="spritesAtlas"
-                src={select('texture-atlas', TEXTURE_ATLAS_SRC, TEXTURE_ATLAS_SRC[0])}
-              />
-            )}
+export const SimpleSprites = () => (
+  <section>
+    <div style={{backgroundColor: '#d0e9f0'}}>
+      <Canvas gl2 pixelRatio={window.devicePixelRatio} style={{minHeight: '480px'}}>
+        <Stage2D plane="xz" type="parallax" projection={PROJECTION}>
 
-            { boolean('show <SpriteGroupMesh>', true) && (
-              <SpriteGroupMesh>
+          { boolean('render <TextureAtlas>', true) && (
+            <TextureAtlas
+              name="spritesAtlas"
+              src={select('texture-atlas', TEXTURE_ATLAS_SRC, TEXTURE_ATLAS_SRC[0])}
+            />
+          )}
 
-                <SimpleSpritesMaterial attach="material" texture="spritesAtlas" />
+          { boolean('show <SpriteGroupMesh>', true) && (
+            <SpriteGroupMesh>
 
-                <SimpleSpritesBufferGeometry
-                  attach="geometry"
-                  capacity={512}
-                  dynamic={true}
-                  autotouch={true}
-                >
-                  { boolean('show <Sprites>', true) && (
-                    <Sprites
-                      textureAtlas="spritesAtlas"
-                      onCreate={onCreate}
-                      onTextureAtlasChange={onTextureAtlasChange}
-                    />
-                  )}
-                </SimpleSpritesBufferGeometry>
+              <SimpleSpritesMaterial attach="material" texture="spritesAtlas" />
 
-              </SpriteGroupMesh>
-            )}
+              <SimpleSpritesBufferGeometry
+                attach="geometry"
+                capacity={512}
+                dynamic={true}
+                autotouch={true}
+              >
+                { boolean('show <Sprites>', true) && (
+                  <ShowSomeSprites />
+                )}
+              </SimpleSpritesBufferGeometry>
 
-          </Stage2D>
-        </Canvas>
-      </div>
-    </section>
-  )
-};
+            </SpriteGroupMesh>
+          )}
+
+        </Stage2D>
+      </Canvas>
+    </div>
+  </section>
+);

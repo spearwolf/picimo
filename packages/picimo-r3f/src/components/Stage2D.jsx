@@ -1,8 +1,8 @@
-import React, {useRef, useMemo, useEffect, Suspense} from 'react';
+import React, {useRef, useMemo, useEffect, Suspense, useState} from 'react';
 import {extend, useThree, useFrame} from 'react-three-fiber';
 import {Stage2D as PicimoStage2D, ParallaxProjection, Plane, Logger, OrthographicProjection} from 'picimo';
 import {node, oneOf, object, bool, any} from 'prop-types';
-import {TextureContext, useTextureContext} from '../hooks/useTexture';
+import {TextureContext, useTextureContext, ProjectionContext} from '../hooks';
 
 extend({PicimoStage2D});
 
@@ -28,11 +28,14 @@ export const Stage2D = ({children, type, plane, projection: projectionOptions, f
 
   const texCtx = useTextureContext();
 
+  const [projCtx, setProjCtx] = useState(null);
+
   const projection = useMemo(() => {
     const proj = new (type === 'parallax' ? ParallaxProjection : OrthographicProjection)(
       new Plane(plane),
       projectionOptions,
     );
+    setProjCtx(proj);
     log.log('create projection:', proj);
     return proj;
   }, [plane, type, projectionOptions]);
@@ -53,9 +56,11 @@ export const Stage2D = ({children, type, plane, projection: projectionOptions, f
   return (
     <TextureContext.Provider value={texCtx}>
       <picimoStage2D ref={ref} projection={projection}>
-        <Suspense fallback={fallback}>
-          {children}
-        </Suspense>
+        <ProjectionContext.Provider value={projCtx}>
+          <Suspense fallback={fallback}>
+            {children}
+          </Suspense>
+        </ProjectionContext.Provider>
       </picimoStage2D>
     </TextureContext.Provider>
   );
