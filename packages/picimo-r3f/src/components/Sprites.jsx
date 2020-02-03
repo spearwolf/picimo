@@ -4,6 +4,7 @@ import {func, string} from 'prop-types';
 import {Logger} from 'picimo';
 import {useTextureAtlas} from '../hooks';
 import {SpriteGroupContext} from './SimpleSpritesBufferGeometry';
+import { useFrame } from 'react-three-fiber';
 
 const log = new Logger('<Sprites>');
 
@@ -21,36 +22,42 @@ const createState = (spriteGroup, instanceRef) => ({
   }
 });
 
-export const Sprites = ({onCreate, onTextureAtlasChange, textureAtlas: textureAtlasName}) => {
+export const Sprites = ({onCreate, onTextureAtlasChange, onFrame, textureAtlas: textureAtlasName}) => {
 
   const [{isInitialized, instance}, setState] = useState({isInitialized: false});
   const [textureAtlas] = useTextureAtlas(textureAtlasName);
-  const [sprites, baseGeometry] = useContext(SpriteGroupContext);
+  const [spriteGroup, baseGeometry] = useContext(SpriteGroupContext);
   const instanceRef = useRef(null);
 
   useEffect(() => {
     if (!isInitialized && onCreate) {
       if (textureAtlasName) {
         if (textureAtlas) {
-          instanceRef.current = onCreate({spriteGroup: sprites, baseGeometry, textureAtlas});
-          setState(createState(sprites, instanceRef));
+          instanceRef.current = onCreate({spriteGroup, baseGeometry, textureAtlas});
+          setState(createState(spriteGroup, instanceRef));
         }
       } else {
-        instanceRef.current = onCreate({spriteGroup: sprites, baseGeometry});
-        setState(createState(sprites, instanceRef));
+        instanceRef.current = onCreate({spriteGroup, baseGeometry});
+        setState(createState(spriteGroup, instanceRef));
       }
     }
   }, [isInitialized, textureAtlasName, textureAtlas, onCreate]);
 
   useEffect(() => {
     if (isInitialized && onTextureAtlasChange && textureAtlas) {
-      const nextInstanceValue = onTextureAtlasChange({spriteGroup: sprites, baseGeometry, textureAtlas}, instanceRef.current);
+      const nextInstanceValue = onTextureAtlasChange({spriteGroup, baseGeometry, textureAtlas}, instanceRef.current);
       if (nextInstanceValue !== undefined && nextInstanceValue !== instanceRef.current) {
         log.log('next instance-value', nextInstanceValue);
         instanceRef.current = nextInstanceValue;
       }
     }
   }, [textureAtlas]);
+
+  useFrame((state, delta) => {
+    if (isInitialized && onFrame) {
+      onFrame({spriteGroup, baseGeometry, textureAtlas, state}, instanceRef.current, delta);
+    }
+  });
 
   return instance ? <primitive object={instance} /> : null;
 }
@@ -59,10 +66,12 @@ Sprites.propTypes = {
   onCreate: func,
   textureAtlas: string,
   onTextureAtlasChange: func,
+  onFrame: func,
 }
 
 Sprites.defaultProps = {
   onCreate: undefined,
   textureAtlas: undefined,
   onTextureAtlasChange: undefined,
+  onFrame: undefined,
 }
