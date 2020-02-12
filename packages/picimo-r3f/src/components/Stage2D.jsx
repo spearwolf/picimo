@@ -8,7 +8,7 @@ extend({PicimoStage2D});
 
 const log = new Logger('<Stage2D>', 0, Infinity);
 
-export const Stage2D = ({children, type, plane, projection: projectionOptions, fallback, enableThreeDevtools}) => {
+export const Stage2D = ({children, type, plane, projection: projectionOptions, fallback, enableThreeDevtools, disableCamera}) => {
 
   const ref = useRef();
 
@@ -45,8 +45,10 @@ export const Stage2D = ({children, type, plane, projection: projectionOptions, f
     const {projection} = stage;
     log.log('init stage->projection', stage);
     projection.update(width, height);
-    setDefaultCamera(projection.camera);
-  }, [projection, width, height, setDefaultCamera]);
+    if (!disableCamera) {
+      setDefaultCamera(projection.camera);
+    }
+  }, [projection, width, height, setDefaultCamera, disableCamera]);
 
   useFrame(({size: {width, height}}) => {
     log.log('width=', width, 'height=', height);
@@ -72,6 +74,7 @@ Stage2D.propTypes = {
   type: oneOf(['orthographic', 'parallax']).isRequired,
   projection: object.isRequired,
   fallback: any,
+  disableCamera: bool,
   enableThreeDevtools: bool,
 }
 
@@ -79,5 +82,7 @@ Stage2D.defaultProps = {
   plane: 'xy',
   type: 'orthographic',
   fallback: null,
+  projection: { pixelZoom: 2.0 },
+  disableCamera: false,
   enableThreeDevtools: false,
 }

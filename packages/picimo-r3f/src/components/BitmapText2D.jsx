@@ -24,6 +24,7 @@ export const BitmapText2D = ({children, capacity, fallback, onFrame, ...props}) 
   const [ref, bitmapText2D] = useLifecycleRef({
     onCreate(bitmapText2d) {
       log.log('create, fontAtlas=', bitmapText2d.fontAtlas, bitmapText2d);
+      bitmapText2d.frustumCulled = false; // TODO move this to picimo library!
       if (bitmapText2d.fontAtlas) {
         setBitmapText2DContext([bitmapText2d, bitmapText2d.fontAtlas]);
       }
