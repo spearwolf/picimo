@@ -1,5 +1,5 @@
 import {WebGLRendererParameters} from 'three';
-import {TextureUtilsOptions} from '../../textures';
+import {TextureUtilsOptions} from '../textures';
 import {Display} from './Display';
 
 export interface IConfigurator {

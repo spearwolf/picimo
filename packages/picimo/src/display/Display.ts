@@ -1,14 +1,12 @@
-import {WebGLRendererParameters, WebGLRenderer, Color} from 'three';
 import {Eventize} from 'eventize-js';
-
-import {readOption, unpick} from '../../utils';
-import {TextureUtils} from '../../textures';
-import {Stylesheets} from '../../utils/Stylesheets';
+import {WebGLRendererParameters, WebGLRenderer, Color} from 'three';
+import {readOption, unpick, Stylesheets} from '../utils';
+import {Stage2D} from '../projection';
+import {TextureUtils} from '../textures';
+import {AAPerformanceConfigurator} from './AAPerformanceConfigurator';
+import {AAQualityConfigurator} from './AAQualityConfigurator';
 import {IConfigurator} from './IConfigurator';
 import {PixelatedConfigurator} from './PixelatedConfigurator';
-import {AAQualityConfigurator} from './AAQualityConfigurator';
-import {AAPerformanceConfigurator} from './AAPerformanceConfigurator';
-import {Stage2D} from '../../projection';
 
 const $emitResize = Symbol('emitResize');
 const $emitFrame = Symbol('emitFrame');

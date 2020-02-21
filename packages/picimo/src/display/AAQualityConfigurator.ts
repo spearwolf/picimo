@@ -1,7 +1,7 @@
-import {IConfigurator} from './IConfigurator';
 import {WebGLRendererParameters, LinearFilter} from 'three';
-import {TextureUtilsOptions} from '../../textures';
+import {TextureUtilsOptions} from '../textures';
 import {Display} from './Display';
+import {IConfigurator} from './IConfigurator';
 
 export class AAQualityConfigurator implements IConfigurator {
 
