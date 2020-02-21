@@ -1,10 +1,10 @@
 import * as THREE from 'three';
 
-import { readOption } from '../../utils';
+import { readOption } from '../utils';
 
-import { ImageSource } from '../PowerOf2Image';
-import { ITexturable } from '../ITexturable';
-import { Texture } from '../Texture';
+import { ImageSource } from './PowerOf2Image';
+import { ITexturable } from './ITexturable';
+import { Texture } from './Texture';
 
 const $maxAnisotrophy = Symbol('maxAnisotrophy');
 
