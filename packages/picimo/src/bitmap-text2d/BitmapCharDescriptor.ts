@@ -1,4 +1,4 @@
-import { VODescriptor, VertexObject } from '../../sprites';
+import { VODescriptor, VertexObject } from '../sprites';
 
 import { BitmapChar } from './BitmapChar';
 import { BitmapCharMethods, BitmapCharMethodsType } from './BitmapCharMethods';

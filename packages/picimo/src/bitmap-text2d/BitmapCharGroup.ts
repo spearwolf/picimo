@@ -1,5 +1,5 @@
-import { SpriteGroupTextured, VOIndices } from '../../sprites';
-import { Texture } from '../../textures';
+import { SpriteGroupTextured, VOIndices } from '../sprites';
+import { Texture } from '../textures';
 
 import { BitmapChar } from './BitmapChar';
 import { BitmapCharMethodsType } from './BitmapCharMethods';

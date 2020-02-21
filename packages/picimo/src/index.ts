@@ -1,9 +1,9 @@
-export * from './display';
+export * from './bitmap-text2d';
 export * from './controls';
+export * from './display';
 export * from './map2d';
 export * from './projection';
 export * from './sprites';
-export * from './text';
 export * from './textures';
 export * from './utils';
 

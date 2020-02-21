@@ -1,19 +1,19 @@
 import * as THREE from 'three';
 import eventize, {Eventize} from 'eventize-js';
 
-import { SpriteGroupMesh, SpriteGroupInstancedBufferGeometry } from '../../../sprites';
-import { TextureAtlas } from '../../../textures';
-import { pick, Logger } from '../../../utils';
+import { SpriteGroupMesh, SpriteGroupInstancedBufferGeometry } from '../sprites';
+import { TextureAtlas } from '../textures';
+import { pick, Logger } from '../utils';
 
-import { BitmapChar } from '../BitmapChar';
-import { BitmapCharBase } from '../BitmapCharBase';
-import { getBitmapCharBaseGroup } from '../BitmapCharBaseGroup';
-import { BitmapCharBaseMethodsType } from '../BitmapCharBaseMethods';
-import { BitmapCharGroup, BitmapCharGroupOptions } from '../BitmapCharGroup';
-import { BitmapCharMethodsType } from '../BitmapCharMethods';
-import { BitmapText2DLine } from '../BitmapText2DLine';
-import { BitmapText2DMeasurement } from '../BitmapText2DMeasurement';
-import { BitmapCharVertexObject } from '../BitmapCharDescriptor';
+import { BitmapChar } from './BitmapChar';
+import { BitmapCharBase } from './BitmapCharBase';
+import { getBitmapCharBaseGroup } from './BitmapCharBaseGroup';
+import { BitmapCharBaseMethodsType } from './BitmapCharBaseMethods';
+import { BitmapCharGroup, BitmapCharGroupOptions } from './BitmapCharGroup';
+import { BitmapCharMethodsType } from './BitmapCharMethods';
+import { BitmapText2DLine } from './BitmapText2DLine';
+import { BitmapText2DMeasurement } from './BitmapText2DMeasurement';
+import { BitmapCharVertexObject } from './BitmapCharDescriptor';
 
 import { BitmapFontMaterial, BitmapFontShaderHooks } from './BitmapFontMaterial';
 

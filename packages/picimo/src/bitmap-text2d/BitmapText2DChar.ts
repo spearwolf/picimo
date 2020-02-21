@@ -1,4 +1,4 @@
-import { Texture } from '../../textures';
+import { Texture } from '../textures';
 
 export interface BitmapText2DChar {
 

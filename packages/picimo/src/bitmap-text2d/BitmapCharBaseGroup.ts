@@ -1,4 +1,4 @@
-import { SpriteGroup, VOIndices } from '../../sprites';
+import { SpriteGroup, VOIndices } from '../sprites';
 
 import { BitmapCharBase } from './BitmapCharBase';
 import { BitmapCharBaseMethodsType } from './BitmapCharBaseMethods';
