@@ -1,4 +1,4 @@
-import { Camera, Vector2 } from "three";
+import { Camera, Vector2 } from 'three';
 
 export interface IProjection {
 

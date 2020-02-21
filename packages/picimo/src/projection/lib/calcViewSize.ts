@@ -2,7 +2,7 @@ import {
   IProjectionSpecs,
   IProjectionPixelZoomSpecs,
   IProjectionViewFrustumSizeSpecs,
-} from "./IProjectionSpecs";
+} from "../IProjectionSpecs";
 
 export function calcViewSize(currentWidth: number, currentHeight: number, specs: IProjectionSpecs) {
 

@@ -1,11 +1,11 @@
 import { Camera, Quaternion, Vector3 } from "three";
 
-import { Plane, Vector2Proxy } from "../../utils";
+import { Plane, Vector2Proxy } from "../utils";
 
-import { calcViewSize } from "../calcViewSize";
-import { IProjectionRule } from "../IProjectionRule";
-import { IProjectionSpecs } from "../IProjectionSpecs";
-import { ProjectionRules } from "../ProjectionRules";
+import { calcViewSize } from "./lib/calcViewSize";
+import { IProjectionRule } from "./IProjectionRule";
+import { IProjectionSpecs } from "./IProjectionSpecs";
+import { ProjectionRules } from "./ProjectionRules";
 import { IProjection } from "./IProjection";
 
 const $origin = Symbol('origin');

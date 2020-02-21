@@ -1,5 +1,5 @@
 import { OrthographicCamera } from "three";
-import { IProjectionSpecs } from "../IProjectionSpecs";
+import { IProjectionSpecs } from "./IProjectionSpecs";
 import { Projection } from "./Projection";
 
 const DEFAULT_DISTANCE = 100;

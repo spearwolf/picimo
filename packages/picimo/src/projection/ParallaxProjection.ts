@@ -1,5 +1,5 @@
 import { PerspectiveCamera } from "three";
-import { IProjectionSpecs } from "../IProjectionSpecs";
+import { IProjectionSpecs } from "./IProjectionSpecs";
 import { Projection } from "./Projection";
 // import { Logger } from "../../utils";
 

@@ -1,5 +1,5 @@
 import {Scene, Camera} from "three";
-import {IProjection} from "..";
+import {IProjection} from ".";
 
 export class Stage2D extends Scene {
 

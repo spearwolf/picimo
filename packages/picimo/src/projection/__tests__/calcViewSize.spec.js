@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 import assert from 'assert';
 
-import { calcViewSize } from '../calcViewSize';
+import { calcViewSize } from '../lib/calcViewSize';
 
 describe('calcViewSize()', () => {
 
