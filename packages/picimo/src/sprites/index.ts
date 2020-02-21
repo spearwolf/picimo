@@ -1,4 +1,5 @@
 
+export * from './AdvancedSprites';
 export * from './SimpleSprites';
 export * from './SpriteGridLayout';
 export * from './SpriteGroup';
