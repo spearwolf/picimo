@@ -1,8 +1,8 @@
 import {BufferGeometry, InterleavedBuffer} from 'three';
 
-import {SpriteGroup} from '../SpriteGroup';
+import {SpriteGroup} from './SpriteGroup';
 
-import {createBufferAttributes} from './createBufferAttributes';
+import {createBufferAttributes} from './lib/createBufferAttributes';
 
 export class SpriteGroupBufferGeometry<T, U> extends BufferGeometry {
 

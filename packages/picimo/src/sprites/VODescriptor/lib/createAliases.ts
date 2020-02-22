@@ -1,5 +1,5 @@
-import { VOAttrDescriptor } from './VOAttrDescriptor';
-import { VODescriptor } from './VODescriptor';
+import { VOAttrDescriptor } from '../VOAttrDescriptor';
+import { VODescriptor } from '../VODescriptor';
 
 export const createAliases = (descriptor: VODescriptor, aliases: any) => {
   if (typeof aliases !== 'object') return;

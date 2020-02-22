@@ -1,6 +1,6 @@
 import { BYTES_PER_ELEMENT } from './typedArrayHelpers';
-import { VOAttrDescriptor } from './VOAttrDescriptor';
-import { VODescriptor, VOAttrDescription, VOAttributesDescription } from './VODescriptor';
+import { VOAttrDescriptor } from '../VOAttrDescriptor';
+import { VODescriptor, VOAttrDescription, VOAttributesDescription } from '../VODescriptor';
 
 const DEFAULT_ATTR_TYPE = 'float32';
 

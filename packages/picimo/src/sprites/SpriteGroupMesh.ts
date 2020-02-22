@@ -1,8 +1,8 @@
 import {Mesh, Material, BufferGeometry} from 'three';
 
-import {Logger} from '../../utils';
+import {Logger} from '../utils';
 
-import {SpriteGroup} from '../SpriteGroup';
+import {SpriteGroup} from './SpriteGroup';
 
 import {SpriteGroupBufferGeometry} from './SpriteGroupBufferGeometry';
 import {SpriteGroupInstancedBufferGeometry} from './SpriteGroupInstancedBufferGeometry';

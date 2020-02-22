@@ -1,9 +1,10 @@
-
 export * from './SimpleSprites';
 export * from './SpriteGridLayout';
 export * from './SpriteGroup';
+export * from './SpriteGroupBufferGeometry';
+export * from './SpriteGroupInstancedBufferGeometry';
+export * from './SpriteGroupMesh';
 export * from './SpriteGroupTextured';
-export * from './three';
 export * from './VOArray';
 export * from './VODescriptor';
 export * from './VOIndices';

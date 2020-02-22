@@ -1,4 +1,4 @@
-import { VODescriptor } from "./VODescriptor";
+import { VODescriptor } from "../VODescriptor";
 
 export function createTypedArrays(descriptor: VODescriptor) {
 

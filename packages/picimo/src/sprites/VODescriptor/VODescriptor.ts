@@ -1,11 +1,11 @@
 import { VOArray, VOArrayUsageHints } from '../VOArray';
 
-import { createAliases } from './createAliases';
-import { createAttributes } from './createAttributes';
-import { createTypedArrays } from './createTypedArrays';
-import { createVO } from './createVO';
-import { createVOPrototype } from './createVOPrototype';
-import { initializeVO  } from './initializeVO';
+import { createAliases } from './lib/createAliases';
+import { createAttributes } from './lib/createAttributes';
+import { createTypedArrays } from './lib/createTypedArrays';
+import { createVO } from './lib/createVO';
+import { createVOPrototype } from './lib/createVOPrototype';
+import { initializeVO  } from './lib/initializeVO';
 import { VOAttrDescriptor } from './VOAttrDescriptor';
 
 type VOAttrDataType = 'float32' | 'int16' | 'int32' | 'int8' | 'uint16' | 'uint32' | 'uint8';

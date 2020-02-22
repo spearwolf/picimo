@@ -1,4 +1,4 @@
-import { BYTES_PER_ELEMENT, TYPED_ARRAY_GETTER } from './typedArrayHelpers';
+import { BYTES_PER_ELEMENT, TYPED_ARRAY_GETTER } from './lib/typedArrayHelpers';
 
 const camelize = (name: string) => name[0].toUpperCase() + name.substr(1);
 
