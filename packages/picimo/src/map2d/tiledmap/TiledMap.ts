@@ -1,6 +1,4 @@
-import { Vector3 } from 'three';
-
-import { Map2D } from '../three';
+import { Map2D } from '../Map2D';
 import { readOption } from '../../utils';
 import { TileSet } from '../../textures';
 
@@ -8,7 +6,7 @@ import { ITiledMapData } from './ITiledMapData';
 import { ITiledMapLayerData } from './ITiledMapLayerData';
 import { Map2DView } from '../Map2DView';
 import { TiledMapLayer } from './TiledMapLayer';
-import { IMap2DLayer } from '../three/IMap2DLayer';
+import { IMap2DLayer } from '../IMap2DLayer';
 import { Map2DViewLayer } from '../Map2DViewLayer';
 
 const Y_START = 0;

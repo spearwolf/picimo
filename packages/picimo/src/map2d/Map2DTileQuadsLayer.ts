@@ -1,13 +1,13 @@
 import * as THREE from 'three';
 
-import { ITileSet, Texture, MaterialCache } from '../../textures';
+import { ITileSet, Texture, MaterialCache } from '../textures';
 
-import { Map2DViewTile } from '../Map2DViewTile';
+import { Map2DViewTile } from './Map2DViewTile';
 
 import { IMap2DLayer } from './IMap2DLayer';
-import { TileQuadMaterial } from './TileQuadMaterial';
-import { TileQuadMesh } from './TileQuadMesh';
-import { TileQuadMeshCache } from './TileQuadMeshCache';
+import { TileQuadMaterial } from './TileQuad/TileQuadMaterial';
+import { TileQuadMesh } from './TileQuad/TileQuadMesh';
+import { TileQuadMeshCache } from './TileQuad/TileQuadMeshCache';
 
 const $obj3d = Symbol('obj3d');
 const $materials = Symbol('materials');

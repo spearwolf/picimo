@@ -1,8 +1,8 @@
 import * as THREE from 'three';
 
-import { TextureLibrary } from '../../textures';
+import { TextureLibrary } from '../textures';
 
-import { Map2DViewTile } from '../Map2DViewTile';
+import { Map2DViewTile } from './Map2DViewTile';
 
 import { IMap2DLayer } from './IMap2DLayer';
 import { Map2DTileBufferGeometry } from './Map2DTileBufferGeometry';
@@ -17,7 +17,7 @@ const $createTileMesh = Symbol('createTileMesh');
 
 /**
  * @deprecated
- * 
+ *
  * Represents a map2d layer.
  *
  * Each tile is rendered with the same material which is built by the layer

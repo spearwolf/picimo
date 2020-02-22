@@ -2,12 +2,12 @@ import { Material } from 'three';
 
 import { SpriteGroupMesh, SpriteGroupInstancedBufferGeometry } from '../../sprites';
 
-import { getTileQuadBaseGroup } from '../TileQuad/TileQuadBaseGroup';
-import { ITileQuad } from '../TileQuad/ITileQuad';
-import { ITileQuadBase } from '../TileQuad/ITileQuadBase';
-import { TileQuadBaseMethodsType } from '../TileQuad/TileQuadBaseMethods';
-import { TileQuadGroup, ITileQuadGroupOptions } from '../TileQuad/TileQuadGroup';
-import { TileQuadMethodsType } from '../TileQuad/TileQuadMethods';
+import { getTileQuadBaseGroup } from './TileQuadBaseGroup';
+import { ITileQuad } from './ITileQuad';
+import { ITileQuadBase } from './ITileQuadBase';
+import { TileQuadBaseMethodsType } from './TileQuadBaseMethods';
+import { TileQuadGroup, ITileQuadGroupOptions } from './TileQuadGroup';
+import { TileQuadMethodsType } from './TileQuadMethods';
 
 export interface ITileQuadMeshOptions extends ITileQuadGroupOptions {
 }

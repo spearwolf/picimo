@@ -1,12 +1,12 @@
 import * as THREE from 'three';
 
-import { ITileSet, MaterialCache } from '../../textures';
+import { ITileSet, MaterialCache } from '../textures';
 
-import { IMap2DRenderer } from '../IMap2DRenderer';
-import { Map2DView } from '../Map2DView';
+import { IMap2DRenderer } from './IMap2DRenderer';
+import { Map2DView } from './Map2DView';
 
 import { IMap2DLayer } from './IMap2DLayer';
-import { TileQuadMeshCache } from './TileQuadMeshCache';
+import { TileQuadMeshCache } from './TileQuad/TileQuadMeshCache';
 import { Map2DTileQuadsLayer } from './Map2DTileQuadsLayer';
 
 const $dispatchEvent = Symbol('dispatchEvent');

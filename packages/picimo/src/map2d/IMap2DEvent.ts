@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-import { Map2DView } from '../Map2DView';
+import { Map2DView } from './Map2DView';
 
 import { Map2D } from './Map2D';
 
