@@ -19,11 +19,11 @@ export abstract class Projection<
 
   rules: ProjectionRules<IProjectionRule<Specs>>;
 
-  width: number = 0;
-  height: number = 0;
+  width = 0;
+  height = 0;
 
-  pixelRatioH: number = 1;
-  pixelRatioV: number = 1;
+  pixelRatioH = 1;
+  pixelRatioV = 1;
 
   camera: Cam;
 

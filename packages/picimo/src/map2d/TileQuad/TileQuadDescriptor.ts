@@ -27,13 +27,13 @@ export type TileQuadDescriptorType = VODescriptor<
 >;
 export type TileQuadVertexObject = VertexObject<TileQuadMethodsType, ITileQuad>;
 
-let g_tileQuadDescriptor: TileQuadDescriptorType = null;
+let gTileQuadDescriptor: TileQuadDescriptorType = null;
 
 export const getTileQuadDescriptor = () => {
-  if (g_tileQuadDescriptor == null) {
-    g_tileQuadDescriptor = new VODescriptor<TileQuadMethodsType, ITileQuad>(
+  if (gTileQuadDescriptor == null) {
+    gTileQuadDescriptor = new VODescriptor<TileQuadMethodsType, ITileQuad>(
       TileQuadDescription,
     );
   }
-  return g_tileQuadDescriptor;
+  return gTileQuadDescriptor;
 };

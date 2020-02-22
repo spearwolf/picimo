@@ -3,10 +3,7 @@ import {TextureAtlas} from './TextureAtlas';
 import {ITileSet} from './ITileSet';
 
 export class TextureLibrary implements ITileSet {
-  static async load(
-    path: string,
-    basePath: string = './',
-  ): Promise<TextureLibrary> {
+  static async load(path: string, basePath = './'): Promise<TextureLibrary> {
     return new TextureLibrary(await TextureAtlas.load(path, basePath));
   }
 

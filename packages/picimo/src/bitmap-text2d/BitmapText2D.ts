@@ -141,12 +141,12 @@ export class BitmapText2D extends SpriteGroupMesh<
         );
       }
     }
-    if (prevAtlas != fontAtlas) {
+    if (prevAtlas !== fontAtlas) {
       this.emit('fontAtlasUpdate', this);
     }
   }
 
-  private getFontHeight(fontSize: number = 0) {
+  private getFontHeight(fontSize = 0) {
     return fontSize || this.fontSize || this.lineHeight;
   }
 
@@ -221,7 +221,7 @@ export class BitmapText2D extends SpriteGroupMesh<
       for (let j = 0; j < line.chars.length; j++) {
         const char = line.chars[j];
 
-        let sprite = spritePool.shift();
+        const sprite = spritePool.shift();
 
         const {tex} = char;
 
@@ -273,7 +273,7 @@ export class BitmapText2D extends SpriteGroupMesh<
 
     let charCount = 0;
 
-    let cursor = {x: 0, y: 0};
+    const cursor = {x: 0, y: 0};
 
     let maxLineWidth = 0;
     let lineWidth = 0;

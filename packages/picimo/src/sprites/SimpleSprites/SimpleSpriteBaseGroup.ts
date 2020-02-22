@@ -16,23 +16,15 @@ export class SimpleSpriteBaseGroup extends SpriteGroup<
   ISimpleSpriteBase
 > {
   constructor(options?: ISimpleSpriteBaseGroupOptions) {
-    super(
-      getSimpleSpriteBaseDescriptor(),
-      Object.assign(
-        {
-          indices: VOIndices.buildQuads,
+    super(getSimpleSpriteBaseDescriptor(), {
+      indices: VOIndices.buildQuads,
 
-          dynamic: false,
+      dynamic: false,
 
-          setSize: (
-            sprite: SimpleSpriteBaseVertexObject,
-            w: number,
-            h: number,
-          ) => sprite.setSize(w, h),
-        },
-        options,
-      ),
-    );
+      setSize: (sprite: SimpleSpriteBaseVertexObject, w: number, h: number) =>
+        sprite.setSize(w, h),
+      ...options,
+    });
   }
 }
 

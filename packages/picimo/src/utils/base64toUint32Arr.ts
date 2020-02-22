@@ -1,6 +1,6 @@
 export function base64toUint32Arr(
   base64: string,
-  isLittleEndian: boolean = true,
+  isLittleEndian = true,
 ): Uint32Array {
   const {buffer} = Uint8Array.from(atob(base64) as any, (char: any) =>
     char.charCodeAt(0),

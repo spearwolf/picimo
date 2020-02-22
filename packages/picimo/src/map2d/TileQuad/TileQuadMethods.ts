@@ -37,13 +37,13 @@ export const TileQuadMethods = {
     }
 
     if (flipFlags & TileFlipFlags.FLIPPED_HORIZONTALLY) {
-      let tmp = s1;
+      const tmp = s1;
       s1 = s0;
       s0 = tmp;
     }
 
     if (flipFlags & TileFlipFlags.FLIPPED_VERTICALLY) {
-      let tmp = t1;
+      const tmp = t1;
       t1 = t0;
       t0 = tmp;
     }

@@ -159,19 +159,11 @@ export class VODescriptor<T = Object, U = Object> {
   }
 
   createVOArray(size = 1, hints?: VOArrayUsageHints): VOArray {
-    return new VOArray(
-      size,
-      this.bytesPerVO,
-      this.typeList,
-      null,
-      Object.assign(
-        {
-          dynamic: true,
-          autotouch: true,
-        },
-        hints,
-      ),
-    );
+    return new VOArray(size, this.bytesPerVO, this.typeList, null, {
+      dynamic: true,
+      autotouch: true,
+      ...hints,
+    });
   }
 
   /**

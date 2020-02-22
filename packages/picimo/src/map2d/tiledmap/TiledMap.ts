@@ -76,7 +76,7 @@ export class TiledMap {
     return this[$data].layers.map(layer => this.getLayer(layer.name));
   }
 
-  async loadTileSets(basePath: string = './') {
+  async loadTileSets(basePath = './') {
     const tilesets = await Promise.all(
       this[$data].tilesets.map(tilesetInfo =>
         TileSet.load(tilesetInfo.image, {

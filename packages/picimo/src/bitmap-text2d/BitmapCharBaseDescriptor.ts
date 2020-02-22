@@ -32,14 +32,14 @@ export type BitmapCharBaseVertexObject = VertexObject<
   BitmapCharBase
 >;
 
-let g_bitmapCharBaseDescriptor: BitmapCharBaseDescriptorType = null;
+let gBitmapCharBaseDescriptor: BitmapCharBaseDescriptorType = null;
 
 export const getBitmapCharBaseDescriptor = () => {
-  if (g_bitmapCharBaseDescriptor == null) {
-    g_bitmapCharBaseDescriptor = new VODescriptor<
+  if (gBitmapCharBaseDescriptor == null) {
+    gBitmapCharBaseDescriptor = new VODescriptor<
       BitmapCharBaseMethodsType,
       BitmapCharBase
     >(BitmapCharBaseDescription);
   }
-  return g_bitmapCharBaseDescriptor;
+  return gBitmapCharBaseDescriptor;
 };

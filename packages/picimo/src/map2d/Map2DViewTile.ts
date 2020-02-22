@@ -24,7 +24,7 @@ export class Map2DViewTile {
 
   readonly tileIds: Uint32Array;
 
-  tileIdsNeedsUpdate: boolean = true;
+  tileIdsNeedsUpdate = true;
 
   layerTileLeft: number;
   layerTileTop: number;
@@ -39,8 +39,8 @@ export class Map2DViewTile {
    */
   viewOffsetY: number;
 
-  private [$top]: number = 0;
-  private [$left]: number = 0;
+  private [$top] = 0;
+  private [$left] = 0;
 
   constructor(layerData: IMap2DLayerData, width: number, height: number) {
     this.layerData = layerData;

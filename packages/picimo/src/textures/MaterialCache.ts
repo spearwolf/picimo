@@ -13,7 +13,7 @@ const $texMats = Symbol('m');
 export class MaterialCache<T, M> {
   private [$texMats] = new Map<string, ITextureMaterial<T, M>>();
 
-  set(id: string, texture: T, material: M, refCount: number = 1) {
+  set(id: string, texture: T, material: M, refCount = 1) {
     this[$texMats].set(id, {id, texture, material, refCount});
   }
 

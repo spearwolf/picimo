@@ -6,13 +6,9 @@ export class Logger {
   private readonly name: string;
   private lastLog: any[] = [];
   private sleeping = false;
-  private logCount: number = 0;
+  private logCount = 0;
 
-  constructor(
-    name: string,
-    throttleTimeoutMs: number = 0,
-    stopAfterNLogs: number = Infinity,
-  ) {
+  constructor(name: string, throttleTimeoutMs = 0, stopAfterNLogs = Infinity) {
     this.name = name;
     this.throttleTimeoutMs = throttleTimeoutMs;
     this.stopAfterNLogs = stopAfterNLogs;

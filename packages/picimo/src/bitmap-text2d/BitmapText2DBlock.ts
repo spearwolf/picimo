@@ -48,40 +48,16 @@ export class BitmapText2DBlock {
   get x() {
     return this._x;
   }
-  get y() {
-    return this._y;
-  }
-  get z() {
-    return this._z;
-  }
-
-  get position() {
-    return [this._x, this._y, this._z];
-  }
-
-  get maxWidth() {
-    return this._maxWidth;
-  }
-
-  get fontSize() {
-    return this._fontSize;
-  }
-  get lineGap() {
-    return this._lineGap;
-  }
-
-  get hAlign() {
-    return this._hAlign;
-  }
-  get vAlign() {
-    return this._vAlign;
-  }
 
   set x(x: number) {
     if (this._x !== x) {
       this._x = x;
       this.needsUpdate = true;
     }
+  }
+
+  get y() {
+    return this._y;
   }
 
   set y(y: number) {
@@ -91,11 +67,19 @@ export class BitmapText2DBlock {
     }
   }
 
+  get z() {
+    return this._z;
+  }
+
   set z(z: number) {
     if (this._z !== z) {
       this._z = z;
       this.needsUpdate = true;
     }
+  }
+
+  get position() {
+    return [this._x, this._y, this._z];
   }
 
   set position([x, y, z]: [number, number, number]) {
@@ -107,18 +91,8 @@ export class BitmapText2DBlock {
     }
   }
 
-  set fontSize(fontSize: number) {
-    if (this._fontSize !== fontSize) {
-      this._fontSize = fontSize;
-      this.needsUpdate = true;
-    }
-  }
-
-  set lineGap(lineGap: number) {
-    if (this._lineGap !== lineGap) {
-      this._lineGap = lineGap;
-      this.needsUpdate = true;
-    }
+  get maxWidth() {
+    return this._maxWidth;
   }
 
   set maxWidth(maxWidth: number) {
@@ -128,11 +102,41 @@ export class BitmapText2DBlock {
     }
   }
 
+  get fontSize() {
+    return this._fontSize;
+  }
+
+  set fontSize(fontSize: number) {
+    if (this._fontSize !== fontSize) {
+      this._fontSize = fontSize;
+      this.needsUpdate = true;
+    }
+  }
+
+  get lineGap() {
+    return this._lineGap;
+  }
+
+  set lineGap(lineGap: number) {
+    if (this._lineGap !== lineGap) {
+      this._lineGap = lineGap;
+      this.needsUpdate = true;
+    }
+  }
+
+  get hAlign() {
+    return this._hAlign;
+  }
+
   set hAlign(align: TextAlignH) {
     if (this._hAlign !== align) {
       this._hAlign = align;
       this.needsUpdate = true;
     }
+  }
+
+  get vAlign() {
+    return this._vAlign;
   }
 
   set vAlign(align: TextAlignV) {

@@ -5,7 +5,7 @@ type CircleCoordsFn = (x: number, y: number, z: number) => void;
 
 export const makeCircleCoords = (
   steps: number,
-  radius: number = 1,
+  radius = 1,
   circleCoordsFn?: CircleCoordsFn,
 ) => {
   const halfRadius = 0.5 * radius;

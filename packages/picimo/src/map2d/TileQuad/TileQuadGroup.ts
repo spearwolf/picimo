@@ -23,25 +23,18 @@ export class TileQuadGroup extends SpriteGroupTextured<
   ITileQuad
 > {
   constructor(options?: ITileQuadGroupOptions) {
-    super(
-      getTileQuadDescriptor(),
-      Object.assign(
-        {
-          indices: VOIndices.buildQuads,
+    super(getTileQuadDescriptor(), {
+      indices: VOIndices.buildQuads,
 
-          dynamic: true,
-          autotouch: false,
+      dynamic: true,
+      autotouch: false,
 
-          setSize: (sprite: TileQuadVertexObject, w: number, h: number) =>
-            sprite.setSize(w, h),
-          setTexCoordsByTexture: (
-            sprite: TileQuadVertexObject,
-            texture: Texture,
-          ) => sprite.setTexCoordsByTexture(texture, 0),
-        },
-        options,
-      ),
-    );
+      setSize: (sprite: TileQuadVertexObject, w: number, h: number) =>
+        sprite.setSize(w, h),
+      setTexCoordsByTexture: (sprite: TileQuadVertexObject, texture: Texture) =>
+        sprite.setTexCoordsByTexture(texture, 0),
+      ...options,
+    });
   }
 
   clearTiles() {

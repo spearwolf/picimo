@@ -32,14 +32,14 @@ export type TileQuadBaseVertexObject = VertexObject<
   ITileQuadBase
 >;
 
-let g_tileQuadBaseDescriptor: TileQuadBaseDescriptorType = null;
+let gTileQuadBaseDescriptor: TileQuadBaseDescriptorType = null;
 
 export const getTileQuadBaseDescriptor = () => {
-  if (g_tileQuadBaseDescriptor == null) {
-    g_tileQuadBaseDescriptor = new VODescriptor<
+  if (gTileQuadBaseDescriptor == null) {
+    gTileQuadBaseDescriptor = new VODescriptor<
       TileQuadBaseMethodsType,
       ITileQuadBase
     >(TileQuadBaseDescription);
   }
-  return g_tileQuadBaseDescriptor;
+  return gTileQuadBaseDescriptor;
 };

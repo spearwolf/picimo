@@ -288,8 +288,8 @@ export class Display extends Eventize {
   resize() {
     const {resizeStrategy} = this;
 
-    let wPx: number = 320;
-    let hPx: number = 200;
+    let wPx = 320;
+    let hPx = 200;
 
     if (resizeStrategy === 'fullscreen') {
       wPx = window.innerWidth;

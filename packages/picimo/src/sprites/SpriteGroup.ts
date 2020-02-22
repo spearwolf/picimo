@@ -119,19 +119,12 @@ export class SpriteGroup<T, U> {
 
     const {voNew, voZero} = options;
 
-    this.voPool = new VOPool(
-      descriptor,
-      Object.assign(
-        {
-          maxAllocVOSize: 1000,
-        },
-        pickVOPoolOpts(options),
-        {
-          voNew: voNew && descriptor.createVO(null, voNew),
-          voZero: voZero && descriptor.createVO(null, voZero),
-        },
-      ),
-    );
+    this.voPool = new VOPool(descriptor, {
+      maxAllocVOSize: 1000,
+      ...pickVOPoolOpts(options),
+      voNew: voNew && descriptor.createVO(null, voNew),
+      voZero: voZero && descriptor.createVO(null, voZero),
+    });
 
     const {indices} = options;
     this.indices =

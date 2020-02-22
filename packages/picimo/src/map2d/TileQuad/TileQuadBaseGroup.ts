@@ -18,20 +18,15 @@ export class TileQuadBaseGroup extends SpriteGroup<
   ITileQuadBase
 > {
   constructor(options?: ITileQuadBaseGroupOptions) {
-    super(
-      getTileQuadBaseDescriptor(),
-      Object.assign(
-        {
-          indices: VOIndices.buildQuads,
+    super(getTileQuadBaseDescriptor(), {
+      indices: VOIndices.buildQuads,
 
-          dynamic: false,
+      dynamic: false,
 
-          setSize: (sprite: TileQuadBaseVertexObject, w: number, h: number) =>
-            sprite.setSize(w, h),
-        },
-        options,
-      ),
-    );
+      setSize: (sprite: TileQuadBaseVertexObject, w: number, h: number) =>
+        sprite.setSize(w, h),
+      ...options,
+    });
   }
 }
 

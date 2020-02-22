@@ -19,23 +19,18 @@ export class BitmapCharGroup extends SpriteGroupTextured<
   BitmapChar
 > {
   constructor(options?: BitmapCharGroupOptions) {
-    super(
-      getBitmapCharDescriptor(),
-      Object.assign(
-        {
-          indices: VOIndices.buildQuads,
+    super(getBitmapCharDescriptor(), {
+      indices: VOIndices.buildQuads,
 
-          dynamic: true,
+      dynamic: true,
 
-          setSize: (sprite: BitmapCharVertexObject, w: number, h: number) =>
-            sprite.setSize(w, h),
-          setTexCoordsByTexture: (
-            sprite: BitmapCharVertexObject,
-            texture: Texture,
-          ) => sprite.setTexCoordsByTexture(texture),
-        },
-        options,
-      ),
-    );
+      setSize: (sprite: BitmapCharVertexObject, w: number, h: number) =>
+        sprite.setSize(w, h),
+      setTexCoordsByTexture: (
+        sprite: BitmapCharVertexObject,
+        texture: Texture,
+      ) => sprite.setTexCoordsByTexture(texture),
+      ...options,
+    });
   }
 }

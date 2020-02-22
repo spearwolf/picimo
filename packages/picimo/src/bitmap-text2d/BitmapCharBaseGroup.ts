@@ -18,20 +18,15 @@ export class BitmapCharBaseGroup extends SpriteGroup<
   BitmapCharBase
 > {
   constructor(options?: BitmapCharBaseGroupOptions) {
-    super(
-      getBitmapCharBaseDescriptor(),
-      Object.assign(
-        {
-          indices: VOIndices.buildQuads,
+    super(getBitmapCharBaseDescriptor(), {
+      indices: VOIndices.buildQuads,
 
-          dynamic: false,
+      dynamic: false,
 
-          setSize: (sprite: BitmapCharBaseVertexObject, w: number, h: number) =>
-            sprite.setSize(w, h),
-        },
-        options,
-      ),
-    );
+      setSize: (sprite: BitmapCharBaseVertexObject, w: number, h: number) =>
+        sprite.setSize(w, h),
+      ...options,
+    });
   }
 }
 

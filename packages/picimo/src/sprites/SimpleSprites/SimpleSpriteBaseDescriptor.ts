@@ -32,14 +32,14 @@ export type SimpleSpriteBaseVertexObject = VertexObject<
   ISimpleSpriteBase
 >;
 
-let g_simpleSpriteBaseDescriptor: SimpleSpriteBaseDescriptorType = null;
+let gSimpleSpriteBaseDescriptor: SimpleSpriteBaseDescriptorType = null;
 
 export const getSimpleSpriteBaseDescriptor = () => {
-  if (g_simpleSpriteBaseDescriptor == null) {
-    g_simpleSpriteBaseDescriptor = new VODescriptor<
+  if (gSimpleSpriteBaseDescriptor == null) {
+    gSimpleSpriteBaseDescriptor = new VODescriptor<
       SimpleSpriteBaseMethodsType,
       ISimpleSpriteBase
     >(SimpleSpriteBaseDescription);
   }
-  return g_simpleSpriteBaseDescriptor;
+  return gSimpleSpriteBaseDescriptor;
 };

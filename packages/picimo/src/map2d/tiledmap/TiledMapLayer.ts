@@ -47,7 +47,7 @@ export class TiledMapLayer implements IMap2DLayerData {
   constructor(
     tiledMap: TiledMap,
     data: ITiledMapLayerData,
-    autoSubdivide: boolean = true,
+    autoSubdivide = true,
   ) {
     this[$tiledMap] = tiledMap;
     this[$data] = data;
@@ -128,7 +128,7 @@ export class TiledMapLayer implements IMap2DLayerData {
     return this[$data].type;
   }
 
-  subdivide(maxChunkPerNodes: number = 2) {
+  subdivide(maxChunkPerNodes = 2) {
     this[$rootNode].subdivide(maxChunkPerNodes);
   }
 

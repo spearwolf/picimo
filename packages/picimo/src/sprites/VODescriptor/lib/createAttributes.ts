@@ -19,10 +19,10 @@ export const createAttributes = (
   } else if (typeof attributesOrObject === 'object') {
     attributes = Object.keys(attributesOrObject).map(name => {
       const attrConf = attributesOrObject[name];
-      return Object.assign(
-        {name},
-        Array.isArray(attrConf) ? {scalars: attrConf} : attrConf,
-      );
+      return {
+        name,
+        ...(Array.isArray(attrConf) ? {scalars: attrConf} : attrConf),
+      };
     });
   }
 

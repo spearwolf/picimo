@@ -21,7 +21,7 @@ export class SpriteGridLayout {
     tileHeight: number,
     columns: number,
     spacing: number,
-    z: number = 0,
+    z = 0,
     translateFn: SpriteTranslateFn = (sprite, x, y, z) =>
       (sprite as any).translate(x, y, z),
   ) {

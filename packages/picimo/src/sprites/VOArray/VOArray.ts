@@ -41,7 +41,7 @@ export class VOArray {
   bufferByteOffset: number;
   bufferByteLength: number;
 
-  serial: number = 1;
+  serial = 1;
 
   hints: VOArrayUsageHints;
 
@@ -128,13 +128,11 @@ export class VOArray {
       ),
     );
 
-    this.hints = Object.assign(
-      {
-        dynamic: false,
-        autotouch: false,
-      },
-      hints,
-    );
+    this.hints = {
+      dynamic: false,
+      autotouch: false,
+      ...hints,
+    };
   }
 
   getTypedArray(type: ArrayDataType) {
@@ -163,7 +161,7 @@ export class VOArray {
    * @param from - Source *array*.
    * @param toOffset - `vertex object` destination offset
    */
-  copy(from: VOArray, toOffset: number = 0) {
+  copy(from: VOArray, toOffset = 0) {
     const elementsPerVO = this.bytesPerVO / Uint32Array.BYTES_PER_ELEMENT;
     const offset = toOffset > 0 ? toOffset * elementsPerVO : 0;
 
@@ -200,7 +198,7 @@ export class VOArray {
    * @param begin - Index of first `vertex object`
    * @param size - Number of `vertex objects` to copy
    */
-  subarray(begin: number, size: number = 1) {
+  subarray(begin: number, size = 1) {
     const {bytesPerVO, bufferByteOffset} = this;
     const byteBegin = bufferByteOffset + begin * bytesPerVO;
     const byteLength = size * bytesPerVO;
