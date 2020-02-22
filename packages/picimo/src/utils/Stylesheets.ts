@@ -1,5 +1,4 @@
-
-export const postFixID = Math.round(Math.random() * (1<<24)).toString(16);
+export const postFixID = Math.round(Math.random() * (1 << 24)).toString(16);
 export const globalStylesID = `picimo-${postFixID}`;
 
 let sheet: CSSStyleSheet = null;
@@ -8,7 +7,6 @@ let sheet: CSSStyleSheet = null;
  * Helpers for installing simple css-class-based rules
  */
 export class Stylesheets {
-
   static getGlobalSheet() {
     if (sheet === null) {
       const styleEl = document.createElement('style');
@@ -40,5 +38,4 @@ export class Stylesheets {
     element.classList.add(className);
     return className;
   }
-
 }

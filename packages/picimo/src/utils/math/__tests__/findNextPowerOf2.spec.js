@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 import assert from 'assert';
 
-import { findNextPowerOf2 } from '..';
+import {findNextPowerOf2} from '..';
 
 describe('findNextPowerOf2', () => {
   it('should work', () => {

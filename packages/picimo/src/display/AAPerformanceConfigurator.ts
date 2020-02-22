@@ -4,18 +4,17 @@ import {TextureUtilsOptions} from '../textures';
 import {Display} from './Display';
 
 export class AAPerformanceConfigurator implements IConfigurator {
-
   getWebGlRendererParameters(userParams?: WebGLRendererParameters) {
     return {
-      ... <WebGLRendererParameters>{
+      ...(<WebGLRendererParameters>{
         precision: 'highp',
         preserveDrawingBuffer: false,
         powerPreference: 'high-performance',
         stencil: false,
         alpha: true,
         antialias: true,
-      },
-      ... userParams,
+      }),
+      ...userParams,
     };
   }
 
@@ -30,6 +29,5 @@ export class AAPerformanceConfigurator implements IConfigurator {
     return 1;
   }
 
-  postSetup(_display: Display) { }
-
+  postSetup(_display: Display) {}
 }

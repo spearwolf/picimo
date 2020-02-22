@@ -1,7 +1,10 @@
 /* eslint-env browser */
-import { findNextPowerOf2, isPowerOf2 } from '../utils';
+import {findNextPowerOf2, isPowerOf2} from '../utils';
 
-export type ImageSource = HTMLImageElement | HTMLCanvasElement | HTMLVideoElement;
+export type ImageSource =
+  | HTMLImageElement
+  | HTMLCanvasElement
+  | HTMLVideoElement;
 
 function convertToPowerOf2(image: ImageSource) {
   const w = findNextPowerOf2(image.width);
@@ -20,7 +23,6 @@ function convertToPowerOf2(image: ImageSource) {
  * always power of 2.
  */
 export class PowerOf2Image {
-
   readonly loaded: Promise<PowerOf2Image> = null;
 
   imgEl: ImageSource = null;
@@ -48,10 +50,12 @@ export class PowerOf2Image {
     const imageHasValidSize = imgEl.width > 0 && imgEl.height > 0;
     if (waitUntilLoading || !imageHasValidSize) {
       this.imgEl = null;
-      this.loaded = new Promise((resolve) => {
+      this.loaded = new Promise(resolve => {
         const origOnLoad = imgEl.onload;
         imgEl.onload = (...args) => {
-          if (origOnLoad) { origOnLoad.call(imgEl, ...args); }
+          if (origOnLoad) {
+            origOnLoad.call(imgEl, ...args);
+          }
           this.setImgEl(imgEl);
           resolve(this);
         };
@@ -84,7 +88,10 @@ export class PowerOf2Image {
   }
 
   setImgEl(imgEl: ImageSource) {
-    this.imgEl = isPowerOf2(imgEl.width) && isPowerOf2(imgEl.height) ? imgEl : convertToPowerOf2(imgEl);
+    this.imgEl =
+      isPowerOf2(imgEl.width) && isPowerOf2(imgEl.height)
+        ? imgEl
+        : convertToPowerOf2(imgEl);
     this.origWidth = imgEl.width;
     this.origHeight = imgEl.height;
   }

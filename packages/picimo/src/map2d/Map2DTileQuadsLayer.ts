@@ -1,13 +1,13 @@
 import * as THREE from 'three';
 
-import { ITileSet, Texture, MaterialCache } from '../textures';
+import {ITileSet, Texture, MaterialCache} from '../textures';
 
-import { Map2DViewTile } from './Map2DViewTile';
+import {Map2DViewTile} from './Map2DViewTile';
 
-import { IMap2DLayer } from './IMap2DLayer';
-import { TileQuadMaterial } from './TileQuad/TileQuadMaterial';
-import { TileQuadMesh } from './TileQuad/TileQuadMesh';
-import { TileQuadMeshCache } from './TileQuad/TileQuadMeshCache';
+import {IMap2DLayer} from './IMap2DLayer';
+import {TileQuadMaterial} from './TileQuad/TileQuadMaterial';
+import {TileQuadMesh} from './TileQuad/TileQuadMesh';
+import {TileQuadMeshCache} from './TileQuad/TileQuadMeshCache';
 
 const $obj3d = Symbol('obj3d');
 const $materials = Symbol('materials');
@@ -20,7 +20,6 @@ const $materialCache = Symbol('materialCache');
 const $freeMesh = Symbol('freeMesh');
 
 function makeTexture(textureSource: Texture) {
-
   const texture = new THREE.Texture(textureSource.imgEl);
 
   texture.flipY = false;
@@ -29,12 +28,12 @@ function makeTexture(textureSource: Texture) {
   texture.needsUpdate = true;
 
   return texture;
-
 }
 
-const constructMeshName = (tileId: string, mesh: THREE.Mesh) => Array.isArray(mesh.material)
-  ? `${tileId}[${mesh.material.map(mat => mat.uuid).join(',')}]`
-  : `${tileId}[${mesh.material.uuid}]`;
+const constructMeshName = (tileId: string, mesh: THREE.Mesh) =>
+  Array.isArray(mesh.material)
+    ? `${tileId}[${mesh.material.map(mat => mat.uuid).join(',')}]`
+    : `${tileId}[${mesh.material.uuid}]`;
 
 /**
  * Represents a map2d layer.
@@ -45,7 +44,6 @@ const constructMeshName = (tileId: string, mesh: THREE.Mesh) => Array.isArray(me
  */
 
 export class Map2DTileQuadsLayer implements IMap2DLayer {
-
   readonly tilesets: ITileSet[];
 
   private readonly [$obj3d]: THREE.Object3D = new THREE.Object3D();
@@ -55,10 +53,16 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
   private readonly [$meshCache]: TileQuadMeshCache;
 
   private readonly [$materials]: string[];
-  private readonly [$materialCache]: MaterialCache<THREE.Texture, THREE.Material>;
+  private readonly [$materialCache]: MaterialCache<
+    THREE.Texture,
+    THREE.Material
+  >;
 
-  constructor(tilesets: ITileSet[], meshCache: TileQuadMeshCache, materialCache: MaterialCache<THREE.Texture, THREE.Material>) {
-
+  constructor(
+    tilesets: ITileSet[],
+    meshCache: TileQuadMeshCache,
+    materialCache: MaterialCache<THREE.Texture, THREE.Material>,
+  ) {
     this.tilesets = tilesets;
     this[$meshCache] = meshCache;
     this[$materialCache] = materialCache;
@@ -71,7 +75,6 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
       }
       return texSrc.uuid;
     });
-
   }
 
   getObject3D() {
@@ -83,7 +86,9 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
   }
 
   dispose() {
-    Array.from(this[$tiles].values()).forEach(meshs => meshs.forEach(mesh => this[$freeMesh](mesh)));
+    Array.from(this[$tiles].values()).forEach(meshs =>
+      meshs.forEach(mesh => this[$freeMesh](mesh)),
+    );
     this[$tiles].clear();
   }
 
@@ -138,7 +143,11 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
     const meshs: TileQuadMesh[] = [];
 
     materials.forEach((matId, idx) => {
-      const mesh = meshCache.createMesh(materialCache.getMaterial(matId), capacity, matId);
+      const mesh = meshCache.createMesh(
+        materialCache.getMaterial(matId),
+        capacity,
+        matId,
+      );
 
       mesh.tiles.showTiles(viewTile, this.tilesets[idx]);
 

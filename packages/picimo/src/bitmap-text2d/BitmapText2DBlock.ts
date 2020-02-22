@@ -1,8 +1,7 @@
-import { BitmapText2D, TextAlignH, TextAlignV } from './BitmapText2D';
-import { BitmapCharVertexObject } from './BitmapCharDescriptor';
+import {BitmapText2D, TextAlignH, TextAlignV} from './BitmapText2D';
+import {BitmapCharVertexObject} from './BitmapCharDescriptor';
 
 export class BitmapText2DBlock {
-
   readonly bitmapText2D: BitmapText2D;
 
   text: string;
@@ -22,8 +21,15 @@ export class BitmapText2DBlock {
   private _hAlign: TextAlignH;
   private _vAlign: TextAlignV;
 
-  constructor(bitmapText2D: BitmapText2D, position: [number, number, number], maxWidth = 0, fontSize = 0, lineGap = 0, hAlign: TextAlignH = 'left', vAlign: TextAlignV = 'baseline') {
-
+  constructor(
+    bitmapText2D: BitmapText2D,
+    position: [number, number, number],
+    maxWidth = 0,
+    fontSize = 0,
+    lineGap = 0,
+    hAlign: TextAlignH = 'left',
+    vAlign: TextAlignV = 'baseline',
+  ) {
     this.bitmapText2D = bitmapText2D;
 
     this.position = position;
@@ -37,22 +43,39 @@ export class BitmapText2DBlock {
 
     this.text = undefined;
     this.sprites = null;
-
   }
 
-  get x() { return this._x; }
-  get y() { return this._y; }
-  get z() { return this._z; }
+  get x() {
+    return this._x;
+  }
+  get y() {
+    return this._y;
+  }
+  get z() {
+    return this._z;
+  }
 
-  get position() { return [this._x, this._y, this._z]; }
+  get position() {
+    return [this._x, this._y, this._z];
+  }
 
-  get maxWidth() { return this._maxWidth; }
+  get maxWidth() {
+    return this._maxWidth;
+  }
 
-  get fontSize() { return this._fontSize; }
-  get lineGap() { return this._lineGap; }
+  get fontSize() {
+    return this._fontSize;
+  }
+  get lineGap() {
+    return this._lineGap;
+  }
 
-  get hAlign() { return this._hAlign; }
-  get vAlign() { return this._vAlign; }
+  get hAlign() {
+    return this._hAlign;
+  }
+  get vAlign() {
+    return this._vAlign;
+  }
 
   set x(x: number) {
     if (this._x !== x) {
@@ -120,36 +143,36 @@ export class BitmapText2DBlock {
   }
 
   update(text?: string) {
-
     if (this.needsUpdate || this.text !== text) {
-
       this.needsUpdate = false;
       this.text = text;
 
-      const { bitmapText2D, sprites: prevSprites } = this;
+      const {bitmapText2D, sprites: prevSprites} = this;
 
       if (typeof text === 'string' && text.length > 0) {
-
-        this.sprites = bitmapText2D.drawText(text, this.x, this.y, this.z, this.maxWidth, this.fontSize, this.lineGap, this.hAlign, this.vAlign, prevSprites);
-
+        this.sprites = bitmapText2D.drawText(
+          text,
+          this.x,
+          this.y,
+          this.z,
+          this.maxWidth,
+          this.fontSize,
+          this.lineGap,
+          this.hAlign,
+          this.vAlign,
+          prevSprites,
+        );
       } else {
-
         this.sprites = null;
-
       }
 
       if (Array.isArray(prevSprites) && prevSprites.length > 0) {
-
         bitmapText2D.bitmapChars.voPool.free(prevSprites);
-
       }
-
     }
-
   }
 
   clear() {
     this.update('');
   }
-
 }

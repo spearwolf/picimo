@@ -1,4 +1,3 @@
-
 export const BYTES_PER_ELEMENT = {
   float32: 4,
   int16: 2,
@@ -20,13 +19,13 @@ export const TYPED_ARRAY_CONSTRUCTOR = {
 };
 
 export const TYPED_ARRAY_GETTER = {
-  float32: (obj: { float32Array: Float32Array }) => obj.float32Array,
-  int32: (obj: { int32Array: Int32Array }) => obj.int32Array,
-  int16: (obj: { int16Array: Int16Array }) => obj.int16Array,
-  int8: (obj: { int8Array: Int8Array }) => obj.int8Array,
-  uint32: (obj: { uint32Array: Uint32Array }) => obj.uint32Array,
-  uint16: (obj: { uint16Array: Uint16Array }) => obj.uint16Array,
-  uint8: (obj: { uint8Array: Uint8Array }) => obj.uint8Array,
+  float32: (obj: {float32Array: Float32Array}) => obj.float32Array,
+  int32: (obj: {int32Array: Int32Array}) => obj.int32Array,
+  int16: (obj: {int16Array: Int16Array}) => obj.int16Array,
+  int8: (obj: {int8Array: Int8Array}) => obj.int8Array,
+  uint32: (obj: {uint32Array: Uint32Array}) => obj.uint32Array,
+  uint16: (obj: {uint16Array: Uint16Array}) => obj.uint16Array,
+  uint8: (obj: {uint8Array: Uint8Array}) => obj.uint8Array,
 };
 
 export const GL_ITEM_TYPES = {

@@ -1,8 +1,8 @@
 import * as THREE from 'three';
 
-import { Map2DViewTile } from './Map2DViewTile';
+import {Map2DViewTile} from './Map2DViewTile';
 
-import { IMap2DLayer } from './IMap2DLayer';
+import {IMap2DLayer} from './IMap2DLayer';
 
 // ===========================================================
 //
@@ -11,7 +11,6 @@ import { IMap2DLayer } from './IMap2DLayer';
 // ===========================================================
 
 export class Map2DFlat2DTilesLayer implements IMap2DLayer {
-
   private readonly obj3d: THREE.Object3D = new THREE.Object3D();
 
   private readonly tiles: Map<string, THREE.Mesh> = new Map();
@@ -28,7 +27,7 @@ export class Map2DFlat2DTilesLayer implements IMap2DLayer {
   }
 
   dispose() {
-    Array.from(this.tiles.values()).forEach((tile) => {
+    Array.from(this.tiles.values()).forEach(tile => {
       tile.geometry.dispose(); // TODO check!
     });
     this.tiles.clear();
@@ -62,7 +61,6 @@ export class Map2DFlat2DTilesLayer implements IMap2DLayer {
   }
 
   private createTileMesh(_viewTile: Map2DViewTile): THREE.Mesh {
-
     // TODO create mesh
 
     // this.tiles.set(viewTile.id, mesh);

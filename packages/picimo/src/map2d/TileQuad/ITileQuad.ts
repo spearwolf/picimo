@@ -1,6 +1,4 @@
-
 export interface ITileQuad {
-
   y: number;
 
   left: number;
@@ -17,6 +15,10 @@ export interface ITileQuad {
   maxS: number;
   maxT: number;
 
-  setTex: (originS: number, originT: number, maxS: number, maxT: number) => void;
-
+  setTex: (
+    originS: number,
+    originT: number,
+    maxS: number,
+    maxT: number,
+  ) => void;
 }

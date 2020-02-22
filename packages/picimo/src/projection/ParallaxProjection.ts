@@ -1,6 +1,6 @@
-import { PerspectiveCamera } from "three";
-import { IProjectionSpecs } from "./IProjectionSpecs";
-import { Projection } from "./Projection";
+import {PerspectiveCamera} from 'three';
+import {IProjectionSpecs} from './IProjectionSpecs';
+import {Projection} from './Projection';
 // import { Logger } from "../../utils";
 
 const DEFAULT_DISTANCE = 300;
@@ -8,7 +8,6 @@ const DEFAULT_NEAR = 0.0001;
 const DEFAULT_FAR = 1000;
 
 export type IParallaxProjectionSpecs = IProjectionSpecs & {
-
   /**
    * Should be between zero and the `distance`. Default is 0.00001
    */
@@ -23,18 +22,18 @@ export type IParallaxProjectionSpecs = IProjectionSpecs & {
    * The distance from the camera to the projection plane. Default is 300.
    */
   distance?: number;
-
 };
 
 // const logger = new Logger('ParallaxProjection', 1000, 4); // XXX remove me
 
-export class ParallaxProjection extends Projection<IParallaxProjectionSpecs, PerspectiveCamera> {
-
+export class ParallaxProjection extends Projection<
+  IParallaxProjectionSpecs,
+  PerspectiveCamera
+> {
   distance: number;
   fovy: number;
 
   updateOrtho(width: number, height: number, specs: IParallaxProjectionSpecs) {
-
     this.width = width;
     this.height = height;
 
@@ -46,19 +45,16 @@ export class ParallaxProjection extends Projection<IParallaxProjectionSpecs, Per
 
     const aspect = width / height;
     const halfHeight = height / 2;
-    const fovy = 2 * Math.atan(halfHeight / distance) * 180 / Math.PI;
+    const fovy = (2 * Math.atan(halfHeight / distance) * 180) / Math.PI;
 
     this.fovy = fovy;
 
-    const { camera } = this;
+    const {camera} = this;
     if (!camera) {
-
       this.camera = new PerspectiveCamera(fovy, aspect, near, far);
       this.applyPlaneRotation();
       this.applyCameraDistance(distance);
-
     } else {
-
       camera.fov = fovy;
       camera.aspect = aspect;
 
@@ -66,14 +62,14 @@ export class ParallaxProjection extends Projection<IParallaxProjectionSpecs, Per
       this.applyCameraDistance(distance);
 
       camera.updateProjectionMatrix();
-
     }
   }
 
   getZoom(distanceToProjectionPlane: number) {
     if (distanceToProjectionPlane === 0) return 1;
     const d = this.distance - distanceToProjectionPlane;
-    const z =  (Math.tan(this.fovy / 2 * Math.PI / 180) * d) / (this.height / 2);
+    const z =
+      (Math.tan(((this.fovy / 2) * Math.PI) / 180) * d) / (this.height / 2);
     // logger.log('zoom=', z, 'width=', this.width, 'height=', this.height, 'distance=', d); // XXX remove me
     return z;
   }

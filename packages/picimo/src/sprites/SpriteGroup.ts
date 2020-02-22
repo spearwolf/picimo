@@ -1,11 +1,16 @@
-import { pick } from '../utils';
+import {pick} from '../utils';
 
-import { VOPool } from './VOPool';
-import { VODescriptor, VertexObject } from './VODescriptor';
-import { VOArray } from './VOArray';
-import { VOIndices } from './VOIndices';
+import {VOPool} from './VOPool';
+import {VODescriptor, VertexObject} from './VODescriptor';
+import {VOArray} from './VOArray';
+import {VOIndices} from './VOIndices';
 
-export type SpriteSizeSetter<T, U> = (sprite: VertexObject<T, U>, w: number, h: number, descriptor: VODescriptor<T, U>) => void;
+export type SpriteSizeSetter<T, U> = (
+  sprite: VertexObject<T, U>,
+  w: number,
+  h: number,
+  descriptor: VODescriptor<T, U>,
+) => void;
 
 const pickVOPoolOpts = pick([
   'autotouch',
@@ -16,11 +21,13 @@ const pickVOPoolOpts = pick([
   'voArray',
 ]);
 
-function createSpriteSizeHook<T, U> (setSize: string | SpriteSizeSetter<T, U> = 'size'): SpriteSizeSetter<T, U> {
+function createSpriteSizeHook<T, U>(
+  setSize: string | SpriteSizeSetter<T, U> = 'size',
+): SpriteSizeSetter<T, U> {
   switch (typeof setSize) {
-
     case 'string':
-      return (sprite, w, h, descriptor) => (descriptor.attr[setSize] as any).setValue(sprite, [w, h]);
+      return (sprite, w, h, descriptor) =>
+        (descriptor.attr[setSize] as any).setValue(sprite, [w, h]);
 
     case 'function':
       return setSize;
@@ -32,14 +39,15 @@ function createSpriteSizeHook<T, U> (setSize: string | SpriteSizeSetter<T, U> = 
       }
 
     default:
-      throw new Error(`[SpriteGroup] invalid sprite size setter! (is ${typeof setSize} but should be a function, string, null or false)`);
+      throw new Error(
+        `[SpriteGroup] invalid sprite size setter! (is ${typeof setSize} but should be a function, string, null or false)`,
+      );
   }
-};
+}
 
 type VOIndicesFactoryFn = (capacity: number) => VOIndices;
 
 export interface SpriteGroupOptions<T, U> {
-
   /**
    * Maximum number of vertex objects
    */
@@ -87,11 +95,9 @@ export interface SpriteGroupOptions<T, U> {
    * See [[VOArray]]
    */
   autotouch?: boolean;
-
 }
 
 export class SpriteGroup<T, U> {
-
   readonly descriptor: VODescriptor<T, U>;
 
   readonly isSpriteGroup = true;
@@ -101,26 +107,35 @@ export class SpriteGroup<T, U> {
   readonly voPool: VOPool<T, U>;
   readonly indices: VOIndices;
 
-  constructor(descriptor: VODescriptor<T, U>, options: SpriteGroupOptions<T, U> = {}) {
-
+  constructor(
+    descriptor: VODescriptor<T, U>,
+    options: SpriteGroupOptions<T, U> = {},
+  ) {
     this.descriptor = descriptor;
 
     this.isSpriteGroup = true;
 
     this.setSpriteSize = createSpriteSizeHook(options.setSize);
 
-    const { voNew, voZero } = options;
+    const {voNew, voZero} = options;
 
-    this.voPool = new VOPool(descriptor, Object.assign({
-      maxAllocVOSize: 1000,
-    }, pickVOPoolOpts(options), {
-      voNew: voNew && descriptor.createVO(null, voNew),
-      voZero: voZero && descriptor.createVO(null, voZero),
-    }));
+    this.voPool = new VOPool(
+      descriptor,
+      Object.assign(
+        {
+          maxAllocVOSize: 1000,
+        },
+        pickVOPoolOpts(options),
+        {
+          voNew: voNew && descriptor.createVO(null, voNew),
+          voZero: voZero && descriptor.createVO(null, voZero),
+        },
+      ),
+    );
 
-    const { indices } = options;
-    this.indices = typeof indices === 'function' ? indices(this.capacity) : indices;
-
+    const {indices} = options;
+    this.indices =
+      typeof indices === 'function' ? indices(this.capacity) : indices;
   }
 
   get capacity() {
@@ -137,9 +152,14 @@ export class SpriteGroup<T, U> {
 
   createSprite(width?: number, height?: number): VertexObject<T, U> {
     const sprite = this.voPool.alloc();
-    const { setSpriteSize } = this;
+    const {setSpriteSize} = this;
     if (setSpriteSize && (width !== undefined || height !== undefined)) {
-      setSpriteSize(sprite, width, height !== undefined ? height : width, this.descriptor);
+      setSpriteSize(
+        sprite,
+        width,
+        height !== undefined ? height : width,
+        this.descriptor,
+      );
     }
     return sprite;
   }
@@ -149,10 +169,12 @@ export class SpriteGroup<T, U> {
    */
   createSprites(count: number, width?: number, height?: number) {
     const sprites = this.voPool.multiAlloc(count);
-    const { setSpriteSize } = this;
+    const {setSpriteSize} = this;
     if (setSpriteSize && (width !== undefined || height !== undefined)) {
       const h = height !== undefined ? height : width;
-      sprites.forEach(sprite => setSpriteSize(sprite, width, h, this.descriptor));
+      sprites.forEach(sprite =>
+        setSpriteSize(sprite, width, h, this.descriptor),
+      );
     }
     return sprites;
   }
@@ -163,5 +185,4 @@ export class SpriteGroup<T, U> {
   touchVertexBuffers() {
     ++this.voPool.voArray.serial;
   }
-
 }

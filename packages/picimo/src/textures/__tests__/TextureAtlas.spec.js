@@ -2,14 +2,14 @@
 /* eslint-env mocha */
 import assert from 'assert';
 
-import { TextureAtlas } from '..';
+import {TextureAtlas} from '..';
 
 describe('TextureAtlas', () => {
   describe('TextureAtlas.load', () => {
     let atlas;
 
-    before((done) => {
-      TextureAtlas.load('nobinger.json', '/assets/').then((textureAtlas) => {
+    before(done => {
+      TextureAtlas.load('nobinger.json', '/assets/').then(textureAtlas => {
         atlas = textureAtlas;
         done();
       });
@@ -32,21 +32,24 @@ describe('TextureAtlas', () => {
     });
 
     it('all frame names', () => {
-      assert.deepEqual(atlas.frameNames().sort(), [
-        'nobinger-blau.png',
-        'nobinger-gold.png',
-        'nobinger-grau.png',
-        'nobinger-gruen.png',
-        'nobinger-lila.png',
-        'nobinger-rot.png',
-      ].sort());
+      assert.deepEqual(
+        atlas.frameNames().sort(),
+        [
+          'nobinger-blau.png',
+          'nobinger-gold.png',
+          'nobinger-grau.png',
+          'nobinger-gruen.png',
+          'nobinger-lila.png',
+          'nobinger-rot.png',
+        ].sort(),
+      );
     });
 
     it('find some frameNames', () => {
-      assert.deepEqual(atlas.frameNames('(blau|gold)').sort(), [
-        'nobinger-blau.png',
-        'nobinger-gold.png',
-      ].sort());
+      assert.deepEqual(
+        atlas.frameNames('(blau|gold)').sort(),
+        ['nobinger-blau.png', 'nobinger-gold.png'].sort(),
+      );
     });
 
     it('atlas features', () => {
@@ -57,8 +60,8 @@ describe('TextureAtlas', () => {
   describe('attach frame features to Texture', () => {
     let atlas;
 
-    before((done) => {
-      TextureAtlas.load('rbmfs.json', '/assets/').then((textureAtlas) => {
+    before(done => {
+      TextureAtlas.load('rbmfs.json', '/assets/').then(textureAtlas => {
         atlas = textureAtlas;
         done();
       });
@@ -71,6 +74,5 @@ describe('TextureAtlas', () => {
       assert.equal(tex.height, 8);
       assert.equal(tex.getFeature('baselineOffset'), -2);
     });
-
   });
 });

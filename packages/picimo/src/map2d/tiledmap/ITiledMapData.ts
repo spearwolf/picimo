@@ -1,5 +1,5 @@
-import { ITiledMapLayerData } from './ITiledMapLayerData';
-import { ITiledTilesetData } from './ITiledTilesetData';
+import {ITiledMapLayerData} from './ITiledMapLayerData';
+import {ITiledTilesetData} from './ITiledTilesetData';
 
 export interface ITiledMapData {
   height: number;

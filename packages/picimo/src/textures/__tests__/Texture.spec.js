@@ -2,7 +2,7 @@
 /* eslint-env mocha */
 import assert from 'assert';
 
-import { Texture, PowerOf2Image } from '..';
+import {Texture, PowerOf2Image} from '..';
 
 describe('Texture', () => {
   describe('new Texture(<img>)', () => {
@@ -64,7 +64,7 @@ describe('Texture', () => {
     let tex;
 
     describe('after complete', () => {
-      before((done) => {
+      before(done => {
         p2img.loaded.then(() => {
           tex = new Texture(p2img);
           done();
@@ -89,8 +89,8 @@ describe('Texture', () => {
 
   describe('Texture.load(url)', () => {
     let tex;
-    before((done) => {
-      Texture.load(('/assets/nobinger.png')).then((texture) => {
+    before(done => {
+      Texture.load('/assets/nobinger.png').then(texture => {
         tex = texture;
         done();
       });
@@ -98,7 +98,8 @@ describe('Texture', () => {
 
     it('image', () => assert.ok(tex.image instanceof PowerOf2Image));
     it('image.isLoaded', () => assert.ok(tex.image.isLoaded));
-    it('image.imgEl', () => assert.ok(tex.image.imgEl instanceof HTMLImageElement));
+    it('image.imgEl', () =>
+      assert.ok(tex.image.imgEl instanceof HTMLImageElement));
     it('width', () => assert.equal(tex.width, 128));
     it('height', () => assert.equal(tex.height, 256));
   });
@@ -171,7 +172,8 @@ describe('Texture', () => {
 
     it('tex != tex2', () => assert.notEqual(tex, tex2));
 
-    it('uuid is the same as from the parent', () => assert.equal(tex2.uuid, parent.uuid));
+    it('uuid is the same as from the parent', () =>
+      assert.equal(tex2.uuid, parent.uuid));
 
     it('image is null', () => assert.equal(tex2.image, null));
     it('parent', () => assert.equal(tex2.parent, parent));
@@ -193,7 +195,8 @@ describe('Texture', () => {
     const tex = new Texture(parent, 100, 50, 20, 10);
     const tex2 = tex.clone();
 
-    it('flipHorizontal() returns this', () => assert.equal(tex2.flipHorizontal(), tex2));
+    it('flipHorizontal() returns this', () =>
+      assert.equal(tex2.flipHorizontal(), tex2));
 
     it('width', () => assert.equal(tex2.width, tex.width));
     it('height', () => assert.equal(tex2.height, tex.height));
@@ -212,7 +215,8 @@ describe('Texture', () => {
     const tex = new Texture(parent, 100, 50, 20, 10);
     const tex2 = tex.clone();
 
-    it('flipVertical() returns this', () => assert.equal(tex2.flipVertical(), tex2));
+    it('flipVertical() returns this', () =>
+      assert.equal(tex2.flipVertical(), tex2));
 
     it('width', () => assert.equal(tex2.width, tex.width));
     it('height', () => assert.equal(tex2.height, tex.height));

@@ -1,8 +1,7 @@
-import {Scene, Camera} from "three";
-import {IProjection} from ".";
+import {Scene, Camera} from 'three';
+import {IProjection} from '.';
 
 export class Stage2D extends Scene {
-
   projection: IProjection;
   scene: Scene;
 
@@ -21,5 +20,4 @@ export class Stage2D extends Scene {
       projection.update(width, height);
     }
   }
-
 }

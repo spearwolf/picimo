@@ -1,10 +1,9 @@
 import * as THREE from 'three';
 
-import { IMap2DEvent } from './IMap2DEvent';
-import { Map2D } from './Map2D';
+import {IMap2DEvent} from './IMap2DEvent';
+import {Map2D} from './Map2D';
 
 export class Map2DViewFrame extends THREE.Object3D {
-
   readonly map2d: Map2D;
 
   color: number;
@@ -40,12 +39,12 @@ export class Map2DViewFrame extends THREE.Object3D {
       new THREE.Vector3(0, 0, c),
     );
 
-    const material = new THREE.LineBasicMaterial({ color: this.color });
-    const lines = new THREE.LineSegments(geometry, material) ;
+    const material = new THREE.LineBasicMaterial({color: this.color});
+    const lines = new THREE.LineSegments(geometry, material);
     this.add(lines);
 
     this.addEventListener(Map2D.BeginRenderEvent, (event: THREE.Event) => {
-      const { view } = event as IMap2DEvent;
+      const {view} = event as IMap2DEvent;
       this.updateView(view.centerX, view.centerY, view.width, view.height);
     });
   }

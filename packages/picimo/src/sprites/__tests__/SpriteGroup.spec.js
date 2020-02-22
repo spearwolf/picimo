@@ -2,39 +2,60 @@
 /* eslint no-param-reassign: 0 */
 import assert from 'assert';
 
-import { SpriteGroup } from '../SpriteGroup';
-import { VODescriptor } from '../VODescriptor';
-import { VOIndices } from '../VOIndices';
+import {SpriteGroup} from '../SpriteGroup';
+import {VODescriptor} from '../VODescriptor';
+import {VOIndices} from '../VOIndices';
 
 describe('SpriteGroup', () => {
   const voDescriptor = new VODescriptor({
     vertexCount: 4,
-    attributes: [{
-      name: 'position',
-      type: 'int32',
-      size: 2,
-      scalars: ['x', 'y'],
-    }, {
-      name: 'size',
-      type: 'int32',
-      size: 2,
-      scalars: ['w', 'h'],
-      uniform: true,
-    }],
+    attributes: [
+      {
+        name: 'position',
+        type: 'int32',
+        size: 2,
+        scalars: ['x', 'y'],
+      },
+      {
+        name: 'size',
+        type: 'int32',
+        size: 2,
+        scalars: ['w', 'h'],
+        uniform: true,
+      },
+    ],
   });
 
   it('should be instancable without options', () => {
     const sg = new SpriteGroup(voDescriptor);
-    assert.strictEqual(sg.descriptor, voDescriptor, 'descriptor should be set as property');
+    assert.strictEqual(
+      sg.descriptor,
+      voDescriptor,
+      'descriptor should be set as property',
+    );
     assert.ok(sg.capacity > 0, 'capacity should be greater than 0');
-    assert.strictEqual(sg.usedCount, 0, 'usedCount should be 0 after initialization');
-    assert.strictEqual(sg.availableCount, sg.capacity, 'availableCount should be equal to capacity');
+    assert.strictEqual(
+      sg.usedCount,
+      0,
+      'usedCount should be 0 after initialization',
+    );
+    assert.strictEqual(
+      sg.availableCount,
+      sg.capacity,
+      'availableCount should be equal to capacity',
+    );
   });
 
   it('should call indices factory function', () => {
-    const sg = new SpriteGroup(voDescriptor, { capacity: 100, indices: VOIndices.buildQuads });
+    const sg = new SpriteGroup(voDescriptor, {
+      capacity: 100,
+      indices: VOIndices.buildQuads,
+    });
     assert.ok(sg.indices, 'indices should exists');
-    assert.ok(sg.indices instanceof VOIndices, 'indices should be a VOIndices instance');
+    assert.ok(
+      sg.indices instanceof VOIndices,
+      'indices should be a VOIndices instance',
+    );
   });
 
   describe('voNew & voZero initializer', () => {
@@ -55,7 +76,7 @@ describe('SpriteGroup', () => {
     it('function', () => {
       const sg = new SpriteGroup(voDescriptor, {
         capacity: 10,
-        voNew: (vo) => {
+        voNew: vo => {
           vo.x1 = 17;
           vo.y3 = 66;
         },

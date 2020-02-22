@@ -1,7 +1,7 @@
-import { IProjection } from '../projection';
+import {IProjection} from '../projection';
 
-import { IMap2DRenderer } from './IMap2DRenderer';
-import { Map2DViewLayer } from './Map2DViewLayer';
+import {IMap2DRenderer} from './IMap2DRenderer';
+import {Map2DViewLayer} from './Map2DViewLayer';
 
 const $renderer = Symbol('renderer');
 
@@ -15,7 +15,6 @@ const $renderer = Symbol('renderer');
  * where the origin (0, 0) is on the top left corner.
  */
 export class Map2DView {
-
   centerX: number;
   centerY: number;
   width: number;
@@ -83,7 +82,7 @@ export class Map2DView {
   update() {
     const renderer = this[$renderer];
     renderer.beginRender(this);
-    this.layers.forEach((layer) => layer.update());
+    this.layers.forEach(layer => layer.update());
     renderer.endRender(this);
   }
 }

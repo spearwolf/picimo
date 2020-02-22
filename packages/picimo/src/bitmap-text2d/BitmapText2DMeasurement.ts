@@ -1,4 +1,4 @@
-import { BitmapText2DLine } from './BitmapText2DLine';
+import {BitmapText2DLine} from './BitmapText2DLine';
 
 export interface BitmapText2DMeasurement {
   height: number;

@@ -1,12 +1,11 @@
-import { AABB2, base64toUint32Arr } from '../../utils';
+import {AABB2, base64toUint32Arr} from '../../utils';
 
-import { ITiledMapLayerChunkData } from './ITiledMapLayerChunkData';
+import {ITiledMapLayerChunkData} from './ITiledMapLayerChunkData';
 
 const $data = Symbol('data');
 const $cachedUint32Array = Symbol('cachedUint32Array');
 
 export class TiledMapLayerChunk {
-
   readonly aabb: AABB2;
 
   private readonly [$data]: ITiledMapLayerChunkData;
@@ -29,10 +28,18 @@ export class TiledMapLayerChunk {
     return this[$cachedUint32Array];
   }
 
-  get left(): number { return this.aabb.left; }
-  get top(): number { return this.aabb.top; }
-  get right(): number { return this.aabb.right; }
-  get bottom(): number { return this.aabb.bottom; }
+  get left(): number {
+    return this.aabb.left;
+  }
+  get top(): number {
+    return this.aabb.top;
+  }
+  get right(): number {
+    return this.aabb.right;
+  }
+  get bottom(): number {
+    return this.aabb.bottom;
+  }
 
   getLocalTileIdAt(x: number, y: number): number {
     return this.uint32Arr[y * this[$data].width + x];

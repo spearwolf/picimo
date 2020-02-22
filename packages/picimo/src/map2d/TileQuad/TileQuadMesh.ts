@@ -1,35 +1,41 @@
-import { Material } from 'three';
+import {Material} from 'three';
 
-import { SpriteGroupMesh, SpriteGroupInstancedBufferGeometry } from '../../sprites';
+import {
+  SpriteGroupMesh,
+  SpriteGroupInstancedBufferGeometry,
+} from '../../sprites';
 
-import { getTileQuadBaseGroup } from './TileQuadBaseGroup';
-import { ITileQuad } from './ITileQuad';
-import { ITileQuadBase } from './ITileQuadBase';
-import { TileQuadBaseMethodsType } from './TileQuadBaseMethods';
-import { TileQuadGroup, ITileQuadGroupOptions } from './TileQuadGroup';
-import { TileQuadMethodsType } from './TileQuadMethods';
+import {getTileQuadBaseGroup} from './TileQuadBaseGroup';
+import {ITileQuad} from './ITileQuad';
+import {ITileQuadBase} from './ITileQuadBase';
+import {TileQuadBaseMethodsType} from './TileQuadBaseMethods';
+import {TileQuadGroup, ITileQuadGroupOptions} from './TileQuadGroup';
+import {TileQuadMethodsType} from './TileQuadMethods';
 
-export interface ITileQuadMeshOptions extends ITileQuadGroupOptions {
-}
+export interface ITileQuadMeshOptions extends ITileQuadGroupOptions {}
 
-export class TileQuadMesh extends SpriteGroupMesh<TileQuadMethodsType, ITileQuad, TileQuadBaseMethodsType, ITileQuadBase> {
-
+export class TileQuadMesh extends SpriteGroupMesh<
+  TileQuadMethodsType,
+  ITileQuad,
+  TileQuadBaseMethodsType,
+  ITileQuadBase
+> {
   readonly picimoType: string;
 
   tiles: TileQuadGroup;
 
   constructor(material: Material, options?: ITileQuadMeshOptions) {
-
     const tiles = new TileQuadGroup({
-
       voNew: null,
       voZero: null,
 
       ...options,
-
     });
 
-    const geometry = new SpriteGroupInstancedBufferGeometry(getTileQuadBaseGroup(), tiles);
+    const geometry = new SpriteGroupInstancedBufferGeometry(
+      getTileQuadBaseGroup(),
+      tiles,
+    );
 
     super(geometry, material);
 
@@ -38,7 +44,6 @@ export class TileQuadMesh extends SpriteGroupMesh<TileQuadMethodsType, ITileQuad
     this.frustumCulled = false;
 
     this.picimoType = 'TileQuadMesh';
-
   }
 
   /* TODO create bounding box/sphere for view culing?
@@ -60,5 +65,4 @@ export class TileQuadMesh extends SpriteGroupMesh<TileQuadMethodsType, ITileQuad
 
   }
   */
-
 }

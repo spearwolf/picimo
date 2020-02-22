@@ -1,9 +1,7 @@
-
 /**
  * Element indices array with data description for triangular polygons
  */
 export class VOIndices {
-
   /**
    * @example
    * // Create indices for 10x quads where each quad made up of 2x triangles (4x vertices and 6x indices)
@@ -12,12 +10,18 @@ export class VOIndices {
    * quadIndices.itemCount     // => 6
    */
 
-  static build(objectCount: number, indices: number[], stride: number, objectOffset = 0) {
+  static build(
+    objectCount: number,
+    indices: number[],
+    stride: number,
+    objectOffset = 0,
+  ) {
     const arr = new VOIndices(objectCount, indices.length);
 
     for (let i = 0; i < objectCount; ++i) {
       for (let j = 0; j < indices.length; ++j) {
-        arr.indices[(i * arr.itemCount) + j] = indices[j] + ((i + objectOffset) * stride);
+        arr.indices[i * arr.itemCount + j] =
+          indices[j] + (i + objectOffset) * stride;
       }
     }
 
@@ -44,5 +48,4 @@ export class VOIndices {
     this.length = objectCount * itemCount;
     this.indices = new Array(this.length);
   }
-
 }

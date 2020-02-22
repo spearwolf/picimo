@@ -41,26 +41,20 @@ const fragmentShader = `
 `;
 
 export class TileQuadMaterial extends THREE.ShaderMaterial {
-
   constructor(texture: THREE.Texture) {
     super({
-
       vertexShader,
       fragmentShader,
 
       uniforms: {
-
         texture: {
           value: texture,
         },
-
       },
 
       side: THREE.FrontSide,
       transparent: true,
       depthWrite: true,
-
     });
   }
-
 }

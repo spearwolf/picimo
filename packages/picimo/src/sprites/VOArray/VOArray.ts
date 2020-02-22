@@ -1,29 +1,36 @@
-import { createBufferView } from './lib/createBufferView';
-import { createLinkedTypedArrays, ArrayDataType } from './lib/createLinkedTypedArrays';
+import {createBufferView} from './lib/createBufferView';
+import {
+  createLinkedTypedArrays,
+  ArrayDataType,
+} from './lib/createLinkedTypedArrays';
 
-type TypedArray = Int8Array | Uint8Array | Int16Array | Uint16Array | Int32Array | Uint32Array | Uint8ClampedArray | Float32Array | Float64Array;
+type TypedArray =
+  | Int8Array
+  | Uint8Array
+  | Int16Array
+  | Uint16Array
+  | Int32Array
+  | Uint32Array
+  | Uint8ClampedArray
+  | Float32Array
+  | Float64Array;
 
 export interface VOArrayUsageHints {
-
   dynamic: boolean;
 
   autotouch: boolean;
-
 }
 
 export interface VOArrayUsageOptions {
-
   dynamic?: boolean;
 
   autotouch?: boolean;
-
 }
 
 /**
  * A wrapper for an ArrayBuffer which additional holds multiple references to typed arrays.
  */
 export class VOArray {
-
   capacity: number;
 
   bytesPerVO: number;
@@ -70,9 +77,10 @@ export class VOArray {
     data?: ArrayBuffer | DataView | TypedArray,
     hints?: VOArrayUsageOptions,
   ) {
-
     if (bytesPerVO % 4 !== 0) {
-      throw new TypeError(`new VOArray: bytesPerVO must be divisible by 4 (but is not!) bytesPerVO=${bytesPerVO}`);
+      throw new TypeError(
+        `new VOArray: bytesPerVO must be divisible by 4 (but is not!) bytesPerVO=${bytesPerVO}`,
+      );
     }
 
     this.capacity = capacity;
@@ -84,62 +92,67 @@ export class VOArray {
     let bufferByteLength: number;
 
     if (data) {
-
       const bufferView = createBufferView(capacity, bytesPerVO, data);
 
       buffer = bufferView.buffer;
       bufferByteOffset = bufferView.byteOffset;
       bufferByteLength = bufferView.byteLength;
-
     } else {
-
       buffer = new ArrayBuffer(capacity * bytesPerVO);
 
       bufferByteOffset = 0;
       bufferByteLength = buffer.byteLength;
-
     }
 
     this.buffer = buffer;
     this.bufferByteOffset = bufferByteOffset;
     this.bufferByteLength = bufferByteLength;
 
-    Object.assign(this, {
+    Object.assign(
+      this,
+      {
+        float32Array: null,
+        int16Array: null,
+        int32Array: null,
+        int8Array: null,
+        uint16Array: null,
+        uint32Array: null,
+        uint8Array: null,
+      },
+      createLinkedTypedArrays(
+        this.buffer,
+        this.bufferByteOffset,
+        this.bufferByteLength,
 
-      float32Array: null,
-      int16Array: null,
-      int32Array: null,
-      int8Array: null,
-      uint16Array: null,
-      uint32Array: null,
-      uint8Array: null,
+        arrayDataTypes,
+      ),
+    );
 
-    }, createLinkedTypedArrays(
-
-      this.buffer,
-      this.bufferByteOffset,
-      this.bufferByteLength,
-
-      arrayDataTypes,
-
-    ));
-
-    this.hints = Object.assign({
-      dynamic: false,
-      autotouch: false,
-    }, hints);
-
+    this.hints = Object.assign(
+      {
+        dynamic: false,
+        autotouch: false,
+      },
+      hints,
+    );
   }
 
   getTypedArray(type: ArrayDataType) {
     switch (type) {
-      case 'float32': return this.float32Array;
-      case 'int16': return this.int16Array;
-      case 'int32': return this.int32Array;
-      case 'int8': return this.int8Array;
-      case 'uint16': return this.uint16Array;
-      case 'uint32': return this.uint32Array;
-      case 'uint8': return this.uint8Array;
+      case 'float32':
+        return this.float32Array;
+      case 'int16':
+        return this.int16Array;
+      case 'int32':
+        return this.int32Array;
+      case 'int8':
+        return this.int8Array;
+      case 'uint16':
+        return this.uint16Array;
+      case 'uint32':
+        return this.uint32Array;
+      case 'uint8':
+        return this.uint8Array;
     }
   }
 
@@ -151,12 +164,10 @@ export class VOArray {
    * @param toOffset - `vertex object` destination offset
    */
   copy(from: VOArray, toOffset: number = 0) {
-
     const elementsPerVO = this.bytesPerVO / Uint32Array.BYTES_PER_ELEMENT;
     const offset = toOffset > 0 ? toOffset * elementsPerVO : 0;
 
     this.toUint32Array().set(from.toUint32Array(), offset);
-
   }
 
   /**
@@ -164,21 +175,21 @@ export class VOArray {
    * As a side-effect the `uint32Array` property will be created (if it did not exist before).
    */
   toUint32Array() {
-
-    const { uint32Array } = this;
+    const {uint32Array} = this;
 
     if (!uint32Array) {
-
       const elementsPerVO = this.bytesPerVO / Uint32Array.BYTES_PER_ELEMENT;
 
-      this.uint32Array = new Uint32Array(this.buffer, this.bufferByteOffset, this.capacity * elementsPerVO);
+      this.uint32Array = new Uint32Array(
+        this.buffer,
+        this.bufferByteOffset,
+        this.capacity * elementsPerVO,
+      );
 
       return this.uint32Array;
-
     }
 
     return uint32Array;
-
   }
 
   /**
@@ -190,13 +201,15 @@ export class VOArray {
    * @param size - Number of `vertex objects` to copy
    */
   subarray(begin: number, size: number = 1) {
-
-    const { bytesPerVO, bufferByteOffset } = this;
-    const byteBegin = bufferByteOffset + (begin * bytesPerVO);
+    const {bytesPerVO, bufferByteOffset} = this;
+    const byteBegin = bufferByteOffset + begin * bytesPerVO;
     const byteLength = size * bytesPerVO;
 
-    return new VOArray(size, bytesPerVO, this.arrayDataTypes, new DataView(this.buffer, byteBegin, byteLength));
-
+    return new VOArray(
+      size,
+      bytesPerVO,
+      this.arrayDataTypes,
+      new DataView(this.buffer, byteBegin, byteLength),
+    );
   }
-
 }

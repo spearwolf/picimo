@@ -1,7 +1,5 @@
-import { Texture } from './Texture';
+import {Texture} from './Texture';
 
 export interface ITexturable {
-
   getTextureSource(): Texture;
-
 }

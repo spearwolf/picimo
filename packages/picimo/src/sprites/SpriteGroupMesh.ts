@@ -9,9 +9,12 @@ import {SpriteGroupInstancedBufferGeometry} from './SpriteGroupInstancedBufferGe
 
 const log = new Logger('picimo/SpriteGroupMesh', 0, Infinity);
 
-function updateBuffers<T, U> (spriteGroup: SpriteGroup<T, U>, getBufferVersion: () => number, geometryUpdateBuffers: () => void) {
-
-  const { serial, hints } = spriteGroup.voPool.voArray;
+function updateBuffers<T, U>(
+  spriteGroup: SpriteGroup<T, U>,
+  getBufferVersion: () => number,
+  geometryUpdateBuffers: () => void,
+) {
+  const {serial, hints} = spriteGroup.voPool.voArray;
 
   const bufferVersion = getBufferVersion();
 
@@ -19,28 +22,27 @@ function updateBuffers<T, U> (spriteGroup: SpriteGroup<T, U>, getBufferVersion: 
     geometryUpdateBuffers();
     spriteGroup.voPool.voArray.serial = bufferVersion;
   }
-
 }
 
 export class SpriteGroupMesh<T, U = {}, K = {}, I = {}> extends Mesh {
-
-  geometry: SpriteGroupBufferGeometry<T, U> | SpriteGroupInstancedBufferGeometry<T, U, K, I>;
+  geometry:
+    | SpriteGroupBufferGeometry<T, U>
+    | SpriteGroupInstancedBufferGeometry<T, U, K, I>;
 
   constructor(
-    spriteGroupGeometry: SpriteGroupBufferGeometry<T, U> | SpriteGroupInstancedBufferGeometry<T, U, K, I>,
+    spriteGroupGeometry:
+      | SpriteGroupBufferGeometry<T, U>
+      | SpriteGroupInstancedBufferGeometry<T, U, K, I>,
     material: Material,
   ) {
-    super(
-      spriteGroupGeometry,
-      material,
-    );
+    super(spriteGroupGeometry, material);
 
-    this.geometry = spriteGroupGeometry || new BufferGeometry as any;
+    this.geometry = spriteGroupGeometry || (new BufferGeometry() as any);
 
     log.log('created', this);
   }
 
-  onBeforeRender = (
+  onBeforeRender = () =>
     /*
     _renderer: any,
     _scene: any,
@@ -49,14 +51,14 @@ export class SpriteGroupMesh<T, U = {}, K = {}, I = {}> extends Mesh {
     _material: any,
     _group: any,
     */
-  ) => {
-    const {picimoType} = this.geometry;;
-    if (picimoType === 'SpriteGroupGeometry') {
-      this.onBeforeRenderSpriteGroup();
-    } else if (picimoType === 'SpriteGroupInstancedBufferGeometry') {
-      this.onBeforeRenderSpriteGroupInstanced();
-    }
-  }
+    {
+      const {picimoType} = this.geometry;
+      if (picimoType === 'SpriteGroupGeometry') {
+        this.onBeforeRenderSpriteGroup();
+      } else if (picimoType === 'SpriteGroupInstancedBufferGeometry') {
+        this.onBeforeRenderSpriteGroupInstanced();
+      }
+    };
 
   dispose() {
     log.log('dispose', this);
@@ -73,7 +75,7 @@ export class SpriteGroupMesh<T, U = {}, K = {}, I = {}> extends Mesh {
 
   private onBeforeRenderSpriteGroup() {
     const geometry = this.geometry as SpriteGroupBufferGeometry<T, U>;
-    const { spriteGroup } = geometry.parameters;
+    const {spriteGroup} = geometry.parameters;
 
     updateBuffers(
       spriteGroup,
@@ -81,23 +83,27 @@ export class SpriteGroupMesh<T, U = {}, K = {}, I = {}> extends Mesh {
       () => geometry.updateBuffers(),
     );
 
-    const { usedCount, indices } = spriteGroup;
+    const {usedCount, indices} = spriteGroup;
     geometry.setDrawRange(0, usedCount * indices.itemCount);
   }
 
   private onBeforeRenderSpriteGroupInstanced() {
-    const geometry = this.geometry as SpriteGroupInstancedBufferGeometry<T, U, K, I>;
-    const { baseSpriteGroup, spriteGroup } = geometry.parameters;
+    const geometry = this.geometry as SpriteGroupInstancedBufferGeometry<
+      T,
+      U,
+      K,
+      I
+    >;
+    const {baseSpriteGroup, spriteGroup} = geometry.parameters;
 
     if (baseSpriteGroup) {
-
       updateBuffers(
         baseSpriteGroup,
         () => geometry.bufferVersion,
         () => geometry.updateBuffers(),
       );
 
-      const { usedCount, indices } = baseSpriteGroup;
+      const {usedCount, indices} = baseSpriteGroup;
       geometry.setDrawRange(0, usedCount * indices.itemCount);
     }
 
@@ -109,5 +115,4 @@ export class SpriteGroupMesh<T, U = {}, K = {}, I = {}> extends Mesh {
 
     // geometry.maxInstancedCount = spriteGroup.usedCount;
   }
-
 }

@@ -1,16 +1,24 @@
-import { ITileQuad } from './ITileQuad';
-import { TileFlipFlags } from './TileFlipFlags';
+import {ITileQuad} from './ITileQuad';
+import {TileFlipFlags} from './TileFlipFlags';
 
 export const TileQuadMethods = {
-
   /**
    * When rendering a tile, the order of operation matters.
    * The diagonal flip (x/y axis swap) is done first,
    * followed by the horizontal and vertical flips.
-   * 
+   *
    * @param flipFlags see [[TileFlipFlags]]
    */
-  setTexCoordsByTexture(this: ITileQuad, { minS, minT, maxS, maxT }: { minS: number, minT: number, maxS: number, maxT: number }, flipFlags: number) {
+  setTexCoordsByTexture(
+    this: ITileQuad,
+    {
+      minS,
+      minT,
+      maxS,
+      maxT,
+    }: {minS: number; minT: number; maxS: number; maxT: number},
+    flipFlags: number,
+  ) {
     let s0: number;
     let s1: number;
     let t0: number;
@@ -54,7 +62,6 @@ export const TileQuadMethods = {
     this.top = top;
     this.y = y;
   },
-
 };
 
 export type TileQuadMethodsType = typeof TileQuadMethods;

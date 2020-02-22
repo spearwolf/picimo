@@ -1,11 +1,11 @@
 import * as THREE from 'three';
 
-import { TextureLibrary } from '../textures';
+import {TextureLibrary} from '../textures';
 
-import { Map2DViewTile } from './Map2DViewTile';
+import {Map2DViewTile} from './Map2DViewTile';
 
-import { IMap2DLayer } from './IMap2DLayer';
-import { Map2DTileBufferGeometry } from './Map2DTileBufferGeometry';
+import {IMap2DLayer} from './IMap2DLayer';
+import {Map2DTileBufferGeometry} from './Map2DTileBufferGeometry';
 
 const $obj3d = Symbol('obj3d');
 const $material = Symbol('material');
@@ -27,7 +27,6 @@ const $createTileMesh = Symbol('createTileMesh');
  */
 
 export class Map2DFlat2DTilesLayer implements IMap2DLayer {
-
   readonly textureLibrary: TextureLibrary;
 
   private readonly [$obj3d]: THREE.Object3D = new THREE.Object3D();
@@ -38,7 +37,6 @@ export class Map2DFlat2DTilesLayer implements IMap2DLayer {
   private readonly [$tiles]: Map<string, THREE.Mesh> = new Map();
 
   constructor(textureLibrary: TextureLibrary) {
-
     this.textureLibrary = textureLibrary;
 
     const texture = new THREE.Texture(textureLibrary.atlas.baseTexture.imgEl);
@@ -52,7 +50,6 @@ export class Map2DFlat2DTilesLayer implements IMap2DLayer {
       map: texture,
       transparent: true,
     });
-
   }
 
   getObject3D() {
@@ -65,7 +62,7 @@ export class Map2DFlat2DTilesLayer implements IMap2DLayer {
 
   dispose() {
     const tiles = this[$tiles];
-    Array.from(tiles.values()).forEach((tile) => {
+    Array.from(tiles.values()).forEach(tile => {
       tile.geometry.dispose();
     });
     tiles.clear();

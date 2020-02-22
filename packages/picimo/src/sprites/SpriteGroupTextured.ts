@@ -1,26 +1,33 @@
-import { Texture } from '../textures';
+import {Texture} from '../textures';
 
-import { SpriteGroup, SpriteGroupOptions } from './SpriteGroup';
-import { VODescriptor, VertexObject } from './VODescriptor';
+import {SpriteGroup, SpriteGroupOptions} from './SpriteGroup';
+import {VODescriptor, VertexObject} from './VODescriptor';
 
-export type SpriteTexCoordsSetter<T, U> = (sprite: VertexObject<T, U>, texture: Texture, descriptor: VODescriptor<T, U>) => void;
+export type SpriteTexCoordsSetter<T, U> = (
+  sprite: VertexObject<T, U>,
+  texture: Texture,
+  descriptor: VODescriptor<T, U>,
+) => void;
 
-const DEFAULT_TEX_COORDS_SETTER = (sprite: any, texture: any) => sprite.setTexCoordsByTexture(texture);
+const DEFAULT_TEX_COORDS_SETTER = (sprite: any, texture: any) =>
+  sprite.setTexCoordsByTexture(texture);
 
-export interface SpriteGroupTexturedOptions<T, U> extends SpriteGroupOptions<T, U> {
-
+export interface SpriteGroupTexturedOptions<T, U>
+  extends SpriteGroupOptions<T, U> {
   setTexCoordsByTexture?: SpriteTexCoordsSetter<T, U>;
-
 }
 
 export class SpriteGroupTextured<T, U> extends SpriteGroup<T, U> {
-
   setTexCoordsByTexture: SpriteTexCoordsSetter<T, U>;
 
-  constructor(descriptor: VODescriptor<T, U>, options: SpriteGroupTexturedOptions<T, U> = {}) {
+  constructor(
+    descriptor: VODescriptor<T, U>,
+    options: SpriteGroupTexturedOptions<T, U> = {},
+  ) {
     super(descriptor, options);
 
-    this.setTexCoordsByTexture = (options.setTexCoordsByTexture || null) || DEFAULT_TEX_COORDS_SETTER;
+    this.setTexCoordsByTexture =
+      options.setTexCoordsByTexture || null || DEFAULT_TEX_COORDS_SETTER;
   }
 
   /**
@@ -40,7 +47,7 @@ export class SpriteGroupTextured<T, U> extends SpriteGroup<T, U> {
 
     const sprite = this.createSprite(w, h);
 
-    const { setTexCoordsByTexture } = this;
+    const {setTexCoordsByTexture} = this;
     if (texture && setTexCoordsByTexture) {
       setTexCoordsByTexture(sprite, texture, this.descriptor);
     }
@@ -51,5 +58,4 @@ export class SpriteGroupTextured<T, U> extends SpriteGroup<T, U> {
   createSpritesFromTextures(textures: Texture[]) {
     return textures.map(tex => this.createSpriteFromTexture(tex));
   }
-
 }

@@ -1,11 +1,11 @@
-import { generateUuid } from '../utils';
-import { ImageSource, PowerOf2Image } from './PowerOf2Image';
+import {generateUuid} from '../utils';
+import {ImageSource, PowerOf2Image} from './PowerOf2Image';
 
 export type TextureImage = PowerOf2Image | ImageSource;
 export type TextureSource = Texture | TextureImage;
 
 function minS(t: Texture) {
-  let { x } = t;
+  let {x} = t;
   let texture: Texture = t;
 
   while ((texture = texture.parent) != null) {
@@ -16,7 +16,7 @@ function minS(t: Texture) {
 }
 
 function minT(t: Texture) {
-  let { y } = t;
+  let {y} = t;
   let texture: Texture = t;
 
   while ((texture = texture.parent) != null) {
@@ -49,7 +49,6 @@ function maxT(t: Texture) {
 }
 
 export class Texture {
-
   static async load(url: string) {
     return new Texture(await new PowerOf2Image(url).loaded);
   }
@@ -70,7 +69,13 @@ export class Texture {
 
   private _features: Map<string, unknown> = null;
 
-  constructor(source: TextureSource, width? :number, height?: number, x = 0, y = 0) {
+  constructor(
+    source: TextureSource,
+    width?: number,
+    height?: number,
+    x = 0,
+    y = 0,
+  ) {
     let w = width;
     let h = height;
 
@@ -80,7 +85,11 @@ export class Texture {
       //
       this.parent = source;
       this.image = null;
-    } else if (typeof source === 'object' && 'width' in source && 'height' in source) {
+    } else if (
+      typeof source === 'object' &&
+      'width' in source &&
+      'height' in source
+    ) {
       //
       // === Create Texture from Image ===
       //
@@ -94,7 +103,9 @@ export class Texture {
     } else if (source === undefined) {
       return; // do nothing here
     } else {
-      throw new Error(`Texture() constructor panic: unexpected parameter {source: ${source}}`);
+      throw new Error(
+        `Texture() constructor panic: unexpected parameter {source: ${source}}`,
+      );
     }
 
     this._width = w;
@@ -119,7 +130,9 @@ export class Texture {
     }
     if (this._features) {
       t._features = new Map();
-      Array.from(this._features.entries()).forEach(([key, val]) => t._features.set(key, val));
+      Array.from(this._features.entries()).forEach(([key, val]) =>
+        t._features.set(key, val),
+      );
     }
     return t;
   }
@@ -157,7 +170,7 @@ export class Texture {
   }
 
   get imgEl() {
-    const { root } = this;
+    const {root} = this;
     if (root.image instanceof PowerOf2Image) {
       return root.image.imgEl;
     }
@@ -165,16 +178,13 @@ export class Texture {
   }
 
   get width(): number {
-    return (typeof this._width === 'number'
+    return typeof this._width === 'number'
       ? this._width
-      : (this.image
-        ? this.image.width
-        : (this.parent
-          ? this.root.width
-          : 0
-        )
-      )
-    );
+      : this.image
+      ? this.image.width
+      : this.parent
+      ? this.root.width
+      : 0;
   }
 
   set width(w) {
@@ -182,16 +192,13 @@ export class Texture {
   }
 
   get height(): number {
-    return (typeof this._height === 'number'
+    return typeof this._height === 'number'
       ? this._height
-      : (this.image
-        ? this.image.height
-        : (this.parent
-          ? this.root.height
-          : 0
-        )
-      )
-    );
+      : this.image
+      ? this.image.height
+      : this.parent
+      ? this.root.height
+      : 0;
   }
 
   set height(h) {

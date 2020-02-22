@@ -1,4 +1,3 @@
-
 export interface ITiledMapCustomProperty {
   name: string;
   type: string;

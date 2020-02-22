@@ -1,4 +1,4 @@
-import { IMap2DLayerData } from './IMap2DLayerData';
+import {IMap2DLayerData} from './IMap2DLayerData';
 
 const $top = Symbol('top');
 const $left = Symbol('left');
@@ -17,7 +17,6 @@ const $left = Symbol('left');
  * where the origin (0, 0) is on the top left corner.
  */
 export class Map2DViewTile {
-
   readonly layerData: IMap2DLayerData;
 
   readonly width: number;
@@ -59,15 +58,19 @@ export class Map2DViewTile {
   /**
    * View dimension in *pixels*
    */
-  get viewWidth() { return this.layerData.tileWidth * this.width; }
+  get viewWidth() {
+    return this.layerData.tileWidth * this.width;
+  }
 
   /**
    * View dimension in *pixels*
    */
-  get viewHeight() { return this.layerData.tileHeight * this.height; }
+  get viewHeight() {
+    return this.layerData.tileHeight * this.height;
+  }
 
   getTileIdAt(x: number, y: number) {
-    return this.tileIds[x + (y * this.width)];
+    return this.tileIds[x + y * this.width];
   }
 
   setLayerTilePosition(left: number, top: number) {
@@ -91,7 +94,9 @@ export class Map2DViewTile {
     }
   }
 
-  get top(): number { return this[$top]; }
+  get top(): number {
+    return this[$top];
+  }
 
   set left(left: number) {
     if (this[$left] !== left) {
@@ -100,7 +105,9 @@ export class Map2DViewTile {
     }
   }
 
-  get left(): number { return this[$left]; }
+  get left(): number {
+    return this[$left];
+  }
 
   setPosition(left: number, top: number) {
     if (this[$top] !== top || this[$left] !== left) {
@@ -113,7 +120,13 @@ export class Map2DViewTile {
 
   fetchTileIds() {
     if (this.tileIdsNeedsUpdate) {
-      this.layerData.getTileIdsWithin(this[$left], this[$top], this.width, this.height, this.tileIds);
+      this.layerData.getTileIdsWithin(
+        this[$left],
+        this[$top],
+        this.width,
+        this.height,
+        this.tileIds,
+      );
       this.tileIdsNeedsUpdate = false;
     }
     return this;

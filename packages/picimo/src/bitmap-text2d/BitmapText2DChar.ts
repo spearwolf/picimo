@@ -1,7 +1,6 @@
-import { Texture } from '../textures';
+import {Texture} from '../textures';
 
 export interface BitmapText2DChar {
-
   tex: Texture;
 
   x: number;
@@ -11,5 +10,4 @@ export interface BitmapText2DChar {
    * baseline offset
    */
   bo: number;
-
 }

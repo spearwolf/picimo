@@ -1,7 +1,6 @@
-import { Camera, Vector2 } from 'three';
+import {Camera, Vector2} from 'three';
 
 export interface IProjection {
-
   camera: Camera;
 
   update(currentWidth: number, currentHeight: number): void;
@@ -18,5 +17,4 @@ export interface IProjection {
    * Return zoom factor (in relation to the projection plane)
    */
   getZoom(distanceToProjectionPlane: number): number;
-
 }

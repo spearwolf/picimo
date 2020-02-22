@@ -21,8 +21,13 @@ const INIT = 'init';
 const FRAME = 'frame';
 const RESIZE = 'resize';
 
-export type DisplayGetSizeFn = (display: Display) => { width: number, height: number };
-export type DisplayResizeStrategy = HTMLElement | DisplayGetSizeFn | 'fullscreen';
+export type DisplayGetSizeFn = (
+  display: Display,
+) => {width: number; height: number};
+export type DisplayResizeStrategy =
+  | HTMLElement
+  | DisplayGetSizeFn
+  | 'fullscreen';
 
 export enum DisplayMode {
   Pixelated = 'pixelated',
@@ -31,7 +36,6 @@ export enum DisplayMode {
 }
 
 export interface DisplayOptions {
-
   resizeStrategy?: DisplayResizeStrategy;
 
   mode?: DisplayMode;
@@ -50,7 +54,6 @@ export interface DisplayOptions {
   clearColor?: number | string | THREE.Color;
 
   stage?: Stage2D;
-
 }
 
 const filterWebGLRendererParameters = unpick<WebGLRendererParameters>([
@@ -81,19 +84,18 @@ export interface DisplayEventOptions {
   height: number;
 
   stage: Stage2D;
-};
+}
 
-export interface DisplayOnInitOptions extends DisplayEventOptions { };
-export interface DisplayOnResizeOptions extends DisplayEventOptions { };
+export interface DisplayOnInitOptions extends DisplayEventOptions {}
+export interface DisplayOnResizeOptions extends DisplayEventOptions {}
 
 export interface DisplayOnFrameOptions extends DisplayEventOptions {
   now: number;
   deltaTime: number;
   frameNo: number;
-};
+}
 
 export class Display extends Eventize {
-
   readonly renderer: WebGLRenderer;
 
   readonly canvas: HTMLCanvasElement;
@@ -141,7 +143,10 @@ export class Display extends Eventize {
 
   private [$stage]: Stage2D;
 
-  constructor(el: HTMLElement, options?: DisplayOptions & WebGLRendererParameters) {
+  constructor(
+    el: HTMLElement,
+    options?: DisplayOptions & WebGLRendererParameters,
+  ) {
     super();
 
     let resizeRefEl: HTMLElement;
@@ -157,18 +162,35 @@ export class Display extends Eventize {
       }
     }
 
-    const configurator = readOption<DisplayOptions>(options, 'configurator', () => {
-      return createConfigurator(readOption<DisplayOptions>(options, 'mode') as DisplayMode);
-    }) as IConfigurator;
+    const configurator = readOption<DisplayOptions>(
+      options,
+      'configurator',
+      () => {
+        return createConfigurator(
+          readOption<DisplayOptions>(options, 'mode') as DisplayMode,
+        );
+      },
+    ) as IConfigurator;
 
-    const pixelRatio = Number(readOption<DisplayOptions>(options, 'pixelRatio', 0));
+    const pixelRatio = Number(
+      readOption<DisplayOptions>(options, 'pixelRatio', 0),
+    );
 
-    this[$lockPixelRatio] = isNaN(pixelRatio) || pixelRatio < 1 ? configurator.getPixelRatio() : pixelRatio;
+    this[$lockPixelRatio] =
+      isNaN(pixelRatio) || pixelRatio < 1
+        ? configurator.getPixelRatio()
+        : pixelRatio;
 
-    this.resizeStrategy = readOption<DisplayOptions>(options, 'resizeStrategy', resizeRefEl) as DisplayResizeStrategy;
+    this.resizeStrategy = readOption<DisplayOptions>(
+      options,
+      'resizeStrategy',
+      resizeRefEl,
+    ) as DisplayResizeStrategy;
 
     const renderParams = <WebGLRendererParameters>{
-      ...configurator.getWebGlRendererParameters(filterWebGLRendererParameters(options)),
+      ...configurator.getWebGlRendererParameters(
+        filterWebGLRendererParameters(options),
+      ),
       canvas: this.canvas,
     };
 
@@ -179,9 +201,13 @@ export class Display extends Eventize {
     domElement.setAttribute('touch-action', 'none'); // => PEP polyfill
 
     if (resizeRefEl && resizeRefEl.tagName !== 'CANVAS') {
-      Stylesheets.addRule(resizeRefEl, 'picimo-container', `
+      Stylesheets.addRule(
+        resizeRefEl,
+        'picimo-container',
+        `
         font-size: 0;
-      `);
+      `,
+      );
     }
 
     const containerOrCanvasEl = resizeRefEl || domElement;
@@ -196,9 +222,16 @@ export class Display extends Eventize {
     }
     */
 
-    this.texUtils = new TextureUtils(this.renderer, configurator.getTextureUtilsOptions());
+    this.texUtils = new TextureUtils(
+      this.renderer,
+      configurator.getTextureUtilsOptions(),
+    );
 
-    const clearColor = readOption<DisplayOptions>(options, 'clearColor', new Color()) as Color | string;
+    const clearColor = readOption<DisplayOptions>(
+      options,
+      'clearColor',
+      new Color(),
+    ) as Color | string;
 
     this.renderer.setClearColor(
       clearColor instanceof Color ? clearColor : new Color(clearColor),
@@ -213,8 +246,11 @@ export class Display extends Eventize {
 
     // on-rotate-go-fullscreen (experimental)
     if (this.resizeStrategy === 'fullscreen') {
-      const { screen } = window;
-      if (typeof screen !== 'undefined' && typeof screen.orientation !== 'undefined') {
+      const {screen} = window;
+      if (
+        typeof screen !== 'undefined' &&
+        typeof screen.orientation !== 'undefined'
+      ) {
         screen.orientation.onchange = () => {
           if (screen.orientation.type.indexOf('landscape') !== -1) {
             if (typeof containerOrCanvasEl.requestFullscreen === 'function') {
@@ -250,7 +286,7 @@ export class Display extends Eventize {
   }
 
   resize() {
-    const { resizeStrategy } = this;
+    const {resizeStrategy} = this;
 
     let wPx: number = 320;
     let hPx: number = 200;
@@ -259,19 +295,22 @@ export class Display extends Eventize {
       wPx = window.innerWidth;
       hPx = window.innerHeight;
     } else if (typeof resizeStrategy === 'function') {
-      const { width, height } = resizeStrategy(this);
+      const {width, height} = resizeStrategy(this);
       wPx = Math.floor(width);
       hPx = Math.floor(height);
     } else if (resizeStrategy instanceof HTMLElement) {
-      const { width, height } = resizeStrategy.getBoundingClientRect();
+      const {width, height} = resizeStrategy.getBoundingClientRect();
       wPx = Math.floor(width);
       hPx = Math.floor(height);
     }
 
-    const { pixelRatio } = this;
+    const {pixelRatio} = this;
 
-    if (pixelRatio !== this[$lastPixelRatio] || wPx !== this.width || hPx !== this.height) {
-
+    if (
+      pixelRatio !== this[$lastPixelRatio] ||
+      wPx !== this.width ||
+      hPx !== this.height
+    ) {
       this.width = wPx;
       this.height = hPx;
       this[$lastPixelRatio] = pixelRatio;
@@ -286,7 +325,6 @@ export class Display extends Eventize {
   }
 
   renderFrame(now = window.performance.now()) {
-
     this.lastNow = this.now;
     this.now = now / 1000.0;
 
@@ -305,7 +343,6 @@ export class Display extends Eventize {
     this[$emitFrame]();
 
     ++this.frameNo;
-
   }
 
   start() {
@@ -317,7 +354,7 @@ export class Display extends Eventize {
         this.renderFrame(now);
       }
       this[$rafID] = window.requestAnimationFrame(renderFrame);
-    }
+    };
 
     this[$rafID] = window.requestAnimationFrame(renderFrame);
   }
@@ -377,5 +414,4 @@ export class Display extends Eventize {
       stage: this.stage,
     };
   }
-
 }

@@ -47,36 +47,33 @@ const fragmentShader = `
 `;
 
 export interface BitmapFontShaderHooks {
-
   vertexShaderPreHook?: string;
 
   vertexShaderTransformHook?: string;
-
 }
 
 const makeVertexShader = (hooks?: BitmapFontShaderHooks) => {
-
   if (hooks) {
-
-    const vs = vertexShader.replace(VERTEX_SHADER_PRE_HOOK, hooks.vertexShaderPreHook || '');
-    return vs.replace(VERTEX_SHADER_TRANSFORM_HOOK, hooks.vertexShaderTransformHook || '');
-
+    const vs = vertexShader.replace(
+      VERTEX_SHADER_PRE_HOOK,
+      hooks.vertexShaderPreHook || '',
+    );
+    return vs.replace(
+      VERTEX_SHADER_TRANSFORM_HOOK,
+      hooks.vertexShaderTransformHook || '',
+    );
   }
 
   return vertexShader;
-
-}
+};
 
 export class BitmapFontMaterial extends THREE.ShaderMaterial {
-
   constructor(fontTexture: THREE.Texture, shaderHooks?: BitmapFontShaderHooks) {
     super({
-
       vertexShader: makeVertexShader(shaderHooks),
       fragmentShader,
 
       uniforms: {
-
         time: {
           value: 0.0,
         },
@@ -84,14 +81,11 @@ export class BitmapFontMaterial extends THREE.ShaderMaterial {
         fontTexture: {
           value: fontTexture,
         },
-
       },
 
       side: THREE.DoubleSide,
       transparent: true,
       depthWrite: true,
-
     });
   }
-
 }

@@ -1,6 +1,4 @@
-
 export interface ISimpleSprite {
-
   y: number;
 
   left: number;
@@ -18,5 +16,4 @@ export interface ISimpleSprite {
   maxT: number;
 
   setTex: (oiginS: number, originT: number, maxS: number, maxT: number) => void;
-
 }

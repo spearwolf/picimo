@@ -1,12 +1,12 @@
 export interface ITiledTilesetData {
-  columns: number,
+  columns: number;
   firstgid: number;
   image: string;
   imageheight: number;
   imagewidth: number;
   margin: number;
   name: string;
-  spacing: number
+  spacing: number;
   tilecount: number;
   tileheight: number;
   tilewidth: number;

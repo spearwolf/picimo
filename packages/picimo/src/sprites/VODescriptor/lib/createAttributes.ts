@@ -1,23 +1,35 @@
-import { BYTES_PER_ELEMENT } from './typedArrayHelpers';
-import { VOAttrDescriptor } from '../VOAttrDescriptor';
-import { VODescriptor, VOAttrDescription, VOAttributesDescription } from '../VODescriptor';
+import {BYTES_PER_ELEMENT} from './typedArrayHelpers';
+import {VOAttrDescriptor} from '../VOAttrDescriptor';
+import {
+  VODescriptor,
+  VOAttrDescription,
+  VOAttributesDescription,
+} from '../VODescriptor';
 
 const DEFAULT_ATTR_TYPE = 'float32';
 
-export const createAttributes = (descriptor: VODescriptor, attributesOrObject: VOAttributesDescription) => {
+export const createAttributes = (
+  descriptor: VODescriptor,
+  attributesOrObject: VOAttributesDescription,
+) => {
   let attributes: VOAttrDescription[];
 
   if (Array.isArray(attributesOrObject)) {
     attributes = attributesOrObject;
   } else if (typeof attributesOrObject === 'object') {
-    attributes = Object.keys(attributesOrObject).map((name) => {
+    attributes = Object.keys(attributesOrObject).map(name => {
       const attrConf = attributesOrObject[name];
-      return Object.assign({ name }, (Array.isArray(attrConf) ? { scalars: attrConf } : attrConf));
+      return Object.assign(
+        {name},
+        Array.isArray(attrConf) ? {scalars: attrConf} : attrConf,
+      );
     });
   }
 
   if (!attributes) {
-    throw new Error('[VODescriptor] option "attributes" should be an array or an object!');
+    throw new Error(
+      '[VODescriptor] option "attributes" should be an array or an object!',
+    );
   }
 
   descriptor.attr = {};
@@ -41,12 +53,26 @@ export const createAttributes = (descriptor: VODescriptor, attributesOrObject: V
     const type = attr.type || DEFAULT_ATTR_TYPE;
 
     if (BYTES_PER_ELEMENT[type] === undefined) {
-      throw new Error(`[VODescriptor] attribute "${attr.name}" has unknown type: should be one of (${Object.keys(BYTES_PER_ELEMENT).join(', ')})`);
+      throw new Error(
+        `[VODescriptor] attribute "${
+          attr.name
+        }" has unknown type: should be one of (${Object.keys(
+          BYTES_PER_ELEMENT,
+        ).join(', ')})`,
+      );
     }
 
     if (attr.name !== undefined) {
       descriptor.scalars.push(attr.name);
-      descriptor.attr[attr.name] = new VOAttrDescriptor(attr.name, type, attrSize, offset, byteOffset, !!attr.uniform, attr.scalars);
+      descriptor.attr[attr.name] = new VOAttrDescriptor(
+        attr.name,
+        type,
+        attrSize,
+        offset,
+        byteOffset,
+        !!attr.uniform,
+        attr.scalars,
+      );
     }
 
     offset += attrSize;
@@ -54,7 +80,8 @@ export const createAttributes = (descriptor: VODescriptor, attributesOrObject: V
   }
 
   // ensure that bytes per vertex is always aligned to 4-bytes!
-  descriptor.rightPadBytesPerVertex = byteOffset % 4 > 0 ? 4 - (byteOffset % 4) : 0;
+  descriptor.rightPadBytesPerVertex =
+    byteOffset % 4 > 0 ? 4 - (byteOffset % 4) : 0;
 
   descriptor.bytesPerVertex = byteOffset + descriptor.rightPadBytesPerVertex;
   descriptor.bytesPerVO = descriptor.bytesPerVertex * descriptor.vertexCount;

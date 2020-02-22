@@ -1,5 +1,10 @@
-export function base64toUint32Arr(base64: string, isLittleEndian: boolean = true): Uint32Array {
-  const { buffer } = Uint8Array.from(atob(base64) as any, (char: any) => char.charCodeAt(0));
+export function base64toUint32Arr(
+  base64: string,
+  isLittleEndian: boolean = true,
+): Uint32Array {
+  const {buffer} = Uint8Array.from(atob(base64) as any, (char: any) =>
+    char.charCodeAt(0),
+  );
   const view = new DataView(buffer);
   const len = view.byteLength >> 2;
   const arr = new Uint32Array(len);

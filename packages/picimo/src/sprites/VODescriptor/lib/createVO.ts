@@ -1,4 +1,3 @@
-
 export function createVO(obj: any, descriptor: any, voArray: any) {
   // set VODescriptor
   //
@@ -12,9 +11,13 @@ export function createVO(obj: any, descriptor: any, voArray: any) {
   //
   obj.voArray = voArray || obj.descriptor.createVOArray();
 
-  if (obj.descriptor.bytesPerVO !== obj.voArray.bytesPerVO &&
-    (obj.descriptor.typeList.join() !== obj.voArray.arrayDataTypes.join())) {
-    throw new TypeError('VODescriptor:createVO: descriptor and voArray are not compatible with each other!');
+  if (
+    obj.descriptor.bytesPerVO !== obj.voArray.bytesPerVO &&
+    obj.descriptor.typeList.join() !== obj.voArray.arrayDataTypes.join()
+  ) {
+    throw new TypeError(
+      'VODescriptor:createVO: descriptor and voArray are not compatible with each other!',
+    );
   }
 
   return obj;

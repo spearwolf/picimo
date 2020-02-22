@@ -1,4 +1,3 @@
-
 /**
  * Returns an array containing 3x values: *red*, *green*, *blue* with each color value in range of [0..255]
  * @param hexColor - css color hex string (with or without leading '#')

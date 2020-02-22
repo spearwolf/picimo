@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 import assert from 'assert';
 
-import { isPowerOf2 } from '..';
+import {isPowerOf2} from '..';
 
 describe('isPowerOf2', () => {
   it('power of 2 value', () => {

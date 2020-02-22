@@ -1,4 +1,3 @@
-
 const isNumber = (x: string | number): x is number => typeof x === 'number';
 
 export function add(a: string | number, b: string | number): string | number {
@@ -101,7 +100,13 @@ export function mat4(
   as = asFloat,
 ) {
   const toStr = as || (x => `${x}`);
-  return `mat4(${toStr(m00)}, ${toStr(m01)}, ${toStr(m02)}, ${toStr(m03)}, ${toStr(m10)}, ${toStr(m11)}, ${toStr(m12)}, ${toStr(m13)}, ${toStr(m20)}, ${toStr(m21)}, ${toStr(m22)}, ${toStr(m23)}, ${toStr(m30)}, ${toStr(m31)}, ${toStr(m32)}, ${toStr(m33)})`;
+  return `mat4(${toStr(m00)}, ${toStr(m01)}, ${toStr(m02)}, ${toStr(
+    m03,
+  )}, ${toStr(m10)}, ${toStr(m11)}, ${toStr(m12)}, ${toStr(m13)}, ${toStr(
+    m20,
+  )}, ${toStr(m21)}, ${toStr(m22)}, ${toStr(m23)}, ${toStr(m30)}, ${toStr(
+    m31,
+  )}, ${toStr(m32)}, ${toStr(m33)})`;
 }
 
 export const rotate = (funcName = 'rotate', x = 0.0, y = 0.0, z = 1.0) => `
@@ -109,11 +114,21 @@ mat4 ${funcName}(float angle) {
   float s = sin(angle);
   float c = cos(angle);
   float oc = 1.0 - c;
-  ${ret(mat4(
-    add(mul('oc', x * x), 'c'), sub(mul('oc', x * y), mul(z, 's')), add(mul('oc', z * x), mul(y, 's')), 0,
-    add(mul('oc', x * y), mul(z, 's')), add(mul('oc', y * y), 'c'), sub(mul('oc', y * z), mul(x, 's')), 0,
-    sub(mul('oc', z * x), mul(y, 's')), add(mul('oc', y * z), mul(x, 's')), add(mul('oc', z * z), 'c'),
-  ))}
+  ${ret(
+    mat4(
+      add(mul('oc', x * x), 'c'),
+      sub(mul('oc', x * y), mul(z, 's')),
+      add(mul('oc', z * x), mul(y, 's')),
+      0,
+      add(mul('oc', x * y), mul(z, 's')),
+      add(mul('oc', y * y), 'c'),
+      sub(mul('oc', y * z), mul(x, 's')),
+      0,
+      sub(mul('oc', z * x), mul(y, 's')),
+      add(mul('oc', y * z), mul(x, 's')),
+      add(mul('oc', z * z), 'c'),
+    ),
+  )}
 }`;
 
 export const rotateZ = (funcName = 'rotateZ') => rotate(funcName, 0, 0, 1);

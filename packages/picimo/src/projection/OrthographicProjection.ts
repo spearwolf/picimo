@@ -1,13 +1,12 @@
-import { OrthographicCamera } from "three";
-import { IProjectionSpecs } from "./IProjectionSpecs";
-import { Projection } from "./Projection";
+import {OrthographicCamera} from 'three';
+import {IProjectionSpecs} from './IProjectionSpecs';
+import {Projection} from './Projection';
 
 const DEFAULT_DISTANCE = 100;
 const DEFAULT_NEAR = 0.0001;
 const DEFAULT_FAR = 1000;
 
 export type IOrthographicProjectionSpecs = IProjectionSpecs & {
-
   /**
    * Should be between zero and the `distance`. Default is 0.00001
    */
@@ -22,13 +21,17 @@ export type IOrthographicProjectionSpecs = IProjectionSpecs & {
    * The distance from the camera to the projection plane. Default is 100.
    */
   distance?: number;
-
 };
 
-export class OrthographicProjection extends Projection<IOrthographicProjectionSpecs, OrthographicCamera> {
-
-  updateOrtho(width: number, height: number, specs: IOrthographicProjectionSpecs) {
-
+export class OrthographicProjection extends Projection<
+  IOrthographicProjectionSpecs,
+  OrthographicCamera
+> {
+  updateOrtho(
+    width: number,
+    height: number,
+    specs: IOrthographicProjectionSpecs,
+  ) {
     this.width = width;
     this.height = height;
 
@@ -38,17 +41,21 @@ export class OrthographicProjection extends Projection<IOrthographicProjectionSp
 
     const [halfWidth, halfHeight] = [width / 2, height / 2];
 
-    const { camera } = this;
+    const {camera} = this;
     if (!camera) {
-
-      this.camera = new OrthographicCamera(-halfWidth, halfWidth, halfHeight, -halfHeight, near, far);
+      this.camera = new OrthographicCamera(
+        -halfWidth,
+        halfWidth,
+        halfHeight,
+        -halfHeight,
+        near,
+        far,
+      );
       // this.camera.applyQuaternion(new Quaternion().setFromAxisAngle(new Vector3(1, 0, 0), Math.PI * -0.5));
       // this.camera.position.y = distance;
       this.applyPlaneRotation();
       this.applyCameraDistance(distance);
-
     } else {
-
       camera.left = -halfWidth;
       camera.right = halfWidth;
       camera.top = halfHeight;
@@ -60,7 +67,6 @@ export class OrthographicProjection extends Projection<IOrthographicProjectionSp
       this.applyCameraDistance(distance);
 
       camera.updateProjectionMatrix();
-
     }
   }
 }

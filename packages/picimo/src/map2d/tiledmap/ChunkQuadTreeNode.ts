@@ -1,6 +1,6 @@
-import { AABB2 } from '../../utils';
+import {AABB2} from '../../utils';
 
-import { TiledMapLayerChunk } from './TiledMapLayerChunk';
+import {TiledMapLayerChunk} from './TiledMapLayerChunk';
 
 enum Quadrant {
   NorthEast = 'northEast',
@@ -24,7 +24,12 @@ const BEFORE_AFTER_DELTA_FACTOR = Math.PI;
 
 type ChunkAabbValues = 'top' | 'right' | 'bottom' | 'left';
 
-const calcAxis = (chunks: TiledMapLayerChunk[], beforeProp: ChunkAabbValues, afterProp: ChunkAabbValues, chunk: TiledMapLayerChunk): IChunkAxis => {
+const calcAxis = (
+  chunks: TiledMapLayerChunk[],
+  beforeProp: ChunkAabbValues,
+  afterProp: ChunkAabbValues,
+  chunk: TiledMapLayerChunk,
+): IChunkAxis => {
   const chunksCount = chunks.length;
   const origin = chunk[beforeProp];
   const beforeChunks: TiledMapLayerChunk[] = [];
@@ -48,27 +53,40 @@ const calcAxis = (chunks: TiledMapLayerChunk[], beforeProp: ChunkAabbValues, aft
   const beforeCount = beforeChunks.length;
   const intersectCount = intersectChunks.length;
   const afterCount = afterChunks.length;
-  const beforeDistance = Math.abs(0.5 - (beforeCount / chunksCount));
-  const intersectDistance = Math.abs(intersectCount / chunksCount) * INTERSECT_DISTANCE_FACTOR;
-  const afterDistance = Math.abs(0.5 - (afterCount / chunksCount));
+  const beforeDistance = Math.abs(0.5 - beforeCount / chunksCount);
+  const intersectDistance =
+    Math.abs(intersectCount / chunksCount) * INTERSECT_DISTANCE_FACTOR;
+  const afterDistance = Math.abs(0.5 - afterCount / chunksCount);
 
   return {
-    distance: beforeDistance + intersectDistance + afterDistance + (Math.abs(afterDistance - beforeDistance) * BEFORE_AFTER_DELTA_FACTOR),
-    noSubdivide: (beforeCount === 0 && intersectCount === 0) ||
+    distance:
+      beforeDistance +
+      intersectDistance +
+      afterDistance +
+      Math.abs(afterDistance - beforeDistance) * BEFORE_AFTER_DELTA_FACTOR,
+    noSubdivide:
+      (beforeCount === 0 && intersectCount === 0) ||
       (beforeCount === 0 && afterCount === 0) ||
       (intersectCount === 0 && afterCount === 0),
     origin,
   };
 };
 
-const findAxis = (chunks: TiledMapLayerChunk[], beforeProp: ChunkAabbValues, afterProp: ChunkAabbValues): IChunkAxis => {
-  chunks.sort((a: TiledMapLayerChunk, b: TiledMapLayerChunk) => a[beforeProp] - b[beforeProp]);
-  return (
-    chunks
-      .map(calcAxis.bind(null, chunks, beforeProp, afterProp))
-      .filter((axis: IChunkAxis) => !axis.noSubdivide)
-      .sort((a: IChunkAxis, b: IChunkAxis) => a.distance - b.distance)
-  )[0] as IChunkAxis;
+const findAxis = (
+  chunks: TiledMapLayerChunk[],
+  beforeProp: ChunkAabbValues,
+  afterProp: ChunkAabbValues,
+): IChunkAxis => {
+  chunks.sort(
+    (a: TiledMapLayerChunk, b: TiledMapLayerChunk) =>
+      a[beforeProp] - b[beforeProp],
+  );
+  return chunks
+    .map(calcAxis.bind(null, chunks, beforeProp, afterProp))
+    .filter((axis: IChunkAxis) => !axis.noSubdivide)
+    .sort(
+      (a: IChunkAxis, b: IChunkAxis) => a.distance - b.distance,
+    )[0] as IChunkAxis;
 };
 
 export class ChunkQuadTreeNode {
@@ -89,7 +107,7 @@ export class ChunkQuadTreeNode {
   /**
    * Uses a right-handed coordinate system
    */
-  constructor(chunks?: TiledMapLayerChunk|TiledMapLayerChunk[]) {
+  constructor(chunks?: TiledMapLayerChunk | TiledMapLayerChunk[]) {
     this.chunks = chunks ? [].concat(chunks) : [];
   }
 
@@ -109,7 +127,7 @@ export class ChunkQuadTreeNode {
         this.isLeaf = false;
 
         this.chunks.length = 0;
-        chunks.forEach((chunk) => this.appendChunk(chunk));
+        chunks.forEach(chunk => this.appendChunk(chunk));
 
         this.subdivideQuadrant(Quadrant.NorthEast, maxChunkNodes);
         this.subdivideQuadrant(Quadrant.NorthWest, maxChunkNodes);
@@ -131,7 +149,7 @@ export class ChunkQuadTreeNode {
       this.chunks.push(chunk);
       return;
     }
-    const { originY, originX } = this;
+    const {originY, originX} = this;
     if (chunk.left >= originX) {
       if (chunk.top >= originY) {
         this.appendToNode(Quadrant.SouthEast, chunk);
@@ -163,7 +181,7 @@ export class ChunkQuadTreeNode {
   }
 
   findVisibleChunks(aabb: AABB2) {
-    let chunks = this.chunks.filter((chunk) => chunk.isIntersecting(aabb));
+    let chunks = this.chunks.filter(chunk => chunk.isIntersecting(aabb));
 
     if (this.isNorthWest(aabb)) {
       chunks = chunks.concat(this.nodes.northWest.findVisibleChunks(aabb));
@@ -198,7 +216,9 @@ export class ChunkQuadTreeNode {
   }
 
   findChunksAt(x: number, y: number): TiledMapLayerChunk[] {
-    const chunks: TiledMapLayerChunk[] = this.chunks.filter((chunk: TiledMapLayerChunk) => chunk.containsTileIdAt(x, y));
+    const chunks: TiledMapLayerChunk[] = this.chunks.filter(
+      (chunk: TiledMapLayerChunk) => chunk.containsTileIdAt(x, y),
+    );
     let moreChunks: TiledMapLayerChunk[] = null;
     if (x < this.originX) {
       if (y < this.originY) {
@@ -216,21 +236,29 @@ export class ChunkQuadTreeNode {
     return chunks.concat(moreChunks);
   }
 
-  toDebugJson(): object|string {
+  toDebugJson(): object | string {
     if (this.isLeaf) {
-      return this.chunks.map((chunk) => chunk.rawData).join(', ');
+      return this.chunks.map(chunk => chunk.rawData).join(', ');
     }
     const out: any = {
       _originX: this.originX,
       _originY: this.originY,
     };
     if (this.chunks.length) {
-      out._chunks = this.chunks.map((chunk) => chunk.rawData).join(', ');
+      out._chunks = this.chunks.map(chunk => chunk.rawData).join(', ');
     }
-    if (this.nodes.northEast) { out.NorthEast = this.nodes.northEast.toDebugJson(); }
-    if (this.nodes.northWest) { out.NorthWest = this.nodes.northWest.toDebugJson(); }
-    if (this.nodes.southEast) { out.SouthEast = this.nodes.southEast.toDebugJson(); }
-    if (this.nodes.southWest) { out.SouthWest = this.nodes.southWest.toDebugJson(); }
+    if (this.nodes.northEast) {
+      out.NorthEast = this.nodes.northEast.toDebugJson();
+    }
+    if (this.nodes.northWest) {
+      out.NorthWest = this.nodes.northWest.toDebugJson();
+    }
+    if (this.nodes.southEast) {
+      out.SouthEast = this.nodes.southEast.toDebugJson();
+    }
+    if (this.nodes.southWest) {
+      out.SouthWest = this.nodes.southWest.toDebugJson();
+    }
     return out;
   }
 }

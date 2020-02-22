@@ -1,10 +1,8 @@
-
 /**
  * Represents a 2D axis aligned boundary box.
  * Uses a right-handed coordinate system.
  */
 export class AABB2 {
-
   left: number;
   top: number;
   width: number;
@@ -21,11 +19,19 @@ export class AABB2 {
     return new AABB2(this.left, this.top, this.width, this.height);
   }
 
-  get right() { return this.left + this.width; }
-  get bottom() { return this.top + this.height; }
+  get right() {
+    return this.left + this.width;
+  }
+  get bottom() {
+    return this.top + this.height;
+  }
 
-  get centerX() { return this.left + (this.width / 2); }
-  get centerY() { return this.top + (this.height / 2); }
+  get centerX() {
+    return this.left + this.width / 2;
+  }
+  get centerY() {
+    return this.top + this.height / 2;
+  }
 
   /**
    * @returns `true` if point is within
@@ -48,29 +54,25 @@ export class AABB2 {
 
   isNorthWest(x: number, y: number) {
     return (
-      (this.right <= x || this.left < x) &&
-      (this.top < y || this.bottom <= y)
+      (this.right <= x || this.left < x) && (this.top < y || this.bottom <= y)
     );
   }
 
   isNorthEast(x: number, y: number) {
     return (
-      (this.right > x || this.left >= x) &&
-      (this.top < y || this.bottom <= y)
+      (this.right > x || this.left >= x) && (this.top < y || this.bottom <= y)
     );
   }
 
   isSouthEast(x: number, y: number) {
     return (
-      (this.right > x || this.left >= x) &&
-      (this.top >= y || this.bottom > y)
+      (this.right > x || this.left >= x) && (this.top >= y || this.bottom > y)
     );
   }
 
   isSouthWest(x: number, y: number) {
     return (
-      (this.right <= x || this.left < x) &&
-      (this.top >= y || this.bottom > y)
+      (this.right <= x || this.left < x) && (this.top >= y || this.bottom > y)
     );
   }
 }

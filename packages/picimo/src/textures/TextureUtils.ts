@@ -1,23 +1,20 @@
 import * as THREE from 'three';
 
-import { readOption } from '../utils';
+import {readOption} from '../utils';
 
-import { ImageSource } from './PowerOf2Image';
-import { ITexturable } from './ITexturable';
-import { Texture } from './Texture';
+import {ImageSource} from './PowerOf2Image';
+import {ITexturable} from './ITexturable';
+import {Texture} from './Texture';
 
 const $maxAnisotrophy = Symbol('maxAnisotrophy');
 
 export interface TextureUtilsOptions {
-
   defaultAnisotrophy?: number;
 
   defaultFilter?: THREE.TextureFilter;
-
 }
 
 export class TextureUtils {
-
   DefaultAnisotrophy: number;
   DefaultFilter: THREE.TextureFilter;
 
@@ -32,11 +29,11 @@ export class TextureUtils {
   makeTexture(
     source: ITexturable | Texture,
     options?: {
-      filter?: THREE.TextureFilter,
-      anisotrophy?: number,
-      flipy?: boolean,
-    }) {
-
+      filter?: THREE.TextureFilter;
+      anisotrophy?: number;
+      flipy?: boolean;
+    },
+  ) {
     let image: ImageSource;
 
     if (typeof (source as ITexturable).getTextureSource === 'function') {
@@ -49,19 +46,29 @@ export class TextureUtils {
 
     texture.flipY = Boolean(readOption(options, 'flipy', false));
 
-    const filter = readOption(options, 'filter', this.DefaultFilter) as THREE.TextureFilter
+    const filter = readOption(
+      options,
+      'filter',
+      this.DefaultFilter,
+    ) as THREE.TextureFilter;
 
     texture.magFilter = filter;
     texture.minFilter = filter;
 
-    const anisotrophy = readOption(options, 'anisotrophy', this.DefaultAnisotrophy) as number;
+    const anisotrophy = readOption(
+      options,
+      'anisotrophy',
+      this.DefaultAnisotrophy,
+    ) as number;
     const maxAnisotrophy = this[$maxAnisotrophy];
 
-    texture.anisotropy = anisotrophy === Infinity || anisotrophy > maxAnisotrophy ? maxAnisotrophy : anisotrophy;
+    texture.anisotropy =
+      anisotrophy === Infinity || anisotrophy > maxAnisotrophy
+        ? maxAnisotrophy
+        : anisotrophy;
 
     texture.needsUpdate = true;
 
     return texture;
   }
-
 }

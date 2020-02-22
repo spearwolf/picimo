@@ -16,11 +16,13 @@
     "build": "run-p build:*",
     "prepublishOnly": "npm-run-all --serial clean --parallel build:*",
     "clean": "rimraf build coverage dist",
-    "test:eslint": "eslint .",
+    "test:eslint": "eslint src/",
     "test:karma": "cross-env NODE_ENV=test karma start --single-run",
     "watch:test": "cross-env NODE_ENV=test karma start",
     "test:types": "tsc -p ./tests/types/tsconfig.json",
-    "test": "npm-run-all --parallel test:eslint test:types --serial test:karma"
+    "test": "npm-run-all --parallel test:eslint test:types --serial test:karma",
+    "prettier:check": "prettier --check \"src/**/*.{ts,js}\"",
+    "prettier:write": "prettier --write \"src/**/*.{ts,js}\""
   },
   "repository": {
     "type": "git",

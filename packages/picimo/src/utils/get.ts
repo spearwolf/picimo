@@ -1,4 +1,3 @@
-
 const arrayAccessor = new RegExp(/(.+)\[(\d+)\]$/);
 
 const getProp = (obj: any, prop: string) => {

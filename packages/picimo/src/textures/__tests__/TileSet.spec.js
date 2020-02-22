@@ -2,7 +2,7 @@
 /* eslint-env mocha */
 import assert from 'assert';
 
-import { TileSet } from '..';
+import {TileSet} from '..';
 
 describe('TileSet', () => {
   describe('TileSet.load', () => {
@@ -36,9 +36,10 @@ describe('TileSet', () => {
     });
 
     describe('tileset0', () => {
-
-      it('tileWidth', () => assert.equal(tileset0.tileWidth, tileset0.baseTexture.width));
-      it('tileHeight', () => assert.equal(tileset0.tileHeight, tileset0.baseTexture.height));
+      it('tileWidth', () =>
+        assert.equal(tileset0.tileWidth, tileset0.baseTexture.width));
+      it('tileHeight', () =>
+        assert.equal(tileset0.tileHeight, tileset0.baseTexture.height));
 
       it('tileCount', () => assert.equal(tileset0.tileCount, 1));
       it('firstId', () => assert.equal(tileset0.firstId, 1));
@@ -54,11 +55,9 @@ describe('TileSet', () => {
         assert.equal(tex.width, tileset0.tileWidth);
         assert.equal(tex.height, tileset0.tileHeight);
       });
-
     });
 
     describe('tileset', () => {
-
       it('baseTexture', () => {
         const baseTex = tileset.baseTexture;
         assert.ok(baseTex);
@@ -107,11 +106,9 @@ describe('TileSet', () => {
         assert.equal(tex.width, 55);
         assert.equal(tex.height, 61);
       });
-
     });
 
     describe('tileset2', () => {
-
       it('tileWidth', () => assert.equal(tileset2.tileWidth, 16));
       it('tileHeight', () => assert.equal(tileset2.tileHeight, 16));
 
@@ -120,7 +117,6 @@ describe('TileSet', () => {
       it('lastId', () => assert.equal(tileset2.lastId, 19));
 
       it('frame: 0', () => assert.equal(tileset2.getTextureById(0), null));
-
     });
   });
 });

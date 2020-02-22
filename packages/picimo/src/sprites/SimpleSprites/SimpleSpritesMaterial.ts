@@ -41,26 +41,20 @@ const fragmentShader = `
 `;
 
 export class SimpleSpritesMaterial extends ShaderMaterial {
-
   constructor(texture: Texture) {
     super({
-
       vertexShader,
       fragmentShader,
 
       uniforms: {
-
         texMap: {
           value: texture,
         },
-
       },
 
       side: DoubleSide,
       transparent: true,
       depthWrite: true,
-
     });
   }
-
 }

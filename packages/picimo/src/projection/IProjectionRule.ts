@@ -1,7 +1,6 @@
-import { IProjectionSpecs } from "./IProjectionSpecs";
+import {IProjectionSpecs} from './IProjectionSpecs';
 
 export interface IProjectionConstraints {
-
   /**
    * `portait`: the height is greater than or equal to the width
    *
@@ -14,13 +13,12 @@ export interface IProjectionConstraints {
 
   minHeight?: number;
   maxHeight?: number;
-
 }
 
-export interface IProjectionRule<Specs extends IProjectionSpecs = IProjectionSpecs> {
-
+export interface IProjectionRule<
+  Specs extends IProjectionSpecs = IProjectionSpecs
+> {
   constraints?: IProjectionConstraints;
 
   specs: Specs;
-
 }

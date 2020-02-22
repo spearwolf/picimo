@@ -11,17 +11,16 @@ import {Display} from './Display';
  * Use linear filter for textures by default.
  */
 export class PixelatedConfigurator implements IConfigurator {
-
   getWebGlRendererParameters(userParams?: WebGLRendererParameters) {
     return {
-      ... <WebGLRendererParameters>{
+      ...(<WebGLRendererParameters>{
         precision: 'highp',
         preserveDrawingBuffer: false,
         powerPreference: 'high-performance',
         stencil: false,
         alpha: true,
-      },
-      ... userParams,
+      }),
+      ...userParams,
     };
   }
 
@@ -37,10 +36,13 @@ export class PixelatedConfigurator implements IConfigurator {
   }
 
   postSetup(display: Display) {
-    Stylesheets.addRule(display.canvas, 'picimo-pixelated', `
+    Stylesheets.addRule(
+      display.canvas,
+      'picimo-pixelated',
+      `
       image-rendering: crisp-edges;
       image-rendering: pixelated;
-    `);
+    `,
+    );
   }
-
 }

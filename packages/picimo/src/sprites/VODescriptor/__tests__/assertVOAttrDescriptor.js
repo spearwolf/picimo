@@ -4,7 +4,10 @@ import assert from 'assert';
 export default (descriptor, names, size, offset, uniform, scalars) => {
   const name = Array.isArray(names) ? names[0] : names;
   const alias = Array.isArray(names) ? names[1] : names;
-  assert(descriptor.hasAttribute(name, size), `descriptor.hasAttribute("${name}", ${size})`);
+  assert(
+    descriptor.hasAttribute(name, size),
+    `descriptor.hasAttribute("${name}", ${size})`,
+  );
   const attr = descriptor.attr[name];
   assert(attr, `descriptor.attr.${name}`);
   assert.equal(attr.name, alias, '.name');

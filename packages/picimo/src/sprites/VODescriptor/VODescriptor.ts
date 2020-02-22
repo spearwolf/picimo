@@ -1,17 +1,23 @@
-import { VOArray, VOArrayUsageHints } from '../VOArray';
+import {VOArray, VOArrayUsageHints} from '../VOArray';
 
-import { createAliases } from './lib/createAliases';
-import { createAttributes } from './lib/createAttributes';
-import { createTypedArrays } from './lib/createTypedArrays';
-import { createVO } from './lib/createVO';
-import { createVOPrototype } from './lib/createVOPrototype';
-import { initializeVO  } from './lib/initializeVO';
-import { VOAttrDescriptor } from './VOAttrDescriptor';
+import {createAliases} from './lib/createAliases';
+import {createAttributes} from './lib/createAttributes';
+import {createTypedArrays} from './lib/createTypedArrays';
+import {createVO} from './lib/createVO';
+import {createVOPrototype} from './lib/createVOPrototype';
+import {initializeVO} from './lib/initializeVO';
+import {VOAttrDescriptor} from './VOAttrDescriptor';
 
-type VOAttrDataType = 'float32' | 'int16' | 'int32' | 'int8' | 'uint16' | 'uint32' | 'uint8';
+type VOAttrDataType =
+  | 'float32'
+  | 'int16'
+  | 'int32'
+  | 'int8'
+  | 'uint16'
+  | 'uint32'
+  | 'uint8';
 
 export interface VOAttrDescription {
-
   name?: string;
 
   type?: VOAttrDataType;
@@ -21,19 +27,15 @@ export interface VOAttrDescription {
   uniform?: boolean;
 
   scalars?: string[];
-
 }
 
 interface VOAttrsMap {
-
-    [attrName: string]: VOAttrDescription | string[];
-
-};
+  [attrName: string]: VOAttrDescription | string[];
+}
 
 export type VOAttributesDescription = VOAttrsMap | Array<VOAttrDescription>;
 
 export interface VODescription<T> {
-
   vertexCount?: number;
 
   methods?: T;
@@ -41,13 +43,11 @@ export interface VODescription<T> {
   attributes: VOAttributesDescription;
 
   aliases?: any; // TODO remove or create real types
-
 }
 
 type toArrayFn = (attrList?: string[]) => number[];
 
 interface VertexObjectMethods<T, U> {
-
   descriptor: VODescriptor<T, U>;
 
   voArray: VOArray;
@@ -58,7 +58,6 @@ interface VertexObjectMethods<T, U> {
    * Free the vertex object
    */
   free: () => void;
-
 }
 
 export type VertexObject<T, U> = T & U & VertexObjectMethods<T, U>;
@@ -113,7 +112,6 @@ export type VOInitializer<T, U> = Object | VOInitializerFn<T, U>;
  */
 
 export class VODescriptor<T = Object, U = Object> {
-
   /**
    * Number of vertices per vertex object
    */
@@ -148,22 +146,32 @@ export class VODescriptor<T = Object, U = Object> {
     uint8: boolean;
   };
 
-  constructor({ vertexCount, attributes, aliases, methods }: VODescription<T>) {
-
-    this.vertexCount = typeof vertexCount === 'number' ? vertexCount : parseInt(vertexCount, 10) || 1;
+  constructor({vertexCount, attributes, aliases, methods}: VODescription<T>) {
+    this.vertexCount =
+      typeof vertexCount === 'number'
+        ? vertexCount
+        : parseInt(vertexCount, 10) || 1;
 
     createAttributes(this, attributes);
     createAliases(this, aliases);
     createVOPrototype(this, methods);
     createTypedArrays(this);
-
   }
 
   createVOArray(size = 1, hints?: VOArrayUsageHints): VOArray {
-    return new VOArray(size, this.bytesPerVO, this.typeList, null, Object.assign({
-      dynamic: true,
-      autotouch: true,
-    }, hints));
+    return new VOArray(
+      size,
+      this.bytesPerVO,
+      this.typeList,
+      null,
+      Object.assign(
+        {
+          dynamic: true,
+          autotouch: true,
+        },
+        hints,
+      ),
+    );
   }
 
   /**
@@ -171,7 +179,10 @@ export class VODescriptor<T = Object, U = Object> {
    *
    * @returns the initialized *vertex object* instance
    */
-  createVO(voArray?: VOArray, voInit?: VOInitializer<T, U>): VertexObject<T, U> {
+  createVO(
+    voArray?: VOArray,
+    voInit?: VOInitializer<T, U>,
+  ): VertexObject<T, U> {
     // @ts-ignore
     const vo = createVO(Object.create(this.voPrototype), this, voArray);
 

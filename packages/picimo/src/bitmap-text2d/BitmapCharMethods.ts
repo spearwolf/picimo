@@ -1,8 +1,15 @@
-import { BitmapChar } from './BitmapChar';
+import {BitmapChar} from './BitmapChar';
 
 export const BitmapCharMethods = {
-
-  setTexCoordsByTexture(this: BitmapChar, { minS, minT, maxS, maxT }: { minS: number, minT: number, maxS: number, maxT: number }) {
+  setTexCoordsByTexture(
+    this: BitmapChar,
+    {
+      minS,
+      minT,
+      maxS,
+      maxT,
+    }: {minS: number; minT: number; maxS: number; maxT: number},
+  ) {
     this.setTex(minS, minT, maxS - minS, maxT - minT);
   },
 
@@ -16,7 +23,6 @@ export const BitmapCharMethods = {
     this.originY = y;
     this.zPos = z;
   },
-
 };
 
 export type BitmapCharMethodsType = typeof BitmapCharMethods;

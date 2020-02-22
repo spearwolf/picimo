@@ -1,13 +1,13 @@
 import * as THREE from 'three';
 
-import { ITileSet, MaterialCache } from '../textures';
+import {ITileSet, MaterialCache} from '../textures';
 
-import { IMap2DRenderer } from './IMap2DRenderer';
-import { Map2DView } from './Map2DView';
+import {IMap2DRenderer} from './IMap2DRenderer';
+import {Map2DView} from './Map2DView';
 
-import { IMap2DLayer } from './IMap2DLayer';
-import { TileQuadMeshCache } from './TileQuad/TileQuadMeshCache';
-import { Map2DTileQuadsLayer } from './Map2DTileQuadsLayer';
+import {IMap2DLayer} from './IMap2DLayer';
+import {TileQuadMeshCache} from './TileQuad/TileQuadMeshCache';
+import {Map2DTileQuadsLayer} from './Map2DTileQuadsLayer';
 
 const $dispatchEvent = Symbol('dispatchEvent');
 const $tileQuadMeshCache = Symbol('tileQuadMeshCache');
@@ -23,9 +23,12 @@ const $getTileQuadMeshCache = Symbol('getTileQuadMeshCache');
  * to the internal 2d *y* map2d coordinate.
  */
 export class Map2D extends THREE.Object3D implements IMap2DRenderer {
-
-  static get BeginRenderEvent() { return 'map2dbeginrender'; }
-  static get EndRenderEvent() { return 'map2dendrender'; }
+  static get BeginRenderEvent() {
+    return 'map2dbeginrender';
+  }
+  static get EndRenderEvent() {
+    return 'map2dendrender';
+  }
 
   readonly map2dLayers = new Set<IMap2DLayer>();
 
@@ -48,8 +51,15 @@ export class Map2D extends THREE.Object3D implements IMap2DRenderer {
   /**
    * @param distanceToProjectionPlane use negative numbers to move the plane further away from the camera and positive numbers to move the plane closer to the camera
    */
-  createTileQuadMeshLayer(tilesets: ITileSet[], distanceToProjectionPlane: number = 0) {
-    const layer = new Map2DTileQuadsLayer(tilesets, this[$getTileQuadMeshCache](), this.materialCache);
+  createTileQuadMeshLayer(
+    tilesets: ITileSet[],
+    distanceToProjectionPlane: number = 0,
+  ) {
+    const layer = new Map2DTileQuadsLayer(
+      tilesets,
+      this[$getTileQuadMeshCache](),
+      this.materialCache,
+    );
     if (distanceToProjectionPlane !== 0) {
       layer.getObject3D().position.set(0, distanceToProjectionPlane, 0);
     }
@@ -74,11 +84,11 @@ export class Map2D extends THREE.Object3D implements IMap2DRenderer {
   }
 
   beginRender(view: Map2DView) {
-    this[$dispatchEvent](Map2D.BeginRenderEvent, { view });
+    this[$dispatchEvent](Map2D.BeginRenderEvent, {view});
   }
 
   endRender(view: Map2DView) {
-    this[$dispatchEvent](Map2D.EndRenderEvent, { view });
+    this[$dispatchEvent](Map2D.EndRenderEvent, {view});
   }
 
   dispose() {
@@ -87,7 +97,7 @@ export class Map2D extends THREE.Object3D implements IMap2DRenderer {
       tileQuadMeshCache.dispose(mesh => mesh.geometry.dispose());
     }
     if (!this.isExternalMaterialCache) {
-      this.materialCache.all().forEach(({ texture, material }) => {
+      this.materialCache.all().forEach(({texture, material}) => {
         material.dispose();
         texture.dispose();
       });
@@ -104,6 +114,8 @@ export class Map2D extends THREE.Object3D implements IMap2DRenderer {
   }
 
   private [$dispatchEvent](type: string, options?: Object) {
-    this.children.forEach(obj3d => obj3d.dispatchEvent({ type, map2d: this, ...options }));
+    this.children.forEach(obj3d =>
+      obj3d.dispatchEvent({type, map2d: this, ...options}),
+    );
   }
 }

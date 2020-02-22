@@ -1,12 +1,16 @@
-import { IMap2DLayerData } from './IMap2DLayerData';
-import { IMap2DLayerRenderer } from './IMap2DLayerRenderer';
-import { Map2DView } from './Map2DView';
-import { Map2DViewTile } from './Map2DViewTile';
+import {IMap2DLayerData} from './IMap2DLayerData';
+import {IMap2DLayerRenderer} from './IMap2DLayerRenderer';
+import {Map2DView} from './Map2DView';
+import {Map2DViewTile} from './Map2DViewTile';
 
 const $createTile = Symbol('createTile');
 
-const takeFrom = (tiles: Map2DViewTile[], left: number, top: number): Map2DViewTile => {
-  const idx = tiles.findIndex((tile) => tile.isLayerTilePosition(left, top));
+const takeFrom = (
+  tiles: Map2DViewTile[],
+  left: number,
+  top: number,
+): Map2DViewTile => {
+  const idx = tiles.findIndex(tile => tile.isLayerTilePosition(left, top));
   if (idx !== -1) {
     return tiles.splice(idx, 1)[0];
   }
@@ -20,7 +24,6 @@ const takeFrom = (tiles: Map2DViewTile[], left: number, top: number): Map2DViewT
  * which is defined by [[Map2DView]].
  */
 export class Map2DViewLayer {
-
   readonly view: Map2DView;
   readonly layerRenderer: IMap2DLayerRenderer;
   readonly layerData: IMap2DLayerData;
@@ -55,17 +58,31 @@ export class Map2DViewLayer {
     // I. create visible map tiles (and remove/dispose unvisible)
     // ---------------------------------------------------------------
 
-    const { view } = this;
-    const zoom = view.projection.getZoom(this.layerRenderer.getDistanceToProjectionPlane());
-    const viewHalfWidth =  view.width * 0.5 * zoom;
+    const {view} = this;
+    const zoom = view.projection.getZoom(
+      this.layerRenderer.getDistanceToProjectionPlane(),
+    );
+    const viewHalfWidth = view.width * 0.5 * zoom;
     const viewHalfHeight = view.height * 0.5 * zoom;
 
-    const { viewCullingThreshold } = this.layerData;
+    const {viewCullingThreshold} = this.layerData;
 
-    const left = Math.floor((view.centerX - viewHalfWidth - viewCullingThreshold.left) / this.tileWidth);
-    const top = Math.floor((view.centerY - viewHalfHeight - viewCullingThreshold.top) / this.tileHeight);
-    const right = Math.ceil((view.centerX + viewHalfWidth + viewCullingThreshold.right) / this.tileWidth);
-    const bottom = Math.ceil((view.centerY + viewHalfHeight + viewCullingThreshold.bottom) / this.tileHeight);
+    const left = Math.floor(
+      (view.centerX - viewHalfWidth - viewCullingThreshold.left) /
+        this.tileWidth,
+    );
+    const top = Math.floor(
+      (view.centerY - viewHalfHeight - viewCullingThreshold.top) /
+        this.tileHeight,
+    );
+    const right = Math.ceil(
+      (view.centerX + viewHalfWidth + viewCullingThreshold.right) /
+        this.tileWidth,
+    );
+    const bottom = Math.ceil(
+      (view.centerY + viewHalfHeight + viewCullingThreshold.bottom) /
+        this.tileHeight,
+    );
 
     const width = right - left;
     const height = bottom - top;
@@ -91,19 +108,21 @@ export class Map2DViewLayer {
     // II. create geometries for all *new* map tiles
     // -------------------------------------------------
 
-    const newTiles: Map2DViewTile[] = newTileCoords.map(([x, y]: number[]): Map2DViewTile => {
-      const prevTile = reuseTiles.shift();
-      if (prevTile) {
-        removeTiles.push(prevTile.id);
-      }
-      return this[$createTile](x, y, prevTile);
-    });
+    const newTiles: Map2DViewTile[] = newTileCoords.map(
+      ([x, y]: number[]): Map2DViewTile => {
+        const prevTile = reuseTiles.shift();
+        if (prevTile) {
+          removeTiles.push(prevTile.id);
+        }
+        return this[$createTile](x, y, prevTile);
+      },
+    );
 
     // III. render visible tiles
     // -------------------------------
 
     this.tiles = knownTiles.concat(newTiles);
-    this.tiles.forEach((tile) => {
+    this.tiles.forEach(tile => {
       tile.fetchTileIds();
       this.layerRenderer.renderViewTile(tile);
     });
@@ -111,12 +130,14 @@ export class Map2DViewLayer {
     // IV. remove unused tiles
     // -----------------------------
 
-    removeTiles = removeTiles.concat(reuseTiles.map((tile) => tile.id));
-    removeTiles.forEach((tile) => this.layerRenderer.removeViewTile(tile));
+    removeTiles = removeTiles.concat(reuseTiles.map(tile => tile.id));
+    removeTiles.forEach(tile => this.layerRenderer.removeViewTile(tile));
   }
 
   private [$createTile](x: number, y: number, reuseTile?: Map2DViewTile) {
-    const tile = reuseTile || new Map2DViewTile(this.layerData, this.tileColumns, this.tileRows);
+    const tile =
+      reuseTile ||
+      new Map2DViewTile(this.layerData, this.tileColumns, this.tileRows);
     tile.setLayerTilePosition(x, y);
     tile.setPosition(x * this.tileColumns, y * this.tileRows);
     tile.setViewOffset(x * this.tileWidth, y * this.tileHeight);

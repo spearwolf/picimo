@@ -8,4 +8,5 @@ export * from './textures';
 export * from './utils';
 
 // @ts-ignore
-export const VERSION = typeof PACKAGE_VERSION !== 'undefined' ? PACKAGE_VERSION : 'dev';
+export const VERSION =
+  typeof PACKAGE_VERSION !== 'undefined' ? PACKAGE_VERSION : 'dev';

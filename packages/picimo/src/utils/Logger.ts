@@ -1,6 +1,4 @@
-
 export class Logger {
-
   throttleTimeoutMs: number;
   paused = false;
   stopAfterNLogs: number;
@@ -10,7 +8,11 @@ export class Logger {
   private sleeping = false;
   private logCount: number = 0;
 
-  constructor(name: string, throttleTimeoutMs: number = 0, stopAfterNLogs: number = Infinity) {
+  constructor(
+    name: string,
+    throttleTimeoutMs: number = 0,
+    stopAfterNLogs: number = Infinity,
+  ) {
     this.name = name;
     this.throttleTimeoutMs = throttleTimeoutMs;
     this.stopAfterNLogs = stopAfterNLogs;
@@ -32,16 +34,18 @@ export class Logger {
         if (this.logCount >= this.stopAfterNLogs) {
           this.paused = true;
           this.logCount = 0;
-          console.debug(`[${this.name}] logger stopped after ${this.stopAfterNLogs} messages`);
+          console.debug(
+            `[${this.name}] logger stopped after ${this.stopAfterNLogs} messages`,
+          );
         }
       }
     }
   }
 
   equalsLastLog(messages: any[]) {
-    const { lastLog } = this;
+    const {lastLog} = this;
     if (messages.length === lastLog.length) {
-      const { length } = messages;
+      const {length} = messages;
       for (let i = 0; i < length; i++) {
         if (messages[i] !== lastLog[i]) {
           return false;
@@ -51,5 +55,4 @@ export class Logger {
     }
     return false;
   }
-
 }

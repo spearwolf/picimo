@@ -1,6 +1,4 @@
-
 export interface BitmapChar {
-
   zPos: number;
 
   baselineOffset: number;
@@ -11,7 +9,12 @@ export interface BitmapChar {
   width: number;
   height: number;
 
-  setPos: (oiginX: number, originY: number, width: number, height: number) => void;
+  setPos: (
+    oiginX: number,
+    originY: number,
+    width: number,
+    height: number,
+  ) => void;
 
   originS: number;
   originT: number;
@@ -20,5 +23,4 @@ export interface BitmapChar {
   maxT: number;
 
   setTex: (oiginS: number, originT: number, maxS: number, maxT: number) => void;
-
 }

@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 import assert from 'assert';
 
-import { maxOf } from '..';
+import {maxOf} from '..';
 
 describe('maxOf', () => {
   it('should work', () => {

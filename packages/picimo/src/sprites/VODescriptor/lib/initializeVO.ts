@@ -1,13 +1,13 @@
-
 export function initializeVO(vertexObject: any, initializer: any) {
-
-  switch (typeof initializer) { // eslint-disable-line
+  switch (
+    typeof initializer // eslint-disable-line
+  ) {
     case 'function':
       initializer(vertexObject);
       break;
 
     case 'object':
-      Object.keys(initializer).forEach((key) => {
+      Object.keys(initializer).forEach(key => {
         const attrDesc = vertexObject.descriptor.attr[key];
         const value = initializer[key];
         if (attrDesc) {
@@ -19,5 +19,4 @@ export function initializeVO(vertexObject: any, initializer: any) {
         }
       });
   }
-
 }

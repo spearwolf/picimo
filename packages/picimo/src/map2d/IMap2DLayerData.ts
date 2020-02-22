@@ -1,13 +1,11 @@
-
 export interface IViewCullingThreshold {
-  top: number,
-  right: number,
-  bottom: number,
+  top: number;
+  right: number;
+  bottom: number;
   left: number;
 }
 
 export interface IMap2DLayerData {
-
   /**
    * The layer name.
    * Does not need to be uniq.
@@ -34,6 +32,11 @@ export interface IMap2DLayerData {
   /**
    * Uses a right-handed coordinate system.
    */
-  getTileIdsWithin(left: number, top: number, width: number, height: number, uint32arr?: Uint32Array): Uint32Array;
-
+  getTileIdsWithin(
+    left: number,
+    top: number,
+    width: number,
+    height: number,
+    uint32arr?: Uint32Array,
+  ): Uint32Array;
 }

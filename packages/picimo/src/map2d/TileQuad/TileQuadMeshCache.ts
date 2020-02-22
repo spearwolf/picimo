@@ -1,15 +1,15 @@
-import { Material } from 'three';
+import {Material} from 'three';
 
-import { TileQuadMesh } from './TileQuadMesh';
+import {TileQuadMesh} from './TileQuadMesh';
 
 const $cache = Symbol('cache');
 
-const constructCacheKey = (material: Material | Material[], capacity: number) => Array.isArray(material)
-  ? material.reduce((key, uuid) => `${uuid}:${key}`, `${capacity}`)
-  : `${material.uuid}:${capacity}`;
+const constructCacheKey = (material: Material | Material[], capacity: number) =>
+  Array.isArray(material)
+    ? material.reduce((key, uuid) => `${uuid}:${key}`, `${capacity}`)
+    : `${material.uuid}:${capacity}`;
 
 export class TileQuadMeshCache {
-
   private readonly [$cache]: Map<string, Array<TileQuadMesh>> = new Map();
 
   createMesh(material: Material, capacity: number, externalMaterialId: string) {
@@ -25,7 +25,7 @@ export class TileQuadMeshCache {
 
     // .. or create a new mesh!
     if (!mesh) {
-      mesh = new TileQuadMesh(material, { capacity });
+      mesh = new TileQuadMesh(material, {capacity});
       mesh.userData.externalMaterialId = externalMaterialId;
     }
 
@@ -50,5 +50,4 @@ export class TileQuadMeshCache {
     Array.from(cache.values()).forEach(meshCache => meshCache.forEach(fn));
     cache.clear();
   }
-
 }

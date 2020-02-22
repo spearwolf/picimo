@@ -1,11 +1,10 @@
 /* eslint-env jest */
 import assert from 'assert';
 
-import { VODescriptor, VOPool } from '..';
+import {VODescriptor, VOPool} from '..';
 
 describe('VOPool', () => {
   const descriptor = new VODescriptor({
-
     // vertex elements layout
     // ----------------------
     //
@@ -39,7 +38,10 @@ describe('VOPool', () => {
     assert.equal(descriptor.bytesPerVO, 48);
     assert.deepEqual(descriptor.typeList, ['float32', 'uint8'].sort());
     assert.deepEqual(descriptor.scalars, ['position', 'color']);
-    assert.deepEqual(descriptor.attrList.map(attr => attr.name), ['position', 'color']);
+    assert.deepEqual(
+      descriptor.attrList.map(attr => attr.name),
+      ['position', 'color'],
+    );
   });
 
   describe('new VOPool()', () => {
@@ -47,7 +49,7 @@ describe('VOPool', () => {
     // @ts-ignore
     zero.setPosition(666, 667, 668, 669, 670, 671, 672, 673, 674);
 
-    const pool = new VOPool(descriptor, { capacity: 8, voZero: zero });
+    const pool = new VOPool(descriptor, {capacity: 8, voZero: zero});
     const floats = new Float32Array(pool.voArray.buffer);
     const vo = [];
 
@@ -69,18 +71,42 @@ describe('VOPool', () => {
       assert.equal(floats[2], 3);
 
       assert.deepEqual(vo[0].toArray(['position']), [
-        1, 2, 3,
-        10, 20, 30,
-        100, 200, 300,
+        1,
+        2,
+        3,
+        10,
+        20,
+        30,
+        100,
+        200,
+        300,
       ]);
 
       assert(vo[0].voArray.float32Array, '.voArray.float32Array is undefined!');
       assert(vo[0].voArray.uint8Array, '.voArray.uint8Array is undefined!');
 
       assert.deepEqual(vo[0].toArray(), [
-        1, 2, 3, 0, 0, 0, 0,
-        10, 20, 30, 0, 0, 0, 0,
-        100, 200, 300, 0, 0, 0, 0,
+        1,
+        2,
+        3,
+        0,
+        0,
+        0,
+        0,
+        10,
+        20,
+        30,
+        0,
+        0,
+        0,
+        0,
+        100,
+        200,
+        300,
+        0,
+        0,
+        0,
+        0,
       ]);
     });
 
@@ -94,9 +120,27 @@ describe('VOPool', () => {
       assert.equal(floats[OFFSET + 2], 6);
 
       assert.deepEqual(vo[1].toArray(), [
-        4, 5, 6, 0, 0, 0, 0,
-        40, 50, 60, 0, 0, 0, 0,
-        400, 500, 600, 0, 0, 0, 0,
+        4,
+        5,
+        6,
+        0,
+        0,
+        0,
+        0,
+        40,
+        50,
+        60,
+        0,
+        0,
+        0,
+        0,
+        400,
+        500,
+        600,
+        0,
+        0,
+        0,
+        0,
       ]);
     });
 
@@ -110,9 +154,27 @@ describe('VOPool', () => {
       assert.equal(floats[OFFSET + 2], 9);
 
       assert.deepEqual(vo[2].toArray(), [
-        7, 8, 9, 0, 0, 0, 0,
-        70, 80, 90, 0, 0, 0, 0,
-        700, 800, 900, 0, 0, 0, 0,
+        7,
+        8,
+        9,
+        0,
+        0,
+        0,
+        0,
+        70,
+        80,
+        90,
+        0,
+        0,
+        0,
+        0,
+        700,
+        800,
+        900,
+        0,
+        0,
+        0,
+        0,
       ]);
     });
 
@@ -144,7 +206,7 @@ describe('VOPool', () => {
   });
 
   describe('new VOPool(max)', () => {
-    const pool = new VOPool(descriptor, { maxAllocVOSize: 10 });
+    const pool = new VOPool(descriptor, {maxAllocVOSize: 10});
     const MAX = Math.floor(65536 / 3);
 
     it('availableCount:before', () => assert.equal(pool.availableCount, MAX));
@@ -158,7 +220,8 @@ describe('VOPool', () => {
     });
 
     it('allocatedCount:after', () => assert.equal(pool.allocatedCount, 20));
-    it('availableCoun:after', () => assert.equal(pool.availableCount, MAX - 15));
+    it('availableCoun:after', () =>
+      assert.equal(pool.availableCount, MAX - 15));
     it('usedCount:after', () => assert.equal(pool.usedCount, 15));
 
     it('free all at once', () => {
@@ -168,21 +231,21 @@ describe('VOPool', () => {
   });
 
   describe('new VOPool(capacity, maxAllocVOSize: undef)', () => {
-    const pool = new VOPool(descriptor, { capacity: 1904 });
+    const pool = new VOPool(descriptor, {capacity: 1904});
 
     it('availableCount', () => assert.equal(pool.availableCount, 1904));
     it('allocatedCount', () => assert.equal(pool.allocatedCount, 1904));
   });
 
   describe('new VOPool(capacity, maxAllocVOSize: 0)', () => {
-    const pool = new VOPool(descriptor, { capacity: 666, maxAllocVOSize: 0 });
+    const pool = new VOPool(descriptor, {capacity: 666, maxAllocVOSize: 0});
 
     it('availableCount', () => assert.equal(pool.availableCount, 666));
     it('allocatedCount', () => assert.equal(pool.allocatedCount, 666));
   });
 
   describe('new VOPool() : multiAlloc > maxAllocVOSize', () => {
-    const pool = new VOPool(descriptor, { capacity: 200, maxAllocVOSize: 10 });
+    const pool = new VOPool(descriptor, {capacity: 200, maxAllocVOSize: 10});
 
     it('availableCount:before', () => assert.equal(pool.availableCount, 200));
     it('allocatedCount:before', () => assert.equal(pool.allocatedCount, 10));

@@ -1,28 +1,33 @@
-import { AABB2 } from '../../utils';
-import { TileSet } from '../../textures';
+import {AABB2} from '../../utils';
+import {TileSet} from '../../textures';
 
-import { IMap2DLayerData, IViewCullingThreshold } from '../IMap2DLayerData';
-import { ChunkQuadTreeNode } from './ChunkQuadTreeNode';
-import { ITiledMapLayerChunkData } from './ITiledMapLayerChunkData';
-import { ITiledMapLayerData } from './ITiledMapLayerData';
-import { TiledMap } from './TiledMap';
-import { TiledMapLayerChunk } from './TiledMapLayerChunk';
-import { TiledMapCustomProperties } from './TiledMapCustomProperties';
+import {IMap2DLayerData, IViewCullingThreshold} from '../IMap2DLayerData';
+import {ChunkQuadTreeNode} from './ChunkQuadTreeNode';
+import {ITiledMapLayerChunkData} from './ITiledMapLayerChunkData';
+import {ITiledMapLayerData} from './ITiledMapLayerData';
+import {TiledMap} from './TiledMap';
+import {TiledMapLayerChunk} from './TiledMapLayerChunk';
+import {TiledMapCustomProperties} from './TiledMapCustomProperties';
 
 const $tiledMap = Symbol('tiledMap');
 const $data = Symbol('data');
 const $rootNode = Symbol('rootNode');
 // const $props = Symbol('props');
 
-const findChunk = (chunks: TiledMapLayerChunk[], x: number, y: number): TiledMapLayerChunk => {
-  return chunks.find((chunk: TiledMapLayerChunk) => chunk.containsTileIdAt(x, y));
+const findChunk = (
+  chunks: TiledMapLayerChunk[],
+  x: number,
+  y: number,
+): TiledMapLayerChunk => {
+  return chunks.find((chunk: TiledMapLayerChunk) =>
+    chunk.containsTileIdAt(x, y),
+  );
 };
 
 /**
  * Represents a specific layer of a TiledMap.
  */
 export class TiledMapLayer implements IMap2DLayerData {
-
   viewCullingThreshold: IViewCullingThreshold = {
     top: 0,
     right: 0,
@@ -39,8 +44,11 @@ export class TiledMapLayer implements IMap2DLayerData {
   private readonly [$rootNode]: ChunkQuadTreeNode;
   // private readonly [$props]: TiledMapCustomProperties;
 
-  constructor(tiledMap: TiledMap, data: ITiledMapLayerData, autoSubdivide: boolean = true) {
-
+  constructor(
+    tiledMap: TiledMap,
+    data: ITiledMapLayerData,
+    autoSubdivide: boolean = true,
+  ) {
     this[$tiledMap] = tiledMap;
     this[$data] = data;
 
@@ -59,13 +67,14 @@ export class TiledMapLayer implements IMap2DLayerData {
 
     this.includeTilesets = props.valueAsCSLofStrings('includeTilesets');
 
-    const chunks: TiledMapLayerChunk[] = data.chunks.map((chunkData: ITiledMapLayerChunkData) => new TiledMapLayerChunk(chunkData));
+    const chunks: TiledMapLayerChunk[] = data.chunks.map(
+      (chunkData: ITiledMapLayerChunkData) => new TiledMapLayerChunk(chunkData),
+    );
     this[$rootNode] = new ChunkQuadTreeNode(chunks);
 
     if (autoSubdivide) {
       this.subdivide();
     }
-
   }
 
   /**
@@ -100,22 +109,40 @@ export class TiledMapLayer implements IMap2DLayerData {
     }
   }
 
-  get name() { return this[$data].name; }
+  get name() {
+    return this[$data].name;
+  }
 
-  get tileWidth() { return this[$tiledMap].tilewidth; }
-  get tileHeight() { return this[$tiledMap].tileheight; }
+  get tileWidth() {
+    return this[$tiledMap].tilewidth;
+  }
+  get tileHeight() {
+    return this[$tiledMap].tileheight;
+  }
 
-  get visible() { return this[$data].visible; }
+  get visible() {
+    return this[$data].visible;
+  }
 
-  get type() { return this[$data].type; }
+  get type() {
+    return this[$data].type;
+  }
 
   subdivide(maxChunkPerNodes: number = 2) {
     this[$rootNode].subdivide(maxChunkPerNodes);
   }
 
-  getTileIdsWithin(left: number, top: number, width: number, height: number, uint32arr?: Uint32Array): Uint32Array {
+  getTileIdsWithin(
+    left: number,
+    top: number,
+    width: number,
+    height: number,
+    uint32arr?: Uint32Array,
+  ): Uint32Array {
     const arr = uint32arr || new Uint32Array(width * height);
-    const chunks = this[$rootNode].findVisibleChunks(new AABB2(left, top, width, height));
+    const chunks = this[$rootNode].findVisibleChunks(
+      new AABB2(left, top, width, height),
+    );
 
     let curChunk: TiledMapLayerChunk = null;
     for (let offsetY = 0; offsetY < height; offsetY++) {
@@ -125,7 +152,9 @@ export class TiledMapLayer implements IMap2DLayerData {
         if (!curChunk || !curChunk.containsTileIdAt(x, y)) {
           curChunk = findChunk(chunks, x, y);
         }
-        arr[offsetY * width + offsetX] = curChunk ? curChunk.getTileIdAt(x, y) : 0;
+        arr[offsetY * width + offsetX] = curChunk
+          ? curChunk.getTileIdAt(x, y)
+          : 0;
       }
     }
     return arr;

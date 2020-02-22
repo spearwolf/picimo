@@ -1,11 +1,11 @@
 /* eslint-env mocha */
 import assert from 'assert';
 
-import { unpick } from '../unpick';
+import {unpick} from '../unpick';
 
 describe('unpick', () => {
   it('should work', () => {
-    const result = unpick(['bar'])({ foo: 123, bar: 456, plah: undefined });
+    const result = unpick(['bar'])({foo: 123, bar: 456, plah: undefined});
     assert.deepEqual(result, {
       foo: 123,
     });

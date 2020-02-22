@@ -1,9 +1,8 @@
-import { ITiledMapCustomProperty } from "./ITiledMapCustomProperty";
+import {ITiledMapCustomProperty} from './ITiledMapCustomProperty';
 
 const $props = Symbol('props');
 
 export class TiledMapCustomProperties {
-
   private readonly [$props]: ITiledMapCustomProperty[];
 
   constructor(props: ITiledMapCustomProperty[]) {
@@ -23,7 +22,7 @@ export class TiledMapCustomProperties {
     let int4 = [0, 0, 0, 0];
     const prop = this.get(name);
     if (prop !== null) {
-      const { value } = prop;
+      const {value} = prop;
       if (typeof value === 'number') {
         const int = parseInt(`${value}`, 10);
         int4 = [int, int, int, int];
@@ -43,7 +42,9 @@ export class TiledMapCustomProperties {
             int4 = [numbers[0], numbers[1], numbers[2], numbers[3]];
             break;
           default:
-            console.warn(`custom property "${name}" has incorrect string format: "${value}" <- should be a number or a space separated list of 2-4x numbers`);
+            console.warn(
+              `custom property "${name}" has incorrect string format: "${value}" <- should be a number or a space separated list of 2-4x numbers`,
+            );
         }
       }
     }
@@ -100,7 +101,7 @@ export class TiledMapCustomProperties {
           case 2:
             // next char is content (inside quote)
             if (c === BACKSLASH) {
-              mode = 3;    
+              mode = 3;
               break;
             } else if (c === quote) {
               mode = 4;
@@ -144,5 +145,4 @@ export class TiledMapCustomProperties {
     }
     return undefined;
   }
-
 }

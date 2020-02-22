@@ -1,31 +1,34 @@
-import {DynamicDrawUsage, StaticDrawUsage, InterleavedBufferAttribute, InterleavedBuffer, BufferGeometry} from 'three';
+import {
+  DynamicDrawUsage,
+  StaticDrawUsage,
+  InterleavedBufferAttribute,
+  InterleavedBuffer,
+  BufferGeometry,
+} from 'three';
 
 import {SpriteGroup} from '../SpriteGroup';
 
 type CreateBufferFn<K> = (typedArray: any, stride: number) => K;
 
-export function createBufferAttributes<T, U, K = InterleavedBuffer> (
+export function createBufferAttributes<T, U, K = InterleavedBuffer>(
   spriteGroup: SpriteGroup<T, U>,
   bufferGeometry: BufferGeometry,
   createBuffer: CreateBufferFn<K>,
 ) {
-
-  const { descriptor } = spriteGroup;
-  const { voArray } = spriteGroup.voPool;
+  const {descriptor} = spriteGroup;
+  const {voArray} = spriteGroup.voPool;
 
   const bufCollection: K[] = [];
   const bufMap: Map<string, K> = new Map();
 
-  const { dynamic } = spriteGroup.voPool.voArray.hints;
+  const {dynamic} = spriteGroup.voPool.voArray.hints;
 
   Object.keys(descriptor.attr).forEach(attrName => {
-
     const attr = descriptor.attr[attrName];
 
     let buffer = bufMap.get(attr.type);
 
     if (!buffer) {
-
       const typedArray = voArray.getTypedArray(attr.type);
       const stride = descriptor.bytesPerVertex / typedArray.BYTES_PER_ELEMENT;
 
@@ -34,14 +37,15 @@ export function createBufferAttributes<T, U, K = InterleavedBuffer> (
 
       bufCollection.push(buffer);
       bufMap.set(attr.type, buffer);
-
     }
 
-    const bufferAttr = new InterleavedBufferAttribute(buffer as any, attr.size, attr.offset);
+    const bufferAttr = new InterleavedBufferAttribute(
+      buffer as any,
+      attr.size,
+      attr.offset,
+    );
     bufferGeometry.setAttribute(attrName, bufferAttr);
-
   });
 
   return bufCollection;
-
-};
+}
