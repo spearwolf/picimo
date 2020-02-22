@@ -1,4 +1,7 @@
-extends: problems
+extends:
+  - problems
+  - eslint:recommended
+  - plugin:prettier/recommended
 parser: babel-eslint
 parserOptions:
   sourceType: module
