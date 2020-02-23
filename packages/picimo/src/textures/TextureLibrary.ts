@@ -1,6 +1,6 @@
+import {ITileSet} from './ITileSet';
 import {Texture} from './Texture';
 import {TextureAtlas} from './TextureAtlas';
-import {ITileSet} from './ITileSet';
 
 export class TextureLibrary implements ITileSet {
   static async load(path: string, basePath = './'): Promise<TextureLibrary> {

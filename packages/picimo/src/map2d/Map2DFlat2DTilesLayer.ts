@@ -2,10 +2,9 @@ import * as THREE from 'three';
 
 import {TextureLibrary} from '../textures';
 
-import {Map2DViewTile} from './Map2DViewTile';
-
 import {IMap2DLayer} from './IMap2DLayer';
 import {Map2DTileBufferGeometry} from './Map2DTileBufferGeometry';
+import {Map2DViewTile} from './Map2DViewTile';
 
 const $obj3d = Symbol('obj3d');
 const $material = Symbol('material');

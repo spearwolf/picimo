@@ -1,11 +1,11 @@
 import {SpriteGroup, VOIndices} from '../sprites';
 
 import {BitmapCharBase} from './BitmapCharBase';
-import {BitmapCharBaseMethodsType} from './BitmapCharBaseMethods';
 import {
   getBitmapCharBaseDescriptor,
   BitmapCharBaseVertexObject,
 } from './BitmapCharBaseDescriptor';
+import {BitmapCharBaseMethodsType} from './BitmapCharBaseMethods';
 
 export interface BitmapCharBaseGroupOptions {
   capacity?: number;

@@ -1,4 +1,5 @@
 import {VOAttrDescriptor} from '../VOAttrDescriptor';
+
 import {toArray} from './toArray';
 
 export function createVOPrototype(descriptor: any, methods = {}) {

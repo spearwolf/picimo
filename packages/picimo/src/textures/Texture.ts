@@ -1,4 +1,5 @@
 import {generateUuid} from '../utils';
+
 import {ImageSource, PowerOf2Image} from './PowerOf2Image';
 
 export type TextureImage = PowerOf2Image | ImageSource;

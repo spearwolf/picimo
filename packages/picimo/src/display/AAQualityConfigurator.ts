@@ -1,5 +1,7 @@
 import {WebGLRendererParameters, LinearFilter} from 'three';
+
 import {TextureUtilsOptions} from '../textures';
+
 import {Display} from './Display';
 import {IConfigurator} from './IConfigurator';
 

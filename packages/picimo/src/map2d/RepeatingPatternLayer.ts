@@ -1,4 +1,5 @@
 import {ITileSet} from '../textures';
+
 import {IMap2DLayerData, IViewCullingThreshold} from './IMap2DLayerData';
 
 export class RepeatingPatternLayer implements IMap2DLayerData {

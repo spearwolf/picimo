@@ -1,13 +1,14 @@
-import {AABB2} from '../../utils';
 import {TileSet} from '../../textures';
+import {AABB2} from '../../utils';
 
 import {IMap2DLayerData, IViewCullingThreshold} from '../IMap2DLayerData';
+
 import {ChunkQuadTreeNode} from './ChunkQuadTreeNode';
 import {ITiledMapLayerChunkData} from './ITiledMapLayerChunkData';
 import {ITiledMapLayerData} from './ITiledMapLayerData';
 import {TiledMap} from './TiledMap';
-import {TiledMapLayerChunk} from './TiledMapLayerChunk';
 import {TiledMapCustomProperties} from './TiledMapCustomProperties';
+import {TiledMapLayerChunk} from './TiledMapLayerChunk';
 
 const $tiledMap = Symbol('tiledMap');
 const $data = Symbol('data');

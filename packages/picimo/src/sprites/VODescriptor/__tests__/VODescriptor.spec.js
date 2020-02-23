@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/camelcase */
 /* eslint-env mocha */
 import assert from 'assert';
-import assertVOAttrDescriptor from './assertVOAttrDescriptor';
 
 import {VODescriptor, VOArray} from '../..';
+
+import assertVOAttrDescriptor from './assertVOAttrDescriptor';
 
 /** @private */
 const assertPropertyTypes = (vo, props) => {

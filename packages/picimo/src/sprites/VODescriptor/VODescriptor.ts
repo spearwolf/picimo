@@ -1,12 +1,12 @@
 import {VOArray, VOArrayUsageHints} from '../VOArray';
 
+import {VOAttrDescriptor} from './VOAttrDescriptor';
 import {createAliases} from './lib/createAliases';
 import {createAttributes} from './lib/createAttributes';
 import {createTypedArrays} from './lib/createTypedArrays';
 import {createVO} from './lib/createVO';
 import {createVOPrototype} from './lib/createVOPrototype';
 import {initializeVO} from './lib/initializeVO';
-import {VOAttrDescriptor} from './VOAttrDescriptor';
 
 type VOAttrDataType =
   | 'float32'

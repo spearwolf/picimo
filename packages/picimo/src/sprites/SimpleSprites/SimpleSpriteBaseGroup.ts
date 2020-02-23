@@ -2,11 +2,11 @@ import {SpriteGroup, SpriteGroupOptions} from '../SpriteGroup';
 import {VOIndices} from '../VOIndices';
 
 import {ISimpleSpriteBase} from './ISimpleSpriteBase';
-import {SimpleSpriteBaseMethodsType} from './SimpleSpriteBaseMethods';
 import {
   getSimpleSpriteBaseDescriptor,
   SimpleSpriteBaseVertexObject,
 } from './SimpleSpriteBaseDescriptor';
+import {SimpleSpriteBaseMethodsType} from './SimpleSpriteBaseMethods';
 
 export interface ISimpleSpriteBaseGroupOptions
   extends SpriteGroupOptions<SimpleSpriteBaseMethodsType, ISimpleSpriteBase> {}

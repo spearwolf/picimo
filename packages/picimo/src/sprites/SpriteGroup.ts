@@ -1,9 +1,9 @@
 import {pick} from '../utils';
 
-import {VOPool} from './VOPool';
-import {VODescriptor, VertexObject} from './VODescriptor';
 import {VOArray} from './VOArray';
+import {VODescriptor, VertexObject} from './VODescriptor';
 import {VOIndices} from './VOIndices';
+import {VOPool} from './VOPool';
 
 export type SpriteSizeSetter<T, U> = (
   sprite: VertexObject<T, U>,

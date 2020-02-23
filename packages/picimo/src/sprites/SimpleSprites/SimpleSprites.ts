@@ -1,9 +1,11 @@
 import {Material} from 'three';
-import {SpriteGroupMesh} from '../SpriteGroupMesh';
+
 import {SpriteGroupInstancedBufferGeometry} from '../SpriteGroupInstancedBufferGeometry';
-import {getSimpleSpriteBaseGroup} from './SimpleSpriteBaseGroup';
+import {SpriteGroupMesh} from '../SpriteGroupMesh';
+
 import {ISimpleSprite} from './ISimpleSprite';
 import {ISimpleSpriteBase} from './ISimpleSpriteBase';
+import {getSimpleSpriteBaseGroup} from './SimpleSpriteBaseGroup';
 import {SimpleSpriteBaseMethodsType} from './SimpleSpriteBaseMethods';
 import {
   SimpleSpriteGroup,

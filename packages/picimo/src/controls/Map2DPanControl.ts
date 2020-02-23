@@ -1,7 +1,9 @@
 import {Map2DView} from '../map2d';
 import {IProjection} from '../projection';
-import {InputControl} from './InputControl';
+
 import {readOption} from '../utils';
+
+import {InputControl} from './InputControl';
 
 interface PanState {
   pointerType: string;

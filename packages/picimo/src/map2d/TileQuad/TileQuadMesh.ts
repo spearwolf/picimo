@@ -5,9 +5,9 @@ import {
   SpriteGroupInstancedBufferGeometry,
 } from '../../sprites';
 
-import {getTileQuadBaseGroup} from './TileQuadBaseGroup';
 import {ITileQuad} from './ITileQuad';
 import {ITileQuadBase} from './ITileQuadBase';
+import {getTileQuadBaseGroup} from './TileQuadBaseGroup';
 import {TileQuadBaseMethodsType} from './TileQuadBaseMethods';
 import {TileQuadGroup, ITileQuadGroupOptions} from './TileQuadGroup';
 import {TileQuadMethodsType} from './TileQuadMethods';

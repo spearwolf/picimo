@@ -1,5 +1,5 @@
-import {Texture} from './Texture';
 import {ITexturable} from './ITexturable';
+import {Texture} from './Texture';
 
 export interface ITileSet extends ITexturable {
   hasTextureId(id: number): boolean;

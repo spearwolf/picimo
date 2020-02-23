@@ -1,4 +1,5 @@
 import {Texture} from '../../textures';
+
 import {ISimpleSprite} from './ISimpleSprite';
 
 export const SimpleSpriteMethods = {

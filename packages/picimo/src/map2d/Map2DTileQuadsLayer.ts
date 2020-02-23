@@ -2,9 +2,9 @@ import * as THREE from 'three';
 
 import {ITileSet, Texture, MaterialCache} from '../textures';
 
+import {IMap2DLayer} from './IMap2DLayer';
 import {Map2DViewTile} from './Map2DViewTile';
 
-import {IMap2DLayer} from './IMap2DLayer';
 import {TileQuadMaterial} from './TileQuad/TileQuadMaterial';
 import {TileQuadMesh} from './TileQuad/TileQuadMesh';
 import {TileQuadMeshCache} from './TileQuad/TileQuadMeshCache';

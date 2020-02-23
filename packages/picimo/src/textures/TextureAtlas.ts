@@ -1,8 +1,8 @@
 import {sample, unpick} from '../utils';
 
+import {ITexturable} from './ITexturable';
 import {PowerOf2Image} from './PowerOf2Image';
 import {Texture} from './Texture';
-import {ITexturable} from './ITexturable';
 
 interface Features {
   [feature: string]: unknown;

@@ -8,12 +8,12 @@ import {Texture, ITileSet} from '../../textures';
 import {Map2DViewTile} from '../Map2DViewTile';
 
 import {ITileQuad} from './ITileQuad';
-import {TileQuadMethodsType} from './TileQuadMethods';
+import {TileFlipFlags} from './TileFlipFlags';
 import {
   getTileQuadDescriptor,
   TileQuadVertexObject,
 } from './TileQuadDescriptor';
-import {TileFlipFlags} from './TileFlipFlags';
+import {TileQuadMethodsType} from './TileQuadMethods';
 
 export interface ITileQuadGroupOptions
   extends SpriteGroupTexturedOptions<TileQuadMethodsType, ITileQuad> {}

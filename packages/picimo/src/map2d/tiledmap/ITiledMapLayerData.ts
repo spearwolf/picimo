@@ -1,5 +1,5 @@
-import {ITiledMapLayerChunkData} from './ITiledMapLayerChunkData';
 import {ITiledMapCustomProperty} from './ITiledMapCustomProperty';
+import {ITiledMapLayerChunkData} from './ITiledMapLayerChunkData';
 
 export interface ITiledMapLayerData {
   chunks: ITiledMapLayerChunkData[];

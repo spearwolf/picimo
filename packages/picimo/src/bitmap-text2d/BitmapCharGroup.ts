@@ -2,11 +2,11 @@ import {SpriteGroupTextured, VOIndices} from '../sprites';
 import {Texture} from '../textures';
 
 import {BitmapChar} from './BitmapChar';
-import {BitmapCharMethodsType} from './BitmapCharMethods';
 import {
   getBitmapCharDescriptor,
   BitmapCharVertexObject,
 } from './BitmapCharDescriptor';
+import {BitmapCharMethodsType} from './BitmapCharMethods';
 
 export interface BitmapCharGroupOptions {
   capacity?: number;

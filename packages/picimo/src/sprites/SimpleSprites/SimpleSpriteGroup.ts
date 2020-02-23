@@ -7,11 +7,11 @@ import {
 import {VOIndices} from '../VOIndices';
 
 import {ISimpleSprite} from './ISimpleSprite';
-import {SimpleSpriteMethodsType} from './SimpleSpriteMethods';
 import {
   getSimpleSpriteDescriptor,
   SimpleSpriteVertexObject,
 } from './SimpleSpriteDescriptor';
+import {SimpleSpriteMethodsType} from './SimpleSpriteMethods';
 
 export interface ISimpleSpriteGroupOptions
   extends SpriteGroupTexturedOptions<SimpleSpriteMethodsType, ISimpleSprite> {}

@@ -1,5 +1,5 @@
-import {BitmapText2D, TextAlignH, TextAlignV} from './BitmapText2D';
 import {BitmapCharVertexObject} from './BitmapCharDescriptor';
+import {BitmapText2D, TextAlignH, TextAlignV} from './BitmapText2D';
 
 export class BitmapText2DBlock {
   readonly bitmapText2D: BitmapText2D;

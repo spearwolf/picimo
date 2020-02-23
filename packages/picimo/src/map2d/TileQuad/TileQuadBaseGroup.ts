@@ -1,11 +1,11 @@
 import {SpriteGroup, VOIndices} from '../../sprites';
 
 import {ITileQuadBase} from './ITileQuadBase';
-import {TileQuadBaseMethodsType} from './TileQuadBaseMethods';
 import {
   getTileQuadBaseDescriptor,
   TileQuadBaseVertexObject,
 } from './TileQuadBaseDescriptor';
+import {TileQuadBaseMethodsType} from './TileQuadBaseMethods';
 
 export interface ITileQuadBaseGroupOptions {
   capacity?: number;

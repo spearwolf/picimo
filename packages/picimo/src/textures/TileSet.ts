@@ -1,7 +1,8 @@
+import {readOption} from '../utils';
+
 import {ITileSet} from './ITileSet';
 import {PowerOf2Image} from './PowerOf2Image';
 import {Texture} from './Texture';
-import {readOption} from '../utils';
 
 export interface TileSetOptions {
   tileWidth?: number;

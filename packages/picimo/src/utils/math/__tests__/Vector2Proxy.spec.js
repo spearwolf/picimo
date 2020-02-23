@@ -1,5 +1,6 @@
 /* eslint-env mocha */
 import assert from 'assert';
+
 import {Vector3, Vector2} from 'three';
 
 import {Vector2Proxy} from '../Vector2Proxy';
