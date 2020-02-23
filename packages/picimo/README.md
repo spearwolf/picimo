@@ -18,6 +18,13 @@ After cloning the repo, run:
 
 ```sh
 $ yarn install
+
+```
+
+To compile and build the sources:
+
+```sh
+$ yarn build
 ```
 
 To run all linters and tests at once:
@@ -26,7 +33,7 @@ To run all linters and tests at once:
 $ yarn test
 ```
 
-### Build System
+### Build System Overview
 
 Picimo is a pure typescript library, which is transpiled using [rollup](https://rollupjs.org/) and [babel](https://babeljs.io/) and is available as a [npm package](https://www.npmjs.com/package/picimo) as build output.
 
