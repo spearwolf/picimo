@@ -26,20 +26,11 @@ To get an idea about the api, please try the [kitchen-sink app](../kitchen-sink)
 
 ### Build System
 
-Picimo is a pure typescript library, which is transpiled using [rollup](https://rollupjs.org/) and [babel](https://babeljs.io/) and is available as an npm package as build output.
+Picimo is a pure typescript library, which is transpiled using [rollup](https://rollupjs.org/) and [babel](https://babeljs.io/) and is available as an [npm package](https://www.npmjs.com/package/picimo) as build output.
 
 [Karma](https://karma-runner.github.io/) and [mocha](https://mochajs.org/) are used for testing.
 
 To increase the general software quality [eslint](https://eslint.org/) and [prettier](https://prettier.io/) are used.
-
-| npm task | description |
-|---|---|
-| `test:eslint` | check eslint issues |
-| `eslint:fix` | fix eslint issues |
-| `test:types` | do some typescript type checks with `tsc`, see [./test/types/](./test/types) |
-| `prettier:check` | check sources with prettier |
-| `prettier:write` | reformat sources with prettier |
-
 
 ## How to use in your project using unkpg.com CDN
 
