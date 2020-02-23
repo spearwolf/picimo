@@ -7,6 +7,6 @@ export * from './sprites';
 export * from './textures';
 export * from './utils';
 
-// @ts-ignore
 export const VERSION =
+  // @ts-ignore
   typeof PACKAGE_VERSION !== 'undefined' ? PACKAGE_VERSION : 'dev';

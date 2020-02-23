@@ -17,6 +17,7 @@ export function createTypedArrays(descriptor: VODescriptor) {
 
   // @ts-ignore
   descriptor.typeList = Object.keys(descriptor.typedArrays)
+    // @ts-ignore
     .filter(type => descriptor.typedArrays[type])
     .sort();
 }
