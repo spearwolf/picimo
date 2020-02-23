@@ -4,7 +4,7 @@
 
 .. is a typescript library for creating realtime 2.5d gfx in html5. It's based upon the fantastic [three.js](https://threejs.org/) library which itself is based on WebGL.
 
-A key feature of picimo is that it is easy to create sprites (with custom shaders) and provide an extremely simple OO-based API to use these sprites without having to worry about the WebGL boilerplate and internals such as attribute buffer arrays or geometry instancing.
+A key feature of picimo is that it is easy to [create sprites (with custom shaders) and provide an extremely simple OO-based API](./src/sprites/README.md) to use these sprites without having to worry about the WebGL boilerplate and internals such as attribute buffer arrays or geometry instancing.
 
 ## Development Setup
 
@@ -30,7 +30,7 @@ Picimo is a pure typescript library, which is transpiled using [rollup](https://
 
 [Karma](https://karma-runner.github.io/) and [mocha](https://mochajs.org/) are used for testing.
 
-To increase the general software quality [eslint](https://eslint.org/) and [prettier](https://prettier.io/) are used.
+To increase the general software quality [eslint](https://eslint.org/) and [prettier](https://prettier.io/) are used and should be utilized for each commit.
 
 ## How to use in your project using unkpg.com CDN
 
