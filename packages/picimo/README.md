@@ -2,7 +2,9 @@
 
 # picimo
 
-A typescript library for my personal 2.5d browser game dev experiments based on [three.js](https://threejs.org/)
+.. is a typescript library for creating realtime 2.5d gfx in html5. It's based upon the fantastic [three.js](https://threejs.org/) library which itself is based on WebGL.
+
+A key feature of picimo is that it is easy to create sprites (with custom shaders) and provide an extremely simple OO-based API to use these sprites without having to worry about the WebGL boilerplate and internals such as attribute buffer arrays or geometry instancing.
 
 ## Development Setup
 
@@ -14,17 +16,22 @@ After cloning the repo, run:
 $ yarn install
 ```
 
-To run all tests:
+To run all linters and tests at once:
 
 ```sh
 $ yarn test
 ```
 
-To start the examples, run:
+To get an idea about the api, please try the [kitchen-sink app](../kitchen-sink) or if you are more on the react-side, please try the components from [picimo-r3f](../picimo-r3f).
 
-```sh
-$ yarn start
-```
+### Build System
+
+Picimo is a pure typescript library, which is transpiled using [rollup](https://rollupjs.org/) and [babel](https://babeljs.io/) and is available as an npm package as build output.
+
+[Karma](https://karma-runner.github.io/) and [mocha](https://mochajs.org/) are used for testing.
+
+To increase the general software quality [eslint](https://eslint.org/) and [prettier](https://prettier.io/) are used.
+
 
 ## How to use in your project using unkpg.com CDN
 
