@@ -6,6 +6,8 @@
 
 A key feature of picimo is that it is easy to [create sprites (with custom shaders) and provide an extremely simple OO-based API](./src/sprites/README.md) to use these sprites without having to worry about the WebGL boilerplate and internals such as attribute buffer arrays or geometry instancing.
 
+One of the first ideas for this library was that it should be as simple as possible to display [pixel art](https://en.wikipedia.org/wiki/Pixel_art) graphics in a [responsive design aware environment](./src/projection), picimo generally supports this in many places.
+
 ## Development Setup
 
 You will need [Node.js](https://nodejs.org/) **version v10+** and [yarn](https://yarnpkg.com/).
@@ -22,11 +24,11 @@ To run all linters and tests at once:
 $ yarn test
 ```
 
-To get an idea about the api, please try the [kitchen-sink app](../kitchen-sink) or if you are more on the [react](https://reactjs.org/)-side, please try the gorgeous components from [picimo-r3f](../picimo-r3f).
+To get an idea about the api, please try the [kitchen-sink app](../kitchen-sink) or if you are more on the [_react_](https://reactjs.org/)-side, please try the gorgeous components from [picimo-r3f](../picimo-r3f).
 
 ### Build System
 
-Picimo is a pure typescript library, which is transpiled using [rollup](https://rollupjs.org/) and [babel](https://babeljs.io/) and is available as an [npm package](https://www.npmjs.com/package/picimo) as build output.
+Picimo is a pure typescript library, which is transpiled using [rollup](https://rollupjs.org/) and [babel](https://babeljs.io/) and is available as a [npm package](https://www.npmjs.com/package/picimo) as build output.
 
 [Karma](https://karma-runner.github.io/) and [mocha](https://mochajs.org/) are used for testing.
 
