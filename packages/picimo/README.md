@@ -4,7 +4,7 @@
 
 .. is a typescript library for creating realtime 2.5d gfx in html5. It's based upon the fantastic [three.js](https://threejs.org/) library which itself is based on WebGL.
 
-One of the first ideas for this library was that it should be as simple as possible to display [pixel art](https://en.wikipedia.org/wiki/Pixel_art) graphics in a [responsive design aware environment](./src/projection).
+One of the first ideas for this library was that it should be as simple as possible to display [pixel art](https://en.wikipedia.org/wiki/Pixel_art) graphics in a [responsive design aware environment](./src/projection/README.md).
 
 As a consequence thereof a key feature of picimo is that it is easy to [create sprites (with custom shaders) and provide an extremely simple OO-based API](./src/sprites/README.md) to use these sprites without having to worry about the WebGL boilerplate and internals such as attribute buffer arrays or geometry instancing.
 
