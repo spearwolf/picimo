@@ -9,9 +9,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@master
-    - name: Install node package dependencies
+    - name: Install dependencies
       run: yarn install
-    - name: Build packages
-      run: yarn build
-    - name: Run tests
-      run: yarn test
+    - name: "picimo: run eslint"
+      run: yarn --cwd packages/picimo test:eslint
+    - name: "picimo: check typescript types"
+      run: yarn --cwd packages/picimo test:types
+    - name: "picimo: prettier check"
+      run: yarn --cwd packages/picimo prettier:check
+    - name: "picimo: make build"
+      run: yarn --cwd packages/picimo build
+    - name: "picimo: run tests"
+      run: yarn --cwd packages/picimo test:karma
+    - name: "picimo-r3f: make build"
+      run: yarn --cwd packages/picimo-r3f build
+
