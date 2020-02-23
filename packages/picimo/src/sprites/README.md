@@ -1,3 +1,5 @@
+# About Sprites and Vertex Objects
+
 One of the main features of this library is the ability to create and display [sprites](https://en.wikipedia.org/wiki/Sprite_(computer_graphics)).
 
 These can be, for example, simple images that are positioned in the scene with 2d coordinates or much more complex objects with various properties that can be defined completely freely up to complete 3d models (&rarr; geometry instancing).
