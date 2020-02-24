@@ -8,7 +8,9 @@ One of the first ideas for this library was that it should be as simple as possi
 
 As a consequence thereof a key feature of picimo is that it is easy to [create sprites (with custom shaders) and provide an extremely simple OO-based API](./src/sprites/README.md) to use these sprites without having to worry about the WebGL boilerplate and internals such as attribute buffer arrays or geometry instancing.
 
-To get an idea about the api and features, please try the [kitchen-sink app](../kitchen-sink) or if you are more on the [_react_](https://reactjs.org/)-side, please try the gorgeous components from [picimo-r3f](../picimo-r3f).
+Those who work with sprites will quickly realize that an easy way to import [spritesheet images and texture-atlas definitions](https://en.wikipedia.org/wiki/Texture_atlas) could be very handy. Picimo supports importing tilesets via grid-aligned spritesheet images or texture altases from json files (exported by tools such as [TexturePacker](https://www.codeandweb.com/texturepacker)).
+
+To get an idea about the API and its capabilities, please try the [kitchen-sink app](../kitchen-sink) or if you are more on the [_react_](https://reactjs.org/)-side, please try the gorgeous components from [picimo-r3f](../picimo-r3f).
 
 ## Development Setup
 
