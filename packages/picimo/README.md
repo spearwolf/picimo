@@ -1,4 +1,5 @@
 [![npm version](https://badge.fury.io/js/picimo.svg)](https://badge.fury.io/js/picimo)
+[![minified size](https://badgen.net/bundlephobia/min/picimo@latest)](https://badgen.net/bundlephobia/min/picimo@latest)
 
 # picimo
 
@@ -11,6 +12,24 @@ As a consequence thereof a key feature of picimo is that it is easy to [create s
 Those who work with sprites will quickly realize that an easy way to import [spritesheet images and texture-atlas definitions](https://en.wikipedia.org/wiki/Texture_atlas) could be very handy. Picimo supports importing tilesets via grid-aligned spritesheet images or texture altases from json files (exported by tools such as [TexturePacker](https://www.codeandweb.com/texturepacker)).
 
 To get an idea about the API and its capabilities, please try the [kitchen-sink app](../kitchen-sink) or if you are more on the [_react_](https://reactjs.org/)-side, please try the gorgeous components from [picimo-r3f](../picimo-r3f).
+
+## How to Install
+
+The `picimo` npm package can be installed from [NPM](https://npmjs.org):
+
+```sh
+yarn add three picimo
+```
+
+It can also be used from the [unpkg.com CDN](https://unpkg.com):
+
+```html
+  <!-- 🚨 OPTIONAL: fetch() polyfill to support IE 11 -->
+  <script nomodule src="https://unpkg.com/whatwg-fetch@latest"></script>
+
+  <script src="https://unpkg.com/three@latest"></script>
+  <script src="https://unpkg.com/picimo@latest"></script>
+```
 
 ## Development Setup
 
@@ -42,15 +61,3 @@ Picimo is a pure typescript library, which is transpiled using [rollup](https://
 [Karma](https://karma-runner.github.io/) and [mocha](https://mochajs.org/) are used for testing.
 
 To increase the general software quality [eslint](https://eslint.org/) and [prettier](https://prettier.io/) are used and should be utilized for each commit.
-
-## How to use in your project using unkpg.com CDN
-
-```html
-
-  <!-- 🚨 OPTIONAL: fetch() polyfill to support IE 11 -->
-  <script nomodule src="https://unpkg.com/whatwg-fetch@latest"></script>
-
-  <script src="https://unpkg.com/three@latest"></script>
-  <script src="https://unpkg.com/picimo@latest"></script>
-
-```
