@@ -1,5 +1,4 @@
 [![npm version](https://badge.fury.io/js/picimo.svg)](https://badge.fury.io/js/picimo)
-[![minified size](https://badgen.net/bundlephobia/min/picimo@latest)](https://badgen.net/bundlephobia/min/picimo@latest)
 
 # picimo
 
