@@ -11,7 +11,7 @@ in the creation of picimo there were the following main objectives:
 - it should be as simple as possible to display [pixel art](https://en.wikipedia.org/wiki/Pixel_art) graphics in a [responsive design aware environment](https://en.wikipedia.org/wiki/Responsive_web_design)
 - the API should be as simple as possible and be fun to use!<sup>**</sup>
 
-_<sup>*</sup> Why? .. as a child of the eighties i grew up with computers and console games that didn't have special 3d hardware. at that time most games consisted of sprites, 2d-levels with parallax effects and sprites that simulated a 3d environment (also known as 2.5d) - already at that time I wanted to be able to program something like that, but somehow I was kept from .._<sup>***</sup>
+_<sup>*</sup> Why? .. as a child of the eighties i grew up with computers and console games that didn't have special 3d hardware. at that time most games consisted of 2d-sprites, 2d-levels with parallax effects and sprites that simulated a 3d environment (also known as 2.5d) - already at that time I wanted to be able to program something like that, but somehow I was kept from .._<sup>***</sup>
 
 _<sup>**</sup> the most important aspect of all :wink:_
 
