@@ -25,7 +25,7 @@ so picimo was started as a part time project in my spare time &mdash; during the
   
 - the development of visual and interactive applications using imperative programming is annoying &mdash; this is nothing new and is probably also responsible for the success of [react](https://reactjs.org/) (or similar frameworks). after early first experiments with a json based scene description or a web component based approach (how it does [a-frame](https://aframe.io/)), picimo now uses the declarative, component based approach of the young and incredibly exciting project [react-three-fiber](https://github.com/react-spring/react-three-fiber)
 
-<sup>*</sup> _right, you guessed it: sprite rendering and all the things that go with it ..._
+<sup>*</sup> _yep, you guessed it: sprite rendering and all the things that go with it ..._
 
 this is the main github repository for the picimo project and all of its related sub-projects.
 
