@@ -12,7 +12,7 @@ Those who work with sprites will quickly realize that an easy way to import [spr
 
 For more detailed API usage and examples, please visit the [kitchen-sink app](../kitchen-sink) or if you are more on the [_react_](https://reactjs.org/)-side, please try the gorgeous components from [picimo-r3f](../picimo-r3f).
 
-## How to Install
+## How to import in your own projects
 
 The `picimo` npm package can be installed from [NPM](https://npmjs.org):
 
@@ -30,7 +30,7 @@ It can also be used from the [unpkg.com CDN](https://unpkg.com):
   <script src="https://unpkg.com/picimo@latest"></script>
 ```
 
-## Development Setup
+## Development
 
 You will need [Node.js](https://nodejs.org/) **version v10+** and [yarn](https://yarnpkg.com/).
 
