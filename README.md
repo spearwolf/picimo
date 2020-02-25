@@ -9,6 +9,10 @@ in the creation of picimo there were the following main objectives:
 - I do wanna create realtime animated graphics in webgl and makes it easy to develop special effects in webdev or even gamedev in desktop and mobile browsers
 - I want to create [sprites](https://en.wikipedia.org/wiki/Sprite_(computer_graphics)) with custom properties defined by me and my imagination and render them with my own custom webgl shaders
 - it should be as simple as possible to display [pixel art](https://en.wikipedia.org/wiki/Pixel_art) graphics in a [responsive design aware environment](https://en.wikipedia.org/wiki/Responsive_web_design)
+- The API should be as simple as possible and be fun to use!<sup>*</sup>
+
+<sup>*</sup> _the most important aspect of all :wink:_
+
 
 this is the main github repository for the picimo project and all of its related sub-projects.
 
