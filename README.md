@@ -7,11 +7,15 @@ picimo is a [creative coding](https://en.wikipedia.org/wiki/Creative_coding) pro
 in the creation of picimo there were the following main objectives:
 
 - I do wanna create realtime animated graphics in webgl and makes it easy to develop special effects in webdev or even gamedev in desktop and mobile browsers
-- I want to create [sprites](https://en.wikipedia.org/wiki/Sprite_(computer_graphics)) with custom properties defined by me and my imagination and render them with my own custom webgl shaders
+- I want to create [sprites](https://en.wikipedia.org/wiki/Sprite_(computer_graphics))<sup>*</sup> with custom properties defined by me and my imagination and render them with my own custom webgl shaders
 - it should be as simple as possible to display [pixel art](https://en.wikipedia.org/wiki/Pixel_art) graphics in a [responsive design aware environment](https://en.wikipedia.org/wiki/Responsive_web_design)
-- the API should be as simple as possible and be fun to use!<sup>*</sup>
+- the API should be as simple as possible and be fun to use!<sup>**</sup>
 
-<sup>*</sup> _the most important aspect of all :wink:_
+_<sup>*</sup> Why? .. as a child of the eighties i grew up with computers and console games that didn't have special 3d hardware. at that time most games consisted of sprites, 2d-levels with parallax effects and sprites that simulated a 3d environment (also known as 2.5d) - already at that time I wanted to be able to program something like that, but somehow I was kept from .._<sup>***</sup>
+
+_<sup>**</sup> the most important aspect of all :wink:_
+
+_<sup>***</sup> I am glad you ask for: you can [hire me as a freelance front-end developer](https://www.spearwolf.de) &mdash; i am always on the search of exiting projects_
 
 during the evolutionary development phases the following experiences and insights were gained:
 
