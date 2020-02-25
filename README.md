@@ -31,7 +31,7 @@ the repository is organized into sub-directories containing the various projects
 |-----------|-------------|
 | [`picimo`](packages/picimo/) | the main library |
 | [`picimo-r3f`](packages/picimo-r3f/) | react components based on react-three-fiber |
-| [`kitchen-sink`](packages/kitchen-sink/) | a SPA with examples for almost all features of the picimo library |
+| [`kitchen-sink`](packages/kitchen-sink/) | a [SPA](https://en.wikipedia.org/wiki/Single-page_application) with examples for almost all features of the picimo library |
 
 ## Development
 
