@@ -1,5 +1,5 @@
 > ## 🛠 Status: In Development
-> The _picimo_ package is currently in development. It's on the track to a 1.0 release, so I encourage you to use it and give me your feedback (or even better create pull requests if you want to contribute to this project :wink:), but be aware there are things that are not yet complete and you should expect some changes.
+> The _picimo_ package is currently in development. It's on the track to a 1.0 release, so I encourage you to use it and give me your feedback (or even better create pull requests if you want to contribute to this project), but be aware there are things that are not yet complete and you should expect some changes.
 >
 > If you want to use _picimo_ in your own projects, I recommend as long as the version is still at 0.0.x to check out the repository locally and use e.g. `yarn link` (the npm package is currently updated only sometimes and irregularly)
 
