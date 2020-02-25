@@ -17,7 +17,7 @@ _<sup>**</sup> the most important aspect of all :wink:_
 
 _<sup>***</sup> I am glad you ask for: you can [hire me as a freelance front-end developer](https://www.spearwolf.de) &mdash; I am always happy to receive exciting project requests!_
 
-so picimo was started as a part time in my spare time &mdash; during the evolutionary development phases the following experiences and insights were gained:
+so picimo was started as a part time project in my spare time &mdash; during the evolutionary development phases the following experiences and insights were gained:
 
 - when developing your own webgl based rendering engine you can learn a lot of things but in the long run it is quite costly &mdash; so, why trying to reinvet the wheel? it is for this reason picimo relies on the fantastic [three.js](https://threejs.org/) as webgl renderer
   
