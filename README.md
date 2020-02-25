@@ -15,7 +15,7 @@ _<sup>*</sup> Why? .. as a child of the eighties i grew up with computers and co
 
 _<sup>**</sup> the most important aspect of all :wink:_
 
-_<sup>***</sup> I am glad you ask for: you can [hire me as a freelance front-end developer](https://www.spearwolf.de) &mdash; I am always happy to receive exciting project requests!_
+_<sup>***</sup> I am glad you ask: you can [hire me as a freelance front-end developer](https://www.spearwolf.de) &mdash; I am always happy to receive exciting project requests!_
 
 so picimo was started as a part time project in my spare time &mdash; during the evolutionary development phases the following experiences and insights were gained:
 
