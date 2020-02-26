@@ -26,6 +26,14 @@ The `picimo` npm package can be installed from [NPM](https://npmjs.org):
 yarn add three picimo
 ```
 
+The [picimo npm package](https://www.npmjs.com/package/picimo) offers three different build fragments:
+
+- the original typescript sources (referenced by `package.json:types`) to use the package in your typescript projects
+- the ES5 javascript universal umd/amd module (referenced by `package.json:main`) which can be &hellip;
+  - &hellip; imported directly in the browser (in this case it is assumed that the three.js library can be found under the global variable `THREE`)
+  - &hellip; used with the most classical javascript module loaders without further processing
+- the ES2019 javascript module (referenced by `package.json:module`) which can be used with modern javascript bundlers and should be transpiled by yourself to your dedicated browser target environments
+
 It can also be used from the [unpkg.com CDN](https://unpkg.com):
 
 ```html
@@ -35,6 +43,7 @@ It can also be used from the [unpkg.com CDN](https://unpkg.com):
   <script src="https://unpkg.com/three@latest"></script>
   <script src="https://unpkg.com/picimo@latest"></script>
 ```
+
 
 ## Development
 
