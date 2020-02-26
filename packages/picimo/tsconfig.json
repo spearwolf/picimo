@@ -9,7 +9,7 @@
     "noImplicitAny": true,
 
     "allowJs": true,
-    "target": "es5",
+    "target": "es2020",
     "experimentalDecorators": true,
     "lib": [
       "dom",
