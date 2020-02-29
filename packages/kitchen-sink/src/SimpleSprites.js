@@ -19,8 +19,8 @@ makeExampleShell(
 
     // const material = new SimpleSpritesMaterial();
     const atlas = await TextureAtlas.load('amigaballs.json', '/assets/');
-    const material = new SimpleSpritesMaterial(display.texUtils.makeTexture(atlas));
-    // material.texture = display.texUtils.makeTexture(atlas);
+    const material = new SimpleSpritesMaterial(display.textureFactory.makeThreeTexture(atlas));
+    // material.texture = display.textureFactory.makeThreeTexture(atlas);
 
     const mesh = new SimpleSprites(material, { capacity: CAPACITY, dynamic: true, autotouch: true });
 

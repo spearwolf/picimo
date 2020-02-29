@@ -26,7 +26,7 @@ makeExampleShell(
       tileCount: 5,
     });
 
-    const material = new SimpleSpritesMaterial(display.texUtils.makeTexture(tileset));
+    const material = new SimpleSpritesMaterial(display.textureFactory.makeThreeTexture(tileset));
     const mesh = new SimpleSprites(material, { capacity: 100, dynamic: true, autotouch: true });
 
     scene.add(mesh);

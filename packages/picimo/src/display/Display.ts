@@ -2,7 +2,7 @@ import {Eventize} from 'eventize-js';
 import {WebGLRendererParameters, WebGLRenderer, Color} from 'three';
 
 import {Stage2D} from '../projection';
-import {TextureUtils} from '../textures';
+import {TextureFactory} from '../textures';
 import {readOption, unpick, Stylesheets} from '../utils';
 
 import {AAPerformanceConfigurator} from './AAPerformanceConfigurator';
@@ -102,7 +102,7 @@ export class Display extends Eventize {
 
   readonly canvas: HTMLCanvasElement;
 
-  readonly texUtils: TextureUtils;
+  readonly textureFactory: TextureFactory;
 
   resizeStrategy: DisplayResizeStrategy;
 
@@ -224,9 +224,9 @@ export class Display extends Eventize {
     }
     */
 
-    this.texUtils = new TextureUtils(
+    this.textureFactory = new TextureFactory(
       this.renderer,
-      configurator.getTextureUtilsOptions(),
+      configurator.getTextureFactoryOptions(),
     );
 
     const clearColor = readOption<DisplayOptions>(

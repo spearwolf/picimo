@@ -1,6 +1,6 @@
 import {WebGLRendererParameters, LinearFilter} from 'three';
 
-import {TextureUtilsOptions} from '../textures';
+import {TextureFactoryOptions} from '../textures';
 
 import {Display} from './Display';
 import {IConfigurator} from './IConfigurator';
@@ -20,8 +20,8 @@ export class AAQualityConfigurator implements IConfigurator {
     };
   }
 
-  getTextureUtilsOptions() {
-    return <TextureUtilsOptions>{
+  getTextureFactoryOptions() {
+    return <TextureFactoryOptions>{
       defaultAnisotrophy: Infinity,
       defaultFilter: LinearFilter,
     };

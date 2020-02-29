@@ -1,6 +1,6 @@
 import {WebGLRendererParameters, NearestFilter} from 'three';
 
-import {TextureUtilsOptions} from '../textures';
+import {TextureFactoryOptions} from '../textures';
 import {Stylesheets} from '../utils';
 
 import {Display} from './Display';
@@ -26,8 +26,8 @@ export class PixelatedConfigurator implements IConfigurator {
     };
   }
 
-  getTextureUtilsOptions() {
-    return <TextureUtilsOptions>{
+  getTextureFactoryOptions() {
+    return <TextureFactoryOptions>{
       defaultAnisotrophy: 0,
       defaultFilter: NearestFilter,
     };

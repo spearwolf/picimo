@@ -19,7 +19,7 @@ import {BitmapText2DMeasurement} from './BitmapText2DMeasurement';
 export type TextAlignH = 'left' | 'center' | 'right';
 export type TextAlignV = 'top' | 'baseline' | 'center' | 'bottom';
 
-function makeTexture(htmlElement: HTMLImageElement) {
+function makeThreeTexture(htmlElement: HTMLImageElement) {
   const texture = new THREE.Texture(htmlElement);
 
   texture.flipY = false;
@@ -131,7 +131,7 @@ export class BitmapText2D extends SpriteGroupMesh<
       }
       if (fontAtlas.baseTexture !== (prevAtlas && prevAtlas.baseTexture)) {
         this.disposeMaterial();
-        this.texture = makeTexture(
+        this.texture = makeThreeTexture(
           fontAtlas.baseTexture.imgEl as HTMLImageElement,
         );
         this.material = new BitmapFontMaterial(

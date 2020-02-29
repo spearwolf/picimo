@@ -1,6 +1,6 @@
 import {WebGLRendererParameters} from 'three';
 
-import {TextureUtilsOptions} from '../textures';
+import {TextureFactoryOptions} from '../textures';
 
 import {Display} from './Display';
 
@@ -9,7 +9,7 @@ export interface IConfigurator {
     userParams?: WebGLRendererParameters,
   ): WebGLRendererParameters;
 
-  getTextureUtilsOptions(): TextureUtilsOptions;
+  getTextureFactoryOptions(): TextureFactoryOptions;
 
   getPixelRatio(): number;
 

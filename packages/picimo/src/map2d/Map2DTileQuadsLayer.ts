@@ -19,7 +19,7 @@ const $meshCache = Symbol('meshCache');
 const $materialCache = Symbol('materialCache');
 const $freeMesh = Symbol('freeMesh');
 
-function makeTexture(textureSource: Texture) {
+function makeThreeTexture(textureSource: Texture) {
   const texture = new THREE.Texture(textureSource.imgEl);
 
   texture.flipY = false;
@@ -70,7 +70,7 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
     this[$materials] = tilesets.map(tileset => {
       const texSrc = tileset.getTextureSource();
       if (!materialCache.has(texSrc.uuid)) {
-        const tex = makeTexture(texSrc);
+        const tex = makeThreeTexture(texSrc);
         materialCache.set(texSrc.uuid, tex, new TileQuadMaterial(tex), 0);
       }
       return texSrc.uuid;
