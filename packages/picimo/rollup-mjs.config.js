@@ -21,13 +21,10 @@ export default {
   input: 'src/index.ts',
   output: {
     name: 'picimo',
-    file: path.join(root, 'dist', 'picimo.min.js'),
+    file: path.join(root, 'dist', 'picimo.mjs'),
     sourcemap: true,
-    sourcemapFile: path.join(root, 'dist', 'picimo.min.js.map'),
-    format: 'umd',
-    globals: {
-      three: 'THREE',
-    },
+    sourcemapFile: path.join(root, 'dist', 'picimo.mjs.map'),
+    format: 'esm',
   },
   external: ['three'],
   plugins: [
@@ -45,6 +42,9 @@ export default {
             debug: false,
             modules: false,
             useBuiltIns: false,
+            targets: {
+              esmodules: true,
+            },
           },
         ],
       ],

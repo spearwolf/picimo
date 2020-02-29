@@ -10,9 +10,11 @@
     "example": "examples"
   },
   "scripts": {
-    "build:umd": "cross-env NODE_ENV=production rollup -c ./rollup.config.js",
-    "build:esm": "cross-env BABEL_ENV=production babel src/ --extensions \".ts\" --out-dir ./build/ --source-maps",
-    "watch:build:esm": "cross-env BABEL_ENV=production babel src/ --extensions \".ts\" --out-dir ./build/ --source-maps --watch",
+    "build:dist:umd": "cross-env NODE_ENV=production rollup -c ./rollup.config.js",
+    "build:dist:mjs": "cross-env NODE_ENV=production rollup -c ./rollup-mjs.config.js",
+    "build:dist": "run-p build:dist:*",
+    "build:module": "cross-env BABEL_ENV=production babel src/ --extensions \".ts\" --out-dir ./build/ --source-maps",
+    "watch:build:module": "cross-env BABEL_ENV=production babel src/ --extensions \".ts\" --out-dir ./build/ --source-maps --watch",
     "build": "run-p build:*",
     "prepublishOnly": "npm-run-all --serial clean --parallel build:*",
     "clean": "rimraf build coverage dist",
