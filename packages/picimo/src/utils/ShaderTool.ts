@@ -1,6 +1,6 @@
 const isNumber = (x: string | number): x is number => typeof x === 'number';
 
-export function add(a: string | number, b: string | number): string | number {
+function add(a: string | number, b: string | number): string | number {
   if (isNumber(a) && isNumber(b)) {
     return a + b;
   } else if (isNumber(a)) {
@@ -22,7 +22,7 @@ export function add(a: string | number, b: string | number): string | number {
   }
 }
 
-export function sub(a: string | number, b: string | number): string | number {
+function sub(a: string | number, b: string | number): string | number {
   if (isNumber(a) && isNumber(b)) {
     return a - b;
   } else if (isNumber(a)) {
@@ -44,7 +44,7 @@ export function sub(a: string | number, b: string | number): string | number {
   }
 }
 
-export function mul(a: string | number, b: string | number): string | number {
+function mul(a: string | number, b: string | number): string | number {
   if (isNumber(b) && isNumber(a)) {
     return a * b;
   } else if (isNumber(a)) {
@@ -70,7 +70,7 @@ export function mul(a: string | number, b: string | number): string | number {
   }
 }
 
-export function asFloat(number: string | number): string {
+function asFloat(number: string | number): string {
   const str = `${number}`.trim();
   if (str.match(/^[0-9]+$/)) {
     return `${str}.0`;
@@ -78,9 +78,9 @@ export function asFloat(number: string | number): string {
   return str;
 }
 
-export const ret = (res: string) => `return ${res};`;
+const ret = (res: string) => `return ${res};`;
 
-export function mat4(
+function mat4(
   m00: string | number = 0,
   m01: string | number = 0,
   m02: string | number = 0,
@@ -109,7 +109,7 @@ export function mat4(
   )}, ${toStr(m32)}, ${toStr(m33)})`;
 }
 
-export const rotate = (funcName = 'rotate', x = 0.0, y = 0.0, z = 1.0) => `
+const rotate = (funcName = 'rotate', x = 0.0, y = 0.0, z = 1.0) => `
 mat4 ${funcName}(float angle) {
   float s = sin(angle);
   float c = cos(angle);
@@ -131,4 +131,15 @@ mat4 ${funcName}(float angle) {
   )}
 }`;
 
-export const rotateZ = (funcName = 'rotateZ') => rotate(funcName, 0, 0, 1);
+const rotateZ = (funcName = 'rotateZ') => rotate(funcName, 0, 0, 1);
+
+export const ShaderTool = {
+  add,
+  asFloat,
+  mat4,
+  mul,
+  ret,
+  rotate,
+  rotateZ,
+  sub,
+};
