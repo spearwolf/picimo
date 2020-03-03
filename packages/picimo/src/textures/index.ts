@@ -4,6 +4,6 @@ export * from './MaterialCache';
 export * from './PowerOf2Image';
 export * from './Texture';
 export * from './TextureAtlas';
-export * from './TextureLibrary';
+export * from './TextureIndexedAltas';
 export * from './TextureFactory';
 export * from './TileSet';

@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-import {TextureLibrary} from '../textures';
+import {TextureIndexedAtlas} from '../textures';
 
 import {IMap2DLayer} from './IMap2DLayer';
 import {Map2DTileBufferGeometry} from './Map2DTileBufferGeometry';
@@ -20,13 +20,13 @@ const $createTileMesh = Symbol('createTileMesh');
  * Represents a map2d layer.
  *
  * Each tile is rendered with the same material which is built by the layer
- * upon the *base image* from the given [[TextureLibrary]].
+ * upon the *base image* from the given [[TextureIndexedAtlas]].
  *
  * For each tile a [[Map2DTileBufferGeometryGeometry]] is created.
  */
 
 export class Map2DFlat2DTilesLayer implements IMap2DLayer {
-  readonly textureLibrary: TextureLibrary;
+  readonly indexedAtlas: TextureIndexedAtlas;
 
   private readonly [$obj3d]: THREE.Object3D = new THREE.Object3D();
 
@@ -35,10 +35,10 @@ export class Map2DFlat2DTilesLayer implements IMap2DLayer {
 
   private readonly [$tiles]: Map<string, THREE.Mesh> = new Map();
 
-  constructor(textureLibrary: TextureLibrary) {
-    this.textureLibrary = textureLibrary;
+  constructor(indexedAtlas: TextureIndexedAtlas) {
+    this.indexedAtlas = indexedAtlas;
 
-    const texture = new THREE.Texture(textureLibrary.atlas.baseTexture.imgEl);
+    const texture = new THREE.Texture(indexedAtlas.atlas.baseTexture.imgEl);
     texture.flipY = false;
     texture.magFilter = THREE.NearestFilter;
     texture.needsUpdate = true;
@@ -99,7 +99,7 @@ export class Map2DFlat2DTilesLayer implements IMap2DLayer {
   }
 
   private [$createTileMesh](viewTile: Map2DViewTile): THREE.Mesh {
-    const geometry = new Map2DTileBufferGeometry(viewTile, this.textureLibrary);
+    const geometry = new Map2DTileBufferGeometry(viewTile, this.indexedAtlas);
     const mesh = new THREE.Mesh(geometry, this[$material]);
     this[$tiles].set(viewTile.id, mesh);
     return mesh;

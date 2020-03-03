@@ -8,6 +8,7 @@
     "url": "git+https://github.com/spearwolf/picimo.git"
   },
   "scripts": {
+    "clean": "lerna run clean",
     "build": "lerna run build",
     "test": "lerna run test"
   },

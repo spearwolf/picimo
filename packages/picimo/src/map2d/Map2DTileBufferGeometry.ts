@@ -1,13 +1,13 @@
 import * as THREE from 'three';
 
-import {TextureLibrary} from '../textures';
+import {TextureIndexedAtlas} from '../textures';
 
 import {Map2DViewTile} from './Map2DViewTile';
 
 export class Map2DTileBufferGeometry extends THREE.BufferGeometry {
   readonly type: string = 'Map2DTileBufferGeometry';
 
-  constructor(viewTile: Map2DViewTile, textureLibrary: TextureLibrary) {
+  constructor(viewTile: Map2DViewTile, indexedAtlas: TextureIndexedAtlas) {
     super();
 
     const {
@@ -57,7 +57,7 @@ export class Map2DTileBufferGeometry extends THREE.BufferGeometry {
         normals.push(up.x, up.y, up.z);
 
         const tileId = viewTile.getTileIdAt(col, tileRows - row - 1);
-        const texture = textureLibrary.getTextureById(tileId);
+        const texture = indexedAtlas.getTextureById(tileId);
 
         if (texture) {
           const {minS, minT, maxS, maxT} = texture;

@@ -203,10 +203,10 @@ requestAnimationFrame(animate);
 Promise.all([
   // -- 180917-a-first-map.json
   // TiledMap.load('./maps/180917-a-first-map.json'),
-  // TextureLibrary.load('sketch-tiles.json', './atlas/'),
+  // TextureIndexedAtlas.load('sketch-tiles.json', './atlas/'),
 
   TiledMap.load('./assets/exports/maps/lab-wall-tiles-new-map.json'),
-  // TextureLibrary.load('lab-wall-tiles-new.json', './atlas/'),
+  // TextureIndexedAtlas.load('lab-wall-tiles-new.json', './atlas/'),
 
 ]).then(async ([tiledMap/*, texLib*/]) => {
 
@@ -265,7 +265,7 @@ Promise.all([
 
   // texLib.setDefaultTexture('empty.png');
   // texLib.setDefaultTexture('sketch-dungeon-back-tile.png');
-  // console.log('TextureLibrary', texLib);
+  // console.log('TextureIndexedAtlas', texLib);
 
   map2d = new Map2D();
   scene.add(map2d);
