@@ -10,6 +10,8 @@
   "scripts": {
     "clean": "lerna run clean",
     "build": "lerna run build",
+    "lint": "lerna run lint",
+    "fix": "lerna run fix",
     "test": "lerna run test"
   },
   "author": "Wolfger Schramm <wolfger@spearwolf.de>",
@@ -19,9 +21,18 @@
   },
   "homepage": "https://github.com/spearwolf/picimo#readme",
   "devDependencies": {
-    "lerna": "^3.20.2"
+    "husky": "^4.2.3",
+    "lerna": "^3.20.2",
+    "npm-run-all": "^4.1.5"
   },
   "workspaces": [
-    "packages/*"
-  ]
+    "packages/*",
+    "examples/*"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "run-s lint",
+      "pre-push": "run-s clean build test"
+    }
+  }
 }
