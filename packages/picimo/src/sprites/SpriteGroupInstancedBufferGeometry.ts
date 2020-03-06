@@ -1,13 +1,13 @@
+import {SpriteGroup} from './SpriteGroup';
+
+import {createBufferAttributes} from './lib/createBufferAttributes';
+
 import {
   InterleavedBuffer,
   InstancedInterleavedBuffer,
   BufferGeometry,
   InstancedBufferGeometry,
 } from 'three';
-
-import {SpriteGroup} from './SpriteGroup';
-
-import {createBufferAttributes} from './lib/createBufferAttributes';
 
 export class SpriteGroupInstancedBufferGeometry<
   T,

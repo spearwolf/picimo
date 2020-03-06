@@ -1,10 +1,10 @@
-import {WebGLRendererParameters, NearestFilter} from 'three';
-
 import {TextureFactoryOptions} from '../textures';
 import {Stylesheets} from '../utils';
 
 import {Display} from './Display';
 import {IConfigurator} from './IConfigurator';
+
+import {WebGLRendererParameters, NearestFilter} from 'three';
 
 /**
  * Activate pixel art mode.

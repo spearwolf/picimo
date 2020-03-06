@@ -1,7 +1,7 @@
-import {PerspectiveCamera} from 'three';
-
 import {IProjectionSpecs} from './IProjectionSpecs';
 import {Projection} from './Projection';
+
+import {PerspectiveCamera} from 'three';
 // import { Logger } from "../../utils";
 
 const DEFAULT_DISTANCE = 300;

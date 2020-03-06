@@ -1,6 +1,3 @@
-import eventize, {Eventize} from 'eventize-js';
-import * as THREE from 'three';
-
 import {SpriteGroupMesh, SpriteGroupInstancedBufferGeometry} from '../sprites';
 import {TextureAtlas} from '../textures';
 import {pick, Logger} from '../utils';
@@ -15,6 +12,9 @@ import {BitmapCharMethodsType} from './BitmapCharMethods';
 import {BitmapFontMaterial, BitmapFontShaderHooks} from './BitmapFontMaterial';
 import {BitmapText2DLine} from './BitmapText2DLine';
 import {BitmapText2DMeasurement} from './BitmapText2DMeasurement';
+
+import eventize, {Eventize} from 'eventize-js';
+import * as THREE from 'three';
 
 export type TextAlignH = 'left' | 'center' | 'right';
 export type TextAlignV = 'top' | 'baseline' | 'center' | 'bottom';

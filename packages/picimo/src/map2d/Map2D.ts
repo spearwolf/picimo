@@ -1,5 +1,3 @@
-import * as THREE from 'three';
-
 import {ITileSet, MaterialCache} from '../textures';
 
 import {IMap2DLayer} from './IMap2DLayer';
@@ -8,6 +6,8 @@ import {Map2DTileQuadsLayer} from './Map2DTileQuadsLayer';
 import {Map2DView} from './Map2DView';
 
 import {TileQuadMeshCache} from './TileQuad/TileQuadMeshCache';
+
+import * as THREE from 'three';
 
 const $dispatchEvent = Symbol('dispatchEvent');
 const $tileQuadMeshCache = Symbol('tileQuadMeshCache');

@@ -1,5 +1,3 @@
-import {Material} from 'three';
-
 import {SpriteGroupInstancedBufferGeometry} from '../SpriteGroupInstancedBufferGeometry';
 import {SpriteGroupMesh} from '../SpriteGroupMesh';
 
@@ -12,6 +10,8 @@ import {
   ISimpleSpriteGroupOptions,
 } from './SimpleSpriteGroup';
 import {SimpleSpriteMethodsType} from './SimpleSpriteMethods';
+
+import {Material} from 'three';
 
 export interface ISimpleSpritesOptions extends ISimpleSpriteGroupOptions {}
 

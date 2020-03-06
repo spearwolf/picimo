@@ -2,9 +2,12 @@ import {ITileSet} from './ITileSet';
 import {Texture} from './Texture';
 import {TextureAtlas} from './TextureAtlas';
 
-export class TextureLibrary implements ITileSet {
-  static async load(path: string, basePath = './'): Promise<TextureLibrary> {
-    return new TextureLibrary(await TextureAtlas.load(path, basePath));
+export class TextureIndexedAtlas implements ITileSet {
+  static async load(
+    path: string,
+    basePath = './',
+  ): Promise<TextureIndexedAtlas> {
+    return new TextureIndexedAtlas(await TextureAtlas.load(path, basePath));
   }
 
   readonly atlas: TextureAtlas;

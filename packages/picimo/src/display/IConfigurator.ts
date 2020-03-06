@@ -1,8 +1,8 @@
-import {WebGLRendererParameters} from 'three';
-
 import {TextureFactoryOptions} from '../textures';
 
 import {Display} from './Display';
+
+import {WebGLRendererParameters} from 'three';
 
 export interface IConfigurator {
   getWebGlRendererParameters(

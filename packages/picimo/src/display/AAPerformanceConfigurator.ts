@@ -1,9 +1,9 @@
-import {WebGLRendererParameters, LinearFilter} from 'three';
-
 import {TextureFactoryOptions} from '../textures';
 
 import {Display} from './Display';
 import {IConfigurator} from './IConfigurator';
+
+import {WebGLRendererParameters, LinearFilter} from 'three';
 
 export class AAPerformanceConfigurator implements IConfigurator {
   getWebGlRendererParameters(userParams?: WebGLRendererParameters) {

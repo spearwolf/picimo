@@ -1,7 +1,7 @@
-import * as THREE from 'three';
-
 import {IMap2DLayer} from './IMap2DLayer';
 import {Map2DViewTile} from './Map2DViewTile';
+
+import * as THREE from 'three';
 
 // ===========================================================
 //

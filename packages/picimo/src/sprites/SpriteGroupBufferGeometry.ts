@@ -1,8 +1,8 @@
-import {BufferGeometry, InterleavedBuffer} from 'three';
-
 import {SpriteGroup} from './SpriteGroup';
 
 import {createBufferAttributes} from './lib/createBufferAttributes';
+
+import {BufferGeometry, InterleavedBuffer} from 'three';
 
 export class SpriteGroupBufferGeometry<T, U> extends BufferGeometry {
   readonly picimoType: string = 'SpriteGroupBufferGeometry';
