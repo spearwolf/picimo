@@ -1,3 +1,5 @@
+import {Material} from 'three';
+
 import {
   SpriteGroupMesh,
   SpriteGroupInstancedBufferGeometry,
@@ -9,8 +11,6 @@ import {getTileQuadBaseGroup} from './TileQuadBaseGroup';
 import {TileQuadBaseMethodsType} from './TileQuadBaseMethods';
 import {TileQuadGroup, ITileQuadGroupOptions} from './TileQuadGroup';
 import {TileQuadMethodsType} from './TileQuadMethods';
-
-import {Material} from 'three';
 
 export interface ITileQuadMeshOptions extends ITileQuadGroupOptions {}
 

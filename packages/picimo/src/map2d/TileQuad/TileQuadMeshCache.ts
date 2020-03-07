@@ -1,6 +1,6 @@
-import {TileQuadMesh} from './TileQuadMesh';
-
 import {Material} from 'three';
+
+import {TileQuadMesh} from './TileQuadMesh';
 
 const $cache = Symbol('cache');
 

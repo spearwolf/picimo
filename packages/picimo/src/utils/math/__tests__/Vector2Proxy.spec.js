@@ -1,9 +1,9 @@
 /* eslint-env mocha */
 import assert from 'assert';
 
-import {Vector2Proxy} from '../Vector2Proxy';
-
 import {Vector3, Vector2} from 'three';
+
+import {Vector2Proxy} from '../Vector2Proxy';
 
 describe('Vector2Proxy', () => {
   it('read values', () => {

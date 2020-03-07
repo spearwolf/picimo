@@ -1,7 +1,7 @@
+import * as THREE from 'three';
+
 import {IMap2DEvent} from './IMap2DEvent';
 import {Map2D} from './Map2D';
-
-import * as THREE from 'three';
 
 export class Map2DViewFrame extends THREE.Object3D {
   readonly map2d: Map2D;

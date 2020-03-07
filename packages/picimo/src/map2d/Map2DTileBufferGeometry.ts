@@ -1,8 +1,8 @@
+import * as THREE from 'three';
+
 import {TextureIndexedAtlas} from '../textures';
 
 import {Map2DViewTile} from './Map2DViewTile';
-
-import * as THREE from 'three';
 
 export class Map2DTileBufferGeometry extends THREE.BufferGeometry {
   readonly type: string = 'Map2DTileBufferGeometry';

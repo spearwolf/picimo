@@ -1,5 +1,3 @@
-import {SpriteGroup} from '../SpriteGroup';
-
 import {
   DynamicDrawUsage,
   StaticDrawUsage,
@@ -7,6 +5,8 @@ import {
   InterleavedBuffer,
   BufferGeometry,
 } from 'three';
+
+import {SpriteGroup} from '../SpriteGroup';
 
 type CreateBufferFn<K> = (typedArray: any, stride: number) => K;
 

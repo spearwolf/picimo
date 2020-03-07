@@ -1,3 +1,5 @@
+import {Camera, Quaternion, Vector3} from 'three';
+
 import {Plane, Vector2Proxy} from '../utils';
 
 import {IProjection} from './IProjection';
@@ -5,8 +7,6 @@ import {IProjectionRule} from './IProjectionRule';
 import {IProjectionSpecs} from './IProjectionSpecs';
 import {ProjectionRules} from './ProjectionRules';
 import {calcViewSize} from './lib/calcViewSize';
-
-import {Camera, Quaternion, Vector3} from 'three';
 
 const $origin = Symbol('origin');
 const $distanceProp = Symbol('distanceProp');

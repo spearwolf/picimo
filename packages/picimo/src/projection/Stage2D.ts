@@ -1,9 +1,9 @@
+import {Scene, Camera} from 'three';
+
 import {Display} from '../display';
 import {Logger} from '../utils';
 
 import {IProjection} from '.';
-
-import {Scene, Camera} from 'three';
 
 const log = new Logger('picimo.Stage2D');
 

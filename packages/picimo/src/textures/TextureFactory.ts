@@ -1,15 +1,15 @@
-import {readOption} from '../utils';
-
-import {ITexturable} from './ITexturable';
-import {ImageSource} from './PowerOf2Image';
-import {Texture as PicimoTexture} from './Texture';
-
 import {
   TextureFilter,
   WebGLRenderer,
   NearestFilter,
   Texture as ThreeTexture,
 } from 'three';
+
+import {readOption} from '../utils';
+
+import {ITexturable} from './ITexturable';
+import {ImageSource} from './PowerOf2Image';
+import {Texture as PicimoTexture} from './Texture';
 
 const $maxAnisotrophy = Symbol('maxAnisotrophy');
 

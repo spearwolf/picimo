@@ -12851,7 +12851,7 @@ react-docgen@^4.1.1:
     node-dir "^0.1.10"
     recast "^0.17.3"
 
-react-dom@^16.12.0, react-dom@^16.13.0:
+react-dom@^16.13.0:
   version "16.13.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.13.0.tgz#cdde54b48eb9e8a0ca1b3dc9943d9bb409b81866"
   integrity sha512-y09d2c4cG220DzdlFkPTnVvGTszVvNpC73v+AaLGLHbkpy3SSgvYq8x0rNwPJ/Rk/CicTNgk0hbHNw1gMEZAXg==
@@ -13029,7 +13029,7 @@ react-textarea-autosize@^7.1.0:
     "@babel/runtime" "^7.1.2"
     prop-types "^15.6.0"
 
-react-three-fiber@^4.0.12, react-three-fiber@^4.0.19:
+react-three-fiber@^4.0.19:
   version "4.0.19"
   resolved "https://registry.yarnpkg.com/react-three-fiber/-/react-three-fiber-4.0.19.tgz#b266267df489152f1b4cc11607f8634d152cf633"
   integrity sha512-D3cMG6KrsyE9Oj+t0yoQpAMGSxkGOChoBjS9vmZjg32DUZ6NxRAXxVkEULutcBuFSLWek0ye8z+MUeiDwdqYAg==
@@ -13062,7 +13062,7 @@ react-use-measure@^2.0.0:
   dependencies:
     debounce "^1.2.0"
 
-react@^16.12.0, react@^16.13.0:
+react@^16.13.0:
   version "16.13.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.13.0.tgz#d046eabcdf64e457bbeed1e792e235e1b9934cf7"
   integrity sha512-TSavZz2iSLkq5/oiE7gnFzmURKZMltmi193rm5HEoUDAXpzT9Kzw6oNZnGoai/4+fUnm7FqS5dwgUL34TujcWQ==
