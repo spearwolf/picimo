@@ -33,6 +33,7 @@ interface ILoggerConfig extends Eventize {
   toJSON: (...args: any[]) => string;
   save: () => void;
   clear: () => void;
+  remove: () => void;
 
   [$isInitialized]: boolean;
 }
@@ -53,14 +54,12 @@ export const getGlobalLogConfig = () => {
   // @ts-ignore
   let cfg: ILoggerConfig = globalThis[GLOBAL_LOG_CONFIG_KEY];
   if (!cfg?.[$isInitialized]) {
-    if (cfg) {
+    const cfgAsStr = globalThis.localStorage?.getItem(LOCAL_STORAGE_KEY);
+    if (cfgAsStr) {
+      debug(null, 'load config from localStorage, key=', LOCAL_STORAGE_KEY);
+      cfg = JSON.parse(cfgAsStr);
+    } else if (cfg) {
       debug(null, 'using static config global, key=', GLOBAL_LOG_CONFIG_KEY);
-    } else {
-      const cfgAsStr = globalThis.localStorage?.getItem(LOCAL_STORAGE_KEY);
-      if (cfgAsStr) {
-        debug(null, 'load config from localStorage, key=', LOCAL_STORAGE_KEY);
-        cfg = JSON.parse(cfgAsStr);
-      }
     }
     cfg = eventize({
       verbose: cfg?.verbose ?? VERBOSE_BY_DEFAULT,
@@ -105,6 +104,20 @@ export const getGlobalLogConfig = () => {
         if (localStorage) {
           debug(null, 'store config to localStorage, key=', LOCAL_STORAGE_KEY);
           localStorage.setItem(LOCAL_STORAGE_KEY, this.toJSON());
+        }
+      },
+
+      remove(this: ILoggerConfig) {
+        const {localStorage} = globalThis;
+        if (localStorage) {
+          if (localStorage.getItem(LOCAL_STORAGE_KEY)) {
+            localStorage.removeItem(LOCAL_STORAGE_KEY);
+            debug(
+              null,
+              'removed config from localStorage, key=',
+              LOCAL_STORAGE_KEY,
+            );
+          }
         }
       },
 
