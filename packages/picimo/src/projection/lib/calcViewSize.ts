@@ -63,5 +63,5 @@ export function calcViewSize(
     }
   }
 
-  return [width, height];
+  return [width, height].map(Math.floor);
 }

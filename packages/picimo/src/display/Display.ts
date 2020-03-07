@@ -379,10 +379,6 @@ export class Display extends Eventize {
     this.emit(RESIZE, <DisplayOnResizeOptions>{
       ...this[$getEventOptions](),
     });
-    const stage = this[$stage];
-    if (stage) {
-      stage.resize(this.width, this.height);
-    }
   }
 
   /**
@@ -397,13 +393,6 @@ export class Display extends Eventize {
       deltaTime: this.deltaTime,
       frameNo: this.frameNo,
     });
-    const stage = this[$stage];
-    if (stage) {
-      const {camera} = stage;
-      if (camera) {
-        this.renderer.render(stage, camera);
-      }
-    }
   }
 
   private [$getEventOptions]() {

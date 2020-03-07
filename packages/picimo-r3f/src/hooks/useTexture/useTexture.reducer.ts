@@ -3,7 +3,7 @@ import {TextureActionType, SET_TEXTURE, SET_TEXTURE_ATLAS, LOAD_TEXTURE, LOAD_TE
 import {makeThreeTexture} from './makeThreeTexture';
 import {Texture, Logger} from 'picimo';
 
-const log = new Logger('useTexture.reducer');
+const log = new Logger('picimo-r3f.useTexture.reducer');
 
 const appendTexture = (state: ITextureMap, name: string, texture: Texture) => {
   log.log('appendTexture', name, texture, state);

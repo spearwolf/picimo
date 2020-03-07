@@ -5,7 +5,7 @@ import {OrthographicCamera} from 'three';
 
 const DEFAULT_DISTANCE = 100;
 const DEFAULT_NEAR = 0.0001;
-const DEFAULT_FAR = 1000;
+const DEFAULT_FAR = 100000;
 
 export type IOrthographicProjectionSpecs = IProjectionSpecs & {
   /**

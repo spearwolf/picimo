@@ -25,7 +25,7 @@ export type IParallaxProjectionSpecs = IProjectionSpecs & {
   distance?: number;
 };
 
-// const logger = new Logger('ParallaxProjection', 1000, 4); // XXX remove me
+// const logger = new Logger('picimo.ParallaxProjection', 1000, 4); // XXX remove me
 
 export class ParallaxProjection extends Projection<
   IParallaxProjectionSpecs,

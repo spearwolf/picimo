@@ -7,7 +7,7 @@ import {useLifecycleRef} from '../hooks';
 
 extend({PicimoBitmapText2DBlock});
 
-const log = new Logger('<BitmapText2DBlock>', 0, Infinity);
+const log = new Logger('picimo-r3f.<BitmapText2DBlock>');
 
 export const BitmapText2DBlock = ({text, position, maxWidth, fontSize, lineGap, hAlign, vAlign}) => {
 

@@ -6,7 +6,7 @@ import {useTextureAtlas} from '../hooks';
 import {SpriteGroupContext} from './SimpleSpritesBufferGeometry';
 import { useFrame } from 'react-three-fiber';
 
-const log = new Logger('<Sprites>');
+const log = new Logger('picimo-r3f.<Sprites>');
 
 const createState = (spriteGroup, instanceRef) => ({
   isInitialized: true,

@@ -5,7 +5,7 @@ import {SpriteGroupInstancedBufferGeometry} from './SpriteGroupInstancedBufferGe
 
 export const SpriteGroupContext = createContext(null);
 
-const log = new Logger('<SimpleSpritesBufferGeometry>', 0, Infinity);
+const log = new Logger('picimo-r3f.<SimpleSpritesBufferGeometry>');
 
 export const SimpleSpritesBufferGeometry = forwardRef(({
   attach,

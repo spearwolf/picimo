@@ -1,0 +1,17 @@
+plugins:
+  - react-hooks
+extends:
+  - problems
+  - eslint:recommended
+  - plugin:react/recommended
+parser: babel-eslint
+parserOptions:
+  sourceType: module
+env:
+  browser: true
+settings:
+  react:
+    version: detect
+rules:
+  react-hooks/rules-of-hooks: error
+  react-hooks/exhaustive-deps: warn

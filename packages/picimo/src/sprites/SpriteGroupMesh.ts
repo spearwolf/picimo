@@ -7,7 +7,7 @@ import {SpriteGroupInstancedBufferGeometry} from './SpriteGroupInstancedBufferGe
 
 import {Mesh, Material, BufferGeometry} from 'three';
 
-const log = new Logger('picimo/SpriteGroupMesh', 0, Infinity);
+const log = new Logger('picimo.SpriteGroupMesh');
 
 function updateBuffers<T, U>(
   spriteGroup: SpriteGroup<T, U>,

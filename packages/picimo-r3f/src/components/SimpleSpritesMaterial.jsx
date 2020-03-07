@@ -3,7 +3,7 @@ import {string, arrayOf, node} from 'prop-types';
 import {SimpleSpritesMaterial as PicimoSimpleSpritesMaterial, Logger} from 'picimo';
 import {useTexture} from 'picimo-r3f';
 
-const log = new Logger('<SimpleSpritesMaterial>', 0, Infinity);
+const log = new Logger('picimo-r3f.<SimpleSpritesMaterial>');
 
 export const SimpleSpritesMaterial = forwardRef(({ children, texture: textureName, ...props }, ref) => {
 

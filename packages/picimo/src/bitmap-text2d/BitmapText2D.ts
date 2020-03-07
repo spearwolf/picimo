@@ -43,7 +43,7 @@ const $fontAtlas = Symbol('fontAtlas');
 const $shaderHooks = Symbol('shaderHooks');
 const $readFontFeatures = Symbol('readFontFeatures');
 
-const log = new Logger('picimo/BitmapText2D', 0, Infinity);
+const log = new Logger('picimo.BitmapText2D', 0, Infinity);
 
 export interface BitmapText2D extends Eventize {}
 

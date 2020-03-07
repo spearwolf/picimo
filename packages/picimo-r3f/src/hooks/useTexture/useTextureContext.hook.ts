@@ -4,7 +4,7 @@ import {TextureActionType, SetTexture, setTextureAtlas, LoadTextureAtlas, LoadTe
 import {reducer} from './useTexture.reducer';
 import {createInitialState} from './useTexture.state';
 
-const log = new Logger('useTextureContext', 0, Infinity);
+const log = new Logger('picimo-r3f.useTextureContext', 0, Infinity);
 
 export const useTextureContext = () => {
 

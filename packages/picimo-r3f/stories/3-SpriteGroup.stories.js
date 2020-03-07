@@ -31,7 +31,7 @@ const TEXTURE_ATLAS_SRC = [
 
 const SPRITES = 32;
 
-const log = new Logger('story');
+const log = new Logger('picimo-r3f.storybook');
 
 const createSprites = ({spriteGroup, textureAtlas, projection}) => {
 

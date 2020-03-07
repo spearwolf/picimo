@@ -6,7 +6,7 @@ import {TextureContext, useTextureContext, ProjectionContext} from '../hooks';
 
 extend({PicimoStage2D});
 
-const log = new Logger('<Stage2D>', 0, Infinity);
+const log = new Logger('picimo-r3f.<Stage2D>');
 
 export const Stage2D = ({children, type, plane, projection: projectionOptions, fallback, enableThreeDevtools, disableCamera}) => {
 

@@ -1,0 +1,33 @@
+{
+  "name": "@picimo/tiled-load-infinity-map",
+  "description": "a picimo sketch",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "parcel index.html",
+    "clean": "rimraf dist .cache"
+  },
+  "license": "MIT",
+  "browserslist": [
+    "last 2 chrome versions",
+    "last 2 firefox versions"
+  ],
+  "staticFiles": {
+    "staticPath": "public",
+    "watcherGlob": "**"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.8.0",
+    "eslint-config-problems": "^4.0.0",
+    "eslint-plugin-react": "^7.18.2",
+    "eslint-plugin-react-hooks": "^2.3.0",
+    "parcel": "^1.12.4",
+    "parcel-plugin-static-files-copy": "^2.3.1",
+    "rimraf": "^3.0.1"
+  },
+  "dependencies": {
+    "picimo": "*",
+    "three": "^0.114.0"
+  }
+}
