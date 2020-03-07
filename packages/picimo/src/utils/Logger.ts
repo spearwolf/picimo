@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import eventize, {Eventize} from 'eventize-js';
 
 // TODO extract this to a separate npm package: 'sticky-log'
@@ -24,6 +25,7 @@ const $isInitialized = Symbol('isInitialized');
 interface ILoggerConfig extends Eventize {
   defaultLogLevel: number;
   verbose: boolean;
+  disable: boolean;
   logger: Record<string, number>;
 
   setDefaultLogLevel: (logLevel: number) => void;
@@ -54,83 +56,99 @@ export const getGlobalLogConfig = () => {
   // @ts-ignore
   let cfg: ILoggerConfig = globalThis[GLOBAL_LOG_CONFIG_KEY];
   if (!cfg?.[$isInitialized]) {
-    const cfgAsStr = globalThis.localStorage?.getItem(LOCAL_STORAGE_KEY);
-    if (cfgAsStr) {
-      debug(null, 'load config from localStorage, key=', LOCAL_STORAGE_KEY);
-      cfg = JSON.parse(cfgAsStr);
-    } else if (cfg) {
-      debug(null, 'using static config global, key=', GLOBAL_LOG_CONFIG_KEY);
-    }
-    cfg = eventize({
-      verbose: cfg?.verbose ?? VERBOSE_BY_DEFAULT,
-      defaultLogLevel: cfg?.defaultLogLevel ?? DEFAULT_LOG_LEVEL,
-      logger: cfg?.logger ?? {},
+    if (cfg?.disable === true) {
+      // @ts-ignore
+      cfg = {
+        verbose: false,
+        defaultLogLevel: 0,
+        logger: {},
+        [$isInitialized]: true,
+        disable: true,
+      };
+    } else {
+      const cfgAsStr = globalThis.localStorage?.getItem(LOCAL_STORAGE_KEY);
+      if (cfgAsStr) {
+        debug(null, 'load config from localStorage, key=', LOCAL_STORAGE_KEY);
+        cfg = JSON.parse(cfgAsStr);
+      } else if (cfg) {
+        debug(null, 'using static config global, key=', GLOBAL_LOG_CONFIG_KEY);
+      }
+      cfg = eventize({
+        verbose: cfg?.verbose ?? VERBOSE_BY_DEFAULT,
+        defaultLogLevel: cfg?.defaultLogLevel ?? DEFAULT_LOG_LEVEL,
+        logger: cfg?.logger ?? {},
 
-      setDefaultLogLevel(this: ILoggerConfig, logLevel: number) {
-        this.defaultLogLevel = logLevel;
-        this.emit('defaultLogLevel', logLevel);
-        if (this.verbose) {
-          debug(
-            null,
-            `set default log level to ${LogLevel.getDescription(logLevel)}`,
-          );
-        }
-      },
-
-      setLogLevel(this: ILoggerConfig, name: string, logLevel: number) {
-        this.logger[name] = logLevel;
-        this.emit(name, logLevel);
-      },
-
-      clearLogLevel(this: ILoggerConfig, name: string) {
-        delete this.logger[name];
-        this.emit(name, undefined);
-      },
-
-      toJSON(this: ILoggerConfig, space?: string | number) {
-        return JSON.stringify(
-          {
-            defaultLogLevel: this.defaultLogLevel,
-            verbose: this.verbose,
-            logger: this.logger,
-          },
-          null,
-          space,
-        );
-      },
-
-      save(this: ILoggerConfig) {
-        const {localStorage} = globalThis;
-        if (localStorage) {
-          debug(null, 'store config to localStorage, key=', LOCAL_STORAGE_KEY);
-          localStorage.setItem(LOCAL_STORAGE_KEY, this.toJSON());
-        }
-      },
-
-      remove(this: ILoggerConfig) {
-        const {localStorage} = globalThis;
-        if (localStorage) {
-          if (localStorage.getItem(LOCAL_STORAGE_KEY)) {
-            localStorage.removeItem(LOCAL_STORAGE_KEY);
+        setDefaultLogLevel(this: ILoggerConfig, logLevel: number) {
+          this.defaultLogLevel = logLevel;
+          this.emit('defaultLogLevel', logLevel);
+          if (this.verbose) {
             debug(
               null,
-              'removed config from localStorage, key=',
-              LOCAL_STORAGE_KEY,
+              `set default log level to ${LogLevel.getDescription(logLevel)}`,
             );
           }
-        }
-      },
+        },
 
-      clear(this: ILoggerConfig) {
-        debug(null, 'clear config and reset to defaults');
-        this.verbose = VERBOSE_BY_DEFAULT;
-        this.defaultLogLevel = DEFAULT_LOG_LEVEL;
-        Object.keys(this.logger).forEach(name => this.clearLogLevel(name));
-        this.logger = {};
-      },
+        setLogLevel(this: ILoggerConfig, name: string, logLevel: number) {
+          this.logger[name] = logLevel;
+          this.emit(name, logLevel);
+        },
 
-      [$isInitialized]: true,
-    });
+        clearLogLevel(this: ILoggerConfig, name: string) {
+          delete this.logger[name];
+          this.emit(name, undefined);
+        },
+
+        toJSON(this: ILoggerConfig, space?: string | number) {
+          return JSON.stringify(
+            {
+              defaultLogLevel: this.defaultLogLevel,
+              verbose: this.verbose,
+              logger: this.logger,
+            },
+            null,
+            space,
+          );
+        },
+
+        save(this: ILoggerConfig) {
+          const {localStorage} = globalThis;
+          if (localStorage) {
+            debug(
+              null,
+              'store config to localStorage, key=',
+              LOCAL_STORAGE_KEY,
+            );
+            localStorage.setItem(LOCAL_STORAGE_KEY, this.toJSON());
+          }
+        },
+
+        remove(this: ILoggerConfig) {
+          const {localStorage} = globalThis;
+          if (localStorage) {
+            if (localStorage.getItem(LOCAL_STORAGE_KEY)) {
+              localStorage.removeItem(LOCAL_STORAGE_KEY);
+              debug(
+                null,
+                'removed config from localStorage, key=',
+                LOCAL_STORAGE_KEY,
+              );
+            }
+          }
+        },
+
+        clear(this: ILoggerConfig) {
+          debug(null, 'clear config and reset to defaults');
+          this.verbose = VERBOSE_BY_DEFAULT;
+          this.defaultLogLevel = DEFAULT_LOG_LEVEL;
+          Object.keys(this.logger).forEach(name => this.clearLogLevel(name));
+          this.logger = {};
+        },
+
+        [$isInitialized]: true,
+        disable: false,
+      });
+    }
     // @ts-ignore
     globalThis[GLOBAL_LOG_CONFIG_KEY] = cfg;
   }
@@ -156,27 +174,50 @@ export class Logger {
     this.stopAfterNLogs = stopAfterNLogs;
 
     const logConfig = getGlobalLogConfig();
-    this.logLevel = logConfig.logger[this.name] ?? logConfig.defaultLogLevel;
-    const updateLogLevel = (logLevel: number) => {
-      if (logLevel !== this.logLevel) {
-        if (logConfig.verbose) {
-          debug(
-            name,
-            `switch log level to ${LogLevel.getDescription(logLevel)}`,
-          );
+    if (!logConfig.disable) {
+      this.logLevel = logConfig.logger[this.name] ?? logConfig.defaultLogLevel;
+      const updateLogLevel = (logLevel: number) => {
+        if (logLevel !== this.logLevel) {
+          if (logConfig.verbose) {
+            debug(
+              name,
+              `switch log level to ${LogLevel.getDescription(logLevel)}`,
+            );
+          }
+          this.logLevel = logLevel;
         }
-        this.logLevel = logLevel;
-      }
-    };
-    logConfig.on('defaultLogLevel', (defaultLogLevel: number) => {
-      this.logLevel = logConfig.logger[this.name] ?? defaultLogLevel;
-    });
-    logConfig.on(this.name, (logLevel: number) => {
-      updateLogLevel(logLevel ?? logConfig.defaultLogLevel);
-    });
+      };
+      logConfig.on('defaultLogLevel', (defaultLogLevel: number) => {
+        this.logLevel = logConfig.logger[this.name] ?? defaultLogLevel;
+      });
+      logConfig.on(this.name, (logLevel: number) => {
+        updateLogLevel(logLevel ?? logConfig.defaultLogLevel);
+      });
 
-    if (logConfig.verbose) {
-      debug(name, 'created', this);
+      if (logConfig.verbose) {
+        debug(name, 'created', this);
+      }
+    } else {
+      const noop = (): void => undefined;
+      Object.defineProperties(this, {
+        logLevel: {value: 0},
+        log: {value: noop},
+        debug: {value: noop},
+        info: {value: noop},
+        warn: {value: noop},
+        error: {value: noop},
+        DEBUG: {value: false},
+        LOG: {value: false},
+        VERBOSE: {value: false},
+        INFO: {value: false},
+        WARN: {value: false},
+        ERROR: {value: false},
+      });
+      this.log = () => undefined;
+      this.debug = () => undefined;
+      this.info = () => undefined;
+      this.warn = () => undefined;
+      this.error = () => undefined;
     }
   }
 
