@@ -11,16 +11,13 @@ jobs:
     - uses: actions/checkout@master
     - name: Install dependencies
       run: yarn install
-    - name: "picimo: run eslint"
-      run: yarn --cwd packages/picimo test:eslint
+    - name: Check lintings
+      run: yarn lint
     - name: "picimo: check typescript types"
       run: yarn --cwd packages/picimo test:types
-    - name: "picimo: prettier check"
-      run: yarn --cwd packages/picimo prettier:check
     - name: "picimo: make build"
       run: yarn --cwd packages/picimo build
     - name: "picimo: run tests"
       run: yarn --cwd packages/picimo test:karma
     - name: "picimo-r3f: make build"
       run: yarn --cwd packages/picimo-r3f build
-
