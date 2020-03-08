@@ -45,6 +45,15 @@ git clone git@github.com:spearwolf/picimo.git
 cd picimo
 yarn
 yarn build
+yarn test
 ```
 
 You should now be ready to work on any of the picimo projects :rocket:
+
+Since this a monorep, we have global *babel*, *eslint* and *prettier* configs. Try these scripts:
+
+| script | description |
+|--------|-------------|
+| `yarn lint` | Run eslint and prettier checks for all sources across over all workspaces |
+| `yarn fix` | Run eslint and prettier *fixes* for all sources across over all workspaces |
+| `yarn cbt` | run in sequence: `clean` &rarr; `build` &rarr; `test` across over all workspaces |
