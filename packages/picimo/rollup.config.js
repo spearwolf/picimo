@@ -1,8 +1,6 @@
 /* eslint-env node */
 import path from 'path';
 
-import bannerPlugin from './scripts/bannerPlugin';
-
 import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import resolve from 'rollup-plugin-node-resolve';
@@ -10,6 +8,8 @@ import replace from 'rollup-plugin-replace';
 
 import {sizeSnapshot} from 'rollup-plugin-size-snapshot';
 import {terser} from 'rollup-plugin-terser';
+
+import bannerPlugin from './scripts/bannerPlugin';
 
 const extensions = ['.js', '.ts'];
 
@@ -35,8 +35,8 @@ export default {
     commonjs(),
     babel({
       extensions,
+      rootMode: 'upward',
       runtimeHelpers: true,
-      // exclude: [/node_modules/],
       exclude: 'node_modules/@babel/**',
       presets: [
         [

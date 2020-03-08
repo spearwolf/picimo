@@ -50,6 +50,7 @@ module.exports = config => {
             use: {
               loader: 'babel-loader',
               options: {
+                rootMode: 'upward',
                 plugins: [
                   [
                     'istanbul',
