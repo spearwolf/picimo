@@ -4,20 +4,16 @@ on: [push]
 
 jobs:
   run_tests:
-    name: Run tests
+    name: build and run tests
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@master
-    - name: Install dependencies
+    - name: install
       run: yarn install
-    - name: Check lintings
+    - name: lint
       run: yarn lint
-    - name: "picimo: check typescript types"
-      run: yarn --cwd packages/picimo test:types
-    - name: "picimo: make build"
-      run: yarn --cwd packages/picimo build
-    - name: "picimo: run tests"
-      run: yarn --cwd packages/picimo test:karma
-    - name: "picimo-r3f: make build"
-      run: yarn --cwd packages/picimo-r3f build
+    - name: build
+      run: yarn build
+    - name: test
+      run: yarn test
