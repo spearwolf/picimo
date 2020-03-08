@@ -54,6 +54,6 @@ Since this a monorep, we have global *babel*, *eslint* and *prettier* configs. T
 
 | script | description |
 |--------|-------------|
-| `yarn lint` | Run eslint and prettier checks for all sources across over all workspaces |
-| `yarn fix` | Run eslint and prettier *fixes* for all sources across over all workspaces |
-| `yarn cbt` | run in sequence: `clean` &rarr; `build` &rarr; `test` across over all workspaces |
+| `yarn lint` | Run `eslint` and `prettier` checks for all sources across all workspaces |
+| `yarn fix` | Run `eslint` and `prettier` *fixes* for all sources across all workspaces |
+| `yarn cbt` | Run in sequence: `clean` &rarr; `build` &rarr; `test` across all workspaces |
