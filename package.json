@@ -10,8 +10,8 @@
   "scripts": {
     "prettier:check": "prettier --check \"{examples,packages}/**/*.{ts,tsx,js,jsx}\"",
     "prettier:write": "prettier --write \"{examples,packages}/**/*.{ts,tsx,js,jsx}\"",
-    "eslint": "eslint examples/*/src packages/*/src --ext .js,.jsx,.ts,.tsx",
-    "eslint:fix": "eslint examples/*/src packages/*/src --ext .js,.jsx,.ts,.tsx --fix",
+    "eslint": "eslint \"**/src/*\" --ext .js,.jsx,.ts,.tsx",
+    "eslint:fix": "eslint \"**/src/*\" --ext .js,.jsx,.ts,.tsx --fix",
     "fix": "run-s eslint:fix prettier:write",
     "lint:workspaces": "lerna run lint",
     "lint": "run-s eslint prettier:check lint:workspaces",

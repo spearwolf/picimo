@@ -1,7 +1,13 @@
+root: true
+
 parser: "@typescript-eslint/parser"
+parserOptions:
+  sourceType: module
+
 plugins:
   - "@typescript-eslint"
   - react-hooks
+
 extends:
   - problems
   - "plugin:@typescript-eslint/eslint-recommended"
@@ -11,11 +17,11 @@ extends:
   - plugin:import/errors
   - plugin:import/warnings
   - plugin:prettier/recommended
-parserOptions:
-  sourceType: module
+
 env:
   amd: true
   browser: true
+
 settings:
   react:
     version: detect
@@ -41,7 +47,6 @@ rules:
   "@typescript-eslint/no-use-before-define": off
   "@typescript-eslint/no-unused-vars": [2, {vars: "all", args: "after-used", argsIgnorePattern: "^_"}]
   "@typescript-eslint/consistent-type-assertions": [2, {assertionStyle: "as", objectLiteralTypeAssertions: "allow-as-parameter"}]
-  import/order: [2, {newlines-between: "always-and-inside-groups", alphabetize: {order: "asc"}}]
+  import/order: [2, {newlines-between: "always-and-inside-groups", alphabetize: {order: "asc"}, groups: ["builtin", "external", "internal", "parent", "sibling", "index", "unknown"]}]
   react-hooks/rules-of-hooks: error
   react-hooks/exhaustive-deps: warn
-
