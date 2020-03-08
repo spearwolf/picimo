@@ -1,10 +1,5 @@
 /* eslint-disable no-console */
 /* eslint-env browser */
-import * as THREE from 'three';
-
-import { makeExampleShell } from './utils/makeExampleShell';
-import { debug } from './utils/debug';
-
 import {
   makeCircleCoords,
   SpriteGroup,
@@ -14,9 +9,12 @@ import {
   hexCol2rgb,
   sample,
 } from 'picimo';
+import * as THREE from 'three';
 
-const init = async ({ display, scene }) => {
+import {debug} from './utils/debug';
+import {makeExampleShell} from './utils/makeExampleShell';
 
+const init = async ({display, scene}) => {
   // ----------------------------------------------------------------------------------
   //
   // create lights
@@ -40,24 +38,18 @@ const init = async ({ display, scene }) => {
   // ----------------------------------------------------------------------------------
 
   const vod = new VODescriptor({
-
     attributes: {
-
       move: ['x', 'y', 'z'],
 
-      tint: { type: 'uint8', scalars: ['r', 'g', 'b'] },
-
+      tint: {type: 'uint8', scalars: ['r', 'g', 'b']},
     },
 
     methods: {
-
       setColor(color) {
         const colors = hexCol2rgb(color);
         this.setTint(...colors);
-      }
-
+      },
     },
-
   });
 
   // ----------------------------------------------------------------------------------
@@ -67,11 +59,9 @@ const init = async ({ display, scene }) => {
   // ----------------------------------------------------------------------------------
 
   const spriteGroup = new SpriteGroup(vod, {
-
     capacity: 1000,
 
     dynamic: false,
-
   });
 
   // ----------------------------------------------------------------------------------
@@ -80,21 +70,14 @@ const init = async ({ display, scene }) => {
   //
   // ----------------------------------------------------------------------------------
 
-  const COLORS = [
-    'b7fbff',
-    'fff6be',
-    'ffe0a3',
-    'ffa1ac',
-  ];
+  const COLORS = ['b7fbff', 'fff6be', 'ffe0a3', 'ffa1ac'];
 
   for (let i = 0; i < 10; i++) {
-
-    makeCircleCoords(100, 650 - (i * 50), (x, y, z) => {
+    makeCircleCoords(100, 650 - i * 50, (x, y, z) => {
       const sprite = spriteGroup.createSprite();
-      sprite.setMove(x, y, (z + (i * 0.05)));
+      sprite.setMove(x, y, z + i * 0.05);
       sprite.setColor(sample(COLORS));
     });
-
   }
 
   console.log('Created', spriteGroup.usedCount, 'sprites');
@@ -105,12 +88,10 @@ const init = async ({ display, scene }) => {
   //
   // ----------------------------------------------------------------------------------
 
-  const timeUniform = { value: 0.0 };
+  const timeUniform = {value: 0.0};
 
-  display.on('frame', ({ now }) => {
-
-    timeUniform.value = (now * 0.5) % Math.PI * 2;
-
+  display.on('frame', ({now}) => {
+    timeUniform.value = ((now * 0.5) % Math.PI) * 2;
   });
 
   // ----------------------------------------------------------------------------------
@@ -124,8 +105,7 @@ const init = async ({ display, scene }) => {
   const material = new THREE.MeshLambertMaterial();
 
   // @ts-ignore
-  material.onBeforeCompile = (shader) => {
-
+  material.onBeforeCompile = shader => {
     shader.uniforms.time = timeUniform;
 
     shader.vertexShader = `
@@ -141,7 +121,8 @@ const init = async ({ display, scene }) => {
     shader.vertexShader = shader.vertexShader.replace(
       '#include <begin_vertex>',
       `
-        vec3 transformed = vec3( position + vec3( move.xy, 150.0 * cos(time + ( move.z * ${Math.PI * 4}) ) - 75.0) );
+        vec3 transformed = vec3( position + vec3( move.xy, 150.0 * cos(time + ( move.z * ${Math.PI *
+          4}) ) - 75.0) );
 
         vTint = tint / 255.0;
       `,
@@ -159,7 +140,6 @@ const init = async ({ display, scene }) => {
         #include <dithering_fragment>
       `,
     );
-
   };
 
   // ----------------------------------------------------------------------------------
@@ -168,20 +148,20 @@ const init = async ({ display, scene }) => {
   //
   // ----------------------------------------------------------------------------------
 
-  const geometry = new SpriteGroupInstancedBufferGeometry(baseGeometry, spriteGroup);
+  const geometry = new SpriteGroupInstancedBufferGeometry(
+    baseGeometry,
+    spriteGroup,
+  );
   const mesh = new SpriteGroupMesh(geometry, material);
 
   scene.add(mesh);
 
-  display.on('frame', ({ deltaTime }) => {
-
+  display.on('frame', ({deltaTime}) => {
     mesh.rotateOnAxis(new THREE.Vector3(0, 0, 1), deltaTime);
-
   });
 
   debug('spriteGroup', spriteGroup);
   debug('material', material);
-
 };
 
 // ----------------------------------------------------------------------------------

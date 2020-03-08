@@ -1,6 +1,11 @@
 import styled from 'styled-components';
+
 import Hamburger from './Hamburger';
-import { BREAKPOINT_SHOW_HAMBURGER, SIDENAV_SIZE, HAMBURER_SIZE } from './constants';
+import {
+  BREAKPOINT_SHOW_HAMBURGER,
+  SIDENAV_SIZE,
+  HAMBURER_SIZE,
+} from './constants';
 
 export default styled(Hamburger)`
   position: absolute;

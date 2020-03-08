@@ -10,7 +10,6 @@
     "build:watch": "cross-env BABEL_ENV=production babel src/ --extensions \".ts,.tsx,.js,.jsx\" --out-dir ./build/ --source-maps --watch",
     "prepublishOnly": "run-s clean build",
     "clean": "rimraf build coverage dist",
-    "lint": "eslint .",
     "karma": "cross-env NODE_ENV=test karma start --single-run",
     "karma:watch": "cross-env NODE_ENV=test karma start",
     "storybook": "start-storybook -p 6006 -s ./assets",

@@ -1,21 +1,29 @@
-import {Display, TextureAtlas, DisplayMode, ParallaxProjection, BitmapText2D, Plane, DisplayOnInitOptions, Stage2D} from 'picimo';
+import {
+  Display,
+  TextureAtlas,
+  DisplayMode,
+  ParallaxProjection,
+  BitmapText2D,
+  Plane,
+  DisplayOnInitOptions,
+  Stage2D,
+} from 'picimo';
 
-const display = new Display(
-  document.getElementById('picimo'), {
-    mode: DisplayMode.AAQuality,
-    resizeStrategy: 'fullscreen',
-    alpha: true,
-    stage: new Stage2D(
-      new ParallaxProjection(Plane.XY, {
-        width: 2000,
-        height: 2000,
-        fit: 'contain',
-      })),
-  });
+const display = new Display(document.getElementById('picimo'), {
+  mode: DisplayMode.AAQuality,
+  resizeStrategy: 'fullscreen',
+  alpha: true,
+  stage: new Stage2D(
+    new ParallaxProjection(Plane.XY, {
+      width: 2000,
+      height: 2000,
+      fit: 'contain',
+    }),
+  ),
+});
 
 display.on('init', async ({stage}: DisplayOnInitOptions) => {
-
-  const text = new BitmapText2D({ capacity: 1000 });
+  const text = new BitmapText2D({capacity: 1000});
   text.fontAtlas = await TextureAtlas.load('comic-schrift.json', '/assets/');
 
   const MESSAGE = 'WELC0ME\nTO\nPICIMO!';

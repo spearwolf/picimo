@@ -25,7 +25,7 @@
     "eslint:fix": "eslint src/ --ext .js,.jsx,.ts,.tsx --fix",
     "prettier:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx}\"",
     "prettier:write": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\"",
-    "lint": "run-s test:eslint test:types prettier:check",
+    "lint": "run-s test:types",
     "fix": "run-s eslint:fix prettier:write",
     "test": "run-s lint test:karma"
   },

@@ -1,8 +1,5 @@
 /* eslint no-console: 0 */
 /* tslint:disable:no-console */
-import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-
 import {
   Display,
   Map2D,
@@ -15,6 +12,8 @@ import {
   RepeatingPatternLayer,
   TileSet,
 } from 'picimo';
+import * as THREE from 'three';
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 
 const display = new Display(document.getElementById('three-container'), {
   clearColor: 0x0043ff,
@@ -31,7 +30,10 @@ camera3d.up.set(0, 1, 0);
 
 let curCamera = null; // camera3d;
 
-const projection = new ParallaxProjection(Plane.XZ, { pixelZoom: 3, distance: 300 });
+const projection = new ParallaxProjection(Plane.XZ, {
+  pixelZoom: 3,
+  distance: 300,
+});
 
 const controls = new OrbitControls(camera3d, display.canvas);
 
@@ -53,7 +55,6 @@ const switchCamera = camera => {
 };
 
 display.on('resize', ({width, height}) => {
-
   projection.update(width, height);
 
   if (curCamera === null) {
@@ -62,31 +63,44 @@ display.on('resize', ({width, height}) => {
 
   camera3d.aspect = width / height;
   camera3d.updateProjectionMatrix();
-
 });
 
 // ////////////////////////////////////////////////////
 
 async function init() {
-
   const map2d = new Map2D();
   scene.add(map2d);
 
-  const view = new Map2DView(map2d, projection, 0, 0, projection.width, projection.height, 512, 512);
+  const view = new Map2DView(
+    map2d,
+    projection,
+    0,
+    0,
+    projection.width,
+    projection.height,
+    512,
+    512,
+  );
 
-  const ball = await TileSet.load('ball-pattern-rot.png', { basePath: '../assets/' });
+  const ball = await TileSet.load('ball-pattern-rot.png', {
+    basePath: '../assets/',
+  });
   view.addLayer(
-    new Map2DViewLayer(view,
+    new Map2DViewLayer(
+      view,
       map2d.createTileQuadMeshLayer([ball], -50),
       RepeatingPatternLayer.fromTile(ball, 1),
-    ));
+    ),
+  );
 
-  const frame = await TileSet.load('frame.png', { basePath: '../assets/frame/' });
+  const frame = await TileSet.load('frame.png', {basePath: '../assets/frame/'});
   view.addLayer(
-    new Map2DViewLayer(view,
+    new Map2DViewLayer(
+      view,
       map2d.createTileQuadMeshLayer([frame]),
       RepeatingPatternLayer.fromTile(frame, 1),
-    ));
+    ),
+  );
 
   viewFrame = new Map2DViewFrame(map2d, 0x66ff00, 1);
   map2d.add(viewFrame);
@@ -110,42 +124,40 @@ async function init() {
   //   }
   // };
 
-  document.addEventListener('keyup', (event) => {
-    const { keyCode } = event;
+  document.addEventListener('keyup', event => {
+    const {keyCode} = event;
     switch (keyCode) {
-    case 49: // 1
-      // @ts-ignore
-      switchCamera(projection.camera);
-      break;
-    case 50: // 2
-      switchCamera(camera3d);
-      break;
-    case 67: // c
-      controls.target.set(view.centerX, 0, view.centerY);
-      break;
-    case 107: // numPad: add
-    case 187: // +
-      // changeViewSize(curCamera === camera3d ? 1.1 : 0.9);
-      break;
-    case 109: // numPad: sub
-    case 189: // -
-      // @ts-ignore
-      // changeViewSize(curCamera === camera2d ? 1.1 : 0.9);
-      break;
+      case 49: // 1
+        // @ts-ignore
+        switchCamera(projection.camera);
+        break;
+      case 50: // 2
+        switchCamera(camera3d);
+        break;
+      case 67: // c
+        controls.target.set(view.centerX, 0, view.centerY);
+        break;
+      case 107: // numPad: add
+      case 187: // +
+        // changeViewSize(curCamera === camera3d ? 1.1 : 0.9);
+        break;
+      case 109: // numPad: sub
+      case 189: // -
+        // @ts-ignore
+        // changeViewSize(curCamera === camera2d ? 1.1 : 0.9);
+        break;
     }
   });
 
   display.on('frame', ({deltaTime: t, display: {renderer}}) => {
-
     controls.update();
 
     panControl.update(t);
     view.update();
 
     renderer.render(scene, curCamera);
-
   });
-};
+}
 
 init();
 display.start();

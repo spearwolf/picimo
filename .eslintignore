@@ -1,0 +1,5 @@
+build
+dist
+assets
+coverage
+node_modules

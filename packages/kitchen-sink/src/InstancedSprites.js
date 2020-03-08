@@ -1,10 +1,5 @@
 /* eslint-disable no-console */
 /* eslint-env browser */
-import * as THREE from 'three';
-
-import { makeExampleShell } from './utils/makeExampleShell';
-import { debug } from './utils/debug';
-
 import {
   hexCol2rgba,
   makeCircleCoords,
@@ -16,9 +11,12 @@ import {
   VODescriptor,
   VOIndices,
 } from 'picimo';
+import * as THREE from 'three';
 
-const init = async ({ display, scene }) => {
+import {debug} from './utils/debug';
+import {makeExampleShell} from './utils/makeExampleShell';
 
+const init = async ({display, scene}) => {
   // ----------------------------------------------------------------------------------
   //
   // create vertex object descriptors
@@ -26,27 +24,19 @@ const init = async ({ display, scene }) => {
   // ----------------------------------------------------------------------------------
 
   const baseQuadsDescriptor = new VODescriptor({
-
     vertexCount: 4,
 
     attributes: {
-
       position: ['x', 'y', 'z'],
-
     },
-
   });
 
   const instancedQuadsDescriptor = new VODescriptor({
-
     attributes: {
-
       translate: ['tx', 'ty', 'tz'],
 
-      rgba: { type: 'uint8', scalars: ['r', 'g', 'b', 'a'] }
-
+      rgba: {type: 'uint8', scalars: ['r', 'g', 'b', 'a']},
     },
-
   });
 
   // ----------------------------------------------------------------------------------
@@ -56,23 +46,19 @@ const init = async ({ display, scene }) => {
   // ----------------------------------------------------------------------------------
 
   const baseSpriteGroup = new SpriteGroup(baseQuadsDescriptor, {
-
     capacity: 1000,
     maxAllocVOSize: 100,
 
     indices: VOIndices.buildQuads,
 
     dynamic: false,
-
   });
 
   const spriteGroup = new SpriteGroup(instancedQuadsDescriptor, {
-
     capacity: 1000,
     maxAllocVOSize: 100,
 
     dynamic: false,
-
   });
 
   // ----------------------------------------------------------------------------------
@@ -86,21 +72,13 @@ const init = async ({ display, scene }) => {
   const DX = 40;
   const DY = 110;
 
-  baseSpriteGroup.createSprite().setPosition(
-    -DX, 0, DY,
-    DX, 0, DY,
-    DX, 0, -DY,
-    -DX, 0, -DY,
-  );
+  baseSpriteGroup
+    .createSprite()
+    .setPosition(-DX, 0, DY, DX, 0, DY, DX, 0, -DY, -DX, 0, -DY);
 
   // === instanced sprites === == -----
 
-  const COLORS = [
-    '3ec1d3',
-    'f6f7d7',
-    'ff9a00',
-    'ff165d',
-  ];
+  const COLORS = ['3ec1d3', 'f6f7d7', 'ff9a00', 'ff165d'];
 
   makeCircleCoords(100, 1000).forEach(([x, y]) => {
     const quad = spriteGroup.createSprite();
@@ -114,12 +92,10 @@ const init = async ({ display, scene }) => {
   //
   // ----------------------------------------------------------------------------------
 
-  const timeUniform = { value: 0.0 };
+  const timeUniform = {value: 0.0};
 
-  display.on('frame', ({ now }) => {
-
-    timeUniform.value = 0.5 * now % Math.PI * 2;
-
+  display.on('frame', ({now}) => {
+    timeUniform.value = ((0.5 * now) % Math.PI) * 2;
   });
 
   // ----------------------------------------------------------------------------------
@@ -129,7 +105,6 @@ const init = async ({ display, scene }) => {
   // ----------------------------------------------------------------------------------
 
   const material = new THREE.ShaderMaterial({
-
     vertexShader: `
       attribute vec3 translate;
       attribute vec4 rgba;
@@ -169,7 +144,6 @@ const init = async ({ display, scene }) => {
 
     depthWrite: false,
     blending: THREE.AdditiveBlending,
-
   });
 
   // ----------------------------------------------------------------------------------
@@ -178,14 +152,16 @@ const init = async ({ display, scene }) => {
   //
   // ----------------------------------------------------------------------------------
 
-  const geometry = new SpriteGroupInstancedBufferGeometry(baseSpriteGroup, spriteGroup);
+  const geometry = new SpriteGroupInstancedBufferGeometry(
+    baseSpriteGroup,
+    spriteGroup,
+  );
   const mesh = new SpriteGroupMesh(geometry, material);
 
   scene.add(mesh);
 
   debug('spriteGroup', spriteGroup);
   debug('material', material);
-
 };
 
 // ----------------------------------------------------------------------------------

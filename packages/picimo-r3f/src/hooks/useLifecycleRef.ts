@@ -1,11 +1,17 @@
 // inspired by https://medium.com/@teh_builder/ref-objects-inside-useeffect-hooks-eb7c15198780
-import {useCallback, useRef, useEffect, DependencyList, MutableRefObject} from "react";
+import {
+  useCallback,
+  useRef,
+  useEffect,
+  DependencyList,
+  MutableRefObject,
+} from 'react';
 
 export const useLifecycleRef = (
   {
     onCreate,
     onDestroy,
-    onUpdate
+    onUpdate,
   }: {
     onCreate: (node: any) => void;
     onDestroy: (node: any) => void;
@@ -37,7 +43,7 @@ export const useLifecycleRef = (
     if (onUpdate && !onCreateCalled && ref.current) {
       onUpdate(ref.current);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onUpdate, onCreateCalled, ...updateDependents]);
 
   return [setRef, ref.current];

@@ -1,11 +1,7 @@
-import {
-  VODescriptor, SpriteGroup, SpriteGroupBufferGeometry,
-} from 'picimo';
+import {VODescriptor, SpriteGroup, SpriteGroupBufferGeometry} from 'picimo';
 
 interface Triangle {
-
   foo: (x: number) => number;
-
 }
 
 interface TriangleAttrs {
@@ -13,25 +9,19 @@ interface TriangleAttrs {
 }
 
 let vod = new VODescriptor<Triangle, TriangleAttrs>({
-
   vertexCount: 3,
 
   methods: {
-
     foo(x: number) {
       return x * 2;
-    }
-
+    },
   },
 
   attributes: {
+    position: {scalars: ['x', 'y', 'z']},
 
-    position: { scalars: ['x', 'y', 'z'], },
-
-    color: { scalars: ['r', 'g', 'a'], }
-
+    color: {scalars: ['r', 'g', 'a']},
   },
-
 });
 
 let triangle = vod.createVO();
@@ -48,10 +38,11 @@ let numbers: number[];
 numbers = triangle.toArray();
 numbers = triangle.toArray(['position']);
 
-const group = new SpriteGroup(vod, { capacity: 100 });
+const group = new SpriteGroup(vod, {capacity: 100});
 triangle = group.createSprite(100, 100);
 triangle.free();
 
 const geometry = new SpriteGroupBufferGeometry(group);
 
-const isSame = geometry.parameters.spriteGroup.descriptor === triangle.descriptor;
+const isSame =
+  geometry.parameters.spriteGroup.descriptor === triangle.descriptor;

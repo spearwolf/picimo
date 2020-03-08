@@ -1,6 +1,6 @@
 /* eslint-disable */
 // tslint:disable:object-literal-sort-keys
-const path = require("path");
+const path = require('path');
 
 const webpack = require('webpack');
 const picimoPackageJson = require('../picimo/package.json');
@@ -10,9 +10,9 @@ const polyfills = ['core-js/stable', 'regenerator-runtime/runtime'];
 const examplesJson = require('./examples.json');
 const entries = {};
 examplesJson.forEach(section => {
-  section.demos.forEach(({ id, entry }) => {
+  section.demos.forEach(({id, entry}) => {
     if (id && entry) {
-      entries[id] = [ ...polyfills, entry ];
+      entries[id] = [...polyfills, entry];
     }
   });
 });
@@ -20,23 +20,19 @@ examplesJson.forEach(section => {
 module.exports = {
   entry: {
     ...entries,
-    "picimo-examples": [ ...polyfills, "./src/main.js" ],
+    'picimo-examples': [...polyfills, './src/main.js'],
   },
   output: {
-    path: path.resolve(__dirname, "public"),
+    path: path.resolve(__dirname, 'public'),
   },
-  mode: "development",
-  devtool: "eval",
+  mode: 'development',
+  devtool: 'eval',
   devServer: {
     port: 3000,
-    contentBase: [
-      "./public",
-      '../picimo/dist',
-      "../../node_modules",
-    ],
+    contentBase: ['./public', '../picimo/dist', '../../node_modules'],
     watchContentBase: true,
     compress: true,
-    host: "0.0.0.0",
+    host: '0.0.0.0',
     useLocalIp: true,
     disableHostCheck: true,
   },
@@ -72,13 +68,10 @@ module.exports = {
       },
       {
         test: /\.m?[jt]s$/,
-        include: [
-          path.resolve('src'),
-          /picimo/,
-        ],
+        include: [path.resolve('src'), /picimo/],
         // exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
             configFile: path.resolve('babel.config.js'),
           },
@@ -87,7 +80,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: [ ".ts", ".js", ".json" ],
+    extensions: ['.ts', '.js', '.json'],
     alias: {
       picimo: path.join(__dirname, '../picimo/src'),
     },

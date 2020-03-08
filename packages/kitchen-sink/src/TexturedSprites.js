@@ -1,14 +1,19 @@
 /* eslint-disable no-console */
 /* eslint-env browser */
+import {
+  VODescriptor,
+  VOIndices,
+  SpriteGroupTextured,
+  SpriteGroupBufferGeometry,
+  SpriteGroupMesh,
+  TextureAtlas,
+} from 'picimo';
 import * as THREE from 'three';
 
-import { makeExampleShell } from './utils/makeExampleShell';
-import { debug } from './utils/debug';
+import {debug} from './utils/debug';
+import {makeExampleShell} from './utils/makeExampleShell';
 
-import { VODescriptor, VOIndices, SpriteGroupTextured, SpriteGroupBufferGeometry, SpriteGroupMesh, TextureAtlas } from 'picimo';
-
-const init = async ({ display, scene }) => {
-
+const init = async ({display, scene}) => {
   // ----------------------------------------------------------------------------------
   //
   // create vertex object descriptor
@@ -16,17 +21,14 @@ const init = async ({ display, scene }) => {
   // ----------------------------------------------------------------------------------
 
   const quads = new VODescriptor({
-
     vertexCount: 4,
 
     attributes: {
-
       position: ['x', 'y', 'z'],
       uv: ['s', 't'],
     },
 
     methods: {
-
       translate(x, y, z) {
         this.x0 += x;
         this.x1 += x;
@@ -42,7 +44,7 @@ const init = async ({ display, scene }) => {
         this.z3 += z;
       },
 
-      setTexCoordsByTexture({ minS, minT, maxS, maxT }, flipXY = false) {
+      setTexCoordsByTexture({minS, minT, maxS, maxT}, flipXY = false) {
         if (flipXY) {
           this.setUv(minS, maxT, minS, minT, maxS, minT, maxS, maxT);
         } else {
@@ -54,14 +56,8 @@ const init = async ({ display, scene }) => {
         const w2 = w / 2;
         const h2 = h / 2;
 
-        this.setPosition(
-          -w2, h2, 0,
-          w2, h2, 0,
-          w2, -h2, 0,
-          -w2, -h2, 0,
-        );
+        this.setPosition(-w2, h2, 0, w2, h2, 0, w2, -h2, 0, -w2, -h2, 0);
       },
-
     },
   });
 
@@ -72,7 +68,6 @@ const init = async ({ display, scene }) => {
   // ----------------------------------------------------------------------------------
 
   const spriteGroup = new SpriteGroupTextured(quads, {
-
     capacity: 1000,
 
     indices: VOIndices.buildQuads,
@@ -80,8 +75,8 @@ const init = async ({ display, scene }) => {
     dynamic: false,
 
     setSize: (sprite, w, h) => sprite.setSize(w, h),
-    setTexCoordsByTexture: (sprite, texture) => sprite.setTexCoordsByTexture(texture, Math.random() < 0.5),
-
+    setTexCoordsByTexture: (sprite, texture) =>
+      sprite.setTexCoordsByTexture(texture, Math.random() < 0.5),
   });
 
   // ----------------------------------------------------------------------------------
@@ -90,12 +85,10 @@ const init = async ({ display, scene }) => {
   //
   // ----------------------------------------------------------------------------------
 
-  const timeUniform = { value: 0.0 };
+  const timeUniform = {value: 0.0};
 
-  display.on('frame', ({ now }) => {
-
-    timeUniform.value = 0.5 * now % Math.PI * 2;
-
+  display.on('frame', ({now}) => {
+    timeUniform.value = ((0.5 * now) % Math.PI) * 2;
   });
 
   // ----------------------------------------------------------------------------------
@@ -110,7 +103,13 @@ const init = async ({ display, scene }) => {
     const tex = atlas.frame(name);
     atlas.addTexture(`${name}--horizontal`, tex.clone().flipHorizontal());
     atlas.addTexture(`${name}--vertical`, tex.clone().flipVertical());
-    atlas.addTexture(`${name}--horizontal-vertical`, tex.clone().flipHorizontal().flipVertical());
+    atlas.addTexture(
+      `${name}--horizontal-vertical`,
+      tex
+        .clone()
+        .flipHorizontal()
+        .flipVertical(),
+    );
   });
 
   // ----------------------------------------------------------------------------------
@@ -124,11 +123,11 @@ const init = async ({ display, scene }) => {
   const LAYERS = 11;
   const STEP_Z = 100;
 
-  for (let z = -0.5 * LAYERS * STEP_Z, j = 0; j < LAYERS; j++, z+= STEP_Z) {
-    for (let x = -0.5 * COUNT * STEP_X, i = 0; i < COUNT; i++, x+= STEP_X) {
-
-      spriteGroup.createSpriteFromTexture(atlas.randomFrame()).translate(x, 0, z);
-
+  for (let z = -0.5 * LAYERS * STEP_Z, j = 0; j < LAYERS; j++, z += STEP_Z) {
+    for (let x = -0.5 * COUNT * STEP_X, i = 0; i < COUNT; i++, x += STEP_X) {
+      spriteGroup
+        .createSpriteFromTexture(atlas.randomFrame())
+        .translate(x, 0, z);
     }
   }
 
@@ -139,7 +138,6 @@ const init = async ({ display, scene }) => {
   // ----------------------------------------------------------------------------------
 
   const material = new THREE.ShaderMaterial({
-
     vertexShader: `
       uniform float time;
 
@@ -168,14 +166,17 @@ const init = async ({ display, scene }) => {
 
     uniforms: {
       time: timeUniform,
-      tex: { value: display.textureFactory.makeThreeTexture(atlas, { anisotrophy: Infinity }) },
+      tex: {
+        value: display.textureFactory.makeThreeTexture(atlas, {
+          anisotrophy: Infinity,
+        }),
+      },
     },
 
     side: THREE.DoubleSide,
     transparent: true,
 
     depthWrite: true,
-
   });
 
   // ----------------------------------------------------------------------------------
@@ -191,7 +192,6 @@ const init = async ({ display, scene }) => {
 
   debug('spriteGroup', spriteGroup);
   debug('material', material);
-
 };
 
 // ----------------------------------------------------------------------------------

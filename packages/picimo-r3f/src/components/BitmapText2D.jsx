@@ -1,7 +1,8 @@
-import React, {Suspense, useState} from 'react';
-import {extend, useFrame} from 'react-three-fiber';
 import {BitmapText2D as PicimoBitmapText2D, Logger} from 'picimo';
 import {node, number, func} from 'prop-types';
+import React, {Suspense, useState} from 'react';
+import {extend, useFrame} from 'react-three-fiber';
+
 import {useLifecycleRef} from '../hooks';
 
 extend({PicimoBitmapText2D});
@@ -10,13 +11,22 @@ const log = new Logger('picimo-r3f.<BitmapText2D>');
 
 export const BitmapText2DContext = React.createContext();
 
-export const BitmapText2D = ({children, capacity, fallback, onFrame, ...props}) => {
-
+export const BitmapText2D = ({
+  children,
+  capacity,
+  fallback,
+  onFrame,
+  ...props
+}) => {
   const [bitmapText2DContext, setBitmapText2DContext] = useState([]);
 
   const onFontAtlasUpdate = bt2d => {
     log.log('onFontAtlasUpdate, fontAtlas=', bt2d.fontAtlas, bt2d);
-    if (bt2d.fontAtlas != null && (bt2d !== bitmapText2DContext[0] || bt2d.fontAtlas !== bitmapText2DContext[1])) {
+    if (
+      bt2d.fontAtlas != null &&
+      (bt2d !== bitmapText2DContext[0] ||
+        bt2d.fontAtlas !== bitmapText2DContext[1])
+    ) {
       setBitmapText2DContext([bt2d, bt2d.fontAtlas]);
     }
   };
@@ -51,7 +61,7 @@ export const BitmapText2D = ({children, capacity, fallback, onFrame, ...props}) 
       </picimoBitmapText2D>
     </Suspense>
   );
-}
+};
 
 BitmapText2D.propTypes = {
   children: node,
@@ -60,7 +70,7 @@ BitmapText2D.propTypes = {
   fontSize: number,
   lineGap: number,
   onFrame: func,
-}
+};
 
 BitmapText2D.defaultProps = {
   capacity: 2048,
@@ -68,4 +78,4 @@ BitmapText2D.defaultProps = {
   fontSize: 0,
   lineGap: 0,
   onFrame: undefined,
-}
+};

@@ -1,16 +1,13 @@
 /* eslint-env node */
 // Karma configuration
-module.exports = (config) => {
+module.exports = config => {
   config.set({
-
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '.',
-
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['mocha'],
-
 
     // list of files / patterns to load in the browser
     files: [
@@ -24,11 +21,8 @@ module.exports = (config) => {
       '/assets/': '/base/tests/assets/',
     },
 
-
     // list of files / patterns to exclude
-    exclude: [
-    ],
-
+    exclude: [],
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
@@ -36,13 +30,12 @@ module.exports = (config) => {
       '**/*.spec.js': ['webpack', 'sourcemap'],
     },
 
-
     webpack: {
       mode: 'development',
       devtool: 'inline-source-map',
 
       resolve: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx', '.json']
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
       },
 
       module: {
@@ -54,16 +47,22 @@ module.exports = (config) => {
               loader: 'babel-loader',
               options: {
                 plugins: [
-                  ['istanbul', {
-                    exclude: ['**/*.spec.js'],
-                  }],
+                  [
+                    'istanbul',
+                    {
+                      exclude: ['**/*.spec.js'],
+                    },
+                  ],
                 ],
                 presets: [
-                  ['@babel/preset-env', {
-                    debug: false,
-                    useBuiltIns: 'usage',
-                    corejs: { version: 3, proposals: true },
-                  }],
+                  [
+                    '@babel/preset-env',
+                    {
+                      debug: false,
+                      useBuiltIns: 'usage',
+                      corejs: {version: 3, proposals: true},
+                    },
+                  ],
                 ],
               },
             },
@@ -77,15 +76,10 @@ module.exports = (config) => {
       stats: 'errors-only',
     },
 
-
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: [
-      'mocha',
-      'coverage-istanbul',
-    ],
-
+    reporters: ['mocha', 'coverage-istanbul'],
 
     // any of these options are valid: https://github.com/istanbuljs/istanbuljs/blob/aae256fb8b9a3d19414dcf069c592e88712c32c6/packages/istanbul-api/lib/config.js#L33-L39
     coverageIstanbulReporter: {
@@ -145,15 +139,12 @@ module.exports = (config) => {
     // web server port
     port: 9876,
 
-
     // enable / disable colors in the output (reporters and logs)
     colors: true,
-
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_INFO,
-
 
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
@@ -161,8 +152,8 @@ module.exports = (config) => {
     customLaunchers: {
       invisibleChrome: {
         base: 'ChromeHeadless',
-        flags: ['--headless', '--disable-gpu']
-      }
+        flags: ['--headless', '--disable-gpu'],
+      },
     },
 
     // start these browsers
@@ -172,7 +163,6 @@ module.exports = (config) => {
       // 'Firefox',
     ],
 
-
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: false,
@@ -180,6 +170,5 @@ module.exports = (config) => {
     // Concurrency level
     // how many browser should be started simultaneous
     concurrency: Infinity,
-
   });
 };

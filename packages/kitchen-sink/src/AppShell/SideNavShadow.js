@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { BREAKPOINT_SHOW_HAMBURGER } from './constants';
+
+import {BREAKPOINT_SHOW_HAMBURGER} from './constants';
 
 export default styled.div`
   transition-duration: 0.15s;

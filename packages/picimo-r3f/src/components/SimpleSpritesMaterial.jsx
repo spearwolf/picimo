@@ -1,32 +1,36 @@
-import React, {forwardRef, useMemo} from 'react';
+import {
+  SimpleSpritesMaterial as PicimoSimpleSpritesMaterial,
+  Logger,
+} from 'picimo';
+
 import {string, arrayOf, node} from 'prop-types';
-import {SimpleSpritesMaterial as PicimoSimpleSpritesMaterial, Logger} from 'picimo';
-import {useTexture} from 'picimo-r3f';
+import React, {forwardRef, useMemo} from 'react';
+
+import {useTexture} from '../hooks/useTexture';
 
 const log = new Logger('picimo-r3f.<SimpleSpritesMaterial>');
 
-export const SimpleSpritesMaterial = forwardRef(({ children, texture: textureName, ...props }, ref) => {
+export const SimpleSpritesMaterial = forwardRef(
+  ({children, texture: textureName, ...props}, ref) => {
+    const [texture] = useTexture(textureName);
 
-  const [texture] = useTexture(textureName);
+    // TODO update material->uniforms on texture update
+    const instance = useMemo(() => {
+      if (texture) {
+        const material = new PicimoSimpleSpritesMaterial(texture);
+        log.log('create', material);
+        return material;
+      }
+    }, [texture]);
 
-  // TODO update material->uniforms on texture update
-  const instance = useMemo(() => {
-    if (texture) {
-      const material = new PicimoSimpleSpritesMaterial(texture);
-      log.log('create', material);
-      return material;
-    }
-  }, [texture]);
-
-  return (
-    <>
-      {children}
-      {instance && (
-        <primitive object={instance} ref={ref} {...props} />
-      )}
-    </>
-  );
-});
+    return (
+      <>
+        {children}
+        {instance && <primitive object={instance} ref={ref} {...props} />}
+      </>
+    );
+  },
+);
 
 SimpleSpritesMaterial.displayName = 'SimpleSpritesMaterial';
 
@@ -39,9 +43,9 @@ SimpleSpritesMaterial.propTypes = {
   children: node,
 
   texture: string,
-}
+};
 
 SimpleSpritesMaterial.defaultProps = {
   node: undefined,
   texture: 'default',
-}
+};

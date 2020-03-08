@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { FONT_FAMILY_TEXT } from './constants';
+
+import {FONT_FAMILY_TEXT} from './constants';
 
 export default styled.a`
   display: block;

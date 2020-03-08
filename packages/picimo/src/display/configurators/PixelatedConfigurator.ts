@@ -1,10 +1,10 @@
 import {WebGLRendererParameters, NearestFilter} from 'three';
 
-import {TextureFactoryOptions} from '../textures';
-import {Stylesheets} from '../utils';
+import {TextureFactoryOptions} from '../../textures';
+import {Stylesheets} from '../../utils';
 
-import {Display} from './Display';
-import {IConfigurator} from './IConfigurator';
+import {Display} from '../Display';
+import {IConfigurator} from '../IConfigurator';
 
 /**
  * Activate pixel art mode.
@@ -14,23 +14,25 @@ import {IConfigurator} from './IConfigurator';
  */
 export class PixelatedConfigurator implements IConfigurator {
   getWebGlRendererParameters(userParams?: WebGLRendererParameters) {
+    const params: WebGLRendererParameters = {
+      precision: 'highp',
+      preserveDrawingBuffer: false,
+      powerPreference: 'high-performance',
+      stencil: false,
+      alpha: true,
+    };
     return {
-      ...(<WebGLRendererParameters>{
-        precision: 'highp',
-        preserveDrawingBuffer: false,
-        powerPreference: 'high-performance',
-        stencil: false,
-        alpha: true,
-      }),
+      ...params,
       ...userParams,
     };
   }
 
   getTextureFactoryOptions() {
-    return <TextureFactoryOptions>{
+    const options: TextureFactoryOptions = {
       defaultAnisotrophy: 0,
       defaultFilter: NearestFilter,
     };
+    return options;
   }
 
   getPixelRatio() {

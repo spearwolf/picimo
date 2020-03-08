@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { FONT_FAMILY_HEADLINE } from './constants';
+
+import {FONT_FAMILY_HEADLINE} from './constants';
 
 export default styled.h2`
   font-family: '${FONT_FAMILY_HEADLINE}', Georgia, sans-serif;

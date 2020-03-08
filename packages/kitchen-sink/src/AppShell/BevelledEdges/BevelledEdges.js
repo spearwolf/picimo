@@ -1,12 +1,12 @@
-import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import React, {Fragment} from 'react';
 import styled from 'styled-components';
 
-import svgSW from './triangle-sw.svg';
-import svgSE from './triangle-se.svg';
-// import svgNW from './triangle-nw.svg';
-import svgNE from './triangle-ne.svg';
 import svgQuad from './quad.svg';
+import svgNE from './triangle-ne.svg';
+import svgSE from './triangle-se.svg';
+import svgSW from './triangle-sw.svg';
+// import svgNW from './triangle-nw.svg';
 
 const Container = styled.div`
   position: absolute;
@@ -119,18 +119,23 @@ const BevelledEdges = ({
   westOffset,
 }) => (
   <Container>
-    { northOffset && <QuadN height={northOffset} /> }
-    { eastOffset && <QuadE width={eastOffset} /> }
-    { southOffset && <QuadS height={southOffset} /> }
-    { westOffset && <QuadW width={westOffset} /> }
-    <Content top={northOffset} right={eastOffset} bottom={southOffset} left={westOffset}>
-      { north && east && (
+    {northOffset && <QuadN height={northOffset} />}
+    {eastOffset && <QuadE width={eastOffset} />}
+    {southOffset && <QuadS height={southOffset} />}
+    {westOffset && <QuadW width={westOffset} />}
+    <Content
+      top={northOffset}
+      right={eastOffset}
+      bottom={southOffset}
+      left={westOffset}
+    >
+      {north && east && (
         <Fragment>
           <TriangleNE height={north} />
           <TriangleSE width={east} top={north} />
         </Fragment>
       )}
-      { south && west && (
+      {south && west && (
         <Fragment>
           <TriangleSW height={south} left={west} right={east} />
           <QuadSW width={west} height={south} />

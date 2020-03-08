@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 import assert from 'assert';
 
-import { VERSION } from '..';
+import {VERSION} from '..';
 
 describe('picimo_r3f', () => {
   it('should have VERSION constant defined', () => {

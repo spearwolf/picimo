@@ -1,8 +1,11 @@
-import {createContext} from 'react';
 import {Texture, TextureAtlas} from 'picimo';
+import {createContext} from 'react';
+
 import {ITextureState, createInitialState} from './useTexture.state';
 
-export type TextureSetterType = (texture: Promise<Texture|TextureAtlas>|Texture|TextureAtlas) => void;
+export type TextureSetterType = (
+  texture: Promise<Texture | TextureAtlas> | Texture | TextureAtlas,
+) => void;
 
 export interface ITextureContext {
   state: ITextureState;

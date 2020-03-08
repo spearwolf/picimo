@@ -1,10 +1,5 @@
 /* eslint no-console: 0 */
 /* tslint:disable:no-console */
-import * as THREE from 'three';
-// import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import Stats from 'stats.js';
-
 import {
   Map2D,
   Map2DView,
@@ -16,9 +11,13 @@ import {
   TileSet,
   Plane,
 } from 'picimo';
+import Stats from 'stats.js';
+import * as THREE from 'three';
+// import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 
 const VIEW_WIDTH = 320;
-const VIEW_ASPECT = .5; //9 / 16;
+const VIEW_ASPECT = 0.5; //9 / 16;
 const calcViewHeight = (width = VIEW_WIDTH) => Math.round(width * VIEW_ASPECT);
 
 console.log('hej ho 🦄');
@@ -30,9 +29,12 @@ const camera3d = new THREE.PerspectiveCamera(75, 1, 1, 10000);
 camera3d.position.set(0, 200, 350);
 camera3d.up.set(0, 1, 0);
 
-const min = (a, b) => a > b ? b : a;
+const min = (a, b) => (a > b ? b : a);
 
-const projection = new ParallaxProjection(Plane.XZ, { pixelZoom: 3, distance: 300 });
+const projection = new ParallaxProjection(Plane.XZ, {
+  pixelZoom: 3,
+  distance: 300,
+});
 
 let curCamera = camera3d;
 
@@ -75,9 +77,9 @@ function resize() {
   }
 
   // @ts-ignore
-  const { clientWidth, clientHeight } = renderer.domElement.parentNode;
+  const {clientWidth, clientHeight} = renderer.domElement.parentNode;
   const minSize = min(clientWidth, clientHeight);
-  const size = Math.floor(pixelate > 0 ? (minSize / pixelate) : (minSize * DPR));
+  const size = Math.floor(pixelate > 0 ? minSize / pixelate : minSize * DPR);
 
   projection.update(size, size);
   if (view) {
@@ -93,13 +95,18 @@ function resize() {
   `;
 
   let info = view
-    ? `${newSizeInfo.trim()}<br>x=${Math.round(view.centerX)} y=${Math.round(view.centerY)} [${Math.round(view.width)}x${Math.round(view.height)}]`
+    ? `${newSizeInfo.trim()}<br>x=${Math.round(view.centerX)} y=${Math.round(
+        view.centerY,
+      )} [${Math.round(view.width)}x${Math.round(view.height)}]`
     : newSizeInfo;
 
   if (materialCache) {
     info = `${info}<br><br>
       Material/Refs:<br>
-      ${materialCache.listRefCounts().map(({ id, refCount }) => `${id}: ${refCount}`).join('<br>')}
+      ${materialCache
+        .listRefCounts()
+        .map(({id, refCount}) => `${id}: ${refCount}`)
+        .join('<br>')}
   `;
   }
 
@@ -108,10 +115,12 @@ function resize() {
     let quadsCount = 0;
     Array.from(map2d.map2dLayers.values()).forEach(layer => {
       const meshs = layer.getObject3D().children;
-      tiles.push(...meshs.map(obj => {
-        quadsCount += obj.tiles.usedCount;
-        return obj.name;
-      }));
+      tiles.push(
+        ...meshs.map(obj => {
+          quadsCount += obj.tiles.usedCount;
+          return obj.name;
+        }),
+      );
     });
     info = `${info.trim()}<br><br>
       Tiles: ${tiles.length}<br>
@@ -158,10 +167,10 @@ let speedWest = 0;
 let lastTime = 0;
 
 function render(time) {
-  let isResized = resize();
+  const isResized = resize();
 
   let t = 0;
-  if (lastTime ===  0) {
+  if (lastTime === 0) {
     lastTime = time / 1000;
   } else {
     const t0 = time / 1000;
@@ -169,7 +178,8 @@ function render(time) {
     lastTime = t0;
   }
 
-  rendererShouldRender = rendererShouldRender || 0 < (speedNorth + speedEast + speedSouth + speedWest);
+  rendererShouldRender =
+    rendererShouldRender || 0 < speedNorth + speedEast + speedSouth + speedWest;
   rendererShouldRender = rendererShouldRender || curCamera === camera3d;
 
   if (isResized || rendererShouldRender) {
@@ -207,9 +217,7 @@ Promise.all([
 
   TiledMap.load('./assets/exports/maps/lab-wall-tiles-new-map.json'),
   // TextureIndexedAtlas.load('lab-wall-tiles-new.json', './atlas/'),
-
-]).then(async ([tiledMap/*, texLib*/]) => {
-
+]).then(async ([tiledMap /*, texLib*/]) => {
   await tiledMap.loadTileSets('./assets/exports/maps/');
 
   console.log('auto-loaded tilesets:', tiledMap.tilesets);
@@ -295,10 +303,19 @@ Promise.all([
   map2d.appendLayer(frontTileQuads);
   */
 
-  view = new Map2DView(map2d, projection, 0, 0, projection.width, projection.height, 100, 100);
+  view = new Map2DView(
+    map2d,
+    projection,
+    0,
+    0,
+    projection.width,
+    projection.height,
+    100,
+    100,
+  );
 
   // tiledMap.createLayers(map2d, view);
-  tiledMap.createLayers(map2d, view, { layers: ['main', 'foreground'] });
+  tiledMap.createLayers(map2d, view, {layers: ['main', 'foreground']});
 
   // view.addLayer(new Map2DViewLayer(view, layerMain, tiledMap.getLayer('main')));
   // view.addLayer(new Map2DViewLayer(view, flat2dTiles, tiledMap.getLayer('Kachelebene 1')));
@@ -308,39 +325,43 @@ Promise.all([
   view.addLayer(new Map2DViewLayer(view, frontTileQuads, tiledMap.getLayer('foreground')));
   */
 
-  const ball = await TileSet.load('ball-pattern-rot.png', { basePath: './assets/exports/maps/' });
+  const ball = await TileSet.load('ball-pattern-rot.png', {
+    basePath: './assets/exports/maps/',
+  });
   view.addLayer(
-    new Map2DViewLayer(view,
+    new Map2DViewLayer(
+      view,
       map2d.createTileQuadMeshLayer([ball], -100),
       RepeatingPatternLayer.fromTile(ball, 1),
-    ));
+    ),
+  );
 
   // view.update();
 
-  viewFrame = new Map2DViewFrame(map2d, 0x66ff00, .5);
+  viewFrame = new Map2DViewFrame(map2d, 0x66ff00, 0.5);
   map2d.add(viewFrame);
 
   rendererShouldRender = true;
 
-  document.addEventListener('keydown', (event) => {
-    const { keyCode } = event;
+  document.addEventListener('keydown', event => {
+    const {keyCode} = event;
     switch (keyCode) {
-    case 87: // W
-      speedNorth = SPEED;
-      break;
-    case 83: // S
-      speedSouth = SPEED;
-      break;
-    case 65: // A
-      speedWest = SPEED;
-      break;
-    case 68: // D
-      speedEast = SPEED;
-      break;
+      case 87: // W
+        speedNorth = SPEED;
+        break;
+      case 83: // S
+        speedSouth = SPEED;
+        break;
+      case 65: // A
+        speedWest = SPEED;
+        break;
+      case 68: // D
+        speedEast = SPEED;
+        break;
     }
   });
 
-  const changeViewSize = (multiplyByScalar) => {
+  const changeViewSize = multiplyByScalar => {
     if (view) {
       view.width *= multiplyByScalar;
       view.height = calcViewHeight(view.width);
@@ -349,43 +370,43 @@ Promise.all([
     }
   };
 
-  document.addEventListener('keyup', (event) => {
-    const { keyCode } = event;
+  document.addEventListener('keyup', event => {
+    const {keyCode} = event;
     switch (keyCode) {
-    case 87: // W
-      speedNorth = 0;
-      break;
-    case 83: // A
-      speedSouth = 0;
-      break;
-    case 65: // S
-      speedWest = 0;
-      break;
-    case 68: // D
-      speedEast = 0;
-      break;
-    case 49: // 1
-      // @ts-ignore
-      curCamera = projection.camera;
-      viewFrame.visible = false;
-      controls.enabled = false;
-      rendererShouldRender = true;
-      break;
-    case 50: // 2
-      curCamera = camera3d;
-      viewFrame.visible = true;
-      controls.enabled = true;
-      rendererShouldRender = true;
-      break;
-    case 107: // numPad: add
-    case 187: // +
-      changeViewSize(curCamera === camera3d ? 1.1 : 0.9);
-      break;
-    case 109: // numPad: sub
-    case 189: // -
-      // @ts-ignore
-      changeViewSize(curCamera === projection.camera ? 1.1 : 0.9);
-      break;
+      case 87: // W
+        speedNorth = 0;
+        break;
+      case 83: // A
+        speedSouth = 0;
+        break;
+      case 65: // S
+        speedWest = 0;
+        break;
+      case 68: // D
+        speedEast = 0;
+        break;
+      case 49: // 1
+        // @ts-ignore
+        curCamera = projection.camera;
+        viewFrame.visible = false;
+        controls.enabled = false;
+        rendererShouldRender = true;
+        break;
+      case 50: // 2
+        curCamera = camera3d;
+        viewFrame.visible = true;
+        controls.enabled = true;
+        rendererShouldRender = true;
+        break;
+      case 107: // numPad: add
+      case 187: // +
+        changeViewSize(curCamera === camera3d ? 1.1 : 0.9);
+        break;
+      case 109: // numPad: sub
+      case 189: // -
+        // @ts-ignore
+        changeViewSize(curCamera === projection.camera ? 1.1 : 0.9);
+        break;
     }
   });
 });

@@ -1,25 +1,25 @@
-import React, {forwardRef, useMemo} from 'react';
 import {SpriteGroupInstancedBufferGeometry as PicimoSpriteGroupInstancedBufferGeometry} from 'picimo';
 import {object, string} from 'prop-types';
+import React, {forwardRef, useMemo} from 'react';
 
-export const SpriteGroupInstancedBufferGeometry = forwardRef(({
-  baseGeometry,
-  spriteGroup,
-  attach,
-  ...props
-}, ref) => {
+export const SpriteGroupInstancedBufferGeometry = forwardRef(
+  ({baseGeometry, spriteGroup, attach, ...props}, ref) => {
+    const instance = useMemo(() => {
+      if (baseGeometry && spriteGroup) {
+        return new PicimoSpriteGroupInstancedBufferGeometry(
+          baseGeometry,
+          spriteGroup,
+        );
+      }
+      return null;
+    }, [baseGeometry, spriteGroup]);
 
-  const instance = useMemo(() => {
-    if (baseGeometry && spriteGroup) {
-      return new PicimoSpriteGroupInstancedBufferGeometry(baseGeometry, spriteGroup);
-    }
-    return null;
-  }, [baseGeometry, spriteGroup]);
+    return <primitive object={instance} attach={attach} ref={ref} {...props} />;
+  },
+);
 
-  return <primitive object={instance} attach={attach} ref={ref} {...props} />;
-});
-
-SpriteGroupInstancedBufferGeometry.displayName = 'SpriteGroupInstancedBufferGeometry';
+SpriteGroupInstancedBufferGeometry.displayName =
+  'SpriteGroupInstancedBufferGeometry';
 
 SpriteGroupInstancedBufferGeometry.propTypes = {
   baseGeometry: object.isRequired,
@@ -33,7 +33,7 @@ SpriteGroupInstancedBufferGeometry.propTypes = {
   // dynamic: bool,
   // autotouch: bool,
   // setSize: oneOfType([string, func]),
-}
+};
 
 SpriteGroupInstancedBufferGeometry.defaultProps = {
   attach: 'geometry',
@@ -41,4 +41,4 @@ SpriteGroupInstancedBufferGeometry.defaultProps = {
   // maxAllocVOSize: 512,
   // dynamic: false,
   // autotouch: false,
-}
+};

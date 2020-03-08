@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { BREAKPOINT_SHOW_HAMBURGER, SIDENAV_SIZE } from './constants';
+
+import {BREAKPOINT_SHOW_HAMBURGER, SIDENAV_SIZE} from './constants';
 
 export default styled.div`
   @media (max-width: ${BREAKPOINT_SHOW_HAMBURGER - 1}px) {
@@ -13,7 +14,7 @@ export default styled.div`
     transition-duration: 0.2s;
     transition-timing-function: ease;
     transition-property: transform;
-    transform: ${props => `translateX(${props.collapsed ? '-100%' : '0'})`}
+    transform: ${props => `translateX(${props.collapsed ? '-100%' : '0'})`};
   }
   @media (min-width: ${BREAKPOINT_SHOW_HAMBURGER}px) {
     flex: 0 0 ${SIDENAV_SIZE}px;

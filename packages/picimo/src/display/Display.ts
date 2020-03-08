@@ -6,10 +6,11 @@ import {Stage2D} from '../projection';
 import {TextureFactory} from '../textures';
 import {readOption, unpick, Stylesheets} from '../utils';
 
-import {AAPerformanceConfigurator} from './AAPerformanceConfigurator';
-import {AAQualityConfigurator} from './AAQualityConfigurator';
 import {IConfigurator} from './IConfigurator';
-import {PixelatedConfigurator} from './PixelatedConfigurator';
+
+import {AAPerformanceConfigurator} from './configurators/AAPerformanceConfigurator';
+import {AAQualityConfigurator} from './configurators/AAQualityConfigurator';
+import {PixelatedConfigurator} from './configurators/PixelatedConfigurator';
 
 const $emitResize = Symbol('emitResize');
 const $emitFrame = Symbol('emitFrame');
@@ -23,6 +24,10 @@ const $getEventOptions = Symbol('getEventOptions');
 const INIT = 'init';
 const FRAME = 'frame';
 const RESIZE = 'resize';
+
+const DISPLAY_MODE_ATTR = 'display-mode';
+const RESIZE_STRATEGY_ATTR = 'resize-strategy';
+const PIXEL_RATIO_ATTR = 'pixel-ratio';
 
 export type DisplayGetSizeFn = (
   display: Display,
@@ -170,13 +175,21 @@ export class Display extends Eventize {
       'configurator',
       () => {
         return createConfigurator(
-          readOption<DisplayOptions>(options, 'mode') as DisplayMode,
+          readOption<DisplayOptions>(
+            options,
+            'mode',
+            el.getAttribute(DISPLAY_MODE_ATTR),
+          ) as DisplayMode,
         );
       },
     ) as IConfigurator;
 
     const pixelRatio = Number(
-      readOption<DisplayOptions>(options, 'pixelRatio', 0),
+      readOption<DisplayOptions>(
+        options,
+        'pixelRatio',
+        parseInt((el.getAttribute(PIXEL_RATIO_ATTR) || 0) as any, 10),
+      ),
     );
 
     this[$lockPixelRatio] =
@@ -187,10 +200,10 @@ export class Display extends Eventize {
     this.resizeStrategy = readOption<DisplayOptions>(
       options,
       'resizeStrategy',
-      resizeRefEl,
+      el.getAttribute(RESIZE_STRATEGY_ATTR) || resizeRefEl,
     ) as DisplayResizeStrategy;
 
-    const renderParams = <WebGLRendererParameters>{
+    const renderParams: WebGLRendererParameters = {
       ...configurator.getWebGlRendererParameters(
         filterWebGLRendererParameters(options),
       ),
@@ -367,9 +380,9 @@ export class Display extends Eventize {
   }
 
   private [$emitInit]() {
-    this.emit(INIT, <DisplayOnInitOptions>{
+    this.emit(INIT, {
       ...this[$getEventOptions](),
-    });
+    } as DisplayOnInitOptions);
   }
 
   /**
@@ -377,9 +390,9 @@ export class Display extends Eventize {
    * 2. resize stage projection
    */
   private [$emitResize]() {
-    this.emit(RESIZE, <DisplayOnResizeOptions>{
+    this.emit(RESIZE, {
       ...this[$getEventOptions](),
-    });
+    } as DisplayOnResizeOptions);
   }
 
   /**
@@ -387,17 +400,17 @@ export class Display extends Eventize {
    * 2. render stage (if exists)
    */
   private [$emitFrame]() {
-    this.emit(FRAME, <DisplayOnFrameOptions>{
+    this.emit(FRAME, {
       ...this[$getEventOptions](),
 
       now: this.now,
       deltaTime: this.deltaTime,
       frameNo: this.frameNo,
-    });
+    } as DisplayOnFrameOptions);
   }
 
   private [$getEventOptions]() {
-    return <DisplayEventOptions>{
+    const options: DisplayEventOptions = {
       display: this,
 
       width: this.width,
@@ -405,5 +418,6 @@ export class Display extends Eventize {
 
       stage: this.stage,
     };
+    return options;
   }
 }

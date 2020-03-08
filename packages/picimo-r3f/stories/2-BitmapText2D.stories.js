@@ -1,7 +1,12 @@
 /* eslint-env browser */
 import React, {useState, useMemo} from 'react';
 import {Canvas} from 'react-three-fiber';
-import {Stage2D, BitmapText2D, BitmapText2DBlock, TextureAtlas} from 'picimo-r3f';
+import {
+  Stage2D,
+  BitmapText2D,
+  BitmapText2DBlock,
+  TextureAtlas,
+} from 'picimo-r3f';
 import {number, withKnobs, text, select, boolean} from '@storybook/addon-knobs';
 
 export default {
@@ -21,37 +26,54 @@ const PROJECTION = {
 const HELLO = `HELLO
 STORYBOOK!`;
 
-const makeCharCountUpdater = setCharCount => bt2d => setCharCount(bt2d.bitmapChars.usedCount);
+const makeCharCountUpdater = setCharCount => bt2d =>
+  setCharCount(bt2d.bitmapChars.usedCount);
 
 export const KitchenSink = () => {
   const [charCount, setCharCount] = useState(0);
-  const updateCharCount = useMemo(() => makeCharCountUpdater(setCharCount), [setCharCount]);
+  const updateCharCount = useMemo(() => makeCharCountUpdater(setCharCount), [
+    setCharCount,
+  ]);
   return (
     <section>
       <div style={{backgroundColor: '#d0e9f0'}}>
-        <Canvas gl2 pixelRatio={window.devicePixelRatio} style={{minHeight: '400px'}}>
+        <Canvas
+          gl2
+          pixelRatio={window.devicePixelRatio}
+          style={{minHeight: '400px'}}
+        >
           <Stage2D plane="xy" type="parallax" projection={PROJECTION}>
-
-            { boolean('show <BitmapText2DB>', true) && (
+            {boolean('show <BitmapText2DB>', true) && (
               <BitmapText2D onFrame={updateCharCount}>
                 <TextureAtlas
                   attach="fontAtlas"
-                  src={select('texture-atlas', ['comic-schrift.json', 'rbmfs.json'], 'comic-schrift.json')}
+                  src={select(
+                    'texture-atlas',
+                    ['comic-schrift.json', 'rbmfs.json'],
+                    'comic-schrift.json',
+                  )}
                 />
 
-                { boolean('show <BitmapText2DBlock>', true) && (
+                {boolean('show <BitmapText2DBlock>', true) && (
                   <BitmapText2DBlock
                     fontSize={number('fontSize', 100)}
                     lineGap={number('lineGap', 10)}
                     maxWidth={number('maxWidth', 0)}
                     text={text('text', HELLO)}
-                    hAlign={select('hAlign', ['center', 'left', 'right'], 'center')}
-                    vAlign={select('vAlign', ['top', 'baseline', 'center', 'bottom'], 'center')}
+                    hAlign={select(
+                      'hAlign',
+                      ['center', 'left', 'right'],
+                      'center',
+                    )}
+                    vAlign={select(
+                      'vAlign',
+                      ['top', 'baseline', 'center', 'bottom'],
+                      'center',
+                    )}
                   />
                 )}
               </BitmapText2D>
             )}
-
           </Stage2D>
         </Canvas>
       </div>
@@ -60,5 +82,5 @@ export const KitchenSink = () => {
         <p>char count: {charCount}</p>
       </div>
     </section>
-  )
+  );
 };

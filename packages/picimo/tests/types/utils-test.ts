@@ -1,22 +1,17 @@
-import {
-  get,
-  pick,
-  sample,
-  generateUuid,
-} from 'picimo';
+import {get, pick, sample, generateUuid} from 'picimo';
 
 let x: number;
 let y: boolean;
 
-x = get({ foo: { bar: 666 }}, 'foo/bar') as number;
-y = get({ foo: { bar: true }}, 'foo/bar') as boolean;
+x = get({foo: {bar: 666}}, 'foo/bar') as number;
+y = get({foo: {bar: true}}, 'foo/bar') as boolean;
 
 let o = {
   foo: {
     bar: 1,
   },
   plah: 666,
-}
+};
 
 interface Plah {
   plah: number;

@@ -1,5 +1,7 @@
 /* eslint-env browser */
-import React, { Fragment } from 'react';
+import React, {Fragment} from 'react';
+
+import DEMOS from '../../examples.json';
 
 import DemoIFrame from './DemoIFrame';
 import DemoLink from './DemoLink';
@@ -15,9 +17,7 @@ import SideNavHamburger from './SideNavHamburger';
 import SideNavShadow from './SideNavShadow';
 import Title from './Title';
 
-import DEMOS from '../../examples.json';
-
-import { BREAKPOINT_SHOW_HAMBURGER } from './constants';
+import {BREAKPOINT_SHOW_HAMBURGER} from './constants';
 
 class AppShell extends React.Component {
   constructor(props) {
@@ -33,11 +33,12 @@ class AppShell extends React.Component {
   runDemo(selectedDemo, demoUrl, demoSourceUrl) {
     this.toggleSideNav(true);
 
-    const switchDemo = () => this.setState({
-      selectedDemo,
-      demoUrl,
-      demoSourceUrl,
-    });
+    const switchDemo = () =>
+      this.setState({
+        selectedDemo,
+        demoUrl,
+        demoSourceUrl,
+      });
 
     if (window.innerWidth < BREAKPOINT_SHOW_HAMBURGER) {
       setTimeout(switchDemo, 200);
@@ -48,26 +49,31 @@ class AppShell extends React.Component {
 
   toggleSideNav(collapse) {
     if (typeof collapse === 'boolean') {
-      this.setState({ isSideNavCollapsed: collapse });
+      this.setState({isSideNavCollapsed: collapse});
     } else {
-      this.setState(currentState => ({ isSideNavCollapsed: !currentState.isSideNavCollapsed }));
+      this.setState(currentState => ({
+        isSideNavCollapsed: !currentState.isSideNavCollapsed,
+      }));
     }
   }
 
   render() {
     return (
       <MainLayout>
-        <SideNavShadow show={!this.state.isSideNavCollapsed} onClick={() => this.toggleSideNav(true)} />
+        <SideNavShadow
+          show={!this.state.isSideNavCollapsed}
+          onClick={() => this.toggleSideNav(true)}
+        />
         <SideNav collapsed={this.state.isSideNavCollapsed}>
           <Header>
             <Logo src="/images/picimo-logo-original.png" alt="picimo" />
             <Title>kitchen sink</Title>
           </Header>
           <SideNavContent>
-            {DEMOS.map(({ section, demos }) => (
+            {DEMOS.map(({section, demos}) => (
               <Fragment key={section}>
                 <Headline>{section}</Headline>
-                {demos.map(({ title, url, sourceUrl }) => (
+                {demos.map(({title, url, sourceUrl}) => (
                   <DemoLink
                     key={title}
                     url={url}
@@ -80,7 +86,10 @@ class AppShell extends React.Component {
               </Fragment>
             ))}
           </SideNavContent>
-          <SideNavHamburger active={!this.state.isSideNavCollapsed} onClick={() => this.toggleSideNav()} />
+          <SideNavHamburger
+            active={!this.state.isSideNavCollapsed}
+            onClick={() => this.toggleSideNav()}
+          />
         </SideNav>
         <DemoView>
           {this.state.demoUrl && (

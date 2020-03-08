@@ -1,1 +1,1 @@
-export { default } from './BevelledEdges';
+export {default} from './BevelledEdges';
