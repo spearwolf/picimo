@@ -1,5 +1,9 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable no-console */
 /* eslint-env node */
-console.log('🚀 babel.config.js');
+const emoji = require('node-emoji');
+
+console.log(emoji.get('rocket'), 'babel.config.js');
 
 module.exports = {
   presets: ['@babel/preset-typescript', '@babel/preset-react'],
