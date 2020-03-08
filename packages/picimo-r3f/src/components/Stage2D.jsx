@@ -58,14 +58,14 @@ export const Stage2D = ({
       ? ParallaxProjection
       : OrthographicProjection)(new Plane(plane), projectionOptions);
     setProjCtx(proj);
-    log.log('create projection:', proj);
+    if (log.DEBUG) log.log('create projection:', proj);
     return proj;
   }, [plane, type, projectionOptions]);
 
   useEffect(() => {
     const stage = ref.current;
     const {projection} = stage;
-    log.log('init stage->projection', stage);
+    if (log.DEBUG) log.log('init stage->projection', stage);
     projection.update(width, height);
     if (!disableCamera) {
       setDefaultCamera(projection.camera);
@@ -73,7 +73,7 @@ export const Stage2D = ({
   }, [projection, width, height, setDefaultCamera, disableCamera]);
 
   useFrame(({size: {width, height}}) => {
-    log.log('width=', width, 'height=', height);
+    if (log.DEBUG) log.log('width=', width, 'height=', height);
     projection.update(width, height);
   });
 

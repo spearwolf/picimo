@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import eventize, {Eventize} from 'eventize-js';
 
 // TODO extract this to a separate npm package: 'sticky-log'

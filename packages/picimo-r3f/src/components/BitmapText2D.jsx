@@ -21,7 +21,8 @@ export const BitmapText2D = ({
   const [bitmapText2DContext, setBitmapText2DContext] = useState([]);
 
   const onFontAtlasUpdate = bt2d => {
-    log.log('onFontAtlasUpdate, fontAtlas=', bt2d.fontAtlas, bt2d);
+    if (log.DEBUG)
+      log.log('onFontAtlasUpdate, fontAtlas=', bt2d.fontAtlas, bt2d);
     if (
       bt2d.fontAtlas != null &&
       (bt2d !== bitmapText2DContext[0] ||
@@ -33,7 +34,8 @@ export const BitmapText2D = ({
 
   const [ref, bitmapText2D] = useLifecycleRef({
     onCreate(bitmapText2d) {
-      log.log('create, fontAtlas=', bitmapText2d.fontAtlas, bitmapText2d);
+      if (log.DEBUG)
+        log.log('create, fontAtlas=', bitmapText2d.fontAtlas, bitmapText2d);
       bitmapText2d.frustumCulled = false; // TODO move this to picimo library!
       if (bitmapText2d.fontAtlas) {
         setBitmapText2DContext([bitmapText2d, bitmapText2d.fontAtlas]);
@@ -41,7 +43,7 @@ export const BitmapText2D = ({
       bitmapText2d.on('fontAtlasUpdate', onFontAtlasUpdate);
     },
     onDestroy(bitmapText2d) {
-      log.log('destroy, off:fontAtlasUpdate', bitmapText2d);
+      if (log.DEBUG) log.log('destroy, off:fontAtlasUpdate', bitmapText2d);
       bitmapText2d.off(onFontAtlasUpdate);
     },
   });

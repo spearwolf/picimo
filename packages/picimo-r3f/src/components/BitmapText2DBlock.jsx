@@ -25,21 +25,23 @@ export const BitmapText2DBlock = ({
   const [ref, block] = useLifecycleRef(
     {
       onCreate(textBlock) {
-        log.log(
-          'create',
-          text,
-          position,
-          maxWidth,
-          fontSize,
-          lineGap,
-          hAlign,
-          vAlign,
-          textBlock,
-        );
+        if (log.DEBUG) {
+          log.log(
+            'create',
+            text,
+            position,
+            maxWidth,
+            fontSize,
+            lineGap,
+            hAlign,
+            vAlign,
+            textBlock,
+          );
+        }
         textBlock.update(text);
       },
       onDestroy(textBlock) {
-        log.log('destroy', textBlock);
+        if (log.DEBUG) log.log('destroy', textBlock);
         textBlock.clear();
       },
       onUpdate(textBlock) {

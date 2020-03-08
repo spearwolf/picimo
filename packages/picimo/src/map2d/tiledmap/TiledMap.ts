@@ -1,5 +1,5 @@
 import {TileSet} from '../../textures';
-import {readOption} from '../../utils';
+import {readOption, Logger} from '../../utils';
 import {IMap2DLayer} from '../IMap2DLayer';
 import {Map2D} from '../Map2D';
 
@@ -16,6 +16,8 @@ const Y_OFFSET = 10;
 
 const $data = Symbol('data');
 const $layerMap = Symbol('layerMap');
+
+const log = new Logger('picimo.TiledMap');
 
 export interface TiledMapCreateLayersOptions {
   layers?: string[];
@@ -110,8 +112,10 @@ export class TiledMap {
       this.getAllLayers();
     const yOffset = readOption(options, 'yOffset', Y_OFFSET) as number;
 
-    console.log('layerNames', layerNames);
-    console.log('layers', layers);
+    if (log.VERBOSE) {
+      log.log('layerNames', layerNames);
+      log.log('layers', layers);
+    }
 
     let y = readOption(options, 'yStart', Y_START) as number;
 
@@ -133,9 +137,9 @@ export class TiledMap {
             break;
 
           default:
-            console.warn(
-              `skipping unknown layer.type = "${tiledMapLayer.type}"`,
-            );
+            if (log.WARN) {
+              log.warn(`skipping unknown layer.type = "${tiledMapLayer.type}"`);
+            }
         }
       }
 

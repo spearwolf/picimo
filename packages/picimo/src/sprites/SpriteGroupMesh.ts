@@ -39,7 +39,7 @@ export class SpriteGroupMesh<T, U = {}, K = {}, I = {}> extends Mesh {
 
     this.geometry = spriteGroupGeometry || (new BufferGeometry() as any);
 
-    log.log('created', this);
+    if (log.VERBOSE) log.log('created', this);
   }
 
   onBeforeRender = () =>
@@ -61,7 +61,7 @@ export class SpriteGroupMesh<T, U = {}, K = {}, I = {}> extends Mesh {
     };
 
   dispose() {
-    log.log('dispose', this);
+    if (log.VERBOSE) log.log('dispose', this);
     const {geometry, material} = this;
     geometry?.dispose();
     this.geometry = null;

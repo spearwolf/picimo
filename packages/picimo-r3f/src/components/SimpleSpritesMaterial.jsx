@@ -18,7 +18,7 @@ export const SimpleSpritesMaterial = forwardRef(
     const instance = useMemo(() => {
       if (texture) {
         const material = new PicimoSimpleSpritesMaterial(texture);
-        log.log('create', material);
+        if (log.DEBUG) log.log('create', material);
         return material;
       }
     }, [texture]);

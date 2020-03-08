@@ -24,9 +24,9 @@ export const useTextureContext = () => {
       const dispatchAction = (action: TextureActionType) => {
         const nextState = reducer(state, action);
         if (nextState !== state) {
-          log.log('next state', nextState);
+          if (log.VERBOSE) log.log('next state', nextState);
           setState(nextState);
-        } else {
+        } else if (log.VERBOSE) {
           log.log('state has not been changed', state);
         }
       };
@@ -47,9 +47,9 @@ export const useTextureContext = () => {
       }
 
       if (action) {
-        log.log('dispatch', action);
+        if (log.VERBOSE) log.log('dispatch', action);
         dispatchAction(action);
-      } else {
+      } else if (log.VERBOSE) {
         log.log('no action to dispatch :-(', {name, isTextureAtlas, tex});
       }
 

@@ -1,6 +1,10 @@
+import {Logger} from '../../utils';
+
 import {ITiledMapCustomProperty} from './ITiledMapCustomProperty';
 
 const $props = Symbol('props');
+
+const log = new Logger('picimo.TiledMapCustomProperties');
 
 export class TiledMapCustomProperties {
   private readonly [$props]: ITiledMapCustomProperty[];
@@ -42,9 +46,11 @@ export class TiledMapCustomProperties {
             int4 = [numbers[0], numbers[1], numbers[2], numbers[3]];
             break;
           default:
-            console.warn(
-              `custom property "${name}" has incorrect string format: "${value}" <- should be a number or a space separated list of 2-4x numbers`,
-            );
+            if (log.WARN) {
+              log.warn(
+                `custom property "${name}" has incorrect string format: "${value}" <- should be a number or a space separated list of 2-4x numbers`,
+              );
+            }
         }
       }
     }

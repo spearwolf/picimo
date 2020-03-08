@@ -55,7 +55,7 @@ const createSprites = ({spriteGroup, textureAtlas, projection}) => {
       .reduce((sum, w) => sum + w, 0) / halfOfSprites;
   const scale = w > MIN_SIZE ? (w < MAX_SIZE ? 0 : MAX_SIZE / w) : MIN_SIZE / w;
 
-  log.log('average width of sprites:', w, textureAtlas);
+  if (log.VERBOSE) log.log('average width of sprites:', w, textureAtlas);
 
   sprites.forEach(sprite => {
     const [x, y] = [
@@ -74,12 +74,12 @@ const createSprites = ({spriteGroup, textureAtlas, projection}) => {
 };
 
 const onCreate = ctx => {
-  log.log('CREATE SPRITES', ctx);
+  if (log.VERBOSE) log.log('CREATE SPRITES', ctx);
   return createSprites(ctx);
 };
 
 const onTextureAtlasChange = (ctx, sprites) => {
-  log.log('TEXTURE-ATLAS CHANGE', ctx, sprites);
+  if (log.VERBOSE) log.log('TEXTURE-ATLAS CHANGE', ctx, sprites);
   ctx.spriteGroup.voPool.free(sprites);
   return createSprites(ctx);
 };

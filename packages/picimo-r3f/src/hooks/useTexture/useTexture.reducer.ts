@@ -15,11 +15,11 @@ import {ITextureState, ITextureMap} from './useTexture.state';
 const log = new Logger('picimo-r3f.useTexture.reducer');
 
 const appendTexture = (state: ITextureMap, name: string, texture: Texture) => {
-  log.log('appendTexture', name, texture, state);
+  if (log.DEBUG) log.log('appendTexture', name, texture, state);
   const prevTexure = state[name]?.three;
   if (!prevTexure || texture !== state[name]?.picimo) {
     if (prevTexure) {
-      log.log('dispose previous texture', prevTexure);
+      if (log.DEBUG) log.log('dispose previous texture', prevTexure);
       prevTexure.dispose();
     }
     const texMap: ITextureMap = {

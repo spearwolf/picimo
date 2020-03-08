@@ -27,7 +27,6 @@ settings:
         - .js
         - .jsx
 rules:
-  no-console: off
   no-fallthrough: off
   no-undef-init: off
   prefer-rest-params: off

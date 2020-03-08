@@ -17,7 +17,8 @@ const createState = (spriteGroup, instanceRef) => ({
     dispose() {
       // react-three-fiber -> dispose callback
       if (spriteGroup && Array.isArray(instanceRef.current)) {
-        log.log('dispose->free', spriteGroup, instanceRef.current);
+        if (log.DEBUG)
+          log.log('dispose->free', spriteGroup, instanceRef.current);
         spriteGroup.voPool.free(instanceRef.current);
       } else if (typeof instanceRef.current?.dispose === 'function') {
         instanceRef.current.dispose();
@@ -67,7 +68,7 @@ export const Sprites = ({
         nextInstanceValue !== undefined &&
         nextInstanceValue !== instanceRef.current
       ) {
-        log.log('next instance-value', nextInstanceValue);
+        if (log.DEBUG) log.log('next instance-value', nextInstanceValue);
         instanceRef.current = nextInstanceValue;
       }
     }

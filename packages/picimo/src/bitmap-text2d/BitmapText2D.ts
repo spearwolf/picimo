@@ -44,7 +44,7 @@ const $fontAtlas = Symbol('fontAtlas');
 const $shaderHooks = Symbol('shaderHooks');
 const $readFontFeatures = Symbol('readFontFeatures');
 
-const log = new Logger('picimo.BitmapText2D', 0, Infinity);
+const log = new Logger('picimo.BitmapText2D');
 
 export interface BitmapText2D extends Eventize {}
 
@@ -88,7 +88,7 @@ export class BitmapText2D extends SpriteGroupMesh<
 
     eventize(this);
 
-    log.log('created', this);
+    if (log.VERBOSE) log.log('created', this);
   }
 
   private [$readFontFeatures]() {
@@ -361,7 +361,7 @@ export class BitmapText2D extends SpriteGroupMesh<
   }
 
   dispose() {
-    log.log('dispose', this);
+    if (log.VERBOSE) log.log('dispose', this);
     this.disposeMaterial();
     super.dispose();
   }

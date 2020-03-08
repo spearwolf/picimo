@@ -21,7 +21,7 @@ export const SimpleSpritesBufferGeometry = forwardRef(
         dynamic,
         autotouch,
       });
-      log.log('create', [sprites, baseGeometry]);
+      if (log.VERBOSE) log.log('create', [sprites, baseGeometry]);
       setSpritesCtx([sprites, baseGeometry]);
       return sprites;
     }, [
