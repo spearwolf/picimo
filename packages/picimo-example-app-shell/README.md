@@ -19,11 +19,11 @@ Code is automatically transformed using:
 
 Add the npm package to your project.
 
-> :warning: NOTE: the `@picimo/example-app-shell` package is intended only for your use within the `picimo` monorep!
-
 ```sh
 $ yarn add --dev @picimo/example-app-shell
 ```
+> :warning: NOTE: the `@picimo/example-app-shell` package is intended only for your use within the `picimo` monorep!
+
 
 After that you should extend your `package.json` with:
 
@@ -47,8 +47,10 @@ After that you should extend your `package.json` with:
 }
 ```
 
-_That's all_ :mushroom:
+:heavy_check_mark: _that's all_
 
 With `yarn start` you can now start a local dev server. Use `yarn build` to create the build output.
 
 And don't forget to set the `NODE_ENV=production` environment variable if you want to output _production_ builds.
+
+_happy coding_ ;-) :mushroom:
