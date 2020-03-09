@@ -7,7 +7,6 @@ import {
   Map2D,
   TiledMap,
   Map2DView,
-  Logger,
 } from 'picimo';
 
 const display = new Display(document.querySelector('[picimo]'));
