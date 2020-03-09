@@ -3,25 +3,29 @@
 /* eslint-env node */
 const path = require('path');
 
+const colors = require('colors');
 const emoji = require('node-emoji');
 
 const isProd = process.env.NODE_ENV === 'production';
+const root = process.env.PICIMO_PROJECT_DIR || process.cwd();
 
 if (isProd) {
-  console.log(emoji.get('package'), 'production build is enabled');
+  console.log(emoji.get('package'), 'production build');
 }
 
+console.log(emoji.get('house'), 'project dir', colors.green(root));
+
 module.exports = {
-  entry: './src/index.js',
+  entry: path.join(root, 'src/index.js'),
   output: {
-    path: path.resolve(__dirname, 'public'),
+    path: path.resolve(root, 'public'),
     filename: 'bundle.js',
   },
   mode: isProd ? 'production' : 'development',
   devtool: isProd ? false : 'eval',
   devServer: {
     port: 3000,
-    contentBase: ['./public'],
+    contentBase: [path.join(root, 'public')],
     watchContentBase: true,
     compress: true,
     host: '0.0.0.0',
@@ -84,8 +88,8 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js', '.json'],
     alias: {
-      picimo: path.join(__dirname, '../../packages/picimo/src'),
-      'picimo-r3f': path.join(__dirname, '../../packages/picimo-r3f/src'),
+      picimo: path.join(__dirname, '../picimo/src'),
+      'picimo-r3f': path.join(__dirname, '../picimo-r3f/src'),
     },
   },
 };

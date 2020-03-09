@@ -4,29 +4,17 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server",
-    "build": "cross-env NODE_ENV=production webpack",
-    "clean": "rimraf dist .cache public/bundle.js"
+    "start": "picimo-example-cli start",
+    "build": "picimo-example-cli build",
+    "clean": "rimraf public/bundle.js"
   },
   "license": "MIT",
   "browserslist": [
     "last 2 chrome versions",
     "last 2 firefox versions"
   ],
-  "staticFiles": {
-    "staticPath": "public",
-    "watcherGlob": "**"
-  },
   "devDependencies": {
-    "babel-loader": "^8.0.6",
-    "cross-env": "^7.0.2",
-    "css-loader": "^3.4.2",
-    "rimraf": "^3.0.1",
-    "sass-loader": "^8.0.2",
-    "source-map-loader": "^0.2.4",
-    "style-loader": "^1.1.3",
-    "webpack": "^4.42.0",
-    "webpack-dev-server": "^3.10.3"
+    "@picimo/example-app-shell": "*"
   },
   "dependencies": {
     "picimo": "*",
