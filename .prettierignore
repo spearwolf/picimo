@@ -2,3 +2,4 @@ build
 dist
 assets
 coverage
+bundle.js

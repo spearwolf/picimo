@@ -3,7 +3,7 @@
 /* eslint-env node */
 const emoji = require('node-emoji');
 
-console.log(emoji.get('rocket'), 'babel.config.js');
+console.log(emoji.get('loudspeaker'), 'babel.config.js');
 
 module.exports = {
   presets: ['@babel/preset-typescript', '@babel/preset-react'],

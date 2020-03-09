@@ -5,6 +5,7 @@ const {spawn} = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
+const colors = require('colors');
 const program = require('commander');
 const emoji = require('node-emoji');
 
@@ -26,7 +27,11 @@ program.option(
 );
 
 function initialize(root) {
-  console.log(emoji.get('coffee'), packageJson.name, packageJson.version);
+  console.log(
+    emoji.get('coffee'),
+    colors.bold(packageJson.name),
+    packageJson.version,
+  );
   const projectDir = path.resolve(root || process.cwd());
   process.env.PICIMO_PROJECT_DIR = projectDir;
   return projectDir;

@@ -11,9 +11,11 @@ const root = process.env.PICIMO_PROJECT_DIR || process.cwd();
 
 if (isProd) {
   console.log(emoji.get('package'), 'production build');
+} else {
+  console.log(emoji.get('construction'), 'development mode activated');
 }
 
-console.log(emoji.get('house'), 'project dir', colors.green(root));
+console.log(emoji.get('circus_tent'), 'project dir', colors.green(root));
 
 module.exports = {
   entry: path.join(root, 'src/index.js'),
