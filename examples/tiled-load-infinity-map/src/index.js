@@ -23,10 +23,9 @@ display.on('init', async () => {
 
   const tiledMap = await TiledMap.load('./assets/lab-wall-tiles-new-map.json');
   await tiledMap.loadTileSets('./assets/');
+  tiledMap.createLayers(map2d, view); //, {layers: ['main', 'foreground']});
 
   console.log('loaded tilesets:', tiledMap.tilesets);
-
-  tiledMap.createLayers(map2d, view); //, {layers: ['main', 'foreground']});
 
   const panControl = new Map2DPanControl(view, projection);
 
