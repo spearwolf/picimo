@@ -22,7 +22,7 @@ const $getTileQuadMeshCache = Symbol('getTileQuadMeshCache');
  * uses a right-handed coordinate system by default the 3d *z* coordinate is mapped
  * to the internal 2d *y* map2d coordinate.
  */
-export class Map2D extends THREE.Object3D implements IMap2DRenderer {
+export class Map2D extends THREE.Scene implements IMap2DRenderer {
   static get BeginRenderEvent() {
     return 'map2dbeginrender';
   }

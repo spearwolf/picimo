@@ -6,7 +6,6 @@ import {Logger} from '../utils';
 import {IProjection} from '.';
 
 const log = new Logger('picimo.Stage2D');
-const frameLog = new Logger('picimo.Stage2D.frame', 1000, Infinity);
 
 export class Stage2D extends Scene {
   projection: IProjection;
@@ -36,7 +35,6 @@ export class Stage2D extends Scene {
 
   frame({display}: {display: Display}) {
     const {camera} = this;
-    if (frameLog.DEBUG) frameLog.log('frame', camera, this);
     if (camera) {
       display.renderer.render(this, camera);
     }

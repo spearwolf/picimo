@@ -288,12 +288,15 @@ export class Display extends Eventize {
 
   set stage(stage: Stage2D) {
     const curStage = this[$stage];
-    if (curStage) {
-      this.off(curStage);
-    }
-    this[$stage] = stage;
-    if (stage) {
-      this.on(stage);
+    if (stage !== curStage) {
+      if (curStage) {
+        this.off(curStage);
+      }
+      this[$stage] = stage;
+      if (stage) {
+        this.on(stage);
+        stage.resize(this[$getEventOptions]());
+      }
     }
   }
 
@@ -366,10 +369,10 @@ export class Display extends Eventize {
     this[$emitInit]();
 
     const renderFrame = (now: number) => {
+      this[$rafID] = window.requestAnimationFrame(renderFrame);
       if (!this.pause) {
         this.renderFrame(now);
       }
-      this[$rafID] = window.requestAnimationFrame(renderFrame);
     };
 
     this[$rafID] = window.requestAnimationFrame(renderFrame);
@@ -390,9 +393,7 @@ export class Display extends Eventize {
    * 2. resize stage projection
    */
   private [$emitResize]() {
-    this.emit(RESIZE, {
-      ...this[$getEventOptions](),
-    } as DisplayOnResizeOptions);
+    this.emit(RESIZE, this[$getEventOptions]() as DisplayOnResizeOptions);
   }
 
   /**
