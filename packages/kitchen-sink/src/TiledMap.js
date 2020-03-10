@@ -303,16 +303,7 @@ Promise.all([
   map2d.appendLayer(frontTileQuads);
   */
 
-  view = new Map2DView(
-    map2d,
-    projection,
-    0,
-    0,
-    projection.width,
-    projection.height,
-    100,
-    100,
-  );
+  view = new Map2DView(map2d, projection, 100, 100);
 
   // tiledMap.createLayers(map2d, view);
   tiledMap.createLayers(map2d, view, {layers: ['main', 'foreground']});

@@ -38,19 +38,17 @@ export class Map2DView {
   constructor(
     renderer: IMap2DRenderer,
     projection: IProjection,
-    centerX: number,
-    centerY: number,
-    width: number,
-    height: number,
     layerTileWidth: number,
     layerTileHeight: number,
+    centerX = 0,
+    centerY = 0,
   ) {
     this[$renderer] = renderer;
     this.projection = projection;
     this.centerX = centerX;
     this.centerY = centerY;
-    this.width = width;
-    this.height = height;
+    this.width = projection.width;
+    this.height = projection.height;
     this.layerTileWidth = layerTileWidth;
     this.layerTileHeight = layerTileHeight;
   }
@@ -79,7 +77,13 @@ export class Map2DView {
     this.height = height;
   }
 
-  update() {
+  update(
+    width: number = this.projection.width,
+    height: number = this.projection.height,
+  ) {
+    this.width = width;
+    this.height = height;
+
     const renderer = this[$renderer];
     renderer.beginRender(this);
     this.layers.forEach(layer => layer.update());
