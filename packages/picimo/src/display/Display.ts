@@ -369,10 +369,10 @@ export class Display extends Eventize {
     this[$emitInit]();
 
     const renderFrame = (now: number) => {
-      this[$rafID] = window.requestAnimationFrame(renderFrame);
       if (!this.pause) {
         this.renderFrame(now);
       }
+      this[$rafID] = window.requestAnimationFrame(renderFrame);
     };
 
     this[$rafID] = window.requestAnimationFrame(renderFrame);

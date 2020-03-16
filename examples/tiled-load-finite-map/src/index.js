@@ -1,13 +1,13 @@
 /* eslint-disable no-console */
 import {
   Display,
-  Map2D,
-  Map2DPanControl,
-  Map2DView,
+  Stage2D,
   OrthographicProjection,
   Plane,
-  Stage2D,
+  Map2D,
   TiledMap,
+  Map2DView,
+  Map2DPanControl,
 } from 'picimo';
 
 const display = new Display(document.querySelector('[picimo]'));
@@ -16,14 +16,16 @@ const stage = new Stage2D(projection);
 
 display.on('init', async () => {
   const map2d = new Map2D();
-  const view = new Map2DView(map2d, projection, 1024, 1024);
+  const view = new Map2DView(map2d, projection, 400, 400, 880, 530);
 
   console.log(map2d);
   console.log(view);
 
-  const tiledMap = await TiledMap.load('./assets/lab-wall-tiles-new-map.json');
+  const tiledMap = await TiledMap.load(
+    './assets/20200313-2bit-dungeon-100x100.json',
+  );
   await tiledMap.loadTileSets('./assets/');
-  tiledMap.createLayers(map2d, view); //, {layers: ['main', 'foreground']});
+  tiledMap.createLayers(map2d, view);
 
   console.log('loaded tilesets:', tiledMap.tilesets);
 

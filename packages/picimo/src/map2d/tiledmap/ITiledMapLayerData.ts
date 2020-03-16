@@ -2,7 +2,8 @@ import {ITiledMapCustomProperty} from './ITiledMapCustomProperty';
 import {ITiledMapLayerChunkData} from './ITiledMapLayerChunkData';
 
 export interface ITiledMapLayerData {
-  chunks: ITiledMapLayerChunkData[];
+  chunks?: ITiledMapLayerChunkData[];
+  data?: string;
   encoding: string;
   height: number;
   name: string;

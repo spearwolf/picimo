@@ -51,7 +51,7 @@ export interface VOPoolOptions<T, U> {
  * Pre-allocate a bunch of vertex objects.
  */
 function createVOs<T, U>(voPool: VOPool<T, U>, maxAllocSize = 0) {
-  const max = voPool.capacity - voPool.usedCount - voPool.allocatedCount;
+  const max = voPool.capacity - voPool.allocatedCount;
   const count = maxAllocSize > 0 && maxAllocSize < max ? maxAllocSize : max;
   const len = voPool.allocatedCount + count;
 

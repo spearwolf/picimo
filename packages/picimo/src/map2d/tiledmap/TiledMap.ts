@@ -47,11 +47,6 @@ export class TiledMap {
       this[$layerMap].set(layerData.name, new TiledMapLayer(this, layerData));
     });
 
-    if (!this.infinite) {
-      throw new Error(
-        `TiledMap: sorry only infinite === true maps are supported yet`,
-      );
-    }
     if (this.orientation !== 'orthogonal') {
       throw new Error(
         `TiledMap: sorry only orientation === orthogonal maps are supported yet`,

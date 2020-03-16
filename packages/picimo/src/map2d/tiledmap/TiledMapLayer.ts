@@ -1,5 +1,5 @@
 import {TileSet} from '../../textures';
-import {AABB2} from '../../utils';
+import {AABB2, Logger} from '../../utils';
 
 import {IMap2DLayerData, IViewCullingThreshold} from '../IMap2DLayerData';
 
@@ -24,6 +24,8 @@ const findChunk = (
     chunk.containsTileIdAt(x, y),
   );
 };
+
+const log = new Logger('picimo.TiledMapLayer');
 
 /**
  * Represents a specific layer of a TiledMap.
@@ -68,13 +70,24 @@ export class TiledMapLayer implements IMap2DLayerData {
 
     this.includeTilesets = props.valueAsCSLofStrings('includeTilesets');
 
-    const chunks: TiledMapLayerChunk[] = data.chunks.map(
-      (chunkData: ITiledMapLayerChunkData) => new TiledMapLayerChunk(chunkData),
-    );
-    this[$rootNode] = new ChunkQuadTreeNode(chunks);
+    if (log.DEBUG) {
+      log.debug('create TiledMapLayer', this, data);
+    }
 
-    if (autoSubdivide) {
-      this.subdivide();
+    if (tiledMap.infinite) {
+      const chunks: TiledMapLayerChunk[] = data.chunks.map(
+        (chunkData: ITiledMapLayerChunkData) =>
+          new TiledMapLayerChunk(chunkData),
+      );
+      this[$rootNode] = new ChunkQuadTreeNode(chunks);
+
+      if (autoSubdivide) {
+        this.subdivide();
+      }
+    } else {
+      this[$rootNode] = new ChunkQuadTreeNode(
+        new TiledMapLayerChunk(data as ITiledMapLayerChunkData),
+      );
     }
   }
 

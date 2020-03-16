@@ -9,7 +9,7 @@ The [Map2DView](./Map2DView.ts) represents a 2d area of a 2d map (&rarr; Map2D) 
 
 The [Map2DViewLayer](./Map2DViewLayer.ts) is organized as a grid of tiles (&rarr; Map2DViewTile) similar to a mosaic and is responsible for the lifecycle of the tiles dependent on their visibility which is defined by the _Map2DView&rarr;projection_.
 
-![Map2DView](./20200312-Map2D.png)
+![Map2DView](./docs/20200312-Map2D.png)
 
 The [Map2DViewTile](./Map2DViewTile.ts) represents an 2d array of _tile ids_. For this purpose it holds a reference to a _data layer_ (&rarr; [IMap2DLayerData](./IMap2DLayerData.ts)). On the other side it is positioned in the grid within the _view layer_ (&rarr; Map2DViewLayer).
 
@@ -18,4 +18,4 @@ The _data layer_ (&rarr; IMap2DLayerData) simply serves as store of the tile ids
 
 ### Class Diagram
 
-![Map2D Class Diagram](./Map2D-Class-Diagram.png)
+![Map2D Class Diagram](./docs/20200315-Map2D-Class-Diagram.png)

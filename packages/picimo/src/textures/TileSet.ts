@@ -107,7 +107,7 @@ export class TileSet implements ITileSet {
       } else {
         x = margin;
         y += tileOuterHeight + spacing;
-        if (y + tileOuterHeight + margin >= baseHeight) {
+        if (y + tileOuterHeight + margin > baseHeight) {
           break;
         }
       }

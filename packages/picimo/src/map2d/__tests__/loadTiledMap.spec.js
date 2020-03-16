@@ -115,11 +115,9 @@ describe('loadTiledMap', () => {
   describe('3: 181002-a-first-map-finite.json', () => {
     let tm = null;
 
-    it('new TiledMap throws an error', () => {
-      assert.throws(() => {
-        tm = new TiledMap(A_FIRST_MAP_FINITE);
-        assert(tm instanceof TiledMap);
-      });
+    it('should work', () => {
+      tm = new TiledMap(A_FIRST_MAP_FINITE);
+      assert(tm instanceof TiledMap);
     });
   });
 });
