@@ -38,10 +38,10 @@ export class Map2DView {
   constructor(
     renderer: IMap2DRenderer,
     projection: IProjection,
-    layerTileWidth: number,
-    layerTileHeight: number,
     centerX = 0,
     centerY = 0,
+    layerTileWidth = 512,
+    layerTileHeight = 512,
   ) {
     this[$renderer] = renderer;
     this.projection = projection;

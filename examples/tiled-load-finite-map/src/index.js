@@ -16,7 +16,7 @@ const stage = new Stage2D(projection);
 
 display.on('init', async () => {
   const map2d = new Map2D();
-  const view = new Map2DView(map2d, projection, 400, 400, 880, 530);
+  const view = new Map2DView(map2d, projection, 880, 530, 400, 400);
 
   console.log(map2d);
   console.log(view);
