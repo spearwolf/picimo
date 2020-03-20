@@ -1,3 +1,5 @@
+import {Logger} from '../utils';
+
 import {IMap2DLayerData} from './IMap2DLayerData';
 import {IMap2DLayerRenderer} from './IMap2DLayerRenderer';
 import {Map2DView} from './Map2DView';
@@ -16,6 +18,8 @@ const takeFrom = (
   }
   return null;
 };
+
+const log = new Logger('picimo.Map2DViewLayer');
 
 /**
  * Represents a single layer of a [[Map2DView]].
@@ -48,6 +52,10 @@ export class Map2DViewLayer {
     this.tileRows = Math.ceil(view.layerTileHeight / layerData.tileHeight);
     this.tileWidth = this.tileColumns * layerData.tileWidth;
     this.tileHeight = this.tileRows * layerData.tileHeight;
+
+    if (log.VERBOSE) {
+      log.log('created Map2DViewLayer', this);
+    }
   }
 
   /**

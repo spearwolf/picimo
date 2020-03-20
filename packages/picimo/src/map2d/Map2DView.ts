@@ -32,8 +32,8 @@ export class Map2DView {
   /**
    * @param centerX horizontal center position
    * @param centerY vertical center position
-   * @param layerTileWidth approximate width of a *grid tile* (see [[Map2DLayerTile]]) in *pixels*. The real size is a multiple of the size of a single tile.
-   * @param layerTileHeight approximate height of a *grid tile* (see [[Map2DLayerTile]]) in *pixels* The real size is a multiple of the size of a single tile.
+   * @param layerTileWidth approximate width of a *grid tile* (see [[Map2DLayerTile]]) in *pixels*. This is just a hint and the real size is a multiple of the size of a single tile which can be different for each layer.
+   * @param layerTileHeight approximate height of a *grid tile* (see [[Map2DLayerTile]]) in *pixels*. This is just a hint and the real size is a multiple of the size of a single tile which can be different for each layer.
    */
   constructor(
     renderer: IMap2DRenderer,
