@@ -30,7 +30,7 @@ const loadBallLayer = async (map2d, view) => {
 };
 
 const loadFrameLayer = async (map2d, view) => {
-  const frame = await TileSet.load('frame.png', {basePath: './assets/'});
+  const frame = await TileSet.load('frame-2.png', {basePath: './assets/'});
   view.addLayer(
     new Map2DViewLayer(
       view,
