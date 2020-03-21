@@ -45,6 +45,8 @@ export default {
             debug: false,
             modules: false,
             useBuiltIns: false,
+            bugfixes: true,
+            loose: true,
           },
         ],
       ],

@@ -8,7 +8,7 @@
     "picimo-example-cli": "./bin/picimo-example-cli.js"
   },
   "dependencies": {
-    "babel-loader": "^8.0.6",
+    "babel-loader": "^8.1.0",
     "colors": "^1.4.0",
     "commander": "^5.0.0",
     "css-loader": "^3.4.2",
