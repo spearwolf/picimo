@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "picimo-example-cli start",
-    "build": "picimo-example-cli build",
+    "start": "picimo-demo-cli start",
+    "build": "picimo-demo-cli build",
     "clean": "rimraf public/bundle.js"
   },
   "license": "MIT",
@@ -14,7 +14,7 @@
     "last 2 firefox versions"
   ],
   "devDependencies": {
-    "@picimo/example-app-shell": "*"
+    "@picimo/demo-shell": "*"
   },
   "dependencies": {
     "picimo": "*",

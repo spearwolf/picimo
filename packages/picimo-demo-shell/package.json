@@ -1,11 +1,11 @@
 {
-  "name": "@picimo/example-app-shell",
-  "description": "webpack launcher and app-shell utils for picimo examples",
+  "name": "@picimo/demo-shell",
+  "description": "webpack launcher and app-shell utils for picimo demos",
   "version": "0.0.1",
   "private": true,
   "license": "MIT",
   "bin": {
-    "picimo-example-cli": "./bin/picimo-example-cli.js"
+    "picimo-demo-cli": "./bin/picimo-demo-cli.js"
   },
   "dependencies": {
     "babel-loader": "^8.1.0",
