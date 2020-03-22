@@ -35,7 +35,7 @@ export class SpriteGroupBufferGeometry<T, U> extends BufferGeometry {
   }
 
   updateBuffers() {
-    this._buffers.forEach(buf => {
+    this._buffers.forEach((buf) => {
       buf.needsUpdate = true;
     });
   }

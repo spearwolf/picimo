@@ -64,7 +64,7 @@ describe('Texture', () => {
     let tex;
 
     describe('after complete', () => {
-      before(done => {
+      before((done) => {
         p2img.loaded.then(() => {
           tex = new Texture(p2img);
           done();
@@ -89,8 +89,8 @@ describe('Texture', () => {
 
   describe('Texture.load(url)', () => {
     let tex;
-    before(done => {
-      Texture.load('/assets/nobinger.png').then(texture => {
+    before((done) => {
+      Texture.load('/assets/nobinger.png').then((texture) => {
         tex = texture;
         done();
       });

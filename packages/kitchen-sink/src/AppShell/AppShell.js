@@ -51,7 +51,7 @@ class AppShell extends React.Component {
     if (typeof collapse === 'boolean') {
       this.setState({isSideNavCollapsed: collapse});
     } else {
-      this.setState(currentState => ({
+      this.setState((currentState) => ({
         isSideNavCollapsed: !currentState.isSideNavCollapsed,
       }));
     }

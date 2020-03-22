@@ -26,7 +26,7 @@ const PROJECTION = {
 const HELLO = `HELLO
 STORYBOOK!`;
 
-const makeCharCountUpdater = setCharCount => bt2d =>
+const makeCharCountUpdater = (setCharCount) => (bt2d) =>
   setCharCount(bt2d.bitmapChars.usedCount);
 
 export const KitchenSink = () => {

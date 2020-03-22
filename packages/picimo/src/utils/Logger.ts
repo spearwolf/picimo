@@ -141,7 +141,7 @@ export const getGlobalLogConfig = () => {
           debug(null, 'clear config and reset to defaults');
           this.verbose = VERBOSE_BY_DEFAULT;
           this.defaultLogLevel = DEFAULT_LOG_LEVEL;
-          Object.keys(this.logger).forEach(name => this.clearLogLevel(name));
+          Object.keys(this.logger).forEach((name) => this.clearLogLevel(name));
           this.logger = {};
         },
 

@@ -91,7 +91,7 @@ export class Map2D extends THREE.Scene implements IMap2DRenderer {
   dispose() {
     const tileQuadMeshCache = this[$tileQuadMeshCache];
     if (tileQuadMeshCache) {
-      tileQuadMeshCache.dispose(mesh => mesh.geometry.dispose());
+      tileQuadMeshCache.dispose((mesh) => mesh.geometry.dispose());
     }
     if (!this.isExternalMaterialCache) {
       this.materialCache.all().forEach(({texture, material}) => {
@@ -111,7 +111,7 @@ export class Map2D extends THREE.Scene implements IMap2DRenderer {
   }
 
   private [$dispatchEvent](type: string, options?: Object) {
-    this.children.forEach(obj3d =>
+    this.children.forEach((obj3d) =>
       obj3d.dispatchEvent({type, map2d: this, ...options}),
     );
   }

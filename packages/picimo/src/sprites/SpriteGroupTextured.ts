@@ -56,6 +56,6 @@ export class SpriteGroupTextured<T, U> extends SpriteGroup<T, U> {
   }
 
   createSpritesFromTextures(textures: Texture[]) {
-    return textures.map(tex => this.createSpriteFromTexture(tex));
+    return textures.map((tex) => this.createSpriteFromTexture(tex));
   }
 }

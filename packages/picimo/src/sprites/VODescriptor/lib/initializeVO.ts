@@ -7,7 +7,7 @@ export function initializeVO(vertexObject: any, initializer: any) {
       break;
 
     case 'object':
-      Object.keys(initializer).forEach(key => {
+      Object.keys(initializer).forEach((key) => {
         const attrDesc = vertexObject.descriptor.attr[key];
         const value = initializer[key];
         if (attrDesc) {

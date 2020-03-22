@@ -23,7 +23,7 @@ export function createBufferAttributes<T, U, K = InterleavedBuffer>(
 
   const {dynamic} = spriteGroup.voPool.voArray.hints;
 
-  Object.keys(descriptor.attr).forEach(attrName => {
+  Object.keys(descriptor.attr).forEach((attrName) => {
     const attr = descriptor.attr[attrName];
 
     let buffer = bufMap.get(attr.type);

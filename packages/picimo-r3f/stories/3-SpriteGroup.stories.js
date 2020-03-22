@@ -49,7 +49,7 @@ const createSprites = ({spriteGroup, textureAtlas, projection}) => {
   const halfOfSprites = Math.floor(SPRITES / 2);
   const w =
     sprites
-      .map(s => s.width)
+      .map((s) => s.width)
       .sort()
       .slice(0, halfOfSprites)
       .reduce((sum, w) => sum + w, 0) / halfOfSprites;
@@ -57,7 +57,7 @@ const createSprites = ({spriteGroup, textureAtlas, projection}) => {
 
   if (log.VERBOSE) log.log('average width of sprites:', w, textureAtlas);
 
-  sprites.forEach(sprite => {
+  sprites.forEach((sprite) => {
     const [x, y] = [
       Math.random() * projection.width - projection.width * 0.5,
       Math.random() * projection.height - projection.height * 0.5,
@@ -73,7 +73,7 @@ const createSprites = ({spriteGroup, textureAtlas, projection}) => {
   return sprites;
 };
 
-const onCreate = ctx => {
+const onCreate = (ctx) => {
   if (log.VERBOSE) log.log('CREATE SPRITES', ctx);
   return createSprites(ctx);
 };

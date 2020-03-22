@@ -113,10 +113,10 @@ function resize() {
   if (map2d) {
     const tiles = [];
     let quadsCount = 0;
-    Array.from(map2d.map2dLayers.values()).forEach(layer => {
+    Array.from(map2d.map2dLayers.values()).forEach((layer) => {
       const meshs = layer.getObject3D().children;
       tiles.push(
-        ...meshs.map(obj => {
+        ...meshs.map((obj) => {
           quadsCount += obj.tiles.usedCount;
           return obj.name;
         }),
@@ -334,7 +334,7 @@ Promise.all([
 
   rendererShouldRender = true;
 
-  document.addEventListener('keydown', event => {
+  document.addEventListener('keydown', (event) => {
     const {keyCode} = event;
     switch (keyCode) {
       case 87: // W
@@ -352,7 +352,7 @@ Promise.all([
     }
   });
 
-  const changeViewSize = multiplyByScalar => {
+  const changeViewSize = (multiplyByScalar) => {
     if (view) {
       view.width *= multiplyByScalar;
       view.height = calcViewHeight(view.width);
@@ -361,7 +361,7 @@ Promise.all([
     }
   };
 
-  document.addEventListener('keyup', event => {
+  document.addEventListener('keyup', (event) => {
     const {keyCode} = event;
     switch (keyCode) {
       case 87: // W

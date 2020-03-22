@@ -39,7 +39,7 @@ const controls = new OrbitControls(camera3d, display.canvas);
 
 let viewFrame;
 
-const switchCamera = camera => {
+const switchCamera = (camera) => {
   curCamera = camera;
   if (camera === camera3d) {
     if (viewFrame) {
@@ -115,7 +115,7 @@ async function init() {
   //   }
   // };
 
-  document.addEventListener('keyup', event => {
+  document.addEventListener('keyup', (event) => {
     const {keyCode} = event;
     switch (keyCode) {
       case 49: // 1

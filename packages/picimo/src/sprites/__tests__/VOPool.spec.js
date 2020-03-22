@@ -39,7 +39,7 @@ describe('VOPool', () => {
     assert.deepEqual(descriptor.typeList, ['float32', 'uint8'].sort());
     assert.deepEqual(descriptor.scalars, ['position', 'color']);
     assert.deepEqual(
-      descriptor.attrList.map(attr => attr.name),
+      descriptor.attrList.map((attr) => attr.name),
       ['position', 'color'],
     );
   });

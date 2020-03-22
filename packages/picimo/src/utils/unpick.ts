@@ -3,7 +3,7 @@ export const unpick = <T extends Object>(names: string[]) => (
 ): T | null => {
   let newObj: any = null;
   if (obj != null) {
-    Object.keys(obj).forEach(key => {
+    Object.keys(obj).forEach((key) => {
       if (!names.includes(key)) {
         const val = (obj as any)[key];
         if (val !== undefined) {

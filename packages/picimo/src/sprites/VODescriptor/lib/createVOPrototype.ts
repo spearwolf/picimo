@@ -9,7 +9,7 @@ export function createVOPrototype(descriptor: any, methods = {}) {
     },
   };
 
-  Object.keys(descriptor.attr).forEach(name => {
+  Object.keys(descriptor.attr).forEach((name) => {
     const attr = descriptor.attr[name];
     VOAttrDescriptor.defineProperties(attr, propertiesObject, descriptor);
   });

@@ -32,7 +32,7 @@ function makeThreeTexture(textureSource: Texture) {
 
 const constructMeshName = (tileId: string, mesh: THREE.Mesh) =>
   Array.isArray(mesh.material)
-    ? `${tileId}[${mesh.material.map(mat => mat.uuid).join(',')}]`
+    ? `${tileId}[${mesh.material.map((mat) => mat.uuid).join(',')}]`
     : `${tileId}[${mesh.material.uuid}]`;
 
 /**
@@ -67,7 +67,7 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
     this[$meshCache] = meshCache;
     this[$materialCache] = materialCache;
 
-    this[$materials] = tilesets.map(tileset => {
+    this[$materials] = tilesets.map((tileset) => {
       const texSrc = tileset.getTextureSource();
       if (!materialCache.has(texSrc.uuid)) {
         const tex = makeThreeTexture(texSrc);
@@ -86,8 +86,8 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
   }
 
   dispose() {
-    Array.from(this[$tiles].values()).forEach(meshs =>
-      meshs.forEach(mesh => this[$freeMesh](mesh)),
+    Array.from(this[$tiles].values()).forEach((meshs) =>
+      meshs.forEach((mesh) => this[$freeMesh](mesh)),
     );
     this[$tiles].clear();
   }
@@ -95,7 +95,7 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
   addViewTile(tile: Map2DViewTile) {
     const meshs = this[$createTileMesh](tile);
     if (meshs != null) {
-      meshs.forEach(mesh => {
+      meshs.forEach((mesh) => {
         mesh.name = constructMeshName(tile.id, mesh);
         this[$obj3d].add(mesh);
       });
@@ -105,7 +105,7 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
   removeViewTile(tileId: string) {
     const meshs = this[$destroyTile](tileId);
     if (meshs != null) {
-      meshs.forEach(mesh => this[$freeMesh](mesh));
+      meshs.forEach((mesh) => this[$freeMesh](mesh));
     }
   }
 

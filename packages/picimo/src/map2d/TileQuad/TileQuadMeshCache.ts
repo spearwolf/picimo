@@ -47,7 +47,7 @@ export class TileQuadMeshCache {
 
   dispose(fn: (mesh: TileQuadMesh) => void) {
     const cache = this[$cache];
-    Array.from(cache.values()).forEach(meshCache => meshCache.forEach(fn));
+    Array.from(cache.values()).forEach((meshCache) => meshCache.forEach(fn));
     cache.clear();
   }
 }

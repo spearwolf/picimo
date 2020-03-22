@@ -20,7 +20,7 @@ export const BitmapText2D = ({
 }) => {
   const [bitmapText2DContext, setBitmapText2DContext] = useState([]);
 
-  const onFontAtlasUpdate = bt2d => {
+  const onFontAtlasUpdate = (bt2d) => {
     if (log.DEBUG)
       log.log('onFontAtlasUpdate, fontAtlas=', bt2d.fontAtlas, bt2d);
     if (

@@ -76,7 +76,7 @@ describe('SpriteGroup', () => {
     it('function', () => {
       const sg = new SpriteGroup(voDescriptor, {
         capacity: 10,
-        voNew: vo => {
+        voNew: (vo) => {
           vo.x1 = 17;
           vo.y3 = 66;
         },

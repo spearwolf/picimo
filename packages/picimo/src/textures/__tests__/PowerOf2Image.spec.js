@@ -8,8 +8,8 @@ describe('PowerOf2Image', () => {
   describe('should load image from given url', () => {
     const p2img = new PowerOf2Image('/assets/nobinger.png');
     let promiseResult;
-    before('after load', done => {
-      p2img.loaded.then(img => {
+    before('after load', (done) => {
+      p2img.loaded.then((img) => {
         promiseResult = img;
         done();
       });
@@ -51,7 +51,7 @@ describe('PowerOf2Image', () => {
   describe('should convert non-power-of-2 image', () => {
     const p2img = new PowerOf2Image('/assets/bird-chicken-penguin.png');
 
-    before('after load', done => {
+    before('after load', (done) => {
       p2img.loaded.then(() => done());
     });
 

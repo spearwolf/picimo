@@ -73,13 +73,13 @@ export class SpriteGroupInstancedBufferGeometry<
   }
 
   updateBuffers() {
-    this._buffers.forEach(buf => {
+    this._buffers.forEach((buf) => {
       buf.needsUpdate = true;
     });
   }
 
   updateInstancedBuffers() {
-    this._instancedBuffers.forEach(buf => {
+    this._instancedBuffers.forEach((buf) => {
       buf.needsUpdate = true;
     });
   }

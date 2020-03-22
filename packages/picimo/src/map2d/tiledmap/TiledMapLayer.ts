@@ -105,7 +105,7 @@ export class TiledMapLayer implements IMap2DLayerData {
     if (!this.includeTilesets || this.includeTilesets.length === 0) {
       return tilesets;
     }
-    const res = tilesets.filter(tileset => {
+    const res = tilesets.filter((tileset) => {
       if (tileset.name) {
         let found = false;
         for (let i = 0; i < this.includeTilesets.length; i++) {

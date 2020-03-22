@@ -8,8 +8,8 @@ export default styled.a`
   font-weight: 400;
   font-size: 14px;
   text-decoration: none;
-  color: ${props => (props.active ? '#FF3060' : '#28C')};
-  background-color: ${props => (props.active ? '#ffe8e7' : 'transparent')};
+  color: ${(props) => (props.active ? '#FF3060' : '#28C')};
+  background-color: ${(props) => (props.active ? '#ffe8e7' : 'transparent')};
   padding: 5px 14px 3px 35px;
   border-radius: 16px;
   margin-left: -33px;

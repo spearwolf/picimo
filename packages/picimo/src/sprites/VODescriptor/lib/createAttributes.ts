@@ -18,7 +18,7 @@ export const createAttributes = (
   if (Array.isArray(attributesOrObject)) {
     attributes = attributesOrObject;
   } else if (typeof attributesOrObject === 'object') {
-    attributes = Object.keys(attributesOrObject).map(name => {
+    attributes = Object.keys(attributesOrObject).map((name) => {
       const attrConf = attributesOrObject[name];
       return {
         name,
@@ -88,5 +88,5 @@ export const createAttributes = (
   descriptor.bytesPerVO = descriptor.bytesPerVertex * descriptor.vertexCount;
   descriptor.vertexAttrCount = offset;
 
-  descriptor.attrList = descriptor.scalars.map(name => descriptor.attr[name]);
+  descriptor.attrList = descriptor.scalars.map((name) => descriptor.attr[name]);
 };

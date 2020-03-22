@@ -8,8 +8,8 @@ import assertVOAttrDescriptor from './assertVOAttrDescriptor';
 
 /** @private */
 const assertPropertyTypes = (vo, props) => {
-  Object.keys(props).forEach(type => {
-    props[type].forEach(name => {
+  Object.keys(props).forEach((type) => {
+    props[type].forEach((name) => {
       assert.equal(typeof vo[name], type, name);
     });
   });

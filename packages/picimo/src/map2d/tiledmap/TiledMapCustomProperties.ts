@@ -14,7 +14,7 @@ export class TiledMapCustomProperties {
   }
 
   get(name: string): ITiledMapCustomProperty {
-    return this[$props].find(prop => prop.name === name) || null;
+    return this[$props].find((prop) => prop.name === name) || null;
   }
 
   value(name: string) {
@@ -31,7 +31,7 @@ export class TiledMapCustomProperties {
         const int = parseInt(`${value}`, 10);
         int4 = [int, int, int, int];
       } else if (typeof value === 'string') {
-        const numbers = value.split(' ').map(str => parseInt(str, 10));
+        const numbers = value.split(' ').map((str) => parseInt(str, 10));
         switch (numbers.length) {
           case 1:
             int4 = [numbers[0], numbers[0], numbers[0], numbers[0]];
@@ -144,7 +144,7 @@ export class TiledMapCustomProperties {
             break;
         }
       }
-      const res = strings.map(s => s.trim()).filter(s => s.length);
+      const res = strings.map((s) => s.trim()).filter((s) => s.length);
       if (res.length) {
         return res;
       }

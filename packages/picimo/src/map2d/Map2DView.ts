@@ -86,7 +86,7 @@ export class Map2DView {
 
     const renderer = this[$renderer];
     renderer.beginRender(this);
-    this.layers.forEach(layer => layer.update());
+    this.layers.forEach((layer) => layer.update());
     renderer.endRender(this);
   }
 }

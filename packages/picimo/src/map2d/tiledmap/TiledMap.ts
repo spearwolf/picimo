@@ -28,7 +28,7 @@ export interface TiledMapCreateLayersOptions {
 
 export class TiledMap {
   static async load(url: string): Promise<TiledMap> {
-    return new TiledMap(await fetch(url).then(response => response.json()));
+    return new TiledMap(await fetch(url).then((response) => response.json()));
   }
 
   readonly tilesets: Array<TileSet> = [];
@@ -72,12 +72,12 @@ export class TiledMap {
     return this[$layerMap].get(name);
   }
   getAllLayers(): TiledMapLayer[] {
-    return this[$data].layers.map(layer => this.getLayer(layer.name));
+    return this[$data].layers.map((layer) => this.getLayer(layer.name));
   }
 
   async loadTileSets(basePath = './') {
     const tilesets = await Promise.all(
-      this[$data].tilesets.map(tilesetInfo =>
+      this[$data].tilesets.map((tilesetInfo) =>
         TileSet.load(tilesetInfo.image, {
           basePath,
           name: tilesetInfo.name,
@@ -103,7 +103,7 @@ export class TiledMap {
   ) {
     const layerNames = readOption(options, 'layers') as string[];
     const layers =
-      (layerNames && layerNames.map(name => this.getLayer(name))) ||
+      (layerNames && layerNames.map((name) => this.getLayer(name))) ||
       this.getAllLayers();
     const yOffset = readOption(options, 'yOffset', Y_OFFSET) as number;
 
@@ -114,7 +114,7 @@ export class TiledMap {
 
     let y = readOption(options, 'yStart', Y_START) as number;
 
-    layers.forEach(tiledMapLayer => {
+    layers.forEach((tiledMapLayer) => {
       const hasYOffset = !isNaN(tiledMapLayer.yOffset);
       const tilesets = tiledMapLayer.filterTilesets(this.tilesets);
 

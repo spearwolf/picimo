@@ -99,7 +99,7 @@ function mat4(
   m33: string | number = 1,
   as = asFloat,
 ) {
-  const toStr = as || (x => `${x}`);
+  const toStr = as || ((x) => `${x}`);
   return `mat4(${toStr(m00)}, ${toStr(m01)}, ${toStr(m02)}, ${toStr(
     m03,
   )}, ${toStr(m10)}, ${toStr(m11)}, ${toStr(m12)}, ${toStr(m13)}, ${toStr(

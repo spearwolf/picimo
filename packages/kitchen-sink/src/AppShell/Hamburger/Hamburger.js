@@ -12,7 +12,7 @@ const Container = styled.div`
   .hamburger-inner,
   .hamburger-inner::before,
   .hamburger-inner::after {
-    background-color: ${props =>
+    background-color: ${(props) =>
       `${props.active ? props.activeColor : props.color}`};
   }
 `;

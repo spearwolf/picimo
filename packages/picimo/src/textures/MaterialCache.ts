@@ -64,7 +64,7 @@ export class MaterialCache<T, M> {
   }
 
   listRefCounts() {
-    return Array.from(this[$texMats].keys()).map(id => ({
+    return Array.from(this[$texMats].keys()).map((id) => ({
       id,
       refCount: this[$texMats].get(id).refCount,
     }));

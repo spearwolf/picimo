@@ -19,7 +19,7 @@ const attrPostfix = (
 };
 
 const getVNu = (getArray: any, offset: number) =>
-  function(attrIndex: number): number {
+  function (attrIndex: number): number {
     // @ts-ignore
     return getArray(this.voArray)[offset + attrIndex];
   };
@@ -31,7 +31,7 @@ const setVNu = (
   vertexAttrCount: number,
   offset: number,
 ) =>
-  function() {
+  function () {
     // @ts-ignore
     const arr = getArray(this.voArray);
 
@@ -43,7 +43,7 @@ const setVNu = (
   };
 
 const getV1u = (getArray: any, offset: number) =>
-  function(): number {
+  function (): number {
     // @ts-ignore
     return getArray(this.voArray)[offset];
   };
@@ -55,7 +55,7 @@ const setVNv = (
   vertexAttrCount: number,
   offset: number,
 ) =>
-  function() {
+  function () {
     // @ts-ignore
     const arr = getArray(this.voArray);
 
@@ -72,7 +72,7 @@ const setV1u = (
   vertexAttrCount: number,
   offset: number,
 ) =>
-  function(value: number) {
+  function (value: number) {
     // @ts-ignore
     const arr = getArray(this.voArray);
 

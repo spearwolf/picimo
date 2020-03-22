@@ -50,7 +50,7 @@ export class PowerOf2Image {
     const imageHasValidSize = imgEl.width > 0 && imgEl.height > 0;
     if (waitUntilLoading || !imageHasValidSize) {
       this.imgEl = null;
-      this.loaded = new Promise(resolve => {
+      this.loaded = new Promise((resolve) => {
         const origOnLoad = imgEl.onload;
         imgEl.onload = (...args) => {
           if (origOnLoad) {

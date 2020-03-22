@@ -19,10 +19,10 @@ const Container = styled.div`
 
 const Content = styled.div`
   position: absolute;
-  top: ${props => props.top || 0};
-  bottom: ${props => props.bottom || 0};
-  right: ${props => props.right || 0};
-  left: ${props => props.left || 0};
+  top: ${(props) => props.top || 0};
+  bottom: ${(props) => props.bottom || 0};
+  right: ${(props) => props.right || 0};
+  left: ${(props) => props.left || 0};
 `;
 
 const Svg = styled.div`
@@ -34,42 +34,42 @@ const Svg = styled.div`
 
 const TriangleSW = Svg.extend`
   background-image: url('${svgSW}');
-  bottom: ${props => props.bottom || 0};
-  right: ${props => props.right || 0};
-  left: ${props => props.left || 0};
-  height: ${props => props.height};
+  bottom: ${(props) => props.bottom || 0};
+  right: ${(props) => props.right || 0};
+  left: ${(props) => props.left || 0};
+  height: ${(props) => props.height};
 `;
 
 const TriangleSW2 = Svg.extend`
   background-image: url('${svgSW}');
-  bottom: ${props => props.bottom || 0};
-  top: ${props => props.top || 0};
-  left: ${props => props.left || 0};
-  width: ${props => props.width};
+  bottom: ${(props) => props.bottom || 0};
+  top: ${(props) => props.top || 0};
+  left: ${(props) => props.left || 0};
+  width: ${(props) => props.width};
 `;
 
 const QuadSW = Svg.extend`
   background-image: url('${svgQuad}');
   left: 0;
   bottom: 0;
-  width: ${props => props.width};
-  height: ${props => props.height};
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
 `;
 
 const TriangleSE = Svg.extend`
   background-image: url('${svgSE}');
-  top: ${props => props.top || 0};
-  right: ${props => props.right || 0};
-  bottom: ${props => props.bottom || 0};
-  width: ${props => props.width};
+  top: ${(props) => props.top || 0};
+  right: ${(props) => props.right || 0};
+  bottom: ${(props) => props.bottom || 0};
+  width: ${(props) => props.width};
 `;
 
 const TriangleNE = Svg.extend`
   background-image: url('${svgNE}');
-  top: ${props => props.top || 0};
-  right: ${props => props.right || 0};
-  left: ${props => props.left || 0};
-  height: ${props => props.height};
+  top: ${(props) => props.top || 0};
+  right: ${(props) => props.right || 0};
+  left: ${(props) => props.left || 0};
+  height: ${(props) => props.height};
 `;
 
 // const TriangleNW = Svg.extend`
@@ -81,7 +81,7 @@ const QuadN = Svg.extend`
   top: 0;
   left: 0;
   right: 0;
-  height: ${props => props.height};
+  height: ${(props) => props.height};
 `;
 
 const QuadS = Svg.extend`
@@ -89,7 +89,7 @@ const QuadS = Svg.extend`
   left: 0;
   right: 0;
   bottom: 0;
-  height: ${props => props.height};
+  height: ${(props) => props.height};
 `;
 
 const QuadE = Svg.extend`
@@ -97,7 +97,7 @@ const QuadE = Svg.extend`
   right: 0;
   top: 0;
   bottom: 0;
-  width: ${props => props.width};
+  width: ${(props) => props.width};
 `;
 
 const QuadW = Svg.extend`
@@ -105,7 +105,7 @@ const QuadW = Svg.extend`
   left: 0;
   top: 0;
   bottom: 0;
-  width: ${props => props.width};
+  width: ${(props) => props.width};
 `;
 
 const BevelledEdges = ({

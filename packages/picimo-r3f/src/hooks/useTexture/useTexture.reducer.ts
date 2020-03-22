@@ -77,7 +77,7 @@ export const reducer = (state: ITextureState, action: TextureActionType) => {
       const {name, loading, dispatch} = action.payload;
       // TODO fix equality check!!! texture -> check for options?
       if (loading !== state.loading[name]) {
-        loading.then(texture => dispatch(SetTexture(name, texture)));
+        loading.then((texture) => dispatch(SetTexture(name, texture)));
         return {
           ...state,
           loading: {
@@ -93,7 +93,7 @@ export const reducer = (state: ITextureState, action: TextureActionType) => {
       const {name, loading, dispatch} = action.payload;
       // TODO fix equality check!!! texture -> check for options?
       if (loading !== state.loading[name]) {
-        loading.then(textureAtlas =>
+        loading.then((textureAtlas) =>
           dispatch(setTextureAtlas(name, textureAtlas)),
         );
         return {

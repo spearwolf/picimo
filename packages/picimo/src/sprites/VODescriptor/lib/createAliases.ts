@@ -4,7 +4,7 @@ import {VODescriptor} from '../VODescriptor';
 export const createAliases = (descriptor: VODescriptor, aliases: any) => {
   if (typeof aliases !== 'object') return;
 
-  Object.keys(aliases).forEach(name => {
+  Object.keys(aliases).forEach((name) => {
     let attr = aliases[name];
 
     if (typeof attr === 'string') {

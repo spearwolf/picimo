@@ -41,7 +41,7 @@ export class TextureAtlas implements ITexturable {
    * Load a texture atlas from json defintion
    */
   static async load(path: string, basePath = './') {
-    const atlas = await fetch(`${basePath}${path}`).then(response =>
+    const atlas = await fetch(`${basePath}${path}`).then((response) =>
       response.json(),
     );
     const baseTexture = new Texture(
@@ -62,7 +62,7 @@ export class TextureAtlas implements ITexturable {
   constructor(baseTexture: Texture, data: TextureAtlasDescription) {
     this.baseTexture = baseTexture;
 
-    Object.keys(data.frames).forEach(name => {
+    Object.keys(data.frames).forEach((name) => {
       const frameData = data.frames[name];
       const {frame} = frameData;
       const features = filterFrameFeatures(frameData);
@@ -71,7 +71,7 @@ export class TextureAtlas implements ITexturable {
 
     const {meta} = data;
     if (meta !== undefined) {
-      Object.keys(meta).forEach(name => {
+      Object.keys(meta).forEach((name) => {
         this.setFeature(name, meta[name]);
       });
     }
@@ -86,7 +86,7 @@ export class TextureAtlas implements ITexturable {
     this._allFrames.push(texture);
     this._frames.set(name, texture);
     if (features != null) {
-      Object.keys(features).forEach(name => {
+      Object.keys(features).forEach((name) => {
         texture.setFeature(name, features[name]);
       });
     }
@@ -123,7 +123,7 @@ export class TextureAtlas implements ITexturable {
   frameNames(match?: string | RegExp) {
     if (match != null) {
       const regex = typeof match === 'string' ? new RegExp(match) : match;
-      return this._allFrameNames.filter(name => regex.test(name));
+      return this._allFrameNames.filter((name) => regex.test(name));
     }
     return this._allFrameNames;
   }

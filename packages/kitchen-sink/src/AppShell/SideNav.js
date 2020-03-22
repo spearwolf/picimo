@@ -14,7 +14,7 @@ export default styled.div`
     transition-duration: 0.2s;
     transition-timing-function: ease;
     transition-property: transform;
-    transform: ${props => `translateX(${props.collapsed ? '-100%' : '0'})`};
+    transform: ${(props) => `translateX(${props.collapsed ? '-100%' : '0'})`};
   }
   @media (min-width: ${BREAKPOINT_SHOW_HAMBURGER}px) {
     flex: 0 0 ${SIDENAV_SIZE}px;

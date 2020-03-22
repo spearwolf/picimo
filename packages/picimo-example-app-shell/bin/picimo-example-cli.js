@@ -64,10 +64,7 @@ function build({root}) {
 }
 
 async function main() {
-  program
-    .command('build')
-    .description('build project')
-    .action(build);
+  program.command('build').description('build project').action(build);
   program
     .command('start')
     .description('start local dev server')

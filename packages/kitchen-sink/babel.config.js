@@ -1,5 +1,5 @@
 /* eslint-disable */
-module.exports = api => {
+module.exports = (api) => {
   api.cache(true);
 
   const plugins = [

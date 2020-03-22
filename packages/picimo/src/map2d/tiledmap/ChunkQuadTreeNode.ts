@@ -127,7 +127,7 @@ export class ChunkQuadTreeNode {
         this.isLeaf = false;
 
         this.chunks.length = 0;
-        chunks.forEach(chunk => this.appendChunk(chunk));
+        chunks.forEach((chunk) => this.appendChunk(chunk));
 
         this.subdivideQuadrant(Quadrant.NorthEast, maxChunkNodes);
         this.subdivideQuadrant(Quadrant.NorthWest, maxChunkNodes);
@@ -181,7 +181,7 @@ export class ChunkQuadTreeNode {
   }
 
   findVisibleChunks(aabb: AABB2) {
-    let chunks = this.chunks.filter(chunk => chunk.isIntersecting(aabb));
+    let chunks = this.chunks.filter((chunk) => chunk.isIntersecting(aabb));
 
     if (this.isNorthWest(aabb)) {
       chunks = chunks.concat(this.nodes.northWest.findVisibleChunks(aabb));
@@ -238,14 +238,14 @@ export class ChunkQuadTreeNode {
 
   toDebugJson(): object | string {
     if (this.isLeaf) {
-      return this.chunks.map(chunk => chunk.rawData).join(', ');
+      return this.chunks.map((chunk) => chunk.rawData).join(', ');
     }
     const out: any = {
       _originX: this.originX,
       _originY: this.originY,
     };
     if (this.chunks.length) {
-      out._chunks = this.chunks.map(chunk => chunk.rawData).join(', ');
+      out._chunks = this.chunks.map((chunk) => chunk.rawData).join(', ');
     }
     if (this.nodes.northEast) {
       out.NorthEast = this.nodes.northEast.toDebugJson();

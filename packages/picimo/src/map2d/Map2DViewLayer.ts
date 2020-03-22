@@ -12,7 +12,7 @@ const takeFrom = (
   left: number,
   top: number,
 ): Map2DViewTile => {
-  const idx = tiles.findIndex(tile => tile.isLayerTilePosition(left, top));
+  const idx = tiles.findIndex((tile) => tile.isLayerTilePosition(left, top));
   if (idx !== -1) {
     return tiles.splice(idx, 1)[0];
   }
@@ -130,7 +130,7 @@ export class Map2DViewLayer {
     // -------------------------------
 
     this.tiles = knownTiles.concat(newTiles);
-    this.tiles.forEach(tile => {
+    this.tiles.forEach((tile) => {
       tile.fetchTileIds();
       this.layerRenderer.renderViewTile(tile);
     });
@@ -138,8 +138,8 @@ export class Map2DViewLayer {
     // IV. remove unused tiles
     // -----------------------------
 
-    removeTiles = removeTiles.concat(reuseTiles.map(tile => tile.id));
-    removeTiles.forEach(tile => this.layerRenderer.removeViewTile(tile));
+    removeTiles = removeTiles.concat(reuseTiles.map((tile) => tile.id));
+    removeTiles.forEach((tile) => this.layerRenderer.removeViewTile(tile));
   }
 
   private [$createTile](x: number, y: number, reuseTile?: Map2DViewTile) {

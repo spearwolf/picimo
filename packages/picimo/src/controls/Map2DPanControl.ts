@@ -209,7 +209,7 @@ export class Map2DPanControl extends InputControl {
     if (event.pointerType === 'mouse') {
       if (
         !Array.from(pointersDown.values()).find(
-          state => state.pointerType === MOUSE,
+          (state) => state.pointerType === MOUSE,
         )
       ) {
         this.restoreCursorStyle(event);

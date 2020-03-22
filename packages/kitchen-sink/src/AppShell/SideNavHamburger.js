@@ -11,7 +11,8 @@ export default styled(Hamburger)`
   position: absolute;
   top: 0;
   left: ${SIDENAV_SIZE}px;
-  transform: ${props => (props.active ? 'translateX(-70px)' : 'translateX(0)')};
+  transform: ${(props) =>
+    props.active ? 'translateX(-70px)' : 'translateX(0)'};
   width: ${HAMBURER_SIZE}px;
   height: ${HAMBURER_SIZE}px;
   z-index: 200;

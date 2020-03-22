@@ -61,7 +61,7 @@ export class Map2DFlat2DTilesLayer implements IMap2DLayer {
 
   dispose() {
     const tiles = this[$tiles];
-    Array.from(tiles.values()).forEach(tile => {
+    Array.from(tiles.values()).forEach((tile) => {
       tile.geometry.dispose();
     });
     tiles.clear();

@@ -6,8 +6,8 @@ import {AABB2} from '../../utils';
 import {ChunkQuadTreeNode} from '../tiledmap/ChunkQuadTreeNode';
 import {TiledMapLayerChunk} from '../tiledmap/TiledMapLayerChunk';
 
-const chunkNodeNames = nodes =>
-  nodes.map(chunkNode => chunkNode.rawData).sort();
+const chunkNodeNames = (nodes) =>
+  nodes.map((chunkNode) => chunkNode.rawData).sort();
 
 describe('ChunkQuadTreeNode', () => {
   describe('create without children', () => {

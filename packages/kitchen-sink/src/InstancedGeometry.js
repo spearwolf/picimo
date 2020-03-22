@@ -105,7 +105,7 @@ const init = async ({display, scene}) => {
   const material = new THREE.MeshLambertMaterial();
 
   // @ts-ignore
-  material.onBeforeCompile = shader => {
+  material.onBeforeCompile = (shader) => {
     shader.uniforms.time = timeUniform;
 
     shader.vertexShader = `
@@ -121,8 +121,9 @@ const init = async ({display, scene}) => {
     shader.vertexShader = shader.vertexShader.replace(
       '#include <begin_vertex>',
       `
-        vec3 transformed = vec3( position + vec3( move.xy, 150.0 * cos(time + ( move.z * ${Math.PI *
-          4}) ) - 75.0) );
+        vec3 transformed = vec3( position + vec3( move.xy, 150.0 * cos(time + ( move.z * ${
+          Math.PI * 4
+        }) ) - 75.0) );
 
         vTint = tint / 255.0;
       `,

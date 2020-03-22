@@ -25,7 +25,7 @@ export const useLifecycleRef = (
 
   let onCreateCalled = false;
 
-  const setRef = useCallback(node => {
+  const setRef = useCallback((node) => {
     if (ref.current && onDestroy) {
       onDestroy(ref.current);
     }

@@ -22,7 +22,7 @@ export class ProjectionRules<T extends IProjectionRule = IProjectionRule> {
     const {rules} = this;
     return (
       rules &&
-      rules.find(rule => {
+      rules.find((rule) => {
         const {constraints} = rule;
         if (constraints) {
           const {orientation} = constraints;

@@ -165,7 +165,7 @@ export class SpriteGroup<T, U> {
     const {setSpriteSize} = this;
     if (setSpriteSize && (width !== undefined || height !== undefined)) {
       const h = height !== undefined ? height : width;
-      sprites.forEach(sprite =>
+      sprites.forEach((sprite) =>
         setSpriteSize(sprite, width, h, this.descriptor),
       );
     }

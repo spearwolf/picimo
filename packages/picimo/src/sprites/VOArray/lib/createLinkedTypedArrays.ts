@@ -47,7 +47,7 @@ export const createLinkedTypedArrays = (
 ) => {
   const typedArrays: TypedArrays = {};
 
-  arrayTypes.forEach(type => {
+  arrayTypes.forEach((type) => {
     const TypedArray = TYPED_ARRAY[type];
     const arr = new TypedArray(
       buffer,

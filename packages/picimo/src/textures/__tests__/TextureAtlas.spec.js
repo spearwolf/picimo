@@ -8,8 +8,8 @@ describe('TextureAtlas', () => {
   describe('TextureAtlas.load', () => {
     let atlas;
 
-    before(done => {
-      TextureAtlas.load('nobinger.json', '/assets/').then(textureAtlas => {
+    before((done) => {
+      TextureAtlas.load('nobinger.json', '/assets/').then((textureAtlas) => {
         atlas = textureAtlas;
         done();
       });
@@ -60,8 +60,8 @@ describe('TextureAtlas', () => {
   describe('attach frame features to Texture', () => {
     let atlas;
 
-    before(done => {
-      TextureAtlas.load('rbmfs.json', '/assets/').then(textureAtlas => {
+    before((done) => {
+      TextureAtlas.load('rbmfs.json', '/assets/').then((textureAtlas) => {
         atlas = textureAtlas;
         done();
       });
