@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+import {Scene, Texture, Material, Group, Object3D} from 'three';
 
 import {ITileSet, MaterialCache} from '../textures';
 
@@ -22,7 +22,7 @@ const $getTileQuadMeshCache = Symbol('getTileQuadMeshCache');
  * uses a right-handed coordinate system by default the 3d *z* coordinate is mapped
  * to the internal 2d *y* map2d coordinate.
  */
-export class Map2D extends THREE.Scene implements IMap2DRenderer {
+export class Map2D extends Scene implements IMap2DRenderer {
   static get BeginRenderEvent() {
     return 'map2dbeginrender';
   }
@@ -31,34 +31,42 @@ export class Map2D extends THREE.Scene implements IMap2DRenderer {
   }
 
   readonly map2dLayers = new Set<IMap2DLayer>();
+  readonly layersGroup = new Group();
 
-  readonly materialCache: MaterialCache<THREE.Texture, THREE.Material>;
+  readonly materialCache: MaterialCache<Texture, Material>;
   readonly isExternalMaterialCache: boolean;
 
   private [$tileQuadMeshCache]: TileQuadMeshCache = null;
 
-  constructor(materialCache?: MaterialCache<THREE.Texture, THREE.Material>) {
+  constructor(materialCache?: MaterialCache<Texture, Material>) {
     super();
+
     if (materialCache) {
       this.materialCache = materialCache;
       this.isExternalMaterialCache = true;
     } else {
-      this.materialCache = new MaterialCache<THREE.Texture, THREE.Material>();
+      this.materialCache = new MaterialCache<Texture, Material>();
       this.isExternalMaterialCache = false;
     }
+
+    this.add(this.layersGroup);
+    this.layersGroup.name = 'map2d.layers';
   }
 
   /**
    * @param distanceToProjectionPlane use negative numbers to move the plane further away from the camera and positive numbers to move the plane closer to the camera
    */
   createTileQuadMeshLayer(tilesets: ITileSet[], distanceToProjectionPlane = 0) {
+    // TODO extract to separat factory
     const layer = new Map2DTileQuadsLayer(
       tilesets,
       this[$getTileQuadMeshCache](),
       this.materialCache,
     );
     if (distanceToProjectionPlane !== 0) {
-      layer.getObject3D().position.set(0, distanceToProjectionPlane, 0);
+      const obj3d = layer.getObject3D();
+      obj3d.position.set(0, distanceToProjectionPlane, 0);
+      // TODO obj3d.renderOrder = distanceToProjectionPlane;
     }
     this.appendLayer(layer);
     return layer;
@@ -68,7 +76,7 @@ export class Map2D extends THREE.Scene implements IMap2DRenderer {
     const layers = this.map2dLayers;
     if (!layers.has(layer)) {
       layers.add(layer);
-      this.add(layer.getObject3D());
+      this.layersGroup.add(layer.getObject3D());
     }
   }
 
@@ -76,7 +84,7 @@ export class Map2D extends THREE.Scene implements IMap2DRenderer {
     const layers = this.map2dLayers;
     if (layers.has(layer)) {
       layers.delete(layer);
-      this.remove(layer.getObject3D());
+      this.layersGroup.remove(layer.getObject3D());
     }
   }
 
@@ -111,7 +119,7 @@ export class Map2D extends THREE.Scene implements IMap2DRenderer {
   }
 
   private [$dispatchEvent](type: string, options?: Object) {
-    this.children.forEach((obj3d) =>
+    this.layersGroup.children.forEach((obj3d) =>
       obj3d.dispatchEvent({type, map2d: this, ...options}),
     );
   }

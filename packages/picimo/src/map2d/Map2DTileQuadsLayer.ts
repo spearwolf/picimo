@@ -46,7 +46,7 @@ const constructMeshName = (tileId: string, mesh: THREE.Mesh) =>
 export class Map2DTileQuadsLayer implements IMap2DLayer {
   readonly tilesets: ITileSet[];
 
-  private readonly [$obj3d]: THREE.Object3D = new THREE.Object3D();
+  private readonly [$obj3d]: THREE.Group = new THREE.Group();
 
   private readonly [$tiles]: Map<string, TileQuadMesh[]> = new Map();
 
