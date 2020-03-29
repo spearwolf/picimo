@@ -4,14 +4,16 @@ import {
   Display,
   Map2D,
   Map2DPanControl,
+  Map2DTileQuadsLayer,
   Map2DView,
   Map2DViewFrame,
   Map2DViewLayer,
   OrthographicProjection,
+  Plane,
   RepeatingPatternLayer,
   TileSet,
-  Plane,
 } from 'picimo';
+
 import * as THREE from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 
@@ -81,7 +83,7 @@ async function init() {
   view.addLayer(
     new Map2DViewLayer(
       view,
-      map2d.createTileQuadMeshLayer([ball]),
+      Map2DTileQuadsLayer.createAndAppend(map2d, [ball]),
       RepeatingPatternLayer.fromTile(ball, 1),
     ),
   );

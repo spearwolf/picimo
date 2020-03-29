@@ -3,6 +3,7 @@ import {readOption, Logger} from '../../utils';
 import {IMap2DLayer} from '../IMap2DLayer';
 import {Map2D} from '../Map2D';
 
+import {Map2DTileQuadsLayer} from '../Map2DTileQuadsLayer';
 import {Map2DView} from '../Map2DView';
 
 import {Map2DViewLayer} from '../Map2DViewLayer';
@@ -124,7 +125,8 @@ export class TiledMap {
         switch (tiledMapLayer.type) {
           case 'tilelayer':
             if (tilesets) {
-              map2dLayer = map2d.createTileQuadMeshLayer(
+              map2dLayer = Map2DTileQuadsLayer.createAndAppend(
+                map2d,
                 tilesets,
                 (hasYOffset && tiledMapLayer.yOffset) || y,
               );

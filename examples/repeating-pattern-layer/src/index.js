@@ -10,6 +10,7 @@ import {
   TileSet,
   Map2DViewLayer,
   RepeatingPatternLayer,
+  Map2DTileQuadsLayer,
 } from 'picimo';
 
 const display = new Display(document.querySelector('[picimo]'));
@@ -23,7 +24,7 @@ const loadBallLayer = async (map2d, view) => {
   view.addLayer(
     new Map2DViewLayer(
       view,
-      map2d.createTileQuadMeshLayer([ball], -50),
+      Map2DTileQuadsLayer.createAndAppend(map2d, [ball], -50),
       RepeatingPatternLayer.fromTile(ball, 1),
     ),
   );
@@ -34,7 +35,7 @@ const loadFrameLayer = async (map2d, view) => {
   view.addLayer(
     new Map2DViewLayer(
       view,
-      map2d.createTileQuadMeshLayer([frame]),
+      Map2DTileQuadsLayer.createAndAppend(map2d, [frame]),
       RepeatingPatternLayer.fromTile(frame, 1),
     ),
   );

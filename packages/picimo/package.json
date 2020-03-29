@@ -79,6 +79,7 @@
     "rollup-plugin-replace": "^2.2.0",
     "rollup-plugin-size-snapshot": "^0.11.0",
     "rollup-plugin-terser": "^5.3.0",
+    "sinon": "^9.0.1",
     "three": "^0.114.0",
     "typescript": "^3.8.3",
     "webpack": "^4.42.0",

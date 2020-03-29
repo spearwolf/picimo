@@ -2,6 +2,7 @@
 /* tslint:disable:no-console */
 import {
   Map2D,
+  Map2DTileQuadsLayer,
   Map2DView,
   Map2DViewFrame,
   Map2DViewLayer,
@@ -322,7 +323,7 @@ Promise.all([
   view.addLayer(
     new Map2DViewLayer(
       view,
-      map2d.createTileQuadMeshLayer([ball], -100),
+      Map2DTileQuadsLayer.createAndAppend(map2d, [ball], -100),
       RepeatingPatternLayer.fromTile(ball, 1),
     ),
   );

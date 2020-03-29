@@ -4,6 +4,7 @@ import {ITileSet, Texture, MaterialCache} from '../textures';
 
 import {IMap2DLayer} from './IMap2DLayer';
 import {Map2D} from './Map2D';
+import {Map2DContextProperty} from './Map2DContext';
 import {Map2DViewTile} from './Map2DViewTile';
 
 import {TileQuadMaterial} from './TileQuad/TileQuadMaterial';
@@ -36,6 +37,13 @@ const constructMeshName = (tileId: string, mesh: THREE.Mesh) =>
     ? `${tileId}[${mesh.material.map((mat) => mat.uuid).join(',')}]`
     : `${tileId}[${mesh.material.uuid}]`;
 
+const Map2DTileQuadMeshCache = {
+  name: 'tileQuadMeshCache',
+  create: () => new TileQuadMeshCache(),
+  dispose: (cache: TileQuadMeshCache) =>
+    cache.dispose((mesh) => mesh.geometry.dispose()),
+};
+
 /**
  * Represents a map2d layer.
  *
@@ -64,9 +72,14 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
     tilesets: ITileSet[],
     distanceToProjectionPlane = 0,
   ) {
+    map2d.context.create(Map2DTileQuadMeshCache as Map2DContextProperty);
+    const tileQuadMeshCache = map2d.context.get(
+      Map2DTileQuadMeshCache.name,
+    ) as TileQuadMeshCache;
+
     const layer = new Map2DTileQuadsLayer(
       tilesets,
-      /* TODO meshCache -> as static lazy property */ null,
+      tileQuadMeshCache,
       map2d.materialCache,
       distanceToProjectionPlane,
     );

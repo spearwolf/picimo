@@ -1,17 +1,13 @@
-import {Scene, Texture, Material, Group, Object3D} from 'three';
+import {Scene, Texture, Material, Group} from 'three';
 
-import {ITileSet, MaterialCache} from '../textures';
+import {MaterialCache} from '../textures';
 
 import {IMap2DLayer} from './IMap2DLayer';
 import {IMap2DRenderer} from './IMap2DRenderer';
-import {Map2DTileQuadsLayer} from './Map2DTileQuadsLayer';
+import {Map2DContext} from './Map2DContext';
 import {Map2DView} from './Map2DView';
 
-import {TileQuadMeshCache} from './TileQuad/TileQuadMeshCache';
-
 const $dispatchEvent = Symbol('dispatchEvent');
-const $tileQuadMeshCache = Symbol('tileQuadMeshCache');
-const $getTileQuadMeshCache = Symbol('getTileQuadMeshCache');
 
 /**
  * Represents a map2d scene.
@@ -33,39 +29,13 @@ export class Map2D extends Scene implements IMap2DRenderer {
   readonly map2dLayers = new Set<IMap2DLayer>();
   readonly layersGroup = new Group();
 
-  readonly materialCache: MaterialCache<Texture, Material>;
-  readonly isExternalMaterialCache: boolean;
+  readonly materialCache = new MaterialCache<Texture, Material>();
+  readonly context = new Map2DContext();
 
-  private [$tileQuadMeshCache]: TileQuadMeshCache = null; // TODO move to Map2DTileQuadsLayer as static
-
-  constructor(materialCache?: MaterialCache<Texture, Material>) {
+  constructor() {
     super();
-
-    if (materialCache) {
-      this.materialCache = materialCache;
-      this.isExternalMaterialCache = true;
-    } else {
-      this.materialCache = new MaterialCache<Texture, Material>();
-      this.isExternalMaterialCache = false;
-    }
-
     this.add(this.layersGroup);
     this.layersGroup.name = 'map2d.layers';
-  }
-
-  /**
-   * @param distanceToProjectionPlane use negative numbers to move the plane further away from the camera and positive numbers to move the plane closer to the camera
-   */
-  createTileQuadMeshLayer(tilesets: ITileSet[], distanceToProjectionPlane = 0) {
-    // TODO extract to separat factory
-    const layer = new Map2DTileQuadsLayer(
-      tilesets,
-      this[$getTileQuadMeshCache](),
-      this.materialCache,
-      distanceToProjectionPlane,
-    );
-    this.appendLayer(layer);
-    return layer;
   }
 
   appendLayer(layer: IMap2DLayer) {
@@ -95,25 +65,11 @@ export class Map2D extends Scene implements IMap2DRenderer {
   }
 
   dispose() {
-    const tileQuadMeshCache = this[$tileQuadMeshCache];
-    if (tileQuadMeshCache) {
-      tileQuadMeshCache.dispose((mesh) => mesh.geometry.dispose());
-    }
-    if (!this.isExternalMaterialCache) {
-      this.materialCache.all().forEach(({texture, material}) => {
-        material.dispose();
-        texture.dispose();
-      });
-    }
-  }
-
-  private [$getTileQuadMeshCache]() {
-    let meshCache = this[$tileQuadMeshCache];
-    if (!meshCache) {
-      meshCache = new TileQuadMeshCache();
-      this[$tileQuadMeshCache] = meshCache;
-    }
-    return meshCache;
+    this.context.dispose();
+    this.materialCache.all().forEach(({texture, material}) => {
+      material.dispose();
+      texture.dispose();
+    });
   }
 
   private [$dispatchEvent](type: string, options?: Object) {
