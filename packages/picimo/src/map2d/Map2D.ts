@@ -36,7 +36,7 @@ export class Map2D extends Scene implements IMap2DRenderer {
   readonly materialCache: MaterialCache<Texture, Material>;
   readonly isExternalMaterialCache: boolean;
 
-  private [$tileQuadMeshCache]: TileQuadMeshCache = null;
+  private [$tileQuadMeshCache]: TileQuadMeshCache = null; // TODO move to Map2DTileQuadsLayer as static
 
   constructor(materialCache?: MaterialCache<Texture, Material>) {
     super();
@@ -62,12 +62,8 @@ export class Map2D extends Scene implements IMap2DRenderer {
       tilesets,
       this[$getTileQuadMeshCache](),
       this.materialCache,
+      distanceToProjectionPlane,
     );
-    if (distanceToProjectionPlane !== 0) {
-      const obj3d = layer.getObject3D();
-      obj3d.position.set(0, distanceToProjectionPlane, 0);
-      // TODO obj3d.renderOrder = distanceToProjectionPlane;
-    }
     this.appendLayer(layer);
     return layer;
   }
@@ -76,7 +72,9 @@ export class Map2D extends Scene implements IMap2DRenderer {
     const layers = this.map2dLayers;
     if (!layers.has(layer)) {
       layers.add(layer);
-      this.layersGroup.add(layer.getObject3D());
+      const obj3d = layer.getObject3D();
+      this.layersGroup.add(obj3d);
+      obj3d.position.set(0, layer.getDistanceToProjectionPlane(), 0);
     }
   }
 

@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import {ITileSet, Texture, MaterialCache} from '../textures';
 
 import {IMap2DLayer} from './IMap2DLayer';
+import {Map2D} from './Map2D';
 import {Map2DViewTile} from './Map2DViewTile';
 
 import {TileQuadMaterial} from './TileQuad/TileQuadMaterial';
@@ -58,14 +59,34 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
     THREE.Material
   >;
 
+  static createAndAppend(
+    map2d: Map2D,
+    tilesets: ITileSet[],
+    distanceToProjectionPlane = 0,
+  ) {
+    const layer = new Map2DTileQuadsLayer(
+      tilesets,
+      /* TODO meshCache -> as static lazy property */ null,
+      map2d.materialCache,
+      distanceToProjectionPlane,
+    );
+    map2d.appendLayer(layer);
+    return layer;
+  }
+
+  /**
+   * @param distanceToProjectionPlane use negative numbers to move the plane further away from the camera and positive numbers to move the plane closer to the camera
+   */
   constructor(
     tilesets: ITileSet[],
     meshCache: TileQuadMeshCache,
     materialCache: MaterialCache<THREE.Texture, THREE.Material>,
+    distanceToProjectionPlane = 0,
   ) {
     this.tilesets = tilesets;
     this[$meshCache] = meshCache;
     this[$materialCache] = materialCache;
+    this.distanceToProjectionPlane = distanceToProjectionPlane;
 
     this[$materials] = tilesets.map((tileset) => {
       const texSrc = tileset.getTextureSource();
@@ -81,8 +102,16 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
     return this[$obj3d];
   }
 
-  getDistanceToProjectionPlane() {
+  set distanceToProjectionPlane(distance: number) {
+    this[$obj3d].position.y = distance;
+  }
+
+  get distanceToProjectionPlane() {
     return this[$obj3d].position.y;
+  }
+
+  getDistanceToProjectionPlane() {
+    return this.distanceToProjectionPlane;
   }
 
   dispose() {
