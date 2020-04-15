@@ -1,0 +1,23 @@
+{
+  "name": "@picimo/textured-sprites",
+  "description": "a picimo sketch",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "picimo-demo-cli start",
+    "build": "picimo-demo-cli build",
+    "clean": "rimraf public/bundle.js"
+  },
+  "license": "MIT",
+  "browserslist": [
+    "last 2 chrome versions",
+    "last 2 firefox versions"
+  ],
+  "devDependencies": {
+    "@picimo/demo-shell": "*"
+  },
+  "dependencies": {
+    "picimo": "*",
+    "three": "^0.114.0"
+  }
+}
