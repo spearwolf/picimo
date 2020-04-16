@@ -15,7 +15,7 @@ import {ShaderMaterial, DoubleSide} from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
 
 const display = new Display(document.querySelector('[picimo]'));
-const projection = new ParallaxProjection(Plane.XY, {pixelZoom: 2, far: 10000});
+const projection = new ParallaxProjection(Plane.XY, {pixelZoom: 2});
 const stage = new Stage2D(projection);
 
 display.on('init', async () => {
