@@ -4,7 +4,7 @@ import {IProjectionSpecs} from './IProjectionSpecs';
 import {Projection} from './Projection';
 
 const DEFAULT_DISTANCE = 100;
-const DEFAULT_NEAR = 0.0001;
+const DEFAULT_NEAR = 0.1;
 const DEFAULT_FAR = 100000;
 
 export type IOrthographicProjectionSpecs = IProjectionSpecs & {

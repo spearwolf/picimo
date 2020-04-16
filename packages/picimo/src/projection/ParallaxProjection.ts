@@ -6,8 +6,8 @@ import {Projection} from './Projection';
 // import { Logger } from "../../utils";
 
 const DEFAULT_DISTANCE = 300;
-const DEFAULT_NEAR = 0.0001;
-const DEFAULT_FAR = 1000;
+const DEFAULT_NEAR = 0.1;
+const DEFAULT_FAR = 100000;
 
 export type IParallaxProjectionSpecs = IProjectionSpecs & {
   /**
