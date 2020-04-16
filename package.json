@@ -59,8 +59,7 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "run-s lint",
-      "pre-push": "run-s clean build test"
+      "pre-commit": "run-s lint cbt"
     }
   }
 }
