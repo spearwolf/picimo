@@ -211,6 +211,10 @@ display.on('init', async () => {
   orbit.dampingFactor = 0.25;
   orbit.autoRotate = true;
   orbit.autoRotateSpeed = 0.25;
+
+  display.on('frame', () => {
+    orbit.update();
+  });
 });
 
 display.stage = stage;
