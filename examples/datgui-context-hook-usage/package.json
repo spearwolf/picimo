@@ -1,0 +1,25 @@
+{
+  "name": "datgui-context-hook-example",
+  "description": "usage example for datgui-context-hook",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "picimo-demo-cli start",
+    "build": "picimo-demo-cli build",
+    "clean": "rimraf public/bundle.js"
+  },
+  "license": "MIT",
+  "browserslist": [
+    "last 2 chrome versions",
+    "last 2 firefox versions"
+  ],
+  "devDependencies": {
+    "@picimo/demo-shell": "*"
+  },
+  "dependencies": {
+    "datgui-context-hook": "*",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}
