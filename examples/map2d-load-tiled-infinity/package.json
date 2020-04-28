@@ -1,5 +1,5 @@
 {
-  "name": "@picimo/tiled-load-infinity-map",
+  "name": "@picimo/map2d-load-tiled-infinity",
   "description": "a picimo sketch",
   "version": "1.0.0",
   "private": true,

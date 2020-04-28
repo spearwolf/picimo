@@ -1,4 +1,4 @@
 node_modules
 $Recycle.Bin
 .vscode
-examples/textured-sprites/public/bundle.js
+examples/*/public/bundle.js

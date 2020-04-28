@@ -1,5 +1,5 @@
 {
-  "name": "@picimo/repeating-pattern-layer",
+  "name": "@picimo/map2d-load-tiled-finite",
   "description": "a picimo sketch",
   "version": "1.0.0",
   "private": true,
