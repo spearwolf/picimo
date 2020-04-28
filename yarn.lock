@@ -8612,7 +8612,7 @@ react-reconciler@0.25.1:
     prop-types "^15.6.2"
     scheduler "^0.19.1"
 
-react-three-fiber@^4.1.1:
+react-three-fiber@^4.0.12, react-three-fiber@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/react-three-fiber/-/react-three-fiber-4.1.1.tgz#441e2000bee0dc5872affaf189d8dfa6739d5c0e"
   integrity sha512-dFvG8ITjMD1p3qxHERuAl1B1tCOW8YfvWWOxyQVUO1wjkvdBXrMZ272cx//2lTF4y3O59n08M8nudN/kNAPQ/w==

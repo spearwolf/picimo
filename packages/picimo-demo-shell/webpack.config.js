@@ -61,7 +61,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.[jt]s?$/,
+        test: /\.[jt]sx?$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -91,7 +91,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.ts', '.js', '.json'],
+    extensions: ['.ts', '.js', '.tsx', '.jsx', '.json'],
     alias: {
       picimo: path.join(__dirname, '../picimo/src'),
       'picimo-r3f': path.join(__dirname, '../picimo-r3f/src'),
