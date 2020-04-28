@@ -34,6 +34,7 @@ module.exports = {
     useLocalIp: true,
     disableHostCheck: true,
   },
+  stats: 'minimal',
   module: {
     rules: [
       {
