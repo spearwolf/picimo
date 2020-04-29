@@ -24,8 +24,9 @@ const loadBallLayer = async (map2d, view) => {
   view.addLayer(
     new Map2DViewLayer(
       view,
-      Map2DTileQuadsLayer.createAndAppend(map2d, [ball], -50),
+      Map2DTileQuadsLayer.appendNewLayer(map2d, [ball]),
       RepeatingPatternLayer.fromTile(ball, 1),
+      [0, 0, -50],
     ),
   );
 };
@@ -35,7 +36,7 @@ const loadFrameLayer = async (map2d, view) => {
   view.addLayer(
     new Map2DViewLayer(
       view,
-      Map2DTileQuadsLayer.createAndAppend(map2d, [frame]),
+      Map2DTileQuadsLayer.appendNewLayer(map2d, [frame]),
       RepeatingPatternLayer.fromTile(frame, 1),
     ),
   );

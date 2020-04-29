@@ -55,8 +55,8 @@ export class Map2DFlat2DTilesLayer implements IMap2DLayer {
     return this[$obj3d];
   }
 
-  getDistanceToProjectionPlane() {
-    return this[$obj3d].position.y;
+  setViewOffset(x: number, y: number, depth: number) {
+    this[$obj3d].position.set(x, depth, y);
   }
 
   dispose() {

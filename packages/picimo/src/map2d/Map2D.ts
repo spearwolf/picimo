@@ -44,7 +44,6 @@ export class Map2D extends Scene implements IMap2DRenderer {
       layers.add(layer);
       const obj3d = layer.getObject3D();
       this.layersGroup.add(obj3d);
-      obj3d.position.set(0, layer.getDistanceToProjectionPlane(), 0);
     }
   }
 

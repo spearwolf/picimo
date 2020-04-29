@@ -67,39 +67,29 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
     THREE.Material
   >;
 
-  static createAndAppend(
-    map2d: Map2D,
-    tilesets: ITileSet[],
-    distanceToProjectionPlane = 0,
-  ) {
+  static getTileQuadMeshCache(map2d: Map2D) {
     map2d.context.create(Map2DTileQuadMeshCache as Map2DContextProperty);
-    const tileQuadMeshCache = map2d.context.get(
-      Map2DTileQuadMeshCache.name,
-    ) as TileQuadMeshCache;
+    return map2d.context.get(Map2DTileQuadMeshCache.name) as TileQuadMeshCache;
+  }
 
+  static appendNewLayer(map2d: Map2D, tilesets: ITileSet[]) {
     const layer = new Map2DTileQuadsLayer(
       tilesets,
-      tileQuadMeshCache,
+      Map2DTileQuadsLayer.getTileQuadMeshCache(map2d),
       map2d.materialCache,
-      distanceToProjectionPlane,
     );
     map2d.appendLayer(layer);
     return layer;
   }
 
-  /**
-   * @param distanceToProjectionPlane use negative numbers to move the plane further away from the camera and positive numbers to move the plane closer to the camera
-   */
   constructor(
     tilesets: ITileSet[],
     meshCache: TileQuadMeshCache,
     materialCache: MaterialCache<THREE.Texture, THREE.Material>,
-    distanceToProjectionPlane = 0,
   ) {
     this.tilesets = tilesets;
     this[$meshCache] = meshCache;
     this[$materialCache] = materialCache;
-    this.distanceToProjectionPlane = distanceToProjectionPlane;
 
     this[$materials] = tilesets.map((tileset) => {
       const texSrc = tileset.getTextureSource();
@@ -115,16 +105,8 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
     return this[$obj3d];
   }
 
-  set distanceToProjectionPlane(distance: number) {
-    this[$obj3d].position.y = distance;
-  }
-
-  get distanceToProjectionPlane() {
-    return this[$obj3d].position.y;
-  }
-
-  getDistanceToProjectionPlane() {
-    return this.distanceToProjectionPlane;
+  setViewOffset(x: number, y: number, depth: number) {
+    this[$obj3d].position.set(x, depth, y);
   }
 
   dispose() {

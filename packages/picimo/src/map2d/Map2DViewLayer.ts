@@ -29,6 +29,7 @@ const log = new Logger('picimo.Map2DViewLayer');
  */
 export class Map2DViewLayer {
   readonly view: Map2DView;
+
   readonly layerRenderer: IMap2DLayerRenderer;
   readonly layerData: IMap2DLayerData;
 
@@ -37,17 +38,28 @@ export class Map2DViewLayer {
   readonly tileWidth: number;
   readonly tileHeight: number;
 
+  viewOffsetX: number;
+  viewOffsetY: number;
+  viewOffsetDepth: number;
+
   tiles: Map2DViewTile[] = [];
 
   constructor(
     view: Map2DView,
     layerRenderer: IMap2DLayerRenderer,
     layerData: IMap2DLayerData,
+    [viewOffsetX, viewOffsetY, viewOffsetDepth] = [0, 0, 0],
   ) {
     this.view = view;
+
     this.layerRenderer = layerRenderer;
     this.layerData = layerData;
 
+    this.viewOffsetX = viewOffsetX || 0;
+    this.viewOffsetY = viewOffsetY || 0;
+    this.viewOffsetDepth = viewOffsetDepth || 0;
+
+    // TODO use zoom here:
     this.tileColumns = Math.ceil(view.layerTileWidth / layerData.tileWidth);
     this.tileRows = Math.ceil(view.layerTileHeight / layerData.tileHeight);
     this.tileWidth = this.tileColumns * layerData.tileWidth;
@@ -66,29 +78,32 @@ export class Map2DViewLayer {
     // I. create visible map tiles (and remove/dispose unvisible)
     // ---------------------------------------------------------------
 
-    const {view} = this;
-    const zoom = view.projection.getZoom(
-      this.layerRenderer.getDistanceToProjectionPlane(),
-    );
-    const viewHalfWidth = view.width * 0.5 * zoom;
-    const viewHalfHeight = view.height * 0.5 * zoom;
+    const {view, viewOffsetDepth} = this;
+
+    const zoom = view.projection.getZoom(viewOffsetDepth);
+
+    const viewHalfWidth = view.width * zoom * 0.5;
+    const viewHalfHeight = view.height * zoom * 0.5;
 
     const {viewCullingThreshold} = this.layerData;
 
+    const viewCenterX = view.centerX + this.viewOffsetX;
+    const viewCenterY = view.centerY + this.viewOffsetY;
+
     const left = Math.floor(
-      (view.centerX - viewHalfWidth - viewCullingThreshold.left) /
+      (viewCenterX - viewHalfWidth - viewCullingThreshold.left) /
         this.tileWidth,
     );
     const top = Math.floor(
-      (view.centerY - viewHalfHeight - viewCullingThreshold.top) /
+      (viewCenterY - viewHalfHeight - viewCullingThreshold.top) /
         this.tileHeight,
     );
     const right = Math.ceil(
-      (view.centerX + viewHalfWidth + viewCullingThreshold.right) /
+      (viewCenterX + viewHalfWidth + viewCullingThreshold.right) /
         this.tileWidth,
     );
     const bottom = Math.ceil(
-      (view.centerY + viewHalfHeight + viewCullingThreshold.bottom) /
+      (viewCenterY + viewHalfHeight + viewCullingThreshold.bottom) /
         this.tileHeight,
     );
 
@@ -112,6 +127,11 @@ export class Map2DViewLayer {
         }
       }
     }
+
+    // Ia. update view offset
+    // ---------------------------------------------------------------
+
+    this.layerRenderer.setViewOffset(0, 0, viewOffsetDepth);
 
     // II. create geometries for all *new* map tiles
     // -------------------------------------------------

@@ -118,6 +118,7 @@ export class TiledMap {
     layers.forEach((tiledMapLayer) => {
       const hasYOffset = !isNaN(tiledMapLayer.yOffset);
       const tilesets = tiledMapLayer.filterTilesets(this.tilesets);
+      const viewOffset: [number, number, number] = [0, 0, 0];
 
       let map2dLayer: IMap2DLayer;
 
@@ -125,11 +126,8 @@ export class TiledMap {
         switch (tiledMapLayer.type) {
           case 'tilelayer':
             if (tilesets) {
-              map2dLayer = Map2DTileQuadsLayer.createAndAppend(
-                map2d,
-                tilesets,
-                (hasYOffset && tiledMapLayer.yOffset) || y,
-              );
+              map2dLayer = Map2DTileQuadsLayer.appendNewLayer(map2d, tilesets);
+              viewOffset[2] = (hasYOffset && tiledMapLayer.yOffset) || y;
             }
             break;
 
@@ -142,7 +140,7 @@ export class TiledMap {
 
       if (map2dLayer) {
         map2dView.addLayer(
-          new Map2DViewLayer(map2dView, map2dLayer, tiledMapLayer),
+          new Map2DViewLayer(map2dView, map2dLayer, tiledMapLayer, viewOffset),
         );
 
         if (!hasYOffset) {
