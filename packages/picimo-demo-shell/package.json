@@ -10,13 +10,14 @@
   "dependencies": {
     "babel-loader": "^8.1.0",
     "colors": "^1.4.0",
-    "commander": "^5.0.0",
-    "css-loader": "^3.5.2",
+    "commander": "^5.1.0",
+    "css-loader": "^3.5.3",
     "node-emoji": "^1.10.0",
     "sass-loader": "^8.0.2",
     "source-map-loader": "^0.2.4",
-    "style-loader": "^1.1.4",
-    "webpack": "^4.42.1",
+    "style-loader": "^1.2.0",
+    "webpack": "^4.43.0",
     "webpack-dev-server": "^3.10.3"
-  }
+  },
+  "devDependencies": {}
 }
