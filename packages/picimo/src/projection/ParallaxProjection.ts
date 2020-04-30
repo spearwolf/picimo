@@ -11,12 +11,12 @@ const DEFAULT_FAR = 100000;
 
 export type IParallaxProjectionSpecs = IProjectionSpecs & {
   /**
-   * Should be between zero and the `distance`. Default is 0.00001
+   * Should be between zero and the `distance`. Default is 0.1
    */
   near?: number;
 
   /**
-   * Should be larger than the `distance` and large enough to include all releavant objects in your scene. Default is 1000.
+   * Should be larger than the `distance` and large enough to include all releavant objects in your scene. Default is 100000.
    */
   far?: number;
 
