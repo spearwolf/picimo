@@ -1,6 +1,6 @@
 import {WebGLRendererParameters, LinearFilter} from 'three';
 
-import {TextureFactoryOptions} from '../../textures';
+import {ITextureFactoryOptions} from '../../textures';
 
 import {Display} from '../Display';
 import {IConfigurator} from '../IConfigurator';
@@ -22,7 +22,7 @@ export class AAPerformanceConfigurator implements IConfigurator {
   }
 
   getTextureFactoryOptions() {
-    const options: TextureFactoryOptions = {
+    const options: ITextureFactoryOptions = {
       defaultAnisotrophy: 0,
       defaultFilter: LinearFilter,
     };
