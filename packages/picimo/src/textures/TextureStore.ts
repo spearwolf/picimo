@@ -10,6 +10,7 @@
 
 */
 
+import {Eventize} from 'eventize-js';
 import {Texture as TextureTHREE} from 'three';
 
 import {Texture as TexturePicimo} from './Texture';
@@ -42,45 +43,43 @@ interface ITextureStoreState {
   [name: string]: ITextureState;
 }
 
-class TextureStore {
-  valueObjects = new Map<ValueIdType, ValueObjectType>();
-
+class TextureStore extends Eventize {
   /** immutable texture store state */
   state: ITextureStoreState = {};
 
+  valueObjects = new Map<ValueIdType, ValueObjectType>();
+  lastValueId = 0;
+
   factory: TextureFactory;
 
-  private lastValueId = 0;
-
   constructor(factory: TextureFactory) {
+    super();
     this.factory = factory;
   }
 
-  private storeValueObject(valObj: ValueObjectType): ValueIdType {
+  #storeValueObject = (valObj: ValueObjectType): ValueIdType => {
     const valueId = ++this.lastValueId;
     this.valueObjects.set(valueId, valObj);
     return valueId;
-  }
+  };
 
-  private updateValueObject(valueId: ValueIdType, valObj: ValueObjectType) {
-    const current = this.getValueObject(valueId);
+  #updateValueObject = (valueId: ValueIdType, valObj: ValueObjectType) => {
+    const current = this.#getValueObject(valueId);
     if (current !== valObj) {
       this.valueObjects.delete(valueId);
-      return this.storeValueObject(valObj);
+      return this.#storeValueObject(valObj);
     }
     return valueId;
-  }
+  };
 
-  private getValueObject(valueId: ValueIdType) {
-    return this.valueObjects.get(valueId);
-  }
+  #getValueObject = (valueId: ValueIdType) => this.valueObjects.get(valueId);
 
-  private updateState(name: string, state: ITextureState) {
+  #updateState = (name: string, state: ITextureState) => {
     this.state = {
       ...this.state,
       [name]: state,
     };
-  }
+  };
 
   setTexture(
     name: string,
@@ -90,10 +89,10 @@ class TextureStore {
     const state = this.state[name];
     if (state?.picimo === undefined) {
       // create new texture state
-      this.updateState(name, {
+      this.#updateState(name, {
         ...state,
         picimo: {
-          valueId: this.storeValueObject(texture),
+          valueId: this.#storeValueObject(texture),
           options: new ThreeTextureOptions(options).toString(),
           serial: 0,
         },
@@ -101,10 +100,10 @@ class TextureStore {
     } else {
       // update texture state
       const {valueId: curValueId, options: curOptions} = state.picimo;
-      const valueId = this.updateValueObject(curValueId, texture);
+      const valueId = this.#updateValueObject(curValueId, texture);
       const nextOptions = new ThreeTextureOptions(options).toString();
       if (valueId !== curValueId || nextOptions !== curOptions) {
-        this.updateState(name, {
+        this.#updateState(name, {
           ...state,
           picimo: {
             valueId,
@@ -119,7 +118,7 @@ class TextureStore {
   touchTexture(name: string) {
     const state = this.state[name];
     if (state.picimo) {
-      this.updateState(name, {
+      this.#updateState(name, {
         ...state,
         picimo: {
           ...state.picimo,
@@ -129,6 +128,15 @@ class TextureStore {
     }
   }
 
+  #createThreeTexture = (picimoValueId: ValueIdType, options: string) => {
+    const threeTexture = this.factory.makeThreeTexture(
+      this.#getValueObject(picimoValueId) as TexturePicimo,
+      ThreeTextureOptions.fromString(options),
+    );
+    this.emit('threeTextureCreated', threeTexture);
+    return threeTexture;
+  };
+
   getTextureTHREE(name: string) {
     const state = this.state[name];
     if (state) {
@@ -136,35 +144,33 @@ class TextureStore {
       if (three) {
         if (picimo && three.serial !== picimo.serial) {
           // update three-texture because input source changed
-          const curTex = this.getValueObject(three.valueId) as TextureTHREE;
-          if (curTex.dispose) {
-            curTex.dispose(); // XXX maybe dispatch an event here?
-          }
-          const threeTexture = this.factory.makeThreeTexture(
-            this.getValueObject(picimo.valueId) as TexturePicimo,
-            ThreeTextureOptions.fromString(picimo.options),
+          const curTex = this.#getValueObject(three.valueId);
+          this.emit('disposeThreeTexture', curTex);
+          const threeTexture = this.#createThreeTexture(
+            picimo.valueId,
+            picimo.options,
           );
-          this.updateState(name, {
+          this.#updateState(name, {
             ...state,
             three: {
-              valueId: this.updateValueObject(three.valueId, threeTexture),
+              valueId: this.#updateValueObject(three.valueId, threeTexture),
               serial: picimo.serial,
             },
           });
           return threeTexture;
         }
         // just return three texture
-        return this.getValueObject(three.valueId) as TextureTHREE;
+        return this.#getValueObject(three.valueId) as TextureTHREE;
       } else if (picimo) {
         // create new three-texture from picimo-texture
-        const threeTexture = this.factory.makeThreeTexture(
-          this.getValueObject(picimo.valueId) as TexturePicimo,
-          ThreeTextureOptions.fromString(picimo.options),
+        const threeTexture = this.#createThreeTexture(
+          picimo.valueId,
+          picimo.options,
         );
-        this.updateState(name, {
+        this.#updateState(name, {
           ...state,
           three: {
-            valueId: this.storeValueObject(threeTexture),
+            valueId: this.#storeValueObject(threeTexture),
             serial: picimo.serial,
           },
         });
