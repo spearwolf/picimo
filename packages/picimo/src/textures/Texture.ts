@@ -54,7 +54,9 @@ export class Texture {
     return new Texture(await new PowerOf2Image(url).loaded);
   }
 
+  // TODO create :image getter & setter
   image: TextureImage = null;
+  // TODO create :parent getter & setter
   parent: Texture = null;
 
   x = 0;
@@ -63,12 +65,12 @@ export class Texture {
   flipH = false;
   flipV = false;
 
-  private _width = 0;
-  private _height = 0;
+  #width = 0;
+  #height = 0;
 
-  private _uuid: string = null;
+  #uuid: string = null;
 
-  private _features: Map<string, unknown> = null;
+  #features: Map<string, unknown> = null;
 
   constructor(
     source: TextureSource,
@@ -94,7 +96,7 @@ export class Texture {
       //
       // === Create Texture from Image ===
       //
-      this._uuid = generateUuid();
+      this.#uuid = generateUuid();
       this.image = source;
       this.parent = null;
       if ('origWidth' in source && 'origHeight' in source) {
@@ -109,8 +111,8 @@ export class Texture {
       );
     }
 
-    this._width = w;
-    this._height = h;
+    this.#width = w;
+    this.#height = h;
 
     this.x = x;
     this.y = y;
@@ -124,15 +126,15 @@ export class Texture {
     t.y = this.y;
     t.flipH = this.flipH;
     t.flipV = this.flipV;
-    t._width = this._width;
-    t._height = this._height;
+    t.#width = this.#width;
+    t.#height = this.#height;
     if (t.parent == null) {
-      t._uuid = generateUuid();
+      t.#uuid = generateUuid();
     }
-    if (this._features) {
-      t._features = new Map();
-      Array.from(this._features.entries()).forEach(([key, val]) =>
-        t._features.set(key, val),
+    if (this.#features) {
+      t.#features = new Map();
+      Array.from(this.#features.entries()).forEach(([key, val]) =>
+        t.#features.set(key, val),
       );
     }
     return t;
@@ -149,25 +151,25 @@ export class Texture {
   }
 
   getFeature(name: string) {
-    return this._features !== null ? this._features.get(name) : undefined;
+    return this.#features?.get(name);
   }
 
   setFeature(name: string, value: unknown) {
-    if (this._features === null) {
-      this._features = new Map();
+    if (this.#features === null) {
+      this.#features = new Map();
     }
-    this._features.set(name, value);
+    this.#features.set(name, value);
   }
 
   /**
-   * @returns Uuid of the underlying image object. Sub-textures returns the uuid from their parents.
+   * @returns Uuid of the root texture. Sub-textures returns the uuid from their parents.
    */
   get uuid(): string {
-    return this._uuid || this.parent.uuid;
+    return this.#uuid || this.parent.uuid;
   }
 
   get root(): Texture {
-    return (this.parent && this.parent.root) || this;
+    return this.parent?.root || this;
   }
 
   get imgEl() {
@@ -179,8 +181,8 @@ export class Texture {
   }
 
   get width(): number {
-    return typeof this._width === 'number'
-      ? this._width
+    return typeof this.#width === 'number'
+      ? this.#width
       : this.image
       ? this.image.width
       : this.parent
@@ -189,12 +191,12 @@ export class Texture {
   }
 
   set width(w) {
-    this._width = w;
+    this.#width = w;
   }
 
   get height(): number {
-    return typeof this._height === 'number'
-      ? this._height
+    return typeof this.#height === 'number'
+      ? this.#height
       : this.image
       ? this.image.height
       : this.parent
@@ -203,7 +205,7 @@ export class Texture {
   }
 
   set height(h) {
-    this._height = h;
+    this.#height = h;
   }
 
   get minS() {

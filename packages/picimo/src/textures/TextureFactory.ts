@@ -19,6 +19,13 @@ export interface ITextureFactoryOptions {
   defaultFilter?: TextureFilter;
 }
 
+export interface IThreeTextureProps {
+  flipY: boolean;
+  magFilter: number;
+  minFilter: number;
+  anisotropy: number;
+}
+
 export class TextureFactory {
   DefaultAnisotrophy: number;
   DefaultFilter: TextureFilter;
@@ -58,6 +65,16 @@ export class TextureFactory {
     source: ITexturable | PicimoTexture,
     options?: IThreeTextureOptions,
   ) {
+    return this.createThreeTexture(
+      source,
+      this.createThreeTextureOptions(options),
+    );
+  }
+
+  createThreeTexture(
+    source: ITexturable | PicimoTexture,
+    props: IThreeTextureProps,
+  ) {
     let image: ImageSource;
 
     if (typeof (source as ITexturable).getTextureSource === 'function') {
@@ -68,7 +85,7 @@ export class TextureFactory {
 
     const texture = new ThreeTexture(image);
 
-    Object.assign(texture, this.createThreeTextureOptions(options));
+    Object.assign(texture, props);
 
     texture.needsUpdate = true;
 
