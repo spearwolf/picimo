@@ -1,15 +1,3 @@
-/*
-
-  new TextureStore(state = {})
-
-  TextureFactory -> IThreeTextureOptions
-
-  [texture,setTexture] = useTexture(url,options)
-  [texture,setTexture] = useTextureTHREE(url,options)
-  [textureAtlas,setTextureAtlas] = useTextureAtlas(url,options)
-
-*/
-
 import {Eventize} from 'eventize-js';
 import {Texture as TextureTHREE} from 'three';
 
@@ -31,6 +19,7 @@ interface ITextureThreeValue {
   valueId: ValueIdType;
   // TODO add source type: picimo,dom-element,render-to-texture-framebuffer,etc...
   serial?: number;
+  // TODO needsUpdate
 }
 
 interface ITextureState {
@@ -81,7 +70,7 @@ class TextureStore extends Eventize {
     };
   };
 
-  setTexture(
+  setPicimoTexture(
     name: string,
     texture: TexturePicimo,
     options?: IThreeTextureOptions,
@@ -115,9 +104,9 @@ class TextureStore extends Eventize {
     }
   }
 
-  touchTexture(name: string) {
+  touchPicimoTexture(name: string) {
     const state = this.state[name];
-    if (state.picimo) {
+    if (state?.picimo) {
       this.#updateState(name, {
         ...state,
         picimo: {
@@ -137,7 +126,7 @@ class TextureStore extends Eventize {
     return threeTexture;
   };
 
-  getTextureTHREE(name: string) {
+  getThreeTexture(name: string) {
     const state = this.state[name];
     if (state) {
       const {three, picimo} = state;
