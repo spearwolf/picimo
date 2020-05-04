@@ -18,8 +18,8 @@ interface ITexturePicimoValue {
 interface ITextureThreeValue {
   valueId: ValueIdType;
   // TODO add source type: picimo,dom-element,render-to-texture-framebuffer,etc...
-  serial?: number;
-  // TODO needsUpdate
+  picimoSerial?: number; // => picimo
+  // TODO needsUpdate? => touchThreeTexture()
 }
 
 interface ITextureState {
@@ -104,6 +104,8 @@ class TextureStore extends Eventize {
     }
   }
 
+  // TODO getPicimoTexture()
+
   touchPicimoTexture(name: string) {
     const state = this.state[name];
     if (state?.picimo) {
@@ -132,7 +134,7 @@ class TextureStore extends Eventize {
       const {three, picimo} = state;
       if (three) {
         // just return the three texture
-        if (!picimo || three.serial === picimo.serial) {
+        if (!picimo || three.picimoSerial === picimo.serial) {
           return this.getValueObject(three.valueId) as TextureTHREE;
         }
 
@@ -147,7 +149,7 @@ class TextureStore extends Eventize {
           ...state,
           three: {
             valueId: this.#updateValueObject(three.valueId, threeTexture),
-            serial: picimo.serial,
+            picimoSerial: picimo.serial,
           },
         });
         return threeTexture;
@@ -162,7 +164,7 @@ class TextureStore extends Eventize {
           ...state,
           three: {
             valueId: this.#storeValueObject(threeTexture),
-            serial: picimo.serial,
+            picimoSerial: picimo.serial,
           },
         });
         return threeTexture;
@@ -170,6 +172,18 @@ class TextureStore extends Eventize {
     }
     return undefined;
   }
+
+  // TODO touchThreeTexture() => needsUpdate?
+
+  // TODO setTextureAtlas()
+  // TODO getTextureAtlas()
+
+  // TODO loadPicimoTexture()
+  // TODO loadTextureAtlas()
+
+  // TODO useRenderTarget()
+
+  // TODO remove*()
 }
 
 export {ITextureStoreState, TextureStore};
