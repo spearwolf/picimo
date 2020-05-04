@@ -133,7 +133,7 @@ describe('TextureStore', () => {
 
   describe('getThreeTexture()', () => {
     describe('sourceType is "picimo"', () => {
-      it('first call should create a new THREE.Texture', () => {
+      it('1st call should create a new THREE.Texture', () => {
         // arrange
         const store = new TextureStore(factory);
         store.setPicimoTexture('plah', tex);
@@ -148,7 +148,7 @@ describe('TextureStore', () => {
         assert.notStrictEqual(store.state, prevState);
         tex3.dispose();
       });
-      it('second call should not change store state', () => {
+      it('2nd call should not change the store state', () => {
         // arrange
         const store = new TextureStore(factory);
         const textureCreatedSpy = sinon.spy();
@@ -166,7 +166,7 @@ describe('TextureStore', () => {
         assert.strictEqual(store.state, prevState);
         tex3.dispose();
       });
-      it('update picimo texture should recreate the three texture', () => {
+      it('2nd call should recreate the THREE.Texture if the picimo texture was updated in the meantime', () => {
         // arrange
         const store = new TextureStore(factory);
         const textureCreatedSpy = sinon.spy();
