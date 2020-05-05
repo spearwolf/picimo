@@ -32,7 +32,10 @@ the repository is organized into sub-directories containing the various projects
 |-----------|-------------|
 | [`picimo`](packages/picimo/) | the main library |
 | [`picimo-r3f`](packages/picimo-r3f/) | react components based on react-three-fiber |
-| [`kitchen-sink`](packages/kitchen-sink/) | a [SPA](https://en.wikipedia.org/wiki/Single-page_application) with examples for almost all features of the picimo library |
+| [`datgui-context-hook`](packages/datgui-context-hook/) | react hook for the [dat.gui](https://github.com/dataarts/dat.gui) library |
+| [`picimo-demo-shell`](packages/picimo-demo-shell/) | a cli wrapper for webpack config and launcher to speed up development of examples |
+| [`examples/*`](examples/) | picimo examples &mdash; good starting point to learn about how to use the picimo api |
+| [`kitchen-sink`](packages/kitchen-sink/) | _OBSOLETE_ a [SPA](https://en.wikipedia.org/wiki/Single-page_application) with examples for almost all features of the picimo library |
 
 ## Development
 
