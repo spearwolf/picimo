@@ -2,6 +2,7 @@ import {Eventize} from 'eventize-js';
 import {Texture as TextureTHREE} from 'three';
 
 import {Texture as TexturePicimo} from './Texture';
+import {TextureAtlas} from './TextureAtlas';
 import {TextureFactory} from './TextureFactory';
 import {IThreeTextureOptions, ThreeTextureOptions} from './ThreeTextureOptions';
 
@@ -20,7 +21,7 @@ interface ITextureSourcePicimo {
   serial: number;
 }
 
-// TODO add more source types: render-to-texture-framebuffer,three,dom-element,array-buffer,etc...
+// TODO add more source types: render-to-texture-framebuffer,TileSet,TextureIndexedAtlas,three,dom-element,array-buffer,etc...
 type TextureSourceType = ITextureSourcePicimo;
 
 interface ITextureThreeValue {
@@ -112,6 +113,27 @@ class TextureStore extends Eventize {
     }
   }
 
+  // TODO add support for three texture options?
+  // TODO add support for TextureIndexedAtlas!
+  setTextureAtlas(name: string, atlas: TextureAtlas) {
+    const state = this.state[name];
+    if (state?.atlas == null) {
+      this.#updateState(name, {
+        ...state,
+        atlas: this.#storeValueObject(atlas),
+      });
+    } else {
+      const {atlas: curValueId} = state;
+      const nextValueId = this.#updateValueObject(curValueId, atlas);
+      if (nextValueId !== curValueId) {
+        this.#updateState(name, {
+          ...state,
+          atlas: nextValueId,
+        });
+      }
+    }
+  }
+
   touchPicimoTexture(name: string) {
     const state = this.state[name];
     if (state?.picimo) {
@@ -133,6 +155,14 @@ class TextureStore extends Eventize {
     this.emit('threeTextureCreated', threeTexture);
     return threeTexture;
   };
+
+  getTextureAtlas(name: string): TextureAtlas {
+    const valueId = this.state[name]?.atlas;
+    if (valueId) {
+      return this.getValueObject(valueId);
+    }
+    return undefined;
+  }
 
   getThreeTexture(name: string): TextureTHREE {
     const state = this.state[name];
@@ -194,15 +224,13 @@ class TextureStore extends Eventize {
 
   // TODO getPicimoTexture()
 
-  // TODO setTextureAtlas()
-  // TODO getTextureAtlas()
-
   // TODO loadPicimoTexture()
   // TODO loadTextureAtlas()
 
   // TODO useRenderTarget()
 
   // TODO remove*()
+  // TODO dispose()
 }
 
 export {ITextureStoreState, TextureStore};

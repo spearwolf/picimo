@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-env browser */
 /* eslint-env mocha */
 import assert from 'assert';
@@ -6,7 +7,7 @@ import sinon from 'sinon';
 
 import {WebGLRenderer} from 'three';
 
-import {TextureFactory, TextureStore, Texture} from '..';
+import {TextureFactory, TextureStore, Texture, TextureAtlas} from '..';
 
 describe('TextureStore', () => {
   let renderer;
@@ -28,6 +29,92 @@ describe('TextureStore', () => {
   it('create()', () => {
     const store = new TextureStore(factory);
     assert.ok(store);
+  });
+
+  describe('getTextureAtlas()', () => {
+    it('no textureAtlas exists', () => {
+      // arrange
+      const store = new TextureStore(factory);
+      const {state: prevState} = store;
+      // act
+      const atlas = store.getTextureAtlas('fooAtlas');
+      // assert
+      assert.strictEqual(atlas, undefined);
+      assert.strictEqual(store.state, prevState);
+    });
+    it('should not change store state', () => {
+      // arrange
+      const store = new TextureStore(factory);
+      const fooAtlas = new TextureAtlas(tex);
+      store.setTextureAtlas('fooAtlas', fooAtlas);
+      const {state: prevState} = store;
+      // act
+      const atlas = store.getTextureAtlas('fooAtlas');
+      // assert
+      assert.strictEqual(atlas, fooAtlas);
+      assert.strictEqual(store.state, prevState);
+      assert.strictEqual(
+        store.getValueObject(store.state.fooAtlas.atlas),
+        fooAtlas,
+      );
+    });
+  });
+
+  describe('setTextureAtlas()', () => {
+    it('no previous textureAtlas exists', () => {
+      // arrange
+      const store = new TextureStore(factory);
+      const atlas = new TextureAtlas(tex);
+      const {state: prevState} = store;
+      // act
+      store.setTextureAtlas('atlas0', atlas);
+      // assert
+      assert.notStrictEqual(store.state, prevState);
+      assert.strictEqual(atlas, store.getValueObject(store.state.atlas0.atlas));
+    });
+    it('no previous textureAtlas exists (but a picimo texture with same name)', () => {
+      // arrange
+      const store = new TextureStore(factory);
+      const atlas = new TextureAtlas(tex);
+      store.setPicimoTexture('atlas0', tex);
+      const {state: prevState} = store;
+      // act
+      store.setTextureAtlas('atlas0', atlas);
+      // assert
+      assert.notStrictEqual(store.state, prevState);
+      assert.strictEqual(atlas, store.getValueObject(store.state.atlas0.atlas));
+      assert.ok(store.state.atlas0.picimo);
+      assert.deepEqual(store.state.atlas0.picimo, prevState.atlas0.picimo);
+      assert.strictEqual(store.state.atlas0.picimo, prevState.atlas0.picimo);
+    });
+    it('changed atlas with previous atlas', () => {
+      // arrange
+      const store = new TextureStore(factory);
+      const atlas = new TextureAtlas(tex);
+      const atlas2 = new TextureAtlas(tex);
+      store.setTextureAtlas('atlas0', atlas);
+      const {state: prevState} = store;
+      // act
+      store.setTextureAtlas('atlas0', atlas2);
+      // assert
+      assert.notStrictEqual(store.state, prevState);
+      assert.strictEqual(
+        atlas2,
+        store.getValueObject(store.state.atlas0.atlas),
+      );
+    });
+    it('same atlas as before', () => {
+      // arrange
+      const store = new TextureStore(factory);
+      const atlas = new TextureAtlas(tex);
+      store.setTextureAtlas('atlas0', atlas);
+      const {state: prevState} = store;
+      // act
+      store.setTextureAtlas('atlas0', atlas);
+      // assert
+      assert.strictEqual(store.state, prevState);
+      assert.strictEqual(atlas, store.getValueObject(store.state.atlas0.atlas));
+    });
   });
 
   describe('setPicimoTexture()', () => {
