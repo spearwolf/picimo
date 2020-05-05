@@ -1,4 +1,4 @@
-## `@picimo/example-app-shell`
+## `@picimo/demo-shell`
 
 Creating a new webpack config for a new project can be challenging and time consuming.
 This package contains a common webpack config and launcher for the [picimo examples](../../examples).
@@ -20,9 +20,9 @@ Code is automatically transformed using:
 Add the npm package to your project.
 
 ```sh
-$ yarn add --dev @picimo/example-app-shell
+$ yarn add --dev @picimo/demo-shell
 ```
-> :warning: NOTE: the `@picimo/example-app-shell` package is intended only for your use within the `picimo` monorep!
+> :warning: NOTE: the `@picimo/demo-shell` package is intended only for your use within the `picimo` monorep!
 
 
 After that you should extend your `package.json` with:
@@ -32,8 +32,8 @@ After that you should extend your `package.json` with:
     // ...
 
     "scripts": {
-        "start": "picimo-example-cli start",
-        "build": "picimo-example-cli build"
+        "start": "picimo-demo-cli start",
+        "build": "picimo-demo-cli build"
     },
 
     // ...
