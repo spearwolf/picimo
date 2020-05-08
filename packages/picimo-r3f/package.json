@@ -78,7 +78,7 @@
     "three": "^0.113.2"
   },
   "dependencies": {
-    "@babel/runtime-corejs3": "^7.9.2",
-    "react-promise-suspense": "^0.3.2"
+    "@babel/runtime-corejs3": "^7.9.6",
+    "react-promise-suspense": "^0.3.3"
   }
 }

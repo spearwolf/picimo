@@ -1,12 +1,13 @@
 node_modules
 .cache
+.typings
 .vscode
+.temp
 __tests__
 browserslist
 examples
 scripts
 tests
-types/test
 .editorconfig
 .eslintignore
 .eslintrc.yaml
@@ -16,3 +17,6 @@ coverage
 karma.conf.js
 webpack.config.js
 rollup.config.js
+rollup-mjs.config.js
+api-extractor.json
+tsconfig.json
