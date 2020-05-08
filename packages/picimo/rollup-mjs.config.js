@@ -1,4 +1,5 @@
 /* eslint-env node */
+import fs from 'fs';
 import path from 'path';
 
 import babel from 'rollup-plugin-babel';
@@ -14,8 +15,9 @@ import bannerPlugin from './scripts/bannerPlugin';
 const extensions = ['.js', '.ts'];
 
 const root = path.resolve(__dirname, '.');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const packageJson = require(path.join(root, 'package.json'));
+const packageJson = JSON.parse(
+  fs.readFileSync(path.join(root, 'package.json'), 'utf-8'),
+);
 
 export default {
   input: 'src/index.ts',
