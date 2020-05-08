@@ -3,3 +3,5 @@ dist
 assets
 coverage
 bundle.js
+.typings
+.temp

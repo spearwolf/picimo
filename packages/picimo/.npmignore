@@ -1,5 +1,6 @@
 node_modules
 .cache
+.typings
 .vscode
 .temp
 .build
@@ -8,7 +9,6 @@ browserslist
 examples
 scripts
 tests
-types/test
 .editorconfig
 .eslintignore
 .eslintrc.yaml
@@ -19,4 +19,5 @@ karma.conf.js
 webpack.config.js
 rollup.config.js
 rollup-mjs.config.js
-yarn-error.log
+api-extractor.json
+tsconfig.json
