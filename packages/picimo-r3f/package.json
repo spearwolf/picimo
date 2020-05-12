@@ -43,10 +43,10 @@
     "babel-plugin-istanbul": "^6.0.0",
     "core-js": "^3.6.4",
     "cross-env": "^7.0.2",
-    "eslint": "^6.8.0",
+    "eslint": "^7.0.0",
     "eslint-config-problems": "^4.0.0",
     "eslint-plugin-react": "^7.19.0",
-    "eslint-plugin-react-hooks": "^3.0.0",
+    "eslint-plugin-react-hooks": "^4.0.0",
     "karma": "^4.4.1",
     "karma-chrome-launcher": "^3.1.0",
     "karma-coverage-istanbul-reporter": "^2.1.1",
@@ -63,7 +63,7 @@
     "react-dom": "^16.13.1",
     "react-three-fiber": "^4.1.1",
     "rimraf": "^3.0.2",
-    "three": "^0.115.0",
+    "three": "^0.116.1",
     "typescript": "^3.8.3",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
@@ -75,10 +75,10 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-three-fiber": "^4.0.12",
-    "three": "^0.113.2"
+    "three": "^0.116.1"
   },
   "dependencies": {
-    "@babel/runtime-corejs3": "^7.9.2",
-    "react-promise-suspense": "^0.3.2"
+    "@babel/runtime-corejs3": "^7.9.6",
+    "react-promise-suspense": "^0.3.3"
   }
 }
