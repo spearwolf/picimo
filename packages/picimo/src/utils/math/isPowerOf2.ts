@@ -1,1 +1,6 @@
-export const isPowerOf2 = (n: number) => n !== 0 && (n & (n - 1)) === 0;
+/**
+ * @public
+ */
+export function isPowerOf2(n: number): boolean {
+  return n !== 0 && (n & (n - 1)) === 0;
+}

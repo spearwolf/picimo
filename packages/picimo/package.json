@@ -18,8 +18,6 @@
     "clean": "rm -fr build coverage dist .typings",
     "typings": "tsc",
     "api-extractor:run": "api-extractor run --local --verbose",
-    "docs": "node scripts/makeDocs.js",
-    "docs0": "api-documenter markdown -i .temp -o ../../website/docs/api",
     "test:eslint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
     "test:karma": "cross-env NODE_ENV=test karma start --single-run",
     "watch:test": "cross-env NODE_ENV=test karma start",

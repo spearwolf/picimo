@@ -1,9 +1,12 @@
-export const readOption = <T>(
+/**
+ * @public
+ */
+export function readOption<T>(
   options: T,
   propName: keyof T,
   defValue?: any,
   funcArgs?: any,
-): unknown => {
+): unknown {
   if (options != null) {
     const val = options[propName];
     if (val !== undefined) return val;
@@ -12,4 +15,4 @@ export const readOption = <T>(
     return defValue(funcArgs);
   }
   return defValue;
-};
+}

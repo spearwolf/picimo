@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import eventize, {Eventize} from 'eventize-js';
 
-// TODO extract this to a separate npm package: 'sticky-log'
+// TODO extract this class to a separate npm package: 'sticky-log'
 
 const LogLevel = {
   ERROR: 1,
@@ -52,6 +52,9 @@ const DEFAULT_LOG_LEVEL =
 const debug = (domain: string, ...args: any[]) =>
   console.debug(`[${LOGGER_NAME}${domain ? `:${domain}` : ''}]`, ...args);
 
+/**
+ * @internal
+ */
 export const getGlobalLogConfig = () => {
   // @ts-ignore
   let cfg: ILoggerConfig = globalThis[GLOBAL_LOG_CONFIG_KEY];
@@ -157,6 +160,9 @@ export const getGlobalLogConfig = () => {
 
 const $log = Symbol('log');
 
+/**
+ * @public
+ */
 export class Logger {
   throttleTimeoutMs: number;
   paused = false;

@@ -133,6 +133,9 @@ mat4 ${funcName}(float angle) {
 
 const rotateZ = (funcName = 'rotateZ') => rotate(funcName, 0, 0, 1);
 
+/**
+ * @public
+ */
 export const ShaderTool = {
   add,
   asFloat,

@@ -119,7 +119,7 @@ export class BitmapText2D extends SpriteGroupMesh<
     }
   }
 
-  get fontAtlas() {
+  get fontAtlas(): TextureAtlas {
     return this[$fontAtlas];
   }
 
@@ -165,7 +165,7 @@ export class BitmapText2D extends SpriteGroupMesh<
     hAlign: TextAlignH = 'left',
     vAlign: TextAlignV = 'baseline',
     spriteCache: BitmapCharVertexObject[] = null,
-  ) {
+  ): BitmapCharVertexObject[] {
     return this.createText(
       this.measureText(text, maxWidth, fontSize, lineGap),
       x,
@@ -349,7 +349,7 @@ export class BitmapText2D extends SpriteGroupMesh<
     };
   }
 
-  disposeMaterial() {
+  disposeMaterial(): void {
     if (this.material) {
       this.material.dispose();
       this.material = undefined;
@@ -360,7 +360,7 @@ export class BitmapText2D extends SpriteGroupMesh<
     }
   }
 
-  dispose() {
+  dispose(): void {
     if (log.VERBOSE) log.log('dispose', this);
     this.disposeMaterial();
     super.dispose();

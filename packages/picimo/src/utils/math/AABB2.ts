@@ -1,6 +1,7 @@
 /**
  * Represents a 2D axis aligned boundary box.
  * Uses a right-handed coordinate system.
+ * @public
  */
 export class AABB2 {
   left: number;
