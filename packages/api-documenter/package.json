@@ -1,0 +1,39 @@
+{
+  "name": "@picimo/api-documenter",
+  "version": "7.8.0",
+  "description": "Read JSON files from api-extractor, generate documentation pages",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/rushstack/tree/master/apps/api-documenter"
+  },
+  "homepage": "https://api-extractor.com/",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rimraf lib",
+    "build": "tsc && cp src/yaml/*.json lib/yaml/ && cp -r src/schemas lib/",
+    "postinstall": "yarn build",
+    "test": "jest"
+  },
+  "bin": {
+    "api-documenter": "./bin/api-documenter"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "@microsoft/api-extractor-model": "7.8.0",
+    "@microsoft/tsdoc": "0.12.19",
+    "@rushstack/node-core-library": "3.19.7",
+    "@rushstack/ts-command-line": "4.3.14",
+    "colors": "~1.2.1",
+    "js-yaml": "~3.13.1",
+    "resolve": "1.8.1"
+  },
+  "devDependencies": {
+    "@types/jest": "25.2.1",
+    "@types/js-yaml": "3.12.1",
+    "@types/node": "10.17.13",
+    "@types/resolve": "0.0.8",
+    "jest": "^26.0.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^3.9.2"
+  }
+}

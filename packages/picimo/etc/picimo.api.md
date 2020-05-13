@@ -1804,11 +1804,11 @@ export interface VOPoolOptions<T, U> {
 
 // Warnings were encountered during analysis:
 //
+// src/utils/ShaderTool.ts:84:8 - (ae-forgotten-export) The symbol "sub" needs to be exported by the entry point index.d.ts
 // src/utils/ShaderTool.ts:136:24 - (ae-forgotten-export) The symbol "add" needs to be exported by the entry point index.d.ts
 // src/utils/ShaderTool.ts:136:24 - (ae-forgotten-export) The symbol "asFloat" needs to be exported by the entry point index.d.ts
 // src/utils/ShaderTool.ts:136:24 - (ae-forgotten-export) The symbol "mat4" needs to be exported by the entry point index.d.ts
 // src/utils/ShaderTool.ts:136:24 - (ae-forgotten-export) The symbol "mul" needs to be exported by the entry point index.d.ts
-// src/utils/ShaderTool.ts:136:24 - (ae-forgotten-export) The symbol "sub" needs to be exported by the entry point index.d.ts
 
 // (No @packageDocumentation comment for this package)
 
