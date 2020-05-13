@@ -35,6 +35,7 @@ the repository is organized into sub-directories containing the various projects
 | [kitchen&#8209;sink](packages/kitchen-sink/) | a [SPA](https://en.wikipedia.org/wiki/Single-page_application) with code examples for almost all features of the picimo library (is subject to major changes &mdash; in future all examples will be moved successively to the [`examples/*`](examples/) directory |
 | [examples/**/*](examples/) | picimo examples &mdash; good starting point to learn about how to use the picimo api |
 | [picimo&#8209;demo&#8209;shell](packages/picimo-demo-shell/) | a cli wrapper for webpack config and launcher to speed up development of the picimo code examples |
+| [api&#8209;documenter](packages/api-documenter/) | a fork of [@microsoft/api-documenter](https://github.com/microsoft/rushstack/tree/master/apps/api-documenter) to create a custom doc pipeline for the picimo library |
 | [datgui&#8209;context&#8209;hook](packages/datgui-context-hook/) | react hook for the [dat.gui](https://github.com/dataarts/dat.gui) library |
 
 ## Development
