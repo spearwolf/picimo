@@ -2,3 +2,4 @@ node_modules
 $Recycle.Bin
 .vscode
 examples/*/public/bundle.js
+yarn-error.log

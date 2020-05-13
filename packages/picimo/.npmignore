@@ -3,6 +3,7 @@ node_modules
 .typings
 .vscode
 .temp
+.build
 __tests__
 browserslist
 examples
@@ -20,3 +21,4 @@ rollup.config.js
 rollup-mjs.config.js
 api-extractor.json
 tsconfig.json
+yarn-error.log

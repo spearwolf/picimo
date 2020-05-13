@@ -29,13 +29,13 @@ this is the main github repository for the picimo project and all of its related
 the repository is organized into sub-directories containing the various projects. Check out the README.md files for specific projects to get more details:
 
 | sub-directory | what's inside? |
-|-----------|-------------|
-| [`picimo`](packages/picimo/) | the main library |
-| [`picimo-r3f`](packages/picimo-r3f/) | react components based on react-three-fiber |
-| [`datgui-context-hook`](packages/datgui-context-hook/) | react hook for the [dat.gui](https://github.com/dataarts/dat.gui) library |
-| [`picimo-demo-shell`](packages/picimo-demo-shell/) | a cli wrapper for webpack config and launcher to speed up development of examples |
-| [`examples/*`](examples/) | picimo examples &mdash; good starting point to learn about how to use the picimo api |
-| [`kitchen-sink`](packages/kitchen-sink/) | a [SPA](https://en.wikipedia.org/wiki/Single-page_application) with examples for almost all features of the picimo library (!!_OBSOLETE_!! all code examples inside this app will move to stand-alone [`examples/*`](examples/) if not already done) |
+|---------------|----------------|
+| [picimo](packages/picimo/) | the main library |
+| [picimo&#8209;r3f](packages/picimo-r3f/) | react components based on react-three-fiber (highly promising but also very experimental) |
+| [kitchen&#8209;sink](packages/kitchen-sink/) | a [SPA](https://en.wikipedia.org/wiki/Single-page_application) with code examples for almost all features of the picimo library (is subject to major changes &mdash; in future all examples will be moved successively to the [`examples/*`](examples/) directory |
+| [examples/**/*](examples/) | picimo examples &mdash; good starting point to learn about how to use the picimo api |
+| [picimo&#8209;demo&#8209;shell](packages/picimo-demo-shell/) | a cli wrapper for webpack config and launcher to speed up development of the picimo code examples |
+| [datgui&#8209;context&#8209;hook](packages/datgui-context-hook/) | react hook for the [dat.gui](https://github.com/dataarts/dat.gui) library |
 
 ## Development
 
