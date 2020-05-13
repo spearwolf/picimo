@@ -430,13 +430,13 @@ export interface DisplayOptions {
 export type DisplayResizeStrategy = HTMLElement | DisplayGetSizeFn | 'fullscreen';
 
 // @public (undocumented)
-export const findNextPowerOf2: (x: number) => number;
-
-// @public (undocumented)
-export const generateUuid: () => any;
+export function findNextPowerOf2(x: number): number;
 
 // @public
-export const get: (obj: Object, path: string) => unknown;
+export function generateUuid(): string;
+
+// @public
+export function get(obj: Object, path: string): unknown;
 
 // @public (undocumented)
 export const getBitmapCharBaseDescriptor: () => BitmapCharBaseDescriptorType;
@@ -448,21 +448,24 @@ export const getBitmapCharBaseGroup: () => BitmapCharBaseGroup;
 export const getBitmapCharDescriptor: () => BitmapCharDescriptorType;
 
 // Warning: (ae-forgotten-export) The symbol "ILoggerConfig" needs to be exported by the entry point index.d.ts
+// Warning: (ae-internal-missing-underscore) The name "getGlobalLogConfig" should be prefixed with an underscore because the declaration is marked as @internal
 //
-// @public (undocumented)
+// @internal (undocumented)
 export const getGlobalLogConfig: () => ILoggerConfig;
 
 // @public (undocumented)
 export const getSimpleSpriteBaseGroup: () => SimpleSpriteBaseGroup;
 
-// @public (undocumented)
+// Warning: (ae-internal-missing-underscore) The name "globalStylesID" should be prefixed with an underscore because the declaration is marked as @internal
+//
+// @internal (undocumented)
 export const globalStylesID: string;
 
 // @public
-export const hexCol2rgb: (hexColor: string) => number[];
+export function hexCol2rgb(hexColor: string): number[];
 
 // @public
-export const hexCol2rgba: (hexColor: string, alpha?: number) => number[];
+export function hexCol2rgba(hexColor: string, alpha?: number): number[];
 
 // @public (undocumented)
 export type ImageSource = HTMLImageElement | HTMLCanvasElement | HTMLVideoElement;
@@ -636,7 +639,7 @@ export interface ISimpleSpritesOptions extends ISimpleSpriteGroupOptions {
 }
 
 // @public (undocumented)
-export const isPowerOf2: (n: number) => boolean;
+export function isPowerOf2(n: number): boolean;
 
 // @public (undocumented)
 export interface ITexturable {
@@ -718,7 +721,7 @@ export class Logger {
 // Warning: (ae-forgotten-export) The symbol "CircleCoords" needs to be exported by the entry point index.d.ts
 //
 // @public (undocumented)
-export const makeCircleCoords: (steps: number, radius?: number, circleCoordsFn?: CircleCoordsFn) => CircleCoords[];
+export function makeCircleCoords(steps: number, radius?: number, circleCoordsFn?: CircleCoordsFn): CircleCoords[];
 
 // @public
 export class Map2D extends Scene implements IMap2DRenderer {
@@ -820,7 +823,9 @@ export interface Map2DPanControlOptions {
     speed: number;
 }
 
-// @public (undocumented)
+// Warning: (ae-internal-missing-underscore) The name "Map2DTileBufferGeometry" should be prefixed with an underscore because the declaration is marked as @internal
+//
+// @internal (undocumented)
 export class Map2DTileBufferGeometry extends THREE_2.BufferGeometry {
     constructor(viewTile: Map2DViewTile, indexedAtlas: TextureIndexedAtlas);
     // (undocumented)
@@ -997,7 +1002,7 @@ export class MaterialCache<T, M> {
 }
 
 // @public (undocumented)
-export const maxOf: (a: number, b: number) => number;
+export function maxOf(a: number, b: number): number;
 
 // Warning: (ae-forgotten-export) The symbol "Projection" needs to be exported by the entry point index.d.ts
 //
@@ -1020,7 +1025,7 @@ export class ParallaxProjection extends Projection<IParallaxProjectionSpecs, Per
 }
 
 // @public (undocumented)
-export const pick: <T extends Object = Object>(names: (keyof T)[]) => (obj?: Object) => T;
+export function pick<T extends Object = Object>(names: (keyof T)[]): (obj?: Object) => T | null;
 
 // @public (undocumented)
 export class Plane {
@@ -1033,7 +1038,9 @@ export class Plane {
     static XZ: Plane;
 }
 
-// @public (undocumented)
+// Warning: (ae-internal-missing-underscore) The name "postFixID" should be prefixed with an underscore because the declaration is marked as @internal
+//
+// @internal (undocumented)
 export const postFixID: string;
 
 // @public
@@ -1055,7 +1062,7 @@ export class PowerOf2Image {
 }
 
 // @public (undocumented)
-export const readOption: <T>(options: T, propName: keyof T, defValue?: any, funcArgs?: any) => unknown;
+export function readOption<T>(options: T, propName: keyof T, defValue?: any, funcArgs?: any): unknown;
 
 // @public (undocumented)
 export class RepeatingPatternLayer implements IMap2DLayerData {
@@ -1078,8 +1085,8 @@ export class RepeatingPatternLayer implements IMap2DLayerData {
     readonly viewCullingThreshold: IViewCullingThreshold;
 }
 
-// @public (undocumented)
-export const sample: <T>(arr: T[]) => T;
+// @public
+export function sample<T>(arr: Array<T>): T;
 
 // @public (undocumented)
 export const ShaderTool: {
@@ -1553,10 +1560,10 @@ export interface TileSetOptions {
 }
 
 // @public
-export const toFloatColors: (colors: number[]) => number[];
+export function toFloatColors(colors: number[]): number[];
 
-// @public (undocumented)
-export const unpick: <T extends Object>(names: string[]) => (obj?: Object) => T;
+// @public
+export function unpick<T extends Object>(names: string[]): (obj?: Object) => T | null;
 
 // @public (undocumented)
 export class Vector2Proxy extends Vector2 {
@@ -1805,10 +1812,10 @@ export interface VOPoolOptions<T, U> {
 // Warnings were encountered during analysis:
 //
 // src/utils/ShaderTool.ts:84:8 - (ae-forgotten-export) The symbol "sub" needs to be exported by the entry point index.d.ts
-// src/utils/ShaderTool.ts:136:24 - (ae-forgotten-export) The symbol "add" needs to be exported by the entry point index.d.ts
-// src/utils/ShaderTool.ts:136:24 - (ae-forgotten-export) The symbol "asFloat" needs to be exported by the entry point index.d.ts
-// src/utils/ShaderTool.ts:136:24 - (ae-forgotten-export) The symbol "mat4" needs to be exported by the entry point index.d.ts
-// src/utils/ShaderTool.ts:136:24 - (ae-forgotten-export) The symbol "mul" needs to be exported by the entry point index.d.ts
+// src/utils/ShaderTool.ts:139:24 - (ae-forgotten-export) The symbol "add" needs to be exported by the entry point index.d.ts
+// src/utils/ShaderTool.ts:139:24 - (ae-forgotten-export) The symbol "asFloat" needs to be exported by the entry point index.d.ts
+// src/utils/ShaderTool.ts:139:24 - (ae-forgotten-export) The symbol "mat4" needs to be exported by the entry point index.d.ts
+// src/utils/ShaderTool.ts:139:24 - (ae-forgotten-export) The symbol "mul" needs to be exported by the entry point index.d.ts
 
 // (No @packageDocumentation comment for this package)
 

@@ -15,8 +15,9 @@ const getProp = (obj: any, prop: string) => {
 /**
  * A rough and unpolished version of lodash's `get()`
  * @param path - The property path. Supports `.` (dots) and `[1]` (array access) syntax.
+ * @public
  */
-export const get = (obj: Object, path: string): unknown => {
+export function get(obj: Object, path: string): unknown {
   if (obj != null) {
     if (path in obj) {
       return (obj as any)[path];
@@ -28,4 +29,4 @@ export const get = (obj: Object, path: string): unknown => {
     }
     return val;
   }
-};
+}

@@ -1,1 +1,6 @@
-export const maxOf = (a: number, b: number) => (a > b ? a : b);
+/**
+ * @public
+ */
+export function maxOf(a: number, b: number) {
+  return a > b ? a : b;
+}

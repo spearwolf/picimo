@@ -103,6 +103,9 @@ export interface DisplayOnFrameOptions extends DisplayEventOptions {
   frameNo: number;
 }
 
+/**
+ * @public
+ */
 export class Display extends Eventize {
   readonly renderer: WebGLRenderer;
 

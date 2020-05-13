@@ -1,10 +1,18 @@
+/**
+ * @internal
+ */
 export const postFixID = Math.round(Math.random() * (1 << 24)).toString(16);
+
+/**
+ * @internal
+ */
 export const globalStylesID = `picimo-${postFixID}`;
 
 let sheet: CSSStyleSheet = null;
 
 /**
- * Helpers for installing simple css-class-based rules
+ * Helper for installing simple css-class-based rules
+ * @public
  */
 export class Stylesheets {
   static getGlobalSheet() {
@@ -29,8 +37,8 @@ export class Stylesheets {
   /**
    * Install a global className-based style ruleset and add the className to the html element
    * The class name gets a uniq-number as postfix added.
-   * @param name The base class name
-   * @param css The styles
+   * @param name - The base class name
+   * @param css - The styles
    * @returns The postfixed class name
    */
   static addRule(element: HTMLElement, name: string, css: string) {

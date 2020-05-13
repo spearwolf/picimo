@@ -1,3 +1,6 @@
+/**
+ * @public
+ */
 export function base64toUint32Arr(
   base64: string,
   isLittleEndian = true,

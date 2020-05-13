@@ -10,6 +10,7 @@ import {Map2DView} from './Map2DView';
 const $dispatchEvent = Symbol('dispatchEvent');
 
 /**
+ * @public
  * Represents a map2d scene.
  *
  * By default the map2d lies on the ground along the x and z axes.

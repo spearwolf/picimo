@@ -5,6 +5,9 @@ type VectorProp = 'x' | 'y' | 'z' | 'w' | 'width' | 'height';
 const $proxy = Symbol('proxy');
 const $props = Symbol('props');
 
+/**
+ * @public
+ */
 export class Vector2Proxy extends Vector2 {
   private readonly [$proxy]: Vector4;
   private readonly [$props]: [VectorProp, VectorProp];

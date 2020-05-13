@@ -3,11 +3,14 @@ const DEG2RAD = Math.PI / 180.0;
 type CircleCoords = [number, number, number];
 type CircleCoordsFn = (x: number, y: number, z: number) => void;
 
-export const makeCircleCoords = (
+/**
+ * @public
+ */
+export function makeCircleCoords(
   steps: number,
   radius = 1,
   circleCoordsFn?: CircleCoordsFn,
-) => {
+) {
   const halfRadius = 0.5 * radius;
   const delta = 360.0 / steps;
   const arr: CircleCoords[] = [];
@@ -30,4 +33,4 @@ export const makeCircleCoords = (
   }
 
   return arr;
-};
+}
