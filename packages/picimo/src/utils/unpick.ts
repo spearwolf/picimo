@@ -1,6 +1,7 @@
 /**
  * The reversed version of `pick()`.
  * @public
+ * @apiDomain utils
  */
 export function unpick<T extends Object>(names: string[]) {
   return (obj?: Object): T | null => {

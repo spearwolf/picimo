@@ -1,10 +1,15 @@
 // Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
 // See LICENSE in the project root for license information.
 
+// 2020/05 modified by spearwolf <wolfger@spearwolf.de>
+//   - add JsonAction
+
 import {CommandLineParser} from '@rushstack/ts-command-line';
+
+import {GenerateAction} from './GenerateAction';
+import {JsonAction} from './JsonAction';
 import {MarkdownAction} from './MarkdownAction';
 import {YamlAction} from './YamlAction';
-import {GenerateAction} from './GenerateAction';
 
 export class ApiDocumenterCommandLine extends CommandLineParser {
   public constructor() {
@@ -26,5 +31,6 @@ export class ApiDocumenterCommandLine extends CommandLineParser {
     this.addAction(new MarkdownAction(this));
     this.addAction(new YamlAction(this));
     this.addAction(new GenerateAction(this));
+    this.addAction(new JsonAction(this));
   }
 }

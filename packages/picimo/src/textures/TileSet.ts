@@ -26,6 +26,9 @@ export interface TileSetLoadOptions extends TileSetOptions {
 
 const $textures = Symbol('textures');
 
+/**
+ * @apiDomain textures
+ */
 export class TileSet implements ITileSet {
   static async load(path: string, options?: TileSetLoadOptions) {
     const basePath = readOption(options, 'basePath', './');

@@ -1,23 +1,23 @@
 "use strict";
-// Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT license.
-// See LICENSE in the project root for license information.
+/* eslint-disable no-case-declarations */
+/* eslint-disable no-console */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.YamlDocumenter = void 0;
+exports.JsonDocumenter = void 0;
+// 2020/05 code based upon ./YamlDocumenter.ts and modified by spearwolf <wolfger@spearwolf.de>
 const path = require("path");
 const yaml = require("js-yaml");
-const node_core_library_1 = require("@rushstack/node-core-library");
-const tsdoc_1 = require("@microsoft/tsdoc");
 const api_extractor_model_1 = require("@microsoft/api-extractor-model");
-const Utilities_1 = require("../utils/Utilities");
+const tsdoc_1 = require("@microsoft/tsdoc");
+const node_core_library_1 = require("@rushstack/node-core-library");
 const CustomMarkdownEmitter_1 = require("../markdown/CustomMarkdownEmitter");
+const Utilities_1 = require("../utils/Utilities");
 const yamlApiSchema = node_core_library_1.JsonSchema.fromFile(path.join(__dirname, '..', 'yaml', 'typescript.schema.json'));
 /**
  * Writes documentation in the Universal Reference YAML file format, as defined by typescript.schema.json.
  */
-class YamlDocumenter {
-    constructor(apiModel, newDocfxNamespaces = false) {
+class JsonDocumenter {
+    constructor(apiModel) {
         this._apiModel = apiModel;
-        this.newDocfxNamespaces = newDocfxNamespaces;
         this._markdownEmitter = new CustomMarkdownEmitter_1.CustomMarkdownEmitter(this._apiModel);
         this._apiItemsByCanonicalReference = new Map();
         this._initApiItems();
@@ -36,13 +36,13 @@ class YamlDocumenter {
     /** @virtual */
     onGetTocRoot() {
         return {
-            name: 'SharePoint Framework reference',
-            href: '~/overview/sharepoint.md',
+            name: 'Picimo.js API Reference',
+            href: '~/overview/picimo.md',
             items: [],
         };
     }
     /** @virtual */
-    onCustomizeYamlItem(yamlItem) {
+    onCustomizeYamlItem(_yamlItem) {
         // virtual
         // (overridden by child class)
     }
@@ -85,14 +85,14 @@ class YamlDocumenter {
             this._yamlReferences = savedYamlReferences;
             const yamlFilePath = this._getYamlFilePath(apiItem);
             if (apiItem.kind === "Package" /* Package */) {
-                console.log('Writing ' + yamlFilePath);
+                console.log(`Writing ${yamlFilePath}`);
             }
             this._writeYamlFile(newYamlFile, yamlFilePath, 'UniversalReference', yamlApiSchema);
             if (parentYamlFile) {
                 // References should be recorded in the parent YAML file with the local name of the embedded item.
                 // This avoids unnecessary repetition when listing items inside of a namespace.
                 this._recordYamlReference(this._ensureYamlReferences(), this._getUid(apiItem), this._getYamlItemName(apiItem, {
-                    includeNamespace: !this.newDocfxNamespaces,
+                    includeNamespace: true,
                     includeSignature: true,
                 }), this._getYamlItemName(apiItem, {
                     includeNamespace: true,
@@ -106,14 +106,10 @@ class YamlDocumenter {
         const children = [];
         if (apiItem.kind === "Package" /* Package */) {
             // Skip over the entry point, since it's not part of the documentation hierarchy
-            this._flattenNamespaces(apiItem.members[0].members, children, this.newDocfxNamespaces
-                ? 0 /* NestedNamespacesAndChildren */
-                : 3 /* NestedChildren */);
+            this._flattenNamespaces(apiItem.members[0].members, children, 3 /* NestedChildren */);
         }
         else {
-            this._flattenNamespaces(apiItem.members, children, this.newDocfxNamespaces
-                ? 2 /* ImmediateChildren */
-                : 3 /* NestedChildren */);
+            this._flattenNamespaces(apiItem.members, children, 3 /* NestedChildren */);
         }
         return children;
     }
@@ -164,26 +160,24 @@ class YamlDocumenter {
      * Write the table of contents
      */
     _writeTocFile(apiItems) {
-        const tocFile = this.buildYamlTocFile(apiItems);
-        const tocFilePath = path.join(this._outputFolder, 'toc.yml');
-        console.log('Writing ' + tocFilePath);
-        this._writeYamlFile(tocFile, tocFilePath, '', undefined);
+        const tocFile = this.buildJsonTocFile(apiItems);
+        const tocFilePath = path.join(this._outputFolder, 'sidebars.json');
+        console.log(`Writing ${tocFilePath}`);
+        node_core_library_1.FileSystem.writeFile(tocFilePath, JSON.stringify(tocFile, null, 2), {
+            convertLineEndings: "\r\n" /* CrLf */,
+            ensureFolderExists: true,
+        });
     }
     /** @virtual */
-    buildYamlTocFile(apiItems) {
-        const tocFile = {
-            items: [],
-        };
-        const rootItem = this.onGetTocRoot();
-        tocFile.items.push(rootItem);
-        rootItem.items.push(...this._buildTocItems(apiItems));
-        return tocFile;
+    buildJsonTocFile(apiItems) {
+        const tocItems = this._buildTocItems(apiItems);
+        return tocItems;
     }
     _buildTocItems(apiItems) {
         const tocItems = [];
         for (const apiItem of apiItems) {
             let tocItem;
-            if (apiItem.kind === "Namespace" /* Namespace */ && !this.newDocfxNamespaces) {
+            if (apiItem.kind === "Namespace" /* Namespace */) {
                 tocItem = {
                     name: this._getTocItemName(apiItem),
                 };
@@ -196,6 +190,8 @@ class YamlDocumenter {
                 tocItem = {
                     name: this._getTocItemName(apiItem),
                     uid: this._getUid(apiItem),
+                    kind: apiItem.kind,
+                    apiDomain: this._getApiDomain(apiItem),
                 };
             }
             tocItems.push(tocItem);
@@ -230,7 +226,7 @@ class YamlDocumenter {
             case "Enum" /* Enum */:
                 return false;
             case "Namespace" /* Namespace */:
-                return !this.newDocfxNamespaces;
+                return true;
         }
         return true;
     }
@@ -281,7 +277,7 @@ class YamlDocumenter {
         }
         yamlItem.name = this._getYamlItemName(apiItem, {
             includeSignature: true,
-            includeNamespace: !this.newDocfxNamespaces,
+            includeNamespace: true,
         });
         yamlItem.fullName = this._getYamlItemName(apiItem, {
             includeSignature: true,
@@ -290,10 +286,7 @@ class YamlDocumenter {
         yamlItem.langs = ['typeScript'];
         // Add the namespace of the item if it is contained in one.
         // Do not add the namespace parent of a namespace as they are flattened in the documentation.
-        if (apiItem.kind !== "Namespace" /* Namespace */ &&
-            apiItem.parent &&
-            apiItem.parent.kind === "Namespace" /* Namespace */ &&
-            this.newDocfxNamespaces) {
+        if (apiItem.kind !== "Namespace" /* Namespace */ && apiItem.parent) {
             yamlItem.namespace = apiItem.parent.canonicalReference.toString();
         }
         switch (apiItem.kind) {
@@ -354,13 +347,13 @@ class YamlDocumenter {
                 this._populateYamlTypeAlias(uid, yamlItem, apiItem);
                 break;
             default:
-                throw new Error('Unimplemented item kind: ' + apiItem.kind);
+                throw new Error(`Unimplemented item kind: ${apiItem.kind}`);
         }
         if (apiItem.kind !== "Package" /* Package */ &&
             !this._shouldEmbed(apiItem.kind)) {
             const associatedPackage = apiItem.getAssociatedPackage();
             if (!associatedPackage) {
-                throw new Error('Unable to determine associated package for ' + apiItem.displayName);
+                throw new Error(`Unable to determine associated package for ${apiItem.displayName}`);
             }
             yamlItem.package = this._getUid(associatedPackage);
         }
@@ -427,7 +420,7 @@ class YamlDocumenter {
                     yamlItem.remarks = sealedMessage;
                 }
                 else {
-                    yamlItem.remarks = sealedMessage + '\n\n' + yamlItem.remarks;
+                    yamlItem.remarks = `${sealedMessage}\n\n${yamlItem.remarks}`;
                 }
             }
         }
@@ -526,7 +519,7 @@ class YamlDocumenter {
                 // the overhead we only support balanced parenthesis with a depth of 1.
                 return encodeURI(`xref:${this._getUid(apiItem)}`)
                     .replace(/[#?]/g, (s) => encodeURIComponent(s))
-                    .replace(/(\([^(]*\))|[()]/g, (s, balanced) => balanced || '\\' + s);
+                    .replace(/(\([^(]*\))|[()]/g, (s, balanced) => balanced || `\\${s}`);
             },
         });
         return stringBuilder.toString().trim();
@@ -537,7 +530,7 @@ class YamlDocumenter {
             lineWidth: 120,
         });
         if (yamlMimeType) {
-            stringified = `### YamlMime:${yamlMimeType}\n` + stringified;
+            stringified = `### YamlMime:${yamlMimeType}\n${stringified}`;
         }
         node_core_library_1.FileSystem.writeFile(filePath, stringified, {
             convertLineEndings: "\r\n" /* CrLf */,
@@ -556,6 +549,15 @@ class YamlDocumenter {
     }
     _getUidObject(apiItem) {
         return apiItem.canonicalReference;
+    }
+    _getApiDomain(apiItem) {
+        var _a;
+        const item = {};
+        apiItem.serializeInto(item);
+        const m = (_a = item.docComment) === null || _a === void 0 ? void 0 : _a.match(/@apiDomain\s+(\w+)/);
+        if (m)
+            return m[1];
+        return '';
     }
     /**
      * Initialize the _apiItemsByCanonicalReference data structure.
@@ -763,9 +765,7 @@ class YamlDocumenter {
             }
             return nameParts.join('.');
         }
-        else {
-            return baseName;
-        }
+        return baseName;
     }
     _getYamlFilePath(apiItem) {
         let result = '';
@@ -793,11 +793,11 @@ class YamlDocumenter {
         if (apiItem.getMergedSiblings().length > 1) {
             disambiguator = `-${apiItem.kind.toLowerCase()}`;
         }
-        return path.join(this._outputFolder, result + disambiguator + '.yml');
+        return path.join(this._outputFolder, `${result + disambiguator}.yml`);
     }
     _deleteOldOutputFiles() {
-        console.log('Deleting old output from ' + this._outputFolder);
+        console.log(`Deleting old output from ${this._outputFolder}`);
         node_core_library_1.FileSystem.ensureEmptyFolder(this._outputFolder);
     }
 }
-exports.YamlDocumenter = YamlDocumenter;
+exports.JsonDocumenter = JsonDocumenter;

@@ -21,6 +21,7 @@
     "docs": "run-s build:dist:typings website:docs",
     "website:docs": "node scripts/makeDocs.js",
     "website:docs0": "api-documenter markdown -i .temp -o ../../website/docs/api",
+    "website:api-docs-json": "api-documenter json -i .temp -o ../../website/docs/api",
     "test:eslint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
     "test:karma": "cross-env NODE_ENV=test karma start --single-run",
     "watch:test": "cross-env NODE_ENV=test karma start",

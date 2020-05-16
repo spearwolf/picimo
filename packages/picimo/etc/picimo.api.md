@@ -1502,7 +1502,7 @@ export interface TiledMapCreateLayersOptions {
     yStart?: number;
 }
 
-// @public (undocumented)
+// @public
 export class TileSet implements ITileSet {
     constructor(baseTexture: Texture, options?: TileSetOptions);
     // (undocumented)

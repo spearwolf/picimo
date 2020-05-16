@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-env node */
 const fs = require('fs');
 const path = require('path');
