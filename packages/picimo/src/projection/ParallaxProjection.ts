@@ -26,24 +26,22 @@ export type IParallaxProjectionSpecs = IProjectionSpecs & {
   distance?: number;
 };
 
-// const logger = new Logger('picimo.ParallaxProjection', 1000, 4); // XXX remove me
+// const logger = new Logger('picimo.ParallaxProjection', 1000, 4);
 
 export class ParallaxProjection extends Projection<
   IParallaxProjectionSpecs,
   PerspectiveCamera
 > {
-  distance: number;
+  initialDistance: number;
   fovy: number;
 
   updateOrtho(width: number, height: number, specs: IParallaxProjectionSpecs) {
     this.width = width;
     this.height = height;
 
-    const near = specs.near || DEFAULT_NEAR;
-    const far = specs.far || DEFAULT_FAR;
-    const distance = specs.distance || DEFAULT_DISTANCE;
-
-    this.distance = distance;
+    const near = specs.near ?? DEFAULT_NEAR;
+    const far = specs.far ?? DEFAULT_FAR;
+    const distance = specs.distance ?? DEFAULT_DISTANCE;
 
     const aspect = width / height;
     const halfHeight = height / 2;
@@ -53,26 +51,24 @@ export class ParallaxProjection extends Projection<
 
     const {camera} = this;
     if (!camera) {
+      // === Create camera
       this.camera = new PerspectiveCamera(fovy, aspect, near, far);
       this.applyPlaneRotation();
       this.applyCameraDistance(distance);
+      this.initialDistance = distance;
     } else {
+      // === Update camera
       camera.fov = fovy;
       camera.aspect = aspect;
-
-      // camera.position.y = distance;
-      this.applyCameraDistance(distance);
-
       camera.updateProjectionMatrix();
     }
   }
 
   getZoom(distanceToProjectionPlane: number) {
     if (distanceToProjectionPlane === 0) return 1;
-    const d = this.distance - distanceToProjectionPlane;
-    const z =
-      (Math.tan(((this.fovy / 2) * Math.PI) / 180) * d) / (this.height / 2);
-    // logger.log('zoom=', z, 'width=', this.width, 'height=', this.height, 'distance=', d); // XXX remove me
-    return z;
+    const d = this.initialDistance - distanceToProjectionPlane;
+    return (
+      (Math.tan(((this.fovy / 2) * Math.PI) / 180) * d) / (this.height / 2)
+    );
   }
 }

@@ -867,7 +867,7 @@
     "@babel/helper-plugin-utils" "^7.8.3"
     "@babel/plugin-transform-typescript" "^7.9.0"
 
-"@babel/runtime-corejs3@^7.8.3", "@babel/runtime-corejs3@^7.8.4", "@babel/runtime-corejs3@^7.9.2", "@babel/runtime-corejs3@^7.9.6":
+"@babel/runtime-corejs3@^7.8.3", "@babel/runtime-corejs3@^7.9.2", "@babel/runtime-corejs3@^7.9.6":
   version "7.9.6"
   resolved "https://registry.yarnpkg.com/@babel/runtime-corejs3/-/runtime-corejs3-7.9.6.tgz#67aded13fffbbc2cb93247388cf84d77a4be9a71"
   integrity sha512-6toWAfaALQjt3KMZQc6fABqZwUDDuWzz+cAfPhqyEnzxvdWOAkjwPNxgF8xlmo7OWLsSjaKjsskpKHRLaMArOA==
@@ -8188,14 +8188,6 @@ performance-now@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
   integrity sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=
-
-picimo@*:
-  version "0.0.23"
-  resolved "https://registry.yarnpkg.com/picimo/-/picimo-0.0.23.tgz#624e3d78f35295e01369dab64b6d38a76378f1ca"
-  integrity sha512-MbheDuBYYkDVHD1iePW77EF9Rvf40UK5+K8tFXDsOj0bCfKe8F64kt5RE93Bv/KPuXkiGhIv+YR6WRQcD+qk3A==
-  dependencies:
-    "@babel/runtime-corejs3" "^7.8.4"
-    eventize-js "^1.0.0"
 
 picomatch@^2.0.4, picomatch@^2.2.1, picomatch@^2.2.2:
   version "2.2.2"

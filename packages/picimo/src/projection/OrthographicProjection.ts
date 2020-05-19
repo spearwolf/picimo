@@ -36,14 +36,15 @@ export class OrthographicProjection extends Projection<
     this.width = width;
     this.height = height;
 
-    const near = specs.near || DEFAULT_NEAR;
-    const far = specs.far || DEFAULT_FAR;
-    const distance = specs.distance || DEFAULT_DISTANCE;
+    const near = specs.near ?? DEFAULT_NEAR;
+    const far = specs.far ?? DEFAULT_FAR;
+    const distance = specs.distance ?? DEFAULT_DISTANCE;
 
     const [halfWidth, halfHeight] = [width / 2, height / 2];
 
     const {camera} = this;
     if (!camera) {
+      // === Create camera
       this.camera = new OrthographicCamera(
         -halfWidth,
         halfWidth,
@@ -52,21 +53,16 @@ export class OrthographicProjection extends Projection<
         near,
         far,
       );
-      // this.camera.applyQuaternion(new Quaternion().setFromAxisAngle(new Vector3(1, 0, 0), Math.PI * -0.5));
-      // this.camera.position.y = distance;
       this.applyPlaneRotation();
       this.applyCameraDistance(distance);
     } else {
+      // Update camera
       camera.left = -halfWidth;
       camera.right = halfWidth;
       camera.top = halfHeight;
       camera.bottom = -halfHeight;
       camera.near = near;
       camera.far = far;
-
-      // camera.position.y = distance;
-      this.applyCameraDistance(distance);
-
       camera.updateProjectionMatrix();
     }
   }
