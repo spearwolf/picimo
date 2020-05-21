@@ -4,7 +4,7 @@
 > If you want to use _picimo_ in your own projects, I recommend as long as the version is still at 0.0.x to check out the repository locally and use e.g. `yarn link` (the npm package is currently updated only sometimes and irregularly)
 
 
-[![npm version](https://badge.fury.io/js/picimo.svg)](https://badge.fury.io/js/picimo)
+[![npm version](https://badge.fury.io/js/picimo.svg)](https://badge.fury.io/js/picimo) [![bundlephobia](https://badgen.net/bundlephobia/minzip/picimo)](https://bundlephobia.com/result?p=picimo)
 
 # picimo
 
