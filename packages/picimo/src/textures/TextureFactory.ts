@@ -10,18 +10,20 @@ import {readOption} from '../utils';
 import {ITexturable} from './ITexturable';
 import {ImageSource} from './PowerOf2Image';
 import {Texture as PicimoTexture} from './Texture';
+import {IThreeTextureOptions} from './ThreeTextureOptions';
 
 const $maxAnisotrophy = Symbol('maxAnisotrophy');
 
-export interface TextureFactoryOptions {
+export interface ITextureFactoryOptions {
   defaultAnisotrophy?: number;
   defaultFilter?: TextureFilter;
 }
 
-export interface ThreeTextureOptions {
-  filter?: TextureFilter;
-  anisotrophy?: number;
-  flipy?: boolean;
+export interface IThreeTextureProps {
+  flipY: boolean;
+  magFilter: number;
+  minFilter: number;
+  anisotropy: number;
 }
 
 export class TextureFactory {
@@ -30,13 +32,13 @@ export class TextureFactory {
 
   private readonly [$maxAnisotrophy]: number;
 
-  constructor(renderer?: WebGLRenderer, options?: TextureFactoryOptions) {
+  constructor(renderer?: WebGLRenderer, options?: ITextureFactoryOptions) {
     this[$maxAnisotrophy] = renderer?.capabilities?.getMaxAnisotropy() ?? 0;
     this.DefaultAnisotrophy = options?.defaultAnisotrophy ?? 0;
     this.DefaultFilter = options?.defaultFilter ?? NearestFilter;
   }
 
-  createThreeTextureOptions(options?: ThreeTextureOptions) {
+  createThreeTextureOptions(options?: IThreeTextureOptions) {
     const filter = readOption(
       options,
       'filter',
@@ -61,7 +63,17 @@ export class TextureFactory {
 
   makeThreeTexture(
     source: ITexturable | PicimoTexture,
-    options?: ThreeTextureOptions,
+    options?: IThreeTextureOptions,
+  ) {
+    return this.createThreeTexture(
+      source,
+      this.createThreeTextureOptions(options),
+    );
+  }
+
+  createThreeTexture(
+    source: ITexturable | PicimoTexture,
+    props: IThreeTextureProps,
   ) {
     let image: ImageSource;
 
@@ -73,7 +85,7 @@ export class TextureFactory {
 
     const texture = new ThreeTexture(image);
 
-    Object.assign(texture, this.createThreeTextureOptions(options));
+    Object.assign(texture, props);
 
     texture.needsUpdate = true;
 

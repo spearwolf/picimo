@@ -13,7 +13,7 @@
     "experimentalDecorators": true,
     "lib": [
       "dom",
-      "es2015"
+      "es2019"
     ],
     "module": "commonjs",
     "noEmit": true,

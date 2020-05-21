@@ -52,27 +52,27 @@ export class TextureAtlas implements ITexturable {
 
   baseTexture: Texture;
 
-  private _frames = new Map<string, Texture>();
+  #frames = new Map<string, Texture>();
 
-  private _allFrames: Texture[] = [];
-  private _allFrameNames: string[] = [];
+  #allFrames: Texture[] = [];
+  #allFrameNames: string[] = [];
 
-  private _features: Map<string, unknown> = null;
+  #features: Map<string, unknown> = null;
 
   constructor(baseTexture: Texture, data: TextureAtlasDescription) {
     this.baseTexture = baseTexture;
 
-    Object.keys(data.frames).forEach((name) => {
-      const frameData = data.frames[name];
-      const {frame} = frameData;
-      const features = filterFrameFeatures(frameData);
-      this.addFrame(name, frame.w, frame.h, frame.x, frame.y, features);
-    });
+    if (data?.frames) {
+      Object.entries(data.frames).forEach(([name, frameData]) => {
+        const {frame} = frameData;
+        const features = filterFrameFeatures(frameData);
+        this.addFrame(name, frame.w, frame.h, frame.x, frame.y, features);
+      });
+    }
 
-    const {meta} = data;
-    if (meta !== undefined) {
-      Object.keys(meta).forEach((name) => {
-        this.setFeature(name, meta[name]);
+    if (data?.meta) {
+      Object.entries(data.meta).forEach(([name, metaData]) => {
+        this.setFeature(name, metaData);
       });
     }
   }
@@ -82,9 +82,9 @@ export class TextureAtlas implements ITexturable {
   }
 
   addTexture(name: string, texture: Texture, features: Features = null) {
-    this._allFrameNames.push(name);
-    this._allFrames.push(texture);
-    this._frames.set(name, texture);
+    this.#allFrameNames.push(name);
+    this.#allFrames.push(texture);
+    this.#frames.set(name, texture);
     if (features != null) {
       Object.keys(features).forEach((name) => {
         texture.setFeature(name, features[name]);
@@ -105,17 +105,17 @@ export class TextureAtlas implements ITexturable {
   }
 
   frame(name: string): Texture {
-    return this._frames.get(name);
+    return this.#frames.get(name);
   }
 
   randomFrame() {
-    return sample(this._allFrames);
+    return sample(this.#allFrames);
   }
 
   randomFrames(count: number) {
     const frames: Texture[] = [];
     for (let i = 0; i < count; i++) {
-      frames.push(sample(this._allFrames));
+      frames.push(sample(this.#allFrames));
     }
     return frames;
   }
@@ -123,25 +123,25 @@ export class TextureAtlas implements ITexturable {
   frameNames(match?: string | RegExp) {
     if (match != null) {
       const regex = typeof match === 'string' ? new RegExp(match) : match;
-      return this._allFrameNames.filter((name) => regex.test(name));
+      return this.#allFrameNames.filter((name) => regex.test(name));
     }
-    return this._allFrameNames;
+    return this.#allFrameNames;
   }
 
   randomFrameName() {
-    return sample(this._allFrameNames);
+    return sample(this.#allFrameNames);
   }
 
   getFeature(name: string, defaultValue: unknown = undefined): unknown {
-    return this._features && this._features.has(name)
-      ? this._features.get(name)
+    return this.#features && this.#features.has(name)
+      ? this.#features.get(name)
       : defaultValue;
   }
 
   setFeature(name: string, value: unknown) {
-    if (this._features === null) {
-      this._features = new Map();
+    if (this.#features === null) {
+      this.#features = new Map();
     }
-    this._features.set(name, value);
+    this.#features.set(name, value);
   }
 }
