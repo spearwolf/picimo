@@ -59,6 +59,12 @@ export class TextureFactory {
     };
   }
 
+  configure(options: ThreeTextureOptions, texture: ThreeTexture) {
+    Object.assign(texture, this.createThreeTextureOptions(options));
+    texture.needsUpdate = true;
+    return texture;
+  }
+
   makeThreeTexture(
     source: ITexturable | PicimoTexture,
     options?: ThreeTextureOptions,
@@ -72,11 +78,6 @@ export class TextureFactory {
     }
 
     const texture = new ThreeTexture(image);
-
-    Object.assign(texture, this.createThreeTextureOptions(options));
-
-    texture.needsUpdate = true;
-
-    return texture;
+    return this.configure(options, texture);
   }
 }
