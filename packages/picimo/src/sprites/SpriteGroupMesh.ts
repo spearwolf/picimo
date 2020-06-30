@@ -112,7 +112,5 @@ export class SpriteGroupMesh<T, U = {}, K = {}, I = {}> extends Mesh {
       () => geometry.instancedBufferVersion,
       () => geometry.updateInstancedBuffers(),
     );
-
-    // geometry.maxInstancedCount = spriteGroup.usedCount;
   }
 }

@@ -26,12 +26,12 @@ const vertexShader = `
 
 const fragmentShader = `
 
-  uniform sampler2D texture;
+  uniform sampler2D tex0;
 
   varying vec2 vTexCoords;
 
   void main(void) {
-    gl_FragColor = texture2D(texture, vec2(vTexCoords.s, vTexCoords.t));
+    gl_FragColor = texture2D(tex0, vec2(vTexCoords.s, vTexCoords.t));
 
     if (gl_FragColor.a == 0.0) {
       discard;
@@ -47,7 +47,7 @@ export class TileQuadMaterial extends THREE.ShaderMaterial {
       fragmentShader,
 
       uniforms: {
-        texture: {
+        tex0: {
           value: texture,
         },
       },

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable react-hooks/exhaustive-deps */
 import * as dat from 'dat.gui';
 import PropTypes from 'prop-types';

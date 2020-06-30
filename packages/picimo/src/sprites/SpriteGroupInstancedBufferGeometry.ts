@@ -64,11 +64,11 @@ export class SpriteGroupInstancedBufferGeometry<
     spriteGroup.voPool.voArray.serial = this.instancedBufferVersion;
   }
 
-  get maxInstancedCount() {
+  get instanceCount() {
     return this.parameters.spriteGroup.usedCount;
   }
 
-  set maxInstancedCount(_x) {
+  set instanceCount(_x) {
     // ignore
   }
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable import/no-unresolved */
 import {useDatGui, number} from 'datgui-context-hook';
 import {

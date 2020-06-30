@@ -6,7 +6,7 @@
   "scripts": {
     "start": "picimo-demo-cli start",
     "build": "picimo-demo-cli build",
-    "clean": "rimraf public/bundle.js"
+    "clean": "rm -f public/bundle.js"
   },
   "license": "MIT",
   "browserslist": [
