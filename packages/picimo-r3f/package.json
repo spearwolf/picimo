@@ -25,16 +25,16 @@
   },
   "homepage": "https://github.com/spearwolf/picimo#readme",
   "devDependencies": {
-    "@babel/cli": "^7.10.3",
-    "@babel/core": "^7.10.3",
-    "@babel/plugin-proposal-class-properties": "^7.10.1",
-    "@babel/plugin-proposal-decorators": "^7.10.3",
-    "@babel/plugin-proposal-object-rest-spread": "^7.10.3",
-    "@babel/plugin-proposal-optional-chaining": "^7.10.3",
-    "@babel/plugin-transform-runtime": "^7.10.3",
-    "@babel/preset-env": "^7.10.3",
-    "@babel/preset-react": "^7.10.1",
-    "@babel/preset-typescript": "^7.10.1",
+    "@babel/cli": "^7.10.4",
+    "@babel/core": "^7.10.4",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-decorators": "^7.10.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.10.4",
+    "@babel/plugin-proposal-optional-chaining": "^7.10.4",
+    "@babel/plugin-transform-runtime": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/preset-react": "^7.10.4",
+    "@babel/preset-typescript": "^7.10.4",
     "@types/react": "^16.9.41",
     "@types/react-dom": "^16.9.7",
     "assert": "^2.0.0",
@@ -45,8 +45,8 @@
     "cross-env": "^7.0.2",
     "eslint": "^7.3.1",
     "eslint-config-problems": "^4.0.0",
-    "eslint-plugin-react": "^7.20.2",
-    "eslint-plugin-react-hooks": "^4.0.4",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react-hooks": "^4.0.5",
     "karma": "^4.4.1",
     "karma-chrome-launcher": "^3.1.0",
     "karma-coverage-istanbul-reporter": "^2.1.1",
@@ -74,10 +74,10 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-three-fiber": "^4.0.12",
-    "three": "^0.116.1"
+    "three": "^0.118.3"
   },
   "dependencies": {
-    "@babel/runtime-corejs3": "^7.10.3",
+    "@babel/runtime-corejs3": "^7.10.4",
     "react-promise-suspense": "^0.3.3"
   }
 }
