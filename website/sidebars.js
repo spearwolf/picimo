@@ -1,4 +1,5 @@
 /* eslint-env node */
+/*
 const fs = require('fs');
 const path = require('path');
 
@@ -14,11 +15,12 @@ fs.readdirSync(path.join(__dirname, 'docs/api'), {encoding: 'utf-8'})
   });
 
 console.dir(API);
+*/
 
 module.exports = {
   someSidebar: {
     'Getting Started': ['Introduction'],
     Guides: ['Sprites', 'Map2D', 'Projection'],
-    API,
+    // API,
   },
 };
