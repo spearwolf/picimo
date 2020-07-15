@@ -23,7 +23,9 @@ export class SpriteGroupBufferGeometry<T, U> extends BufferGeometry {
       spriteGroup,
     };
 
-    this.setIndex(spriteGroup.indices.indices);
+    if (spriteGroup.indices) {
+      this.setIndex(spriteGroup.indices.indices);
+    }
 
     this._buffers = createBufferAttributes(
       spriteGroup,
@@ -34,13 +36,13 @@ export class SpriteGroupBufferGeometry<T, U> extends BufferGeometry {
     spriteGroup.voPool.voArray.serial = this.bufferVersion;
   }
 
-  updateBuffers() {
+  updateBuffers(): void {
     this._buffers.forEach((buf) => {
       buf.needsUpdate = true;
     });
   }
 
-  get bufferVersion() {
+  get bufferVersion(): number {
     return this._buffers[0].version;
   }
 }

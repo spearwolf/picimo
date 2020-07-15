@@ -46,7 +46,7 @@ export class TileQuadMesh extends SpriteGroupMesh<
     this.picimoType = 'TileQuadMesh';
   }
 
-  /* TODO create bounding box/sphere for view culing?
+  /* TODO create bounding box/sphere for view culling?
   updateBoundingSphere(viewTile: Map2DViewTile) {
 
     const {

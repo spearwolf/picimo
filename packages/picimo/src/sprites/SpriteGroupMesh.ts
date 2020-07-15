@@ -42,7 +42,7 @@ export class SpriteGroupMesh<T, U = {}, K = {}, I = {}> extends Mesh {
     if (log.VERBOSE) log.log('created', this);
   }
 
-  onBeforeRender = () =>
+  onBeforeRender = (): void =>
     /*
     _renderer: any,
     _scene: any,
@@ -53,14 +53,21 @@ export class SpriteGroupMesh<T, U = {}, K = {}, I = {}> extends Mesh {
     */
     {
       const {picimoType} = this.geometry;
-      if (picimoType === 'SpriteGroupGeometry') {
+      if (picimoType === 'SpriteGroupBufferGeometry') {
         this.onBeforeRenderSpriteGroup();
       } else if (picimoType === 'SpriteGroupInstancedBufferGeometry') {
         this.onBeforeRenderSpriteGroupInstanced();
+      } else if (log.WARN) {
+        log.warn(
+          'onBeforeRender->???, unknown picimoType=',
+          picimoType,
+          'mesh:',
+          this,
+        );
       }
     };
 
-  dispose() {
+  dispose(): void {
     if (log.VERBOSE) log.log('dispose', this);
     const {geometry, material} = this;
     geometry?.dispose();
@@ -84,7 +91,13 @@ export class SpriteGroupMesh<T, U = {}, K = {}, I = {}> extends Mesh {
     );
 
     const {usedCount, indices} = spriteGroup;
-    geometry.setDrawRange(0, usedCount * indices.itemCount);
+    if (indices != null) {
+      geometry.setDrawRange(0, usedCount * indices.itemCount);
+    } else if (log.WARN) {
+      log.warn(
+        'TODO setDrawRange(...) for SpriteGroupBufferGeometry without indices!',
+      );
+    }
   }
 
   private onBeforeRenderSpriteGroupInstanced() {
@@ -103,8 +116,18 @@ export class SpriteGroupMesh<T, U = {}, K = {}, I = {}> extends Mesh {
         () => geometry.updateBuffers(),
       );
 
+      if (log.INFO) {
+        log.info('onBeforeRenderSpriteGroupInstanced');
+      }
+
       const {usedCount, indices} = baseSpriteGroup;
-      geometry.setDrawRange(0, usedCount * indices.itemCount);
+      if (indices != null) {
+        geometry.setDrawRange(0, usedCount * indices.itemCount);
+      } else if (log.WARN) {
+        log.warn(
+          'TODO setDrawRange(...) for SpriteGroupInstancedBufferGeometry without indices!',
+        );
+      }
     }
 
     updateBuffers(
