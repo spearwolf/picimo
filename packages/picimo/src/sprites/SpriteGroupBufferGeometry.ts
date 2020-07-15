@@ -1,8 +1,9 @@
-import {BufferGeometry, InterleavedBuffer} from 'three';
+import {BufferGeometry, InterleavedBuffer, Object3D} from 'three';
 
 import {SpriteGroup} from './SpriteGroup';
 
 import {createBufferAttributes} from './lib/createBufferAttributes';
+import {updateBuffers} from './lib/updateBuffers';
 
 export class SpriteGroupBufferGeometry<T, U> extends BufferGeometry {
   readonly picimoType: string = 'SpriteGroupBufferGeometry';
@@ -44,5 +45,28 @@ export class SpriteGroupBufferGeometry<T, U> extends BufferGeometry {
 
   get bufferVersion(): number {
     return this._buffers[0].version;
+  }
+
+  onBeforeRender(): void {
+    const {spriteGroup} = this.parameters;
+
+    updateBuffers(
+      spriteGroup,
+      () => this.bufferVersion,
+      () => this.updateBuffers(),
+    );
+
+    const {usedCount, indices} = spriteGroup;
+    this.setDrawRange(
+      0,
+      indices == null
+        ? usedCount * spriteGroup.descriptor.vertexCount
+        : usedCount * indices.itemCount,
+    );
+  }
+
+  updateBeforeRenderObject(object3d: Object3D): Object3D {
+    object3d.onBeforeRender = this.onBeforeRender.bind(this);
+    return object3d;
   }
 }

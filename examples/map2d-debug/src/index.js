@@ -106,16 +106,16 @@ display.on('init', async ({width, height}) => {
   // lines and helpers
   // =====================================
 
-  const lines = new Lines({capacity: 1000, color: 0x000000});
+  const lines = new Lines({capacity: 1000, color: 0xff0066});
   console.log('lines', lines);
   lines.createLine([0, 0, 0], [100, 0, 0]);
-  lines.createLine([0, 0, 10], [100, 0, 10]);
-  lines.createLine([100, 0, 0], [100, 100, 0]);
-  lines.createLine([100, 100, 0], [0, 100, 0]);
-  lines.createLine([0, 100, 0], [0, 0, 0]);
+  lines.createLine([0, 0, 10], [100, 0, 10], 0x00ff00);
+  lines.createLine([100, 0, 0], [100, 100, 0], 0x0000ff);
+  lines.createLine([100, 100, 0], [0, 100, 0], 0xffff00);
+  lines.createLine([0, 100, 0], [0, 0, 0], 0x000000);
 
   stage.add(map2d);
-  stage.add(lines.mesh);
+  stage.add(lines.object3d);
 });
 
 display.start();

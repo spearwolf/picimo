@@ -1,10 +1,5 @@
-import {
-  VODescriptor,
-  VOIndices,
-  SpriteGroup,
-  SpriteGroupBufferGeometry,
-} from 'picimo';
-import {LineSegments, Sphere, Vector3, LineBasicMaterial} from 'three';
+import {VODescriptor, SpriteGroup, SpriteGroupBufferGeometry} from 'picimo';
+import {LineSegments, LineBasicMaterial, Color} from 'three';
 
 const makeLinesDescriptor = () =>
   new VODescriptor({
@@ -12,6 +7,18 @@ const makeLinesDescriptor = () =>
 
     attributes: {
       position: ['x', 'y', 'z'],
+      color: {scalars: ['r', 'g', 'b'], uniform: true},
+    },
+
+    methods: {
+      setPosition(from, to) {
+        this._setPosition(from[0], from[1], from[2], to[0], to[1], to[2]);
+      },
+
+      setColor(color) {
+        const {r, g, b} = typeof color === 'number' ? new Color(color) : color;
+        this._setColor(r, g, b);
+      },
     },
   });
 
@@ -19,20 +26,21 @@ export class Lines extends SpriteGroup {
   constructor({color, ...spriteGroupOptions}) {
     super(makeLinesDescriptor(), {
       dynamic: true,
-      indices: VOIndices.buildLines,
+      autotouch: true,
       ...spriteGroupOptions,
     });
-    const material = new LineBasicMaterial({color});
+    this.color = new Color(color == null ? 0x000000 : color);
+    const material = new LineBasicMaterial({vertexColors: true});
     const geometry = new SpriteGroupBufferGeometry(this);
-    // geometry.boundingSphere = new Sphere(new Vector3(0, 0, 0), 1000); // TODO boundingSphere radius
-    this.mesh = new LineSegments(geometry, material);
-    // geometry.connectToObject3D(this.mesh);
-    // this.mesh = geometry.createObject3D(LineSegments, material);
+    // geometry.boundingSphere = new Sphere(new Vector3(0, 0, 0), 1000); // TODO boundingSphere radius?
+    this.object3d = new LineSegments(geometry, material);
+    geometry.updateBeforeRenderObject(this.object3d);
   }
 
-  createLine(from, to) {
+  createLine(from, to, color = this.color) {
     const line = this.createSprite();
-    line.setPosition(from[0], from[1], from[2], to[0], to[1], to[2]);
+    line.setPosition(from, to);
+    line.setColor(color);
     return line;
   }
 }

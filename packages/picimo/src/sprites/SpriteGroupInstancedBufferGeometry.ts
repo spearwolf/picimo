@@ -3,11 +3,17 @@ import {
   InstancedInterleavedBuffer,
   BufferGeometry,
   InstancedBufferGeometry,
+  Object3D,
 } from 'three';
+
+import {Logger} from '../utils';
 
 import {SpriteGroup} from './SpriteGroup';
 
 import {createBufferAttributes} from './lib/createBufferAttributes';
+import {updateBuffers} from './lib/updateBuffers';
+
+const log = new Logger('picimo.SpriteGroupInstancedBufferGeometry');
 
 export class SpriteGroupInstancedBufferGeometry<
   T,
@@ -64,31 +70,63 @@ export class SpriteGroupInstancedBufferGeometry<
     spriteGroup.voPool.voArray.serial = this.instancedBufferVersion;
   }
 
-  get instanceCount() {
+  get instanceCount(): number {
     return this.parameters.spriteGroup.usedCount;
   }
 
-  set instanceCount(_x) {
-    // ignore
+  set instanceCount(_count: number) {
+    // ignore updates from THREE.InstancedBufferGeometry
   }
 
-  updateBuffers() {
+  updateBuffers(): void {
     this._buffers.forEach((buf) => {
       buf.needsUpdate = true;
     });
   }
 
-  updateInstancedBuffers() {
+  updateInstancedBuffers(): void {
     this._instancedBuffers.forEach((buf) => {
       buf.needsUpdate = true;
     });
   }
 
-  get bufferVersion() {
+  get bufferVersion(): number {
     return this._buffers[0].version;
   }
 
-  get instancedBufferVersion() {
+  get instancedBufferVersion(): number {
     return this._instancedBuffers[0].version;
+  }
+
+  onBeforeRender(): void {
+    const {baseSpriteGroup, spriteGroup} = this.parameters;
+
+    if (baseSpriteGroup) {
+      updateBuffers(
+        baseSpriteGroup,
+        () => this.bufferVersion,
+        () => this.updateBuffers(),
+      );
+
+      const {usedCount, indices} = baseSpriteGroup;
+      if (indices != null) {
+        this.setDrawRange(0, usedCount * indices.itemCount);
+      } else if (log.WARN) {
+        log.warn(
+          'TODO setDrawRange(...) for SpriteGroupInstancedBufferGeometry without indices!',
+        );
+      }
+    }
+
+    updateBuffers(
+      spriteGroup,
+      () => this.instancedBufferVersion,
+      () => this.updateInstancedBuffers(),
+    );
+  }
+
+  updateBeforeRenderObject(object3d: Object3D): Object3D {
+    object3d.onBeforeRender = this.onBeforeRender.bind(this);
+    return object3d;
   }
 }
