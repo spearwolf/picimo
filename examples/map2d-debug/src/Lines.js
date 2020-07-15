@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import {VODescriptor, SpriteGroup, SpriteGroupBufferGeometry} from 'picimo';
 import {LineSegments, LineBasicMaterial, Color} from 'three';
 
