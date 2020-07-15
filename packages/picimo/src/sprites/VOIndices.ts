@@ -15,7 +15,7 @@ export class VOIndices {
     indices: number[],
     stride: number,
     objectOffset = 0,
-  ) {
+  ): VOIndices {
     const arr = new VOIndices(objectCount, indices.length);
 
     for (let i = 0; i < objectCount; ++i) {
@@ -28,12 +28,16 @@ export class VOIndices {
     return arr;
   }
 
-  static buildQuads(count: number) {
+  static buildQuads(count: number): VOIndices {
     return VOIndices.build(count, [0, 1, 2, 0, 2, 3], 4);
   }
 
-  static buildTriangles(count: number) {
+  static buildTriangles(count: number): VOIndices {
     return VOIndices.build(count, [0, 1, 2], 3);
+  }
+
+  static buildLines(count: number): VOIndices {
+    return VOIndices.build(count, [0, 1], 2);
   }
 
   objectCount: number;
