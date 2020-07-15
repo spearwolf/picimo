@@ -55,6 +55,7 @@ export class TileQuadMaterial extends THREE.ShaderMaterial {
       side: THREE.FrontSide,
       transparent: true,
       depthWrite: true,
+      depthTest: true,
     });
   }
 }
