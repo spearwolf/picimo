@@ -19,10 +19,10 @@ const $dispatchEvent = Symbol('dispatchEvent');
  * to the internal 2d *y* map2d coordinate.
  */
 export class Map2D extends Scene implements IMap2DRenderer {
-  static get BeginRenderEvent() {
+  static get BeginRenderEvent(): string {
     return 'map2dbeginrender';
   }
-  static get EndRenderEvent() {
+  static get EndRenderEvent(): string {
     return 'map2dendrender';
   }
 
@@ -38,7 +38,16 @@ export class Map2D extends Scene implements IMap2DRenderer {
     this.layersGroup.name = 'map2d.layers';
   }
 
-  appendLayer(layer: IMap2DLayer) {
+  setOrigin(x: number, y: number): void {
+    this.position.set(x, 0, y);
+    this.updateMatrix();
+  }
+
+  getOrigin(): [number, number] {
+    return [this.position.x, this.position.z];
+  }
+
+  appendLayer(layer: IMap2DLayer): void {
     const layers = this.map2dLayers;
     if (!layers.has(layer)) {
       layers.add(layer);
@@ -47,7 +56,7 @@ export class Map2D extends Scene implements IMap2DRenderer {
     }
   }
 
-  removeLayer(layer: IMap2DLayer) {
+  removeLayer(layer: IMap2DLayer): void {
     const layers = this.map2dLayers;
     if (layers.has(layer)) {
       layers.delete(layer);
@@ -55,15 +64,15 @@ export class Map2D extends Scene implements IMap2DRenderer {
     }
   }
 
-  beginRender(view: Map2DView) {
+  beginRender(view: Map2DView): void {
     this[$dispatchEvent](Map2D.BeginRenderEvent, {view});
   }
 
-  endRender(view: Map2DView) {
+  endRender(view: Map2DView): void {
     this[$dispatchEvent](Map2D.EndRenderEvent, {view});
   }
 
-  dispose() {
+  dispose(): void {
     this.context.dispose();
     this.materialCache.all().forEach(({texture, material}) => {
       material.dispose();

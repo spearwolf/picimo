@@ -1,4 +1,4 @@
-import {Camera, Vector2} from 'three';
+import {Camera} from 'three';
 
 export interface IProjection {
   camera: Camera;
@@ -11,7 +11,7 @@ export interface IProjection {
   pixelRatioH: number;
   pixelRatioV: number;
 
-  origin: Vector2;
+  // origin: Vector2;
 
   /**
    * Return zoom factor (in relation to the projection plane)

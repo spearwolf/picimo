@@ -14,7 +14,23 @@
       overflow: hidden;
       position: fixed;
       overscroll-behavior-y: none;
-      background-color: #fff;
+      background-color: #333;
+      font-size: 16px;
+    }
+    .guiContainer {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+    }
+    .whichCamera, .centerPos {
+      background-color: rgba(0, 0, 0, .5);
+      color: #fff;
+      padding: .125rem .5rem;
+      display: inline-block;
+    }
+    .centerPos {
+      font-family: monospace;
+      font-size: 11px;
     }
   </style>
 </head>
@@ -23,6 +39,10 @@
     var stickyLogConfig = { verbose: false };
   </script>
   <div picimo display-mode="pixelated" resize-strategy="fullscreen"></div>
+  <div class=guiContainer>
+    <div class=whichCamera>orbit</div>
+    <div class=centerPos></div>
+  </div>
   <script src="./bundle.js"></script>
 </body>
 </html>

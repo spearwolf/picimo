@@ -35,7 +35,11 @@ export class ParallaxProjection extends Projection<
   initialDistance: number;
   fovy: number;
 
-  updateOrtho(width: number, height: number, specs: IParallaxProjectionSpecs) {
+  updateOrtho(
+    width: number,
+    height: number,
+    specs: IParallaxProjectionSpecs,
+  ): void {
     this.width = width;
     this.height = height;
 
@@ -64,7 +68,7 @@ export class ParallaxProjection extends Projection<
     }
   }
 
-  getZoom(distanceToProjectionPlane: number) {
+  getZoom(distanceToProjectionPlane: number): number {
     if (distanceToProjectionPlane === 0) return 1;
     const d = this.initialDistance - distanceToProjectionPlane;
     return (

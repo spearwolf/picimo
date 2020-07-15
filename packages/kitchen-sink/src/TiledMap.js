@@ -193,7 +193,7 @@ function render(time) {
       view.centerX -= speedWest * t;
       view.update();
 
-      projection.origin.set(view.centerX, view.centerY);
+      // projection.origin.set(view.centerX, view.centerY);
     }
     renderer.render(scene, curCamera);
     rendererShouldRender = false;

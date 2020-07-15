@@ -74,7 +74,7 @@ export class Map2DViewLayer {
    * Create, update or delete the tiles dependent of their visibility.
    * You should call this only once per frame.
    */
-  update() {
+  update(): void {
     // I. create visible map tiles (and remove/dispose unvisible)
     // ---------------------------------------------------------------
 

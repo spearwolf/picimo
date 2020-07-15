@@ -1,6 +1,6 @@
 import {Camera, Quaternion, Vector3} from 'three';
 
-import {Plane, Vector2Proxy} from '../utils';
+import {Plane} from '../utils';
 
 import {IProjection} from './IProjection';
 import {IProjectionRule} from './IProjectionRule';
@@ -8,7 +8,7 @@ import {IProjectionSpecs} from './IProjectionSpecs';
 import {ProjectionRules} from './ProjectionRules';
 import {calcViewSize} from './lib/calcViewSize';
 
-const $origin = Symbol('origin');
+// const $origin = Symbol('origin');
 const $distanceProp = Symbol('distanceProp');
 
 export abstract class Projection<
@@ -27,7 +27,7 @@ export abstract class Projection<
 
   camera: Cam;
 
-  private [$origin]: Vector2Proxy;
+  // private [$origin]: Vector2Proxy;
   private [$distanceProp]: 'x' | 'y' | 'z';
 
   constructor(plane: Plane, rules: Specs | IProjectionRule<Specs>[]) {
@@ -37,7 +37,7 @@ export abstract class Projection<
     );
   }
 
-  update(currentWidth: number, currentHeight: number) {
+  update(currentWidth: number, currentHeight: number): void {
     const rule = this.rules.findMatchingRule(currentWidth, currentHeight);
     if (rule && rule.specs) {
       const [width, height] = calcViewSize(
@@ -55,7 +55,9 @@ export abstract class Projection<
 
   abstract updateOrtho(width: number, height: number, specs: Specs): void;
 
-  get origin() {
+  // TODO remove!
+  /*
+  get origin(): Vector2Proxy {
     let v = this[$origin];
     if (!v) {
       const {camera} = this;
@@ -71,12 +73,13 @@ export abstract class Projection<
     }
     return v;
   }
+  */
 
-  getZoom(_distanceToPojectionPlane: number) {
+  getZoom(_distanceToPojectionPlane: number): number {
     return 1;
   }
 
-  protected applyPlaneRotation() {
+  protected applyPlaneRotation(): void {
     switch (this.plane.type) {
       case 'xz':
         this.camera.applyQuaternion(
@@ -94,7 +97,7 @@ export abstract class Projection<
     }
   }
 
-  protected applyCameraDistance(distance: number) {
+  protected applyCameraDistance(distance: number): void {
     this.camera.position[this[$distanceProp]] = distance;
   }
 }

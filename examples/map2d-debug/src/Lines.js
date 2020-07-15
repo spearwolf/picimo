@@ -33,8 +33,8 @@ export class Lines extends SpriteGroup {
     this.color = new Color(color == null ? 0x000000 : color);
     const material = new LineBasicMaterial({vertexColors: true});
     const geometry = new SpriteGroupBufferGeometry(this);
-    // geometry.boundingSphere = new Sphere(new Vector3(0, 0, 0), 1000); // TODO boundingSphere radius?
     this.object3d = new LineSegments(geometry, material);
+    this.object3d.frustumCulled = false;
     geometry.updateBeforeRenderObject(this.object3d);
   }
 

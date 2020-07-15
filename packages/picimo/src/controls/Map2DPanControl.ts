@@ -68,6 +68,9 @@ export interface Map2DPanControlOptions {
    * Default is [87, 83, 65, 68] which is the well known _WASD_ layout.
    */
   keyCodes: [number, number, number, number];
+
+  disablePointer?: boolean;
+  disableKeyboard?: boolean;
 }
 
 export class Map2DPanControl extends InputControl {
@@ -90,18 +93,27 @@ export class Map2DPanControl extends InputControl {
   mouseButton: number;
   keyCodes: [number, number, number, number];
 
+  readonly pointerDisabled: boolean;
+  readonly keyboardDisabled: boolean;
+
   /**
    * @param speed pixels per seconds
    */
-  constructor(
-    map2dView: Map2DView,
-    projection: IProjection,
-    options?: Map2DPanControlOptions,
-  ) {
+  constructor(map2dView: Map2DView, options?: Map2DPanControlOptions) {
     super();
 
+    this.pointerDisabled = readOption(
+      options,
+      'disablePointer',
+      false,
+    ) as boolean;
+    this.keyboardDisabled = readOption(
+      options,
+      'disableKeyboard',
+      false,
+    ) as boolean;
+
     this.map2dView = map2dView;
-    this.projection = projection;
 
     this.pixelsPerSecond = readOption(options, 'speed', 100) as number;
 
@@ -110,6 +122,7 @@ export class Map2DPanControl extends InputControl {
       'cursorDefaultStyle',
       '',
     ) as string;
+
     this.cursorPanStyle = readOption(
       options,
       'cursorPanStyle',
@@ -130,8 +143,8 @@ export class Map2DPanControl extends InputControl {
   /**
    * @param t delta time since last `update()` call in seconds
    */
-  update(t: number) {
-    const {map2dView: view, projection} = this;
+  update(t: number): void {
+    const {map2dView: view} = this;
 
     view.centerY -= this.speedNorth * t;
     view.centerY += this.speedSouth * t;
@@ -140,25 +153,28 @@ export class Map2DPanControl extends InputControl {
     view.centerX -= this.speedWest * t;
 
     const {panX, panY} = mergePan(Array.from(this[$pointersDown].values()));
+    const {projection} = view;
     const {pixelRatioH, pixelRatioV} = projection;
 
     view.centerX -= panX / pixelRatioH;
     view.centerY -= panY / pixelRatioV;
 
-    projection.origin.set(view.centerX, view.centerY);
-
     view.width = projection.width;
     view.height = projection.height;
   }
 
-  start() {
+  start(): void {
     const {subscribe} = this;
 
-    subscribe(document, 'keydown', this.onKeyDown);
-    subscribe(document, 'keyup', this.onKeyUp);
-    subscribe(document, 'pointerdown', this.onPointerDown);
-    subscribe(document, 'pointerup', this.onPointerUp);
-    subscribe(document, 'pointermove', this.onPointerMove);
+    if (!this.keyboardDisabled) {
+      subscribe(document, 'keydown', this.onKeyDown);
+      subscribe(document, 'keyup', this.onKeyUp);
+    }
+    if (!this.pointerDisabled) {
+      subscribe(document, 'pointerdown', this.onPointerDown);
+      subscribe(document, 'pointerup', this.onPointerUp);
+      subscribe(document, 'pointermove', this.onPointerMove);
+    }
   }
 
   private isPanPointer(event: PointerEvent) {
@@ -171,7 +187,7 @@ export class Map2DPanControl extends InputControl {
     return false;
   }
 
-  onPointerDown = (event: PointerEvent) => {
+  onPointerDown = (event: PointerEvent): void => {
     if (this.isPanPointer(event)) {
       const pointersDown = this[$pointersDown];
       if (!pointersDown.has(event.pointerId)) {
@@ -197,7 +213,7 @@ export class Map2DPanControl extends InputControl {
     el.style.cursor = this.cursorPanStyle;
   }
 
-  onPointerUp = (event: PointerEvent) => {
+  onPointerUp = (event: PointerEvent): void => {
     const pointersDown = this[$pointersDown];
     if (this.isPanPointer(event)) {
       const state = pointersDown.get(event.pointerId);
@@ -225,7 +241,7 @@ export class Map2DPanControl extends InputControl {
     }
   }
 
-  onPointerMove = (event: PointerEvent) => {
+  onPointerMove = (event: PointerEvent): void => {
     if (this.isPanPointer(event)) {
       const state = this[$pointersDown].get(event.pointerId);
       if (state) {
@@ -247,7 +263,7 @@ export class Map2DPanControl extends InputControl {
     state.lastY = y;
   }
 
-  private toRelativeCoords(event: PointerEvent) {
+  private toRelativeCoords(event: PointerEvent): {x: number; y: number} {
     const {clientX, clientY} = event;
     const {left, top} = (event.target as HTMLElement).getBoundingClientRect();
 
@@ -257,7 +273,7 @@ export class Map2DPanControl extends InputControl {
     };
   }
 
-  onKeyDown = ({keyCode}: KeyboardEvent) => {
+  onKeyDown = ({keyCode}: KeyboardEvent): void => {
     const {pixelsPerSecond} = this;
 
     switch (keyCode) {
@@ -276,7 +292,7 @@ export class Map2DPanControl extends InputControl {
     }
   };
 
-  onKeyUp = ({keyCode}: KeyboardEvent) => {
+  onKeyUp = ({keyCode}: KeyboardEvent): void => {
     switch (keyCode) {
       case this.keyCodes[0]: // 87: // W
         this.speedNorth = 0;
