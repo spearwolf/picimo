@@ -9,6 +9,7 @@ const log = new Logger('picimo.Stage2D');
 
 export class Stage2D extends Scene {
   projection: IProjection;
+  renderOnFrame = true;
 
   constructor(projection?: IProjection) {
     super();
@@ -34,8 +35,8 @@ export class Stage2D extends Scene {
   }
 
   frame({display}: {display: Display}) {
-    const {camera} = this;
-    if (camera) {
+    const {camera, renderOnFrame} = this;
+    if (camera && renderOnFrame) {
       display.renderer.render(this, camera);
     }
   }
