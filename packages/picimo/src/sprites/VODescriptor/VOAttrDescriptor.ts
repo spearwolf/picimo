@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import {BYTES_PER_ELEMENT, TYPED_ARRAY_GETTER} from './lib/typedArrayHelpers';
 
 const camelize = (name: string) => name[0].toUpperCase() + name.substr(1);
@@ -156,13 +157,23 @@ export class VOAttrDescriptor {
     attrDesc: any,
     propertiesObject: any,
     descriptor: any,
-  ) {
+    methods: any,
+  ): void {
     const {name} = attrDesc;
     const getArray = (TYPED_ARRAY_GETTER as any)[attrDesc.type];
     const {vertexCount} = descriptor;
     const vertexAttrCount = attrDesc.vertexAttrCount(descriptor);
     const offset = attrDesc.byteOffset / attrDesc.bytesPerElement;
     const hasMultipleVertices = descriptor.vertexCount > 1;
+
+    // do not overwrite custom methods from descriptor->methods!
+    // TODO write tests
+    const prefixMethodName = (methodName: string): string => {
+      if (methods && methods[methodName]) {
+        return `_${methodName}`;
+      }
+      return methodName;
+    };
 
     if (attrDesc.size === 1) {
       if (attrDesc.uniform) {
@@ -193,7 +204,7 @@ export class VOAttrDescriptor {
 
         attrDesc.setValue = (vo: any, args: any) => valueSetter.apply(vo, args);
 
-        propertiesObject[`set${camelize(name)}`] = {
+        propertiesObject[prefixMethodName(`set${camelize(name)}`)] = {
           value: valueSetter,
           enumerable: true,
         };
@@ -229,12 +240,12 @@ export class VOAttrDescriptor {
           valueGetter.call(vo, idx);
         attrDesc.setValue = (vo: any, args: any) => valueSetter.apply(vo, args);
 
-        propertiesObject[`get${camelize(name)}`] = {
+        propertiesObject[prefixMethodName(`get${camelize(name)}`)] = {
           value: valueGetter,
           enumerable: true,
         };
 
-        propertiesObject[`set${camelize(name)}`] = {
+        propertiesObject[prefixMethodName(`set${camelize(name)}`)] = {
           value: valueSetter,
           enumerable: true,
         };
@@ -259,7 +270,7 @@ export class VOAttrDescriptor {
 
         attrDesc.setValue = (vo: any, args: any) => valueSetter.apply(vo, args);
 
-        propertiesObject[`set${camelize(name)}`] = {
+        propertiesObject[prefixMethodName(`set${camelize(name)}`)] = {
           value: valueSetter,
           enumerable: true,
         };
