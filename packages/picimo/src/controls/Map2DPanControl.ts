@@ -159,6 +159,7 @@ export class Map2DPanControl extends InputControl {
     view.centerX -= panX / pixelRatioH;
     view.centerY -= panY / pixelRatioV;
 
+    // TODO do we really need this?
     view.width = projection.width;
     view.height = projection.height;
   }
