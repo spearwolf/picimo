@@ -139,9 +139,9 @@ display.on('init', async ({width, height}) => {
       showOrbitCamera = !showOrbitCamera;
       orbit.enabled = showOrbitCamera;
       orbitMap2d.enabled = !showOrbitCamera;
-      document.querySelector('.whichCamera').textContent = showOrbitCamera
-        ? 'orbit'
-        : 'map2d';
+      document.querySelector(
+        '.whichCamera > .dataValue',
+      ).textContent = showOrbitCamera ? 'orbit' : 'map2d';
     }
   });
 
@@ -200,16 +200,25 @@ display.on('init', async ({width, height}) => {
         }),
       );
     }
+    const {viewOffsetX, viewOffsetY} = layer;
     layer.tiles.forEach((tile, i) => {
       makeCrossRect(
         arr,
-        [tile.viewOffsetX, z, tile.viewOffsetY],
-        [tile.viewOffsetX + tile.viewWidth, z, tile.viewOffsetY],
-        [tile.viewOffsetX, z, tile.viewOffsetY + tile.viewHeight],
+        [viewOffsetX + tile.viewOffsetX, z, viewOffsetY + tile.viewOffsetY],
         [
-          tile.viewOffsetX + tile.viewWidth,
+          viewOffsetX + tile.viewOffsetX + tile.viewWidth,
           z,
-          tile.viewOffsetY + tile.viewHeight,
+          viewOffsetY + tile.viewOffsetY,
+        ],
+        [
+          viewOffsetX + tile.viewOffsetX,
+          z,
+          viewOffsetY + tile.viewOffsetY + tile.viewHeight,
+        ],
+        [
+          viewOffsetX + tile.viewOffsetX + tile.viewWidth,
+          z,
+          viewOffsetY + tile.viewOffsetY + tile.viewHeight,
         ],
         false,
         i * 4,
@@ -258,10 +267,27 @@ display.on('init', async ({width, height}) => {
     lines.object3d.position.z = y;
     lines.object3d.updateMatrix();
 
-    document.querySelector('.centerPos').textContent = `center: [${Math.round(
-      view.centerX,
-    )}, ${Math.round(view.centerY)}]`;
+    document.querySelector(
+      '.centerPos > .dataValue',
+    ).textContent = `${Math.round(view.centerX)},${Math.round(view.centerY)}`;
   });
+
+  const makeLayerUi = (cssRoot, layer) => {
+    document.querySelectorAll(`${cssRoot} .slider`).forEach((el) => {
+      el.addEventListener('input', (event) => {
+        const {value} = event.target;
+        event.target.parentNode.querySelector('.dataValue').textContent = value;
+        const isSliderX = event.target.className.indexOf('sliderX') >= 0;
+
+        const viewOffsetX = isSliderX ? parseInt(value, 10) : layer.viewOffsetX;
+        const viewOffsetY = isSliderX ? layer.viewOffsetY : parseInt(value, 10);
+        layer.setViewOffset(viewOffsetX, viewOffsetY);
+      });
+    });
+  };
+
+  makeLayerUi('.viewOffset256x', layer256x);
+  makeLayerUi('.viewOffset16x', layer16x);
 
   stage.add(map2d);
   stage.add(lines.object3d);

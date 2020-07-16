@@ -1,48 +1,145 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-  <meta name="theme-color" content="#ff0066">
-  <title>a picimo sketch • created by spearwolf</title>
-  <style>
-    html, body, #picimo {
-      width: 100%;
-      height: 100%;
-    }
-    body {
-      margin: 0;
-      overflow: hidden;
-      position: fixed;
-      overscroll-behavior-y: none;
-      background-color: #333;
-      font-size: 16px;
-    }
-    .guiContainer {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-    }
-    .whichCamera, .centerPos {
-      background-color: rgba(0, 0, 0, .5);
-      color: #fff;
-      padding: .125rem .5rem;
-      display: inline-block;
-    }
-    .centerPos {
-      font-family: monospace;
-      font-size: 11px;
-    }
-  </style>
-</head>
-<body>
-  <script>
-    var stickyLogConfig = { verbose: false };
-  </script>
-  <div picimo display-mode="pixelated" resize-strategy="fullscreen"></div>
-  <div class=guiContainer>
-    <div class=whichCamera>orbit</div>
-    <div class=centerPos></div>
-  </div>
-  <script src="./bundle.js"></script>
-</body>
+  <head>
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#ff0066" />
+    <title>a picimo sketch • created by spearwolf</title>
+    <style>
+      html,
+      body,
+      #picimo {
+        width: 100%;
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        overflow: hidden;
+        position: fixed;
+        overscroll-behavior-y: none;
+        background-color: #666;
+        font-size: 16px;
+      }
+      .guiContainer {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .dataDisplay,
+      .dataGroup {
+        font-size: 81.25%;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #f0f0f0;
+        padding: 0.125rem 0.5rem;
+        margin: 0 2px 2px 0;
+      }
+      .dataDisplay {
+        display: inline-block;
+      }
+      .dataGroup {
+        display: flex;
+      }
+      .dataValue {
+        font-family: monospace;
+        font-size: 1rem;
+        color: #fff;
+      }
+      .keyCode {
+        color: #cca;
+        margin-right: 0.25rem;
+      }
+      .viewOffset > .slider {
+        width: 256px;
+      }
+      .viewOffset > .dataValue {
+        width: 2.5em;
+        text-align: right;
+      }
+      .groupTitle {
+        font-size: 120%;
+        font-weight: bold;
+        color: #fff;
+        margin: 0.1rem 0;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      var stickyLogConfig = {verbose: false};
+    </script>
+    <div picimo display-mode="pixelated" resize-strategy="fullscreen"></div>
+    <div class="guiContainer">
+      <div class="whichCamera dataDisplay">
+        <span class="keyCode">[c]</span>camera:
+        <span class="dataValue">orbit</span>
+      </div>
+
+      <div class="centerPos dataDisplay">
+        <span class="keyCode">[w,a,s,d]</span>center:
+        <span class="dataValue"></span>
+      </div>
+
+      <h3 class="groupTitle">layer256x</h3>
+      <div class="viewOffset256x viewOffset dataGroup">
+        <span class="label">
+          viewOffsetX:
+        </span>
+        <input
+          class="slider sliderX"
+          type="range"
+          min="-512"
+          max="512"
+          value="0"
+        />
+        <span class="dataValue">0</span>
+      </div>
+      <div class="viewOffset256x viewOffset dataGroup">
+        <span class="label">
+          viewOffsetY:
+        </span>
+        <input
+          class="slider sliderY"
+          type="range"
+          min="-512"
+          max="512"
+          value="0"
+        />
+        <span class="dataValue">0</span>
+      </div>
+
+      <h3 class="groupTitle">layer16x</h3>
+      <div class="viewOffset16x viewOffset dataGroup">
+        <span class="label">
+          viewOffsetX:
+        </span>
+        <input
+          class="slider sliderX"
+          type="range"
+          min="-512"
+          max="512"
+          value="0"
+        />
+        <span class="dataValue">0</span>
+      </div>
+      <div class="viewOffset16x viewOffset dataGroup">
+        <span class="label">
+          viewOffsetY:
+        </span>
+        <input
+          class="slider sliderY"
+          type="range"
+          min="-512"
+          max="512"
+          value="0"
+        />
+        <span class="dataValue">0</span>
+      </div>
+    </div>
+    <script src="./bundle.js"></script>
+  </body>
 </html>
