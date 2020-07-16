@@ -66,7 +66,15 @@ export class SpriteGroupBufferGeometry<T, U> extends BufferGeometry {
   }
 
   updateBeforeRenderObject(object3d: Object3D): Object3D {
-    object3d.onBeforeRender = this.onBeforeRender.bind(this);
+    const {onBeforeRender} = object3d;
+    if (typeof onBeforeRender === 'function') {
+      object3d.onBeforeRender = (...args) => {
+        this.onBeforeRender();
+        onBeforeRender.apply(object3d, args);
+      };
+    } else {
+      object3d.onBeforeRender = this.onBeforeRender.bind(this);
+    }
     return object3d;
   }
 }
