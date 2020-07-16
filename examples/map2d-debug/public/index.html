@@ -21,7 +21,7 @@
         overscroll-behavior-y: none;
         font-size: 16px;
       }
-      #picimo > canvas, body {
+      *:fullscreen, body {
         background-color: #666;
       }
       .guiContainer {
@@ -39,9 +39,10 @@
         color: #f0f0f0;
         padding: 0.125rem 0.5rem;
         margin: 1px 0 0;
+        line-height: 1.5;
       }
-      .dataDisplay {
-        display: inline-block;
+      .dataGroup + .dataGroup {
+        margin: 0;
       }
       .dataGroup {
         display: flex;
@@ -49,6 +50,10 @@
         align-items: center;
         width: 400px;
         max-width: 100vw;
+        box-sizing: border-box;
+      }
+      .dataGroup > span {
+        display: inline-block;
       }
       .dataValue {
         font-family: monospace;
