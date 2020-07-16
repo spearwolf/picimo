@@ -19,8 +19,10 @@
         overflow: hidden;
         position: fixed;
         overscroll-behavior-y: none;
-        background-color: #666;
         font-size: 16px;
+      }
+      #picimo > canvas, body {
+        background-color: #666;
       }
       .guiContainer {
         position: absolute;
@@ -36,13 +38,17 @@
         background-color: rgba(0, 0, 0, 0.5);
         color: #f0f0f0;
         padding: 0.125rem 0.5rem;
-        margin: 0 2px 2px 0;
+        margin: 1px 0 0;
       }
       .dataDisplay {
         display: inline-block;
       }
       .dataGroup {
         display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 400px;
+        max-width: 100vw;
       }
       .dataValue {
         font-family: monospace;
@@ -53,18 +59,21 @@
         color: #cca;
         margin-right: 0.25rem;
       }
+      .viewOffset > .label {
+        flex-basis: 6em;
+      }
       .viewOffset > .slider {
-        width: 256px;
+        flex-basis: 256px;
       }
       .viewOffset > .dataValue {
-        width: 2.5em;
+        flex-basis: 2.5em;
         text-align: right;
       }
       .groupTitle {
         font-size: 120%;
         font-weight: bold;
         color: #fff;
-        margin: 0.1rem 0;
+        margin: 0.1rem 0 0 1px;
       }
     </style>
   </head>
