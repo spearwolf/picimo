@@ -2,9 +2,10 @@ import {Scene, Texture, Material, Group} from 'three';
 
 import {MaterialCache} from '../textures';
 
+import {DisposableContext} from '../utils/DisposableContext';
+
 import {IMap2DLayer} from './IMap2DLayer';
 import {IMap2DRenderer} from './IMap2DRenderer';
-import {Map2DContext} from './Map2DContext';
 import {Map2DView} from './Map2DView';
 
 const $dispatchEvent = Symbol('dispatchEvent');
@@ -29,8 +30,10 @@ export class Map2D extends Scene implements IMap2DRenderer {
   readonly map2dLayers = new Set<IMap2DLayer>();
   readonly layersGroup = new Group();
 
+  // TODO remove - use a more generic solution here - see feature/texture-store branch...
   readonly materialCache = new MaterialCache<Texture, Material>();
-  readonly context = new Map2DContext();
+  // TODO remove
+  readonly context = new DisposableContext();
 
   constructor() {
     super();

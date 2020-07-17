@@ -3,17 +3,23 @@ import assert from 'assert';
 
 import sinon from 'sinon';
 
-import {Map2DContext} from '../Map2DContext';
+import {DisposableContext} from '../DisposableContext';
+import {getGlobalLogConfig, LogLevel} from '../Logger';
 
-describe('Map2DContext', () => {
+getGlobalLogConfig().setLogLevel(
+  'picimo.DisposableContext',
+  LogLevel.ERROR | LogLevel.WARN,
+);
+
+describe('DisposableContext', () => {
   it('create without arguments', () => {
-    assert(new Map2DContext());
+    assert(new DisposableContext());
   });
 
   it('get(name) with pre-defined value', () => {
     // assemble
     const Foo = {};
-    const ctx = new Map2DContext();
+    const ctx = new DisposableContext();
     const create = sinon.spy(() => ({}));
     ctx.create({
       create,
@@ -30,7 +36,7 @@ describe('Map2DContext', () => {
 
   it('create(..) and get(name)', () => {
     // assemble
-    const ctx = new Map2DContext();
+    const ctx = new DisposableContext();
     const create = sinon.spy(() => ({}));
     ctx.create({
       create,
@@ -48,7 +54,7 @@ describe('Map2DContext', () => {
 
   it('create, get, dispose, get ..', () => {
     // assemble
-    const ctx = new Map2DContext();
+    const ctx = new DisposableContext();
     const create = sinon.spy(() => ({}));
     ctx.create({
       create,
@@ -68,7 +74,7 @@ describe('Map2DContext', () => {
 
   it('create, get, create, get!', () => {
     // assemble
-    const ctx = new Map2DContext();
+    const ctx = new DisposableContext();
     const create = sinon.spy(() => ({}));
     const propDef = {
       create,

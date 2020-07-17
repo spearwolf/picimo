@@ -2,9 +2,10 @@ import * as THREE from 'three';
 
 import {ITileSet, Texture, MaterialCache} from '../textures';
 
+import {DisposableContextValue} from '../utils/DisposableContext';
+
 import {IMap2DLayer} from './IMap2DLayer';
 import {Map2D} from './Map2D';
-import {Map2DContextProperty} from './Map2DContext';
 import {Map2DViewTile} from './Map2DViewTile';
 
 import {TileQuadMaterial} from './TileQuad/TileQuadMaterial';
@@ -37,7 +38,7 @@ const constructMeshName = (tileId: string, mesh: THREE.Mesh) =>
     ? `${tileId}[${mesh.material.map((mat) => mat.uuid).join(',')}]`
     : `${tileId}[${mesh.material.uuid}]`;
 
-const Map2DTileQuadMeshCache = {
+const SharedMeshCache: DisposableContextValue<TileQuadMeshCache> = {
   name: 'tileQuadMeshCache',
   create: () => new TileQuadMeshCache(),
   dispose: (cache: TileQuadMeshCache) =>
@@ -67,11 +68,12 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
     THREE.Material
   >;
 
-  static getTileQuadMeshCache(map2d: Map2D) {
-    map2d.context.create(Map2DTileQuadMeshCache as Map2DContextProperty);
-    return map2d.context.get(Map2DTileQuadMeshCache.name) as TileQuadMeshCache;
+  static getTileQuadMeshCache(map2d: Map2D): TileQuadMeshCache {
+    map2d.context.create(SharedMeshCache);
+    return map2d.context.get(SharedMeshCache);
   }
 
+  // TODO rename to createLayer()
   static appendNewLayer(map2d: Map2D, tilesets: ITileSet[]) {
     const layer = new Map2DTileQuadsLayer(
       tilesets,
