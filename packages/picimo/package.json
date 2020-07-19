@@ -7,8 +7,8 @@
   "types": "src/index.ts",
   "sideEffects": false,
   "scripts": {
-    "build:dist:umd": "cross-env NODE_ENV=production rollup -c ./rollup.config.js",
-    "build:dist:mjs": "cross-env NODE_ENV=production rollup -c ./rollup-mjs.config.js",
+    "build:dist:umd": "cross-env NODE_ENV=production rollup -c ./rollup/umd.config.js",
+    "build:dist:mjs": "cross-env NODE_ENV=production rollup -c ./rollup/mjs.config.js",
     "build:dist": "run-s build:dist:*",
     "build:module": "cross-env BABEL_ENV=production babel --root-mode upward src/ --extensions \".ts\" --out-dir ./build/ --source-maps",
     "watch:build:module": "cross-env BABEL_ENV=production babel --root-mode upward src/ --extensions \".ts\" --out-dir ./build/ --source-maps --watch",
@@ -69,6 +69,7 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^4.0.2",
     "lerna": "^3.20.2",
+    "lodash": "^4.17.19",
     "mocha": "^7.1.1",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.5",
