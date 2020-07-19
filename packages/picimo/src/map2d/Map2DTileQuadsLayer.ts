@@ -1,10 +1,18 @@
-import * as THREE from 'three';
+import {
+  Object3D,
+  Texture as ThreeTexture,
+  NearestFilter,
+  Mesh,
+  Group,
+  Material,
+} from 'three';
 
 import {ITileSet, Texture, MaterialCache} from '../textures';
 
+import {DisposableContextValue} from '../utils/DisposableContext';
+
 import {IMap2DLayer} from './IMap2DLayer';
 import {Map2D} from './Map2D';
-import {Map2DContextProperty} from './Map2DContext';
 import {Map2DViewTile} from './Map2DViewTile';
 
 import {TileQuadMaterial} from './TileQuad/TileQuadMaterial';
@@ -22,26 +30,31 @@ const $materialCache = Symbol('materialCache');
 const $freeMesh = Symbol('freeMesh');
 
 function makeThreeTexture(textureSource: Texture) {
-  const texture = new THREE.Texture(textureSource.imgEl);
+  const texture = new ThreeTexture(textureSource.imgEl);
 
   texture.flipY = false;
-  texture.minFilter = THREE.NearestFilter;
-  texture.magFilter = THREE.NearestFilter;
+  texture.minFilter = NearestFilter;
+  texture.magFilter = NearestFilter;
   texture.needsUpdate = true;
 
   return texture;
 }
 
-const constructMeshName = (tileId: string, mesh: THREE.Mesh) =>
+const constructMeshName = (tileId: string, mesh: Mesh) =>
   Array.isArray(mesh.material)
     ? `${tileId}[${mesh.material.map((mat) => mat.uuid).join(',')}]`
     : `${tileId}[${mesh.material.uuid}]`;
 
-const Map2DTileQuadMeshCache = {
+const SharedMeshCache: DisposableContextValue<TileQuadMeshCache> = {
   name: 'tileQuadMeshCache',
   create: () => new TileQuadMeshCache(),
   dispose: (cache: TileQuadMeshCache) =>
     cache.dispose((mesh) => mesh.geometry.dispose()),
+};
+
+const getSharedMeshCache = (map2d: Map2D): TileQuadMeshCache => {
+  map2d.disposableContext.create(SharedMeshCache);
+  return map2d.disposableContext.get(SharedMeshCache);
 };
 
 /**
@@ -55,27 +68,22 @@ const Map2DTileQuadMeshCache = {
 export class Map2DTileQuadsLayer implements IMap2DLayer {
   readonly tilesets: ITileSet[];
 
-  private readonly [$obj3d]: THREE.Group = new THREE.Group();
+  private readonly [$obj3d]: Group = new Group();
 
   private readonly [$tiles]: Map<string, TileQuadMesh[]> = new Map();
 
   private readonly [$meshCache]: TileQuadMeshCache;
 
   private readonly [$materials]: string[];
-  private readonly [$materialCache]: MaterialCache<
-    THREE.Texture,
-    THREE.Material
-  >;
+  private readonly [$materialCache]: MaterialCache<ThreeTexture, Material>;
 
-  static getTileQuadMeshCache(map2d: Map2D) {
-    map2d.context.create(Map2DTileQuadMeshCache as Map2DContextProperty);
-    return map2d.context.get(Map2DTileQuadMeshCache.name) as TileQuadMeshCache;
-  }
-
-  static appendNewLayer(map2d: Map2D, tilesets: ITileSet[]) {
+  static appendNewLayer(
+    map2d: Map2D,
+    tilesets: ITileSet[],
+  ): Map2DTileQuadsLayer {
     const layer = new Map2DTileQuadsLayer(
       tilesets,
-      Map2DTileQuadsLayer.getTileQuadMeshCache(map2d),
+      getSharedMeshCache(map2d),
       map2d.materialCache,
     );
     map2d.appendLayer(layer);
@@ -85,7 +93,7 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
   constructor(
     tilesets: ITileSet[],
     meshCache: TileQuadMeshCache,
-    materialCache: MaterialCache<THREE.Texture, THREE.Material>,
+    materialCache: MaterialCache<ThreeTexture, Material>,
   ) {
     this.tilesets = tilesets;
     this[$meshCache] = meshCache;
@@ -101,22 +109,22 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
     });
   }
 
-  getObject3D() {
+  getObject3D(): Object3D {
     return this[$obj3d];
   }
 
-  setViewOffset(x: number, y: number, depth: number) {
+  setViewOffset(x: number, y: number, depth: number): void {
     this[$obj3d].position.set(x, depth, y);
   }
 
-  dispose() {
+  dispose(): void {
     Array.from(this[$tiles].values()).forEach((meshs) =>
       meshs.forEach((mesh) => this[$freeMesh](mesh)),
     );
     this[$tiles].clear();
   }
 
-  addViewTile(tile: Map2DViewTile) {
+  addViewTile(tile: Map2DViewTile): void {
     const meshs = this[$createTileMesh](tile);
     if (meshs != null) {
       meshs.forEach((mesh) => {
@@ -126,14 +134,14 @@ export class Map2DTileQuadsLayer implements IMap2DLayer {
     }
   }
 
-  removeViewTile(tileId: string) {
+  removeViewTile(tileId: string): void {
     const meshs = this[$destroyTile](tileId);
     if (meshs != null) {
       meshs.forEach((mesh) => this[$freeMesh](mesh));
     }
   }
 
-  renderViewTile(_tile: Map2DViewTile) {
+  renderViewTile(_tile: Map2DViewTile): void {
     // TODO animate tiles?
   }
 

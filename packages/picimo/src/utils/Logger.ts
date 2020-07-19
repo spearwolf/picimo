@@ -3,13 +3,13 @@ import eventize, {Eventize} from 'eventize-js';
 
 // TODO extract this to a separate npm package: 'sticky-log'
 
-const LogLevel = {
+export const LogLevel = {
   ERROR: 1,
   WARN: 2,
   INFO: 4,
   DEBUG: 8,
 
-  getDescription(logLevel: number) {
+  getDescription(logLevel: number): string {
     if (logLevel === 0) return 'NONE';
     const level: string[] = [];
     if (logLevel & LogLevel.ERROR) level.push('ERROR');
@@ -221,27 +221,27 @@ export class Logger {
     }
   }
 
-  get DEBUG() {
+  get DEBUG(): boolean {
     return (this.logLevel & LogLevel.DEBUG) !== 0;
   }
 
-  get LOG() {
+  get LOG(): boolean {
     return (this.logLevel & LogLevel.DEBUG) !== 0;
   }
 
-  get VERBOSE() {
+  get VERBOSE(): boolean {
     return (this.logLevel & LogLevel.DEBUG) !== 0;
   }
 
-  get INFO() {
+  get INFO(): boolean {
     return (this.logLevel & LogLevel.INFO) !== 0;
   }
 
-  get WARN() {
+  get WARN(): boolean {
     return (this.logLevel & LogLevel.WARN) !== 0;
   }
 
-  get ERROR() {
+  get ERROR(): boolean {
     return (this.logLevel & LogLevel.ERROR) !== 0;
   }
 

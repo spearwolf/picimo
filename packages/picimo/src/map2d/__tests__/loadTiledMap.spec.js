@@ -1,6 +1,8 @@
 /* eslint-env mocha */
 import assert from 'assert';
 
+import {getGlobalLogConfig, LogLevel} from '../../utils/Logger';
+
 import {TiledMap} from '../tiledmap/TiledMap';
 import {TiledMapLayer} from '../tiledmap/TiledMapLayer';
 
@@ -9,6 +11,11 @@ import {
   A_FIRST_MAP_FINITE,
   A_FIRST_MAP_RIGHT_TOP,
 } from './tiledmaps';
+
+getGlobalLogConfig().setLogLevel(
+  'picimo.TiledMapLayer',
+  LogLevel.ERROR | LogLevel.WARN,
+);
 
 describe('loadTiledMap', () => {
   describe('1: 180917-a-first-map.json', () => {

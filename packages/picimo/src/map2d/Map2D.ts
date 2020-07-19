@@ -2,12 +2,17 @@ import {Scene, Texture, Material, Group} from 'three';
 
 import {MaterialCache} from '../textures';
 
+import {DisposableContext} from '../utils/DisposableContext';
+
 import {IMap2DLayer} from './IMap2DLayer';
 import {IMap2DRenderer} from './IMap2DRenderer';
-import {Map2DContext} from './Map2DContext';
 import {Map2DView} from './Map2DView';
 
-const $dispatchEvent = Symbol('dispatchEvent');
+function dispatchEvent(map2d: Map2D, type: string, options?: Object) {
+  map2d.layersGroup.children.forEach((obj3d) =>
+    obj3d.dispatchEvent({type, map2d, ...options}),
+  );
+}
 
 /**
  * Represents a map2d scene.
@@ -27,15 +32,25 @@ export class Map2D extends Scene implements IMap2DRenderer {
   }
 
   readonly map2dLayers = new Set<IMap2DLayer>();
-  readonly layersGroup = new Group();
+  readonly layersGroup: Group;
 
+  // TODO remove...
+  // - use a more generic solution here
+  // - see feature/texture-store branch...
+  // - integrate into disposableContext?
   readonly materialCache = new MaterialCache<Texture, Material>();
-  readonly context = new Map2DContext();
+
+  /*
+   * A generic property store.
+   * When the Map2D->dispose() is called, all properties in the store will be also dispose()d
+   */
+  readonly disposableContext = new DisposableContext();
 
   constructor() {
     super();
-    this.add(this.layersGroup);
-    this.layersGroup.name = 'map2d.layers';
+    const group = new Group();
+    group.name = 'map2d.layers';
+    this.add((this.layersGroup = group));
   }
 
   setOrigin(x: number, y: number): void {
@@ -64,25 +79,21 @@ export class Map2D extends Scene implements IMap2DRenderer {
     }
   }
 
+  // TODO rename to beginUpdate()
   beginRender(view: Map2DView): void {
-    this[$dispatchEvent](Map2D.BeginRenderEvent, {view});
+    dispatchEvent(this, Map2D.BeginRenderEvent, {view});
   }
 
+  // TODO rename to endUpdate()
   endRender(view: Map2DView): void {
-    this[$dispatchEvent](Map2D.EndRenderEvent, {view});
+    dispatchEvent(this, Map2D.EndRenderEvent, {view});
   }
 
   dispose(): void {
-    this.context.dispose();
+    this.disposableContext.dispose();
     this.materialCache.all().forEach(({texture, material}) => {
       material.dispose();
       texture.dispose();
     });
-  }
-
-  private [$dispatchEvent](type: string, options?: Object) {
-    this.layersGroup.children.forEach((obj3d) =>
-      obj3d.dispatchEvent({type, map2d: this, ...options}),
-    );
   }
 }
