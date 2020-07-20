@@ -90,7 +90,7 @@ export class Map2D extends Scene implements IMap2DRenderer {
   }
 
   dispose(): void {
-    this.disposableContext.dispose();
+    this.disposableContext.disposeAll();
     this.materialCache.all().forEach(({texture, material}) => {
       material.dispose();
       texture.dispose();
