@@ -39,22 +39,24 @@ describe('DisposableContext', () => {
     const ctx = new DisposableContext();
     const createFoo = sinon.spy(() => ({}));
     const createBar = sinon.spy(() => ({}));
-    ctx.create({
+    const fooDef = {
       create: createFoo,
       value: null,
       name: 'foo',
       dispose: () => undefined,
-    });
-    ctx.create({
+    };
+    const barDef = {
       create: createBar,
       name: 'bar',
       dispose: () => undefined,
-    });
+    };
+    ctx.create(fooDef);
+    ctx.create(barDef);
     // act
     const foo0 = ctx.get('foo');
-    const foo1 = ctx.get('foo');
+    const foo1 = ctx.get(fooDef);
     const bar0 = ctx.get('bar');
-    const bar1 = ctx.get('bar');
+    const bar1 = ctx.get(barDef);
     // assert
     assert.ok(foo0);
     assert.strictEqual(foo0, foo1);
@@ -176,5 +178,39 @@ describe('DisposableContext', () => {
       assert.equal(dispose.callCount, 1);
       assert.ok(dispose.calledWith(foo0, ctx));
     });
+  });
+
+  it('disposeAll() should clear and remove all property values', () => {
+    // assemble
+    const ctx = new DisposableContext();
+    const create0 = sinon.spy(() => ({}));
+    const dispose0 = sinon.spy(() => 0);
+    const create1 = sinon.spy(() => ({}));
+    const dispose1 = sinon.spy(() => 0);
+    ctx.create({
+      create: create0,
+      dispose: dispose0,
+      name: 'foo',
+    });
+    ctx.create({
+      create: create1,
+      dispose: dispose1,
+      name: 'bar',
+    });
+    const foo0 = ctx.get('foo');
+    const bar0 = ctx.get('bar');
+    // act
+    ctx.disposeAll();
+    // assert
+    const foo1 = ctx.get('foo');
+    const bar1 = ctx.get('bar');
+    assert.ok(foo0);
+    assert.ok(bar0);
+    assert.strictEqual(foo1, undefined);
+    assert.strictEqual(bar1, undefined);
+    assert.ok(create0.calledOnce);
+    assert.ok(create1.calledOnce);
+    assert.ok(dispose0.calledOnce);
+    assert.ok(dispose1.calledOnce);
   });
 });

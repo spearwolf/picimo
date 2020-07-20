@@ -28,7 +28,8 @@ const isValueName = (name: any): name is TContextValueName => {
 // - [x] maybe this class is NOT needed at all? (yes;)
 // - [ ] add a reference counter?
 //   - see MaterialCache
-//   - would enable a .disposeUnref() and .disposeAll() api
+//   - add .disposeUnref()
+
 export class DisposableContext {
   #values = new Map<TContextValueName, DisposableContextValue>();
 
@@ -98,17 +99,21 @@ export class DisposableContext {
    * But this does not delete the value entry from the context: on the next get() call
    * the value will be recreated using the given create() factory callback.
    */
-  dispose(name?: string): void {
-    const property = this.#values.get(name);
+  dispose<TValue = unknown>(
+    name: TContextValueName | DisposableContextValue<TValue>,
+  ): void {
+    const property = this.#values.get(
+      isValueName(name) ? name : name.name,
+    ) as DisposableContextValue<TValue>;
     if (property) {
       if (property.value != null) {
         if (log.VERBOSE) {
-          log.log(`dispose "${name}"`);
+          log.log(`dispose "${String(name)}"`);
         }
         property.dispose(property.value, this);
         property.value = null;
       } else if (log.VERBOSE) {
-        log.log(`property "${name}" is already disposed!`);
+        log.log(`property "${String(name)}" is already disposed!`);
       }
     } else if (log.VERBOSE) {
       log.log('could not dispose unknown property value:', name);
