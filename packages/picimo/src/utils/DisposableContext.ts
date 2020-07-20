@@ -43,10 +43,19 @@ export class DisposableContext {
       if (prevProp.value != null && prevProp.create !== property.create) {
         prevProp.dispose(prevProp.value, this);
         prevProp.value = undefined;
+        if (log.VERBOSE) {
+          log.log('cleared value because create() changed', property);
+        }
       }
       if (property.value != null && property.value !== prevProp.value) {
         if (prevProp.value != null) {
           prevProp.dispose(prevProp.value, this);
+          if (log.VERBOSE) {
+            log.log(
+              'disposed the value because a new value was explicitly set with create()',
+              property,
+            );
+          }
         }
         prevProp.value = property.value;
       }
@@ -75,7 +84,7 @@ export class DisposableContext {
       }
       property.value = property.create(this);
       if (log.VERBOSE) {
-        log.log('created', property);
+        log.log('created new value', property);
       }
       return property.value;
     }
@@ -102,7 +111,7 @@ export class DisposableContext {
         log.log(`property "${name}" is already disposed!`);
       }
     } else if (log.VERBOSE) {
-      log.log('can not dispose unknown property:', name);
+      log.log('could not dispose unknown property value:', name);
     }
   }
 

@@ -59,6 +59,8 @@ export const makePlugins = (config) => [
   replace({
     NODE_ENV: JSON.stringify('production'),
     PACKAGE_VERSION: JSON.stringify(packageJson.version),
+    'log.VERBOSE': 'false',
+    'log.DEBUG': 'false',
   }),
   sizeSnapshot(),
   terser({
