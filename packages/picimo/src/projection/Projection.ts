@@ -22,6 +22,7 @@ export abstract class Projection<
   width = 0;
   height = 0;
 
+  // TODO reduce to single prop: pixelRatio (assume that we never have none-rectangular pixels)
   pixelRatioH = 1;
   pixelRatioV = 1;
 
@@ -32,25 +33,17 @@ export abstract class Projection<
 
   constructor(plane: Plane, rules: Specs | IProjectionRule<Specs>[]) {
     this.plane = plane;
-    this.rules = new ProjectionRules(
-      Array.isArray(rules) ? rules : [{specs: rules}],
-    );
+    this.rules = ProjectionRules.create(rules);
   }
 
   update(currentWidth: number, currentHeight: number): void {
-    const rule = this.rules.findMatchingRule(currentWidth, currentHeight);
-    if (rule && rule.specs) {
-      const [width, height] = calcViewSize(
-        currentWidth,
-        currentHeight,
-        rule.specs,
-      );
+    const {specs} = this.rules.findMatchingRule(currentWidth, currentHeight);
+    const [width, height] = calcViewSize(currentWidth, currentHeight, specs);
 
-      this.pixelRatioH = currentWidth / width;
-      this.pixelRatioV = currentHeight / height;
+    this.pixelRatioH = currentWidth / width;
+    this.pixelRatioV = currentHeight / height;
 
-      this.updateOrtho(width, height, rule.specs);
-    }
+    this.updateOrtho(width, height, specs);
   }
 
   abstract updateOrtho(width: number, height: number, specs: Specs): void;
@@ -79,6 +72,7 @@ export abstract class Projection<
     return 1;
   }
 
+  // TODO move to -> .createCamera()
   protected applyPlaneRotation(): void {
     switch (this.plane.type) {
       case 'xz':
@@ -97,6 +91,7 @@ export abstract class Projection<
     }
   }
 
+  // TODO move to -> .createCamera()
   protected applyCameraDistance(distance: number): void {
     this.camera.position[this[$distanceProp]] = distance;
   }
