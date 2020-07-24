@@ -119,10 +119,10 @@ module.exports = (config) => {
         emitWarning: true, // set to `true` to not fail the test command when thresholds are not met
         // thresholds for all files
         global: {
-          statements: 100,
-          lines: 100,
-          branches: 100,
-          functions: 100,
+          statements: 42,
+          lines: 42,
+          branches: 42,
+          functions: 42,
         },
         // thresholds per file
         // each: {
