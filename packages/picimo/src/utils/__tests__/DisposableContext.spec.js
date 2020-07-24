@@ -21,11 +21,11 @@ describe('DisposableContext', () => {
     const Foo = {};
     const ctx = new DisposableContext();
     const create = sinon.spy(() => ({}));
-    ctx.create({
+    ctx.set({
       create,
       key: 'foo',
       value: Foo,
-      dispose: () => undefined,
+      // dispose: () => undefined,
     });
     // act
     const foo = ctx.get('foo');
@@ -43,15 +43,15 @@ describe('DisposableContext', () => {
       create: createFoo,
       value: null,
       key: 'foo',
-      dispose: () => undefined,
+      // dispose: () => undefined,
     };
     const barDef = {
       create: createBar,
       key: 'bar',
-      dispose: () => undefined,
+      // dispose: () => undefined,
     };
-    ctx.create(fooDef);
-    ctx.create(barDef);
+    ctx.set(fooDef);
+    ctx.set(barDef);
     // act
     const foo0 = ctx.get('foo');
     const foo1 = ctx.get(fooDef);
@@ -73,7 +73,7 @@ describe('DisposableContext', () => {
     const ctx = new DisposableContext();
     const create = sinon.spy(() => ({}));
     const dispose = sinon.spy(() => undefined);
-    ctx.create({
+    ctx.set({
       create,
       dispose,
       key: 'foo',
@@ -94,7 +94,7 @@ describe('DisposableContext', () => {
     assert.ok(dispose.calledWith(foo0, ctx));
   });
 
-  describe('multiple calls to create()', () => {
+  describe('multiple calls to set()', () => {
     it('should not clear value if value is already created and create() helper is unchanged', () => {
       // assemble
       const ctx = new DisposableContext();
@@ -106,10 +106,10 @@ describe('DisposableContext', () => {
         key: 'foo',
         value: undefined,
       };
-      ctx.create(propDef);
+      ctx.set(propDef);
       // act
       const foo0 = ctx.get('foo');
-      ctx.create(propDef);
+      ctx.set(propDef);
       const foo1 = ctx.get('foo');
       // assert
       assert.ok(foo0);
@@ -132,10 +132,10 @@ describe('DisposableContext', () => {
         key: 'foo',
         value: undefined,
       };
-      ctx.create(propDef);
+      ctx.set(propDef);
       // act
       const foo0 = ctx.get('foo');
-      ctx.create({...propDef, create: create1, dispose: dispose1, value: null});
+      ctx.set({...propDef, create: create1, dispose: dispose1, value: null});
       const foo1 = ctx.get('foo');
       // assert
       assert.ok(foo0);
@@ -165,10 +165,10 @@ describe('DisposableContext', () => {
         dispose,
         key: 'foo',
       };
-      ctx.create(propDef);
+      ctx.set(propDef);
       // act
       const foo0 = ctx.get('foo');
-      ctx.create({...propDef, value: {}});
+      ctx.set({...propDef, value: {}});
       const foo1 = ctx.get('foo');
       // assert
       assert.ok(foo0);
@@ -187,12 +187,12 @@ describe('DisposableContext', () => {
     const dispose0 = sinon.spy(() => 0);
     const create1 = sinon.spy(() => ({}));
     const dispose1 = sinon.spy(() => 0);
-    ctx.create({
+    ctx.set({
       create: create0,
       dispose: dispose0,
       key: 'foo',
     });
-    ctx.create({
+    ctx.set({
       create: create1,
       dispose: dispose1,
       key: 'bar',

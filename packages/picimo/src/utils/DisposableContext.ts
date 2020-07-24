@@ -7,8 +7,9 @@ export type TContextValueName = string | symbol;
 export interface DisposableContextValue<TValue = unknown> {
   key: TContextValueName;
   value?: TValue;
+  default?: TValue;
   create?: (context: DisposableContext) => TValue;
-  dispose: (value: TValue, context: DisposableContext) => void;
+  dispose?: (value: TValue, context: DisposableContext) => void;
 }
 
 const isValueKey = (key: any): key is TContextValueName => {
@@ -33,29 +34,33 @@ const isValueKey = (key: any): key is TContextValueName => {
 export class DisposableContext {
   #values = new Map<TContextValueName, DisposableContextValue>();
 
-  create<TValue = unknown>(prop: DisposableContextValue<TValue>): void {
+  set<TValue = unknown>(prop: DisposableContextValue<TValue>): void {
     if (!this.#values.has(prop.key)) {
       this.#values.set(prop.key, prop as DisposableContextValue);
       if (log.VERBOSE) {
-        log.log('created property', prop);
+        log.log('set: created property', prop);
       }
     } else {
       const curProp = this.#values.get(prop.key);
       if (curProp.value != null && curProp.create !== prop.create) {
-        curProp.dispose(curProp.value, this);
+        if (curProp.dispose) {
+          curProp.dispose(curProp.value, this);
+        }
         curProp.value = undefined;
         if (log.VERBOSE) {
-          log.log('cleared value because create() changed', prop);
+          log.log('set: cleared previuos value because create() changed', prop);
         }
       }
       if (prop.value != null && prop.value !== curProp.value) {
         if (curProp.value != null) {
-          curProp.dispose(curProp.value, this);
-          if (log.VERBOSE) {
-            log.log(
-              'disposed the value because a new value was explicitly set with create()',
-              prop,
-            );
+          if (curProp.dispose) {
+            curProp.dispose(curProp.value, this);
+            if (log.VERBOSE) {
+              log.log(
+                'set: disposed previous value because a new value was explicitly set',
+                prop,
+              );
+            }
           }
         }
         curProp.value = prop.value;
@@ -86,10 +91,10 @@ export class DisposableContext {
       if (prop.create) {
         prop.value = prop.create(this);
         if (log.VERBOSE) {
-          log.log('created new value', prop);
+          log.log('get: created new value', prop);
         }
       }
-      return prop.value;
+      return prop.value ?? prop.default ?? undefined;
     }
     return undefined;
   }
@@ -104,21 +109,23 @@ export class DisposableContext {
   dispose<TValue = unknown>(
     key: TContextValueName | DisposableContextValue<TValue>,
   ): void {
-    const property = this.#values.get(
+    const prop = this.#values.get(
       isValueKey(key) ? key : key.key,
     ) as DisposableContextValue<TValue>;
-    if (property) {
-      if (property.value != null) {
+    if (prop) {
+      if (prop.value != null) {
         if (log.VERBOSE) {
-          log.log(`dispose "${String(key)}"`);
+          log.log(`dispose: dispose "${String(key)}"`);
         }
-        property.dispose(property.value, this);
-        property.value = null;
+        if (prop.dispose) {
+          prop.dispose(prop.value, this);
+        }
+        prop.value = undefined;
       } else if (log.VERBOSE) {
-        log.log(`property "${String(key)}" is already disposed!`);
+        log.log(`dispose: property "${String(key)}" is already disposed!`);
       }
     } else if (log.VERBOSE) {
-      log.log('could not dispose unknown property value:', key);
+      log.log('dispose: could not dispose unknown property value:', key);
     }
   }
 

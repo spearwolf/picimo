@@ -53,7 +53,7 @@ const SharedMeshCache: DisposableContextValue<TileQuadMeshCache> = {
 };
 
 const getSharedMeshCache = (map2d: Map2D): TileQuadMeshCache => {
-  map2d.disposableContext.create(SharedMeshCache);
+  map2d.disposableContext.set(SharedMeshCache);
   return map2d.disposableContext.get(SharedMeshCache);
 };
 
