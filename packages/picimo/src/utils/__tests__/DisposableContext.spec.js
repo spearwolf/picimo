@@ -16,14 +16,14 @@ describe('DisposableContext', () => {
     assert(new DisposableContext());
   });
 
-  it('get(name) with a pre defined value should return the value without calling create() before', () => {
+  it('get(key) with a pre defined value should return the value without calling create() before', () => {
     // assemble
     const Foo = {};
     const ctx = new DisposableContext();
     const create = sinon.spy(() => ({}));
     ctx.create({
       create,
-      name: 'foo',
+      key: 'foo',
       value: Foo,
       dispose: () => undefined,
     });
@@ -34,7 +34,7 @@ describe('DisposableContext', () => {
     assert.equal(create.callCount, 0);
   });
 
-  it('get(name) should call create() helper if value is undefined or null', () => {
+  it('get(key) should call create() helper if value is undefined or null', () => {
     // assemble
     const ctx = new DisposableContext();
     const createFoo = sinon.spy(() => ({}));
@@ -42,12 +42,12 @@ describe('DisposableContext', () => {
     const fooDef = {
       create: createFoo,
       value: null,
-      name: 'foo',
+      key: 'foo',
       dispose: () => undefined,
     };
     const barDef = {
       create: createBar,
-      name: 'bar',
+      key: 'bar',
       dispose: () => undefined,
     };
     ctx.create(fooDef);
@@ -76,7 +76,7 @@ describe('DisposableContext', () => {
     ctx.create({
       create,
       dispose,
-      name: 'foo',
+      key: 'foo',
     });
     // act
     const foo0 = ctx.get('foo');
@@ -103,7 +103,7 @@ describe('DisposableContext', () => {
       const propDef = {
         create,
         dispose,
-        name: 'foo',
+        key: 'foo',
         value: undefined,
       };
       ctx.create(propDef);
@@ -129,7 +129,7 @@ describe('DisposableContext', () => {
       const propDef = {
         create: create0,
         dispose: dispose0,
-        name: 'foo',
+        key: 'foo',
         value: undefined,
       };
       ctx.create(propDef);
@@ -163,7 +163,7 @@ describe('DisposableContext', () => {
       const propDef = {
         create,
         dispose,
-        name: 'foo',
+        key: 'foo',
       };
       ctx.create(propDef);
       // act
@@ -190,12 +190,12 @@ describe('DisposableContext', () => {
     ctx.create({
       create: create0,
       dispose: dispose0,
-      name: 'foo',
+      key: 'foo',
     });
     ctx.create({
       create: create1,
       dispose: dispose1,
-      name: 'bar',
+      key: 'bar',
     });
     const foo0 = ctx.get('foo');
     const bar0 = ctx.get('bar');

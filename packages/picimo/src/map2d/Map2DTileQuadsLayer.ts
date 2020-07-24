@@ -46,7 +46,7 @@ const constructMeshName = (tileId: string, mesh: Mesh) =>
     : `${tileId}[${mesh.material.uuid}]`;
 
 const SharedMeshCache: DisposableContextValue<TileQuadMeshCache> = {
-  name: 'tileQuadMeshCache',
+  key: 'tileQuadMeshCache',
   create: () => new TileQuadMeshCache(),
   dispose: (cache: TileQuadMeshCache) =>
     cache.dispose((mesh) => mesh.geometry.dispose()),
