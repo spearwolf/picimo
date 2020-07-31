@@ -9,7 +9,7 @@ import {
 
 import {ITileSet, Texture, MaterialCache} from '../textures';
 
-import {DisposableContextValue} from '../utils/DisposableContext';
+import {DisposableContextPropDef} from '../utils/DisposableContext';
 
 import {IMap2DLayer} from './IMap2DLayer';
 import {Map2D} from './Map2D';
@@ -45,7 +45,7 @@ const constructMeshName = (tileId: string, mesh: Mesh) =>
     ? `${tileId}[${mesh.material.map((mat) => mat.uuid).join(',')}]`
     : `${tileId}[${mesh.material.uuid}]`;
 
-const SharedMeshCache: DisposableContextValue<TileQuadMeshCache> = {
+const SharedMeshCache: DisposableContextPropDef<TileQuadMeshCache> = {
   key: 'tileQuadMeshCache',
   create: () => new TileQuadMeshCache(),
   dispose: (cache: TileQuadMeshCache) =>
