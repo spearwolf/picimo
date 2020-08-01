@@ -35,6 +35,8 @@ ctx.has('foo')
 ctx.has({ key: 'foo' })
 ```
 
+_Note:_ A value is either *set* or *undefined* but never *null*! 
+
 ## Meta Info
 
 ### Read Meta Info
@@ -49,6 +51,16 @@ const { serial, refCount } = ctx.meta({ key: 'foo' })
 - the _serial_ starts at 1, but if _serial_ is 0, then no property has been defined yet
 - the _refCount_ is initialized with -1, which indicates that there was no reference counting for this property yet
 
+### Serial
+
+```js
+ctx.serial  // starts at 1
+
+ctx.touch('foo')
+ctx.touch({ key: 'foo' })
+```
+
+- *ctx.serial* is the fastest way to check if any value has changed
 
 ### Reference Counter
 

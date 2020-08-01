@@ -29,6 +29,25 @@ export interface DisposableContextMetaInfo {
 
 const REF_COUNT_UNDEF = -1;
 
+function copyOtherPropDefFields(
+  from: DisposableContextPropDef,
+  to: DisposableContextPropDef,
+) {
+  if (from.default != null) {
+    to.default = from.default;
+  }
+  if (typeof from.create === 'function') {
+    to.create = from.create;
+  }
+  if (typeof from.dispose === 'function') {
+    to.dispose = from.dispose;
+  }
+}
+
+const readKey = <TValue = unknown>(
+  key: TDisposableContextKey | DisposableContextPropDef<TValue>,
+): TDisposableContextKey => (isValueKey(key) ? key : key.key);
+
 export class DisposableContext {
   #propDefs = new Map<TDisposableContextKey, DisposableContextPropDef>();
   #metaInfos = new WeakMap<
@@ -37,21 +56,34 @@ export class DisposableContext {
   >();
   #refKeys = new Set<TDisposableContextKey>();
 
+  serial = 1;
+
   set<TValue = unknown>(prop: DisposableContextPropDef<TValue>): void {
     if (!this.#propDefs.has(prop.key)) {
-      this.#propDefs.set(prop.key, prop as DisposableContextPropDef);
+      const propDef: DisposableContextPropDef = {
+        key: prop.key,
+      };
+      propDef.value = prop.value ?? undefined;
+      copyOtherPropDefFields(prop as DisposableContextPropDef, propDef);
+      this.#propDefs.set(prop.key, propDef);
+      ++this.serial;
       if (log.VERBOSE) {
-        log.log('set: created property', prop);
+        log.log('set: created property definition:', propDef);
       }
     } else {
       const meta = this.#findOrCreateMetaInfo(prop as DisposableContextPropDef);
       const curProp = this.#propDefs.get(prop.key);
-      if (curProp.value != null && curProp.create !== prop.create) {
+      if (
+        curProp.value != null &&
+        typeof prop.create === 'function' &&
+        curProp.create !== prop.create
+      ) {
         if (curProp.dispose) {
           curProp.dispose(curProp.value, this);
         }
         curProp.value = undefined;
-        meta.serial++;
+        ++meta.serial;
+        ++this.serial;
         if (log.VERBOSE) {
           log.log('set: cleared previuos value because create() changed', {
             prop,
@@ -71,40 +103,43 @@ export class DisposableContext {
             }
           }
         }
-        curProp.value = prop.value;
-        meta.serial++;
+        curProp.value = prop.value ?? undefined;
+        ++meta.serial;
+        ++this.serial;
       }
-      Object.assign(curProp, {
-        create: prop.create,
-        dispose: prop.dispose,
-      });
+      copyOtherPropDefFields(prop as DisposableContextPropDef, curProp);
     }
   }
 
   /**
-   * Return a context value.
-   * If the context value entry is previously defined by create() but
-   * not yet created (the _value_ is undefined) then the value will be created
-   * through the given create() factory method.
+   * Return a value.
+   * If the value is not yet defined, try to generate a new value
+   * by calling the corresponding create() function.
+   *
+   * Note: is the value is either *set* or *undefined* but never *null*!
    */
   get<TValue = unknown>(
     key: TDisposableContextKey | DisposableContextPropDef<TValue>,
   ): TValue | undefined {
-    const prop = this.#propDefs.get(
-      isValueKey(key) ? key : key.key,
-    ) as DisposableContextPropDef<TValue>;
+    const prop = this.#propDefs.get(readKey(key)) as DisposableContextPropDef<
+      TValue
+    >;
     if (prop) {
       if (prop.value != null) {
         return prop.value;
       }
       if (prop.create) {
-        prop.value = prop.create(this);
-        const meta = this.#findOrCreateMetaInfo(
-          prop as DisposableContextPropDef,
-        );
-        meta.serial++;
-        if (log.VERBOSE) {
-          log.log('get: created new value', prop);
+        const value = prop.create(this);
+        if (value != null) {
+          prop.value = value;
+          const meta = this.#findOrCreateMetaInfo(
+            prop as DisposableContextPropDef,
+          );
+          ++meta.serial;
+          ++this.serial;
+          if (log.VERBOSE) {
+            log.log('get: created new value', prop);
+          }
         }
       }
       return prop.value ?? prop.default ?? undefined;
@@ -118,7 +153,7 @@ export class DisposableContext {
   has<TValue = unknown>(
     key: TDisposableContextKey | DisposableContextPropDef<TValue>,
   ): boolean {
-    return this.#propDefs.has(isValueKey(key) ? key : key.key);
+    return this.#propDefs.has(readKey(key));
   }
 
   /**
@@ -129,7 +164,7 @@ export class DisposableContext {
     key: TDisposableContextKey | DisposableContextPropDef<TValue>,
   ): DisposableContextMetaInfo | undefined {
     const propDef = this.#propDefs.get(
-      isValueKey(key) ? key : key.key,
+      readKey(key),
     ) as DisposableContextPropDef;
     if (propDef) {
       return {...this.#findOrCreateMetaInfo(propDef)};
@@ -140,9 +175,7 @@ export class DisposableContext {
   #readMetaInfo = <TValue = unknown>(
     key: TDisposableContextKey | DisposableContextPropDef<TValue>,
   ): DisposableContextMetaInfo | undefined => {
-    const prop = this.#propDefs.get(
-      isValueKey(key) ? key : key.key,
-    ) as DisposableContextPropDef;
+    const prop = this.#propDefs.get(readKey(key)) as DisposableContextPropDef;
     if (prop) {
       return this.#findOrCreateMetaInfo(prop);
     }
@@ -171,10 +204,10 @@ export class DisposableContext {
       if (meta.refCount === REF_COUNT_UNDEF) {
         meta.refCount = 1;
       } else {
-        meta.refCount++;
+        ++meta.refCount;
       }
       if (meta.refCount === 1) {
-        this.#refKeys.delete(isValueKey(key) ? key : key.key);
+        this.#refKeys.delete(readKey(key));
       }
       return meta.refCount;
     }
@@ -193,11 +226,24 @@ export class DisposableContext {
         --meta.refCount;
       }
       if (meta.refCount === 0) {
-        this.#refKeys.add(isValueKey(key) ? key : key.key);
+        this.#refKeys.add(readKey(key));
       }
       return meta.refCount;
     }
     return REF_COUNT_UNDEF;
+  }
+
+  /**
+   * Increaase the serial
+   */
+  touch<TValue = unknown>(
+    key: TDisposableContextKey | DisposableContextPropDef<TValue>,
+  ): void {
+    const meta = this.#readMetaInfo(key);
+    if (meta) {
+      ++meta.serial;
+      ++this.serial;
+    }
   }
 
   /**
@@ -210,9 +256,9 @@ export class DisposableContext {
   dispose<TValue = unknown>(
     key: TDisposableContextKey | DisposableContextPropDef<TValue>,
   ): void {
-    const prop = this.#propDefs.get(
-      isValueKey(key) ? key : key.key,
-    ) as DisposableContextPropDef<TValue>;
+    const prop = this.#propDefs.get(readKey(key)) as DisposableContextPropDef<
+      TValue
+    >;
     if (prop) {
       if (prop.value != null) {
         if (log.VERBOSE) {
@@ -222,6 +268,11 @@ export class DisposableContext {
           prop.dispose(prop.value, this);
         }
         prop.value = undefined;
+        const meta = this.#findOrCreateMetaInfo(
+          prop as DisposableContextPropDef,
+        );
+        ++meta.serial;
+        ++this.serial;
       } else if (log.VERBOSE) {
         log.log(`dispose: property "${String(key)}" is already disposed!`);
       }
@@ -255,6 +306,9 @@ export class DisposableContext {
       if (propDef.value != null) {
         propDef.dispose(propDef.value, this);
         propDef.value = undefined;
+        const meta = this.#findOrCreateMetaInfo(propDef);
+        ++meta.serial;
+        ++this.serial;
       }
     });
   }
@@ -269,5 +323,6 @@ export class DisposableContext {
     }
     this.#propDefs.clear();
     this.#refKeys.clear();
+    ++this.serial;
   }
 }
