@@ -8,21 +8,35 @@ import {IProjection} from '.';
 const log = new Logger('picimo.Stage2D');
 
 export class Stage2D extends Scene {
-  projection: IProjection;
   renderOnFrame = true;
+
+  private _projection: IProjection;
+  private _currentWidth: number = 0;
+  private _currentHeight: number = 0;
 
   constructor(projection?: IProjection) {
     super();
-    this.projection = projection;
+    this._projection = projection;
+  }
+
+  set projection(projection: IProjection) {
+    this._projection = projection;
+    projection.update(this._currentWidth, this._currentHeight);
+  }
+
+  get projection(): IProjection {
+    return this._projection;
   }
 
   get camera(): Camera {
-    return this.projection && this.projection.camera;
+    return this._projection?.camera;
   }
 
   resize({width, height}: {width: number; height: number}) {
     const {projection} = this;
     if (projection) {
+      this._currentWidth = width;
+      this._currentHeight = height;
       projection.update(width, height);
       if (log.DEBUG) {
         log.log(
