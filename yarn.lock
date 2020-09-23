@@ -5700,10 +5700,10 @@ eventemitter3@^4.0.0:
   resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-4.0.7.tgz#2de9b68f6528d5644ef5c59526a1b4a07306169f"
   integrity sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==
 
-eventize-js@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/eventize-js/-/eventize-js-1.0.0.tgz#f0817e58adc6e1ba284b86e19f9d0671f5a2a730"
-  integrity sha512-Z8h2dp0Zmd//13G4aomG++bDnK3pXIjiEMBpkgpGqFpPKXSvVQVzL7I/dA9l1Yk+CUA3pnmq6o1PdZ296a3Diw==
+eventize-js@^1.1.0:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/eventize-js/-/eventize-js-1.1.1.tgz#c20488cb29e43a7e220305511a454a11c54a1119"
+  integrity sha512-SSTe53EaiuOwVJv61BXB3coIaCAjHwBB/OK0MV989q9HsGZVjatybDUQSzvLo/sZshqklNGUjIR/aBACfzaLdA==
 
 events@^3.0.0:
   version "3.1.0"
@@ -9201,13 +9201,6 @@ performance-now@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
   integrity sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=
-
-picimo@*:
-  version "0.0.25"
-  resolved "https://registry.yarnpkg.com/picimo/-/picimo-0.0.25.tgz#253b7f5b22a12a0a22309e623b01db64e8d66e95"
-  integrity sha512-JGPeeCMoQ2KTSx3c9knVxyHPap6+pv2ecCv9XMi6WO/lapU1kZwUK8OGbEa1cg5xcudOBTSSDrJwMe7FNYQ8Tw==
-  dependencies:
-    eventize-js "^1.0.0"
 
 picomatch@^2.0.4, picomatch@^2.2.1, picomatch@^2.2.2:
   version "2.2.2"

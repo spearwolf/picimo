@@ -1,6 +1,6 @@
 {
   "name": "picimo",
-  "version": "0.0.26-pre",
+  "version": "0.0.26",
   "description": "A typescript library for my personal visual gfx and game dev experiments based on three.js",
   "main": "dist/picimo.min.js",
   "module": "build/index.js",
@@ -91,6 +91,6 @@
     "three": "^0.118.3"
   },
   "dependencies": {
-    "eventize-js": "^1.0.0"
+    "eventize-js": "^1.1.0"
   }
 }
