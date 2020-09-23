@@ -116,10 +116,6 @@ export class SpriteGroupMesh<T, U = {}, K = {}, I = {}> extends Mesh {
         () => geometry.updateBuffers(),
       );
 
-      if (log.INFO) {
-        log.info('onBeforeRenderSpriteGroupInstanced');
-      }
-
       const {usedCount, indices} = baseSpriteGroup;
       if (indices != null) {
         geometry.setDrawRange(0, usedCount * indices.itemCount);
