@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+  <title>a picimo sketch • created by spearwolf</title>
+  <style>
+    body {
+      background-color: #6d3580;
+    }
+
+    #picimo {
+      padding: 20px;
+      max-width: 50vw;
+      border: 15px solid #cc4165;
+      background-color: #e4734f;
+    }
+
+    main {
+      position: relative;
+    }
+    .infoDisplay {
+      position: absolute;
+      bottom: 40px;
+      left: 20px;
+      color: #000;
+      text-shadow: 0 0 1px #fff;
+      font-family: monospace;
+      font-size: 12px;
+    }
+    .infoDisplay p {
+      margin: 0;
+      padding: 0;
+    }
+    .infoDisplay em {
+      display: inline-block;
+      padding-right: 0.25em;
+      width: 9em;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    var stickyLogConfig = { verbose: false };
+  </script>
+  <main>
+    <div id="picimo" data-display-mode="antialias-quality"></div>
+    <div class="infoDisplay"></div>
+  </main>
+  <script src="./bundle.js"></script>
+</body>
+</html>

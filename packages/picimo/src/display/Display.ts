@@ -32,9 +32,11 @@ const PIXEL_RATIO_ATTR = 'pixel-ratio';
 export type DisplayGetSizeFn = (
   display: Display,
 ) => {width: number; height: number};
+
 export type DisplayResizeStrategy =
   | HTMLElement
   | DisplayGetSizeFn
+  | 'window'
   | 'fullscreen';
 
 export enum DisplayMode {
@@ -102,6 +104,17 @@ export interface DisplayOnFrameOptions extends DisplayEventOptions {
   deltaTime: number;
   frameNo: number;
 }
+
+const getAttribute = (el: HTMLElement, attrName: string): string => {
+  const dataAttrName = `data-${attrName}`;
+  if (el.hasAttribute(dataAttrName)) {
+    return el.getAttribute(dataAttrName);
+  }
+  if (el.hasAttribute(attrName)) {
+    return el.getAttribute(attrName);
+  }
+  return undefined;
+};
 
 export class Display extends Eventize {
   readonly renderer: WebGLRenderer;
@@ -178,7 +191,7 @@ export class Display extends Eventize {
           readOption<DisplayOptions>(
             options,
             'mode',
-            el.getAttribute(DISPLAY_MODE_ATTR),
+            getAttribute(el, DISPLAY_MODE_ATTR),
           ) as DisplayMode,
         );
       },
@@ -188,7 +201,7 @@ export class Display extends Eventize {
       readOption<DisplayOptions>(
         options,
         'pixelRatio',
-        parseInt((el.getAttribute(PIXEL_RATIO_ATTR) || 0) as any, 10),
+        parseInt((getAttribute(el, PIXEL_RATIO_ATTR) || 0) as any, 10),
       ),
     );
 
@@ -200,7 +213,7 @@ export class Display extends Eventize {
     this.resizeStrategy = readOption<DisplayOptions>(
       options,
       'resizeStrategy',
-      el.getAttribute(RESIZE_STRATEGY_ATTR) || resizeRefEl,
+      getAttribute(el, RESIZE_STRATEGY_ATTR) || resizeRefEl,
     ) as DisplayResizeStrategy;
 
     const renderParams: WebGLRendererParameters = {
@@ -282,7 +295,7 @@ export class Display extends Eventize {
     }
   }
 
-  get stage() {
+  get stage(): Stage2D {
     return this[$stage];
   }
 
@@ -300,17 +313,17 @@ export class Display extends Eventize {
     }
   }
 
-  get pixelRatio() {
+  get pixelRatio(): number {
     return this[$lockPixelRatio] || window.devicePixelRatio || 1;
   }
 
-  resize() {
+  resize(): void {
     const {resizeStrategy} = this;
 
     let wPx = 320;
     let hPx = 200;
 
-    if (resizeStrategy === 'fullscreen') {
+    if (resizeStrategy === 'fullscreen' || resizeStrategy === 'window') {
       wPx = window.innerWidth;
       hPx = window.innerHeight;
     } else if (typeof resizeStrategy === 'function') {
@@ -319,8 +332,19 @@ export class Display extends Eventize {
       hPx = Math.floor(height);
     } else if (resizeStrategy instanceof HTMLElement) {
       const {width, height} = resizeStrategy.getBoundingClientRect();
-      wPx = Math.floor(width);
-      hPx = Math.floor(height);
+      const styles = getComputedStyle(resizeStrategy, null);
+      const verticalMargin =
+        parseInt(styles.getPropertyValue('border-top-width'), 10) +
+        parseInt(styles.getPropertyValue('border-bottom-width'), 10) +
+        parseInt(styles.getPropertyValue('padding-top'), 10) +
+        parseInt(styles.getPropertyValue('padding-bottom'), 10);
+      const horizontalMargin =
+        parseInt(styles.getPropertyValue('border-right-width'), 10) +
+        parseInt(styles.getPropertyValue('border-left-width'), 10) +
+        parseInt(styles.getPropertyValue('padding-left'), 10) +
+        parseInt(styles.getPropertyValue('padding-right'), 10);
+      wPx = Math.floor(width - horizontalMargin);
+      hPx = Math.floor(height - verticalMargin);
     }
 
     const {pixelRatio} = this;
@@ -343,7 +367,7 @@ export class Display extends Eventize {
     }
   }
 
-  renderFrame(now = window.performance.now()) {
+  renderFrame(now = window.performance.now()): void {
     this.lastNow = this.now;
     this.now = now / 1000.0;
 
@@ -364,7 +388,7 @@ export class Display extends Eventize {
     ++this.frameNo;
   }
 
-  start() {
+  start(): void {
     this.pause = false;
     this[$emitInit]();
 
@@ -378,7 +402,7 @@ export class Display extends Eventize {
     this[$rafID] = window.requestAnimationFrame(renderFrame);
   }
 
-  stop() {
+  stop(): void {
     window.cancelAnimationFrame(this[$rafID]);
   }
 
