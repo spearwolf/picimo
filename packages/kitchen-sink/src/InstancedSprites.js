@@ -161,7 +161,7 @@ const init = async ({display, scene}) => {
   scene.add(mesh);
 
   debug('spriteGroup', spriteGroup);
-  debug('material', material);
+  debug('mesh', mesh);
 };
 
 // ----------------------------------------------------------------------------------

@@ -14,7 +14,7 @@ export function createBufferAttributes<T, U, K = InterleavedBuffer>(
   spriteGroup: SpriteGroup<T, U>,
   bufferGeometry: BufferGeometry,
   createBuffer: CreateBufferFn<K>,
-) {
+): K[] {
   const {descriptor} = spriteGroup;
   const {voArray} = spriteGroup.voPool;
 
@@ -42,8 +42,9 @@ export function createBufferAttributes<T, U, K = InterleavedBuffer>(
     const bufferAttr = new InterleavedBufferAttribute(
       buffer as any,
       attr.size,
-      attr.offset,
+      attr.byteOffset,
     );
+    bufferAttr.name = attrName;
     bufferGeometry.setAttribute(attrName, bufferAttr);
   });
 
