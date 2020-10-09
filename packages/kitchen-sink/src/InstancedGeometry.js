@@ -24,11 +24,11 @@ const init = async ({display, scene}) => {
   const ambientLight = new THREE.AmbientLight(0xffffa0);
   scene.add(ambientLight);
 
-  const hemisphereLight = new THREE.HemisphereLight(0xf0f0f0, 0xff0066, 1);
+  const hemisphereLight = new THREE.HemisphereLight(0xf0f0f0, 0xff0066, 0.8);
   scene.add(hemisphereLight);
 
-  const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-  directionalLight.position.set(0, 0, 1000);
+  const directionalLight = new THREE.DirectionalLight(0xffffdd, 1);
+  directionalLight.position.set(-500, 500, -1000);
   scene.add(directionalLight);
 
   // ----------------------------------------------------------------------------------
@@ -59,7 +59,7 @@ const init = async ({display, scene}) => {
   // ----------------------------------------------------------------------------------
 
   const spriteGroup = new SpriteGroup(vod, {
-    capacity: 1000,
+    capacity: 500,
 
     dynamic: false,
   });
@@ -70,10 +70,10 @@ const init = async ({display, scene}) => {
   //
   // ----------------------------------------------------------------------------------
 
-  const COLORS = ['b7fbff', 'fff6be', 'ffe0a3', 'ffa1ac'];
+  const COLORS = ['ee4444', '44aa44', '4444ff', 'aaaa44'];
 
   for (let i = 0; i < 10; i++) {
-    makeCircleCoords(100, 650 - i * 50, (x, y, z) => {
+    makeCircleCoords(50, 650 - i * 50, (x, y, z) => {
       const sprite = spriteGroup.createSprite();
       sprite.setMove(x, y, z + i * 0.05);
       sprite.setColor(sample(COLORS));

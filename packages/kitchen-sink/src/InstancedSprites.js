@@ -78,7 +78,8 @@ const init = async ({display, scene}) => {
 
   // === instanced sprites === == -----
 
-  const COLORS = ['3ec1d3', 'f6f7d7', 'ff9a00', 'ff165d'];
+  // const COLORS = ['3ec1d3', 'f6f7d7', 'ff9a00', 'ff165d'];
+  const COLORS = ['ff0000', '00ff00', '0000ff', 'ffff00'];
 
   makeCircleCoords(100, 1000).forEach(([x, y]) => {
     const quad = spriteGroup.createSprite();
