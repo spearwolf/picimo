@@ -1,4 +1,4 @@
-/#ffe26f* eslint-disable no-console */;
+/* eslint-disable no-console */
 import {Display} from 'picimo';
 
 const display = new Display(document.getElementById('picimo'), {
