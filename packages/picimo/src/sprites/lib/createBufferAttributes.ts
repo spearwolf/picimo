@@ -42,7 +42,8 @@ export function createBufferAttributes<T, U, K = InterleavedBuffer>(
     const bufferAttr = new InterleavedBufferAttribute(
       buffer as any,
       attr.size,
-      attr.byteOffset,
+      // @ts-ignore
+      attr.byteOffset / buffer.array.BYTES_PER_ELEMENT,
     );
     bufferAttr.name = attrName;
     bufferGeometry.setAttribute(attrName, bufferAttr);

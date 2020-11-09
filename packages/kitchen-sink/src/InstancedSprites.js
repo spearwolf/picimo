@@ -33,8 +33,22 @@ const init = async ({display, scene}) => {
 
   const instancedQuadsDescriptor = new VODescriptor({
     attributes: {
+      //
+      // +----+----+----+-+-+-+-+
+      // |tx  |ty  |tz  |r|g|b|a|
+      // +----+----+----+-+-+-+-+
+      //
+      // <----------------------> descriptor.bytesPerVertex = 16
+      //
+      // <------------->          attr(translate).bytesPerVertex = 12
+      // >                        attr(translate).byteOffset = 0
+      // >                        attr(translate).offset = 0
+      //
+      //                 <------> attr(rgba).bytesPerVertex = 4
+      // -------------->          attr(rgba).byteOffset = 12
+      // -------------->          attr(rgba).offset = 3 ???
+      //
       translate: ['tx', 'ty', 'tz'],
-
       rgba: {type: 'uint8', scalars: ['r', 'g', 'b', 'a']},
     },
   });

@@ -1,6 +1,6 @@
 {
   "name": "picimo",
-  "version": "0.0.28",
+  "version": "0.0.29",
   "description": "A typescript library for my personal visual gfx and game dev experiments based on three.js",
   "main": "dist/picimo.min.js",
   "module": "build/index.js",
