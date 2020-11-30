@@ -18,9 +18,9 @@ Note that the `Projection` is an interface and not intended to be created direct
 
 ## General Usage
 
-1. create the projection (eg. configure a parallax projection for the display canvas, or define an orthogonal projection for your render-to-texture target)
-2. (repeatedly) update the projection by calling `projection.update(width, height)` on _each frame_, or whenver the render-to-texture buffer dimension changes)
-3. use the `projection.camera` to render your scene
+1. Create the projection (eg. configure a parallax projection for the display canvas, or define an orthogonal projection for your render-to-texture target)
+2. (Repeatedly) update the projection by calling `projection.update(width, height)` on _each frame_, or whenever the render-to-texture buffer dimension changes)
+3. Use the `projection.camera` to render your scene
 
 ## Configuration
 
