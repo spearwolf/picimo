@@ -121,9 +121,9 @@ export class DisposableContext {
   get<TValue = unknown>(
     key: TDisposableContextKey | DisposableContextPropDef<TValue>,
   ): TValue | undefined {
-    const prop = this.#propDefs.get(readKey(key)) as DisposableContextPropDef<
-      TValue
-    >;
+    const prop = this.#propDefs.get(
+      readKey(key),
+    ) as DisposableContextPropDef<TValue>;
     if (prop) {
       if (prop.value != null) {
         return prop.value;
@@ -256,9 +256,9 @@ export class DisposableContext {
   dispose<TValue = unknown>(
     key: TDisposableContextKey | DisposableContextPropDef<TValue>,
   ): void {
-    const prop = this.#propDefs.get(readKey(key)) as DisposableContextPropDef<
-      TValue
-    >;
+    const prop = this.#propDefs.get(
+      readKey(key),
+    ) as DisposableContextPropDef<TValue>;
     if (prop) {
       if (prop.value != null) {
         if (log.VERBOSE) {

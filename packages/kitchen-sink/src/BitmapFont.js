@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-env browser */
 import {TextureAtlas, BitmapText2D, BitmapText2DBlock} from 'picimo';
 

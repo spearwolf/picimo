@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-env browser */
 import {TextureAtlas, SimpleSprites, SimpleSpritesMaterial} from 'picimo';
 
