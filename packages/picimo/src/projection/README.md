@@ -18,7 +18,7 @@ Note that the `Projection` is an interface and not intended to be created direct
 
 ## General Usage
 
-1. create the projection (eg. configure a parallax projection for the display canvas, or define an orthogonal projection for your render-to-texture buffer)
+1. create the projection (eg. configure a parallax projection for the display canvas, or define an orthogonal projection for your render-to-texture target)
 2. (repeatedly) update the projection by calling `projection.update(width, height)` on _each frame_, or whenver the render-to-texture buffer dimension changes)
 3. use the `projection.camera` to render your scene
 
@@ -26,7 +26,7 @@ Note that the `Projection` is an interface and not intended to be created direct
 
 Both `OrthographicProjection` as well as `ParallaxProjection` are configured by a set of **rules** similar to _css styles and media queries_.
 
-These rules determine how the dimension of the projection plane should be, based on the resolution of the render buffer (the input to `projection.update(width, height)`)
+These rules determine how the dimension of the projection plane should be, based on the resolution of the render target (&larr; `projection.update(width, height)`)
 
 A rule may have one or more **constraints**. The first rule applies where constraints fit.
 
