@@ -56,6 +56,8 @@ const rules = [
 
 ### Constraints
 
+If the following properties apply to the render target:
+
 #### Orientation
 
 ```typescript
@@ -78,6 +80,8 @@ maxHeight: number
 
 
 ### Specs
+
+Specify the dimension of the projection plane:
 
 #### View Frustum Size
 
