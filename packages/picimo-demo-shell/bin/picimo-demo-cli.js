@@ -40,8 +40,8 @@ function initialize(root) {
 function startDevServer({root}) {
   const projectDir = initialize(root);
   spawn(
-    'webpack-dev-server',
-    ['--config', path.resolve(__dirname, '../webpack.config.js')],
+    'webpack',
+    ['serve', '--config', path.resolve(__dirname, '../webpack.config.js')],
     {
       cwd: projectDir,
       shell: true,
