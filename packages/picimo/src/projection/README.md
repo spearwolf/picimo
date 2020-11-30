@@ -26,6 +26,8 @@ Note that the `Projection` is an interface and not intended to be created direct
 
 Both `OrthographicProjection` as well as `ParallaxProjection` are configured by a set of **rules** similar to _css styles and media queries_.
 
+These rules determine how the dimension of the projection plane should be, based on the resolution of the render buffer (the input to `projection.update(width, height)`)
+
 A rule may have one or more **constraints**. The first rule applies where constraints fit.
 
 If a rule has no constraints it always fits.
