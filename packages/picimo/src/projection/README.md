@@ -1,8 +1,30 @@
 # Projection
 
+The underlying concept of the `Projection` is that ..
+- the view into the 3d world is projected from the camera on a 2d _projection plane_
+- the _dimension_ of the projection plane depends on both the camera and the dimension of the render buffer target
+
+From a technical point of view a `Projection` creates and updates a [Camera](https://threejs.org/docs/#api/en/cameras/Camera).
+In addition to the access to the `Camera` it offers some handy attributes and methods to get infos about the _projection plane_:
+- `.width: number` the width of the projection plane
+- `.height: number` the height of the projection plane
+- `.pixelRatioH: number` the horizontal ratio of the resolution in pixels of the current render buffer target to the width of the projection plane
+- `.pixelRatioV: number` the vertical ratio of the resolution in pixels of the current render buffer target to the height of the projection plane
+- `.getZoom(distanceToProjectionPlane: number) => number`
+
+Note that the `Projection` is an interface and not intended to be created directly; you probably want a specialized projection class like:
+- `OrthographicProjection`
+- `ParallaxProjection`
+
+## General Usage
+
+1. create the projection (eg. configure a parallax projection for the display canvas, or define an orthogonal projection for your render-to-texture buffer)
+2. (repeatedly) update the projection by calling `projection.update(width, height)` on _each frame_, or whenver the render-to-texture buffer dimension changes)
+3. use the `projection.camera` to render your scene
+
 ## Configuration
 
-A `Projection` is configured by a set of **rules** similar to _css styles and media queries_.
+Both `OrthographicProjection` as well as `ParallaxProjection` are configured by a set of **rules** similar to _css styles and media queries_.
 
 A rule may have one or more **constraints**. The first rule applies where constraints fit.
 
@@ -85,4 +107,3 @@ With this _exclusive_ option the size of the camera view frustum is defined by t
 If this option is used all other specs have no effect.
 
 i.e., if set to `2` while the canvas size is `320x240` then the view size is `160x120` pixels.
-
