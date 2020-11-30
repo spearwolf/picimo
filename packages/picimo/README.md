@@ -16,7 +16,7 @@ As a consequence thereof a key feature of picimo is that it is easy to create cu
 
 Those who work with sprites will quickly realize that an easy way to import [spritesheet images and texture-atlas definitions](https://en.wikipedia.org/wiki/Texture_atlas) could be very handy. Picimo supports importing tilesets via grid-aligned spritesheet images or texture altases from json files (exported by tools such as [TexturePacker](https://www.codeandweb.com/texturepacker)).
 
-For more detailed API usage and examples, please visit the [kitchen-sink app](../kitchen-sink) or if you are more on the [_react_](https://reactjs.org/)-side, please try the gorgeous components from [picimo-r3f](../picimo-r3f).
+For more detailed API usage and examples, please visit the [kitchen-sink app](../kitchen-sink) or if you are more on the [_react_](https://reactjs.org/)-side, please try the components from [picimo-r3f](../picimo-r3f).
 
 ## How to import in your own projects
 
