@@ -32,6 +32,7 @@ settings:
         - .tsx
         - .js
         - .jsx
+
 rules:
   no-fallthrough: off
   no-undef-init: off
@@ -46,7 +47,8 @@ rules:
   "@typescript-eslint/interface-name-prefix": off
   "@typescript-eslint/no-empty-interface": off
   "@typescript-eslint/no-empty-function": off
-  "@typescript-eslint/no-use-before-define": off
+  "no-use-before-define": off
+  "@typescript-eslint/no-use-before-define": [2, {"functions": false}]
   "@typescript-eslint/no-unused-vars": [2, {vars: "all", args: "after-used", argsIgnorePattern: "^_"}]
   "@typescript-eslint/consistent-type-assertions": [2, {assertionStyle: "as", objectLiteralTypeAssertions: "allow-as-parameter"}]
   import/order: [2, {newlines-between: "always-and-inside-groups", alphabetize: {order: "asc"}, groups: ["builtin", "external", "internal", "parent", "sibling", "index", "unknown"]}]

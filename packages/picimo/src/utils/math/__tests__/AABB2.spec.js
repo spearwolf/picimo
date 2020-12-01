@@ -1,4 +1,4 @@
-/* eslint-env mocha */
+/* eslint-env jest */
 import assert from 'assert';
 
 import {AABB2} from '../AABB2';

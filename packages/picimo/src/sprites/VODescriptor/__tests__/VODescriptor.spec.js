@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/camelcase */
-/* eslint-env mocha */
+/* eslint-env jest */
 import assert from 'assert';
 
 import {VODescriptor, VOArray} from '../..';
@@ -18,7 +17,7 @@ const assertPropertyTypes = (vo, props) => {
 describe('VODescriptor', () => {
   let descriptor;
 
-  before(() => {
+  beforeAll(() => {
     descriptor = new VODescriptor({
       methods: {
         foo() {

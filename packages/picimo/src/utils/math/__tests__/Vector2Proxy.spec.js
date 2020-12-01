@@ -1,4 +1,4 @@
-/* eslint-env mocha */
+/* eslint-env jest */
 import assert from 'assert';
 
 import {Vector3, Vector2} from 'three';

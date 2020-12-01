@@ -1,4 +1,4 @@
-/* eslint-env mocha */
+/* eslint-env jest */
 import assert from 'assert';
 
 import {ProjectionRules} from '../ProjectionRules';
@@ -12,7 +12,7 @@ describe('ProjectionRules', () => {
   describe('findMatchingRule()', () => {
     let cam;
 
-    before(() => {
+    beforeAll(() => {
       cam = new ProjectionRules([
         {
           id: 1, // id is not needed - used for testing only

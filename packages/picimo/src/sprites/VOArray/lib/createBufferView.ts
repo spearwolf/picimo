@@ -1,8 +1,8 @@
 export const createBufferView = (
   capacity: number,
   bytesPerVO: number,
-  data: ArrayBuffer | ArrayBufferView,
-) => {
+  data: ArrayBufferLike | ArrayBufferView,
+): DataView => {
   const byteLength = capacity * bytesPerVO;
 
   if (ArrayBuffer.isView(data)) {
@@ -15,7 +15,7 @@ export const createBufferView = (
     return new DataView(data.buffer, byteOffset, byteLength);
   }
 
-  if (data instanceof ArrayBuffer) {
+  if (data?.byteLength) {
     if (byteLength > data.byteLength) {
       throw new TypeError(
         `VOArray: [data] buffer is too small! needs ${byteLength} bytes (capacity=${capacity} bytesPerVO=${bytesPerVO}) but has ${data.byteLength} bytes!`,

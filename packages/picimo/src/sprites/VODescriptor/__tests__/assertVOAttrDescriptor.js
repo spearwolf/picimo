@@ -1,6 +1,8 @@
+/* eslint-env jest */
 import assert from 'assert';
 
 /** @private */
+// eslint-disable-next-line
 export default (descriptor, names, size, offset, uniform, scalars) => {
   const name = Array.isArray(names) ? names[0] : names;
   const alias = Array.isArray(names) ? names[1] : names;
