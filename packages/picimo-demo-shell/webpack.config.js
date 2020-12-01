@@ -94,7 +94,6 @@ module.exports = {
     extensions: ['.ts', '.js', '.tsx', '.jsx', '.json'],
     alias: {
       picimo: path.join(__dirname, '../picimo/src'),
-      'picimo-r3f': path.join(__dirname, '../picimo-r3f/src'),
       'datgui-context-hook': path.join(__dirname, '../datgui-context-hook/src'),
     },
   },

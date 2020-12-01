@@ -31,7 +31,6 @@ the repository is organized into sub-directories containing the various projects
 | sub-directory | what's inside? |
 |---------------|----------------|
 | [picimo](packages/picimo/) | the main library |
-| [picimo&#8209;r3f](packages/picimo-r3f/) | react components based on react-three-fiber (highly promising but also very experimental) |
 | [kitchen&#8209;sink](packages/kitchen-sink/) | a [SPA](https://en.wikipedia.org/wiki/Single-page_application) with code examples for almost all features of the picimo library (is subject to major changes &mdash; in future all examples will be moved successively to the [`examples/*`](examples/) directory |
 | [examples/**/*](examples/) | picimo examples &mdash; good starting point to learn about how to use the picimo api |
 | [picimo&#8209;demo&#8209;shell](packages/picimo-demo-shell/) | a cli wrapper for webpack config and launcher to speed up development of the picimo code examples |
