@@ -3,6 +3,12 @@
   "description": "a picimo sketch",
   "version": "1.0.0",
   "private": true,
+  "picimo": {
+    "title": "display",
+    "url": "/display/",
+    "public": "display/public",
+    "sourceUrl": "https://github.com/spearwolf/picimo/blob/master/examples/display/src/index.js"
+  },
   "scripts": {
     "start": "picimo-demo-cli start",
     "build": "picimo-demo-cli build",

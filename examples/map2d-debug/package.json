@@ -3,6 +3,12 @@
   "description": "a picimo sketch",
   "version": "1.0.0",
   "private": true,
+  "picimo": {
+    "title": "map2d-debug",
+    "url": "/map2d-debug/",
+    "public": "map2d-debug/public",
+    "sourceUrl": "https://github.com/spearwolf/picimo/blob/master/examples/map2d-debug/src/index.js"
+  },
   "scripts": {
     "start": "picimo-demo-cli start",
     "build": "picimo-demo-cli build",

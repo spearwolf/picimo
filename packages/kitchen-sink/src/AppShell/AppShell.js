@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-env browser */
 import React, {Fragment} from 'react';
 
-import DEMOS from '../../examples.json';
+import DEMOS from '../../demos.json';
 
 import DemoIFrame from './DemoIFrame';
 import DemoLink from './DemoLink';
@@ -18,6 +19,11 @@ import SideNavShadow from './SideNavShadow';
 import Title from './Title';
 
 import {BREAKPOINT_SHOW_HAMBURGER} from './constants';
+
+// eslint-disable-next-line no-undef
+const DemosAndExamples = [...DEMOS, EXAMPLES].sort(
+  (a, b) => b.order || 0 - a.order || 0,
+);
 
 class AppShell extends React.Component {
   constructor(props) {
@@ -70,7 +76,7 @@ class AppShell extends React.Component {
             <Title>kitchen sink</Title>
           </Header>
           <SideNavContent>
-            {DEMOS.map(({section, demos}) => (
+            {DemosAndExamples.map(({section, demos}) => (
               <Fragment key={section}>
                 <Headline>{section}</Headline>
                 {demos.map(({title, url, sourceUrl}) => (
