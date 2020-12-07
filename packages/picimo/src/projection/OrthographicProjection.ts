@@ -91,8 +91,8 @@ export class OrthographicProjection implements IProjection {
         far,
       );
       this.#plane.applyRotation(this.#camera);
-      this.#camera.position[this.#plane.distancePropName] =
-        specs.distance ?? DEFAULT_DISTANCE;
+      const distance = specs.distance ?? DEFAULT_DISTANCE;
+      this.#camera.position.copy(this.#plane.getPointByDistance(distance));
     } else {
       // Update camera
       this.#camera.left = -halfWidth;

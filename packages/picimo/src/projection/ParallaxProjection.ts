@@ -92,7 +92,7 @@ export class ParallaxProjection implements IProjection {
       const far = specs.far ?? DEFAULT_FAR;
       this.#camera = new PerspectiveCamera(this.fovy, aspect, near, far);
       this.#plane.applyRotation(this.#camera);
-      this.#camera.position[this.#plane.distancePropName] = distance;
+      this.#camera.position.copy(this.#plane.getPointByDistance(distance));
       this.#initialDistance = distance;
     } else {
       // === Update camera
