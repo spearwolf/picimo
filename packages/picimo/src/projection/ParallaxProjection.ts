@@ -104,7 +104,7 @@ export class ParallaxProjection implements IProjection {
 
   getZoom(distanceToProjectionPlane: number): number {
     if (distanceToProjectionPlane === 0) return 1;
-    // TODO [initial=>current]distance === length(camera.position) ?!
+    // TODO [initial=>current]? distance to camera.position ?!
     const d = this.#initialDistance - distanceToProjectionPlane;
     return (
       (Math.tan(((this.fovy / 2) * Math.PI) / 180) * d) / (this.#height / 2)
