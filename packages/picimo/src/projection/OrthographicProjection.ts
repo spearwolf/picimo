@@ -1,7 +1,13 @@
 import {OrthographicCamera} from 'three';
 
+import {Plane} from '../utils';
+
+import {IProjection} from './IProjection';
+import {IProjectionRule} from './IProjectionRule';
+
 import {IProjectionSpecs} from './IProjectionSpecs';
-import {Projection} from './Projection';
+import {ProjectionRules} from './ProjectionRules';
+import {calcViewSize} from './lib/calcViewSize';
 
 const DEFAULT_DISTANCE = 100;
 const DEFAULT_NEAR = 0.1;
@@ -24,27 +30,50 @@ export type IOrthographicProjectionSpecs = IProjectionSpecs & {
   distance?: number;
 };
 
-export class OrthographicProjection extends Projection<
-  IOrthographicProjectionSpecs,
-  OrthographicCamera
-> {
-  updateOrtho(
-    width: number,
-    height: number,
-    specs: IOrthographicProjectionSpecs,
-  ) {
-    this.width = width;
-    this.height = height;
+export type OrthographicProjectionRule = IProjectionRule<IOrthographicProjectionSpecs>;
+
+export type OrthographicConfig =
+  | IOrthographicProjectionSpecs
+  | OrthographicProjectionRule[];
+
+export class OrthographicProjection implements IProjection {
+  camera: OrthographicCamera;
+
+  width = 0;
+  height = 0;
+
+  pixelRatioH = 1;
+  pixelRatioV = 1;
+
+  readonly #plane: Plane;
+  readonly #config: ProjectionRules<OrthographicProjectionRule>;
+
+  constructor(plane: Plane, rules: OrthographicConfig) {
+    this.#plane = plane;
+    this.#config = ProjectionRules.create(rules);
+  }
+
+  update(actualWidth: number, actualHeight: number): void {
+    const {specs} = this.#config.findMatchingRule(actualWidth, actualHeight);
+
+    const [viewWidth, viewHeight] = calcViewSize(
+      actualWidth,
+      actualHeight,
+      specs,
+    );
+    this.width = viewWidth;
+    this.height = viewHeight;
+
+    this.pixelRatioH = actualWidth / viewWidth;
+    this.pixelRatioV = actualHeight / viewHeight;
 
     const near = specs.near ?? DEFAULT_NEAR;
     const far = specs.far ?? DEFAULT_FAR;
-    const distance = specs.distance ?? DEFAULT_DISTANCE;
+    const [halfWidth, halfHeight] = [viewWidth / 2, viewHeight / 2];
 
-    const [halfWidth, halfHeight] = [width / 2, height / 2];
-
-    const {camera} = this;
-    if (!camera) {
+    if (!this.camera) {
       // === Create camera
+      // TODO create one camera for each specs ?!
       this.camera = new OrthographicCamera(
         -halfWidth,
         halfWidth,
@@ -53,17 +82,22 @@ export class OrthographicProjection extends Projection<
         near,
         far,
       );
-      this.applyPlaneRotation();
-      this.applyCameraDistance(distance);
+      this.#plane.applyRotation(this.camera);
+      this.camera.position[this.#plane.distancePropName] =
+        specs.distance ?? DEFAULT_DISTANCE;
     } else {
       // Update camera
-      camera.left = -halfWidth;
-      camera.right = halfWidth;
-      camera.top = halfHeight;
-      camera.bottom = -halfHeight;
-      camera.near = near;
-      camera.far = far;
-      camera.updateProjectionMatrix();
+      this.camera.left = -halfWidth;
+      this.camera.right = halfWidth;
+      this.camera.top = halfHeight;
+      this.camera.bottom = -halfHeight;
+      this.camera.near = near;
+      this.camera.far = far;
     }
+    this.camera.updateProjectionMatrix();
+  }
+
+  getZoom(_distanceToPojectionPlane: number): number {
+    return 1;
   }
 }
