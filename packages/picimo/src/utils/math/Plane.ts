@@ -12,10 +12,10 @@ export class Plane {
     this.type = type;
     if (type === 'xy') {
       this.threePlane = new ThreePlane();
-      this.distancePropName = 'y';
+      this.distancePropName = 'z';
     } else {
       this.threePlane = new ThreePlane(new Vector3(0, 1, 0));
-      this.distancePropName = 'z';
+      this.distancePropName = 'y';
     }
   }
 
