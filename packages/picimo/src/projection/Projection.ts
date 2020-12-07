@@ -8,9 +8,6 @@ import {IProjectionSpecs} from './IProjectionSpecs';
 import {ProjectionRules} from './ProjectionRules';
 import {calcViewSize} from './lib/calcViewSize';
 
-// const $origin = Symbol('origin');
-const $distanceProp = Symbol('distanceProp');
-
 export abstract class Projection<
   Specs extends IProjectionSpecs,
   Cam extends Camera
@@ -22,14 +19,12 @@ export abstract class Projection<
   width = 0;
   height = 0;
 
-  // TODO reduce to single prop: pixelRatio (assume that we never have none-rectangular pixels)
   pixelRatioH = 1;
   pixelRatioV = 1;
 
   camera: Cam;
 
-  // private [$origin]: Vector2Proxy;
-  private [$distanceProp]: 'x' | 'y' | 'z';
+  #distancePropName: 'x' | 'y' | 'z';
 
   constructor(plane: Plane, rules: Specs | IProjectionRule<Specs>[]) {
     this.plane = plane;
@@ -48,26 +43,6 @@ export abstract class Projection<
 
   abstract updateOrtho(width: number, height: number, specs: Specs): void;
 
-  // TODO remove!
-  /*
-  get origin(): Vector2Proxy {
-    let v = this[$origin];
-    if (!v) {
-      const {camera} = this;
-      if (camera) {
-        const {plane} = this;
-        v = new Vector2Proxy(
-          camera.position,
-          plane.type[0] as 'x',
-          plane.type[1] as 'y' | 'z',
-        );
-        this[$origin] = v;
-      }
-    }
-    return v;
-  }
-  */
-
   getZoom(_distanceToPojectionPlane: number): number {
     return 1;
   }
@@ -82,17 +57,17 @@ export abstract class Projection<
             Math.PI * -0.5,
           ),
         );
-        this[$distanceProp] = 'y';
+        this.#distancePropName = 'y';
         break;
 
       case 'xy':
       default:
-        this[$distanceProp] = 'z';
+        this.#distancePropName = 'z';
     }
   }
 
   // TODO move to -> .createCamera()
   protected applyCameraDistance(distance: number): void {
-    this.camera.position[this[$distanceProp]] = distance;
+    this.camera.position[this.#distancePropName] = distance;
   }
 }

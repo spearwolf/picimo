@@ -1,20 +1,20 @@
 import {Camera} from 'three';
 
 export interface IProjection {
+  // TODO replace with getCamera()
   camera: Camera;
 
-  update(currentWidth: number, currentHeight: number): void;
-
+  // TODO replace props with getViewRect() => {width,height,pixelRatioH,pixelRationV}
   width: number;
   height: number;
 
   pixelRatioH: number;
   pixelRatioV: number;
 
-  // origin: Vector2;
+  update(width: number, height: number): void;
 
   /**
-   * Return zoom factor (in relation to the projection plane)
+   * Calculate zoom factor (in relation to the projection plane)
    */
   getZoom(distanceToProjectionPlane: number): number;
 }
