@@ -25,8 +25,10 @@ window.display = display;
 window.projection = projection;
 window.stage = stage;
 
-projection.update(display.width, display.height);
-display.on('resize', ({width, height}) => projection.update(width, height));
+projection.updateViewRect(display.width, display.height);
+display.on('resize', ({width, height}) =>
+  projection.updateViewRect(width, height),
+);
 
 const createLayerFromImage = async (map2d, view, imageFile, viewOffset) => {
   const frame = await TileSet.load(imageFile, {basePath: './assets/'});
@@ -123,7 +125,7 @@ display.on('init', async ({width, height}) => {
   orbit.dampingFactor = 0.25;
 
   const orbitMap2d = new OrbitControls(
-    projection.camera,
+    projection.getCamera(),
     display.renderer.domElement,
   );
 
@@ -155,7 +157,7 @@ display.on('init', async ({width, height}) => {
 
     display.renderer.render(
       stage,
-      showOrbitCamera ? orbitCamera : projection.camera,
+      showOrbitCamera ? orbitCamera : projection.getCamera(),
     );
   });
 

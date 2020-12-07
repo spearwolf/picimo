@@ -57,10 +57,10 @@ const switchCamera = (camera) => {
 };
 
 display.on('resize', ({width, height}) => {
-  projection.update(width, height);
+  projection.updateViewRect(width, height);
 
   if (curCamera === null) {
-    switchCamera(projection.camera);
+    switchCamera(projection.getCamera());
   }
 
   camera3d.aspect = width / height;
@@ -99,7 +99,7 @@ async function init() {
   viewFrame = new Map2DViewFrame(map2d, 0x66ff00, 1);
   map2d.add(viewFrame);
 
-  if (curCamera === projection.camera) {
+  if (curCamera === projection.getCamera()) {
     viewFrame.visible = false;
   }
 
@@ -123,7 +123,7 @@ async function init() {
     switch (keyCode) {
       case 49: // 1
         // @ts-ignore
-        switchCamera(projection.camera);
+        switchCamera(projection.getCamera());
         break;
       case 50: // 2
         switchCamera(camera3d);

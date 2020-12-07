@@ -82,10 +82,11 @@ function resize() {
   const minSize = min(clientWidth, clientHeight);
   const size = Math.floor(pixelate > 0 ? minSize / pixelate : minSize * DPR);
 
-  projection.update(size, size);
+  projection.updateViewRect(size, size);
   if (view) {
-    view.width = projection.width;
-    view.height = projection.height;
+    const [viewWidth, viewHeight] = projection.getViewRect();
+    view.width = viewWidth;
+    view.height = viewHeight;
   }
 
   const newSizeInfo = `
@@ -358,7 +359,7 @@ Promise.all([
     if (view) {
       view.width *= multiplyByScalar;
       view.height = calcViewHeight(view.width);
-      projection.update(view.width, view.height);
+      projection.updateViewRect(view.width, view.height);
       rendererShouldRender = true;
     }
   };
@@ -380,7 +381,7 @@ Promise.all([
         break;
       case 49: // 1
         // @ts-ignore
-        curCamera = projection.camera;
+        curCamera = projection.getCamera();
         viewFrame.visible = false;
         controls.enabled = false;
         rendererShouldRender = true;
@@ -398,7 +399,7 @@ Promise.all([
       case 109: // numPad: sub
       case 189: // -
         // @ts-ignore
-        changeViewSize(curCamera === projection.camera ? 1.1 : 0.9);
+        changeViewSize(curCamera === projection.getCamera() ? 1.1 : 0.9);
         break;
     }
   });

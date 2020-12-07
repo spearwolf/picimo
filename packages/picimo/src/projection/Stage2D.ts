@@ -31,12 +31,12 @@ export class Stage2D extends Scene {
 
   constructor(projection?: IProjection) {
     super();
-    this.#projection = projection;
+    this.projection = projection;
   }
 
   set projection(projection: IProjection) {
     this.#projection = projection;
-    projection.update(this.#curProjWidth, this.#curProjHeight);
+    projection?.updateViewRect(this.#curProjWidth, this.#curProjHeight);
   }
 
   get projection(): IProjection {
@@ -44,7 +44,7 @@ export class Stage2D extends Scene {
   }
 
   get camera(): Camera {
-    return this.#projection?.camera;
+    return this.#projection?.getCamera();
   }
 
   /**
@@ -59,10 +59,13 @@ export class Stage2D extends Scene {
       if (prevWidth !== width || prevHeight !== height) {
         this.#curProjWidth = width;
         this.#curProjHeight = height;
-        projection.update(width, height);
+        projection.updateViewRect(width, height);
         if (log.DEBUG) {
           log.log(
-            `resize: ${width}x${height}, projection: ${projection.width}x${projection.height}`,
+            `resize: ${width}x${height}, projection: ${projection
+              .getViewRect()
+              .slice(0, 2)
+              .join('x')}`,
           );
         }
       }

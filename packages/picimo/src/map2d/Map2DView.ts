@@ -47,8 +47,9 @@ export class Map2DView {
     this.projection = projection;
     this.centerX = centerX;
     this.centerY = centerY;
-    this.width = projection.width;
-    this.height = projection.height;
+    const [viewWidth, viewHeight] = projection.getViewRect();
+    this.width = viewWidth;
+    this.height = viewHeight;
     this.layerTileWidth = layerTileWidth;
     this.layerTileHeight = layerTileHeight;
   }
@@ -78,12 +79,15 @@ export class Map2DView {
     this.height = height;
   }
 
-  update(
-    width: number = this.projection.width,
-    height: number = this.projection.height,
-  ): void {
-    this.width = width;
-    this.height = height;
+  update(width?: number, height?: number): void {
+    if (width == null || height == null) {
+      const [viewWidth, viewHeight] = this.projection.getViewRect();
+      this.width = width ?? viewWidth;
+      this.height = height ?? viewHeight;
+    } else {
+      this.width = width;
+      this.height = height;
+    }
 
     const renderer = this[$renderer];
     renderer.setOrigin(-this.centerX, -this.centerY);

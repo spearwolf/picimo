@@ -1,20 +1,20 @@
 import {Camera} from 'three';
 
 export interface IProjection {
-  // TODO replace with getCamera()
-  camera: Camera;
+  getCamera(): Camera;
 
-  // TODO replace props with getViewRect() => {width,height,pixelRatioH,pixelRationV}
-  width: number;
-  height: number;
+  updateViewRect(width: number, height: number): void;
 
-  pixelRatioH: number;
-  pixelRatioV: number;
-
-  update(width: number, height: number): void;
+  /**
+   * @returns [width, height, pixelRatioH, pixelRatioV]
+   */
+  getViewRect(): [number, number, number, number];
 
   /**
    * Calculate zoom factor (in relation to the projection plane)
    */
   getZoom(distanceToProjectionPlane: number): number;
+
+  // TODO setZoom(baseFactor) ?! --> NO, only for ParallaxProjection
+  // TODO add a projectionPlane (THREE.Plane with position) ??
 }

@@ -154,14 +154,19 @@ export class Map2DPanControl extends InputControl {
 
     const {panX, panY} = mergePan(Array.from(this[$pointersDown].values()));
     const {projection} = view;
-    const {pixelRatioH, pixelRatioV} = projection;
+    const [
+      viewWidth,
+      viewHeight,
+      pixelRatioH,
+      pixelRatioV,
+    ] = projection.getViewRect();
 
     view.centerX -= panX / pixelRatioH;
     view.centerY -= panY / pixelRatioV;
 
     // TODO do we really need this?
-    view.width = projection.width;
-    view.height = projection.height;
+    view.width = viewWidth;
+    view.height = viewHeight;
   }
 
   start(): void {

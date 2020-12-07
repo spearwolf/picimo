@@ -37,13 +37,13 @@ export type OrthographicConfig =
   | OrthographicProjectionRule[];
 
 export class OrthographicProjection implements IProjection {
-  camera: OrthographicCamera;
+  #camera: OrthographicCamera;
 
-  width = 0;
-  height = 0;
+  #width = 0;
+  #height = 0;
 
-  pixelRatioH = 1;
-  pixelRatioV = 1;
+  #pixelRatioH = 1;
+  #pixelRatioV = 1;
 
   readonly #plane: Plane;
   readonly #config: ProjectionRules<OrthographicProjectionRule>;
@@ -53,7 +53,15 @@ export class OrthographicProjection implements IProjection {
     this.#config = ProjectionRules.create(rules);
   }
 
-  update(actualWidth: number, actualHeight: number): void {
+  getCamera(): OrthographicCamera {
+    return this.#camera;
+  }
+
+  getViewRect(): [number, number, number, number] {
+    return [this.#width, this.#height, this.#pixelRatioH, this.#pixelRatioV];
+  }
+
+  updateViewRect(actualWidth: number, actualHeight: number): void {
     const {specs} = this.#config.findMatchingRule(actualWidth, actualHeight);
 
     const [viewWidth, viewHeight] = calcViewSize(
@@ -61,20 +69,20 @@ export class OrthographicProjection implements IProjection {
       actualHeight,
       specs,
     );
-    this.width = viewWidth;
-    this.height = viewHeight;
+    this.#width = viewWidth;
+    this.#height = viewHeight;
 
-    this.pixelRatioH = actualWidth / viewWidth;
-    this.pixelRatioV = actualHeight / viewHeight;
+    this.#pixelRatioH = actualWidth / viewWidth;
+    this.#pixelRatioV = actualHeight / viewHeight;
 
     const near = specs.near ?? DEFAULT_NEAR;
     const far = specs.far ?? DEFAULT_FAR;
     const [halfWidth, halfHeight] = [viewWidth / 2, viewHeight / 2];
 
-    if (!this.camera) {
+    if (!this.#camera) {
       // === Create camera
       // TODO create one camera for each specs ?!
-      this.camera = new OrthographicCamera(
+      this.#camera = new OrthographicCamera(
         -halfWidth,
         halfWidth,
         halfHeight,
@@ -82,19 +90,19 @@ export class OrthographicProjection implements IProjection {
         near,
         far,
       );
-      this.#plane.applyRotation(this.camera);
-      this.camera.position[this.#plane.distancePropName] =
+      this.#plane.applyRotation(this.#camera);
+      this.#camera.position[this.#plane.distancePropName] =
         specs.distance ?? DEFAULT_DISTANCE;
     } else {
       // Update camera
-      this.camera.left = -halfWidth;
-      this.camera.right = halfWidth;
-      this.camera.top = halfHeight;
-      this.camera.bottom = -halfHeight;
-      this.camera.near = near;
-      this.camera.far = far;
+      this.#camera.left = -halfWidth;
+      this.#camera.right = halfWidth;
+      this.#camera.top = halfHeight;
+      this.#camera.bottom = -halfHeight;
+      this.#camera.near = near;
+      this.#camera.far = far;
     }
-    this.camera.updateProjectionMatrix();
+    this.#camera.updateProjectionMatrix();
   }
 
   getZoom(_distanceToPojectionPlane: number): number {

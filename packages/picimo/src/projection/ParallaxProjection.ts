@@ -37,26 +37,35 @@ export type ParallaxConfig =
   | ParallaxProjectionRule[];
 
 export class ParallaxProjection implements IProjection {
-  camera: PerspectiveCamera;
+  fovy: number;
 
-  width = 0;
-  height = 0;
+  #camera: PerspectiveCamera;
 
-  pixelRatioH = 1;
-  pixelRatioV = 1;
+  #width = 0;
+  #height = 0;
+
+  #pixelRatioH = 1;
+  #pixelRatioV = 1;
 
   readonly #plane: Plane;
   readonly #config: ProjectionRules<ParallaxProjectionRule>;
 
   #initialDistance: number;
-  #fovy: number;
 
   constructor(plane: Plane, rules: ParallaxConfig) {
     this.#plane = plane;
     this.#config = ProjectionRules.create(rules);
   }
 
-  update(actualWidth: number, actualHeight: number): void {
+  getCamera(): PerspectiveCamera {
+    return this.#camera;
+  }
+
+  getViewRect(): [number, number, number, number] {
+    return [this.#width, this.#height, this.#pixelRatioH, this.#pixelRatioV];
+  }
+
+  updateViewRect(actualWidth: number, actualHeight: number): void {
     const {specs} = this.#config.findMatchingRule(actualWidth, actualHeight);
 
     const [viewWidth, viewHeight] = calcViewSize(
@@ -64,33 +73,33 @@ export class ParallaxProjection implements IProjection {
       actualHeight,
       specs,
     );
-    this.width = viewWidth;
-    this.height = viewHeight;
+    this.#width = viewWidth;
+    this.#height = viewHeight;
 
-    this.pixelRatioH = actualWidth / viewWidth;
-    this.pixelRatioV = actualHeight / viewHeight;
+    this.#pixelRatioH = actualWidth / viewWidth;
+    this.#pixelRatioV = actualHeight / viewHeight;
 
     const distance = specs.distance ?? DEFAULT_DISTANCE;
     const aspect = viewWidth / viewHeight;
     const halfHeight = viewHeight / 2;
 
-    this.#fovy = (2 * Math.atan(halfHeight / distance) * 180) / Math.PI;
+    this.fovy = (2 * Math.atan(halfHeight / distance) * 180) / Math.PI;
 
-    if (!this.camera) {
+    if (!this.#camera) {
       // === Create camera
       // TODO create one camera for each specs ?!
       const near = specs.near ?? DEFAULT_NEAR;
       const far = specs.far ?? DEFAULT_FAR;
-      this.camera = new PerspectiveCamera(this.#fovy, aspect, near, far);
-      this.#plane.applyRotation(this.camera);
-      this.camera.position[this.#plane.distancePropName] = distance;
+      this.#camera = new PerspectiveCamera(this.fovy, aspect, near, far);
+      this.#plane.applyRotation(this.#camera);
+      this.#camera.position[this.#plane.distancePropName] = distance;
       this.#initialDistance = distance;
     } else {
       // === Update camera
-      this.camera.fov = this.#fovy;
-      this.camera.aspect = aspect;
+      this.#camera.fov = this.fovy;
+      this.#camera.aspect = aspect;
     }
-    this.camera.updateProjectionMatrix();
+    this.#camera.updateProjectionMatrix();
   }
 
   getZoom(distanceToProjectionPlane: number): number {
@@ -98,7 +107,7 @@ export class ParallaxProjection implements IProjection {
     // TODO [initial=>current]distance === length(camera.position) ?!
     const d = this.#initialDistance - distanceToProjectionPlane;
     return (
-      (Math.tan(((this.#fovy / 2) * Math.PI) / 180) * d) / (this.height / 2)
+      (Math.tan(((this.fovy / 2) * Math.PI) / 180) * d) / (this.#height / 2)
     );
   }
 }
