@@ -6,31 +6,46 @@ import {
   Object3D,
 } from 'three';
 
-export type PlaneDescription = 'xy' | 'xz' | THREE_Plane;
+export type PlaneDescription = 'xy' | 'xz';
 
 /**
- * Holds a reference to `THREE.Plane` and offers some handy utility methods around it.
- *
- * The main reason why the current implementation is modeled as a class
- * and not as a loose collection of functions, is so that the user does not have to
- * deal with two different `Plane`-types (one from `THREE` and this one here)
+ * Holds a reference to `THREE.Plane` and an additional _up_ vector.
+ * Offers some handy utility methods around it.
  */
 export class Plane {
   static XY = 'xy';
   static XZ = 'xz';
 
   plane: THREE_Plane;
+  upVector: Vector3;
 
-  constructor(planeDescription: PlaneDescription) {
+  constructor(
+    planeDescription: PlaneDescription | THREE_Plane,
+    upVector?: Vector3,
+  ) {
     if (planeDescription === 'xy') {
       this.plane = new THREE_Plane(new Vector3(0, 0, 1));
+      this.upVector = upVector?.clone() ?? new Vector3(0, 1, 0);
     } else if (planeDescription === 'xz') {
       // xz
       this.plane = new THREE_Plane(new Vector3(0, 1, 0));
+      this.upVector = upVector?.clone() ?? new Vector3(0, 0, -1);
     } else {
-      // custom plane
+      // custom projection plane
       this.plane = planeDescription.clone();
+      if (upVector == null) {
+        throw new Error('upVector is mandatory for a custom projection plane');
+      }
+      this.upVector = upVector.clone();
     }
+  }
+
+  static get(plane: Plane | PlaneDescription): Plane {
+    return plane instanceof Plane ? plane : new Plane(plane);
+  }
+
+  clone(): Plane {
+    return new Plane(this.plane.clone(), this.upVector.clone());
   }
 
   applyRotation(obj3d: Object3D): void {
@@ -39,7 +54,7 @@ export class Plane {
         new Matrix4().lookAt(
           this.getPointByDistance(1),
           this.getPointByDistance(0),
-          new Vector3(0, 1, 0),
+          this.upVector,
         ),
       ),
     );

@@ -52,8 +52,11 @@ export class ParallaxProjection implements IProjection {
 
   #initialDistance: number;
 
-  constructor(planeDescription: PlaneDescription, rules: ParallaxConfig) {
-    this.#plane = new Plane(planeDescription);
+  constructor(
+    planeDescription: Plane | PlaneDescription,
+    rules: ParallaxConfig,
+  ) {
+    this.#plane = Plane.get(planeDescription);
     this.#config = ProjectionRules.create(rules);
   }
 

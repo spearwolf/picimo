@@ -48,8 +48,11 @@ export class OrthographicProjection implements IProjection {
   readonly #plane: Plane;
   readonly #config: ProjectionRules<OrthographicProjectionRule>;
 
-  constructor(planeDescription: PlaneDescription, rules: OrthographicConfig) {
-    this.#plane = new Plane(planeDescription);
+  constructor(
+    planeDescription: Plane | PlaneDescription,
+    rules: OrthographicConfig,
+  ) {
+    this.#plane = Plane.get(planeDescription);
     this.#config = ProjectionRules.create(rules);
   }
 
