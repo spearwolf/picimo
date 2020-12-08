@@ -1,6 +1,6 @@
 import {PerspectiveCamera} from 'three';
 
-import {Plane} from '../utils';
+import {Plane, PlaneDescription} from '../utils';
 
 import {IProjection} from './IProjection';
 import {IProjectionRule} from './IProjectionRule';
@@ -52,8 +52,8 @@ export class ParallaxProjection implements IProjection {
 
   #initialDistance: number;
 
-  constructor(plane: Plane, rules: ParallaxConfig) {
-    this.#plane = plane;
+  constructor(planeDescription: PlaneDescription, rules: ParallaxConfig) {
+    this.#plane = new Plane(planeDescription);
     this.#config = ProjectionRules.create(rules);
   }
 
@@ -85,7 +85,7 @@ export class ParallaxProjection implements IProjection {
 
     this.fovy = (2 * Math.atan(halfHeight / distance) * 180) / Math.PI;
 
-    if (!this.#camera) {
+    if (this.#camera == null) {
       // === Create camera
       // TODO create one camera for each specs ?!
       const near = specs.near ?? DEFAULT_NEAR;
@@ -104,7 +104,7 @@ export class ParallaxProjection implements IProjection {
 
   getZoom(distanceToProjectionPlane: number): number {
     if (distanceToProjectionPlane === 0) return 1;
-    // TODO [initial=>current]? distance to camera.position ?!
+    // TODO [initial=>current]? distance from proj->plane to camera.position ?!
     const d = this.#initialDistance - distanceToProjectionPlane;
     return (
       (Math.tan(((this.fovy / 2) * Math.PI) / 180) * d) / (this.#height / 2)

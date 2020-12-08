@@ -16,5 +16,4 @@ export interface IProjection {
   getZoom(distanceToProjectionPlane: number): number;
 
   // TODO setZoom(baseFactor) ?! --> NO, only for ParallaxProjection
-  // TODO add a projectionPlane (THREE.Plane with position) ??
 }

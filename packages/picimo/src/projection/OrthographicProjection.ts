@@ -1,6 +1,6 @@
 import {OrthographicCamera} from 'three';
 
-import {Plane} from '../utils';
+import {Plane, PlaneDescription} from '../utils';
 
 import {IProjection} from './IProjection';
 import {IProjectionRule} from './IProjectionRule';
@@ -48,8 +48,8 @@ export class OrthographicProjection implements IProjection {
   readonly #plane: Plane;
   readonly #config: ProjectionRules<OrthographicProjectionRule>;
 
-  constructor(plane: Plane, rules: OrthographicConfig) {
-    this.#plane = plane;
+  constructor(planeDescription: PlaneDescription, rules: OrthographicConfig) {
+    this.#plane = new Plane(planeDescription);
     this.#config = ProjectionRules.create(rules);
   }
 
@@ -79,7 +79,7 @@ export class OrthographicProjection implements IProjection {
     const far = specs.far ?? DEFAULT_FAR;
     const [halfWidth, halfHeight] = [viewWidth / 2, viewHeight / 2];
 
-    if (!this.#camera) {
+    if (this.#camera == null) {
       // === Create camera
       // TODO create one camera for each specs ?!
       this.#camera = new OrthographicCamera(

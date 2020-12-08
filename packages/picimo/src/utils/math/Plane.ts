@@ -1,33 +1,40 @@
 import {
-  Camera,
   Plane as THREE_Plane,
   Quaternion,
   Vector3,
   Matrix4,
+  Object3D,
 } from 'three';
 
+export type PlaneDescription = 'xy' | 'xz' | THREE_Plane;
+
+/**
+ * Holds a reference to `THREE.Plane` and offers some handy utility methods around it.
+ *
+ * The main reason why the current implementation is modeled as a class
+ * and not as a loose collection of functions, is so that the user does not have to
+ * deal with two different `Plane`-types (one from `THREE` and this one here)
+ */
 export class Plane {
-  static XY = new Plane('xy');
-  static XZ = new Plane('xz');
+  static XY = 'xy';
+  static XZ = 'xz';
 
-  position = new Vector3();
+  plane: THREE_Plane;
 
-  readonly type: 'xy' | 'xz';
-  readonly plane: THREE_Plane;
-
-  // TODO allow THREE_Plane as input
-  constructor(type: 'xy' | 'xz') {
-    this.type = type;
-    if (type === 'xy') {
+  constructor(planeDescription: PlaneDescription) {
+    if (planeDescription === 'xy') {
       this.plane = new THREE_Plane(new Vector3(0, 0, 1));
-    } else {
+    } else if (planeDescription === 'xz') {
       // xz
       this.plane = new THREE_Plane(new Vector3(0, 1, 0));
+    } else {
+      // custom plane
+      this.plane = planeDescription.clone();
     }
   }
 
-  applyRotation(camera: Camera): void {
-    camera.applyQuaternion(
+  applyRotation(obj3d: Object3D): void {
+    obj3d.applyQuaternion(
       new Quaternion().setFromRotationMatrix(
         new Matrix4().lookAt(
           this.getPointByDistance(1),
