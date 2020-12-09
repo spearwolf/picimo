@@ -2,15 +2,20 @@
 
 The underlying concept of the `Projection` is that ..
 - the view into the 3d world is projected from the camera on a 2d _projection plane_
-- the _dimension_ of the projection plane depends on both the camera and the dimension of the render buffer target
+- the _dimension_ of the projection plane depends on the dimension of the render buffer target
+
+So, that is why the `Projection` contains a _projection plane_ and a camera.
+The projection plane is defined by a `THREE.Plane` and an _up vector_ which is needed by the camera.
 
 From a technical point of view a `Projection` creates and updates a [Camera](https://threejs.org/docs/#api/en/cameras/Camera).
 In addition to the access to the `Camera` it offers some handy attributes and methods to get infos about the _projection plane_:
-- `.width: number` the width of the projection plane
-- `.height: number` the height of the projection plane
-- `.pixelRatioH: number` the horizontal ratio of the resolution in pixels of the current render buffer target to the width of the projection plane
-- `.pixelRatioV: number` the vertical ratio of the resolution in pixels of the current render buffer target to the height of the projection plane
-- `.getZoom(distanceToProjectionPlane: number) => number`
+- `projection.getViewRect(): [width, height, pixelRatioH, pixelRatioV]`
+  - `width` of the projection plane
+  - `height` of the projection plane
+  - `pixelRatioH` horizontal ratio of the resolution in pixels of the current render buffer target to the width of the projection plane
+  - `pixelRatioV` vertical ratio of the resolution in pixels of the current render buffer target to the height of the projection plane
+- `projection.getZoom(distanceToProjectionPlane: number) => number`
+- `projection.getCamera() => Camera`
 
 Note that the `Projection` is an interface and not intended to be created directly; you probably want a specialized projection class like:
 - `OrthographicProjection`
