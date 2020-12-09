@@ -9,9 +9,12 @@ import {
 export type PlaneDescription = 'xy' | 'xz';
 
 /**
- * Holds a reference to `THREE.Plane` and an additional _up_ vector.
+ * Holds a reference to a `THREE.Plane` and an additional _up_ vector.
+ *
  * Is mainly used by the `Projection` as _projection plane_.
- * The idea behind the _up_ vector is, that it is used for a camera directed to this plane.
+ *
+ * The idea behind the _up_ vector is, that it is used for a camera directed to this plane
+ * and thus also decisive for the direction of the coordinate system on the projection plane.
  */
 export class Plane {
   static XY = 'xy';
