@@ -73,6 +73,7 @@ export class DisposableContext {
     } else {
       const meta = this.#readMetaInfo(next as DisposableContextPropDef);
       const current = this.#propDefs.get(next.key);
+      let serialsIncreased = false;
       if (
         current.value != null &&
         typeof next.create === 'function' &&
@@ -84,6 +85,7 @@ export class DisposableContext {
         current.value = undefined;
         ++meta.serial;
         ++this.serial;
+        serialsIncreased = true;
         if (log.VERBOSE) {
           log.log('set: cleared previuos value because create() changed', {
             prop: next,
@@ -104,8 +106,10 @@ export class DisposableContext {
           }
         }
         current.value = next.value ?? undefined;
-        ++meta.serial;
-        ++this.serial;
+        if (!serialsIncreased) {
+          ++meta.serial;
+          ++this.serial;
+        }
       }
       copyOtherPropDefFields(next as DisposableContextPropDef, current);
     }
