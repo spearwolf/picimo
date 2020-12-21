@@ -35,7 +35,7 @@ ctx.has('foo')
 ctx.has({ key: 'foo' })
 ```
 
-_Note:_ A value is either *set* or *undefined* but never *null*! 
+_Note:_ A value is either *set* or *undefined* but never *null*!
 
 ## Meta Info
 
@@ -56,21 +56,27 @@ const { serial, refCount } = ctx.meta({ key: 'foo' })
 ```js
 ctx.serial  // starts at 1
 
-ctx.touch('foo')
-ctx.touch({ key: 'foo' })
+ctx.touch('foo')              // ctx.serial == 2
+ctx.touch({ key: 'bar' })     // ctx.serial == 3
 ```
 
-- *ctx.serial* is the fastest way to check if any value has changed
+> *ctx.serial* is the fastest way to check if any value has changed
+
+This is a shared serial. If anything changes within the entire context, the serial automatically increases.
+
 
 ### Reference Counter
 
 ```js
-ctx.incRefCount('foo')          
+ctx.incRefCount('foo')
 ctx.incRefCount({ key: 'foo' })
 
 ctx.decRefCount('foo')
 ctx.decRefCount({ key: 'foo' })
 ```
+
+> Changes of the reference counter do not affect the serial!
+
 
 ## Dispose
 
@@ -82,5 +88,5 @@ ctx.disposeAll()  // dispose all values but do not remove the property definitio
 
 ctx.disposeUnref()  // dispose all values which have a reference count of 0
 
-ctx.clear()  // dispose all values and remove all property definitions 
+ctx.clear()  // dispose all values and remove all property definitions
 ```

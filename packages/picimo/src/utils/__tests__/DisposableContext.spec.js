@@ -318,4 +318,59 @@ describe('DisposableContext', () => {
       'pho->dispose should not be called',
     );
   });
+
+  it('serial works as expected', () => {
+    const ctx = new DisposableContext();
+    assert.strictEqual(ctx.serial, 1);
+
+    ctx.set({key: 'foo', value: 'abc'});
+    assert.strictEqual(ctx.serial, 2);
+    assert.strictEqual(ctx.meta('foo').serial, 1);
+
+    ctx.set({key: 'bar', create: () => 'plah!'});
+    assert.strictEqual(ctx.serial, 3);
+    assert.strictEqual(ctx.meta('bar').serial, 1);
+
+    ctx.set({key: 'foo', value: 'def'});
+    assert.strictEqual(ctx.serial, 4);
+    assert.strictEqual(ctx.meta('foo').serial, 2);
+    assert.strictEqual(ctx.meta('bar').serial, 1);
+    assert.strictEqual(ctx.meta('xyz').serial, 0);
+
+    ctx.get('bar');
+    assert.strictEqual(ctx.serial, 5);
+    assert.strictEqual(ctx.meta('bar').serial, 2);
+    assert.strictEqual(ctx.meta('foo').serial, 2);
+    assert.strictEqual(ctx.meta('xyz').serial, 0);
+
+    assert.strictEqual(ctx.meta('bar').refCount, -1);
+
+    ctx.incRefCount('bar');
+    assert.strictEqual(ctx.meta('bar').refCount, 1);
+    assert.strictEqual(ctx.meta('bar').serial, 2);
+    assert.strictEqual(ctx.serial, 5);
+
+    ctx.incRefCount('bar');
+    ctx.incRefCount('bar');
+    assert.strictEqual(ctx.meta('bar').refCount, 3);
+    assert.strictEqual(ctx.meta('bar').serial, 2);
+    assert.strictEqual(ctx.serial, 5);
+
+    ctx.decRefCount('bar');
+    ctx.decRefCount('bar');
+    ctx.decRefCount('bar');
+    assert.strictEqual(ctx.meta('bar').refCount, 0);
+    assert.strictEqual(ctx.meta('bar').serial, 2);
+    assert.strictEqual(ctx.serial, 5);
+
+    ctx.disposeUnref();
+    assert.strictEqual(ctx.meta('bar').refCount, 0);
+    assert.strictEqual(ctx.meta('bar').serial, 3);
+    assert.strictEqual(ctx.serial, 6);
+
+    ctx.disposeUnref();
+    assert.strictEqual(ctx.meta('bar').refCount, 0);
+    assert.strictEqual(ctx.meta('bar').serial, 3);
+    assert.strictEqual(ctx.serial, 6);
+  });
 });

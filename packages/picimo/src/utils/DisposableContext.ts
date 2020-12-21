@@ -58,56 +58,56 @@ export class DisposableContext {
 
   serial = 1;
 
-  set<TValue = unknown>(prop: DisposableContextPropDef<TValue>): void {
-    if (!this.#propDefs.has(prop.key)) {
+  set<TValue = unknown>(next: DisposableContextPropDef<TValue>): void {
+    if (!this.#propDefs.has(next.key)) {
       const propDef: DisposableContextPropDef = {
-        key: prop.key,
+        key: next.key,
       };
-      propDef.value = prop.value ?? undefined;
-      copyOtherPropDefFields(prop as DisposableContextPropDef, propDef);
-      this.#propDefs.set(prop.key, propDef);
+      propDef.value = next.value ?? undefined;
+      copyOtherPropDefFields(next as DisposableContextPropDef, propDef);
+      this.#propDefs.set(next.key, propDef);
       ++this.serial;
       if (log.VERBOSE) {
         log.log('set: created property definition:', propDef);
       }
     } else {
-      const meta = this.#findOrCreateMetaInfo(prop as DisposableContextPropDef);
-      const curProp = this.#propDefs.get(prop.key);
+      const meta = this.#readMetaInfo(next as DisposableContextPropDef);
+      const current = this.#propDefs.get(next.key);
       if (
-        curProp.value != null &&
-        typeof prop.create === 'function' &&
-        curProp.create !== prop.create
+        current.value != null &&
+        typeof next.create === 'function' &&
+        current.create !== next.create
       ) {
-        if (curProp.dispose) {
-          curProp.dispose(curProp.value, this);
+        if (current.dispose) {
+          current.dispose(current.value, this);
         }
-        curProp.value = undefined;
+        current.value = undefined;
         ++meta.serial;
         ++this.serial;
         if (log.VERBOSE) {
           log.log('set: cleared previuos value because create() changed', {
-            prop,
+            prop: next,
             meta,
           });
         }
       }
-      if (prop.value != null && prop.value !== curProp.value) {
-        if (curProp.value != null) {
-          if (curProp.dispose) {
-            curProp.dispose(curProp.value, this);
+      if (next.value != null && next.value !== current.value) {
+        if (current.value != null) {
+          if (current.dispose) {
+            current.dispose(current.value, this);
             if (log.VERBOSE) {
               log.log(
                 'set: disposed previous value because a new value was explicitly set',
-                prop,
+                next,
               );
             }
           }
         }
-        curProp.value = prop.value ?? undefined;
+        current.value = next.value ?? undefined;
         ++meta.serial;
         ++this.serial;
       }
-      copyOtherPropDefFields(prop as DisposableContextPropDef, curProp);
+      copyOtherPropDefFields(next as DisposableContextPropDef, current);
     }
   }
 
