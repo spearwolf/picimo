@@ -35,7 +35,7 @@ ctx.has('foo')
 ctx.has({ key: 'foo' })
 ```
 
-_Note:_ A value is either *set* or *undefined* but never *null*!
+> A value is either *set* or *undefined* but never *null*!
 
 ## Meta Info
 
@@ -75,7 +75,7 @@ ctx.decRefCount('foo')
 ctx.decRefCount({ key: 'foo' })
 ```
 
-> Changes of the reference counter do not affect the serial!
+> Changes to the reference counter do not affect the serial!
 
 
 ## Dispose

@@ -372,5 +372,20 @@ describe('DisposableContext', () => {
     assert.strictEqual(ctx.meta('bar').refCount, 0);
     assert.strictEqual(ctx.meta('bar').serial, 3);
     assert.strictEqual(ctx.serial, 6);
+
+    ctx.touch({key: 'foo'});
+    assert.strictEqual(ctx.meta('foo').serial, 3);
+    assert.strictEqual(ctx.meta('bar').serial, 3);
+    assert.strictEqual(ctx.serial, 7);
+
+    ctx.touch('bar');
+    assert.strictEqual(ctx.meta('foo').serial, 3);
+    assert.strictEqual(ctx.meta('bar').serial, 4);
+    assert.strictEqual(ctx.serial, 8);
+
+    ctx.touch('plah!');
+    assert.strictEqual(ctx.meta('foo').serial, 3);
+    assert.strictEqual(ctx.meta('bar').serial, 4);
+    assert.strictEqual(ctx.serial, 8);
   });
 });
