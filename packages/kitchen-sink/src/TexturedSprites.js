@@ -163,9 +163,7 @@ const init = async ({display, scene}) => {
     uniforms: {
       time: timeUniform,
       tex: {
-        value: display.textureFactory.makeThreeTexture(atlas, {
-          anisotrophy: Infinity,
-        }),
+        value: display.textureFactory.create(atlas, 'nearest', 'anisotrophy'),
       },
     },
 

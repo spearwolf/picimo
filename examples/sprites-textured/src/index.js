@@ -168,9 +168,7 @@ display.on('init', async () => {
     uniforms: {
       time: timeUniform,
       tex: {
-        value: display.textureFactory.makeThreeTexture(atlas, {
-          anisotrophy: Infinity,
-        }),
+        value: display.textureFactory.create(atlas, 'nearest', 'anisotrophy'),
       },
     },
 

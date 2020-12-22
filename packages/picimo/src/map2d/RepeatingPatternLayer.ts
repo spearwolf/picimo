@@ -66,15 +66,13 @@ export class RepeatingPatternLayer implements IMap2DLayerData {
       case 'horizontal':
         if (top >= 1 || top + height < 0) {
           uints.fill(0);
+        } else if (top === 0) {
+          uints.fill(this.pattern, 0, width);
+          uints.fill(0, width);
         } else {
-          if (top === 0) {
-            uints.fill(this.pattern, 0, width);
-            uints.fill(0, width);
-          } else {
-            uints.fill(0, 0, -top * width);
-            uints.fill(this.pattern, -top * width, (-top + 1) * width);
-            uints.fill(0, (-top + 1) * width);
-          }
+          uints.fill(0, 0, -top * width);
+          uints.fill(this.pattern, -top * width, (-top + 1) * width);
+          uints.fill(0, (-top + 1) * width);
         }
         break;
       case 'none':

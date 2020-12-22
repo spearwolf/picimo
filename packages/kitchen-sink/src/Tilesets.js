@@ -31,7 +31,7 @@ makeExampleShell(
     });
 
     const material = new SimpleSpritesMaterial(
-      display.textureFactory.makeThreeTexture(tileset),
+      display.textureFactory.create(tileset),
     );
     const mesh = new SimpleSprites(material, {
       capacity: 100,

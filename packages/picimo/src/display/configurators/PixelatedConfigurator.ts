@@ -1,6 +1,6 @@
-import {WebGLRendererParameters, NearestFilter} from 'three';
+import {WebGLRendererParameters} from 'three';
 
-import {TextureFactoryOptions} from '../../textures';
+import {TextureOptionClasses} from '../../textures';
 import {Stylesheets} from '../../utils';
 
 import {Display} from '../Display';
@@ -13,7 +13,9 @@ import {IConfigurator} from '../IConfigurator';
  * Use linear filter for textures by default.
  */
 export class PixelatedConfigurator implements IConfigurator {
-  getWebGlRendererParameters(userParams?: WebGLRendererParameters) {
+  getWebGlRendererParameters(
+    userParams?: WebGLRendererParameters,
+  ): WebGLRendererParameters {
     const params: WebGLRendererParameters = {
       precision: 'highp',
       preserveDrawingBuffer: false,
@@ -27,19 +29,15 @@ export class PixelatedConfigurator implements IConfigurator {
     };
   }
 
-  getTextureFactoryOptions() {
-    const options: TextureFactoryOptions = {
-      defaultAnisotrophy: 0,
-      defaultFilter: NearestFilter,
-    };
-    return options;
+  getTextureFactoryOptions(): Array<TextureOptionClasses> {
+    return ['anisotrophy', 'nearest'];
   }
 
-  getPixelRatio() {
+  getPixelRatio(): number {
     return 1;
   }
 
-  postSetup(display: Display) {
+  postSetup(display: Display): void {
     Stylesheets.addRule(
       display.canvas,
       'picimo-pixelated',

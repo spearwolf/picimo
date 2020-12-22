@@ -1,12 +1,14 @@
-import {WebGLRendererParameters, LinearFilter} from 'three';
+import {WebGLRendererParameters} from 'three';
 
-import {TextureFactoryOptions} from '../../textures';
+import {TextureOptionClasses} from '../../textures';
 
 import {Display} from '../Display';
 import {IConfigurator} from '../IConfigurator';
 
 export class AAPerformanceConfigurator implements IConfigurator {
-  getWebGlRendererParameters(userParams?: WebGLRendererParameters) {
+  getWebGlRendererParameters(
+    userParams?: WebGLRendererParameters,
+  ): WebGLRendererParameters {
     const params: WebGLRendererParameters = {
       precision: 'highp',
       preserveDrawingBuffer: false,
@@ -21,17 +23,13 @@ export class AAPerformanceConfigurator implements IConfigurator {
     };
   }
 
-  getTextureFactoryOptions() {
-    const options: TextureFactoryOptions = {
-      defaultAnisotrophy: 0,
-      defaultFilter: LinearFilter,
-    };
-    return options;
+  getTextureFactoryOptions(): Array<TextureOptionClasses> {
+    return ['no-anisotrophy', 'linear'];
   }
 
-  getPixelRatio() {
+  getPixelRatio(): number {
     return 1;
   }
 
-  postSetup(_display: Display) {}
+  postSetup(_display: Display): void {}
 }

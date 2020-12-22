@@ -226,12 +226,10 @@ export class ChunkQuadTreeNode {
       } else {
         moreChunks = this.nodes.southWest.findChunksAt(x, y);
       }
+    } else if (y < this.originY) {
+      moreChunks = this.nodes.northEast.findChunksAt(x, y);
     } else {
-      if (y < this.originY) {
-        moreChunks = this.nodes.northEast.findChunksAt(x, y);
-      } else {
-        moreChunks = this.nodes.southEast.findChunksAt(x, y);
-      }
+      moreChunks = this.nodes.southEast.findChunksAt(x, y);
     }
     return chunks.concat(moreChunks);
   }
