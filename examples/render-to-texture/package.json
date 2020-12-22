@@ -1,0 +1,29 @@
+{
+  "name": "@picimo/render-to-texture",
+  "description": "a picimo sketch",
+  "version": "1.0.0",
+  "private": true,
+  "picimo": {
+    "title": "render-to-texture",
+    "url": "/render-to-texture/",
+    "public": "render-to-texture/public",
+    "sourceUrl": "https://github.com/spearwolf/picimo/blob/master/examples/render-to-texture/src/index.js"
+  },
+  "scripts": {
+    "start": "picimo-demo-cli start",
+    "build": "picimo-demo-cli build",
+    "clean": "rm -f public/bundle.js"
+  },
+  "license": "MIT",
+  "browserslist": [
+    "last 2 chrome versions",
+    "last 2 firefox versions"
+  ],
+  "devDependencies": {
+    "@picimo/demo-shell": "*"
+  },
+  "dependencies": {
+    "picimo": "*",
+    "three": "^0.123.0"
+  }
+}
