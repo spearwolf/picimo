@@ -60,17 +60,25 @@ export class DisposableContext {
 
   set<TValue = unknown>(next: DisposableContextPropDef<TValue>): void {
     if (!this.#propDefs.has(next.key)) {
+      // ----------------------------------------------------------------------
+      // create
+      // ----------------------------------------------------------------------
       const propDef: DisposableContextPropDef = {
         key: next.key,
       };
       propDef.value = next.value ?? undefined;
       copyOtherPropDefFields(next as DisposableContextPropDef, propDef);
+
       this.#propDefs.set(next.key, propDef);
       ++this.serial;
+
       if (log.VERBOSE) {
         log.log('set: created property definition:', propDef);
       }
     } else {
+      // ----------------------------------------------------------------------
+      // update
+      // ----------------------------------------------------------------------
       const meta = this.#readMetaInfo(next as DisposableContextPropDef);
       const current = this.#propDefs.get(next.key);
       let serialsIncreased = false;
@@ -79,13 +87,19 @@ export class DisposableContext {
         typeof next.create === 'function' &&
         current.create !== next.create
       ) {
+        // ----------------------------------------------------------------------
+        // + current value is defined
+        // + create() is defined and changes
+        // ----------------------------------------------------------------------
         if (current.dispose) {
           current.dispose(current.value, this);
         }
         current.value = undefined;
+
         ++meta.serial;
         ++this.serial;
         serialsIncreased = true;
+
         if (log.VERBOSE) {
           log.log('set: cleared previuos value because create() changed', {
             prop: next,
@@ -94,9 +108,14 @@ export class DisposableContext {
         }
       }
       if (next.value != null && next.value !== current.value) {
+        // ----------------------------------------------------------------------
+        // - value is defined
+        // - value changes
+        // ----------------------------------------------------------------------
         if (current.value != null) {
           if (current.dispose) {
             current.dispose(current.value, this);
+
             if (log.VERBOSE) {
               log.log(
                 'set: disposed previous value because a new value was explicitly set',
@@ -105,7 +124,9 @@ export class DisposableContext {
             }
           }
         }
+
         current.value = next.value ?? undefined;
+
         if (!serialsIncreased) {
           ++meta.serial;
           ++this.serial;
