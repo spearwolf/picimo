@@ -394,8 +394,8 @@ describe('DisposableContext', () => {
     assert.strictEqual(ctx.serial, 8);
 
     ctx.set({key: 'foo', value: 'def', create: () => 'xyz'});
-    assert.strictEqual(ctx.meta('foo').serial, 4);
+    assert.strictEqual(ctx.meta('foo').serial, 3);
     assert.strictEqual(ctx.meta('bar').serial, 4);
-    assert.strictEqual(ctx.serial, 9);
+    assert.strictEqual(ctx.serial, 8);
   });
 });
