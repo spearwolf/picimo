@@ -35,14 +35,16 @@ export const makePlugins = (config) => [
     extensions,
     rootMode: 'upward',
     runtimeHelpers: true,
-    exclude: 'node_modules/@babel/**',
+    exclude: [/\/core-js\//, 'node_modules/@babel/**'],
+    plugins: [['@babel/plugin-transform-runtime', {}]],
     presets: [
       [
         '@babel/preset-env',
         {
           debug: false,
           modules: false,
-          useBuiltIns: false,
+          useBuiltIns: 'usage',
+          corejs: 3,
           bugfixes: true,
           loose: true,
           ...get(config, 'babel.presets.@babel/preset-env'),
