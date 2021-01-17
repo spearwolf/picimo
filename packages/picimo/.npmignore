@@ -17,6 +17,8 @@ types/test
 coverage
 karma.conf.js
 webpack.config.js
-rollup.config.js
-rollup-mjs.config.js
 yarn-error.log
+rollup
+jest.config.ts
+src
+tsconfig.json

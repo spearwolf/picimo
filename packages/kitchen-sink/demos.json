@@ -90,6 +90,10 @@
     "url": "/Version/umd.html",
     "sourceUrl": "https://github.com/spearwolf/picimo/blob/master/packages/picimo-examples/public/Version/umd.html"
   }, {
+    "title": "mjs",
+    "url": "/Version/mjs.html",
+    "sourceUrl": "https://github.com/spearwolf/picimo/blob/master/packages/picimo-examples/public/Version/mjs.html"
+  }, {
     "title": "unpkg",
     "url": "/Version/unpkg.html",
     "sourceUrl": "https://github.com/spearwolf/picimo/blob/master/packages/picimo-examples/public/Version/unpkg.html"

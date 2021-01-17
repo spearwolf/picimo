@@ -3,3 +3,6 @@ dist
 assets
 coverage
 bundle.js
+types
+packages/picimo/picimo.js
+packages/picimo/picimo.umd.js

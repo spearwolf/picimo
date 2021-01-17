@@ -1,16 +1,28 @@
 {
+  "include": ["src"],
+
   "compilerOptions": {
-    "target": "esnext",
+    "lib": ["es2017", "dom"],
+    "target": "es2017",
+
+    "declaration": true,
+    "declarationDir": "types",
+
+    "noEmitOnError": true,
+    "noErrorTruncation": true,
+
+    "module": "esnext",
     "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
     "allowJs": true,
-    "noEmit": true,
+
     "strict": true,
     "strictNullChecks": false,
-    "isolatedModules": true,
     "esModuleInterop": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitAny": true
-  },
-  "include": ["src"]
+  }
 }

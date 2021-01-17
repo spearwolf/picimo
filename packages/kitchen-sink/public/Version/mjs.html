@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Version/umd • picimo</title>
+  <title>Version/mjs • picimo</title>
   <style>
     body {
       color: #333;
@@ -32,7 +32,7 @@
   <dl>
     <dt>/three/build/three.min.js &rarr; REVISION</dt>
     <dd id=threeRevision></dd>
-    <dt>/picimo.umd.js &rarr; VERSION</dt>
+    <dt>/picimo.mjs &rarr; VERSION</dt>
     <dd id=picimoVersion></dd>
   </dl>
   <script>
@@ -40,15 +40,19 @@
     console.log('hej ho ♥');
 
   </script>
-  <script src="/three/build/three.min.js"></script>
-  <script>
+  <script type=importmap>
+    {
+      "imports": {
+        "three": "/three/build/three.module.js"
+      }
+    }
+  </script>
+  <script type=module>
+
+    import * as THREE from 'three';
+    import * as picimo from '/picimo.mjs';
 
     document.getElementById('threeRevision').textContent = THREE.REVISION;
-
-  </script>
-  <script src="/picimo.umd.js"></script>
-  <script>
-
     document.getElementById('picimoVersion').textContent = picimo.VERSION;
 
   </script>

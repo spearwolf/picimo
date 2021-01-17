@@ -6,3 +6,10 @@ node_modules
 .size-snapshot.json
 dist/esm
 package-lock.json
+types
+picimo.js
+picimo.js.map
+picimo.mjs
+picimo.mjs.map
+picimo.umd.js
+picimo.umd.js.map

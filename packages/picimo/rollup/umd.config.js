@@ -7,9 +7,9 @@ export default {
   input: 'src/index.ts',
   output: {
     name,
-    file: path.join(outputDir, `${name}.min.js`),
+    file: path.join(outputDir, `${name}.umd.js`),
     sourcemap: true,
-    sourcemapFile: path.join(outputDir, `${name}.min.js.map`),
+    sourcemapFile: path.join(outputDir, `${name}.umd.js.map`),
     format: 'umd',
     globals: {
       three: 'THREE',

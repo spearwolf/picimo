@@ -57,7 +57,7 @@ module.exports = {
   devtool: 'eval',
   devServer: {
     port: 3000,
-    contentBase: ['./public', '../picimo/dist', '../../node_modules'],
+    contentBase: ['./public', '../picimo', '../../node_modules'],
     after: function (app) {
       examples.forEach((example) => {
         app.use(
