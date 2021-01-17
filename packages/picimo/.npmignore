@@ -22,3 +22,4 @@ rollup
 jest.config.ts
 src
 tsconfig.json
+build

@@ -1,6 +1,6 @@
 {
   "name": "picimo",
-  "version": "0.0.34",
+  "version": "0.0.35",
   "description": "A typescript library for my personal visual effects and game dev experiments based on three.js",
   "exports": "./picimo.js",
   "module": "picimo.js",
