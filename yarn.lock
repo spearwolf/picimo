@@ -8963,13 +8963,6 @@ performance-now@^2.1.0:
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
   integrity sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=
 
-picimo@*:
-  version "0.0.33"
-  resolved "https://registry.yarnpkg.com/picimo/-/picimo-0.0.33.tgz#88cc96faf7eabae31a0a1f0f098d982eab36b3dd"
-  integrity sha512-23xPhJTTPcrxzz7+Jwa9/aI718AzKgaxlc5K/ruBOlapoIGZ36ZoLUZe9GpKRSPcW8DCLlZZ3oRJXTc8ARA/2g==
-  dependencies:
-    eventize-js "^1.1.0"
-
 picomatch@^2.0.4, picomatch@^2.0.5, picomatch@^2.2.1, picomatch@^2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.2.2.tgz#21f333e9b6b8eaff02468f5146ea406d345f4dad"
