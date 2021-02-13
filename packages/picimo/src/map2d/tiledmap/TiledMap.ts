@@ -38,9 +38,6 @@ export class TiledMap {
 
   private readonly [$layerMap]: Map<string, TiledMapLayer> = new Map();
 
-  /**
-   * Assume tiled map orientation is orthogonal and infinite is true.
-   */
   constructor(data: ITiledMapData) {
     this[$data] = data;
 
@@ -55,42 +52,55 @@ export class TiledMap {
     }
   }
 
-  get orientation() {
+  get orientation(): string {
     return this[$data].orientation;
   }
-  get infinite() {
+
+  get infinite(): boolean {
     return this[$data].infinite;
   }
 
-  get tilewidth() {
+  get tilewidth(): number {
     return this[$data].tilewidth;
   }
-  get tileheight() {
+
+  get tileheight(): number {
     return this[$data].tileheight;
   }
 
-  getLayer(name: string) {
+  getLayer(name: string): TiledMapLayer {
     return this[$layerMap].get(name);
   }
+
   getAllLayers(): TiledMapLayer[] {
     return this[$data].layers.map((layer) => this.getLayer(layer.name));
   }
 
-  async loadTileSets(basePath = './') {
+  /**
+   * With the `importMap` you can optionally map the _tileset name_ to a specific url
+   * otherwise the _tileset image_ url will be used (which is the default)
+   */
+  async loadTileSets(
+    basePath = './',
+    importMap: Record<string, string>,
+  ): Promise<TileSet[]> {
     const tilesets = await Promise.all(
       this[$data].tilesets.map((tilesetInfo) =>
-        TileSet.load(tilesetInfo.image, {
-          basePath,
-          name: tilesetInfo.name,
-          tileWidth: tilesetInfo.tilewidth,
-          tileHeight: tilesetInfo.tileheight,
-          margin: tilesetInfo.margin,
-          spacing: tilesetInfo.spacing,
-          // padding: 0
-          columns: tilesetInfo.columns,
-          firstId: tilesetInfo.firstgid,
-          tileCount: tilesetInfo.tilecount,
-        }),
+        TileSet.load(
+          (importMap && importMap[tilesetInfo.name]) || tilesetInfo.image,
+          {
+            basePath,
+            name: tilesetInfo.name,
+            tileWidth: tilesetInfo.tilewidth,
+            tileHeight: tilesetInfo.tileheight,
+            margin: tilesetInfo.margin,
+            spacing: tilesetInfo.spacing,
+            // padding: 0
+            columns: tilesetInfo.columns,
+            firstId: tilesetInfo.firstgid,
+            tileCount: tilesetInfo.tilecount,
+          },
+        ),
       ),
     );
     this.tilesets.push(...tilesets.sort((a, b) => a.firstId - b.firstId));
@@ -101,7 +111,7 @@ export class TiledMap {
     map2d: Map2D,
     map2dView: Map2DView,
     options?: TiledMapCreateLayersOptions,
-  ) {
+  ): void {
     const layerNames = readOption(options, 'layers') as string[];
     const layers =
       (layerNames && layerNames.map((name) => this.getLayer(name))) ||
