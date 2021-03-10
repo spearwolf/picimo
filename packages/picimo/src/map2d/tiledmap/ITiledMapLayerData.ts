@@ -4,6 +4,7 @@ import {ITiledMapLayerChunkData} from './ITiledMapLayerChunkData';
 export interface ITiledMapLayerData {
   chunks?: ITiledMapLayerChunkData[];
   data?: string;
+  compression: string;
   encoding: string;
   height: number;
   name: string;
