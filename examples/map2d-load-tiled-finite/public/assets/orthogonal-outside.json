@@ -1,0 +1,1399 @@
+{ "compressionlevel":-1,
+ "height":31,
+ "infinite":false,
+ "layers":[
+        {
+         "compression":"zlib",
+         "data":"eJyNWE1vVVUU3Y0KQeXL4kBL7QAiEkcopQOIkjgysXagYeLIpE0HGucEtY5U6giw1Bj8AdiWxhZ+ANLS4nv+AJKW1+TVH9DklWfSR+LeeWt51j3eWxmsnPvuPR9rr7P3Pvu8hpkd7DFb8dYb24Pf89bFtOOio8\/xquNreZ\/jdccxx0nH53j+SN7F81nHOfz+BGs1vP0C706i\/1kZ+6asMWRdrvMY+4q3bzmedTwj\/FfAO\/i2HVcc10s4f+t4QzidcEw6vnd8lz0HfrAu3wOO8xj3seO44AT6cY0GONPWTx1jjp8cvzjO4Fsbfan\/luP3XXgrJ+4XtWnjeQX9VzBmErgsdud8lXdwCb94G5w3HE+g+R5ZcwDPDx114U3dY569wkW5UZ8J8I6+AfalPbT7MvhS03nMMV3CNzT+A5zHMt70obvezjrWwfue47HwynUhH3JivwG01E1Be0cs8eW3mOd9x2lwXHVsOx7AP8bgI\/PCZ5+PmwHvHceSaK76UZO2cGyg1X2mT\/eKrtOwUX2Le\/RcicbB4zfHyz6239sPs3VijtB6E33XRPPr0CbXmpwaAvrEPPyBvsDvOn4IbQ+4jkHnDaxfE52POl6zFIe0n1oH12Vw37Hq2HzH8W5o6DgE9FrRn+l7uk8rVvSZi6LvDdF4GaBPU2edS32kDjub1vWrMt6Mq8gJkc\/OwQbypq9T54jrKcfVkrl+Fq5ctwn9\/hTOZefIgPC+7VhEW9tFb+bwyL2Rw3le5DHGeVuY6xrma0DPJtpYL+Ip\/JT+TM7uT9\/k649jji3MEWMO+5gF2Py4hLOel8y\/A1bMKdRbeW8K99BkzlIOmMVe37GuL2u+y\/PYCNbbAkfGwCo0vyX9cq0nwbcsXnP\/e97xAjADzutoQ6def3+kJ2lMnCmZL\/wl\/C7y87bsTXDuOB5Bt\/\/jpbgiflBlQwe6am4bE40Dw6J1PscW9inmiJhlvvzVcaAn7fnT8JyC\/ZG77u\/SX3Nx8CPnQNRxl6xY05XZPYN5HoBv+F+VL49kccF9on9GG757q2J84KXMD0bBrw\/+EHt7yro5umqOh7IW1330FHtNvkvQdg72co8GKtajnn2ib+QJ1p7T2XMgzlDPI\/\/mv+C8Db5NWVO\/MeangB\/Bt4Y9CnuXs7FVIEfWofy9d5cxPF8mRKtNaDQLvxiy5O\/xvgMteQ5si7Y1PLdkf8owjvW+hIan7L85gnXJRLd\/wQ+ZD+jPjOU1K9ao1JLfeWatgfdtvGcNsBtnzjcu+\/+VdWMubNA6i3lNx9MWahl7qvUHa1RqS79pWjord9C\/hedFjLsKaByQ72KJLax1437GmqZX+OV2Mz+FP9y0dI52wKuFd3y\/CH3Zh1qz1f7x7n62X\/USHm3ggqU7pdYyeZ57EedTxI3W1XXw25T1a+DFs4vn\/Bz4d7BHm5bOOe4XvzdLeBBRO0YdwzszeYevjFvymYg1xiv1qFvKtx1o17QUi1EXMHYOgfsR8G9Z8hXWiZyrjvFVnFl\/kfOxjDdrmeAZeeuapTOce8x6gHquAVEv6jnL51VozH6shdbAn3VnrBvxdtCS7\/LdeUv\/NUQNxntlG7ypK\/dxHWuw\/tbzlTVIrMlaKu4Zeu4egm30I+a\/WbTL+KaaHoeWh8GX+sZ\/I1HnDlixFr9nqY5dtFQztjK+vMurbsH7hqU7J\/X+GxyXMGcNWJI9oy9csOJ\/PKEr\/0cJe96Dvjdl\/3g\/2ZZ1uH9\/Wbe2GnR8AC7Rb8dSPOV2jaIfc7ae6ew7akX\/nQRP+kC8j\/OO98vgvA95Yj\/q2v2SK7Sm5fx5rC2gT\/R\/YsXacRT7EeMXLMVdcNa4rYrByMd6B676j44+3QFn1U7jTLkzz6nGw\/I93m9Yyot5HcdzhPkrELkrYjD8mnGZc2a9pnUO+Q5mPEO\/fivG21Grtktty+8eqjM58b873tk+s25c6t0+cNdS\/cAYv1Oxfhn6pR20oh+dzvoOZ\/b+A6OnAUo=",
+         "encoding":"base64",
+         "height":31,
+         "id":1,
+         "name":"Ground",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":45,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "compression":"zlib",
+         "data":"eJzVl9lNw0AURZ8ltgr4YquAjliaYPl8DdAChCVABRB2KkBhpwK2sKQC4FgiShQ8tseMx\/aVjmRLY+fO3JnnFxGRGZiVamkBFos2EaOBQGQw6N6PFmcltcbwOx50vU+neKYztsb1OmzAZq4uo9XxbjO2wfUBHMJRjt5c6RyacAlXcF2oGzu9wCu0YCohpwcPftJqFdZ+r9uGMf1nvWjtwX7P\/UiEN5vzUiZRW5Qao9QarUHRftKI2qLUGKXWaCOjZ9\/zprYoNUapNdrM+Hsu5m0jaotSY5Rao62M73Ax70d4gme4yOgjSb01tH\/eu\/947xd8izvfS7Ds6F2+VZP8e5oVx+8rY0\/D90dN385QPnuapN7DZnxvT1O2HiCNqtYD2GaXt3aot9tQh62K9CJn+DyFEziuiOd7fN7BLdyUxDN5C7kL+Yf74I8+8fkB7\/AGQ+zdYU\/7t21YI\/IWchfyD\/dBoibwO1nwmSNvIXch\/3AfxCopE18ibyF3If9wH8TKNhOfMq2nTSZ5yXSeTOvZn0nU83Mw78Bb1P\/tUKbzlHY9k87jD20Li3Y=",
+         "encoding":"base64",
+         "height":31,
+         "id":2,
+         "name":"Fringe",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":45,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":3,
+         "name":"Objects",
+         "objects":[
+                {
+                 "height":99,
+                 "id":1,
+                 "name":"maggots",
+                 "properties":[
+                        {
+                         "name":"spawncount",
+                         "type":"int",
+                         "value":5
+                        }, 
+                        {
+                         "name":"spawntype",
+                         "type":"string",
+                         "value":"maggot"
+                        }],
+                 "rotation":0,
+                 "type":"location",
+                 "visible":true,
+                 "width":155,
+                 "x":435,
+                 "y":74
+                }, 
+                {
+                 "ellipse":true,
+                 "height":127,
+                 "id":2,
+                 "name":"discover chest",
+                 "properties":[
+                        {
+                         "name":"script",
+                         "type":"string",
+                         "value":"chest-discovered.lua"
+                        }],
+                 "rotation":0,
+                 "type":"trigger",
+                 "visible":true,
+                 "width":127,
+                 "x":201,
+                 "y":200
+                }, 
+                {
+                 "height":0,
+                 "id":3,
+                 "name":"unreachable",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":55,
+                         "y":-23
+                        }, 
+                        {
+                         "x":96,
+                         "y":-117
+                        }, 
+                        {
+                         "x":110,
+                         "y":-61
+                        }, 
+                        {
+                         "x":104,
+                         "y":-42
+                        }, 
+                        {
+                         "x":119,
+                         "y":-33
+                        }, 
+                        {
+                         "x":116,
+                         "y":6
+                        }, 
+                        {
+                         "x":104,
+                         "y":9
+                        }, 
+                        {
+                         "x":100,
+                         "y":36
+                        }, 
+                        {
+                         "x":60,
+                         "y":43
+                        }, 
+                        {
+                         "x":53,
+                         "y":58
+                        }, 
+                        {
+                         "x":43,
+                         "y":58
+                        }, 
+                        {
+                         "x":34,
+                         "y":74
+                        }, 
+                        {
+                         "x":21,
+                         "y":69
+                        }, 
+                        {
+                         "x":18,
+                         "y":90
+                        }, 
+                        {
+                         "x":0,
+                         "y":89
+                        }],
+                 "properties":[
+                        {
+                         "name":"friction",
+                         "type":"float",
+                         "value":1
+                        }, 
+                        {
+                         "name":"static",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "rotation":0,
+                 "type":"Fixture",
+                 "visible":true,
+                 "width":0,
+                 "x":2,
+                 "y":158
+                }, 
+                {
+                 "height":0,
+                 "id":5,
+                 "name":"guard",
+                 "polyline":[
+                        {
+                         "x":-3,
+                         "y":120
+                        }, 
+                        {
+                         "x":87,
+                         "y":91
+                        }, 
+                        {
+                         "x":154,
+                         "y":96
+                        }, 
+                        {
+                         "x":181,
+                         "y":16
+                        }, 
+                        {
+                         "x":273,
+                         "y":-1
+                        }],
+                 "rotation":0,
+                 "type":"NPC",
+                 "visible":true,
+                 "width":0,
+                 "x":22,
+                 "y":361
+                }, 
+                {
+                 "height":0,
+                 "id":6,
+                 "name":"guard",
+                 "polyline":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":75,
+                         "y":78
+                        }, 
+                        {
+                         "x":133,
+                         "y":82
+                        }, 
+                        {
+                         "x":176,
+                         "y":179
+                        }, 
+                        {
+                         "x":274,
+                         "y":183
+                        }],
+                 "rotation":0,
+                 "type":"NPC",
+                 "visible":true,
+                 "width":0,
+                 "x":277,
+                 "y":18
+                }, 
+                {
+                 "gid":282,
+                 "height":16,
+                 "id":10,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":413.333,
+                 "y":225.333
+                }, 
+                {
+                 "gid":282,
+                 "height":16,
+                 "id":11,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":421.667,
+                 "y":218
+                }, 
+                {
+                 "gid":2147483930,
+                 "height":16,
+                 "id":12,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":423,
+                 "y":235.333
+                }, 
+                {
+                 "gid":282,
+                 "height":16,
+                 "id":13,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":5,
+                 "y":70
+                }, 
+                {
+                 "gid":282,
+                 "height":16,
+                 "id":14,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":-3.66667,
+                 "y":80.3333
+                }, 
+                {
+                 "gid":283,
+                 "height":16,
+                 "id":16,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":538,
+                 "y":418.333
+                }, 
+                {
+                 "gid":283,
+                 "height":16,
+                 "id":17,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":407.667,
+                 "y":462
+                }, 
+                {
+                 "gid":283,
+                 "height":16,
+                 "id":18,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":417,
+                 "y":473.667
+                }, 
+                {
+                 "gid":283,
+                 "height":16,
+                 "id":19,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":402.667,
+                 "y":469
+                }, 
+                {
+                 "gid":2147483930,
+                 "height":16,
+                 "id":21,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":683.333,
+                 "y":260.5
+                }, 
+                {
+                 "gid":282,
+                 "height":16,
+                 "id":22,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":692.167,
+                 "y":269.167
+                }, 
+                {
+                 "gid":282,
+                 "height":16,
+                 "id":23,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":701.667,
+                 "y":247.833
+                }, 
+                {
+                 "gid":282,
+                 "height":16,
+                 "id":24,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":688.5,
+                 "y":242
+                }, 
+                {
+                 "gid":282,
+                 "height":16,
+                 "id":25,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":670.5,
+                 "y":263.5
+                }, 
+                {
+                 "gid":282,
+                 "height":16,
+                 "id":26,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":680,
+                 "y":284
+                }, 
+                {
+                 "gid":282,
+                 "height":16,
+                 "id":27,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":643.833,
+                 "y":283.667
+                }, 
+                {
+                 "gid":282,
+                 "height":16,
+                 "id":28,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":63.4165,
+                 "y":386
+                }, 
+                {
+                 "gid":282,
+                 "height":16,
+                 "id":29,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":9.0835,
+                 "y":356.167
+                }, 
+                {
+                 "gid":282,
+                 "height":16,
+                 "id":30,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":11.9165,
+                 "y":385
+                }, 
+                {
+                 "gid":282,
+                 "height":16,
+                 "id":31,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":54.2495,
+                 "y":378.5
+                }, 
+                {
+                 "gid":2147483930,
+                 "height":16,
+                 "id":32,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":2.4165,
+                 "y":364.5
+                }, 
+                {
+                 "gid":2147483930,
+                 "height":16,
+                 "id":33,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":41.5835,
+                 "y":382.833
+                }, 
+                {
+                 "gid":257,
+                 "height":16,
+                 "id":34,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"text",
+                         "type":"string",
+                         "value":"East West"
+                        }],
+                 "rotation":0,
+                 "type":"Sign",
+                 "visible":true,
+                 "width":16,
+                 "x":670.667,
+                 "y":87
+                }, 
+                {
+                 "height":16,
+                 "id":36,
+                 "name":"player-start",
+                 "rotation":0,
+                 "type":"Location",
+                 "visible":true,
+                 "width":16,
+                 "x":192,
+                 "y":160
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }],
+ "nextlayerid":4,
+ "nextobjectid":37,
+ "orientation":"orthogonal",
+ "properties":[
+        {
+         "name":"enemyTint",
+         "type":"color",
+         "value":"#ffa33636"
+        }],
+ "renderorder":"right-down",
+ "tiledversion":"2021.01.13",
+ "tileheight":16,
+ "tilesets":[
+        {
+         "columns":24,
+         "firstgid":1,
+         "image":"..\/..\/..\/..\/..\/..\/Program Files\/Tiled\/examples\/buch-outdoor.png",
+         "imageheight":192,
+         "imagewidth":384,
+         "margin":0,
+         "name":"outdoor",
+         "spacing":0,
+         "tilecount":288,
+         "tileheight":16,
+         "tiles":[
+                {
+                 "id":6,
+                 "probability":0.1
+                }, 
+                {
+                 "id":27,
+                 "probability":0.05
+                }, 
+                {
+                 "id":28,
+                 "probability":0.05
+                }, 
+                {
+                 "id":30,
+                 "probability":0.1
+                }, 
+                {
+                 "id":51,
+                 "probability":0.05
+                }, 
+                {
+                 "id":52,
+                 "probability":0.05
+                }, 
+                {
+                 "id":54,
+                 "probability":0.1
+                }, 
+                {
+                 "id":75,
+                 "probability":0.05
+                }, 
+                {
+                 "id":76,
+                 "probability":0.05
+                }, 
+                {
+                 "id":78,
+                 "probability":0.1
+                }, 
+                {
+                 "id":82,
+                 "probability":0.1
+                }, 
+                {
+                 "id":83,
+                 "probability":0.1
+                }, 
+                {
+                 "id":99,
+                 "probability":0.05
+                }, 
+                {
+                 "id":102,
+                 "probability":0.1
+                }, 
+                {
+                 "id":106,
+                 "probability":0.1
+                }, 
+                {
+                 "id":107,
+                 "probability":0.1
+                }, 
+                {
+                 "id":126,
+                 "probability":0.1
+                }],
+         "tilewidth":16,
+         "wangsets":[
+                {
+                 "colors":[
+                        {
+                         "color":"#fce94f",
+                         "name":"Grass",
+                         "probability":1,
+                         "tile":150
+                        }, 
+                        {
+                         "color":"#ef2929",
+                         "name":"Dirt",
+                         "probability":1,
+                         "tile":100
+                        }, 
+                        {
+                         "color":"#f57900",
+                         "name":"Dark Dirt",
+                         "probability":1,
+                         "tile":34
+                        }, 
+                        {
+                         "color":"#729fcf",
+                         "name":"Water",
+                         "probability":1,
+                         "tile":171
+                        }],
+                 "name":"Terrains",
+                 "tile":25,
+                 "type":"corner",
+                 "wangtiles":[
+                        {
+                         "tileid":0,
+                         "wangid":[0, 1, 0, 2, 0, 1, 0, 1]
+                        }, 
+                        {
+                         "tileid":1,
+                         "wangid":[0, 1, 0, 2, 0, 2, 0, 1]
+                        }, 
+                        {
+                         "tileid":2,
+                         "wangid":[0, 1, 0, 2, 0, 2, 0, 1]
+                        }, 
+                        {
+                         "tileid":3,
+                         "wangid":[0, 1, 0, 2, 0, 2, 0, 1]
+                        }, 
+                        {
+                         "tileid":4,
+                         "wangid":[0, 1, 0, 2, 0, 2, 0, 1]
+                        }, 
+                        {
+                         "tileid":5,
+                         "wangid":[0, 1, 0, 1, 0, 2, 0, 1]
+                        }, 
+                        {
+                         "tileid":6,
+                         "wangid":[0, 1, 0, 1, 0, 1, 0, 1]
+                        }, 
+                        {
+                         "tileid":7,
+                         "wangid":[0, 2, 0, 3, 0, 2, 0, 2]
+                        }, 
+                        {
+                         "tileid":8,
+                         "wangid":[0, 2, 0, 3, 0, 3, 0, 2]
+                        }, 
+                        {
+                         "tileid":9,
+                         "wangid":[0, 2, 0, 3, 0, 3, 0, 2]
+                        }, 
+                        {
+                         "tileid":10,
+                         "wangid":[0, 2, 0, 3, 0, 3, 0, 2]
+                        }, 
+                        {
+                         "tileid":11,
+                         "wangid":[0, 2, 0, 3, 0, 3, 0, 2]
+                        }, 
+                        {
+                         "tileid":12,
+                         "wangid":[0, 2, 0, 2, 0, 3, 0, 2]
+                        }, 
+                        {
+                         "tileid":13,
+                         "wangid":[0, 1, 0, 3, 0, 1, 0, 1]
+                        }, 
+                        {
+                         "tileid":14,
+                         "wangid":[0, 1, 0, 3, 0, 3, 0, 1]
+                        }, 
+                        {
+                         "tileid":15,
+                         "wangid":[0, 1, 0, 3, 0, 3, 0, 1]
+                        }, 
+                        {
+                         "tileid":16,
+                         "wangid":[0, 1, 0, 3, 0, 3, 0, 1]
+                        }, 
+                        {
+                         "tileid":17,
+                         "wangid":[0, 1, 0, 3, 0, 3, 0, 1]
+                        }, 
+                        {
+                         "tileid":18,
+                         "wangid":[0, 1, 0, 1, 0, 3, 0, 1]
+                        }, 
+                        {
+                         "tileid":24,
+                         "wangid":[0, 2, 0, 2, 0, 1, 0, 1]
+                        }, 
+                        {
+                         "tileid":25,
+                         "wangid":[0, 2, 0, 1, 0, 2, 0, 2]
+                        }, 
+                        {
+                         "tileid":26,
+                         "wangid":[0, 2, 0, 2, 0, 1, 0, 2]
+                        }, 
+                        {
+                         "tileid":27,
+                         "wangid":[0, 2, 0, 2, 0, 2, 0, 2]
+                        }, 
+                        {
+                         "tileid":28,
+                         "wangid":[0, 2, 0, 2, 0, 2, 0, 2]
+                        }, 
+                        {
+                         "tileid":29,
+                         "wangid":[0, 1, 0, 1, 0, 2, 0, 2]
+                        }, 
+                        {
+                         "tileid":30,
+                         "wangid":[0, 1, 0, 1, 0, 1, 0, 1]
+                        }, 
+                        {
+                         "tileid":31,
+                         "wangid":[0, 3, 0, 3, 0, 2, 0, 2]
+                        }, 
+                        {
+                         "tileid":32,
+                         "wangid":[0, 3, 0, 2, 0, 3, 0, 3]
+                        }, 
+                        {
+                         "tileid":33,
+                         "wangid":[0, 3, 0, 3, 0, 2, 0, 3]
+                        }, 
+                        {
+                         "tileid":34,
+                         "wangid":[0, 3, 0, 3, 0, 3, 0, 3]
+                        }, 
+                        {
+                         "tileid":35,
+                         "wangid":[0, 3, 0, 3, 0, 3, 0, 3]
+                        }, 
+                        {
+                         "tileid":36,
+                         "wangid":[0, 2, 0, 2, 0, 3, 0, 3]
+                        }, 
+                        {
+                         "tileid":37,
+                         "wangid":[0, 3, 0, 3, 0, 1, 0, 1]
+                        }, 
+                        {
+                         "tileid":38,
+                         "wangid":[0, 3, 0, 1, 0, 3, 0, 3]
+                        }, 
+                        {
+                         "tileid":39,
+                         "wangid":[0, 3, 0, 3, 0, 1, 0, 3]
+                        }, 
+                        {
+                         "tileid":40,
+                         "wangid":[0, 3, 0, 3, 0, 3, 0, 3]
+                        }, 
+                        {
+                         "tileid":42,
+                         "wangid":[0, 1, 0, 1, 0, 3, 0, 3]
+                        }, 
+                        {
+                         "tileid":48,
+                         "wangid":[0, 2, 0, 2, 0, 1, 0, 1]
+                        }, 
+                        {
+                         "tileid":49,
+                         "wangid":[0, 1, 0, 2, 0, 2, 0, 2]
+                        }, 
+                        {
+                         "tileid":50,
+                         "wangid":[0, 2, 0, 2, 0, 2, 0, 1]
+                        }, 
+                        {
+                         "tileid":51,
+                         "wangid":[0, 2, 0, 2, 0, 2, 0, 2]
+                        }, 
+                        {
+                         "tileid":52,
+                         "wangid":[0, 2, 0, 2, 0, 2, 0, 2]
+                        }, 
+                        {
+                         "tileid":53,
+                         "wangid":[0, 1, 0, 1, 0, 2, 0, 2]
+                        }, 
+                        {
+                         "tileid":54,
+                         "wangid":[0, 1, 0, 1, 0, 1, 0, 1]
+                        }, 
+                        {
+                         "tileid":55,
+                         "wangid":[0, 3, 0, 3, 0, 2, 0, 2]
+                        }, 
+                        {
+                         "tileid":56,
+                         "wangid":[0, 2, 0, 3, 0, 3, 0, 3]
+                        }, 
+                        {
+                         "tileid":57,
+                         "wangid":[0, 3, 0, 3, 0, 3, 0, 2]
+                        }, 
+                        {
+                         "tileid":58,
+                         "wangid":[0, 3, 0, 3, 0, 3, 0, 3]
+                        }, 
+                        {
+                         "tileid":59,
+                         "wangid":[0, 3, 0, 3, 0, 3, 0, 3]
+                        }, 
+                        {
+                         "tileid":60,
+                         "wangid":[0, 2, 0, 2, 0, 3, 0, 3]
+                        }, 
+                        {
+                         "tileid":61,
+                         "wangid":[0, 3, 0, 3, 0, 1, 0, 1]
+                        }, 
+                        {
+                         "tileid":62,
+                         "wangid":[0, 1, 0, 3, 0, 3, 0, 3]
+                        }, 
+                        {
+                         "tileid":63,
+                         "wangid":[0, 3, 0, 3, 0, 3, 0, 1]
+                        }, 
+                        {
+                         "tileid":66,
+                         "wangid":[0, 1, 0, 1, 0, 3, 0, 3]
+                        }, 
+                        {
+                         "tileid":72,
+                         "wangid":[0, 2, 0, 2, 0, 1, 0, 1]
+                        }, 
+                        {
+                         "tileid":73,
+                         "wangid":[0, 2, 0, 1, 0, 2, 0, 1]
+                        }, 
+                        {
+                         "tileid":74,
+                         "wangid":[0, 1, 0, 2, 0, 1, 0, 2]
+                        }, 
+                        {
+                         "tileid":75,
+                         "wangid":[0, 2, 0, 2, 0, 2, 0, 2]
+                        }, 
+                        {
+                         "tileid":76,
+                         "wangid":[0, 2, 0, 2, 0, 2, 0, 2]
+                        }, 
+                        {
+                         "tileid":77,
+                         "wangid":[0, 1, 0, 1, 0, 2, 0, 2]
+                        }, 
+                        {
+                         "tileid":78,
+                         "wangid":[0, 1, 0, 1, 0, 1, 0, 1]
+                        }, 
+                        {
+                         "tileid":79,
+                         "wangid":[0, 3, 0, 3, 0, 2, 0, 2]
+                        }, 
+                        {
+                         "tileid":80,
+                         "wangid":[0, 3, 0, 2, 0, 3, 0, 2]
+                        }, 
+                        {
+                         "tileid":81,
+                         "wangid":[0, 2, 0, 3, 0, 2, 0, 3]
+                        }, 
+                        {
+                         "tileid":82,
+                         "wangid":[0, 3, 0, 3, 0, 3, 0, 3]
+                        }, 
+                        {
+                         "tileid":83,
+                         "wangid":[0, 3, 0, 3, 0, 3, 0, 3]
+                        }, 
+                        {
+                         "tileid":84,
+                         "wangid":[0, 2, 0, 2, 0, 3, 0, 3]
+                        }, 
+                        {
+                         "tileid":85,
+                         "wangid":[0, 3, 0, 3, 0, 1, 0, 1]
+                        }, 
+                        {
+                         "tileid":86,
+                         "wangid":[0, 3, 0, 1, 0, 3, 0, 1]
+                        }, 
+                        {
+                         "tileid":87,
+                         "wangid":[0, 1, 0, 3, 0, 1, 0, 3]
+                        }, 
+                        {
+                         "tileid":90,
+                         "wangid":[0, 1, 0, 1, 0, 3, 0, 3]
+                        }, 
+                        {
+                         "tileid":96,
+                         "wangid":[0, 2, 0, 2, 0, 1, 0, 1]
+                        }, 
+                        {
+                         "tileid":97,
+                         "wangid":[0, 1, 0, 2, 0, 1, 0, 2]
+                        }, 
+                        {
+                         "tileid":98,
+                         "wangid":[0, 2, 0, 1, 0, 2, 0, 1]
+                        }, 
+                        {
+                         "tileid":99,
+                         "wangid":[0, 2, 0, 2, 0, 2, 0, 2]
+                        }, 
+                        {
+                         "tileid":100,
+                         "wangid":[0, 2, 0, 2, 0, 2, 0, 2]
+                        }, 
+                        {
+                         "tileid":101,
+                         "wangid":[0, 1, 0, 1, 0, 2, 0, 2]
+                        }, 
+                        {
+                         "tileid":102,
+                         "wangid":[0, 1, 0, 1, 0, 1, 0, 1]
+                        }, 
+                        {
+                         "tileid":103,
+                         "wangid":[0, 3, 0, 3, 0, 2, 0, 2]
+                        }, 
+                        {
+                         "tileid":104,
+                         "wangid":[0, 2, 0, 3, 0, 2, 0, 3]
+                        }, 
+                        {
+                         "tileid":105,
+                         "wangid":[0, 3, 0, 2, 0, 3, 0, 2]
+                        }, 
+                        {
+                         "tileid":106,
+                         "wangid":[0, 3, 0, 3, 0, 3, 0, 3]
+                        }, 
+                        {
+                         "tileid":107,
+                         "wangid":[0, 3, 0, 3, 0, 3, 0, 3]
+                        }, 
+                        {
+                         "tileid":108,
+                         "wangid":[0, 2, 0, 2, 0, 3, 0, 3]
+                        }, 
+                        {
+                         "tileid":109,
+                         "wangid":[0, 3, 0, 3, 0, 1, 0, 1]
+                        }, 
+                        {
+                         "tileid":110,
+                         "wangid":[0, 1, 0, 3, 0, 1, 0, 3]
+                        }, 
+                        {
+                         "tileid":111,
+                         "wangid":[0, 3, 0, 1, 0, 3, 0, 1]
+                        }, 
+                        {
+                         "tileid":114,
+                         "wangid":[0, 1, 0, 1, 0, 3, 0, 3]
+                        }, 
+                        {
+                         "tileid":120,
+                         "wangid":[0, 2, 0, 1, 0, 1, 0, 1]
+                        }, 
+                        {
+                         "tileid":121,
+                         "wangid":[0, 2, 0, 1, 0, 1, 0, 2]
+                        }, 
+                        {
+                         "tileid":122,
+                         "wangid":[0, 2, 0, 1, 0, 1, 0, 2]
+                        }, 
+                        {
+                         "tileid":123,
+                         "wangid":[0, 2, 0, 1, 0, 1, 0, 2]
+                        }, 
+                        {
+                         "tileid":124,
+                         "wangid":[0, 2, 0, 1, 0, 1, 0, 2]
+                        }, 
+                        {
+                         "tileid":125,
+                         "wangid":[0, 1, 0, 1, 0, 1, 0, 2]
+                        }, 
+                        {
+                         "tileid":126,
+                         "wangid":[0, 1, 0, 1, 0, 1, 0, 1]
+                        }, 
+                        {
+                         "tileid":127,
+                         "wangid":[0, 3, 0, 2, 0, 2, 0, 2]
+                        }, 
+                        {
+                         "tileid":128,
+                         "wangid":[0, 3, 0, 2, 0, 2, 0, 3]
+                        }, 
+                        {
+                         "tileid":129,
+                         "wangid":[0, 3, 0, 2, 0, 2, 0, 3]
+                        }, 
+                        {
+                         "tileid":130,
+                         "wangid":[0, 3, 0, 2, 0, 2, 0, 3]
+                        }, 
+                        {
+                         "tileid":131,
+                         "wangid":[0, 3, 0, 2, 0, 2, 0, 3]
+                        }, 
+                        {
+                         "tileid":132,
+                         "wangid":[0, 2, 0, 2, 0, 2, 0, 3]
+                        }, 
+                        {
+                         "tileid":133,
+                         "wangid":[0, 3, 0, 1, 0, 1, 0, 1]
+                        }, 
+                        {
+                         "tileid":134,
+                         "wangid":[0, 3, 0, 1, 0, 1, 0, 3]
+                        }, 
+                        {
+                         "tileid":135,
+                         "wangid":[0, 3, 0, 1, 0, 1, 0, 3]
+                        }, 
+                        {
+                         "tileid":136,
+                         "wangid":[0, 3, 0, 1, 0, 1, 0, 3]
+                        }, 
+                        {
+                         "tileid":137,
+                         "wangid":[0, 3, 0, 1, 0, 1, 0, 3]
+                        }, 
+                        {
+                         "tileid":138,
+                         "wangid":[0, 1, 0, 1, 0, 1, 0, 3]
+                        }, 
+                        {
+                         "tileid":144,
+                         "wangid":[0, 1, 0, 4, 0, 1, 0, 1]
+                        }, 
+                        {
+                         "tileid":145,
+                         "wangid":[0, 1, 0, 4, 0, 4, 0, 1]
+                        }, 
+                        {
+                         "tileid":146,
+                         "wangid":[0, 1, 0, 4, 0, 4, 0, 1]
+                        }, 
+                        {
+                         "tileid":147,
+                         "wangid":[0, 1, 0, 4, 0, 4, 0, 1]
+                        }, 
+                        {
+                         "tileid":148,
+                         "wangid":[0, 1, 0, 4, 0, 4, 0, 1]
+                        }, 
+                        {
+                         "tileid":149,
+                         "wangid":[0, 1, 0, 1, 0, 4, 0, 1]
+                        }, 
+                        {
+                         "tileid":150,
+                         "wangid":[0, 1, 0, 1, 0, 1, 0, 1]
+                        }, 
+                        {
+                         "tileid":151,
+                         "wangid":[0, 2, 0, 4, 0, 2, 0, 2]
+                        }, 
+                        {
+                         "tileid":152,
+                         "wangid":[0, 2, 0, 4, 0, 4, 0, 2]
+                        }, 
+                        {
+                         "tileid":153,
+                         "wangid":[0, 2, 0, 4, 0, 4, 0, 2]
+                        }, 
+                        {
+                         "tileid":154,
+                         "wangid":[0, 2, 0, 4, 0, 4, 0, 2]
+                        }, 
+                        {
+                         "tileid":155,
+                         "wangid":[0, 2, 0, 4, 0, 4, 0, 2]
+                        }, 
+                        {
+                         "tileid":156,
+                         "wangid":[0, 2, 0, 2, 0, 4, 0, 2]
+                        }, 
+                        {
+                         "tileid":168,
+                         "wangid":[0, 4, 0, 4, 0, 1, 0, 1]
+                        }, 
+                        {
+                         "tileid":169,
+                         "wangid":[0, 4, 0, 1, 0, 4, 0, 4]
+                        }, 
+                        {
+                         "tileid":170,
+                         "wangid":[0, 4, 0, 4, 0, 1, 0, 4]
+                        }, 
+                        {
+                         "tileid":171,
+                         "wangid":[0, 4, 0, 4, 0, 4, 0, 4]
+                        }, 
+                        {
+                         "tileid":172,
+                         "wangid":[0, 4, 0, 4, 0, 4, 0, 4]
+                        }, 
+                        {
+                         "tileid":173,
+                         "wangid":[0, 1, 0, 1, 0, 4, 0, 4]
+                        }, 
+                        {
+                         "tileid":174,
+                         "wangid":[0, 1, 0, 1, 0, 1, 0, 1]
+                        }, 
+                        {
+                         "tileid":175,
+                         "wangid":[0, 4, 0, 4, 0, 2, 0, 2]
+                        }, 
+                        {
+                         "tileid":176,
+                         "wangid":[0, 4, 0, 2, 0, 4, 0, 4]
+                        }, 
+                        {
+                         "tileid":177,
+                         "wangid":[0, 4, 0, 4, 0, 2, 0, 4]
+                        }, 
+                        {
+                         "tileid":178,
+                         "wangid":[0, 4, 0, 4, 0, 4, 0, 4]
+                        }, 
+                        {
+                         "tileid":179,
+                         "wangid":[0, 4, 0, 4, 0, 4, 0, 4]
+                        }, 
+                        {
+                         "tileid":180,
+                         "wangid":[0, 2, 0, 2, 0, 4, 0, 4]
+                        }, 
+                        {
+                         "tileid":192,
+                         "wangid":[0, 4, 0, 4, 0, 1, 0, 1]
+                        }, 
+                        {
+                         "tileid":193,
+                         "wangid":[0, 1, 0, 4, 0, 4, 0, 4]
+                        }, 
+                        {
+                         "tileid":194,
+                         "wangid":[0, 4, 0, 4, 0, 4, 0, 1]
+                        }, 
+                        {
+                         "tileid":195,
+                         "wangid":[0, 4, 0, 4, 0, 4, 0, 4]
+                        }, 
+                        {
+                         "tileid":196,
+                         "wangid":[0, 4, 0, 4, 0, 4, 0, 4]
+                        }, 
+                        {
+                         "tileid":197,
+                         "wangid":[0, 1, 0, 1, 0, 4, 0, 4]
+                        }, 
+                        {
+                         "tileid":198,
+                         "wangid":[0, 1, 0, 1, 0, 1, 0, 1]
+                        }, 
+                        {
+                         "tileid":199,
+                         "wangid":[0, 4, 0, 4, 0, 2, 0, 2]
+                        }, 
+                        {
+                         "tileid":200,
+                         "wangid":[0, 2, 0, 4, 0, 4, 0, 4]
+                        }, 
+                        {
+                         "tileid":201,
+                         "wangid":[0, 4, 0, 4, 0, 4, 0, 2]
+                        }, 
+                        {
+                         "tileid":202,
+                         "wangid":[0, 4, 0, 4, 0, 4, 0, 4]
+                        }, 
+                        {
+                         "tileid":203,
+                         "wangid":[0, 4, 0, 4, 0, 4, 0, 4]
+                        }, 
+                        {
+                         "tileid":204,
+                         "wangid":[0, 2, 0, 2, 0, 4, 0, 4]
+                        }, 
+                        {
+                         "tileid":216,
+                         "wangid":[0, 4, 0, 4, 0, 1, 0, 1]
+                        }, 
+                        {
+                         "tileid":217,
+                         "wangid":[0, 4, 0, 1, 0, 4, 0, 1]
+                        }, 
+                        {
+                         "tileid":218,
+                         "wangid":[0, 1, 0, 4, 0, 1, 0, 4]
+                        }, 
+                        {
+                         "tileid":219,
+                         "wangid":[0, 4, 0, 4, 0, 4, 0, 4]
+                        }, 
+                        {
+                         "tileid":220,
+                         "wangid":[0, 4, 0, 4, 0, 4, 0, 4]
+                        }, 
+                        {
+                         "tileid":221,
+                         "wangid":[0, 1, 0, 1, 0, 4, 0, 4]
+                        }, 
+                        {
+                         "tileid":222,
+                         "wangid":[0, 1, 0, 1, 0, 1, 0, 1]
+                        }, 
+                        {
+                         "tileid":223,
+                         "wangid":[0, 4, 0, 4, 0, 2, 0, 2]
+                        }, 
+                        {
+                         "tileid":224,
+                         "wangid":[0, 4, 0, 2, 0, 4, 0, 2]
+                        }, 
+                        {
+                         "tileid":225,
+                         "wangid":[0, 2, 0, 4, 0, 2, 0, 4]
+                        }, 
+                        {
+                         "tileid":226,
+                         "wangid":[0, 4, 0, 4, 0, 4, 0, 4]
+                        }, 
+                        {
+                         "tileid":227,
+                         "wangid":[0, 4, 0, 4, 0, 4, 0, 4]
+                        }, 
+                        {
+                         "tileid":228,
+                         "wangid":[0, 2, 0, 2, 0, 4, 0, 4]
+                        }, 
+                        {
+                         "tileid":240,
+                         "wangid":[0, 4, 0, 4, 0, 1, 0, 1]
+                        }, 
+                        {
+                         "tileid":241,
+                         "wangid":[0, 1, 0, 4, 0, 1, 0, 4]
+                        }, 
+                        {
+                         "tileid":242,
+                         "wangid":[0, 4, 0, 1, 0, 4, 0, 1]
+                        }, 
+                        {
+                         "tileid":243,
+                         "wangid":[0, 4, 0, 4, 0, 4, 0, 4]
+                        }, 
+                        {
+                         "tileid":244,
+                         "wangid":[0, 4, 0, 4, 0, 4, 0, 4]
+                        }, 
+                        {
+                         "tileid":245,
+                         "wangid":[0, 1, 0, 1, 0, 4, 0, 4]
+                        }, 
+                        {
+                         "tileid":246,
+                         "wangid":[0, 1, 0, 1, 0, 1, 0, 1]
+                        }, 
+                        {
+                         "tileid":247,
+                         "wangid":[0, 4, 0, 4, 0, 2, 0, 2]
+                        }, 
+                        {
+                         "tileid":248,
+                         "wangid":[0, 2, 0, 4, 0, 2, 0, 4]
+                        }, 
+                        {
+                         "tileid":249,
+                         "wangid":[0, 4, 0, 2, 0, 4, 0, 2]
+                        }, 
+                        {
+                         "tileid":250,
+                         "wangid":[0, 4, 0, 4, 0, 4, 0, 4]
+                        }, 
+                        {
+                         "tileid":251,
+                         "wangid":[0, 4, 0, 4, 0, 4, 0, 4]
+                        }, 
+                        {
+                         "tileid":252,
+                         "wangid":[0, 2, 0, 2, 0, 4, 0, 4]
+                        }, 
+                        {
+                         "tileid":264,
+                         "wangid":[0, 4, 0, 1, 0, 1, 0, 1]
+                        }, 
+                        {
+                         "tileid":265,
+                         "wangid":[0, 4, 0, 1, 0, 1, 0, 4]
+                        }, 
+                        {
+                         "tileid":266,
+                         "wangid":[0, 4, 0, 1, 0, 1, 0, 4]
+                        }, 
+                        {
+                         "tileid":267,
+                         "wangid":[0, 4, 0, 1, 0, 1, 0, 4]
+                        }, 
+                        {
+                         "tileid":268,
+                         "wangid":[0, 4, 0, 1, 0, 1, 0, 4]
+                        }, 
+                        {
+                         "tileid":269,
+                         "wangid":[0, 1, 0, 1, 0, 1, 0, 4]
+                        }, 
+                        {
+                         "tileid":270,
+                         "wangid":[0, 1, 0, 1, 0, 1, 0, 1]
+                        }, 
+                        {
+                         "tileid":271,
+                         "wangid":[0, 4, 0, 2, 0, 2, 0, 2]
+                        }, 
+                        {
+                         "tileid":272,
+                         "wangid":[0, 4, 0, 2, 0, 2, 0, 4]
+                        }, 
+                        {
+                         "tileid":273,
+                         "wangid":[0, 4, 0, 2, 0, 2, 0, 4]
+                        }, 
+                        {
+                         "tileid":274,
+                         "wangid":[0, 4, 0, 2, 0, 2, 0, 4]
+                        }, 
+                        {
+                         "tileid":275,
+                         "wangid":[0, 4, 0, 2, 0, 2, 0, 4]
+                        }, 
+                        {
+                         "tileid":276,
+                         "wangid":[0, 2, 0, 2, 0, 2, 0, 4]
+                        }]
+                }]
+        }],
+ "tilewidth":16,
+ "type":"map",
+ "version":1.4,
+ "width":45
+}
