@@ -262,8 +262,8 @@ export class DisposableContext {
 
   /**
    * Dispose a specific context value.
-   * If the value exists the dispose() callback is called and
-   * then the value is reset (set to null).
+   * Ff the value exists the dispose() callback is called and
+   * then the value is reset to undefined.
    * But this does not delete the value entry from the context: on the next get() call
    * the value will be recreated using the given create() factory callback.
    */

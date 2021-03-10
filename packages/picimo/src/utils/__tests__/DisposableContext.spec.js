@@ -106,9 +106,10 @@ describe('DisposableContext', () => {
     assert.ok(foo2);
     assert.notStrictEqual(foo0, foo1);
     assert.strictEqual(foo1, foo2);
-    assert.equal(create.callCount, 2);
+    assert.strictEqual(create.callCount, 2);
     assert.ok(create.calledWith(ctx));
     assert.ok(dispose.calledWith(foo0, ctx));
+    assert.strictEqual(ctx.serial, 5);
   });
 
   describe('multiple calls to set()', () => {
@@ -132,8 +133,8 @@ describe('DisposableContext', () => {
       assert.ok(foo0);
       assert.ok(foo1);
       assert.strictEqual(foo0, foo1);
-      assert.equal(create.callCount, 1);
-      assert.equal(dispose.callCount, 0);
+      assert.strictEqual(create.callCount, 1);
+      assert.strictEqual(dispose.callCount, 0);
     });
 
     it('should clear the value if already created and the create() function changed', () => {
@@ -158,10 +159,14 @@ describe('DisposableContext', () => {
       assert.ok(foo0);
       assert.ok(foo1);
       assert.notStrictEqual(foo0, foo1);
-      assert.equal(create0.callCount, 1);
-      assert.equal(create1.callCount, 1);
-      assert.equal(dispose0.callCount, 1, 'dispose0() should be called 1x');
-      assert.equal(
+      assert.strictEqual(create0.callCount, 1);
+      assert.strictEqual(create1.callCount, 1);
+      assert.strictEqual(
+        dispose0.callCount,
+        1,
+        'dispose0() should be called 1x',
+      );
+      assert.strictEqual(
         dispose1.callCount,
         0,
         "dispose1() shouldn't be called at all",
@@ -191,8 +196,8 @@ describe('DisposableContext', () => {
       assert.ok(foo0);
       assert.ok(foo1);
       assert.notStrictEqual(foo0, foo1);
-      assert.equal(create.callCount, 1);
-      assert.equal(dispose.callCount, 1);
+      assert.strictEqual(create.callCount, 1);
+      assert.strictEqual(dispose.callCount, 1);
       assert.ok(dispose.calledWith(foo0, ctx));
     });
   });
