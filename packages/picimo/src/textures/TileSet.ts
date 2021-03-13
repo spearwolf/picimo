@@ -24,15 +24,16 @@ export interface TileSetLoadOptions extends TileSetOptions {
   basePath?: string;
 }
 
-const $textures = Symbol('textures');
-
 export class TileSet implements ITileSet {
-  static async load(path: string, options?: TileSetLoadOptions) {
-    const basePath = readOption(options, 'basePath', './');
+  static async load(
+    path: string,
+    tilesetOptions?: TileSetLoadOptions,
+  ): Promise<ITileSet> {
+    const basePath = readOption(tilesetOptions, 'basePath', '');
     const baseTexture = new Texture(
       await new PowerOf2Image(`${basePath}${path}`).loaded,
     );
-    return new TileSet(baseTexture, options);
+    return new TileSet(baseTexture, tilesetOptions);
   }
 
   readonly name: string;
@@ -46,37 +47,36 @@ export class TileSet implements ITileSet {
   readonly tileCount: number;
   readonly lastId: number;
 
-  private readonly [$textures]: Map<number, Texture> = new Map();
+  readonly #textures: Map<number, Texture> = new Map();
 
-  constructor(baseTexture: Texture, options?: TileSetOptions) {
-    this.name = readOption(options, 'name', 'TileSet') as string;
+  constructor(baseTexture: Texture, tilesetOptions?: TileSetOptions) {
+    this.name = readOption(tilesetOptions, 'name', 'TileSet') as string;
 
     this.baseTexture = baseTexture;
 
     this.tileWidth = readOption(
-      options,
+      tilesetOptions,
       'tileWidth',
       baseTexture.width,
     ) as number;
+
     this.tileHeight = readOption(
-      options,
+      tilesetOptions,
       'tileHeight',
       baseTexture.height,
     ) as number;
 
-    this.firstId = readOption(options, 'firstId', 1) as number;
+    this.firstId = readOption(tilesetOptions, 'firstId', 1) as number;
 
-    const limitTileCount = readOption(options, 'tileCount', 0) as number;
-    const margin = readOption(options, 'margin', 0) as number;
-    const padding = readOption(options, 'padding', 0) as number;
-    const spacing = readOption(options, 'spacing', 0) as number;
+    const limitTileCount = readOption(tilesetOptions, 'tileCount', 0) as number;
+    const margin = readOption(tilesetOptions, 'margin', 0) as number;
+    const padding = readOption(tilesetOptions, 'padding', 0) as number;
+    const spacing = readOption(tilesetOptions, 'spacing', 0) as number;
 
     const {width: baseWidth, height: baseHeight} = baseTexture.root;
 
     const tileOuterWidth = this.tileWidth + (padding << 1);
     const tileOuterHeight = this.tileHeight + (padding << 1);
-
-    const textures = this[$textures];
 
     let x = margin;
     let y = margin;
@@ -84,7 +84,7 @@ export class TileSet implements ITileSet {
     let tileCount = 0;
 
     while (1) {
-      textures.set(
+      this.#textures.set(
         curId,
         new Texture(
           baseTexture,
@@ -119,26 +119,26 @@ export class TileSet implements ITileSet {
     this.lastId = curId;
   }
 
-  getTextureSource() {
+  getTextureSource(): Texture {
     return this.baseTexture;
   }
 
-  hasTextureId(id: number) {
+  hasTextureId(id: number): boolean {
     return id >= this.firstId && id <= this.lastId;
   }
 
   getTextureById(id: number): Texture {
     if (id >= this.firstId && id <= this.lastId) {
-      return this[$textures].get(id) || null;
+      return this.#textures.get(id) ?? null;
     }
     return null;
   }
 
-  randomFrames(count: number) {
+  randomFrames(count: number): Texture[] {
     const frames: Texture[] = [];
     for (let i = 0; i < count; i++) {
       frames.push(
-        this[$textures].get(
+        this.#textures.get(
           this.firstId + Math.floor(Math.random() * this.tileCount),
         ),
       );

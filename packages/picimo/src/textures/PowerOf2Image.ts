@@ -42,6 +42,7 @@ export class PowerOf2Image {
     let waitUntilLoading = false;
     if (typeof from === 'string') {
       imgEl = new Image();
+      imgEl.crossOrigin = 'anonymous';
       imgEl.src = from;
       waitUntilLoading = true;
     } else {
@@ -69,25 +70,25 @@ export class PowerOf2Image {
   /**
    * `true` if the image has loaded and possible converted
    */
-  get isLoaded() {
+  get isLoaded(): boolean {
     return this.imgEl != null;
   }
 
   /**
    * Image width or `0` if image loading is not finished
    */
-  get width() {
+  get width(): number {
     return (this.imgEl && this.imgEl.width) || 0;
   }
 
   /**
    * Image height or `0` if image loading is not finished
    */
-  get height() {
+  get height(): number {
     return (this.imgEl && this.imgEl.height) || 0;
   }
 
-  setImgEl(imgEl: ImageSource) {
+  setImgEl(imgEl: ImageSource): void {
     this.imgEl =
       isPowerOf2(imgEl.width) && isPowerOf2(imgEl.height)
         ? imgEl
