@@ -1,26 +1,12 @@
 import {Scene, Camera} from 'three';
 
-import {Display} from '../display';
+import {IProjection} from '../projection';
 import {Logger} from '../utils';
 
-import {IProjection} from '.';
+import {DisplayOnFrameOptions, DisplayOnResizeOptions} from './Display';
 
 const log = new Logger('picimo.Stage2D');
 
-/**
- * A `Stage2D` is a `THREE.Scene` with a `Projection`.
- *
- * This helper class does not bring new features, but simplifies the handling of
- * a `THREE.Scene`, `THREE.Camera`, `Projection` and `Display`.
- *
- * It offers the `resize()` and `frame()` methods, with which you can easily connect to
- * the 'Display' class: `display.on(stage2d)`
- *
- * The `resize()` method updates the projection and should be called whenever
- * the 2d dimension of the render target changes.
- *
- * The `frame()` method renders the scene with the camera from the projection.
- */
 export class Stage2D {
   scene: Scene;
 
@@ -57,11 +43,7 @@ export class Stage2D {
     return this.#currentHeight;
   }
 
-  /**
-   * Update the projection.
-   * Should be called whenever the 2d dimension of the render target changes.
-   */
-  resize({width, height}: {width: number; height: number}): void {
+  resize({width, height}: DisplayOnResizeOptions): void {
     const prevWidth = this.#currentWidth;
     const prevHeight = this.#currentHeight;
     if (prevWidth !== width || prevHeight !== height) {
@@ -83,7 +65,7 @@ export class Stage2D {
    * Render the scene with the camera from the projection.
    * But does not do anything, if `renderOnFrame` is `false`.
    */
-  frame({display}: {display: Display}): void {
+  frame({display}: DisplayOnFrameOptions): void {
     if (this.camera && this.renderOnFrame) {
       display.renderer.render(this.scene, this.camera);
     }

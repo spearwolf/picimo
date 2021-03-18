@@ -7,14 +7,17 @@ import {
   BitmapText2D,
   Plane,
   DisplayOnInitOptions,
-  Stage2D,
+  PostProcessingStage2D,
 } from 'picimo';
+import {GlitchPass} from 'three/examples/jsm/postprocessing/GlitchPass';
+import {ShaderPass} from 'three/examples/jsm/postprocessing/ShaderPass';
+import {RGBShiftShader} from 'three/examples/jsm/shaders/RGBShiftShader';
 
 const display = new Display(document.getElementById('picimo'), {
   mode: DisplayMode.AAQuality,
   resizeStrategy: 'fullscreen',
   alpha: true,
-  stage: new Stage2D(
+  stage: new PostProcessingStage2D(
     new ParallaxProjection(Plane.XY, {
       width: 2000,
       height: 2000,
@@ -39,6 +42,12 @@ display.on('init', async ({stage}: DisplayOnInitOptions) => {
   // c.originY = 0;
 
   stage.scene.add(text);
+
+  const shaderPass = new ShaderPass(RGBShiftShader);
+  shaderPass.uniforms.amount.value = 0.0015;
+
+  stage.composer.addPass(shaderPass);
+  stage.composer.addPass(new GlitchPass());
 
   console.log('display', display);
   console.log('projection', stage.projection);

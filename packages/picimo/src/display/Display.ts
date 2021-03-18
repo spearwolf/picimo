@@ -2,11 +2,11 @@ import {Eventize} from 'eventize-js';
 
 import {WebGLRendererParameters, WebGLRenderer, Color} from 'three';
 
-import {Stage2D} from '../projection';
 import {TextureFactory} from '../textures';
 import {readOption, unpick, Stylesheets} from '../utils';
 
 import {IConfigurator} from './IConfigurator';
+import {Stage2D} from './Stage2D';
 
 import {AAPerformanceConfigurator} from './configurators/AAPerformanceConfigurator';
 import {AAQualityConfigurator} from './configurators/AAQualityConfigurator';
