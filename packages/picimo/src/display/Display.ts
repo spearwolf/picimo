@@ -28,6 +28,7 @@ const RESIZE = 'resize';
 const DISPLAY_MODE_ATTR = 'display-mode';
 const RESIZE_STRATEGY_ATTR = 'resize-strategy';
 const PIXEL_RATIO_ATTR = 'pixel-ratio';
+const GO_FULLSCREEN_ON_DEVICE_ROTATE = 'go-fullscreen-on-device-rotate';
 
 export type DisplayGetSizeFn = (
   display: Display,
@@ -50,6 +51,8 @@ export interface DisplayOptions {
 
   mode?: DisplayMode;
 
+  goFullscreenOnDeviceRotate?: boolean;
+
   /**
    * Set a custom [[IConfigurator]]. Will override the configurator from the `mode` option.
    */
@@ -63,9 +66,12 @@ export interface DisplayOptions {
 
   clearColor?: number | string | THREE.Color;
 
+  autoClear?: boolean;
+
   stage?: Stage2D;
 }
 
+// TODO remove me - find a better solution!
 const filterWebGLRendererParameters = unpick<WebGLRendererParameters>([
   'resizeStrategy',
   'pixelate',
@@ -73,6 +79,8 @@ const filterWebGLRendererParameters = unpick<WebGLRendererParameters>([
   'scene',
   'canvas',
   'stage',
+  'goFullscreenOnDeviceRotate',
+  'autoClear',
 ]);
 
 const createConfigurator = (mode: DisplayMode) => {
@@ -157,6 +165,10 @@ export class Display extends Eventize {
 
   pause = false;
 
+  autoClear = true;
+
+  goFullscreenOnDeviceRotate = false;
+
   private [$lockPixelRatio] = 0;
   private [$lastPixelRatio] = 0;
 
@@ -205,6 +217,18 @@ export class Display extends Eventize {
       ),
     );
 
+    this.autoClear = readOption<DisplayOptions>(
+      options,
+      'autoClear',
+      true,
+    ) as boolean;
+
+    this.goFullscreenOnDeviceRotate = readOption<DisplayOptions>(
+      options,
+      'goFullscreenOnDeviceRotate',
+      getAttribute(el, GO_FULLSCREEN_ON_DEVICE_ROTATE) ?? false,
+    ) as boolean;
+
     this[$lockPixelRatio] =
       isNaN(pixelRatio) || pixelRatio < 1
         ? configurator.getPixelRatio()
@@ -226,30 +250,14 @@ export class Display extends Eventize {
     this.renderer = new WebGLRenderer(renderParams);
 
     const {domElement} = this.renderer;
-    Stylesheets.addRule(domElement, 'picimo', `touch-action: none;`);
+    Stylesheets.addRule(domElement, 'picimo', 'touch-action: none;');
     domElement.setAttribute('touch-action', 'none'); // => PEP polyfill
 
     if (resizeRefEl && resizeRefEl.tagName !== 'CANVAS') {
-      Stylesheets.addRule(
-        resizeRefEl,
-        'picimo-container',
-        `
-        font-size: 0;
-      `,
-      );
+      Stylesheets.addRule(resizeRefEl, 'picimo-container', 'font-size: 0;');
     }
 
     const containerOrCanvasEl = resizeRefEl || domElement;
-
-    /*
-    if (this.resizeStrategy === 'fullscreen') {
-      Stylesheets.addRule(containerOrCanvasEl, 'picimo-fullscreen', `
-        position: fixed;
-        top: 0;
-        left: 0;
-      `);
-    }
-    */
 
     this.textureFactory = new TextureFactory(
       this.renderer,
@@ -282,8 +290,10 @@ export class Display extends Eventize {
       ) {
         screen.orientation.onchange = () => {
           if (screen.orientation.type.indexOf('landscape') !== -1) {
-            if (typeof containerOrCanvasEl.requestFullscreen === 'function') {
-              containerOrCanvasEl.requestFullscreen();
+            if (this.goFullscreenOnDeviceRotate) {
+              if (typeof containerOrCanvasEl.requestFullscreen === 'function') {
+                containerOrCanvasEl.requestFullscreen();
+              }
             }
           } else if (screen.orientation.type.indexOf('portrait') !== -1) {
             if (typeof document.exitFullscreen === 'function') {
@@ -378,10 +388,12 @@ export class Display extends Eventize {
     this.resize();
 
     if (this.frameNo === 0) {
-      this[$emitResize](); // always call resize before render the first frame!
+      this[$emitResize](); // always emit resize event before render the first frame!
     }
 
-    this.renderer.clear(); // TODO add autoClear option?
+    if (this.autoClear) {
+      this.renderer.clear();
+    }
 
     this[$emitFrame]();
 
@@ -412,18 +424,10 @@ export class Display extends Eventize {
     } as DisplayOnInitOptions);
   }
 
-  /**
-   * 1. emit 'resize' event
-   * 2. resize stage projection
-   */
   private [$emitResize]() {
     this.emit(RESIZE, this[$getEventOptions]() as DisplayOnResizeOptions);
   }
 
-  /**
-   * 1. emit 'frame' event
-   * 2. render stage (if exists)
-   */
   private [$emitFrame]() {
     this.emit(FRAME, {
       ...this[$getEventOptions](),

@@ -24,6 +24,6 @@
   },
   "dependencies": {
     "picimo": "*",
-    "three": "^0.124.0"
+    "three": "^0.126.1"
   }
 }

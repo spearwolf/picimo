@@ -28,7 +28,7 @@ export class TileSet implements ITileSet {
   static async load(
     path: string,
     tilesetOptions?: TileSetLoadOptions,
-  ): Promise<ITileSet> {
+  ): Promise<TileSet> {
     const basePath = readOption(tilesetOptions, 'basePath', '');
     const baseTexture = new Texture(
       await new PowerOf2Image(`${basePath}${path}`).loaded,
