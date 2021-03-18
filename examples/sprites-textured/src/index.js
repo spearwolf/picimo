@@ -187,7 +187,7 @@ display.on('init', async () => {
   const spriteGroupGeometry = new SpriteGroupBufferGeometry(spriteGroup);
   const mesh = new SpriteGroupMesh(spriteGroupGeometry, material);
 
-  stage.add(mesh);
+  stage.scene.add(mesh);
 
   // ----------------------------------------------------------------------------------
   //

@@ -156,7 +156,7 @@ display.on('init', async ({width, height}) => {
     }
 
     display.renderer.render(
-      stage,
+      stage.scene,
       showOrbitCamera ? orbitCamera : projection.getCamera(),
     );
   });
@@ -291,9 +291,9 @@ display.on('init', async ({width, height}) => {
   makeLayerUi('.viewOffset256x', layer256x);
   makeLayerUi('.viewOffset16x', layer16x);
 
-  stage.add(map2d);
-  stage.add(lines.object3d);
-  stage.add(staticLines.object3d);
+  stage.scene.add(map2d);
+  stage.scene.add(lines.object3d);
+  stage.scene.add(staticLines.object3d);
 });
 
 display.start();

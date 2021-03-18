@@ -38,7 +38,7 @@ display.on('init', async ({stage}: DisplayOnInitOptions) => {
   // c.originX = 0;
   // c.originY = 0;
 
-  stage.add(text);
+  stage.scene.add(text);
 
   console.log('display', display);
   console.log('projection', stage.projection);

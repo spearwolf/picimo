@@ -21,22 +21,24 @@ const log = new Logger('picimo.Stage2D');
  *
  * The `frame()` method renders the scene with the camera from the projection.
  */
-export class Stage2D extends Scene {
+export class Stage2D {
+  scene: Scene;
+
   renderOnFrame = true;
 
   #projection: IProjection;
 
-  #curProjWidth = 0;
-  #curProjHeight = 0;
+  #currentWidth = 0;
+  #currentHeight = 0;
 
-  constructor(projection?: IProjection) {
-    super();
+  constructor(projection?: IProjection, scene?: Scene) {
     this.projection = projection;
+    this.scene = scene ?? new Scene();
   }
 
   set projection(projection: IProjection) {
     this.#projection = projection;
-    projection?.updateViewRect(this.#curProjWidth, this.#curProjHeight);
+    projection?.updateViewRect(this.#currentWidth, this.#currentHeight);
   }
 
   get projection(): IProjection {
@@ -47,27 +49,32 @@ export class Stage2D extends Scene {
     return this.#projection?.getCamera();
   }
 
+  get width(): number {
+    return this.#currentWidth;
+  }
+
+  get height(): number {
+    return this.#currentHeight;
+  }
+
   /**
    * Update the projection.
    * Should be called whenever the 2d dimension of the render target changes.
    */
   resize({width, height}: {width: number; height: number}): void {
-    const {projection} = this;
-    if (projection) {
-      const prevWidth = this.#curProjWidth;
-      const prevHeight = this.#curProjHeight;
-      if (prevWidth !== width || prevHeight !== height) {
-        this.#curProjWidth = width;
-        this.#curProjHeight = height;
-        projection.updateViewRect(width, height);
-        if (log.DEBUG) {
-          log.log(
-            `resize: ${width}x${height}, projection: ${projection
-              .getViewRect()
-              .slice(0, 2)
-              .join('x')}`,
-          );
-        }
+    const prevWidth = this.#currentWidth;
+    const prevHeight = this.#currentHeight;
+    if (prevWidth !== width || prevHeight !== height) {
+      this.#currentWidth = width;
+      this.#currentHeight = height;
+      this.projection?.updateViewRect(width, height);
+      if (log.DEBUG) {
+        log.log(
+          `resize: ${width}x${height}, projection: ${this.projection
+            ?.getViewRect()
+            .slice(0, 2)
+            .join('x')}`,
+        );
       }
     }
   }
@@ -77,9 +84,8 @@ export class Stage2D extends Scene {
    * But does not do anything, if `renderOnFrame` is `false`.
    */
   frame({display}: {display: Display}): void {
-    const {camera, renderOnFrame} = this;
-    if (camera && renderOnFrame) {
-      display.renderer.render(this, camera);
+    if (this.camera && this.renderOnFrame) {
+      display.renderer.render(this.scene, this.camera);
     }
   }
 }

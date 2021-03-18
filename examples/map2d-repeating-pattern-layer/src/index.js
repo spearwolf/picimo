@@ -54,7 +54,7 @@ display.on('init', async ({width, height}) => {
 
   const panControl = new Map2DPanControl(view, projection);
 
-  stage.add(map2d);
+  stage.scene.add(map2d);
 
   display.on('frame', ({deltaTime}) => {
     panControl.update(deltaTime);
