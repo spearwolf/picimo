@@ -30,6 +30,8 @@ display.start();
 
 ## Options
 
+_All options have precedence over the attributes_
+
 | option | description |
 |-|-|
 | resizeStrategy | _HTMLElement_<sub>default</sub> \| `"window"` \| `"fullscreen"` \| `(display) => {width, height}` |
