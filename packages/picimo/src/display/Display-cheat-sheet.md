@@ -22,22 +22,24 @@ display.start();
 
 | attribute | description |
 |-|-|
-| resize-strategy | `"window"` \| `"fullscreen"` &rarr; both are synonyms for the same thing: read size from _window.innerWidth_ and _window.innerHeight_ properties |
+| resize-strategy | `"window"` \| `"fullscreen"` &rarr; both are synonyms for the same thing: read size from _window.innerWidth_ and _window.innerHeight_ properties (default is the current _HTMLElement_) |
 | display-mode | `"pixelated"`<sub>default</sub> \| `"antialias-quality"` \| `"antialias-performance"` |
-| pixel-ratio | _number_ |
-| go-fullscreen-on-device-rotate | _boolean_ (experimental feature) |
+| pixel-ratio | _number_ (default is _window.devicePixelRatio_) |
+| go-fullscreen-on-device-rotate | _boolean_ (experimental feature &mdash; default is `false`) |
 
 
 ## Options
 
 | option | description |
 |-|-|
-| resizeStrategy | _HTMLElement_ \| `"window"` \| `"fullscreen"` \| `(display) => {width, height}` |
+| resizeStrategy | _HTMLElement_<sub>default</sub> \| `"window"` \| `"fullscreen"` \| `(display) => {width, height}` |
 | mode | `"pixelated"`<sub>default</sub> \| `"antialias-quality"` \| `"antialias-performance"` |
-| pixel-ratio | _number_ \| `undefined`<sub>window.devicePixelRatio</sub> |
-| go-fullscreen-on-device-rotate | _boolean_ (experimental feature) |
+| configurator | _IConfigurator_ instance &mdash; has precedence over the _mode_ option/attribute |
+| pixel-ratio | _number_ \| `undefined` &mdash; default is _window.devicePixelRatio_ |
 | clearColor |  _number_ \| _string_ \| _THREE.Color_ |
 | autoClear | _boolean_ (defines whether the renderer should automatically clear its output before rendering a frame - default is `true`) |
+| go-fullscreen-on-device-rotate | _boolean_ (experimental feature &mdash; default is `false`) |
+| stage | _Stage2D_ &mdash; the stage is automatically connected to all display events |
 
 ## Properties
 

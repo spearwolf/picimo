@@ -170,11 +170,11 @@ export class Display extends Eventize {
         ? configurator.getPixelRatio()
         : pixelRatio;
 
-    this.resizeStrategy = readOption<DisplayOptions>(
-      options,
+    this.resizeStrategy = getOptionOrAttribute<DisplayResizeStrategy>(
       'resizeStrategy',
-      readAttribute(el, ATTR_RESIZE_STRATEGY) || resizeRefEl,
-    ) as DisplayResizeStrategy;
+      ATTR_RESIZE_STRATEGY,
+      resizeRefEl,
+    );
 
     this.#renderParams = {
       ...configurator.getWebGlRendererParameters(
