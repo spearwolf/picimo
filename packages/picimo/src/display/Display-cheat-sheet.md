@@ -22,10 +22,10 @@ display.start();
 
 | attribute | description |
 |-|-|
-| resize-strategy | `"window"` \| `"fullscreen"` |
-| display-mode | `"pixelated"` \| `"antialias-quality"` \| `"antialias-performance"` |
+| resize-strategy | `"window"` \| `"fullscreen"` &rarr; both are synonyms for the same thing: read size from _window.innerWidth_ and _window.innerHeight_ properties |
+| display-mode | `"pixelated"`<sub>default</sub> \| `"antialias-quality"` \| `"antialias-performance"` |
 | pixel-ratio | _number_ |
-| go-fullscreen-on-device-rotate | _boolean_ |
+| go-fullscreen-on-device-rotate | _boolean_ (experimental feature) |
 
 
 ## Options
@@ -33,11 +33,11 @@ display.start();
 | option | description |
 |-|-|
 | resizeStrategy | _HTMLElement_ \| `"window"` \| `"fullscreen"` \| `(display) => {width, height}` |
-| mode | `"pixelated"` \| `"antialias-quality"` \| `"antialias-performance"` |
-| pixel-ratio | _number_ \| `undefined` |
-| go-fullscreen-on-device-rotate | _boolean_ |
+| mode | `"pixelated"`<sub>default</sub> \| `"antialias-quality"` \| `"antialias-performance"` |
+| pixel-ratio | _number_ \| `undefined`<sub>window.devicePixelRatio</sub> |
+| go-fullscreen-on-device-rotate | _boolean_ (experimental feature) |
 | clearColor |  _number_ \| _string_ \| _THREE.Color_ |
-| autoClear | _boolean_ |
+| autoClear | _boolean_ (defines whether the renderer should automatically clear its output before rendering a frame - default is `true`) |
 
 ## Properties
 
@@ -53,9 +53,9 @@ display.start();
 | lastNow | _number_ (the time in seconds from the last animation frame) |
 | deltaTime | _number_ (the time in seconds that has elapsed since the last animation frame) |
 | frameNo | _number_ (current frame number &mdash; starts at 0) |
-| autoClear | _boolean_ (defines whether the renderer should automatically clear its output before rendering a frame) |
+| autoClear | _boolean_ (defines whether the renderer should automatically clear its output before rendering a frame - default is `true`) |
 | clearColor<sub>readonly</sub> | _THREE.Color_ |
-| goFullscreenOnDeviceRotate  | _boolean_ |
+| goFullscreenOnDeviceRotate  | _boolean_ (experimental feature) |
 | stage | _Stage2D_ \| `undefined` &mdash; _IMPORTANT_: the stage is automatically connected to all display events |
 | pixelRatio<sub>readonly</sub> | _number_ |
 | pause | _boolean_ |
@@ -74,6 +74,6 @@ display.start();
 
 | event | arg | description |
 |-|-|-|
-| init | `{display, width, height, stage}` | is called _every time_ after start() |
-| resize | `{display, width, height, stage}` | is called _every time_ the canvas size changes &mdash; and initially before the first _frame_ event |
-| frame | `{display, width, height, stage, now, deltaTime, frameNo}` | called on every animation frame, after clearing the render buffer &mdash; unless _autoClear_ is disabled or _pause_ is activated |
+| init | _IDisplayOnInitParameters_ `{display, width, height, stage}` | is called _every time_ after start() |
+| resize | _IDisplayOnResizeParameters_ `{display, width, height, stage}` | is called _every time_ the canvas size changes &mdash; and initially before the first _frame_ event |
+| frame | _IDisplayOnFrameParameters_ `{display, width, height, stage, now, deltaTime, frameNo}` | called on every animation frame, after clearing the render buffer &mdash; unless _autoClear_ is disabled or _pause_ is activated |
