@@ -76,7 +76,7 @@ _All options have precedence over the attributes_
 
 ## Events
 
-| event | arg | description |
+| event | data | description |
 |-|-|-|
 | init | _IDisplayOnInitParameters_ `{display, width, height, stage}` | is called _every time_ after start() |
 | resize | _IDisplayOnResizeParameters_ `{display, width, height, stage}` | is called _every time_ the canvas size changes &mdash; and initially before the first _frame_ event |
