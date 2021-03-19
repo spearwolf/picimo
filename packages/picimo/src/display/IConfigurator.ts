@@ -9,9 +9,9 @@ export interface IConfigurator {
     userParams?: WebGLRendererParameters,
   ): WebGLRendererParameters;
 
-  getTextureFactoryOptions(): Array<TextureOptionClasses>;
-
   getPixelRatio(): number;
+
+  getTextureFactoryOptions(): Array<TextureOptionClasses>;
 
   postSetup(display: Display): void;
 }

@@ -2,20 +2,22 @@ import {WebGLRenderer} from 'three';
 import {EffectComposer} from 'three/examples/jsm/postprocessing/EffectComposer';
 import {RenderPass} from 'three/examples/jsm/postprocessing/RenderPass';
 
-import {DisplayOnFrameOptions, DisplayOnResizeOptions} from './Display';
 import {Stage2D} from './Stage2D';
+import {IDisplayOnFrameParamters, IDisplayOnResizeParameters} from './types';
 
 export class PostProcessingStage2D extends Stage2D {
   composer: EffectComposer;
 
-  resize(params: DisplayOnResizeOptions): void {
+  resize(params: IDisplayOnResizeParameters): void {
     super.resize(params);
 
-    const composer = this.getComposer(params.display.renderer);
+    const {display} = params;
+    const composer = this.getComposer(display.renderer);
     composer.setSize(params.width, params.height);
+    composer.setPixelRatio(display.pixelRatio);
   }
 
-  frame({display}: DisplayOnFrameOptions): void {
+  frame({display}: IDisplayOnFrameParamters): void {
     const composer = this.getComposer(display.renderer);
     composer.render();
   }

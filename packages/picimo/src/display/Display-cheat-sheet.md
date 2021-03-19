@@ -43,20 +43,21 @@ display.start();
 
 | property | description |
 |-|-|
-| renderer | _THREE.WebGLRenderer_ |
-| canvas | _HTMLCanvasElement_ |
-| textureFactory | _TextureFactory_ |
+| renderer<sub>readonly</sub> | _THREE.WebGLRenderer_ |
+| canvas<sub>readonly</sub> | _HTMLCanvasElement_ |
+| textureFactory<sub>readonly</sub> | _TextureFactory_ |
 | resizeStrategy | _HTMLElement_ \| `"window"` \| `"fullscreen"` \| `(display) => {width, height}` |
-| width | _number_ (css pixels) |
-| height | _number_ (css pixels) |
-| now | _number_ (time in seconds) |
-| lastNow | _number_ (seconds) |
-| deltaTime | _number_ (seconds) |
-| frameNo | _number_ (starts at 0) |
-| autoClear | _boolean_ |
+| width | _number_ (_CSS_ pixels) |
+| height | _number_ (_CSS_ pixels) |
+| now | _number_ (current time in seconds) |
+| lastNow | _number_ (the time in seconds from the last animation frame) |
+| deltaTime | _number_ (the time in seconds that has elapsed since the last animation frame) |
+| frameNo | _number_ (current frame number &mdash; starts at 0) |
+| autoClear | _boolean_ (defines whether the renderer should automatically clear its output before rendering a frame) |
+| clearColor<sub>readonly</sub> | _THREE.Color_ |
 | goFullscreenOnDeviceRotate  | _boolean_ |
-| stage | _Stage2D_ \| `undefined` &mdash; _IMPORTANT_: the stage is automatically connected to the display events |
-| pixelRatio | _number_ |
+| stage | _Stage2D_ \| `undefined` &mdash; _IMPORTANT_: the stage is automatically connected to all display events |
+| pixelRatio<sub>readonly</sub> | _number_ |
 | pause | _boolean_ |
 
 ## Methods
@@ -67,6 +68,7 @@ display.start();
 | stop() | stop the main render loop |
 | resize() | read out the canvas size (normally you don't need to call this yourself) |
 | renderFrame(now) | render a frame (normally you don't need to call this yourself) |
+| setClearColor(color) | set the clear color |
 
 ## Events
 

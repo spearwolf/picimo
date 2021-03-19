@@ -3,11 +3,15 @@ import {Scene, Camera} from 'three';
 import {IProjection} from '../projection';
 import {Logger} from '../utils';
 
-import {DisplayOnFrameOptions, DisplayOnResizeOptions} from './Display';
+import {
+  IDisplayOnFrameParamters,
+  IDisplayOnResizeParameters,
+  IStage2D,
+} from './types';
 
 const log = new Logger('picimo.Stage2D');
 
-export class Stage2D {
+export class Stage2D implements IStage2D {
   scene: Scene;
 
   renderOnFrame = true;
@@ -43,7 +47,7 @@ export class Stage2D {
     return this.#currentHeight;
   }
 
-  resize({width, height}: DisplayOnResizeOptions): void {
+  resize({width, height}: IDisplayOnResizeParameters): void {
     const prevWidth = this.#currentWidth;
     const prevHeight = this.#currentHeight;
     if (prevWidth !== width || prevHeight !== height) {
@@ -65,7 +69,7 @@ export class Stage2D {
    * Render the scene with the camera from the projection.
    * But does not do anything, if `renderOnFrame` is `false`.
    */
-  frame({display}: DisplayOnFrameOptions): void {
+  frame({display}: IDisplayOnFrameParamters): void {
     if (this.camera && this.renderOnFrame) {
       display.renderer.render(this.scene, this.camera);
     }

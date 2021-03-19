@@ -6,7 +6,6 @@ import {
   ParallaxProjection,
   BitmapText2D,
   Plane,
-  DisplayOnInitOptions,
   PostProcessingStage2D,
 } from 'picimo';
 import {GlitchPass} from 'three/examples/jsm/postprocessing/GlitchPass';
@@ -26,7 +25,7 @@ const display = new Display(document.getElementById('picimo'), {
   ),
 });
 
-display.on('init', async ({stage}: DisplayOnInitOptions) => {
+display.on('init', async ({stage}) => {
   const text = new BitmapText2D({capacity: 1000});
   text.fontAtlas = await TextureAtlas.load('comic-schrift.json', '/assets/');
 

@@ -10,9 +10,9 @@
   }, {
     "id": "ComicFont",
     "title": "ComicFont",
-    "entry": "./src/ComicFont.ts",
+    "entry": "./src/ComicFont.js",
     "url": "/ComicFont/",
-    "sourceUrl": "https://github.com/spearwolf/picimo/blob/master/packages/picimo-examples/src/ComicFont.ts"
+    "sourceUrl": "https://github.com/spearwolf/picimo/blob/master/packages/picimo-examples/src/ComicFont.js"
   }, {
     "id": "SimpleSprites",
     "title": "SimpleSprites",

@@ -6,114 +6,42 @@ import {TextureFactory} from '../textures';
 import {readOption, unpick, Stylesheets} from '../utils';
 
 import {IConfigurator} from './IConfigurator';
-import {Stage2D} from './Stage2D';
 
-import {AAPerformanceConfigurator} from './configurators/AAPerformanceConfigurator';
-import {AAQualityConfigurator} from './configurators/AAQualityConfigurator';
-import {PixelatedConfigurator} from './configurators/PixelatedConfigurator';
+import {makeConfigurator} from './configurators/makeConfigurator';
+import {
+  EVENT_INIT,
+  EVENT_FRAME,
+  EVENT_RESIZE,
+  ATTR_DISPLAY_MODE,
+  ATTR_RESIZE_STRATEGY,
+  ATTR_PIXEL_RATIO,
+  ATTR_GO_FULLSCREEN_ON_DEVICE_ROTATE,
+} from './constants';
+import {
+  IDisplayEventParameters,
+  IDisplayOnInitParameters,
+  IDisplayOnResizeParameters,
+  IDisplayOnFrameParamters,
+  IStage2D,
+  DisplayResizeStrategy,
+  DisplayMode,
+  DisplayOptions,
+} from './types';
 
-const $emitResize = Symbol('emitResize');
-const $emitFrame = Symbol('emitFrame');
-const $emitInit = Symbol('emitInit');
-const $lockPixelRatio = Symbol('lockPixelRatio');
-const $lastPixelRatio = Symbol('lastPixelRatio');
-const $rafID = Symbol('rafID');
-const $stage = Symbol('stage');
-const $getEventOptions = Symbol('getEventOptions');
-
-const INIT = 'init';
-const FRAME = 'frame';
-const RESIZE = 'resize';
-
-const DISPLAY_MODE_ATTR = 'display-mode';
-const RESIZE_STRATEGY_ATTR = 'resize-strategy';
-const PIXEL_RATIO_ATTR = 'pixel-ratio';
-const GO_FULLSCREEN_ON_DEVICE_ROTATE = 'go-fullscreen-on-device-rotate';
-
-export type DisplayGetSizeFn = (
-  display: Display,
-) => {width: number; height: number};
-
-export type DisplayResizeStrategy =
-  | HTMLElement
-  | DisplayGetSizeFn
-  | 'window'
-  | 'fullscreen';
-
-export enum DisplayMode {
-  Pixelated = 'pixelated',
-  AAQuality = 'antialias-quality',
-  AAPerformance = 'antialias-performance',
-}
-
-export interface DisplayOptions {
-  resizeStrategy?: DisplayResizeStrategy;
-
-  mode?: DisplayMode;
-
-  goFullscreenOnDeviceRotate?: boolean;
-
-  /**
-   * Set a custom [[IConfigurator]]. Will override the configurator from the `mode` option.
-   */
-  configurator?: IConfigurator;
-
-  /**
-   * Set a fixed device pixel ratio.
-   * Otherwise DPR is read from [[IConfigurator]] or `window.devicePixelRatio`
-   */
-  pixelRatio?: number;
-
-  clearColor?: number | string | THREE.Color;
-
-  autoClear?: boolean;
-
-  stage?: Stage2D;
-}
-
-// TODO remove me - find a better solution!
 const filterWebGLRendererParameters = unpick<WebGLRendererParameters>([
-  'resizeStrategy',
-  'pixelate',
-  'clearColor',
-  'scene',
-  'canvas',
-  'stage',
-  'goFullscreenOnDeviceRotate',
   'autoClear',
+  'canvas',
+  'clearColor',
+  'configurator',
+  'goFullscreenOnDeviceRotate',
+  'mode',
+  'pixelRatio',
+  'resizeStrategy',
+  'scene',
+  'stage',
 ]);
 
-const createConfigurator = (mode: DisplayMode) => {
-  switch (mode) {
-    case DisplayMode.AAQuality:
-      return new AAQualityConfigurator();
-    case DisplayMode.AAPerformance:
-      return new AAPerformanceConfigurator();
-    case DisplayMode.Pixelated:
-    default:
-      return new PixelatedConfigurator();
-  }
-};
-
-export interface DisplayEventOptions {
-  display: Display;
-
-  width: number;
-  height: number;
-
-  stage: Stage2D;
-}
-
-export interface DisplayOnInitOptions extends DisplayEventOptions {}
-export interface DisplayOnResizeOptions extends DisplayEventOptions {}
-
-export interface DisplayOnFrameOptions extends DisplayEventOptions {
-  now: number;
-  deltaTime: number;
-  frameNo: number;
-}
-
-const getAttribute = (el: HTMLElement, attrName: string): string => {
+const readAttribute = (el: HTMLElement, attrName: string): string => {
   const dataAttrName = `data-${attrName}`;
   if (el.hasAttribute(dataAttrName)) {
     return el.getAttribute(dataAttrName);
@@ -126,55 +54,60 @@ const getAttribute = (el: HTMLElement, attrName: string): string => {
 
 export class Display extends Eventize {
   readonly renderer: WebGLRenderer;
-
   readonly canvas: HTMLCanvasElement;
-
   readonly textureFactory: TextureFactory;
 
   resizeStrategy: DisplayResizeStrategy;
 
   /**
-   * _css_ pixels
+   * _CSS_ pixels
    */
   width = 0;
 
   /**
-   * _css_ pixels
+   * _CSS_ pixels
    */
   height = 0;
 
   /**
-   * Time in *seconds*.
+   * current time in seconds
    */
   now = 0;
 
   /**
-   * The time in *seconds* as it was at the last call of `frame()`.
+   * the time in seconds from the last animation frame
    */
   lastNow = 0;
 
   /**
-   * Seconds passed since the last render / previous call to `frame()`.
+   * the time in seconds that has elapsed since the last animation frame
    */
   deltaTime = 0;
 
   /**
-   * Current frame number. Initially set to 0.
+   * current frame number (starts at 0)
    */
   frameNo = 0;
 
   pause = false;
 
+  /**
+   * defines whether the renderer should automatically clear its output before rendering a frame
+   */
   autoClear = true;
 
   goFullscreenOnDeviceRotate = false;
 
-  private [$lockPixelRatio] = 0;
-  private [$lastPixelRatio] = 0;
+  #lockPixelRatio = 0;
+  #lastPixelRatio = 0;
 
-  private [$rafID] = 0;
+  #rafID = 0;
 
-  private [$stage]: Stage2D;
+  #stage: IStage2D;
+
+  #renderParams: WebGLRendererParameters;
+
+  #clearColor: Color;
 
   constructor(
     el: HTMLElement,
@@ -195,41 +128,44 @@ export class Display extends Eventize {
       }
     }
 
-    const configurator = readOption<DisplayOptions>(
-      options,
-      'configurator',
-      () => {
-        return createConfigurator(
-          readOption<DisplayOptions>(
-            options,
-            'mode',
-            getAttribute(el, DISPLAY_MODE_ATTR),
-          ) as DisplayMode,
-        );
-      },
-    ) as IConfigurator;
+    const getOption = <T = unknown>(
+      propName: keyof DisplayOptions,
+      defaultValue?: any,
+    ): T => readOption<DisplayOptions>(options, propName, defaultValue) as T;
 
-    const pixelRatio = Number(
+    const getOptionOrAttribute = <T = unknown>(
+      propName: keyof DisplayOptions,
+      attrName: string,
+      defaultValue?: T,
+    ): T =>
       readOption<DisplayOptions>(
         options,
-        'pixelRatio',
-        parseInt((getAttribute(el, PIXEL_RATIO_ATTR) || 0) as any, 10),
+        propName,
+        readAttribute(el, attrName) ?? defaultValue,
+      ) as T;
+
+    const configurator = getOption<IConfigurator>('configurator', () =>
+      makeConfigurator(
+        getOptionOrAttribute<DisplayMode>('mode', ATTR_DISPLAY_MODE),
       ),
     );
 
-    this.autoClear = readOption<DisplayOptions>(
-      options,
-      'autoClear',
-      true,
-    ) as boolean;
+    const pixelRatio = Number(
+      getOption(
+        'pixelRatio',
+        parseInt(readAttribute(el, ATTR_PIXEL_RATIO) ?? '0', 10),
+      ),
+    );
 
-    this.goFullscreenOnDeviceRotate = readOption<DisplayOptions>(
-      options,
+    this.autoClear = getOption<boolean>('autoClear', true);
+
+    this.goFullscreenOnDeviceRotate = getOptionOrAttribute<boolean>(
       'goFullscreenOnDeviceRotate',
-      getAttribute(el, GO_FULLSCREEN_ON_DEVICE_ROTATE) ?? false,
-    ) as boolean;
+      ATTR_GO_FULLSCREEN_ON_DEVICE_ROTATE,
+      false,
+    );
 
-    this[$lockPixelRatio] =
+    this.#lockPixelRatio =
       isNaN(pixelRatio) || pixelRatio < 1
         ? configurator.getPixelRatio()
         : pixelRatio;
@@ -237,17 +173,17 @@ export class Display extends Eventize {
     this.resizeStrategy = readOption<DisplayOptions>(
       options,
       'resizeStrategy',
-      getAttribute(el, RESIZE_STRATEGY_ATTR) || resizeRefEl,
+      readAttribute(el, ATTR_RESIZE_STRATEGY) || resizeRefEl,
     ) as DisplayResizeStrategy;
 
-    const renderParams: WebGLRendererParameters = {
+    this.#renderParams = {
       ...configurator.getWebGlRendererParameters(
         filterWebGLRendererParameters(options),
       ),
       canvas: this.canvas,
     };
 
-    this.renderer = new WebGLRenderer(renderParams);
+    this.renderer = new WebGLRenderer(this.#renderParams);
 
     const {domElement} = this.renderer;
     Stylesheets.addRule(domElement, 'picimo', 'touch-action: none;');
@@ -264,20 +200,11 @@ export class Display extends Eventize {
       configurator.getTextureFactoryOptions(),
     );
 
-    const clearColor = readOption<DisplayOptions>(
-      options,
-      'clearColor',
-      new Color(),
-    ) as Color | string;
-
-    this.renderer.setClearColor(
-      clearColor instanceof Color ? clearColor : new Color(clearColor),
-      renderParams.alpha ? 0 : 1,
-    );
+    this.setClearColor(getOption<Color | string>('clearColor', new Color()));
 
     configurator.postSetup(this);
 
-    this.stage = readOption<DisplayOptions>(options, 'stage') as Stage2D;
+    this.stage = readOption<DisplayOptions>(options, 'stage') as IStage2D;
 
     this.resize();
 
@@ -305,26 +232,39 @@ export class Display extends Eventize {
     }
   }
 
-  get stage(): Stage2D {
-    return this[$stage];
+  setClearColor(clearColor: string | number | Color): void {
+    this.#clearColor =
+      clearColor instanceof Color ? clearColor : new Color(clearColor);
+    this.renderer.setClearColor(
+      this.#clearColor,
+      this.#renderParams.alpha ? 0 : 1,
+    );
   }
 
-  set stage(stage: Stage2D) {
-    const curStage = this[$stage];
+  get clearColor(): Color {
+    return this.#clearColor;
+  }
+
+  get stage(): IStage2D {
+    return this.#stage;
+  }
+
+  set stage(stage: IStage2D) {
+    const curStage = this.#stage;
     if (stage !== curStage) {
       if (curStage) {
         this.off(curStage);
       }
-      this[$stage] = stage;
+      this.#stage = stage;
       if (stage) {
         this.on(stage);
-        stage.resize(this[$getEventOptions]());
+        stage.resize(this.#getCommonEventParameters());
       }
     }
   }
 
   get pixelRatio(): number {
-    return this[$lockPixelRatio] || window.devicePixelRatio || 1;
+    return this.#lockPixelRatio || window.devicePixelRatio || 1;
   }
 
   resize(): void {
@@ -360,19 +300,19 @@ export class Display extends Eventize {
     const {pixelRatio} = this;
 
     if (
-      pixelRatio !== this[$lastPixelRatio] ||
+      pixelRatio !== this.#lastPixelRatio ||
       wPx !== this.width ||
       hPx !== this.height
     ) {
       this.width = wPx;
       this.height = hPx;
-      this[$lastPixelRatio] = pixelRatio;
+      this.#lastPixelRatio = pixelRatio;
 
       this.renderer.setPixelRatio(this.pixelRatio);
       this.renderer.setSize(wPx, hPx);
 
       if (this.frameNo > 0) {
-        this[$emitResize](); // no need to emit this inside construction phase
+        this.#emitResize(); // no need to emit this inside construction phase
       }
     }
   }
@@ -388,65 +328,59 @@ export class Display extends Eventize {
     this.resize();
 
     if (this.frameNo === 0) {
-      this[$emitResize](); // always emit resize event before render the first frame!
+      this.#emitResize(); // always emit resize event before render the first frame!
     }
 
     if (this.autoClear) {
       this.renderer.clear();
     }
 
-    this[$emitFrame]();
+    this.#emitFrame();
 
     ++this.frameNo;
   }
 
   start(): void {
     this.pause = false;
-    this[$emitInit]();
+    this.#emitInit();
 
     const renderFrame = (now: number) => {
       if (!this.pause) {
         this.renderFrame(now);
       }
-      this[$rafID] = window.requestAnimationFrame(renderFrame);
+      this.#rafID = window.requestAnimationFrame(renderFrame);
     };
 
-    this[$rafID] = window.requestAnimationFrame(renderFrame);
+    this.#rafID = window.requestAnimationFrame(renderFrame);
   }
 
   stop(): void {
-    window.cancelAnimationFrame(this[$rafID]);
+    window.cancelAnimationFrame(this.#rafID);
   }
 
-  private [$emitInit]() {
-    this.emit(INIT, {
-      ...this[$getEventOptions](),
-    } as DisplayOnInitOptions);
-  }
+  #emitInit = (): void =>
+    this.emit(EVENT_INIT, {
+      ...this.#getCommonEventParameters(),
+    } as IDisplayOnInitParameters);
 
-  private [$emitResize]() {
-    this.emit(RESIZE, this[$getEventOptions]() as DisplayOnResizeOptions);
-  }
+  #emitResize = (): void =>
+    this.emit(
+      EVENT_RESIZE,
+      this.#getCommonEventParameters() as IDisplayOnResizeParameters,
+    );
 
-  private [$emitFrame]() {
-    this.emit(FRAME, {
-      ...this[$getEventOptions](),
-
+  #emitFrame = (): void =>
+    this.emit(EVENT_FRAME, {
+      ...this.#getCommonEventParameters(),
       now: this.now,
       deltaTime: this.deltaTime,
       frameNo: this.frameNo,
-    } as DisplayOnFrameOptions);
-  }
+    } as IDisplayOnFrameParamters);
 
-  private [$getEventOptions]() {
-    const options: DisplayEventOptions = {
-      display: this,
-
-      width: this.width,
-      height: this.height,
-
-      stage: this.stage,
-    };
-    return options;
-  }
+  #getCommonEventParameters = (): IDisplayEventParameters => ({
+    display: this,
+    stage: this.stage,
+    width: this.width,
+    height: this.height,
+  });
 }
