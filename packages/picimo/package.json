@@ -3,28 +3,21 @@
   "version": "0.0.37",
   "description": "A typescript library for my personal visual effects and game dev experiments based on three.js",
   "exports": "./picimo.js",
-  "module": "picimo.js",
-  "main": "picimo.umd.js",
   "types": "types/index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "build:dist:umd": "cross-env NODE_ENV=production rollup -c ./rollup/umd.config.js",
-    "build:dist:mjs": "cross-env NODE_ENV=production rollup -c ./rollup/mjs.config.js",
-    "build:es2017": "cross-env NODE_ENV=production rollup -c ./rollup/es2017.config.js",
-    "build:dist": "run-s build:dist:*",
-    "build:module": "cross-env BABEL_ENV=production babel --root-mode upward src/ --extensions \".ts\" --out-dir ./build/ --source-maps",
+    "build:modern:es2017": "cross-env NODE_ENV=production rollup -c ./rollup/modern-es2017.config.js",
     "build:types": "tsc --emitDeclarationOnly",
     "watch:types": "tsc --emitDeclarationOnly --watch",
-    "watch:build:module": "cross-env BABEL_ENV=production babel --root-mode upward src/ --extensions \".ts\" --out-dir ./build/ --source-maps --watch",
-    "build": "run-s build:*",
+    "build": "run-s build:modern:* build:types",
     "watch": "run-p watch:types watch:build:module",
-    "prepublishOnly": "npm-run-all --serial clean --parallel build:*",
+    "prepublishOnly": "npm-run-all --silent --print-name --serial clean --parallel build:*",
     "clean": "rm -fr build coverage dist types",
     "test:eslint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
     "eslint:fix": "eslint src/ --ext .js,.jsx,.ts,.tsx --fix",
     "prettier:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx}\"",
     "prettier:write": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\"",
-    "fix": "run-s eslint:fix prettier:write",
+    "fix": "run-s --silent --print-label eslint:fix prettier:write",
     "test": "cross-env NODE_ENV=test jest"
   },
   "repository": {
@@ -86,7 +79,7 @@
     "typescript": "^4.1.2"
   },
   "peerDependencies": {
-    "three": "^0.126.1"
+    "three": "^0.127.0"
   },
   "dependencies": {
     "eventize-js": "^1.1.0"

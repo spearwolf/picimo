@@ -2,8 +2,6 @@
 /* eslint-env node */
 import path from 'path';
 
-import {get} from 'lodash';
-import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import resolve from 'rollup-plugin-node-resolve';
 import replace from 'rollup-plugin-replace';
@@ -16,44 +14,38 @@ import createBannerPlugin from './bannerPlugin';
 export const projectDir = path.resolve(
   path.join(path.dirname(__filename), '..'),
 );
-export const outputDir = projectDir; // path.join(projectDir, 'dist');
+
+export const outputDir = projectDir;
 
 const packageJson = require(path.join(projectDir, 'package.json'));
-export const bannerPlugin = () => createBannerPlugin(packageJson);
 
-export const name = 'picimo';
+export const bannerPlugin = (version) =>
+  createBannerPlugin({...packageJson, version});
+
+export const makeVersionWithBuild = (build) => {
+  const today = new Date();
+  let month = today.getUTCMonth() + 1;
+  if (month < 10) {
+    month = `0${month}`;
+  }
+  let date = today.getUTCDate();
+  if (date < 10) {
+    date = `0${date}`;
+  }
+  return (version) =>
+    `${version}+${build}.${today.getUTCFullYear()}${month}${date}`;
+};
+
+export const {name} = packageJson;
 
 export const extensions = ['.js', '.ts'];
 
-export const external = ['three'];
-
-export const makePlugins = (config = {}) =>
-  [
-    bannerPlugin(),
+export const makePlugins = (makeVersion, makeBabelPlugin = () => undefined) => {
+  const version = makeVersion(packageJson.version);
+  return [
+    bannerPlugin(version),
     commonjs(),
-    config.babel !== false
-      ? babel({
-          extensions,
-          rootMode: 'upward',
-          runtimeHelpers: true,
-          exclude: [/\/core-js\//, 'node_modules/@babel/**'],
-          plugins: [['@babel/plugin-transform-runtime', {}]],
-          presets: [
-            [
-              '@babel/preset-env',
-              {
-                debug: false,
-                modules: false,
-                useBuiltIns: 'usage',
-                corejs: 3,
-                bugfixes: true,
-                loose: true,
-                ...get(config, 'babel.presets.@babel/preset-env'),
-              },
-            ],
-          ],
-        })
-      : null,
+    makeBabelPlugin() || null,
     resolve({
       extensions,
       customResolveOptions: {
@@ -62,7 +54,7 @@ export const makePlugins = (config = {}) =>
     }),
     replace({
       NODE_ENV: JSON.stringify('production'),
-      PACKAGE_VERSION: JSON.stringify(packageJson.version),
+      PACKAGE_VERSION: JSON.stringify(version),
       'log.VERBOSE': 'false',
       'log.DEBUG': 'false',
     }),
@@ -71,3 +63,4 @@ export const makePlugins = (config = {}) =>
       output: {comments: /^!/},
     }),
   ].filter((plugin) => plugin != null);
+};

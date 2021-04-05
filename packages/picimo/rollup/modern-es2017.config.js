@@ -3,7 +3,12 @@ import path from 'path';
 
 import typescript from '@rollup/plugin-typescript';
 
-import {name, outputDir, external, makePlugins} from './shared.config';
+import {
+  name,
+  outputDir,
+  makePlugins,
+  makeVersionWithBuild,
+} from './shared.config';
 
 export default {
   input: 'src/index.ts',
@@ -14,11 +19,6 @@ export default {
     sourcemapFile: path.join(outputDir, `${name}.js.map`),
     format: 'esm',
   },
-  external,
-  plugins: [
-    typescript(),
-    ...makePlugins({
-      babel: false,
-    }),
-  ],
+  external: ['eventize-js', 'three', /\/node_modules\/three\//],
+  plugins: [typescript(), ...makePlugins(makeVersionWithBuild('es2017'))],
 };
