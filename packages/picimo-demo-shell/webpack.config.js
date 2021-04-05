@@ -76,7 +76,7 @@ module.exports = {
                   useBuiltIns: 'usage',
                   corejs: {version: 3, proposals: true},
                   bugfixes: true,
-                  loose: true,
+                  loose: false,
                 },
               ],
             ],
