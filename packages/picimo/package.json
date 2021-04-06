@@ -6,8 +6,8 @@
   "types": "types/index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "build:modern": "cross-env NODE_ENV=production rollup -c ./rollup/modern-es2017.config.js",
-    "watch:modern": "cross-env NODE_ENV=production rollup -w -c ./rollup/modern-es2017.config.js",
+    "build:modern": "cross-env NODE_ENV=production rollup -c ./rollup/rollup.config.js",
+    "watch:modern": "cross-env NODE_ENV=production rollup -w -c ./rollup/rollup.config.js",
     "build:types": "tsc --emitDeclarationOnly",
     "watch:types": "tsc --emitDeclarationOnly --watch",
     "build": "run-s --silent build:modern build:types",
