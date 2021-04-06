@@ -26,23 +26,10 @@ The `picimo` npm package can be installed from [NPM](https://npmjs.org):
 yarn add three picimo
 ```
 
-The [picimo npm package](https://www.npmjs.com/package/picimo) offers three different build fragments:
+The [picimo npm package](https://www.npmjs.com/package/picimo) offers the following build fragments:
 
-- the original typescript sources (referenced by `package.json:types`) to use the package in your typescript projects
-- the ES5 javascript universal umd/amd module (referenced by `package.json:main`) which can be &hellip;
-  - &hellip; imported directly in the browser (in this case it is assumed that the three.js library can be found under the global variable `THREE`)
-  - &hellip; used with the most classical javascript module loaders without further processing
-- the ES2019 javascript module (referenced by `package.json:module`) which can be used with modern javascript bundlers and should be transpiled by yourself to your dedicated browser target environments
-
-It can also be used from the [unpkg.com CDN](https://unpkg.com):
-
-```html
-  <!-- 🚨 OPTIONAL: fetch() polyfill to support IE 11 -->
-  <script nomodule src="https://unpkg.com/whatwg-fetch@latest"></script>
-
-  <script src="https://unpkg.com/three@latest"></script>
-  <script src="https://unpkg.com/picimo@latest"></script>
-```
+- the typescript types (referenced by `package.json:types`) to use the package in your typescript projects
+- a modern es2017 javascript module bundle (referenced by `package.json:exports` _and_ also by `package.json:main`) which can be used with modern javascript bundlers and should be transpiled by yourself to your dedicated browser target environments
 
 
 ## Development
@@ -72,6 +59,6 @@ $ yarn test
 
 Picimo is a pure typescript library, which is transpiled using [rollup](https://rollupjs.org/) and [babel](https://babeljs.io/) and is available as a [npm package](https://www.npmjs.com/package/picimo) as build output.
 
-[Karma](https://karma-runner.github.io/) and [mocha](https://mochajs.org/) are used for testing.
+[Jest](https://jestjs.io/) is used for testing.
 
 To increase the general software quality [eslint](https://eslint.org/) and [prettier](https://prettier.io/) are used and should be utilized for each commit.
