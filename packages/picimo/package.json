@@ -6,12 +6,12 @@
   "types": "types/index.d.ts",
   "sideEffects": false,
   "scripts": {
-    "build:modern:es2017": "cross-env NODE_ENV=production rollup -c ./rollup/modern-es2017.config.js",
+    "build:modern": "cross-env NODE_ENV=production rollup -c ./rollup/modern-es2017.config.js",
     "build:types": "tsc --emitDeclarationOnly",
     "watch:types": "tsc --emitDeclarationOnly --watch",
-    "build": "run-s build:modern:* build:types",
-    "watch": "run-p watch:types watch:build:module",
-    "prepublishOnly": "npm-run-all --silent --print-name --serial clean --parallel build:*",
+    "build": "run-s --silent build:modern build:types",
+    "watch": "run-p --silent watch:types watch:build:modern",
+    "prepublishOnly": "npm-run-all --silent --print-name --serial clean build",
     "clean": "rm -fr build coverage dist types",
     "test:eslint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
     "eslint:fix": "eslint src/ --ext .js,.jsx,.ts,.tsx --fix",
@@ -49,6 +49,7 @@
     "assert": "^2.0.0",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.3",
+    "babel-plugin-inline-constants": "^2.0.0",
     "canvas": "^2.6.1",
     "core-js": "^3.6.4",
     "cross-env": "^7.0.2",
@@ -59,12 +60,14 @@
     "eslint-plugin-prettier": "^3.1.3",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "glslify-loader": "^2.0.0",
     "jest": "^26.6.3",
     "karma-mocha-reporter": "^2.2.5",
     "lerna": "^4.0.0",
     "lodash": "^4.17.19",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.2.1",
+    "raw-loader": "^4.0.2",
     "rollup": "^2.7.3",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-commonjs": "^10.1.0",
@@ -82,6 +85,7 @@
     "three": "^0.127.0"
   },
   "dependencies": {
+    "@babel/runtime-corejs3": "^7.13.10",
     "eventize-js": "^1.1.0"
   }
 }

@@ -15,12 +15,16 @@ export const projectDir = path.resolve(
   path.join(path.dirname(__filename), '..'),
 );
 
-export const outputDir = projectDir;
-
 const packageJson = require(path.join(projectDir, 'package.json'));
+
+export const outputDir = projectDir;
 
 export const bannerPlugin = (version) =>
   createBannerPlugin({...packageJson, version});
+
+export const {name} = packageJson;
+
+export const extensions = ['.js', '.ts', '.json'];
 
 export const makeVersionWithBuild = (build) => {
   const today = new Date();
@@ -36,22 +40,18 @@ export const makeVersionWithBuild = (build) => {
     `${version}+${build}.${today.getUTCFullYear()}${month}${date}`;
 };
 
-export const {name} = packageJson;
-
-export const extensions = ['.js', '.ts'];
-
-export const makePlugins = (makeVersion, makeBabelPlugin = () => undefined) => {
+export const makePlugins = (makeVersion, makeBabelPlugin) => {
   const version = makeVersion(packageJson.version);
   return [
     bannerPlugin(version),
     commonjs(),
-    makeBabelPlugin() || null,
     resolve({
       extensions,
       customResolveOptions: {
         moduleDirectory: 'node_modules',
       },
     }),
+    makeBabelPlugin(),
     replace({
       NODE_ENV: JSON.stringify('production'),
       PACKAGE_VERSION: JSON.stringify(version),
@@ -62,5 +62,5 @@ export const makePlugins = (makeVersion, makeBabelPlugin = () => undefined) => {
     terser({
       output: {comments: /^!/},
     }),
-  ].filter((plugin) => plugin != null);
+  ];
 };
