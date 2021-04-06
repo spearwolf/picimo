@@ -7,6 +7,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import typescript from '@rollup/plugin-typescript';
 import {sizeSnapshot} from 'rollup-plugin-size-snapshot';
+import {terser} from 'rollup-plugin-terser';
 
 import createBannerPlugin from './bannerPlugin';
 import {makeVersionWithBuild} from './makeVersionWithBuild';
@@ -64,6 +65,9 @@ export default {
       PACKAGE_VERSION: JSON.stringify(version),
       'log.VERBOSE': 'false',
       'log.DEBUG': 'false',
+    }),
+    terser({
+      output: {comments: /^!/},
     }),
     sizeSnapshot(),
   ],
