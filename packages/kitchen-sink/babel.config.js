@@ -5,10 +5,10 @@ module.exports = (api) => {
   const plugins = [
     '@babel/plugin-proposal-optional-chaining',
     ['@babel/plugin-proposal-decorators', {decoratorsBeforeExport: false}],
-    ['@babel/plugin-proposal-class-properties', {loose: true}],
+    ['@babel/plugin-proposal-class-properties', {loose: false}],
     [
       '@babel/plugin-proposal-object-rest-spread',
-      {loose: true, useBuiltIns: true},
+      {loose: false, useBuiltIns: true},
     ],
   ];
 

@@ -69,6 +69,7 @@ module.exports = {
             rootMode: 'upward',
             cacheDirectory: true,
             presets: [
+              '@babel/preset-react',
               [
                 '@babel/preset-env',
                 {
