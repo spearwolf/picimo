@@ -3,6 +3,7 @@
   "version": "0.0.37",
   "description": "A typescript library for my personal visual effects and game dev experiments based on three.js",
   "main": "./picimo.js",
+  "module": "./picimo.js",
   "exports": "./picimo.js",
   "types": "types/index.d.ts",
   "sideEffects": false,
@@ -43,12 +44,15 @@
     "@babel/plugin-proposal-optional-chaining": "^7.10.4",
     "@babel/plugin-transform-runtime": "^7.12.10",
     "@babel/preset-typescript": "^7.10.4",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-commonjs": "^18.0.0",
+    "@rollup/plugin-node-resolve": "^11.2.1",
+    "@rollup/plugin-replace": "^2.4.2",
     "@rollup/plugin-typescript": "^8.1.0",
     "@types/three": "^0.127.0",
     "@typescript-eslint/eslint-plugin": "^4.21.0",
     "@typescript-eslint/parser": "^4.21.0",
     "assert": "^2.0.0",
-    "babel-jest": "^26.6.3",
     "canvas": "^2.6.1",
     "core-js": "^3.6.4",
     "cross-env": "^7.0.2",
@@ -63,23 +67,16 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^2.2.1",
     "rollup": "^2.7.3",
-    "rollup-plugin-babel": "^4.4.0",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-node-resolve": "^5.0.1",
     "rollup-plugin-replace": "^2.2.0",
     "rollup-plugin-size-snapshot": "^0.12.0",
-    "rollup-plugin-terser": "^7.0.2",
     "sinon": "^10.0.0",
-    "three": "^0.127.0",
     "ts-jest": "^26.4.4",
     "ts-node": "^9.0.0",
     "typescript": "^4.1.2"
   },
-  "peerDependencies": {
-    "three": "^0.127.0"
-  },
   "dependencies": {
     "@babel/runtime-corejs3": "^7.13.10",
-    "eventize-js": "^1.1.0"
+    "eventize-js": "^1.1.0",
+    "three": "^0.127.0"
   }
 }
