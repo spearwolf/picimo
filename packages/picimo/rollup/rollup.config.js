@@ -63,11 +63,16 @@ export default {
       preventAssignment: true,
       NODE_ENV: JSON.stringify('production'),
       PACKAGE_VERSION: JSON.stringify(version),
-      'log.VERBOSE': 'false',
-      'log.DEBUG': 'false',
     }),
     terser({
       output: {comments: /^!/},
+      ecma: 2017,
+      safari10: true,
+      compress: {
+        global_defs: {
+          DEBUG: false,
+        },
+      },
     }),
     sizeSnapshot(),
   ],

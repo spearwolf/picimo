@@ -29,7 +29,7 @@ yarn add three picimo
 The [picimo npm package](https://www.npmjs.com/package/picimo) offers the following build fragments:
 
 - the typescript types (referenced by `package.json:types`) to use the package in your typescript projects
-- a modern es2017 javascript module bundle (referenced by `package.json:exports` _and_ also by `package.json:main`) which can be used with modern javascript bundlers and should be transpiled by yourself to your dedicated browser target environments
+- a modern es2017 javascript module bundle (referenced by `package.json:exports` _and_ also by the `main` and `module` properties) which can be used with modern javascript bundlers and **_must be transpiled by yourself to your dedicated browser target environment!_**
 
 
 ## Development

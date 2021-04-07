@@ -1,5 +1,5 @@
 import {TileSet} from '../../textures';
-import {AABB2, Logger} from '../../utils';
+import {AABB2, Logger, PICIMO_DEV} from '../../utils';
 
 import {IMap2DLayerData, IViewCullingThreshold} from '../IMap2DLayerData';
 
@@ -70,7 +70,7 @@ export class TiledMapLayer implements IMap2DLayerData {
 
     this.includeTilesets = props.valueAsCSLofStrings('includeTilesets');
 
-    if (log.DEBUG) {
+    if (PICIMO_DEV) {
       log.debug('create TiledMapLayer', this, data);
     }
 

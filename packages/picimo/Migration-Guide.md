@@ -1,5 +1,10 @@
 # Migration Guide
 
+## v0.0.38 &rarr; v0.0.39
+
+- the npm package now exports an es2017 javascript module (using the native `import` syntax). **_Please be aware, that you need to transpile the picimo module by yourself (e.g. using babeljs) if you need it!_**
+- `Logger` &rarr; `.log(..)` and `.debug(..)`  now work as expected
+
 ## v0.0.37 &rarr; v0.0.38
 
 - three.js is now a _normal_ dependency, no more a _peer_ dependency

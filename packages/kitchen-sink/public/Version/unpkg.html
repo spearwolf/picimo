@@ -49,17 +49,14 @@
     console.log('hej ho ♥');
 
   </script>
-  <script src="https://unpkg.com/three@latest"></script>
-  <script>
+  <script type="module">
+    import picimo from 'https://unpkg.com/picimo@latest';
+    import THREE from 'https://unpkg.com/three@latest';
 
-    document.getElementById('threeRevision').textContent = THREE.REVISION;
-
-  </script>
-  <script src="https://unpkg.com/picimo@latest"></script>
-  <script>
+    // TODO fix me!
 
     document.getElementById('picimoVersion').textContent = picimo.VERSION;
-
+    document.getElementById('threeRevision').textContent = THREE.REVISION;
   </script>
 
   <pre>&lt;script src="https://unpkg.com/three@latest"&gt;&lt;script&gt;

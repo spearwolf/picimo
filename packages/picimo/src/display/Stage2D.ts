@@ -1,7 +1,7 @@
 import {Scene, Camera} from 'three';
 
 import {IProjection} from '../projection';
-import {Logger} from '../utils';
+import {Logger, PICIMO_DEV} from '../utils';
 
 import {
   IDisplayOnFrameParamters,
@@ -54,7 +54,7 @@ export class Stage2D implements IStage2D {
       this.#currentWidth = width;
       this.#currentHeight = height;
       this.projection?.updateViewRect(width, height);
-      if (log.DEBUG) {
+      if (PICIMO_DEV) {
         log.log(
           `resize: ${width}x${height}, projection: ${this.projection
             ?.getViewRect()

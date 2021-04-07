@@ -2,8 +2,8 @@
   "include": ["src"],
 
   "compilerOptions": {
-    "lib": ["dom"],
-    "target": "es2020",
+    "lib": ["es2017", "dom"],
+    "target": "es2017",
 
     "declaration": true,
     "declarationDir": "types",

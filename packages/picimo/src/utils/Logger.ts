@@ -1,6 +1,10 @@
 /* eslint-disable no-console */
 import eventize, {Eventize} from 'eventize-js';
 
+export const PICIMO_DEV: boolean =
+  // @ts-ignore
+  typeof DEBUG === 'undefined' || DEBUG !== false;
+
 // TODO extract this to a separate npm package: 'sticky-log'
 
 export const LogLevel = {
