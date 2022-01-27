@@ -78,6 +78,6 @@
   "dependencies": {
     "@babel/runtime-corejs3": "^7.13.10",
     "eventize-js": "^1.1.0",
-    "three": "^0.127.0"
+    "three": "^0.137.0"
   }
 }
