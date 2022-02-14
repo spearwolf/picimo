@@ -1,3 +1,5 @@
+> **!!! IMPORTANT !!! this library is not actively maintained - but don't worry, there is a follow-up development, which can be found here: https://github.com/spearwolf/three-vertex-objects !!!**
+
 # ![picimo](./picimo.png)
 
 P I C T U R E S &nbsp; I N &nbsp; M O T I O N
