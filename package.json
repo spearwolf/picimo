@@ -7,6 +7,9 @@
     "type": "git",
     "url": "git+https://github.com/spearwolf/picimo.git"
   },
+  "engines": {
+    "node": ">=14.0.0 <15"
+  },
   "scripts": {
     "prettier:check": "prettier --check \"{examples,packages}/**/*.{ts,tsx,js,jsx}\"",
     "prettier:write": "prettier --write \"{examples,packages}/**/*.{ts,tsx,js,jsx}\"",
